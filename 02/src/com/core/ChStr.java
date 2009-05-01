@@ -13,7 +13,6 @@ public class ChStr {
 			strvalue="";												//将变量strvalue赋值为空
 		}
 		return strvalue;												//返回转换后的输入变量strvalue
-	
 	}
 
 	// 处理字符串中的空值
