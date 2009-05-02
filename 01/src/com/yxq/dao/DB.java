@@ -12,7 +12,7 @@ public class DB {
 	private String user="jsjmz";
 	private String password="lishunli";
 	private String className="com.microsoft.sqlserver.jdbc.SQLServerDriver";
-	private String url="jdbc:sqlserver://localhost:1433;DatabaseName=db_CityInfo";	
+	private String url="jdbc:sqlserver://localhost:1433;DatabaseName=db_CityInfo";	//连接sql2005数据库
 	
 	public DB(){
 		try{
