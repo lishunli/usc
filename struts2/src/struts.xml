@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="gb2312"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+   
+  <struts>    
+  
+  <constant name="struts.custom.i18n.resources" value="message"></constant>
+
+<!-- 配置Struts2应用的编码集 --> 
+<!--  <constant name="struts.i18n.encoding" value="gbk"></constant>-->
+<!--在struts.properties中也可以配置-->
+  
+<!--上面一句能支持中文  -->
+  <constant name="struts.multipart.saveDir" value="c:\"></constant>
+<!--上面一句能提供临时文件的位置  -->
+
+
+<!--   <package name="struts2" extends="struts-default">-->
+   <package name="struts2" extends="jfreechart-default">
+<!-- 通过继承jfreechart-default 来继承struts-default   -->
+   
+   
+   
+   		<interceptors>
+			<interceptor name="myInterceptor" class="com.test.interceptor.MyInterceptor">
+				<param name="hello">world</param>
+<!--添加一个元素				-->
+			</interceptor>
+			
+			<interceptor name="myInterceptor2" class="com.test.interceptor.MyInterceptor2">
+			</interceptor>
+			
+			<interceptor name="myInterceptor3" class="com.test.interceptor.MyInterceptor3">
+			
+			</interceptor>
+			
+			<interceptor name="auth" class="com.test.interceptor.AuthInterceptor">
+			
+			</interceptor>
+			
+			<interceptor-stack name="myStack">
+				
+<!--				<interceptor-ref name="myInterceptor"></interceptor-ref>-->
+<!--				<interceptor-ref name="myInterceptor2"></interceptor-ref>-->
+				
+		<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		
+			<default-interceptor-ref name="myStack"></default-interceptor-ref>
+  
+  
+     	<global-results>
+   			<result name="login" type="redirect">/login2.jsp</result>
+   			<result name="passwordInvalid">/passwordInvalid.jsp</result>
+   		</global-results> 		
+
+<!--全局异常处理  		-->
+   		<global-exception-mappings>
+ 		  	<exception-mapping result="passwordInvalid" exception="com.test.exception.PasswordException"></exception-mapping>
+   		</global-exception-mappings>
+   		
+    		
+
+   
+        <action name="login" class="loginAction">
+<!--		<action name="*Login" class="com.test.action.loginAction" method="{1}">-->
+<!--     		<result name="input">/login2.jsp</result>-->
+<!--局部异常处理			-->
+<!--			<exception-mapping result="usernameInvalid" exception="com.test.exception.UsernameException"></exception-mapping>-->
+<!--            <result name="usernameInvalid">/usernameInvalid.jsp</result>-->
+			<result name="input">/login2.jsp</result>
+            <result name="success">/result.jsp</result>
+<!--			<result name="success">/register3.jsp</result>-->
+<!--            <result name="failer">/login2.jsp</result>-->
+        </action>
+   
+   		<action name="pointConverter" class="com.test.action.PointAction">
+			<result name="success">/output.jsp</result>
+			
+		</action>
+		<action name="register" class="com.test.action.RegisterAction" method="abc">
+<!--		<action name="register" class="com.test.action.RegisterAction2">-->
+			<result name="success">/success.jsp</result>
+			<result name="input">/register2.jsp</result>
+		
+		</action>
+		
+		<action name="register3" class="com.test.action.RegisterAction" method="abc">
+<!--		<action name="register3" class="com.test.action.RegisterAction2">-->
+			<result name="success">/success.jsp</result>
+			<result name="input">/register3.jsp</result>
+			<interceptor-ref name="token"></interceptor-ref>
+			<result name="invalid.token">/register3.jsp</result>
+			
+<!--			<interceptor-ref name="myInterceptor">-->
+<!--				<param name="hello">welcome</param>-->
+<!--			</interceptor-ref>-->
+			
+<!--			<interceptor-ref name="myStack"></interceptor-ref>-->
+<!--方法拦截器			-->
+<!--			<interceptor-ref name="myInterceptor3">-->
+<!--				<param name="excludeMethods">abc,execute</param>-->
+<!--				<param name="includeMethods">abc</param>-->
+<!--			</interceptor-ref>-->
+
+<!--用于方法拦截，必须经过login.jsp才能进入register3.jsp-->
+<!--			<interceptor-ref name="auth"></interceptor-ref>-->
+			
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			
+<!--可以使用重新定义默认的拦截器<default-interceptor-ref name="myStack"></default-interceptor-ref>，那么上面就可以不要			-->
+			
+<!--			<interceptor-ref name="defaultStack"></interceptor-ref>			-->
+<!--手动添加默认的拦截器。必须手工添加，不添加的话，就不会使用			-->
+		
+		</action>
+		
+		
+		<action name="upload" class="com.test.action.UploadAction">
+			<result name="success">/File/uploadResult.jsp</result>
+			<result name="input">/File/upload3.jsp</result>
+			<interceptor-ref name="fileUpload">
+				<param name="maximumSize">2097152</param>
+<!--单位是字节	2M	（2097152B）		-->
+				<param name="allowedTypes">application/powerpoint,text/plain,application/vnd.ms-word,application/vnd.ms-excel,application/pdf,text/plain</param>
+<!--容许文件类型为doc,ppt,xls,pdf,txt,java			-->
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+		
+		
+<!--		<action name="download" class="com.test.action.DownloadAction">-->
+<!--			<result name="success" type="stream">-->
+<!--				<param name="contentType">application/pdf</param>-->
+<!--				<param name="contentDisposition">filename="SQL.pdf"</param>-->
+<!--				<param name="inputName">downloadFile</param>-->
+<!--			</result>-->
+<!--		</action>-->
+		
+		
+<!--上面的download不能支持中文，下面的download支持中文		-->
+<!--下载都是对一些特定的文件进行下载-->
+        <action name="download" class="com.test.action.FileDownloadAction"> 
+            <param name="inputPath">/File/upload/SQL数据库.pdf</param> <!-- 指定被下载资源的位置 --> 
+			<result name="success" type="stream"> <!-- 配置结果类型为stream的结果 --> 
+                <param name="contentType">application/pdf</param> <!-- 指定下载文件的文件类型 --> 
+                <param name="inputName">targetFile</param> 
+                <param name="contentDisposition">filename="SQL.pdf"</param> 
+                <param name="bufferSize">4096</param> <!-- 指定下载文件的缓冲大小 --> 
+            </result> 
+      	  </action> 
+      	  
+      	  
+      	 <action name="viewResult" class="com.test.action.ViewResultAction">
+ 			<result name="success" type="chart">
+  				<param name="height">600</param> 
+  				<param name="width">800</param> 
+ 			 </result>
+  		</action>
+      	  
+      	  
+      	  
+      	  
+   </package>
+  
+
+
+  </struts>

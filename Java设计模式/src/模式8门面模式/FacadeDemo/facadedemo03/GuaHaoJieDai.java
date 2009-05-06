@@ -1,0 +1,10 @@
+package 模式8门面模式.FacadeDemo.facadedemo03;
+//挂号系统的门面
+public class GuaHaoJieDai {
+	public final static GuaHao gh=new GuaHao();
+	
+	public void satrt(){
+		gh.start();
+		gh.over();
+	}
+}
