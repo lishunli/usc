@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
++项目
+++目标
++++任务
+-->
+
+
+<project name = "Ant" default = "deploy">
+
+	<description>
+		这是一个简单的Ant项目
+	</description>
+	
+	<property name="who" value="jsjmz"></property>
+	<!--但在命令行中的—D命令同时指定是以命令行指定为准-->
+	
+	
+	<echo>项目构建由${who}开始</echo>
+
+	<!--初始化，建立一些文件夹-->
+	<target name="init" description="初始化目标">
+		<mkdir dir="build/classes" />
+		<mkdir dir="dist" />
+	</target>
+
+	<!--编译任务，产生class文件，并把它们放到classes文件夹下-->
+	<target name="compile" depends="init" description="编译目标">
+		<javac srcdir="src" destdir="build/classes" />
+	</target>
+
+	<!--产生文档-->
+	<target name="doc" depends="init" description="产生文档目标">
+		<javadoc destdir="build/classes" sourcepath="src" />
+	</target>
+
+	<!--发布jar文件-->
+	<target name="deploy" depends="compile,doc" description="发布jar文件目标">
+		<jar destfile="dist/project.jar" basedir="build/classes" />
+	</target>
+	
+	<echo>项目构建开始</echo>
+
+</project>

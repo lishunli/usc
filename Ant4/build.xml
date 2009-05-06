@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="attribute" default="buildpropertiesfiles" basedir="src">
+	
+	<property file="../build.properties"/>
+	
+<!--	<property name="who" value="jsjmz" />-->
+	<target name="showproperty">
+		<echo>${who}</echo>
+		<echo>${os.name}</echo>
+		<echo>${basedir}</echo>
+		<echo>${ant.file}</echo>
+		<echo>${ant.version}</echo>
+		<echo>${ant.project.name}</echo>
+		<echo>${ant.home}</echo>
+		<echo>${ant.java.version}</echo>
+		
+		<echo> </echo>
+	</target>
+	
+	<target name="buildpropertiesfiles">
+		<echo message="outputdir:${output.dir}"></echo>
+		
+
+		<property name="outputdir" value="out"/>
+		<echo message="outputdir:${outputdir}"></echo>
+		<mkdir dir="${outputdir}"/>
+
+<!--value是相对路径，location是绝对路径，所以不会把location放到属性文件中，也就是说，从属性文件读取的属性石value		-->
+		<property name="outputdir2" location="out2"/>
+		<echo message="outputdir:${outputdir2}"></echo>
+		<mkdir dir="${outputdir2}"/>
+
+<!--属性赋值不可更改性(不变性)，一次赋值，先到先复制		-->
+<!--但是可以使用available和uptodate来修改-->
+<!-- -D在每次运行前就运行，所以不影响不变性原则 -->
+		<echo message="debug before:${build.debug}"></echo>
+		<property name="build.debug" value="on"></property>
+		<echo message="debug after:${build.debug}"></echo>
+		
+		
+	</target>
+	
+</project>
+
+
+<!--
+		
+		<echo>Java的内置属性</echo>
+		<echo>Java Runtime Environment version:${java.version}</echo>
+		<echo>Java Runtime Environment vendor:${java.vendor }</echo>
+		<echo>Java vendor URL :${java.vendor.url}</echo>
+		<echo>Java installation directory :${java.home }</echo>
+		<echo>Java Virtual Machine specification version:${java.vm.specification.version }</echo>
+		<echo>Java Virtual Machine specification vendor:${java.vm.specification.vendor}</echo>
+		<echo>Java Virtual Machine specification name:${java.vm.specification.name }</echo>
+		<echo>Java Virtual Machine implementationversion:${java.vm.version }</echo>
+		<echo>Java Virtual Machine implementation vendor :${java.vm.vendor}</echo>
+			java.vm.name Java Virtual Machine implementation name
+			java.specification.version Java Runtime Environment specification
+			version java.specification.vendor Java Runtime Environment
+			specification vendor java.specification.name Java Runtime Environment
+			specification name java.class.version Java class format version
+			number java.class.path Java class path java.library.path List of
+			paths to search when loading libraries java.io.tmpdir Default temp
+			file path java.compiler Name of JIT compiler to use java.ext.dirs
+			Path of extension directory or directories os.name Operating system
+			name os.arch Operating system architecture os.version Operating
+			system version file.separator File separator ("/" on UNIX)
+			path.separator Path separator (":" on UNIX) line.separator Line
+			separator ("\n" on UNIX) user.name User's account name user.home
+			User's home directory user.dir User's current working directory
+			
+			-->

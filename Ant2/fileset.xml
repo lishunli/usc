@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="fileset" default ="cc">
+	
+	<fileset dir="src" includes="**/*.java" id="source.fileset"></fileset>
+	
+	<target name="cc">
+		<copy todir="backup">
+			<fileset refid="source.fileset" />
+		</copy>
+	</target>
+	
+	<echo>${name}</echo>
+	
+</project>

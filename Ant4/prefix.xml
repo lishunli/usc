@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="attribute" default="showproperty">
+
+<!--通过前缀就可以改变一下属性值了-->
+	
+	<property file="build.properties" prefix="temp"/>
+	<property file="build2.properties" prefix="temp2"/>
+	
+	<target name="showproperty">
+		<echo>${temp.build.debug}</echo>
+		
+		<echo>${build.debug}</echo>
+		
+		<echo>${temp2.build.debug}</echo>
+		
+		<echo>${build.debug}</echo>
+		
+	</target>
+	
+</project>
+

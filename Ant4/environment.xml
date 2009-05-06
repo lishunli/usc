@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="attribute" default="showproperty">
+
+<!--通过环境变量来获得属性-->
+	
+
+	<property environment="env"/>
+	
+	<target name="showproperty">
+		<echo>${env.NUMBER_OF_PROCESSORS}</echo>
+		
+		<echo>${env.ANT_HOME}</echo>
+		
+		<echo>${env.Path}</echo>
+
+		
+	</target>
+	
+</project>

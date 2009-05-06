@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--注意结构的树-->
+<project name="Ant2" default="excute">
+
+	<target name="init">
+		<mkdir dir="build/classes" />
+		<mkdir dir="dist" />
+	</target>
+
+
+	<target name="compile" depends="init">
+		<javac srcdir="src" destdir="build/classes" />
+	</target>
+
+	<target name="archive" depends="compile">
+		<jar destfile="dist/Ant2.jar" basedir="build/classes" />
+	</target>
+
+	<target name="clean" depends="init">
+		<delete dir="build" />
+		<delete dir="dist" />
+	</target>
+
+	<target name="all" depends="archive">
+	</target>
+	<!--<target name="all" depends="archive,clean"></target>-->
+
+	<target name="excute" depends="all">
+		<java classname="com.test.ant.Main" classpath="build/classes">
+			<arg value="a" />
+			<arg value="b" />
+			<!-- 当前目录-->
+			<arg file="." />
+			<!--当前的上一个目录 -->
+			<arg file=".." />
+			<!-- 当前的上两个目录个目录-->
+			<arg file="../.." />
+
+		</java>
+	</target>
+	
+	<target name="copy">
+		<copy todir="new_backup">
+			<fileset dir="build"></fileset>
+		</copy>
+	</target>
+	
+	<target name="copy2">
+		<copy todir="new_backup1">
+			<fileset dir="build"></fileset>
+		</copy>
+	</target>
+	
+	<target name="copy3">
+		<copy todir="new_backup2">
+			<fileset dir="build">
+				<exclude name="**/*.class"/>
+			</fileset>
+		</copy>
+	</target>
+
+
+</project>

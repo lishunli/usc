@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="tstamp" default="showtstamp">
+	
+	<target name="showtstamp">
+		<tstamp>
+			<format property="buildtime" pattern="yyyy-MM-dd 'T' HH:mm:ss"/>
+			<format property="dayofweek" pattern="EEEE"/>
+		</tstamp>
+		
+		
+		<echo message="${DSTAMP}"></echo>
+		<echo message="${TSTAMP}"></echo>
+		<echo message="${TODAY}"></echo>
+		<echo message="${dayofweek}"></echo>
+		<echo message="${buildtime}"></echo>
+
+		
+		
+		
+	</target>
+	
+</project>
