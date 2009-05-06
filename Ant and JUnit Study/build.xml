@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Ant and JUnit Study" default="reporttohtml">
+
+	<property file="build.properties" />
+
+	<!-- 包含所有项目下的包 -->
+	<path id="compile.path">
+		<fileset dir="${lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<target name="init" description="mkdir report">
+		<tstamp />
+		<!-- 生成文件夹 -->
+		<mkdir dir="${test.report}/Test-${DSTAMP}-${TSTAMP}" />
+
+
+	</target>
+
+	<!-- 执行编译任务 -->
+	<target name="compile" description="compile">
+		<javac destdir="${run.classpath}" srcdir="${run.srcpath}" classpathref="compile.path" />
+		<javac destdir="${run.classpath}" srcdir="${test.srcpath}" classpathref="compile.path" />
+	</target>
+
+
+	<!-- 执行测试任务 -->
+	<target name="junit" depends="init,compile">
+		<junit printsummary="true">
+			<classpath>
+				<pathelement path="${run.classpath}" />
+				<fileset dir="${lib.dir}">
+					<include name="**/*.jar" />
+				</fileset>
+			</classpath>
+			<formatter type="xml" />
+			<batchtest fork="yes" todir="${test.report}/Test-${DSTAMP}-${TSTAMP}">
+				<fileset dir="${test.srcpath}">
+					<!--<include name="**/*Test*.java"/> -->
+					<include name="**/TestAll.java" />
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
+
+	<target name="reporttohtml" depends="junit">
+		<junitreport todir="${test.report}">
+			<fileset dir=".">
+				<include name="${test.report}/Test-${DSTAMP}-${TSTAMP}/TEST-*.xml" />
+			</fileset>
+			<report format="frames" todir="${test.report}/JUnit_Report" />
+		</junitreport>
+	</target>
+
+
+</project>

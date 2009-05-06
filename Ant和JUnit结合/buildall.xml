@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="buildall">
+	<ant antfile="build.xml">
+	</ant>
+	<ant antfile="buildhtml.xml">
+	</ant>
+	<ant antfile="buildxml.xml">
+	</ant>
+</project>

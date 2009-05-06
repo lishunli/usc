@@ -1,0 +1,7 @@
+Testsuite: cn.jxsme.hj.test.JunitOneTest
+Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.052 sec
+------------- Standard Output ---------------
+tesis Sun May 03 09:29:10 GMT 2009
+------------- ---------------- ---------------
+
+Testcase: testSayHello took 0.026 sec

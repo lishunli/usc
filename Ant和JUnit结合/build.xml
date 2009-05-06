@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<project name="project" default="junit">
+	<property name="run.classpath" value="bin">
+	</property>
+	<!-- 源代码的路径 -->
+	<property name="run.srcpath" value="src">
+	</property>
+	<!-- 测试的源代码的路径 -->
+	<property name="test.srcpath" value="junit">
+	</property>
+	<!-- 测试结果存放的路径 -->
+	<property name="test.report" value="report">
+	</property>
+	<!-- 包的路径 -->
+	<property name="lib.dir" value="lib" />
+	<!-- 包含所有项目下的包 -->
+	<path id="compile.path">
+		<fileset dir="${lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+	<!-- 执行编译任务 -->
+	<target name="compile">
+		<javac destdir="${run.classpath}" srcdir="${run.srcpath}" classpathref="compile.path" />
+		<javac destdir="${run.classpath}" srcdir="${test.srcpath}" classpathref="compile.path" />
+	</target>
+	<!-- 执行测试任务 -->
+	<target name="junit" depends="compile">
+		<tstamp />
+	<!-- 生成文件夹 -->
+		<mkdir dir="${test.report}" />
+		<mkdir dir="${test.report}/framework-${DSTAMP}-${TSTAMP}" />
+		<junit printsummary="true">
+			<classpath>
+				<pathelement path="${run.classpath}" />
+				<fileset dir="${lib.dir}">
+					<include name="**/*.jar" />
+				</fileset>
+			</classpath>
+			<formatter type="plain" />
+			<batchtest fork="yes" todir="${test.report}/framework-${DSTAMP}-${TSTAMP}">
+				<fileset dir="${test.srcpath}">
+					<include name="**/*Test.java" />
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
+</project>
