@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="Ant打ear包"
+  id="myeclipse.1242116347658"
+  context-root="/Ant打ear包"
+  j2ee-spec="5.0"
+  archive="Ant打ear包.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

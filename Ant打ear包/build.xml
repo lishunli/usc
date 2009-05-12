@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Ant_ear" default="deploy" basedir=".">
+
+    <property environment="env" />
+    <property name="app.dir" value="${basedir}" />
+    <property name="src.dir" value="${app.dir}\src" />
+    <property name="classes.dir" value="${app.dir}\build\classes" />
+    <property name="WebRoot.dir" value="${app.dir}\WebRoot" />
+    <property name="jboss.home" value="D:\jboss"/>
+    <property name="jboss.server.config" value="default" />
+
+    <path id="build.classpath" description="编译时classpath">
+        <fileset dir="${WebRoot.dir}\WEB-INF\lib">
+            <include name="*.jar" />
+        </fileset>
+        <pathelement location="${classes.dir}" />
+    </path>
+
+    <target name="prepare" depends="clean" description="创建classes文件夹">
+        <mkdir dir="${classes.dir}" />
+    </target>
+
+    <target name="compile" depends="prepare" description="编绎">
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" debug="on" deprecation="on" optimize="off" includes="**">
+            <classpath refid="build.classpath" />
+        </javac>
+    </target>
+    
+    <target name="sessionInterface" depends="compile" description="创建session bean接口包">
+        <jar destfile="${app.dir}/interface.jar">
+            <fileset dir="${classes.dir}">
+                <include name="org/ejb_jar/*.class" />
+            </fileset>
+        </jar>
+    </target>
+
+    <target name="ejb_jar" depends="sessionInterface" description="创建ejb jar包">
+            <jar destfile="${app.dir}/ejb.jar">
+                <fileset dir="${classes.dir}">
+                    <include name="org/ejb_jar/impl/**" />
+                </fileset>
+                <manifest>
+                    <attribute name="Class-Path" value="interface.jar commons-collections-3.2.jar commons-lang-2.3.jar"/>
+                </manifest>
+            </jar>
+    </target>
+    
+    <target name="web-war" depends="ejb_jar" description="创建WEB发布包">
+        <war destfile="${app.dir}/web.war" webxml="${WebRoot.dir}/WEB-INF/web.xml">
+            <fileset dir="${WebRoot.dir}">
+                <include name="*.jsp"/>
+                <exclude name="WEB-INF/web.xml"/>
+                <exclude name="WEB-INF/lib/**"/>
+            </fileset>
+            <manifest>
+                <attribute name="Class-Path" value="interface.jar commons-collections-3.2.jar commons-lang-2.3.jar"/>
+            </manifest>
+        </war>
+    </target>
+
+    <target name="ear" depends="web-war" description="创建WEB发布包">
+        <ear destfile="${app.dir}/Hello.ear" appxml="${src.dir}/META-INF/application.xml">
+            <fileset dir="${app.dir}">
+                <include name="ejb.jar"/>
+                <include name="web.war"/>
+                <include name="interface.jar"/>
+            </fileset>
+            <fileset dir="${WebRoot.dir}/WEB-INF/lib" >
+                <include name="commons*.jar"/>
+            </fileset>
+        </ear>
+    </target>
+    
+    <target name="deploy" depends="ear">
+        <copy file="${app.dir}/Hello.ear" todir="${jboss.home}/server/${jboss.server.config}/deploy" />
+    </target>
+
+    <target name="clean">
+        <delete>
+            <fileset dir="${app.dir}">
+                <include name="ejb.jar"/>
+                <include name="web.war"/>
+                <include name="interface.jar"/>
+            </fileset>
+        </delete>
+        <delete dir="${classes.dir}" />
+        <!-- -->
+        <delete file="${jboss.home}/server/${jboss.server.config}/deploy/Hello.ear" />
+        
+    </target>
+
+</project>
