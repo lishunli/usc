@@ -1,0 +1,3 @@
+https://usc.googlecode.com/svn
+file:///G:/Project_Version
+http://OpenSVN.csie.org/usc

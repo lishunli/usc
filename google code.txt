@@ -1,0 +1,12 @@
+网站：http://code.google.com/hosting/
+
+或
+
+https://www.google.com/accounts/ServiceLogin?service=code&ltmpl=phosting&continue=http%3A%2F%2Fcode.google.com%
+2Fhosting%2FcreateProject
+
+SVN资源库URL：https://usc.googlecode.com/svn/
+
+用户名：nhjsjmz@gmail.com
+
+密码：TQ8gA9DA7kB3 

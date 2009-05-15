@@ -1,0 +1,63 @@
+#include<iostream>
+using namespace std;
+
+const N = 10000;
+
+int main()
+{
+	int i;
+	int j;
+	int n;
+	int c;
+	int t;
+	int ans;
+	int sum[250];
+
+	while(cin>>n)
+	{
+		memset(sum,0,sizeof(sum));
+		t = 0;
+		c = 0;
+		sum[0] = 1;
+
+		for(i=1; i<=n; i++)
+		{
+			for(j=0; j<=t; j++)
+			{
+				ans = i * sum[j] + c;
+				c = 0;
+				sum[j] = ans % N;
+
+				if(ans > N)
+				{
+					c = ans / N;
+					if(t == j)
+					{
+						t++;
+					}
+				}
+			}
+		}
+
+		cout<<sum[t];
+		for(i=t-1; i>=0; i--)
+		{
+			if(sum[i] < 10)
+			{
+				cout<<"000";
+			}
+			else if(sum[i] < 100)
+			{
+				cout<<"00";
+			}
+			else if(sum[i] < 1000)
+			{
+				cout<<"0";
+			}
+			cout<<sum[i];
+		}
+		cout<<endl;
+
+	}
+	return 0;
+}
