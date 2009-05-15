@@ -1,0 +1,195 @@
+EditPlus 快捷键 
+文件
+
+FileFtpUpload       Ctrl+Shift+S       上传文件到 FTP 服务器
+FileNew           Ctrl+N           新建普通的文本文档
+FileNewHtml       Ctrl+Shift+N       创建一个空白的 HTML 页面
+FileNewBrowser     Ctrl+Shift+B       新建浏览器窗口
+FileOpen         Ctrl+O           打开一个现有的文档
+FileOpenHeader     Ctrl+Shift+H       打开 C/C++ 文件的头文件
+FilePrint         Ctrl+P           打印当前文档
+FileSave         Ctrl+S           保存当前文档
+
+光标
+
+BackTab           Shift+Tab         移动光标到上一个制表符的位置
+CharLeft         Left             光标左移一个字符
+CharLeftExtend     Shift+Left         将选定区域向左扩展一个字符
+CharRight         Right           光标右移一个字符
+CharRightExtend     Shift+Right       将选定区域向右扩展一个字符
+FileEnd           Ctrl+End         移动到文档末尾处
+FileEndExtend       Ctrl+Shift+End     将选定区域扩展到文档末尾处
+FileStart         Ctrl+Home         移动到文档开始处
+FileStartExtend     Ctrl+Shift+Home     将选定区域扩展到文档开始处
+LineDown         Down             光标下移一行
+LineDownExtend     Shift+Down         将选定区域扩展到下一行
+LineEnd           End             移动光标到当前行行末
+LineEndExtend       Shift+End         将选定区域扩展到当前行行末
+LineStart         Home             移动光标到当前行行首
+LineStartExtend     Shift+Home         将选定区域扩展到当前行行首
+LineUp           Up             光标上移一行
+LineUpExtend       Shift+Up         将选定区域扩展到上一行
+PageDown         Page Down         光标下移一页
+PageDownExtend     Shift+Page Down     将选定区域扩展到下一页
+PageUp           Page Up           光标上移一页
+PageUpExtend       Shift+Page Up       将选定区域扩展到上一页
+ScrollDown         Ctrl+Down         向下滚动一行
+ScrollUp         Ctrl+Up           向上滚动一行
+ViewEnd           Ctrl+Page Down     光标移动到当前屏幕底部
+ViewEndExtend       Ctrl+Shift+Page Down 将选定区域扩展到当前屏幕底部
+ViewStart         Ctrl+Page Up       光标移动到当前屏幕顶部
+ViewStartExtend     Ctrl+Shift+Page Up   将选定区域扩展到当前屏幕顶部
+WordLeft         Ctrl+Left         移动到上一个单词
+WordLeftExtend     Ctrl+Shift+Left     将选定区域扩展到上一个单词
+WordRight         Ctrl+Right         移动到下一个单词
+WordRightExtend     Ctrl+Shift+Right     将选定区域扩展到下一个单词
+
+编辑
+
+EditBackspace       Backspace         删除光标左侧的单词
+EditCapitalize     Ctrl+Shift+U       选定文本中单词的首字母大写
+EditCopy         Ctrl+C           复制选定内容到剪贴板
+EditCopyAppend     Ctrl+Shift+C       复制选定文本并追加到剪贴板钟
+EditCut           Ctrl+X           剪切选定内容到剪贴板
+EditCutAppend       Ctrl+Shift+X       剪切选定文本并追加到剪贴板钟
+EditDate         Ctrl+D           插入当前日期
+EditDateLong       Ctrl+Shift+D       插入当前日期(长型)
+EditDelete         Delete           删除选定内容
+EditDeleteEol       Ctrl+Shift+Delete   删除到当前行结束位置
+EditDeleteEow       Ctrl+Delete       删除到当前单词结束位置
+EditDeleteLine     Alt+Shift+Delete     删除当前行
+EditDeleteWord     Alt+Delete         删除当前单词
+EditDeleteBack     Backspace         删除光标左侧的单词
+EditDeleteBackWord   Ctrl+Backspace     删除光标左侧的单词
+EditDuplicate       Ctrl+J           创建当前行的副本
+EditDuplicateChar   Ctrl+-           复制上一行的一个字符到当前行
+EditExpandWord     F2             使用对应的剪辑文本替换当前单词
+EditJoin         Ctrl+Shift+J       合并选定行
+EditIndentMore     Ctrl+I           增大当前行或选定块的缩进
+EditIndentLess     Ctrl+Shift+I       减小当前行或选定块的缩进
+EditInsertMode     Insert           切换插入模式与覆盖模式
+EditInvertCase     Ctrl+K           反转选定文本的大小写
+EditLowerCase       Ctrl+L           转换选定的文本为小写
+EditPaste         Ctrl+V           插入剪贴板内容
+EditRedo         Ctrl+Y           重做上次未完成的操作
+EditReformat       Ctrl+Shift+R       按照自动换行列号重新排列段落格式
+EditSelectAll       Ctrl+A           选择整合文档
+EditSelectBegin     Alt+Shift+B       开始/结束选择
+EditSelectBeginCol   Alt+Shift+E       开始/结束列选择
+EditSelectColumn     Alt+C           开始列选择
+EditSelectLine     Ctrl+R           选择当前行
+EditSelectWord     Ctrl+W           选择当前单词
+EditSplit         Ctrl+Shift+K       分割选定行(必须启用自动换行)
+EditStripHTML       Ctrl+Shift+P       移除当前文档或选定文本的 HTML 标签
+EditTime         Ctrl+M           插入当前时间
+EditTimeLong       Ctrl+Shift+M       插入当前时间(包含秒钟)
+EditTranspose       Ctrl+T           调转光标两侧字符的位置
+EditUndo         Ctrl+Z           撤消上次操作
+EditUpperCase       Ctrl+U           转换选定的文本为大写
+
+查看
+
+ViewBrowser       Ctrl+B           载入当前文档到网页浏览器
+ViewCliptextLib     Alt+Shift+1       显示或隐藏剪辑文本窗口
+ViewCursorIndicator   Alt+Shift+C       显示或隐藏光标指示符
+ViewDirectory       Alt+Shift+3       显示或隐藏目录窗口
+ViewFullscreen     Alt+Shift+0       全屏模式开/关
+ViewGotoOutputWnd   Shift+F5         在输出窗口与文档间切换焦点
+ViewHighlightUrl     Alt+Shift+U       高亮显示 URL 与 e-mail 地址
+ViewLineBreak       Alt+Shift+L       显示或隐藏换行符
+ViewLineNumber     Ctrl+Shift+L       显示或隐藏当前文档的行号
+ViewOutputWindow     Alt+Shift+2       显示或隐藏输出窗口
+ViewRuler         Alt+Shift+R       显示或隐藏标尺
+ViewTabSpace       Alt+Shift+I       显示或隐藏制表符与空格
+ViewToggleFocus     F5             在剪辑文本/目录窗口与文档间切换焦点
+
+搜索
+
+SearchFind         Alt+F3           查找指定文本
+SearchFindNext     F3             查找下一个匹配文本
+SearchFindNextWord   Ctrl+F3           向下查找当前单词或选定的文本
+SearchFindPrevious   Shift+F3         查找上一个匹配的文本
+SearchFindPrevWord   Ctrl+Shift+F3       向上查找当前单词或选定的文本
+SearchFunction     Ctrl+F11         显示函数列表
+SearchGotoLine     Ctrl+G           转到当前文档的指定行
+SearchGotoUrl       F8             转到高亮的 URL
+SearchJumpToFile     F7             使用输出窗口模式转到一个文件
+SearchMarkerClear   Ctrl+Shift+F9       清除当前文档中的所有标记
+SearchMarkerToggle   F9             设置或清除当前行的标记
+SearchMarkerNext     F4             转到下一个标记位置
+SearchMarkerPrev     Shift+F4         转到上一个标记位置
+SearchMatchBrace     Ctrl+]           搜索一对匹配的括号
+SearchReplace       Ctrl+H           使用不同的文本替换指定的文本
+SearchSelectBrace   Ctrl+Shift+]       搜索一对匹配的括号并选择该文本
+
+文档
+
+DocColumnMarker     Alt+Shift+M       显示或隐藏列标记
+DocWordwrap       Ctrl+Shift+W       切换当前文档的自动换行功能
+
+HTML
+
+
+浏览器
+
+BrowserEditSource   Ctrl+E           编辑当前 HTML 页面的源文件
+
+剪辑文本
+
+
+目录
+
+
+工程
+
+ToolGroup1         Ctrl+Shift+1       群组 1
+ToolGroup2         Ctrl+Shift+2       群组 2
+ToolGroup3         Ctrl+Shift+3       群组 3
+ToolGroup4         Ctrl+Shift+4       群组 4
+ToolGroup5         Ctrl+Shift+5       群组 5
+ToolGroup6         Ctrl+Shift+6       群组 6
+ToolGroup7         Ctrl+Shift+7       群组 7
+ToolGroup8         Ctrl+Shift+8       群组 8
+ToolGroup9         Ctrl+Shift+9       群组 9
+ToolGroup10       Ctrl+Shift+0       群组 10
+ToolOutputNext     Ctrl+F5           打开下一个匹配的文件
+ToolOutputPrev     Ctrl+Shift+F5       打开上一个匹配的文件
+ToolPlaybackRecord   Alt+1           播放击键记录 1
+ToolPlaybackRecord2   Alt+2           播放击键记录 2
+ToolPlaybackRecord3   Alt+3           播放击键记录 3
+ToolPlaybackRecord4   Alt+4           播放击键记录 4
+ToolPlaybackRecord5   Alt+5           播放击键记录 5
+ToolPlaybackRecord6   Alt+6           播放击键记录 6
+ToolPlaybackRecord7   Alt+7           播放击键记录 7
+ToolPlaybackRecord8   Alt+8           播放击键记录 8
+ToolPlaybackRecord9   Alt+9           播放击键记录 9
+ToolPlaybackRecord10 Alt+0           播放击键记录 10
+ToolRecordKeys     Ctrl+Q           开始/停止击键记录
+ToolStop         Ctrl+Break         中断当前工具的操作
+ToolUser1         Ctrl+1           运行该用户定义工具
+ToolUser2         Ctrl+2           
+ToolUser3         Ctrl+3           
+ToolUser4         Ctrl+4           
+ToolUser5         Ctrl+5           
+ToolUser6         Ctrl+6           
+ToolUser7         Ctrl+7           
+ToolUser8         Ctrl+8           
+ToolUser9         Ctrl+9           
+ToolUser10         Ctrl+0           
+
+工具
+
+WindowLastVisited   F12             切换到上次访问的文档窗口
+WindowList         F11             显示所有文档窗口的列表
+WindowNext         Ctrl+Tab         切换到下一个文档窗口
+WindowNextPane     F6             切换到下一个窗格
+WindowPrev         Ctrl+Shift+Tab     切换到上一个文档窗口
+WindowPrevPane     Shift+F6         切换回前一个窗格
+
+窗口
+
+Help             F1             显示对当前任务或命令的帮助
+HelpContext       Shift+F1         显示按钮、菜单或窗口所对应的帮助
+
+帮助
+
