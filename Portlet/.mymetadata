@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="Portlet"
+  id="myeclipse.1242286639845"
+  context-root="/Portlet"
+  j2ee-spec="1.4"
+  archive="Portlet.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

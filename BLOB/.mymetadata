@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="BLOB"
+  id="myeclipse.1200365175609"
+  context-root="/BLOB"
+  j2ee-spec="1.4"
+  archive="BLOB.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
