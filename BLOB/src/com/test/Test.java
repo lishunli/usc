@@ -77,6 +77,9 @@ public class Test {
 	/*	session.clear();
 		session.flush();*/
 		sdao.save(s);
+		
+		
+
 	}
 
 }
