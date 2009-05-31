@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+	<form-beans>
+		<form-bean name="loginForm" type="com.bjsxt.usermgr.forms.LoginActionForm"/>
+	</form-beans>
+	
+	<action-mappings>
+		
+		<action path="/logininput"
+				forward="/login.jsp"
+		></action>
+	
+	<!--type不是以前的类了，是代理类了				-->
+		<action path="/login"
+				type="org.springframework.web.struts.DelegatingActionProxy"
+				name="loginForm"
+				scope="request"	
+		>
+			<forward name="success" path="/success.jsp"/>
+		</action>
+	</action-mappings>
+
+    <message-resources parameter="MessageResources" />
+</struts-config>
+
