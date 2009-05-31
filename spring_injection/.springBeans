@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beansProjectDescription>
+	<version>1</version>
+	<pluginVersion><![CDATA[2.0.4.zmyeclipse69100200808]]></pluginVersion>
+	<configSuffixes>
+		<configSuffix><![CDATA[xml]]></configSuffix>
+	</configSuffixes>
+	<enableImports><![CDATA[false]]></enableImports>
+	<configs>
+		<config>src/applicationContext-beans.xml</config>
+		<config>src/applicationContext-editor.xml</config>
+		<config>src/applicationContext-other.xml</config>
+	</configs>
+	<configSets>
+	</configSets>
+	<springVersion>1.2</springVersion>
+</beansProjectDescription>

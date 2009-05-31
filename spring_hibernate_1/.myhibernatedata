@@ -1,0 +1,23 @@
+#
+#Sun May 31 06:59:39 CST 2009
+genBasicCompId=false
+sessionFactoryName=com.bjsxt.usermgr.util.HibernateSessionFactory
+profile=
+daoSFId=
+version=3.2
+jndiPath=
+detectM2M=false
+reStrategyClass=
+springDaoFile=
+useJavaTypes=true
+keyGenerator=
+libInstallFolder=lib
+addLibs2Project=true
+genVersionTag=false
+sessionFactoryId=
+basePersistenceClass=
+reSettingsFile=
+configFile=/spring_hibernate_1/src/hibernate.cfg1.xml
+createConfigFile=true
+addLibs2Classpath=true
+baseDaoClass=
