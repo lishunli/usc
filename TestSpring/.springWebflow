@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webflow-project-description>
+	<version>1</version>
+	<pluginVersion><![CDATA[2.0.4.zmyeclipse69100200808]]></pluginVersion>
+	<configs>
+		<config>
+			<file>src/applicationContextwebflow.xml</file>
+			<name><![CDATA[applicationContextwebflow]]></name>
+			<beans-config><![CDATA[1:BeansModel|2:TestSpring|3:src/applicationContext.xml]]></beans-config>
+		</config>
+	</configs>
+</webflow-project-description>
