@@ -1,0 +1,48 @@
+MyEclipse 7.1中安装subclipse 1.6收藏
+要知道subclipse要正常运转必须在客户端有svn存在，实际上是存在svn这样subversion commond line.
+
+ 
+
+1.安装subversion client
+
+ 
+
+去这里http://subversion.tigris.org/看到有windows的安装介质奥。注意有些人爱用乌龟，现在的乌龟已经不再支持svn commond line，所以你现在也就两种选择，要么安装http://www.sliksvn.com/en/download，要么安装http://www.collab.net/downloads/subversion/。我安装的后者。
+
+ 
+
+2.下载subclipse 1.6 的site包
+
+ 
+
+把这个site-1.6.2解压开，features复制到C:\Program Files\Genuitec\Common\features，我是默认安装的myeclipse，plugins复制到这里C:\Program Files\Genuitec\Common\plugins。
+
+ (复制两个文件夹进行粘贴就可以了)
+
+3.改个配置文件
+
+ 
+
+编辑C:\Program Files\Genuitec\MyEclipse 7.0\configuration\org.eclipse.equinox.simpleconfigurator\bundles.info
+
+ 
+
+在最后增加以下内容：
+
+ 
+
+org.tigris.subversion.clientadapter,1.6.0.2,file:plugins\org.tigris.subversion.clientadapter_1.6.0.2.jar,4,false
+org.tigris.subversion.clientadapter.javahl.win32,1.6.0.3,file:plugins\org.tigris.subversion.clientadapter.javahl.win32_1.6.0.3.jara,4,false
+org.tigris.subversion.clientadapter.javahl,1.6.0.3,file:plugins\org.tigris.subversion.clientadapter.javahl_1.6.0.3.jar,4,false
+org.tigris.subversion.clientadapter.svnkit,1.6.0.1,file:plugins\org.tigris.subversion.clientadapter.svnkit_1.6.0.1.jar,4,false
+org.tigris.subversion.subclipse.core,1.6.2,file:plugins\org.tigris.subversion.subclipse.core_1.6.2.jar,4,false
+org.tigris.subversion.subclipse.doc,1.3.0,file:plugins\org.tigris.subversion.subclipse.doc_1.3.0.jar,4,false
+org.tigris.subversion.subclipse.graph,1.0.7,file:plugins\org.tigris.subversion.subclipse.graph_1.0.7.jar,4,false
+org.tigris.subversion.subclipse.mylyn,2.0.4,file:plugins\org.tigris.subversion.subclipse.mylyn_2.0.4.jar,4,false
+org.tigris.subversion.subclipse.mylyn,3.0.0,file:plugins\org.tigris.subversion.subclipse.mylyn_3.0.0.jar,4,false
+org.tigris.subversion.subclipse.ui,1.6.2,file:plugins\org.tigris.subversion.subclipse.ui_1.6.2.jar,4,false
+
+ 
+
+行了，该保存的保存，开启myeclipse。成了！就是这么简单：）
+

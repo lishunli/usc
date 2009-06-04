@@ -1,0 +1,12 @@
+1.安装，并修改环境变量（把BIN目录加入）
+
+2.先创建一个仓库svnadmin create G:\MyEclipse_Project_backup
+
+3.添加用户：打开svnserve.conf文件，将password-db = passwd之前的#号删掉，后打开svnserve.conf文件同目录就有一个passwd文件
+
+4.anon-access = none,这表示匿名用户将没有权限读和写
+
+5.ctrl+c ,重启服务器
+
+6.svnserve -d -r G:\MyEclipse_Project_backup 启动服务器
+
