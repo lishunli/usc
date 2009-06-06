@@ -1,5 +1,7 @@
 package com.bjsxt.spring;
 
+
+
 public class UserManagerImpl implements UserManager {
 
 	public void addUser(String username, String password) {
