@@ -8,8 +8,7 @@ public class Users implements java.io.Serializable
 {
 
 	// Fields
-
-	private Integer uid;
+    private Integer uid;
 	private String uname;
 	private String upass;
 
@@ -18,6 +17,16 @@ public class Users implements java.io.Serializable
 	/** default constructor */
 	public Users()
 	{
+	}
+
+	public Integer getUid()
+	{
+		return uid;
+	}
+
+	public void setUid(Integer uid)
+	{
+		this.uid = uid;
 	}
 
 	/** full constructor */
@@ -29,15 +38,6 @@ public class Users implements java.io.Serializable
 
 	// Property accessors
 
-	public Integer getUid()
-	{
-		return this.uid;
-	}
-
-	public void setUid(Integer uid)
-	{
-		this.uid = uid;
-	}
 
 	public String getUname()
 	{
