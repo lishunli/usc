@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="SSHUser"
+  id="myeclipse.1244307214804"
+  context-root="/SSHUser"
+  j2ee-spec="5.0"
+  archive="SSHUser.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
