@@ -13,6 +13,17 @@ public class SaveUserAction extends ActionSupport
 {
 	private Users user;
 	private String sex;
+	private String mz;
+	public String getMz()
+	{
+		return mz;
+	}
+	public void setMz(String mz)
+	{
+		this.mz = mz;
+	}
+
+
 	private userService us;
 	
 	public Users getUser()
@@ -51,7 +62,7 @@ public class SaveUserAction extends ActionSupport
 
 		
 		
-		System.out.println("z******"+getSex());
+		System.out.println("z******"+getSex()+"++++++"+mz);
 //		user.setFirstname(sex);
 		us.save(user);
 		return SUCCESS;

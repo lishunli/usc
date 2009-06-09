@@ -22,7 +22,5 @@ public class UsersAction extends ActionSupport
 	public String getAllUsers() {   
 		users = us.findAll();   
         return null;   
-    }  
-	
-	
+    }  	
 }
