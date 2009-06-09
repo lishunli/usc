@@ -1,8 +1,8 @@
 package com.usc.action;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.usc.dao.Users;
 import com.usc.service.userService;
-import com.usc.util.Users;
 
 public class SaveUserAction extends ActionSupport
 {

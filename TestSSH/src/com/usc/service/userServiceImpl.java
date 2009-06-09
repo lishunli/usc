@@ -1,7 +1,7 @@
 package com.usc.service;
 
-import com.usc.util.Users;
-import com.usc.util.UsersDAO;
+import com.usc.dao.Users;
+import com.usc.dao.UsersDAO;
 
 public class userServiceImpl implements userService
 {

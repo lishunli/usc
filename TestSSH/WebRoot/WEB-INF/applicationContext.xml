@@ -7,7 +7,7 @@
 		<property name="configLocation" value="classpath:hibernate.cfg.xml">
 		</property>
 	</bean>
-	<bean id="UsersDAO" class="com.usc.util.UsersDAO">
+	<bean id="UsersDAO" class="com.usc.dao.UsersDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>

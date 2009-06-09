@@ -9,7 +9,7 @@
 	<session-factory>
 		<property name="connection.username">root</property>
 		<property name="connection.url">
-			jdbc:mysql://localhost:3306/test?useUnicode=true&amp;characterEncoding=gbk
+			jdbc:mysql://localhost:3306/test?useUnicode=true&amp;characterEncoding=utf-8
 		</property>
 		<property name="dialect">
 			org.hibernate.dialect.MySQLDialect
@@ -22,7 +22,7 @@
 		<property name="show_sql">true</property>
 		<property name="connection.autocommit">true</property>
 <!--	用MyEclipse整合开发没有上面的一句，会出现添加的数据在缓冲里，没有添加到数据库中	-->
-		<mapping resource="com/usc/util/Users.hbm.xml" />
+		<mapping resource="com/usc/dao/Users.hbm.xml" />
 		
 
 	</session-factory>
