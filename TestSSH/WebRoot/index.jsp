@@ -23,6 +23,5 @@
 		<s:a href="listUser.action">List Users</s:a>
 
 
-
 	</body>
 </html>

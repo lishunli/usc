@@ -11,6 +11,10 @@
 			<result name="input">/save.jsp</result>
 		</action>
 		
+		<action name="UsersAction" class="UsersAction"  method="getAllUsers">
+		</action>
 		
 	</package>
+	
+	
 </struts>
