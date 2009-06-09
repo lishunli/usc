@@ -4,7 +4,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.usc.service.userService;
 import com.usc.util.Users;
 
-public class saveuseraction extends ActionSupport
+public class SaveUserAction extends ActionSupport
 {
 	private Users user;
 	private userService us;

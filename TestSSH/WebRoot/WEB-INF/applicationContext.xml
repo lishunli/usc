@@ -16,7 +16,7 @@
 		<property name="dao" ref="UsersDAO"></property>
 	</bean>
 	
-	<bean id="saveUserAction" class="com.usc.action.saveuseraction">
+	<bean id="saveUserAction" class="com.usc.action.SaveUserAction" scope="prototype">
 		<property name="us" ref="userService"></property>
 	</bean>
 	
