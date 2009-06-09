@@ -32,7 +32,7 @@
   <body>
    
    <h1><font color="red"><center>Users List</center></font></h1>
-   
+   <s:select list="#request.list" name="users" label="sex"></s:select>
    <table border="1" width="80%" align="center">
    
    	<tr>
