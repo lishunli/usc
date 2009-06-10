@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="configLocation" value="classpath:hibernate.cfg.xml">
+		</property>
+	</bean>
+	<bean id="StudentDAO" class="com.usc.dao.StudentDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="GradeDAO" class="com.usc.dao.GradeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="StudentManager" class="com.usc.service.StudenaManagerImpl">
+		<property name="sdao" ref="StudentDAO"></property>
+		<property name="gdao" ref="GradeDAO"></property>
+	</bean>
+
+	<bean id="addStuAction" class="com.usc.action.addStuAction" scope="prototype">
+		<property name="sm" ref="StudentManager"></property>
+	</bean>
+	
+	<bean id="gradeNameAction" class="com.usc.action.gradeNameAction" scope="prototype">
+		<property name="sm" ref="StudentManager"></property>
+	</bean>
+</beans>
