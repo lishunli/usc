@@ -22,12 +22,12 @@ public class gradeNameAction extends ActionSupport
 	}
 
 	public String getAllGradeName() { 
-		for(Grade grade : sm.showgrade())
-		{
-			
-			System.out.println(grade.getGname());
-//			gradeName.add((Object)grade.getGname());
-		}
+//		for(Grade grade : sm.showgrade())
+//		{
+//			
+//			System.out.println(grade.getGname());
+////			gradeName.add((Object)grade.getGname());
+//		}
 //		String s = new String("2");
 //		gradeName.add("1");
 //		gradeName.add(s);
