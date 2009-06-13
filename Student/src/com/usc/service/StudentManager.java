@@ -9,4 +9,5 @@ public interface StudentManager
 {
 	public void addStu(Student stu);
 	public List<Grade> showgrade();
+	public boolean checksid(String id);
 }

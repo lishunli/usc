@@ -25,14 +25,20 @@ public class StudenaManagerImpl implements StudentManager
 	public void addStu(Student stu)
 	{
 		sdao.save(stu);
-		
-	}
 
+	}
 
 	public List<Grade> showgrade()
 	{
 
 		return gdao.findAll();
+	}
+
+	public boolean checksid(String id)
+	{
+		if (null != sdao.findById(id))
+			return true;
+		return false;
 	}
 
 }

@@ -8,6 +8,7 @@
 		<action name="addStu" class="addStuAction">
 			<result name="success" type="redirect">listStu.action</result>
 			<result name="input">/addStu.jsp</result>
+			<result name="error">/snoerror.jsp</result>
 		</action>
 		
 		<action name="gradeNameAction" class="gradeNameAction" method="getAllGradeName"></action>

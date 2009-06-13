@@ -9,7 +9,6 @@ public class Student implements java.io.Serializable
 
 	// Fields
 
-	private Integer sid;
 	private String sno;
 	private String sname;
 	private String sex;
@@ -35,16 +34,6 @@ public class Student implements java.io.Serializable
 	}
 
 	// Property accessors
-
-	public Integer getSid()
-	{
-		return this.sid;
-	}
-
-	public void setSid(Integer sid)
-	{
-		this.sid = sid;
-	}
 
 	public String getSno()
 	{

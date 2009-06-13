@@ -23,7 +23,6 @@ public class StudentDAO extends HibernateDaoSupport
 {
 	private static final Log log = LogFactory.getLog(StudentDAO.class);
 	// property constants
-	public static final String SNO = "sno";
 	public static final String SNAME = "sname";
 	public static final String SEX = "sex";
 	public static final String AGE = "age";
@@ -62,7 +61,7 @@ public class StudentDAO extends HibernateDaoSupport
 		}
 	}
 
-	public Student findById(java.lang.Integer id)
+	public Student findById(java.lang.String id)
 	{
 		log.debug("getting Student instance with id: " + id);
 		try
@@ -107,11 +106,6 @@ public class StudentDAO extends HibernateDaoSupport
 			log.error("find by property name failed", re);
 			throw re;
 		}
-	}
-
-	public List findBySno(Object sno)
-	{
-		return findByProperty(SNO, sno);
 	}
 
 	public List findBySname(Object sname)

@@ -1,5 +1,5 @@
 #
-#Sat Jun 13 12:04:52 CST 2009
+#Sat Jun 13 12:09:12 CST 2009
 genBasicCompId=false
 sessionFactoryName=
 profile=
@@ -10,7 +10,7 @@ detectM2M=false
 reStrategyClass=
 springDaoFile=WebRoot/WEB-INF/applicationContext.xml
 useJavaTypes=true
-keyGenerator=native
+keyGenerator=assigned
 libInstallFolder=/WebRoot/WEB-INF/lib
 addLibs2Project=true
 genVersionTag=false

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE validators PUBLIC "-//OpenSymphony Group//XWork Validator 1.0.2//EN" "http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
+<validators>
+	<field name="stu.sno">
+<!--		<field-validator type="requiredstring">-->
+<!--			<message key="no.validation"></message>-->
+<!--		</field-validator>-->
+		<field-validator type="regex">
+<!--			<param name="expression"><![CDATA[^10\d{9}$]]></param>-->
+			<param name="expression"><![CDATA[(^[0-9]{11}$)]]></param>   
+<!--		学号为11位，全为0-9的数字	-->
+			<message>学生的学号为空或者格式不正确</message>
+		</field-validator>
+	</field>
+	<field name="stu.sname">
+		<field-validator type="requiredstring">
+			<message>学生的姓名为空</message>
+		</field-validator>
+	</field>
+	<field name="stu.sex">
+		<field-validator type="requiredstring">
+			<message>学生的性别为空</message>
+		</field-validator>
+	</field>
+<!--	<field name="stu.age">-->
+<!--		<field-validator type="required">-->
+<!--			<message>学生的年龄为空</message>-->
+<!--		</field-validator>-->
+<!--		<field-validator type="int">-->
+<!--			<param name="min">1</param>-->
+<!--			<param name="max">200</param>-->
+<!--			<message>学生的年龄应该在1-200之间</message>-->
+<!--		</field-validator>-->
+<!--	</field>-->
+<!--	<field name="stu.grade">-->
+<!--		<field-validator type="requiredstring">-->
+<!--			<message>学生的班级为空</message>-->
+<!--		</field-validator>-->
+<!--	</field>-->
+		
+<!--	</field>-->
+<!--	<field name="user.lastname">-->
+<!--		<field-validator type="requiredstring">-->
+<!--			<message>required last name</message>-->
+<!--		</field-validator>-->
+<!--	</field>-->
+<!--	<field name="user.age">-->
+<!--		<field-validator type="required">-->
+<!--			<message>required age</message>-->
+<!--		</field-validator>-->
+<!--		<field-validator type="int">-->
+<!--			<param name="min">1</param>-->
+<!--			<param name="max">150</param>-->
+<!--			<message>age should be between ${min} and ${max}</message>-->
+<!--		</field-validator>-->
+<!--	</field>-->
+</validators>

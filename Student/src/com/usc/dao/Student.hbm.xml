@@ -6,13 +6,10 @@
 -->
 <hibernate-mapping>
     <class name="com.usc.dao.Student" table="student" catalog="student">
-        <id name="sid" type="java.lang.Integer">
-            <column name="sid" />
-            <generator class="native" />
+        <id name="sno" type="java.lang.String">
+            <column name="sno" length="20" />
+            <generator class="assigned" />
         </id>
-        <property name="sno" type="java.lang.String">
-            <column name="sno" length="20" not-null="true" />
-        </property>
         <property name="sname" type="java.lang.String">
             <column name="sname" length="20" not-null="true" />
         </property>
