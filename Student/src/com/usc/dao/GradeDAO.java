@@ -110,13 +110,13 @@ public class GradeDAO extends HibernateDaoSupport
 		return findByProperty(GNAME, gname);
 	}
 
-	public List<Grade> findAll()
+	public List findAll()
 	{
 		log.debug("finding all Grade instances");
 		try
 		{
 			String queryString = "from Grade";
-			return (List<Grade>)getHibernateTemplate().find(queryString);
+			return getHibernateTemplate().find(queryString);
 		} catch (RuntimeException re)
 		{
 			log.error("find all failed", re);
