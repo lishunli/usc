@@ -43,7 +43,7 @@ public class LoginAction extends Action
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 	{
-		System.out.println("execute");
+//		System.out.println("execute");
 		LoginForm loginForm = (LoginForm) form;// TODO Auto-generated method stub
 		List sex = new ArrayList();
 		sex.add("nan");
