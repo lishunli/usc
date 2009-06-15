@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+  <data-sources />
+  <form-beans >
+    <form-bean name="loginForm" type="com.usc.struts.form.LoginForm" />
+    <form-bean name="addStudentForm" type="com.usc.struts.form.AddStudentForm" />
+
+  </form-beans>
+
+  <global-exceptions />
+  <global-forwards />
+  <action-mappings >
+    <action
+      attribute="loginForm"
+      input="/login.jsp"
+      name="loginForm"
+      path="/login"
+      scope="request"
+      validate="true"
+      type="com.usc.struts.action.LoginAction" />
+    <action
+      attribute="addStudentForm"
+      input="/addStudent.jsp"
+      name="addStudentForm"
+      path="/addStudent"
+      scope="request"
+      type="com.usc.struts.action.AddStudentAction" />
+
+  </action-mappings>
+
+  <message-resources parameter="com.usc.struts.ApplicationResources" />
+  
+ <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+ </plug-in>
+
+</struts-config>
+
