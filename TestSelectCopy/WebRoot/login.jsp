@@ -11,7 +11,7 @@
 		<html:form action="/login" onsubmit="return validateLoginForm(this);">			
 			username : <html:text property="username"/><font color="#FF0000"><html:errors property="username"/><br/></font>
 
-			password : <html:password property="password"/><font color="#FF0000"><html:errors property="username"/><br/></font><br/>
+			password : <html:password property="password"/><font color="#FF0000"><html:errors property="password"/><br/></font><br/>
 			<html:submit/><html:reset/>
 		</html:form>
 	</body>

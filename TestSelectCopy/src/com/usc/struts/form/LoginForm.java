@@ -100,7 +100,7 @@ public class LoginForm extends ActionForm
 	public ActionErrors validate(ActionMapping mapping,
 			HttpServletRequest request)
 	{
-		System.out.println("validate");
+//		System.out.println("validate");
 		ActionErrors errors = new ActionErrors();
 
 		if (username == null || "".equals(username.trim()))
@@ -108,7 +108,7 @@ public class LoginForm extends ActionForm
 
 			errors
 					.add("username", new ActionMessage(
-							"register.error.username"));
+							"login.error.username"));
 
 		}
 
@@ -117,7 +117,7 @@ public class LoginForm extends ActionForm
 
 			errors
 					.add("password", new ActionMessage(
-							"register.error.password"));
+							"login.error.password"));
 
 		}
 

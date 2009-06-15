@@ -9,10 +9,10 @@
 	<formset>
 		<form name="loginForm">
 			<field property="username" depends="required">
-				<msg key="register.error.username" name="required" />
+				<msg key="login.error.username" name="required" />
 			</field>
 			<field property="password" depends="required">
-				<msg key="register.error.password" name="required" />
+				<msg key="login.error.password" name="required" />
 			</field>
 		</form>
 	</formset>
