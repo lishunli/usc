@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+
+	<form-beans>
+		<form-bean name="loginForm" type="com.bjsxt.struts.LoginActionForm"/>
+	</form-beans>
+	
+	<global-exceptions>
+	<!-- 
+			<exception key="user.not.found" type="com.bjsxt.struts.UserNotFoundException" path="/login_error.jsp"/>
+			<exception key="user.password.error" type="com.bjsxt.struts.PasswordErrorException" path="/login_error.jsp"/>
+	 -->
+	 
+	 <!-- 
+		<exception key="user.not.found" type="com.bjsxt.struts.UserNotFoundException" handler="org.apache.struts.action.ExceptionHandler"/>
+		<exception key="user.password.error" type="com.bjsxt.struts.PasswordErrorException" handler="org.apache.struts.action.ExceptionHandler"/>
+	 -->
+	 
+	 <!-- 
+	 <exception key="error.exception" type="com.bjsxt.struts.ErrorCodeException" handler="com.bjsxt.struts.ErrorCodeExceptionHandler"/>
+	  -->
+	  <!-- 
+	  <exception key="error.exception" type="com.bjsxt.struts.AppException" handler="com.bjsxt.struts.AppExceptionHandler"/>
+	   -->	
+	  
+	  <exception key="error.exception" type="com.bjsxt.struts.AppException"/> 
+	</global-exceptions>
+		
+	<action-mappings>
+		<action path="/login"
+				type="com.bjsxt.struts.LoginAction"
+				name="loginForm"
+				scope="request"
+				validate="false"
+				input="/login.jsp"
+		>	
+		<!-- 
+			<exception key="user.not.found" type="com.bjsxt.struts.UserNotFoundException" path="/login_error.jsp"/>
+			<exception key="user.password.error" type="com.bjsxt.struts.PasswordErrorException" path="/login_error.jsp"/>
+		 -->	
+			<forward name="success" path="/login_success.jsp"/>
+			<forward name="error" path="/login.jsp"/>
+		</action>
+		
+		<action path="/changelang"
+				type="com.bjsxt.struts.ChangeLanguageAction"
+		>
+			<forward name="index" path="/index.jsp"/>
+		</action>
+		
+		<action path="/login1"
+				type="org.apache.struts.actions.ForwardAction"
+				parameter="/login.jsp"
+		></action>
+	</action-mappings>
+	
+	<message-resources parameter="res.MessageResources" />
+</struts-config>
+

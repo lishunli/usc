@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+	<form-beans>
+		<form-bean name="dynaForm" type="org.apache.struts.action.DynaActionForm">
+			<form-property name="username" type="java.lang.String"/>
+			<form-property name="age" type="java.lang.Integer"/>
+		</form-bean>
+		
+		<form-bean name="uploadForm" type="com.bjsxt.struts.UploadActionForm"/>
+		
+		<form-bean name="blankFieldForm" type="com.bjsxt.struts.BlankFieldActionForm"/>
+		
+		<form-bean name="typeconvertForm" type="com.bjsxt.struts.TypeConvertActionForm"/>
+	</form-beans>
+	
+	<action-mappings>
+		<action path="/dyanactionform"
+				type="com.bjsxt.struts.DynaActionFormTestAction"
+				name="dynaForm"
+				scope="request"
+		>
+			<forward name="success" path="/dyna_actionform.jsp"/>
+		</action>
+		
+		<action path="/upload"
+				type="com.bjsxt.struts.UploadTestAction"
+				name="uploadForm"
+				scope="request"
+		>
+			<forward name="success" path="/upload_success.jsp"/>
+		</action>
+		
+		<action path="/blankfield"
+				type="com.bjsxt.struts.BlankFieldTestAction"
+				name="blankFieldForm"
+				scope="request"		
+		>
+			<forward name="success" path="/blankfield_success.jsp"/>
+		</action>
+		
+		<action path="/typeconvert"
+				type="com.bjsxt.struts.TypeConvertTestAction"
+				name="typeconvertForm"
+				scope="request"
+		>
+			<forward name="success" path="/typeconvert_success.jsp"/>	
+		</action>
+	</action-mappings>
+	
+	<controller maxFileSize="10M"/>
+	
+	<plug-in className="com.bjsxt.struts.UtilDateConverterInitWithPlugin"/>
+</struts-config>
+

@@ -1,0 +1,1 @@
+分步收集，ActionForm的scope=session

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+<struts-config>
+	
+	<form-beans>
+		<form-bean name="calForm" type="com.bjsxt.struts.CalActionForm"/>
+	</form-beans>
+
+	<action-mappings>
+		<action path="/cal"
+				type="com.bjsxt.struts.CalAction"
+				name="calForm"
+				scope="request"
+				attribute="testForm"
+		>
+			<forward name="success" path="/success.jsp"/>
+			<forward name="error" path="/error.jsp"/>
+		</action>
+	</action-mappings>
+</struts-config>
+

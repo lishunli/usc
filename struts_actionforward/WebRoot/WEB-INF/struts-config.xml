@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+
+	<form-beans>
+		<form-bean name="loginForm" type="com.bjsxt.struts.LoginActionForm"/>
+	</form-beans>
+	
+	<global-forwards>
+		<forward name="login" path="/login.jsp" redirect="true"/>
+	</global-forwards>
+	
+	<action-mappings>
+		<action path="/login"
+				type="com.bjsxt.struts.LoginAction"
+				name="loginForm"
+				scope="request"
+				validate="false"
+		>
+			<forward name="success" path="/login_success.jsp"/>
+			<forward name="error" path="/login_error.jsp"/>
+		</action>
+		
+		<action path="/mustlogin"
+				type="com.bjsxt.struts.MustLoginAction"
+		>
+			<!-- 
+			<forward name="login" path="/login.jsp" redirect="true"/>
+			 -->
+			<forward name="success" path="/mustlogin.jsp"/>
+		</action>
+		
+		<action path="/dynaactionforward"
+				type="com.bjsxt.struts.DynaActionForwardTestAction"	
+		>
+		<!-- 
+			<forward name="page1" path="/page1.jsp"/>
+			<forward name="page2" path="/page2.jsp"/>
+		 -->	
+		</action>
+	</action-mappings>
+</struts-config>
+

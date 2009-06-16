@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="struts_trainnig_cal"
+  id="myeclipse.1217469468593"
+  context-root="/struts_trainnig_cal"
+  j2ee-spec="1.4"
+  archive="struts_trainnig_cal.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
