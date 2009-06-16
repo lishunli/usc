@@ -27,12 +27,7 @@
 		<%
 			session.setAttribute("index", "jsjmz(Q:506817493)");
 		%>
-		<%
-			List gradelist = new ArrayList();
-			gradelist.add("061");
-			gradelist.add("062");
-			session.setAttribute("gradelist", gradelist);
-		%>
+
 		<center>
 			<table border="0" width="920" cellspacing="0" bgcolor="white">
 				<tr>
@@ -43,7 +38,7 @@
 						<hr>
 						<br>
 						<br>
-						<a href="addStudent.jsp"><font size="6">添加学生</font> </a>
+						<a href="init.do"><font size="6">添加学生</font> </a>
 						<br>
 						<br>
 						<a href="login.jsp"><font size="6">登录</font

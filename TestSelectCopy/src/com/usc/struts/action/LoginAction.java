@@ -6,6 +6,7 @@ package com.usc.struts.action;
 
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,6 +48,24 @@ public class LoginAction extends Action
 		LoginForm loginForm = (LoginForm) form;// TODO Auto-generated method stub
 		List sex = new ArrayList();
 		sex.add("nan");
+//		return null;
+////		1.方法一
+//		return new ActionForward("/index.jsp");
+		
+//		2.方法二
+		try
+		{
+			response.sendRedirect(request.getContextPath()+"/index.jsp");
+		} catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
+		
+//		3.方法三
+//		return mapping.findForward("success");
+		
+		
 	}
 }

@@ -63,7 +63,7 @@ public class UserLoginFilter implements Filter
 		// return;
 		// }
 //		System.out.println("++++"+indexflag);
-		if(requesturi.endsWith("/index.jsp") || requesturi.endsWith(httpServletRequest.getContextPath()+"/"))
+		if(requesturi.endsWith("/index.jsp") || requesturi.endsWith("/init.do") || requesturi.endsWith(httpServletRequest.getContextPath()+"/"))
 		{			
 		}
 		else if(indexflag == null)

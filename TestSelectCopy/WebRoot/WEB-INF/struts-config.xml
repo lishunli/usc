@@ -6,6 +6,7 @@
   <form-beans >
     <form-bean name="loginForm" type="com.usc.struts.form.LoginForm" />
     <form-bean name="addStudentForm" type="com.usc.struts.form.AddStudentForm" />
+    <form-bean name="initForm" type="com.usc.struts.form.InitForm" />
   </form-beans>
 
   <global-exceptions />
@@ -18,17 +19,30 @@
       path="/login"
       scope="request"
       validate="true"
-      type="com.usc.struts.action.LoginAction" />
+      type="org.springframework.web.struts.DelegatingActionProxy" />
     <action
       attribute="addStudentForm"
       input="/addStudent.jsp"
       name="addStudentForm"
       path="/addStudent"
       scope="request"
-      type="com.usc.struts.action.AddStudentAction" />
-
+      type="org.springframework.web.struts.DelegatingActionProxy"/>
+	
+	<action path="pagenotfind"
+		unknown="true"
+		forward="/pagenotfind.jsp" 	
+	/>
+    <action
+      attribute="initForm"
+      input="/init.jsp"
+      name="initForm"
+      path="/init"
+      scope="request"
+      type="org.springframework.web.struts.DelegatingActionProxy">
+      <forward name="success" path="/addStudent.jsp" redirect="true"></forward>
+      </action>
   </action-mappings>
-
+	
   <message-resources parameter="com.usc.struts.ApplicationResources" />
   
  <plug-in className="org.apache.struts.validator.ValidatorPlugIn">

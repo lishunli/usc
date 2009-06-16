@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-module
   type="WEB"
-  name="TestSelectCopy"
+  name="StudentManager"
   id="myeclipse.1244982798369"
-  context-root="/TestSelectCopy"
+  context-root="/StudentManager"
   j2ee-spec="5.0"
-  archive="TestSelectCopy.war">
+  archive="StudentManager.war">
   <attributes>
     <attribute name="webrootdir" value="/WebRoot" />
   </attributes>

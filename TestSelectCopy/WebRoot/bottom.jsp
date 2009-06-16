@@ -16,7 +16,7 @@
 							<a href=mailto:jsjmz@qq.com>jsjmz@qq.com</a>
 							<br>
 							CopyRight 2008-2009
-							<a href=http://blog.sina.com.cn/usc3l target=_blank>木子博客</a> Inc
+							<a href=http://blog.sina.com.cn/usc3l target=_blank>木子</a> Inc
 							All Rights Reserved
 							<br>
 							<br>

@@ -116,6 +116,7 @@ public class GradeDAO extends HibernateDaoSupport
 		try
 		{
 			String queryString = "from Grade";
+			
 			return getHibernateTemplate().find(queryString);
 		} catch (RuntimeException re)
 		{
