@@ -38,7 +38,8 @@
       name="initForm"
       path="/init"
       scope="request"
-      type="org.springframework.web.struts.DelegatingActionProxy">
+      type="org.springframework.web.struts.DelegatingActionProxy"  
+      >
       <forward name="success" path="/addStudent.jsp" redirect="true"></forward>
       </action>
   </action-mappings>

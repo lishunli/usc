@@ -8,7 +8,11 @@
 
 	</head>
 	<body>
-		<html:form action="/addStudent"> 
+		<%
+			response.setHeader("Cache-Control", "no-cache");
+		%>
+		<!--上面的语句是进入jsp后刷新一次-->
+		<html:form action="/addStudent">
 			psno&nbsp;&nbsp; : <html:text property="sno" />
 			<html:errors property="sno" />
 			<br />
@@ -26,7 +30,7 @@
 			<html:errors property="age" />
 			<br />
 			gname : <html:select property="gname">
-					
+
 				<logic:iterate id="g" name="gradelist">
 					<html:option value="${g}"></html:option>
 				</logic:iterate>

@@ -41,11 +41,8 @@ public class AddStudentAction extends Action
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 	{
-		List gradelist = new ArrayList();
-		gradelist.add("061");
-		gradelist.add("062");
-		
 		AddStudentForm addStudentForm = (AddStudentForm) form;// TODO Auto-generated method stub
+		System.out.println(addStudentForm.getSname()+"------"+addStudentForm.getGname()+"------"+addStudentForm.getSex());
 		return null;
 	}
 }

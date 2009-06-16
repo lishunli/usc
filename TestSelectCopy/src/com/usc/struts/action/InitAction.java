@@ -54,7 +54,7 @@ public class InitAction extends Action
 	{
 		
 		
-		System.out.println("exectute .....");
+//		System.out.println("exectute .....");
 //		InitForm initForm = (InitForm) form;// TODO Auto-generated method stub
 		List gradelist = new ArrayList();
 //		gradelist.add("061");
@@ -62,7 +62,7 @@ public class InitAction extends Action
 //		request.getSession().setAttribute("gradelist", gradelist);
 		
 //		List g = ss.getAllGrade();
-		System.out.println(ss.getAllGrade().size());
+//		System.out.println(ss.getAllGrade().size());
 		for(Grade glist : ss.getAllGrade())
 		{
 			gradelist.add(glist.getGname());

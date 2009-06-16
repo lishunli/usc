@@ -38,7 +38,7 @@
 						<hr>
 						<br>
 						<br>
-						<a href="init.do"><font size="6">添加学生</font> </a>
+						<a href="addStudent.jsp"><font size="6">添加学生</font> </a>
 						<br>
 						<br>
 						<a href="login.jsp"><font size="6">登录</font
