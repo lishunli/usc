@@ -31,11 +31,11 @@
 		<center>
 			<table border="0" width="920" cellspacing="0" bgcolor="white">
 				<tr>
+					<jsp:include page="/top.jsp"></jsp:include>
+				</tr>
+				<tr>
 					<td height="500" align="center" valign="top">
-						<h1>
-							<font color="red" size="10">学生管理系统</font>
-						</h1>
-						<hr>
+
 						<br>
 						<br>
 						<a href="addStudent.jsp"><font size="6">添加学生</font> </a>
@@ -56,15 +56,16 @@
 					<br>
 					<br>
 					<br>
+					<br>
+					<br>
+					<br>
+					<br>
 
 				</tr>
 				<tr>
-
-					<td>
-						<hr>
-						<jsp:include page="/bottom.jsp"></jsp:include>
-						<br>
-					</td>
+					<hr>
+					<jsp:include page="/bottom.jsp"></jsp:include>
+					<br>
 				</tr>
 			</table>
 		</center>
