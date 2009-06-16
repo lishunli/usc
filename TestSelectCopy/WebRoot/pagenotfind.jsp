@@ -8,21 +8,40 @@
 	</head>
 	<body>
 		<center>
-			<table border="0" width="100%" cellspacing="0" cellpadding="0">
+			<table border="0" width="920" cellspacing="0" bgcolor="white">
 				<tr>
-					<td align="center">
-						<p>
-							<br>
-							<br>
-							<br>
-							<br>
-							<font color="red" size="10"><a href="index.jsp">请求不存在，请返回首页</a>
-							</font>
+					<jsp:include page="/top.jsp"></jsp:include>
+				</tr>
+				<tr>
+					<td height="500" align="center" valign="top">
 
-							<br>
-							<br>
-						</p>
+						<br>
+						<br>
+						<font color="red" size="10"><a href="index.jsp">请求不存在，请返回首页</a>
+						</font>
+						<br>
+						<br>
+						<br>
+
 					</td>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+
+				</tr>
+				<tr>
+					<hr>
+					<jsp:include page="/bottom.jsp"></jsp:include>
+					<br>
 				</tr>
 			</table>
 		</center>
