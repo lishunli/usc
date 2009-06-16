@@ -32,6 +32,7 @@
 			<h1>
 				<font color="red">学生管理系统 </font>
 			</h1>
+			<hr>
 			<br>
 			<br>
 			<s:a href="addStu.jsp">添加学生</s:a>
