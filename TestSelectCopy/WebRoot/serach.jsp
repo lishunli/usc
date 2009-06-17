@@ -19,11 +19,18 @@
 							您现在的位置：
 							<a href="index.jsp">首页</a>&gt;&gt;查询学生信息
 						</div>
-						<p align="right">
-							<a href="loginOut.do">注销登录</a>
-						</p>
-
-						<br>
+						<c:choose>
+							<c:when test="${empty login}">
+								<p align="right">
+									<a href="login.jsp">登录</a>
+								</p>
+							</c:when>
+							<c:otherwise>
+								<p align="right">
+									<a href="loginOut.do">注销登录</a>
+								</p>
+							</c:otherwise>
+						</c:choose>
 						<br>
 
 						<table border="1">

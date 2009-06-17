@@ -29,7 +29,6 @@
 								<p align="right">
 									<a href="login.jsp">登录</a>
 								</p>
-								</a>
 							</c:when>
 							<c:otherwise>
 								<p align="right">

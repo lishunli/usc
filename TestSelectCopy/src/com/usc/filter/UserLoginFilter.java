@@ -50,7 +50,12 @@ public class UserLoginFilter implements Filter
 				&& !requesturi.endsWith("/listAllStudent.jsp")
 				&& !requesturi.endsWith("/listAllStudent.do")
 				&& !requesturi.endsWith("/login.jsp")
-				&& !requesturi.endsWith("/login.do"))
+				&& !requesturi.endsWith("/login.do")
+				&& !requesturi.endsWith("/searchbyno.jsp")
+				&& !requesturi.endsWith("/searchbyno.do")
+				&& !requesturi.endsWith("/serachbyname.jsp")
+				&& !requesturi.endsWith("/serachbyname.do")
+				)
 		{
 			httpServletResponse.sendRedirect(httpServletRequest
 					.getContextPath()

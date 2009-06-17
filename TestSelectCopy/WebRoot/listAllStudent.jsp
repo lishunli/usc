@@ -52,7 +52,7 @@
 								<p align="right">
 									<a href="login.jsp">登录</a>
 								</p>
-								</a>
+								
 							</c:when>
 							<c:otherwise>
 								<p align="right">
@@ -61,7 +61,7 @@
 							</c:otherwise>
 						</c:choose>
 						<br>
-						<br>
+						
 
 						<table border="1">
 							<tr>
