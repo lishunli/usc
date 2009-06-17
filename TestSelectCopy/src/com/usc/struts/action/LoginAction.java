@@ -12,6 +12,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
@@ -44,10 +45,16 @@ public class LoginAction extends Action
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 	{
+			
+		HttpSession session= request.getSession();
+		session.setAttribute("login", "true");
+		String requrl = session.getAttribute("requrl").toString();
+//		System.out.println("action..."+requrl);
 //		System.out.println("execute");
+//		System.out.println("1...."+session.getAttribute("login"));
 		LoginForm loginForm = (LoginForm) form;// TODO Auto-generated method stub
-		List sex = new ArrayList();
-		sex.add("nan");
+//		List sex = new ArrayList();
+//		sex.add("nan");
 //		return null;
 ////		1.方法一
 //		return new ActionForward("/index.jsp");
@@ -55,7 +62,9 @@ public class LoginAction extends Action
 //		2.方法二
 		try
 		{
-			response.sendRedirect(request.getContextPath()+"/index.jsp");
+//			System.out.println("contextpath"+request.getContextPath());
+//			System.out.println(request.getContextPath()+ requrl);
+			response.sendRedirect(requrl);
 		} catch (IOException e)
 		{
 			// TODO Auto-generated catch block

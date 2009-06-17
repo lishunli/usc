@@ -31,6 +31,8 @@ public class UserLoginFilter implements Filter
 		// 通过检查session中的变量，过虑请求,最好把username提取出来当常量
 		HttpSession session = httpServletRequest.getSession();
 		Object indexflag = session.getAttribute("index");
+		Object loginflag = session.getAttribute("login");
+//		System.out.println("2...."+session.getAttribute("login"));
 		Object addflag = session.getAttribute("addflag");
 //		System.out.println("++++"+indexflag);
 		if(requesturi.endsWith("/index.jsp") || requesturi.endsWith("/init.do") || requesturi.endsWith(httpServletRequest.getContextPath()+"/"))
@@ -43,6 +45,17 @@ public class UserLoginFilter implements Filter
 					+ "/index.jsp");
 			return;
 		}
+		else if(loginflag == null && !requesturi.endsWith("/listAllStudent.jsp") && !requesturi.endsWith("/login.jsp") && !requesturi.endsWith("/login.do"))
+		{
+			httpServletResponse.sendRedirect(httpServletRequest
+					.getContextPath()
+					+ "/login.jsp");
+//			 String reqUrl = httpServletRequest.getHeader("referer");
+//			 System.out.println("qingqiu..."+requesturi);
+			 session.setAttribute("requrl", requesturi);
+			return;
+		}
+		
 		else if(requesturi.endsWith("/addStudent.jsp") && addflag == null)
 		{
 			session.setAttribute("addflag", "true");

@@ -19,7 +19,7 @@
 				</tr>
 				<tr>
 					<td height="500" align="center" valign="top">
-
+<div align="left">您现在的位置：<a href="index.jsp">首页</a>&gt;&gt;添加学生 </div>
 						<br>
 						<br>
 						<html:form action="/addStudent">

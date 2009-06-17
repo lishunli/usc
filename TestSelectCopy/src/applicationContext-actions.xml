@@ -15,7 +15,7 @@
     <bean name="/login" class="com.usc.struts.action.LoginAction"> 
     </bean>
     
-        <bean name="/addStudent" class="com.usc.struts.action.AddStudentAction"> 
+    <bean name="/addStudent" class="com.usc.struts.action.AddStudentAction"> 
     </bean>
     
  </beans>
