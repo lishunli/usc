@@ -63,6 +63,14 @@
 						</a>
 						<br>
 						<br>
+						<a href="searchbyno.jsp"><font size="6">按学号查询</font
+						</a>
+						<br>
+						<br>
+						<a href="serachbyname.jsp"><font size="6">按姓名查询</font
+						</a>
+						<br>
+						<br>
 						<c:choose>
 							<c:when test="${empty login}">
 								<a href="login.jsp"><font size="6">登录</font

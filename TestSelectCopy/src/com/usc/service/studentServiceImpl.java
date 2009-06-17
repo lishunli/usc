@@ -62,4 +62,15 @@ public class studentServiceImpl implements studentService
 		
 	}
 
+	public List<Student> searchbyname(String sname)
+	{
+		
+		return sdao.findBySname(sname);
+	}
+
+	public List<Student> searchbyno(String no)
+	{
+		return sdao.findBySno(no);
+	}
+
 }

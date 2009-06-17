@@ -8,27 +8,37 @@
   <StrutsActivity path="/updateStudent.do" location="650,650" dimension="288,104" />
   <StrutsActivity path="pagenotfind.do" location="950,250" dimension="114,70" />
   <StrutsActivity path="/loginOut.do" location="50,950" dimension="362,104" />
+  <StrutsActivity path="/updatePStudent.do" location="950,1050" dimension="295,104" />
   <StrutsActivity path="/login.jsp" location="345,45" dimension="86,53" />
   <StrutsActivity path="/adderror.jsp" location="650,1050" dimension="110,53" />
   <StrutsActivity path="/addStudent.jsp" location="120,285" dimension="124,53" />
-  <StrutsActivity path="/init.jsp" location="650,350" dimension="74,53" />
   <StrutsActivity path="/listAllStudent.jsp" location="350,550" dimension="131,53" />
+  <StrutsActivity path="/updateerror.jsp" location="350,350" dimension="128,53" />
   <StrutsActivity path="/updateStudent.jsp" location="650,850" dimension="142,53" />
   <StrutsActivity path="/pagenotfind.jsp" location="50,450" dimension="128,53" />
   <StrutsActivity path="/index.jsp" location="50,1250" dimension="88,53" />
+  <StrutsActivity path="/init.jsp" location="650,350" dimension="74,53" />
   <StrutsActivity path="/deleteStudent.jsp" location="950,850" dimension="137,53" />
-  <StrutsActivity path="/updatePStudent.do" location="950,1050" dimension="295,104" />
+  <StrutsActivity path="/searchbyname.do" location="50,1450" dimension="286,104" />
+  <StrutsActivity path="/searchbyname.jsp" location="650,1450" dimension="141,53" />
   <StrutsTransition id="/loginOut.do,success,/index.jsp,1" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="123,1054" />
       <AbsolutePoint location="123,1250" />
     </AutomaticBendpoints>
   </StrutsTransition>
-  <StrutsTransition id="/init.jsp,null,/init.do,2" routingType="0">
+  <StrutsTransition id="/searchbyno.jsp,null,/searchbyno.do,2" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="724,376" />
-      <AbsolutePoint location="1161,376" />
-      <AbsolutePoint location="1161,154" />
+      <AbsolutePoint location="950,1276" />
+      <AbsolutePoint location="619,1276" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/updateStudent.do,error,/updateerror.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="650,702" />
+      <AbsolutePoint location="556,702" />
+      <AbsolutePoint location="556,376" />
+      <AbsolutePoint location="478,376" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/login.jsp,null,/login.do,2" routingType="0">
@@ -41,21 +51,29 @@
   <StrutsTransition id="/init.do,success,/addStudent.jsp,1" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="1131,154" />
-      <AbsolutePoint location="1131,335" />
-      <AbsolutePoint location="244,335" />
+      <AbsolutePoint location="1131,418" />
+      <AbsolutePoint location="193,418" />
+      <AbsolutePoint location="193,338" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/addStudent.do,success,/listAllStudent.do,1" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="466,299" />
-      <AbsolutePoint location="466,488" />
-      <AbsolutePoint location="950,488" />
+      <AbsolutePoint location="614,235" />
+      <AbsolutePoint location="1089,235" />
+      <AbsolutePoint location="1089,450" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/updatePStudent.do,success,/updateStudent.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="950,1088" />
+      <AbsolutePoint location="775,1088" />
+      <AbsolutePoint location="775,903" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/addStudent.do,error,/adderror.jsp,1" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="496,299" />
-      <AbsolutePoint location="496,1076" />
+      <AbsolutePoint location="586,299" />
+      <AbsolutePoint location="586,1076" />
       <AbsolutePoint location="650,1076" />
     </AutomaticBendpoints>
   </StrutsTransition>
@@ -66,25 +84,38 @@
       <AbsolutePoint location="1102,554" />
     </AutomaticBendpoints>
   </StrutsTransition>
+  <StrutsTransition id="/updateStudent.do,success,/listAllStudent.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="794,650" />
+      <AbsolutePoint location="794,518" />
+      <AbsolutePoint location="950,518" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
   <StrutsTransition id="pagenotfind.do,null,/pagenotfind.jsp,1" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="1007,320" />
-      <AbsolutePoint location="1007,418" />
-      <AbsolutePoint location="105,418" />
+      <AbsolutePoint location="1007,250" />
+      <AbsolutePoint location="1007,169" />
+      <AbsolutePoint location="105,169" />
       <AbsolutePoint location="105,450" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/listAllStudent.jsp,null,/listAllStudent.do,2" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="481,576" />
-      <AbsolutePoint location="1072,576" />
-      <AbsolutePoint location="1072,554" />
+      <AbsolutePoint location="445,550" />
+      <AbsolutePoint location="445,488" />
+      <AbsolutePoint location="950,488" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/login.do,input,/login.jsp,1" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="283,83" />
       <AbsolutePoint location="345,83" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/searchbyname.jsp,null,/searchbyname.do,2" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="650,1476" />
+      <AbsolutePoint location="336,1476" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/updateStudent.jsp,null,/updateStudent.do,2" routingType="0">
@@ -95,16 +126,16 @@
   </StrutsTransition>
   <StrutsTransition id="/listAllStudent.do,success,/listAllStudent.jsp,1" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="950,518" />
-      <AbsolutePoint location="415,518" />
+      <AbsolutePoint location="950,458" />
+      <AbsolutePoint location="415,458" />
       <AbsolutePoint location="415,550" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/addStudent.jsp,null,/addStudent.do,2" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="182,285" />
-      <AbsolutePoint location="182,247" />
-      <AbsolutePoint location="345,247" />
+      <AbsolutePoint location="244,314" />
+      <AbsolutePoint location="463,314" />
+      <AbsolutePoint location="463,299" />
     </AutomaticBendpoints>
   </StrutsTransition>
 </FlowViewLayout>

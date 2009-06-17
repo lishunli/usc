@@ -9,6 +9,8 @@
 		<form-bean name="listAllStudentForm" type="com.usc.struts.form.ListAllStudentForm" />
 		<form-bean name="updataStudentForm" type="com.usc.struts.form.UpdataStudentForm" />
 		<form-bean name="updateStudentForm" type="com.usc.struts.form.UpdateStudentForm" />
+		<form-bean name="searchbynoForm" type="com.usc.struts.form.SearchbynoForm" />
+		<form-bean name="serachbynameForm" type="com.usc.struts.form.SerachbynameForm" />
 	</form-beans>
 	<global-exceptions />
 	<global-forwards />
@@ -28,7 +30,6 @@
 			type="org.springframework.web.struts.DelegatingActionProxy">
 			<forward name="success" path="/addStudent.jsp" redirect="true"></forward>
 		</action>
-		
 		<action attribute="listAllStudentForm" input="/listAllStudent.jsp"
 			name="listAllStudentForm" path="/listAllStudent" scope="request"
 			type="org.springframework.web.struts.DelegatingActionProxy">
@@ -49,8 +50,19 @@
 			type="org.springframework.web.struts.DelegatingActionProxy">
 			<forward name="success" path="/index.jsp"></forward>
 		</action>
-		<action path="/updatePStudent" type="org.springframework.web.struts.DelegatingActionProxy" scope="session">
+		<action path="/updatePStudent"
+			type="org.springframework.web.struts.DelegatingActionProxy" scope="session">
 			<forward name="success" path="/updateStudent.jsp" redirect="true"></forward>
+		</action>
+		<action attribute="searchbynoForm" input="/searchbyno.jsp"
+			name="searchbynoForm" path="/searchbyno" scope="request"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="success" path="/serach.jsp"></forward>
+		</action>
+		<action attribute="serachbynameForm" input="/serachbyname.jsp"
+			name="serachbynameForm" path="/serachbyname" scope="request"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="success" path="/serach.jsp"></forward>
 		</action>
 	</action-mappings>
 	<message-resources parameter="com.usc.struts.ApplicationResources" />

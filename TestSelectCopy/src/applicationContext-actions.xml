@@ -8,7 +8,6 @@
 	<bean name="/init" class="com.usc.struts.action.InitAction">
 		<property name="ss" ref="studentService"></property>
 	</bean>
-
 	<bean name="/login" class="com.usc.struts.action.LoginAction">
 	</bean>
 	<bean name="/addStudent" class="com.usc.struts.action.AddStudentAction">
@@ -25,12 +24,15 @@
 	<bean name="/deleteStudent" class="com.usc.struts.action.DeleteStudentAction">
 		<property name="ss" ref="studentService"></property>
 	</bean>
-	
 	<bean name="/loginOut" class="com.usc.struts.action.LoginOutAction">
 	</bean>
-	
 	<bean name="/updatePStudent" class="com.usc.struts.action.UpdatePStudentAction">
 		<property name="ss" ref="studentService"></property>
 	</bean>
-	
+	<bean name="/searchbyno" class="com.usc.struts.action.SearchbynoAction">
+		<property name="ss" ref="studentService"></property>
+	</bean>
+	<bean name="/serachbyname" class="com.usc.struts.action.SerachbynameAction">
+		<property name="ss" ref="studentService"></property>
+	</bean>
 </beans>
