@@ -9,7 +9,8 @@
            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
 
 
-	
+	<bean id="Student" class="com.usc.dao.Student">
+	</bean>
 	<bean id="StudentDAO" class="com.usc.dao.StudentDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
@@ -24,5 +25,6 @@
 		<property name="gdao" ref="GradeDAO"></property>
 		<property name="sdao" ref="StudentDAO"></property>
 	</bean>
+
 	
 </beans>

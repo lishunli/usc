@@ -6,7 +6,7 @@
 <html>
 	<head>
 		<title>学生管理系统添加学生</title>
-
+		<html:javascript formName="addStudentForm" />
 	</head>
 	<body>
 		<%
@@ -20,8 +20,11 @@
 				</tr>
 				<tr>
 					<td height="500" align="center" valign="top">
-<div align="left">您现在的位置：<a href="index.jsp">首页</a>&gt;&gt;添加学生 </div>
-<c:choose>
+						<div align="left">
+							您现在的位置：
+							<a href="index.jsp">首页</a>&gt;&gt;添加学生
+						</div>
+						<c:choose>
 							<c:when test="${empty login}">
 								<p align="right">
 									<a href="login.jsp">登录</a>
@@ -36,26 +39,29 @@
 						</c:choose>
 						<br>
 						<br>
-						<html:form action="/addStudent">
+						<html:form action="/addStudent" onsubmit="return validateAddStudentForm(this);">
 			学号: <html:text property="sno" />
-							<html:errors property="sno" />
-							<br />
+							<font color="#FF0000"><html:errors property="sno" /> <br />
+							</font>
+							
 							
 			姓名: <html:text property="sname" />
-							<html:errors property="sname" />
-							<br /> 
+							<font color="#FF0000"><html:errors property="sname" /> <br />
+							</font>
+							
 							
 							  
 			性别: <html:select property="sex">
 								<html:option value="男生">男生</html:option>
 								<html:option value="女生">女生</html:option>
 							</html:select>
-
-							<html:errors property="sex" />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<font color="#FF0000"><html:errors property="sex" /> </font>
 							<br />  
 			年龄: <html:text property="age" />
-							<html:errors property="age" />
+
+							<font color="#FF0000"><html:errors property="age" />
+							</font>
 							<br />
 			班级: <html:select property="gname">
 
@@ -63,8 +69,8 @@
 									<html:option value="${g}"></html:option>
 								</logic:iterate>
 							</html:select>
-							<html:errors property="gname" />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+<font color="#FF0000"><html:errors property="gname" /> </font>
 							<br />
 							<html:submit value="添加" />
 							<html:reset value="重置" />

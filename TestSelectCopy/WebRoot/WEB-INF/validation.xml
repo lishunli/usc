@@ -15,5 +15,29 @@
 				<msg key="login.error.password.required" name="required" />
 			</field>
 		</form>
+		<form name="addStudentForm">
+			<field property="sno" depends="required,mask">
+				<msg key="add.error.sno.required" name="required" />
+				<msg key="add.error.sno" name="mask" />
+				<arg key="${var:mask}" name="mask" />
+				<var>
+					<var-name>mask </var-name>
+					<var-value>^\d{11}$</var-value>
+				</var>
+			</field>
+			<field property="sname" depends="required">
+				<msg key="add.error.sname.required" name="required" />
+			</field>
+			<field property="sex" depends="required">
+				<msg key="add.error.sex.required" name="required" />
+			</field>
+			<field property="age" depends="required,integer">
+				<msg key="add.error.age.required" name="required" />
+				<msg key="add.error.age" name="integer" />
+			</field>
+			<field property="gname" depends="required">
+				<msg key="add.error.gname.required" name="required" />
+			</field>
+		</form>
 	</formset>
 </form-validation>

@@ -8,6 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
+
+
+import com.usc.service.studentService;
 
 /** 
  * MyEclipse Struts
@@ -32,11 +36,14 @@ public class AddStudentForm extends ActionForm
 	private String sname;
 
 	/** age property */
-	private String age;
+	private Integer age;
 
 	/** gname property */
 	private String gname;
 
+	
+	
+	
 	/*
 	 * Generated Methods
 	 */
@@ -47,12 +54,7 @@ public class AddStudentForm extends ActionForm
 	 * @param request
 	 * @return ActionErrors
 	 */
-	public ActionErrors validate(ActionMapping mapping,
-			HttpServletRequest request)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	/** 
 	 * Method reset
@@ -122,7 +124,7 @@ public class AddStudentForm extends ActionForm
 	 * Returns the age.
 	 * @return String
 	 */
-	public String getAge()
+	public Integer getAge()
 	{
 		return age;
 	}
@@ -131,7 +133,7 @@ public class AddStudentForm extends ActionForm
 	 * Set the age.
 	 * @param age The age to set
 	 */
-	public void setAge(String age)
+	public void setAge(Integer age)
 	{
 		this.age = age;
 	}
@@ -153,4 +155,50 @@ public class AddStudentForm extends ActionForm
 	{
 		this.gname = gname;
 	}
+	
+	public ActionErrors validate(ActionMapping mapping,
+			HttpServletRequest request)
+	{
+		ActionErrors errors = new ActionErrors();
+
+		if (null == sno || "".equals(sno.trim()))
+		{
+
+			errors.add("sno", new ActionMessage("add.error.sno.required"));
+
+		}
+		else if( 11 != sno.length() || !sno.matches("[0-9]+"))
+		{
+			errors.add("sno", new ActionMessage("add.error.sno"));
+		}
+		if (null == sname || "".equals(sname.trim()))
+		{
+
+			errors.add("sname", new ActionMessage("add.error.sname.required"));
+
+		}
+		if (null == sex || "".equals(sex.trim()))
+		{
+
+			errors.add("sex", new ActionMessage("add.error.sex.required"));
+
+		}
+		if (null == age || "".equals(age))
+		{
+
+			errors.add("age", new ActionMessage("add.error.age.required"));
+		}
+		else if(age<1 || age>150 || ! age.toString().matches("[0-9]+"))
+		{
+			errors.add("age", new ActionMessage("add.error.age"));
+		}
+		if (null == gname || "".equals(gname.trim()))
+		{
+
+			errors.add("gname", new ActionMessage("add.error.gname.required"));
+
+		}
+		return errors;
+	}
+	
 }

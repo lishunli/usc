@@ -11,7 +11,7 @@ public class studentServiceImpl implements studentService
 {
 	private GradeDAO gdao;
 	private StudentDAO sdao;
-	
+
 	public void setSdao(StudentDAO sdao)
 	{
 		this.sdao = sdao;
@@ -30,7 +30,7 @@ public class studentServiceImpl implements studentService
 	public void addStudent(Student s)
 	{
 		sdao.save(s);
-		
+
 	}
 
 	public List<Student> getAllStudnet()
@@ -41,7 +41,14 @@ public class studentServiceImpl implements studentService
 	public void deleteStudent(String sno)
 	{
 		sdao.delete(sdao.findById(sno));
-		
+
+	}
+
+	public boolean findbysno(String sno)
+	{
+		if (null == sdao.findById(sno))
+			return false;
+		return true;
 	}
 
 }

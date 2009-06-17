@@ -4,8 +4,7 @@
  */
 package com.usc.struts.action;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.lang.reflect.InvocationTargetException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +14,9 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import com.sun.org.apache.commons.beanutils.BeanUtils;
+import com.usc.dao.Student;
+import com.usc.service.studentService;
 import com.usc.struts.form.AddStudentForm;
 
 /** 
@@ -26,23 +28,45 @@ import com.usc.struts.form.AddStudentForm;
  */
 public class AddStudentAction extends Action
 {
-	/*
-	 * Generated Methods
-	 */
+	private Student s;
+	private studentService ss;
+	public void setSs(studentService ss)
+	{
+		this.ss = ss;
+	}
 
-	/** 
-	 * Method execute
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return ActionForward
-	 */
+	public void setS(Student s)
+	{
+		this.s = s;
+	}
+
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 	{
+		
+		
 		AddStudentForm addStudentForm = (AddStudentForm) form;// TODO Auto-generated method stub
-		System.out.println(addStudentForm.getSname()+"------"+addStudentForm.getGname()+"------"+addStudentForm.getSex());
-		return null;
+//		System.out.println(addStudentForm.getSname()+"------"+addStudentForm.getGname()+"------"+addStudentForm.getSex());
+		try
+		{
+			BeanUtils.copyProperties(s,addStudentForm);
+		} catch (IllegalAccessException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+//		System.out.println(s.getGname()+s.getSno());
+		if(ss.findbysno(s.getSno()))
+		{
+			return mapping.findForward("error");
+		}
+		else
+		ss.addStudent(s);
+		
+		return mapping.findForward("success");
 	}
 }
