@@ -14,6 +14,8 @@ public interface studentService
 	public List<Student> getAllStudnet();
 	public void deleteStudent(String sno);
 	public boolean findbysno(String sno);
+	public Student findbyid(String sno);
+	public void updateStudent(Student s);
 	
 	
 }

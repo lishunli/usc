@@ -58,7 +58,7 @@ public class UserLoginFilter implements Filter
 			// String reqUrl = httpServletRequest.getHeader("referer");
 			// System.out.println("qingqiu..."+requesturi);
 			if (requesturi.endsWith("/deleteStudent.do")
-					|| requesturi.endsWith("/updateStudent.do"))
+					|| requesturi.endsWith("/updatePStudent.do"))
 			{
 				// System.out.println("......" + request.getContentType());
 				// System.out.println("+++++" + request.getContentType()
@@ -87,6 +87,7 @@ public class UserLoginFilter implements Filter
 		{
 			session.removeAttribute("addflag");
 		}
+
 
 		chain.doFilter(request, response);
 	}

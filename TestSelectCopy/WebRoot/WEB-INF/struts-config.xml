@@ -24,11 +24,11 @@
 			<forward name="success" path="/listAllStudent.do"></forward>
 			<forward name="error" path="/adderror.jsp"></forward>
 		</action>
-		<action attribute="initForm" input="/init.jsp" name="initForm"
-			path="/init" scope="request"
+		<action path="/init" scope="request"
 			type="org.springframework.web.struts.DelegatingActionProxy">
 			<forward name="success" path="/addStudent.jsp" redirect="true"></forward>
 		</action>
+		
 		<action attribute="listAllStudentForm" input="/listAllStudent.jsp"
 			name="listAllStudentForm" path="/listAllStudent" scope="request"
 			type="org.springframework.web.struts.DelegatingActionProxy">
@@ -41,11 +41,16 @@
 		<action attribute="updateStudentForm" input="/updateStudent.jsp"
 			name="updateStudentForm" path="/updateStudent" scope="request"
 			type="org.springframework.web.struts.DelegatingActionProxy" validate="true">
+			<forward name="success" path="/listAllStudent.do"></forward>
+			<forward name="error" path="/updateerror.jsp"></forward>
 		</action>
 		<action path="pagenotfind" unknown="true" forward="/pagenotfind.jsp" />
 		<action path="/loginOut"
 			type="org.springframework.web.struts.DelegatingActionProxy">
 			<forward name="success" path="/index.jsp"></forward>
+		</action>
+		<action path="/updatePStudent" type="org.springframework.web.struts.DelegatingActionProxy" scope="session">
+			<forward name="success" path="/updateStudent.jsp" redirect="true"></forward>
 		</action>
 	</action-mappings>
 	<message-resources parameter="com.usc.struts.ApplicationResources" />

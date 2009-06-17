@@ -4,12 +4,18 @@
  */
 package com.usc.struts.action;
 
+import java.lang.reflect.InvocationTargetException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+
+import com.sun.org.apache.commons.beanutils.BeanUtils;
+import com.usc.dao.Student;
+import com.usc.service.studentService;
 import com.usc.struts.form.UpdateStudentForm;
 
 /** 
@@ -21,22 +27,42 @@ import com.usc.struts.form.UpdateStudentForm;
  */
 public class UpdateStudentAction extends Action
 {
-	/*
-	 * Generated Methods
-	 */
+	private Student s;
+	private studentService ss;
+	public void setSs(studentService ss)
+	{
+		this.ss = ss;
+	}
 
-	/** 
-	 * Method execute
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return ActionForward
-	 */
+	public void setS(Student s)
+	{
+		this.s = s;
+	}
+
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 	{
 		UpdateStudentForm updateStudentForm = (UpdateStudentForm) form;// TODO Auto-generated method stub
-		return null;
+		try
+		{
+			BeanUtils.copyProperties(s, updateStudentForm);
+		} catch (IllegalAccessException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(request.getSession().getAttribute("beforesno"));
+		System.out.println(s.getSno());
+		if(s.getSno().equals(request.getSession().getAttribute("beforesno")) && ss.findbysno(s.getSno()))
+		{
+			return mapping.findForward("error");
+		}
+		ss.updateStudent(s);
+		
+		return mapping.findForward("success");
 	}
 }

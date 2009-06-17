@@ -17,6 +17,18 @@
 			return true;
 		}
 		return false;
+	}
+	
+	function update()
+	{
+		if ("<%= session.getAttribute("login") %>" == "null") {   
+    		alert("需要登陆才能修改学生,请登录");   
+		} 
+		if(confirm("你真的想修改该学生的信息吗？"))
+		{
+			return true;
+		}
+		return false;
 		
 		
 	}
@@ -102,7 +114,7 @@
 											</td>
 											<td>
 												
-												<a href="updateStudent.do">修改</a>
+												<a href="updatePStudent.do?sno=${stu.sno }" onclick="return update();">修改</a>
 											</td>
 											<td>
 												<a href="deleteStudent.do?sno=${stu.sno }"

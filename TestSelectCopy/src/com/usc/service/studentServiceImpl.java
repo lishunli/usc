@@ -51,4 +51,15 @@ public class studentServiceImpl implements studentService
 		return true;
 	}
 
+	public Student findbyid(String sno)
+	{
+		return sdao.findById(sno);
+	}
+
+	public void updateStudent(Student s)
+	{
+		sdao.merge(s);
+		
+	}
+
 }
