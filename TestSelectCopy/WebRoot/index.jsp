@@ -26,6 +26,7 @@
 	<body>
 		<%
 			session.setAttribute("index", "jsjmz(Q:506817493)");
+			session.setAttribute("requrl", request.getContextPath() + "/index.jsp");
 		%>
 
 		<center>
@@ -41,7 +42,7 @@
 						<a href="addStudent.jsp"><font size="6">添加学生</font> </a>
 						<br>
 						<br>
-						<a href="listAllStudent.jsp"><font size="6">显示所有学生信息</font
+						<a href="listAllStudent.do"><font size="6">显示所有学生信息</font
 						</a>
 						<br>
 						<br>

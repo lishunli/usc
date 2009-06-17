@@ -4,39 +4,68 @@
  */
 package com.usc.struts.action;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import com.usc.struts.form.ListAllStudentForm;
 
-/** 
- * MyEclipse Struts
- * Creation date: 06-17-2009
+import com.sun.org.apache.commons.beanutils.BeanUtils;
+import com.usc.dao.Student;
+import com.usc.service.studentService;
+
+/**
+ * MyEclipse Struts Creation date: 06-17-2009
  * 
  * XDoclet definition:
- * @struts.action path="/listAllStudent" name="listAllStudentForm" input="/listAllStudent.jsp" scope="request" validate="true"
+ * 
+ * @struts.action path="/listAllStudent" name="listAllStudentForm"
+ *                input="/listAllStudent.jsp" scope="request" validate="true"
  */
 public class ListAllStudentAction extends Action
 {
+	private studentService ss;
+
 	/*
 	 * Generated Methods
 	 */
 
-	/** 
-	 * Method execute
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return ActionForward
-	 */
+	public void setSs(studentService ss)
+	{
+		this.ss = ss;
+	}
+
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 	{
-		ListAllStudentForm listAllStudentForm = (ListAllStudentForm) form;// TODO Auto-generated method stub
-		return null;
+//		System.out.println("listallstudent");
+//		System.out.println(ss.getAllStudnet().size());
+//		List studentlist = new ArrayList();
+//		for(Student slist : ss.getAllStudnet())
+//		{
+//			studentlist.add(slist);
+//			System.out.println("+++"+slist.getGname());
+//		}
+//		List studentlist = new ArrayList();
+//		try
+//		{
+//			BeanUtils.copyProperties(studentlist,ss.getAllStudnet());
+//		} catch (IllegalAccessException e)
+//		{
+//			e.printStackTrace();
+//		} catch (InvocationTargetException e)
+//		{
+//			e.printStackTrace();
+//		}
+//		System.out.println(studentlist.size());
+		request.setAttribute("studentlist", ss.getAllStudnet());
+
+		return mapping.findForward("success");
 	}
 }

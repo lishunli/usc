@@ -22,6 +22,7 @@
 	</bean>
 	<bean id="studentService" class="com.usc.service.studentServiceImpl">
 		<property name="gdao" ref="GradeDAO"></property>
+		<property name="sdao" ref="StudentDAO"></property>
 	</bean>
 	
 </beans>

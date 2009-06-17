@@ -100,27 +100,31 @@ public class LoginForm extends ActionForm
 	public ActionErrors validate(ActionMapping mapping,
 			HttpServletRequest request)
 	{
-//		System.out.println("validate");
+		// System.out.println("validate");
 		ActionErrors errors = new ActionErrors();
 
 		if (username == null || "".equals(username.trim()))
 		{
 
-			errors
-					.add("username", new ActionMessage(
-							"login.error.username"));
+			errors.add("username", new ActionMessage("login.error.username.required"));
 
 		}
 
-		if (password == null ||"".equals(password.trim()))
+		if (password == null || "".equals(password.trim()))
 		{
 
-			errors
-					.add("password", new ActionMessage(
-							"login.error.password"));
+			errors.add("password", new ActionMessage("login.error.password.required"));
 
 		}
 
+		if (!"admin".equals(username))
+		{
+			errors.add("username", new ActionMessage("login.error.username"));
+		}
+		if (!"admin".equals(password))
+		{
+			errors.add("password", new ActionMessage("login.error.password"));
+		}
 		// request.setAttribute("registerFormBean", this);
 
 		return errors;

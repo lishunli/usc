@@ -32,40 +32,43 @@ public class UserLoginFilter implements Filter
 		HttpSession session = httpServletRequest.getSession();
 		Object indexflag = session.getAttribute("index");
 		Object loginflag = session.getAttribute("login");
-//		System.out.println("2...."+session.getAttribute("login"));
+		// System.out.println("2...."+session.getAttribute("login"));
 		Object addflag = session.getAttribute("addflag");
-//		System.out.println("++++"+indexflag);
-		if(requesturi.endsWith("/index.jsp") || requesturi.endsWith("/init.do") || requesturi.endsWith(httpServletRequest.getContextPath()+"/"))
-		{			
-		}
-		else if(indexflag == null)
+		// System.out.println("++++"+indexflag);
+		if (requesturi.endsWith("/index.jsp")
+				|| requesturi.endsWith("/init.do")
+				|| requesturi.endsWith(httpServletRequest.getContextPath()
+						+ "/"))
+		{
+		} else if (indexflag == null)
 		{
 			httpServletResponse.sendRedirect(httpServletRequest
 					.getContextPath()
 					+ "/index.jsp");
 			return;
-		}
-		else if(loginflag == null && !requesturi.endsWith("/listAllStudent.jsp") && !requesturi.endsWith("/login.jsp") && !requesturi.endsWith("/login.do"))
+		} else if (loginflag == null
+				&& !requesturi.endsWith("/listAllStudent.jsp")
+				&& !requesturi.endsWith("/listAllStudent.do")
+				&& !requesturi.endsWith("/login.jsp")
+				&& !requesturi.endsWith("/login.do"))
 		{
 			httpServletResponse.sendRedirect(httpServletRequest
 					.getContextPath()
 					+ "/login.jsp");
-//			 String reqUrl = httpServletRequest.getHeader("referer");
+			// String reqUrl = httpServletRequest.getHeader("referer");
 //			 System.out.println("qingqiu..."+requesturi);
-			 session.setAttribute("requrl", requesturi);
+			session.setAttribute("requrl", requesturi);
 			return;
 		}
-		
-		else if(requesturi.endsWith("/addStudent.jsp") && addflag == null)
+
+		else if (requesturi.endsWith("/addStudent.jsp") && addflag == null)
 		{
 			session.setAttribute("addflag", "true");
 			httpServletResponse.sendRedirect(httpServletRequest
 					.getContextPath()
 					+ "/init.do");
-			
 			return;
-		}
-		else if(requesturi.endsWith("/addStudent.jsp") && addflag != null)
+		} else if (requesturi.endsWith("/addStudent.jsp") && addflag != null)
 		{
 			session.removeAttribute("addflag");
 		}

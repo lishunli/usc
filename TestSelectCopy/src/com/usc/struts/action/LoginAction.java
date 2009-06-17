@@ -46,13 +46,12 @@ public class LoginAction extends Action
 			HttpServletRequest request, HttpServletResponse response)
 	{
 			
-		HttpSession session= request.getSession();
-		session.setAttribute("login", "true");
-		String requrl = session.getAttribute("requrl").toString();
+		LoginForm loginForm = (LoginForm) form;// TODO Auto-generated method stub		
+		
 //		System.out.println("action..."+requrl);
 //		System.out.println("execute");
 //		System.out.println("1...."+session.getAttribute("login"));
-		LoginForm loginForm = (LoginForm) form;// TODO Auto-generated method stub
+		
 //		List sex = new ArrayList();
 //		sex.add("nan");
 //		return null;
@@ -60,11 +59,23 @@ public class LoginAction extends Action
 //		return new ActionForward("/index.jsp");
 		
 //		2.·½·¨¶þ
+		
+			
+		
 		try
 		{
+			if("admin".equals(loginForm.getUsername().trim()) && "admin".equals(loginForm.getPassword().trim()))
+			{
+				HttpSession session= request.getSession();
+				String requrl = session.getAttribute("requrl").toString();
+				System.out.println(requrl);
+				session.setAttribute("login", "true");
+				response.sendRedirect(requrl);
+			}
+			else
+				return mapping.findForward("input");
 //			System.out.println("contextpath"+request.getContextPath());
-//			System.out.println(request.getContextPath()+ requrl);
-			response.sendRedirect(requrl);
+			
 		} catch (IOException e)
 		{
 			// TODO Auto-generated catch block
