@@ -56,12 +56,27 @@ public class UserLoginFilter implements Filter
 					.getContextPath()
 					+ "/login.jsp");
 			// String reqUrl = httpServletRequest.getHeader("referer");
-//			 System.out.println("qingqiu..."+requesturi);
+			// System.out.println("qingqiu..."+requesturi);
+			if (requesturi.endsWith("/deleteStudent.do")
+					|| requesturi.endsWith("/updateStudent.do"))
+			{
+				// System.out.println("......" + request.getContentType());
+				// System.out.println("+++++" + request.getContentType()
+				// + "/listAllStudent.jsp");
+				session.setAttribute("requrl", httpServletRequest
+						.getContextPath()
+						+ "/listAllStudent.do");
+				return;
+			}
 			session.setAttribute("requrl", requesturi);
 			return;
-		}
-
-		else if (requesturi.endsWith("/addStudent.jsp") && addflag == null)
+		} else if (requesturi.endsWith("/listAllStudent.jsp"))
+		{
+			httpServletResponse.sendRedirect(httpServletRequest
+					.getContextPath()
+					+ "/listAllStudent.do");
+			return;
+		} else if (requesturi.endsWith("/addStudent.jsp") && addflag == null)
 		{
 			session.setAttribute("addflag", "true");
 			httpServletResponse.sendRedirect(httpServletRequest

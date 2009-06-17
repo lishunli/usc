@@ -10,7 +10,9 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import com.usc.struts.form.DeleteStudentForm;
+
+import com.usc.service.studentService;
+
 
 /** 
  * MyEclipse Struts
@@ -21,22 +23,18 @@ import com.usc.struts.form.DeleteStudentForm;
  */
 public class DeleteStudentAction extends Action
 {
-	/*
-	 * Generated Methods
-	 */
+	private studentService ss;
 
-	/** 
-	 * Method execute
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return ActionForward
-	 */
+	public void setSs(studentService ss)
+	{
+		this.ss = ss;
+	}
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 	{
-		DeleteStudentForm deleteStudentForm = (DeleteStudentForm) form;// TODO Auto-generated method stub
-		return null;
+		String sno = request.getParameter("sno");
+//		System.out.println(sno);
+		ss.deleteStudent(sno);
+		return mapping.findForward("success");
 	}
 }

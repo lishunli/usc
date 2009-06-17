@@ -32,10 +32,6 @@ public class ListAllStudentAction extends Action
 {
 	private studentService ss;
 
-	/*
-	 * Generated Methods
-	 */
-
 	public void setSs(studentService ss)
 	{
 		this.ss = ss;

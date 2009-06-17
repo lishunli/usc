@@ -38,4 +38,10 @@ public class studentServiceImpl implements studentService
 		return sdao.findAll();
 	}
 
+	public void deleteStudent(String sno)
+	{
+		sdao.delete(sdao.findById(sno));
+		
+	}
+
 }

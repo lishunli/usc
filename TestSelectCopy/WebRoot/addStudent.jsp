@@ -2,6 +2,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean"%>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
 <%@ taglib prefix="logic" uri="http://struts.apache.org/tags-logic"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 	<head>
 		<title>学生管理系统添加学生</title>
@@ -20,6 +21,19 @@
 				<tr>
 					<td height="500" align="center" valign="top">
 <div align="left">您现在的位置：<a href="index.jsp">首页</a>&gt;&gt;添加学生 </div>
+<c:choose>
+							<c:when test="${empty login}">
+								<p align="right">
+									<a href="login.jsp">登录</a>
+								</p>
+								</a>
+							</c:when>
+							<c:otherwise>
+								<p align="right">
+									<a href="loginOut.do">注销登录</a>
+								</p>
+							</c:otherwise>
+						</c:choose>
 						<br>
 						<br>
 						<html:form action="/addStudent">

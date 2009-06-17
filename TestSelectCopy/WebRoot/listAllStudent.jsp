@@ -4,7 +4,23 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 	<head>
-		<title>JSP for ListAllStudentForm form</title>
+		<title>显示所有学生信息</title>
+
+		<script type="text/javascript">
+	function del()
+	{
+		if ("<%= session.getAttribute("login") %>" == "null") {   
+    		alert("需要登陆才能删除学生,请登录");   
+		} 
+		if(confirm("你真的想删除该学生的信息吗？"))
+		{
+			return true;
+		}
+		return false;
+		
+		
+	}
+	</script>
 	</head>
 	<body>
 		<center>
@@ -18,6 +34,19 @@
 							您现在的位置：
 							<a href="index.jsp">首页</a>&gt;&gt;显示所有学生信息
 						</div>
+						<c:choose>
+							<c:when test="${empty login}">
+								<p align="right">
+									<a href="login.jsp">登录</a>
+								</p>
+								</a>
+							</c:when>
+							<c:otherwise>
+								<p align="right">
+									<a href="loginOut.do">注销登录</a>
+								</p>
+							</c:otherwise>
+						</c:choose>
 						<br>
 						<br>
 
@@ -38,11 +67,17 @@
 								<td>
 									班级
 								</td>
+								<td>
+									修改
+								</td>
+								<td>
+									删除
+								</td>
 							</tr>
 							<c:choose>
 								<c:when test="${empty studentlist}">
 									<tr>
-										<td colspan="5">
+										<td colspan="7">
 											没有学生信息!
 										</td>
 									</tr>
@@ -65,7 +100,14 @@
 											<td>
 												${stu.gname }
 											</td>
-
+											<td>
+												
+												<a href="updateStudent.do">修改</a>
+											</td>
+											<td>
+												<a href="deleteStudent.do?sno=${stu.sno }"
+													onclick="return del();">删除</a>
+											</td>
 										</tr>
 									</c:forEach>
 								</c:otherwise>

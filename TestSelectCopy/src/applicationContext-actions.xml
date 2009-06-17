@@ -16,11 +16,11 @@
 	<bean name="/listAllStudent" class="com.usc.struts.action.ListAllStudentAction">
 		<property name="ss" ref="studentService"></property>
 	</bean>
-	<bean name="/updateStudentForm" class="com.usc.struts.action.UpdateStudentAction">
+	<bean name="/updateStudent" class="com.usc.struts.action.UpdateStudentAction">
 <!--		<property name="ss" ref="studentService"></property>-->
 	</bean>
-	<bean name="/deleteStudentForm" class="com.usc.struts.action.DeleteStudentAction">
-<!--		<property name="ss" ref="studentService"></property>-->
+	<bean name="/deleteStudent" class="com.usc.struts.action.DeleteStudentAction">
+		<property name="ss" ref="studentService"></property>
 	</bean>
 	
 	<bean name="/loginOut" class="com.usc.struts.action.LoginOutAction">

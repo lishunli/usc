@@ -8,7 +8,6 @@
 		<form-bean name="initForm" type="com.usc.struts.form.InitForm" />
 		<form-bean name="listAllStudentForm" type="com.usc.struts.form.ListAllStudentForm" />
 		<form-bean name="updataStudentForm" type="com.usc.struts.form.UpdataStudentForm" />
-		<form-bean name="deleteStudentForm" type="com.usc.struts.form.DeleteStudentForm" />
 		<form-bean name="updateStudentForm" type="com.usc.struts.form.UpdateStudentForm" />
 	</form-beans>
 	<global-exceptions />
@@ -32,9 +31,10 @@
 			type="org.springframework.web.struts.DelegatingActionProxy">
 			<forward name="success" path="/listAllStudent.jsp"></forward>
 		</action>
-		<action attribute="deleteStudentForm" input="/deleteStudent.jsp"
-			name="deleteStudentForm" path="/deleteStudent" scope="request"
-			type="org.springframework.web.struts.DelegatingActionProxy" />
+		<action path="/deleteStudent" scope="request"
+			type="org.springframework.web.struts.DelegatingActionProxy" >
+			<forward name="success" path="/listAllStudent.do"></forward>
+			</action>
 		<action attribute="updateStudentForm" input="/updateStudent.jsp"
 			name="updateStudentForm" path="/updateStudent" scope="request"
 			type="org.springframework.web.struts.DelegatingActionProxy" />
