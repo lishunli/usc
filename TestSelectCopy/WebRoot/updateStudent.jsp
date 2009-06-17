@@ -1,7 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean"%>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 	<head>
 		<title>学生管理系统修改学生信息</title>
@@ -57,17 +57,16 @@
 
 
 班级: <html:select property="gname" value="${updatelist.gname}">
-								<html:option value="计算机061班">计算机061班</html:option>
-								<html:option value="计算机062班">计算机062班</html:option>
-								<html:option value="软件061班">软件061班</html:option>
-								<html:option value="软件062班">软件062班</html:option>
-								<html:option value="网络061班">网络061班</html:option>
-								<html:option value="计算机071班">计算机071班</html:option>
-								<html:option value="数媒071班">数媒071班</html:option>
-								<html:option value="软件071班">软件071班</html:option>
-								<html:option value="软件072班">软件072班</html:option>
-								<html:option value="网络071班">网络071班</html:option>
-								<html:option value="网络072班">网络072班</html:option>
+								<c:choose>
+									<c:when test="${empty glist}">
+											没有班级信息
+								</c:when>
+									<c:otherwise>
+										<c:forEach items="${glist}" var="g">
+											<html:option value="${g}"></html:option>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
 							</html:select>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
 <font color="#FF0000"><html:errors property="gname" /> </font>

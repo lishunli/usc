@@ -4,6 +4,9 @@
  */
 package com.usc.struts.action;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,6 +15,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import com.usc.dao.Grade;
 import com.usc.service.studentService;
 
 /**
@@ -37,6 +41,22 @@ public class UpdatePStudentAction extends Action
 		request.getSession().setAttribute("updatelist", ss.findbyid(request.getParameter("sno")));
 //		ss.deleteStudent(request.getParameter("sno"));
 		request.getSession().setAttribute("beforesno", request.getParameter("sno"));
+		
+		List gradelist = new ArrayList();
+//		gradelist.add("061");
+//		gradelist.add("062");
+//		request.getSession().setAttribute("gradelist", gradelist);
+		
+//		List g = ss.getAllGrade();
+//		System.out.println(ss.getAllGrade().size());
+		for(Grade glist : ss.getAllGrade())
+		{
+			gradelist.add(glist.getGname());
+//			System.out.println("+++"+glist.getGname());
+		}
+		request.getSession().setAttribute("glist", gradelist);
+		
+		
 		return mapping.findForward("success");
 	}
 }

@@ -2,6 +2,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean"%>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="logic" uri="http://struts.apache.org/tags-logic"%>
 <html>
 	<head>
 		<title>显示所有学生信息</title>
