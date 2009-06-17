@@ -107,7 +107,8 @@ public class StudentDAO extends HibernateDaoSupport
 			throw re;
 		}
 	}
-
+	
+	
 	public List findBySname(Object sname)
 	{
 		return findByProperty(SNAME, sname);
