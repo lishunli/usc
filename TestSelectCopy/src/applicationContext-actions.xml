@@ -22,4 +22,7 @@
 	<bean name="/deleteStudentForm" class="com.usc.struts.action.DeleteStudentAction">
 <!--		<property name="ss" ref="studentService"></property>-->
 	</bean>
+	
+	<bean name="/loginOut" class="com.usc.struts.action.LoginOutAction">
+	</bean>
 </beans>

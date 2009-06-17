@@ -16,9 +16,9 @@
 	<action-mappings>
 		<action attribute="loginForm" input="/login.jsp" name="loginForm"
 			path="/login" scope="request" validate="true"
-			type="org.springframework.web.struts.DelegatingActionProxy" >
+			type="org.springframework.web.struts.DelegatingActionProxy">
 			<forward name="input" path="/login.jsp"></forward>
-			</action>
+		</action>
 		<action attribute="addStudentForm" input="/addStudent.jsp"
 			name="addStudentForm" path="/addStudent" scope="request"
 			type="org.springframework.web.struts.DelegatingActionProxy" />
@@ -39,6 +39,10 @@
 			name="updateStudentForm" path="/updateStudent" scope="request"
 			type="org.springframework.web.struts.DelegatingActionProxy" />
 		<action path="pagenotfind" unknown="true" forward="/pagenotfind.jsp" />
+		<action path="/loginOut"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="success" path="/index.jsp"></forward>
+		</action>
 	</action-mappings>
 	<message-resources parameter="com.usc.struts.ApplicationResources" />
 	<plug-in className="org.apache.struts.validator.ValidatorPlugIn">

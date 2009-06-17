@@ -68,7 +68,7 @@ public class LoginAction extends Action
 			{
 				HttpSession session= request.getSession();
 				String requrl = session.getAttribute("requrl").toString();
-				System.out.println(requrl);
+//				System.out.println(requrl);
 				session.setAttribute("login", "true");
 				response.sendRedirect(requrl);
 			}

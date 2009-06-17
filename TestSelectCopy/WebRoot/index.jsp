@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -26,7 +27,8 @@
 	<body>
 		<%
 			session.setAttribute("index", "jsjmz(Q:506817493)");
-			session.setAttribute("requrl", request.getContextPath() + "/index.jsp");
+			session.setAttribute("requrl", request.getContextPath()
+					+ "/index.jsp");
 		%>
 
 		<center>
@@ -36,7 +38,22 @@
 				</tr>
 				<tr>
 					<td height="500" align="center" valign="top">
-<div align="left">您现在的位置：首页</div>
+						<div align="left">
+							您现在的位置：首页
+						</div>
+						<c:choose>
+							<c:when test="${empty login}">
+								<p align="right">
+									<a href="login.jsp">登录</a>
+								</p>
+								</a>
+							</c:when>
+							<c:otherwise>
+								<p align="right">
+									<a href="loginOut.do">注销登录</a>
+								</p>
+							</c:otherwise>
+						</c:choose>
 						<br>
 						<br>
 						<a href="addStudent.jsp"><font size="6">添加学生</font> </a>
@@ -46,8 +63,15 @@
 						</a>
 						<br>
 						<br>
-						<a href="login.jsp"><font size="6">登录</font
-						</a>
+						<c:choose>
+							<c:when test="${empty login}">
+								<a href="login.jsp"><font size="6">登录</font
+								</a>
+							</c:when>
+							<c:otherwise>
+							</c:otherwise>
+						</c:choose>
+
 						<br>
 						<br>
 						<br>
