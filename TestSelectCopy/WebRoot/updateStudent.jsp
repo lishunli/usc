@@ -56,7 +56,7 @@
 							<br />
 
 
-班级: <html:select property="gname" value="${updatelist.gname}">
+			班级: <html:select property="gname" value="${updatelist.gname}">
 								<c:choose>
 									<c:when test="${empty glist}">
 											没有班级信息
