@@ -68,7 +68,6 @@
 								<html:option value="软件072班">软件072班</html:option>
 								<html:option value="网络071班">网络071班</html:option>
 								<html:option value="网络072班">网络072班</html:option>
-
 							</html:select>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
 <font color="#FF0000"><html:errors property="gname" /> </font>

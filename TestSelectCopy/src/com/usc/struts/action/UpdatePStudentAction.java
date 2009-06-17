@@ -35,6 +35,7 @@ public class UpdatePStudentAction extends Action
 	{
 	
 		request.getSession().setAttribute("updatelist", ss.findbyid(request.getParameter("sno")));
+//		ss.deleteStudent(request.getParameter("sno"));
 		request.getSession().setAttribute("beforesno", request.getParameter("sno"));
 		return mapping.findForward("success");
 	}

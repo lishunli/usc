@@ -55,9 +55,11 @@ public class UpdateStudentAction extends Action
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(request.getSession().getAttribute("beforesno"));
-		System.out.println(s.getSno());
-		if(s.getSno().equals(request.getSession().getAttribute("beforesno")) && ss.findbysno(s.getSno()))
+//		System.out.println(request.getSession().getAttribute("beforesno"));
+//		System.out.println(s.getSno());
+		//!s.getSno().equals( request.getSession().getAttribute("beforesno"))&& 
+		ss.deleteStudent(request.getSession().getAttribute("beforesno").toString());
+		if(ss.findbysno(s.getSno()))
 		{
 			return mapping.findForward("error");
 		}
