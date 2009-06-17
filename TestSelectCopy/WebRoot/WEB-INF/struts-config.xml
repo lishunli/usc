@@ -6,6 +6,7 @@
 		<form-bean name="loginForm" type="com.usc.struts.form.LoginForm" />
 		<form-bean name="addStudentForm" type="com.usc.struts.form.AddStudentForm" />
 		<form-bean name="initForm" type="com.usc.struts.form.InitForm" />
+    <form-bean name="listAllStudentForm" type="com.usc.struts.form.ListAllStudentForm" />
 	</form-beans>
 	<global-exceptions />
 	<global-forwards />
@@ -22,6 +23,13 @@
 			<forward name="success" path="/addStudent.jsp" redirect="true"></forward>
 		</action>
 		<action path="pagenotfind" unknown="true" forward="/pagenotfind.jsp" />
+    <action
+      attribute="listAllStudentForm"
+      input="/listAllStudent.jsp"
+      name="listAllStudentForm"
+      path="/listAllStudent"
+      scope="request"
+      type="com.usc.struts.action.ListAllStudentAction" />
 	</action-mappings>
 	<message-resources parameter="com.usc.struts.ApplicationResources" />
 	<plug-in className="org.apache.struts.validator.ValidatorPlugIn">
