@@ -58,11 +58,12 @@ public class UpdateStudentAction extends Action
 //		System.out.println(request.getSession().getAttribute("beforesno"));
 //		System.out.println(s.getSno());
 		//!s.getSno().equals( request.getSession().getAttribute("beforesno"))&& 
-		ss.deleteStudent(request.getSession().getAttribute("beforesno").toString());
-		if(ss.findbysno(s.getSno()))
+		
+		if(!s.getSno().equals( request.getSession().getAttribute("beforesno"))&& ss.findbysno(s.getSno()))
 		{
 			return mapping.findForward("error");
 		}
+		ss.deleteStudent(request.getSession().getAttribute("beforesno").toString());
 		ss.updateStudent(s);
 		
 		return mapping.findForward("success");
