@@ -5,7 +5,7 @@
 <html>
 	<head>
 		<title>学生管理系统修改学生信息</title>
-		<html:javascript formName="addStudentForm" />
+		<html:javascript formName="updateStudentForm" />
 	</head>
 	<body>
 		<%
@@ -30,7 +30,7 @@
 						<br>
 						<br>
 						<html:form action="/updateStudent"
-							onsubmit="return validateAddStudentForm(this);">
+							onsubmit="return validateUpdateStudentForm(this);">
 			学号: <html:text property="sno" value="${updatelist.sno}" />
 							<font color="#FF0000"><html:errors property="sno" /> <br />
 							</font>
