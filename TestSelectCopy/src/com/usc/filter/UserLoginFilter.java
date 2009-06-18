@@ -55,6 +55,8 @@ public class UserLoginFilter implements Filter
 				&& !requesturi.endsWith("/searchbyno.do")
 				&& !requesturi.endsWith("/serachbyname.jsp")
 				&& !requesturi.endsWith("/serachbyname.do")
+				&& !requesturi.endsWith("/excel.do")
+				&& !requesturi.endsWith("/pdf.do")
 				)
 		{
 			httpServletResponse.sendRedirect(httpServletRequest

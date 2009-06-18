@@ -47,6 +47,9 @@
 							您现在的位置：
 							<a href="index.jsp">首页</a>&gt;&gt;显示所有学生信息
 						</div>
+						<p align="right"> 
+						学生信息导出为 &nbsp; <a href="excel.do">Excel</a>&nbsp;&nbsp; 或 &nbsp; <a href="pdf.do">PDF</a>
+						</p>
 						<c:choose>
 							<c:when test="${empty login}">
 								<p align="right">
@@ -60,7 +63,8 @@
 								</p>
 							</c:otherwise>
 						</c:choose>
-						<br>
+						<br><br>
+
 						
 
 						<table border="1">

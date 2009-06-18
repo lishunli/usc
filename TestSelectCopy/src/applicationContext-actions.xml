@@ -35,4 +35,10 @@
 	<bean name="/serachbyname" class="com.usc.struts.action.SerachbynameAction">
 		<property name="ss" ref="studentService"></property>
 	</bean>
+	<bean name="/excel" class="com.usc.struts.action.ExcelAction">
+		<property name="ss" ref="studentService"></property>
+	</bean>
+	<bean name="/pdf" class="com.usc.struts.action.PdfAction">
+		<property name="ss" ref="studentService"></property>
+	</bean>
 </beans>
