@@ -25,12 +25,6 @@
 		if ("<%= session.getAttribute("login") %>" == "null") {   
     		alert("需要登陆才能修改学生,请登录");   
 		} 
-		if(confirm("你真的想修改该学生的信息吗？"))
-		{
-			return true;
-		}
-		return false;
-		
 		
 	}
 	</script>
