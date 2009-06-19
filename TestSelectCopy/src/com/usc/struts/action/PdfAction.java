@@ -18,7 +18,11 @@ import org.apache.struts.action.ActionMapping;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
+import com.lowagie.text.Font;
 import com.lowagie.text.Paragraph;
+import com.lowagie.text.pdf.BaseFont;
+import com.lowagie.text.pdf.PdfPCell;
+import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 import com.usc.dao.Student;
 import com.usc.service.studentService;
@@ -42,47 +46,118 @@ public class PdfAction extends Action
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 	{
-		Document document = new Document();
-		ByteArrayOutputStream student = new ByteArrayOutputStream();
-		try
-		{
-			PdfWriter writer = PdfWriter.getInstance(document, student);
-		} catch (DocumentException e1)
-		{
-			e1.printStackTrace();
-		}
-		document.open();
-		
-//		List<Student> list = ss.getAllStudnet();
-//
-//		for (int i = 0; i < list.size(); ++i)
-//		{
-//			document.add(new Paragraph((String) list.get(i)));
-//		}
-//		
-		try
-		{
-			document.add(new Paragraph("student"));
-		} catch (DocumentException e1)
-		{
-			e1.printStackTrace();
-		}
-		document.close();
 
-		OutputStream os;
+		BaseFont bfChinese = null;
 		try
 		{
-			os = response.getOutputStream();
-			response.setContentType("application/pdf");
-			response.setHeader("Content-disposition",
-					"attachment;filename=student.pdf");
-			student.writeTo(os);
-			os.flush();
-			os.close();
+			bfChinese = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H",
+					BaseFont.NOT_EMBEDDED);
+		} catch (DocumentException e)
+		{
+			e.printStackTrace();
 		} catch (IOException e)
 		{
 			e.printStackTrace();
 		}
+		Font FontChinese = new Font(bfChinese, 12, Font.NORMAL);
+		try
+		{
+			Document document = new Document();
+			ByteArrayOutputStream student = new ByteArrayOutputStream();
+			try
+			{
+				PdfWriter.getInstance(document, student);
+				document.open();
+				PdfPTable table = new PdfPTable(5);
+				table.setWidthPercentage(80f);
+				PdfPCell h1 = new PdfPCell(new Paragraph("学号", FontChinese));
+				PdfPCell h2 = new PdfPCell(new Paragraph("姓名", FontChinese));
+				PdfPCell h3 = new PdfPCell(new Paragraph("性别", FontChinese));
+				PdfPCell h4 = new PdfPCell(new Paragraph("年龄", FontChinese));
+				PdfPCell h5 = new PdfPCell(new Paragraph("班级", FontChinese));
+				table.setHeaderRows(1);
+				table.addCell(h1);
+				table.addCell(h2);
+				table.addCell(h3);
+				table.addCell(h4);
+				table.addCell(h5);
+				PdfPCell cell;
+				List<Student> list = ss.getAllStudnet();
+				for (int i = 0; i < list.size(); ++i)
+				{
+					Student stu = list.get(i);
+					cell = new PdfPCell(
+							new Paragraph(stu.getSno(), FontChinese));
+					table.addCell(cell);
+					cell = new PdfPCell(new Paragraph(stu.getSname(),
+							FontChinese));
+					table.addCell(cell);
+					cell = new PdfPCell(
+							new Paragraph(stu.getSex(), FontChinese));
+					table.addCell(cell);
+					cell = new PdfPCell(new Paragraph(stu.getAge().toString(),
+							FontChinese));
+					table.addCell(cell);
+					cell = new PdfPCell(new Paragraph(stu.getGname(),
+							FontChinese));
+					table.addCell(cell);
+				}
+				document.add(table);
+
+			} catch (DocumentException de)
+			{
+				System.err.println(de.getMessage());
+			}
+			document.close();
+
+			response.setContentLength(student.size());
+			OutputStream out = response.getOutputStream();
+			response.setContentType("application/pdf");
+			response.setHeader("Content-disposition",
+					"attachment;filename=student.pdf");
+			student.writeTo(out);
+			out.flush();
+			out.close();
+
+		} catch (Throwable e)
+		{
+			e.printStackTrace();
+		}
+
+		// Document document = new Document();
+		// ByteArrayOutputStream student = new ByteArrayOutputStream();
+		// try
+		// {
+		// PdfWriter writer = PdfWriter.getInstance(document, student);
+		// } catch (DocumentException e1)
+		// {
+		// e1.printStackTrace();
+		// }
+		// document.open();
+		//			
+		// try
+		// {
+		// document.add(new Paragraph("student"));
+		// } catch (DocumentException e1)
+		// {
+		// e1.printStackTrace();
+		// }
+		// document.close();
+		//
+		// OutputStream os;
+		// try
+		// {
+		// os = response.getOutputStream();
+		// response.setContentType("application/pdf");
+		// response.setHeader("Content-disposition",
+		// "attachment;filename=student.pdf");
+		// student.writeTo(os);
+		// os.flush();
+		// os.close();
+		// } catch (IOException e)
+		// {
+		// e.printStackTrace();
+		// }
 
 		return null;
 	}
