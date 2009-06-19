@@ -124,41 +124,6 @@ public class PdfAction extends Action
 			e.printStackTrace();
 		}
 
-		// Document document = new Document();
-		// ByteArrayOutputStream student = new ByteArrayOutputStream();
-		// try
-		// {
-		// PdfWriter writer = PdfWriter.getInstance(document, student);
-		// } catch (DocumentException e1)
-		// {
-		// e1.printStackTrace();
-		// }
-		// document.open();
-		//			
-		// try
-		// {
-		// document.add(new Paragraph("student"));
-		// } catch (DocumentException e1)
-		// {
-		// e1.printStackTrace();
-		// }
-		// document.close();
-		//
-		// OutputStream os;
-		// try
-		// {
-		// os = response.getOutputStream();
-		// response.setContentType("application/pdf");
-		// response.setHeader("Content-disposition",
-		// "attachment;filename=student.pdf");
-		// student.writeTo(os);
-		// os.flush();
-		// os.close();
-		// } catch (IOException e)
-		// {
-		// e.printStackTrace();
-		// }
-
 		return null;
 	}
 }
