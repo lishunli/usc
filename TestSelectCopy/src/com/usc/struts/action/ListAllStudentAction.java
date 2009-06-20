@@ -4,10 +4,6 @@
  */
 package com.usc.struts.action;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,8 +12,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import com.sun.org.apache.commons.beanutils.BeanUtils;
-import com.usc.dao.Student;
+import com.usc.service.pageModel;
 import com.usc.service.studentService;
 
 /**
@@ -31,12 +26,19 @@ import com.usc.service.studentService;
 public class ListAllStudentAction extends Action
 {
 	private studentService ss;
+	private pageModel pm;
+	public void setPm(pageModel pm)
+	{
+		this.pm = pm;
+	}
+
 
 	public void setSs(studentService ss)
 	{
 		this.ss = ss;
 	}
-
+	
+	
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 	{
@@ -60,8 +62,14 @@ public class ListAllStudentAction extends Action
 //			e.printStackTrace();
 //		}
 //		System.out.println(studentlist.size());
-		request.setAttribute("studentlist", ss.getAllStudnet());
-
+//		request.setAttribute("studentlist", ss.getAllStudnet());
+//
+//		return mapping.findForward("success");
+		
+		int pageNo = Integer.parseInt(request.getParameter("pageNo"));
+		request.setAttribute("studentlist", ss.getAllStudentbyPage(pageNo));
+		request.setAttribute("pageModel", pm);
 		return mapping.findForward("success");
+		
 	}
 }

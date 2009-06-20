@@ -7,7 +7,7 @@
 	<head>
 		<title>显示所有学生信息</title>
 
-		<script type="text/javascript">
+<script type="text/javascript">
 	function del()
 	{
 		if ("<%= session.getAttribute("login") %>" == "null") {   
@@ -27,7 +27,23 @@
 		} 
 		
 	}
-	</script>
+		
+	function topPage() {
+		window.self.location = "listAllStudent.do?pageNo=1"
+	}
+	
+	function previousPage() {
+		window.self.location = "listAllStudent.do?pageNo=${pageModel.pageNo-1}"
+	}	
+	
+	function nextPage() {
+		window.self.location = "listAllStudent.do?pageNo=${pageModel.pageNo+1}"
+	}
+	
+	function bottomPage() {
+		window.self.location = "listAllStudent.do?pageNo=${pageModel.totalPages}"
+	}	
+</script>
 	</head>
 	<body>
 		<center>
@@ -123,10 +139,21 @@
 									</c:forEach>
 								</c:otherwise>
 							</c:choose>
-
 						</table>
-
-
+ <table width="35%" height="30" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr> 
+      <td  height="2" width="60%"> <div align="left">
+总页数：${pageModel.totalPages }
+&nbsp;&nbsp;
+当前页：${pageModel.pageNo }
+      <td  width="40%" > <div align="right">
+        <input name="btnTopPage"  type="button" id="btnTopPage" value="|&lt;&lt; "  title="首页" onClick="topPage()">
+        <input name="btnPreviousPage" type="button" id="btnPreviousPage" value=" &lt;  "  title="上一页" onClick="previousPage()">
+        <input name="btnNext"  type="button" id="btnNext" value="  &gt; "  title="下一页" onClick="nextPage()">
+        <input name="btnBottomPage"  type="button" id="btnBottomPage" value=" &gt;&gt;|"  title="尾页" onClick="bottomPage()">
+        </div></td>
+    </tr>
+  </table>
 						<br>
 						<br>
 						<br>

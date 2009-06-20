@@ -18,4 +18,5 @@ public interface studentService
 	public void updateStudent(Student s);
 	public List<Student> searchbyno(String no);
 	public List<Student> searchbyname(String sname);
+	public List<Student> getAllStudentbyPage(int pageNo);
 }

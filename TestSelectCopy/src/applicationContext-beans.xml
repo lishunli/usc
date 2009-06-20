@@ -24,7 +24,11 @@
 	<bean id="studentService" class="com.usc.service.studentServiceImpl">
 		<property name="gdao" ref="GradeDAO"></property>
 		<property name="sdao" ref="StudentDAO"></property>
+		<property name="pm" ref="pageModel"></property>
 	</bean>
-
+	
+	<bean id="pageModel" class="com.usc.service.pageModel">
+		<property name="sdao" ref="StudentDAO"></property>
+	</bean>
 	
 </beans>

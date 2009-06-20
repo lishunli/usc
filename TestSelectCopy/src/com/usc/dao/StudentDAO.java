@@ -1,10 +1,14 @@
 package com.usc.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.HibernateException;
 import org.hibernate.LockMode;
+import org.hibernate.Session;
 import org.springframework.context.ApplicationContext;
+import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 /**
@@ -108,11 +112,12 @@ public class StudentDAO extends HibernateDaoSupport
 			throw re;
 		}
 	}
+
 	public List findBySno(Object sno)
 	{
 		return findByProperty(SNO, sno);
 	}
-	
+
 	public List findBySname(Object sname)
 	{
 		return findByProperty(SNAME, sname);
@@ -145,6 +150,34 @@ public class StudentDAO extends HibernateDaoSupport
 			log.error("find all failed", re);
 			throw re;
 		}
+	}
+
+	/*
+	 * 分页显示
+	 */
+	public List findAllbyPage(final int pageNo, final int pageSize)
+	{
+//		System.out.println("1+++"+pageNo+"*****"+pageSize);
+		return this.getHibernateTemplate().executeFind(new HibernateCallback()
+		{
+
+			public Object doInHibernate(Session session)
+					throws HibernateException, SQLException
+			{
+				return session.createQuery("from Student")
+						.setFirstResult((pageNo - 1) * pageSize).setMaxResults(
+								pageSize).list();
+			}
+		});
+
+	}
+
+	/*
+	 * 获得总记录数
+	 */
+	public int getAllRecords()
+	{
+		return findAll().size();
 	}
 
 	public Student merge(Student detachedInstance)

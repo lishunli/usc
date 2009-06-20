@@ -16,6 +16,7 @@
 	</bean>
 	<bean name="/listAllStudent" class="com.usc.struts.action.ListAllStudentAction">
 		<property name="ss" ref="studentService"></property>
+		<property name="pm" ref="pageModel"></property>
 	</bean>
 	<bean name="/updateStudent" class="com.usc.struts.action.UpdateStudentAction">
 		<property name="ss" ref="studentService"></property>

@@ -59,7 +59,7 @@
 						<a href="addStudent.jsp"><font size="6">添加学生</font> </a>
 						<br>
 						<br>
-						<a href="listAllStudent.do"><font size="6">显示所有学生信息</font
+						<a href="listAllStudent.do?pageNo=1"><font size="6">显示所有学生信息</font
 						</a>
 						<br>
 						<br>

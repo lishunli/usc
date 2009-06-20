@@ -20,6 +20,12 @@ public class studentServiceImpl implements studentService
 {
 	private GradeDAO gdao;
 	private StudentDAO sdao;
+	private pageModel pm;
+
+	public void setPm(pageModel pm)
+	{
+		this.pm = pm;
+	}
 
 	public void setSdao(StudentDAO sdao)
 	{
@@ -80,5 +86,15 @@ public class studentServiceImpl implements studentService
 	public List<Student> searchbyno(String no)
 	{
 		return sdao.findBySno(no);
+	}
+
+	public List<Student> getAllStudentbyPage(int pageNo)
+	{
+		pm.setPageSize();
+		pm.setPageNo(pageNo);
+		pm.setTotalRecords();
+		pm.setTotalPages();
+//		System.out.println("2+++"+pageNo+pm.getPageNo()+"*****"+pm.getPageSize());
+		return sdao.findAllbyPage(pm.getPageNo(), pm.getPageSize());
 	}
 }
