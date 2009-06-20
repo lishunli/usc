@@ -72,7 +72,7 @@ public class UserLoginFilter implements Filter
 				// + "/listAllStudent.jsp");
 				session.setAttribute("requrl", httpServletRequest
 						.getContextPath()
-						+ "/listAllStudent.do");
+						+ "/listAllStudent.do?pageNo=1");
 				return;
 			}
 			session.setAttribute("requrl", requesturi);
@@ -81,7 +81,7 @@ public class UserLoginFilter implements Filter
 		{
 			httpServletResponse.sendRedirect(httpServletRequest
 					.getContextPath()
-					+ "/listAllStudent.do");
+					+ "/listAllStudent.do?pageNo=1");
 			return;
 		} else if (requesturi.endsWith("/addStudent.jsp") && addflag == null)
 		{

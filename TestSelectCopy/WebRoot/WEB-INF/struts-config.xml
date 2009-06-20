@@ -22,7 +22,7 @@
 		<action attribute="addStudentForm" input="/addStudent.jsp"
 			name="addStudentForm" path="/addStudent" scope="request"
 			type="org.springframework.web.struts.DelegatingActionProxy" validate="true">
-			<forward name="success" path="/listAllStudent.do"></forward>
+			<forward name="success" path="/listAllStudent.do?pageNo=1"></forward>
 			<forward name="error" path="/adderror.jsp"></forward>
 		</action>
 		<action path="/init" scope="request"
@@ -36,12 +36,12 @@
 		</action>
 		<action path="/deleteStudent" scope="request"
 			type="org.springframework.web.struts.DelegatingActionProxy">
-			<forward name="success" path="/listAllStudent.do"></forward>
+			<forward name="success" path="/listAllStudent.do?pageNo=1"></forward>
 		</action>
 		<action attribute="updateStudentForm" input="/updateStudent.jsp"
 			name="updateStudentForm" path="/updateStudent" scope="request"
 			type="org.springframework.web.struts.DelegatingActionProxy" validate="true">
-			<forward name="success" path="/listAllStudent.do"></forward>
+			<forward name="success" path="/listAllStudent.do?pageNo=1"></forward>
 			<forward name="error" path="/updateerror.jsp"></forward>
 		</action>
 		<action path="pagenotfind" unknown="true" forward="/pagenotfind.jsp" />

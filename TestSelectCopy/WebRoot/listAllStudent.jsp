@@ -43,6 +43,12 @@
 	function bottomPage() {
 		window.self.location = "listAllStudent.do?pageNo=${pageModel.totalPages}"
 	}	
+	function selectPageNo() {
+		//dim i = document.getElementById("selectPageNo").value
+		//alert(document.getElementById("selectPageNo").value);
+		window.self.location = "listAllStudent.do?pageNo=" + document.getElementById("selectPageNo").value;
+	}	
+	
 </script>
 	</head>
 	<body>
@@ -140,12 +146,16 @@
 								</c:otherwise>
 							</c:choose>
 						</table>
- <table width="35%" height="30" border="0" align="center" cellpadding="0" cellspacing="0">
+ <table width="45%" height="30" border="0" align="center" cellpadding="0" cellspacing="0">
     <tr> 
       <td  height="2" width="60%"> <div align="left">
+当前页：${pageModel.pageNo }
+&nbsp;&nbsp;
 总页数：${pageModel.totalPages }
 &nbsp;&nbsp;
-当前页：${pageModel.pageNo }
+<input name="btnTopPage"  type="submit" id="btnTopPage" value="转到第"  title="转到，输入错误转到第一页" onClick="selectPageNo()">
+<input name="selectPageNo" type="text" id="selectPageNo" size="3" maxlength="3"/>页
+</div></td>
       <td  width="40%" > <div align="right">
         <input name="btnTopPage"  type="button" id="btnTopPage" value="|&lt;&lt; "  title="首页" onClick="topPage()">
         <input name="btnPreviousPage" type="button" id="btnPreviousPage" value=" &lt;  "  title="上一页" onClick="previousPage()">

@@ -65,8 +65,16 @@ public class ListAllStudentAction extends Action
 //		request.setAttribute("studentlist", ss.getAllStudnet());
 //
 //		return mapping.findForward("success");
-		
-		int pageNo = Integer.parseInt(request.getParameter("pageNo"));
+		int pageNo;
+		try
+		{
+			pageNo = Integer.parseInt(request.getParameter("pageNo"));
+		} catch (NumberFormatException e)
+		{
+			// TODO Auto-generated catch block
+			pageNo = 1;
+//			e.printStackTrace();
+		}
 		request.setAttribute("studentlist", ss.getAllStudentbyPage(pageNo));
 		request.setAttribute("pageModel", pm);
 		return mapping.findForward("success");
