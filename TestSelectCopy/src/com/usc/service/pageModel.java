@@ -40,9 +40,9 @@ public class pageModel
 	{
 		return pageSize;
 	}
-	public void setPageSize()
+	public void setPageSize(int pageSize)
 	{
-		this.pageSize = 3;//每页显示三条
+		this.pageSize = pageSize;//每页显示三条
 	}
 	
 	public int getTotalPages()

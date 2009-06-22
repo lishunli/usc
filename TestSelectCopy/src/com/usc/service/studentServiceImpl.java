@@ -90,7 +90,7 @@ public class studentServiceImpl implements studentService
 
 	public List<Student> getAllStudentbyPage(int pageNo)
 	{
-		pm.setPageSize();
+		pm.setPageSize(3);//设置每页显示条数
 		pm.setPageNo(pageNo);
 		pm.setTotalRecords();
 		pm.setTotalPages();
