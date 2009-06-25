@@ -26,7 +26,6 @@ import com.usc.util.Users;
 public class RegAction extends Action
 {
 
-	
 	private userManager um;
 
 	public void setUm(userManager um)
