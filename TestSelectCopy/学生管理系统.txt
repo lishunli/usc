@@ -1,0 +1,62 @@
+学生管理系统
+
+1.技术选择使用SSH +  MySQL
+Table grade
+gno	gname
+Table student
+sid	sno	sname	sex	gname
+
+
+2.数据的有效性（个字段全不能为空）
+学号 长度为10 全为数字
+姓名 
+性别  只能为男生或女生
+班级 可以通过数据库读出
+
+
+3.国际化
+
+4.需求 
+a，添加学生，删除 ，修改学生，并能够按照学号或者姓名进行查找
+b，分页
+c，导出为Excel
+d，当前台用户进入系统时需要注意防止用户通过输入网址来访问不应该被访问的题目（注意filter的使用）登录后要回到前面的一个页面
+在login.jsp中添加代码 
+Java代码 
+String referer = request.getHeader("Referer");   
+session.setAttribute("returnURL", referer);  
+
+String referer = request.getHeader("Referer");
+session.setAttribute("returnURL", referer);
+记录登陆前页面url 
+
+login.do 从session中取得returnURL ，然后跳转 
+Java代码 
+if( loginSuccess ){   
+    String returnURL = (String)request.getSession().getAttribute("returnURL");   
+    response.sendRedirect(returnURL );   
+}  
+
+if( loginSuccess ){
+    String returnURL = (String)request.getSession().getAttribute("returnURL");
+    response.sendRedirect(returnURL );
+}
+
+呵呵 就这么简单轻松搞定 
+
+对了最后别忘了session.removeAttribute(returnURL); 
+
+loginAction里登录成功后应该判断，如果returnURL为空则跳到index.jsp，不为空则redirect到returnURL
+
+
+
+//e，要实现后台管理端，需要用户名与密码才能登陆进入系统（注意filter的使用，防止用户不输入网址直接跳过登陆界面进入系统）
+
+
+
+1.过滤网址，在没有登录的情况下，添加和修改，删除都不可以操作
+2.验证（包括服务器和客户端验证）
+3.select下拉框的值从数据库获得（session list）
+4.国际化...
+5.找不到jsp如何办？
+6.anction之前做一个anction如何办？(过滤器了)
