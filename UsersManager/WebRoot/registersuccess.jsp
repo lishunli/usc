@@ -9,7 +9,7 @@
 	<body>
 		<center>
 			<h1>
-				Register Success
+				Register Success<br><a href="index.jsp">返回首页</a>
 			</h1>
 		</center>
 	</body>

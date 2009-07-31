@@ -21,13 +21,13 @@ public class UsersManagerImpl implements UsersManager
 		udao.save(user);
 	}
 
-	public Boolean checkUser(User user)
+	public boolean checkUser(User user)
 	{
-		if(udao.findByExample(user).size() == 0)
+		if (udao.findByExample(user).size() == 0)
 			return false;
 		return true;
 	}
-	
+
 	/**
 	 * 传一个字符串，经过MD5经过加密后返回一个加密后的字符串
 	 */
@@ -35,10 +35,10 @@ public class UsersManagerImpl implements UsersManager
 	{
 		String resultString = null;
 		resultString = new String(password);
-		MessageDigest md;//信息摘要
+		MessageDigest md;// 信息摘要
 		try
 		{
-			md = MessageDigest.getInstance("MD5");//实例化
+			md = MessageDigest.getInstance("MD5");// 实例化
 			md.update(password.getBytes());
 			byte[] digest = md.digest();
 			StringBuffer sb = new StringBuffer();
@@ -54,6 +54,11 @@ public class UsersManagerImpl implements UsersManager
 		return resultString;
 	}
 
-
+	public boolean checkUserName(String username)
+	{
+		if (udao.findByUsername(username).isEmpty())//没有找到用户名，也即用户名不存在
+			return true;
+		return false;//用户名存在
+	}
 
 }

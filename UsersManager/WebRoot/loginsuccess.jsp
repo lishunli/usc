@@ -9,7 +9,7 @@
 	<body>
 		<center>
 			<h1>
-				Login Success
+				Login Success<br><a href="index.jsp">返回首页</a>
 			</h1>
 		</center>
 	</body>

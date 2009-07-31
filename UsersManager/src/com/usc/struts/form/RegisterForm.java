@@ -4,16 +4,26 @@
  */
 package com.usc.struts.form;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
+import org.apache.struts.action.ActionServlet;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
-/** 
- * MyEclipse Struts
- * Creation date: 06-26-2009
+import com.usc.dao.User;
+import com.usc.service.UsersManager;
+
+/**
+ * MyEclipse Struts Creation date: 06-26-2009
  * 
  * XDoclet definition:
+ * 
  * @struts.form name="registerForm"
  */
 public class RegisterForm extends ActionForm
@@ -21,6 +31,28 @@ public class RegisterForm extends ActionForm
 	/*
 	 * Generated fields
 	 */
+	private  static UsersManager um;
+
+	public static boolean setUm(UsersManager um)
+	{
+		RegisterForm.um = um;
+		return true; 
+	}
+
+//	public UsersManager getUm()
+//	{
+//		return um;
+//	}
+
+//	@Override
+//	public void setServlet(ActionServlet servlet)
+//	{
+//		ServletContext context = servlet.getServletContext();
+//		ApplicationContext ctx = WebApplicationContextUtils
+//				.getWebApplicationContext(context);
+//		this.um = ((RegisterForm) ctx.getBean("RegisterForm")).getUm();
+//		super.setServlet(servlet);
+//	}
 
 	/** password property */
 	private String password;
@@ -35,8 +67,9 @@ public class RegisterForm extends ActionForm
 	 * Generated Methods
 	 */
 
-	/** 
-	 * Method validate
+	/**
+	 * 注册验证 Method validate
+	 * 
 	 * @param mapping
 	 * @param request
 	 * @return ActionErrors
@@ -44,12 +77,40 @@ public class RegisterForm extends ActionForm
 	public ActionErrors validate(ActionMapping mapping,
 			HttpServletRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		ActionErrors errors = new ActionErrors();
+		// 用户名不能为空或者空格组成
+		if (null == username || "".equals(username.trim())
+				|| username.trim().length() == 0)
+		{
+			errors.add("username", new ActionMessage("username.required"));
+			// System.out.println("username is required");
+		} else if (username.trim().length() < 5
+				|| username.trim().length() > 12)
+		{
+			errors.add("username", new ActionMessage("username.error"));
+		} else if (!um.checkUserName(username))
+		{
+			errors.add("username", new ActionMessage("username.error.exist"));
+		} 
+//		else
+//		{
+//			errors.clear();
+//		}
+		if (null == password || "".equals(password.trim())
+				|| password.trim().length() == 0)
+		{
+			errors.add("password", new ActionMessage("password.required"));
+		} else if (!password.trim().equals(repassword))
+		{
+			errors.add("repassword", new ActionMessage("repassword.error"));
+		}
+		
+		return errors;
 	}
 
-	/** 
+	/**
 	 * Method reset
+	 * 
 	 * @param mapping
 	 * @param request
 	 */
@@ -58,8 +119,9 @@ public class RegisterForm extends ActionForm
 		// TODO Auto-generated method stub
 	}
 
-	/** 
+	/**
 	 * Returns the password.
+	 * 
 	 * @return String
 	 */
 	public String getPassword()
@@ -67,17 +129,20 @@ public class RegisterForm extends ActionForm
 		return password;
 	}
 
-	/** 
+	/**
 	 * Set the password.
-	 * @param password The password to set
+	 * 
+	 * @param password
+	 *            The password to set
 	 */
 	public void setPassword(String password)
 	{
 		this.password = password;
 	}
 
-	/** 
+	/**
 	 * Returns the username.
+	 * 
 	 * @return String
 	 */
 	public String getUsername()
@@ -85,17 +150,20 @@ public class RegisterForm extends ActionForm
 		return username;
 	}
 
-	/** 
+	/**
 	 * Set the username.
-	 * @param username The username to set
+	 * 
+	 * @param username
+	 *            The username to set
 	 */
 	public void setUsername(String username)
 	{
 		this.username = username;
 	}
 
-	/** 
+	/**
 	 * Returns the repassword.
+	 * 
 	 * @return String
 	 */
 	public String getRepassword()
@@ -103,9 +171,11 @@ public class RegisterForm extends ActionForm
 		return repassword;
 	}
 
-	/** 
+	/**
 	 * Set the repassword.
-	 * @param repassword The repassword to set
+	 * 
+	 * @param repassword
+	 *            The repassword to set
 	 */
 	public void setRepassword(String repassword)
 	{

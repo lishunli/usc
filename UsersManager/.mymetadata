@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-module
   type="WEB"
-  name="UsersManager"
+  name="UsersManagerWithAJAX"
   id="myeclipse.1245995484692"
-  context-root="/UsersManager"
+  context-root="/UsersManagerWithAJAX"
   j2ee-spec="5.0"
-  archive="UsersManager.war">
+  archive="UsersManagerWithAJAX.war">
   <attributes>
-    <attribute name="webrootdir" value="WebRoot" />
+    <attribute name="webrootdir" value="/WebRoot" />
   </attributes>
 </project-module>
 
