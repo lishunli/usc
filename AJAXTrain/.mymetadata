@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="AJAXTrain"
+  id="myeclipse.1248748870437"
+  context-root="/AJAXTrain"
+  j2ee-spec="5.0"
+  archive="AJAXTrain.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

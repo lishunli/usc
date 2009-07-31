@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=GB18030">
+		<title>浮动窗口</title>
+		<!--		链接外部的js文件-->
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/jquerywin.js"></script>
+		<!--		链接外部的css文件-->
+		<link type="text/css" rel="stylesheet" href="css/win.css" />
+	</head>
+	<body>
+		<a href="#" onclick="showwin()">显示浮动窗口</a>
+		<!--  	如何表示页面中的一个弹出窗口-->
+		<!--		目前怎么看都不是一个窗口，因此需要用css来改变一下这个div的样子-->
+		<!--		出现标题栏和内容区域-->
+		<div id="win">
+			<div id="title">
+				我是标题栏
+				<span id="close" onclick="hide()">X</span>
+			</div>
+			<div id="content">
+				我是一个窗口
+			</div>
+		</div>
+	</body>
+</html>

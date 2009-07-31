@@ -1,0 +1,40 @@
+/*id选择器,# + id名，能够对某个特定的标签进行css样式*/
+#win
+{
+	/*希望窗口有边框*/
+	border: 1px red solid;
+	/*希望窗口的高宽一定，合适*/
+	width: 300px;
+	height: 200px;
+	/*希望控制一下窗口的位置*/
+	position:absolute;/*绝对定位*/
+	top: 150px;
+	left: 500px;
+	/*希望窗口开始时不可见*/
+	display: none;
+}
+/*控制标题栏的样式*/
+#title
+{
+	/*控制标题栏的背景颜色*/
+	background-color: blue;
+	/*控制标题栏的文字颜色*/
+	color: yellow;
+	/*控制标题栏的左内边距*/
+	padding-left: 3px;
+}
+
+/*控制内容区的样式*/
+#content
+{
+	padding-left: 3px;
+	padding-top: 5px;
+}
+/*控制关闭按钮的位置*/
+#close
+{
+	/*使官兵按钮向右移动*/
+	margin-left: 200px;
+	/*超链接，显示小手*/
+	cursor: pointer;
+}

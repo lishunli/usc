@@ -1,0 +1,5 @@
+table, td
+{
+	border-collapse: collapse;/*让相邻的边框合并*/
+	border: 1.5px solid black;/*边框1个像素*/
+}
