@@ -47,6 +47,43 @@ public class RegisterAction extends Action
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 	{
+		
+		try
+		{
+
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter out = response.getWriter();
+
+			// 1.取参数
+			String old = request.getParameter("name");
+			// String name = new String(old.getBytes("iso8859-1"),"UTF-8");
+			String name = URLDecoder.decode(old, "UTF-8");
+
+			// if(null == um)
+			// System.out.println("null");
+			// else
+			// System.out.println(um.checkUserName(name));
+
+			// 2.检查参数是否有问题
+			if (!um.checkUserName(name))
+
+			{
+				// System.out.println("exist");
+				// 4。和传统应用不同之处。这一步需要将用户感兴趣的数据返回给页面段，而不是将一个新的页面发送给用户
+				// 写法没有变化，本质发生了改变
+
+				out.println("username exist,please change username");
+			} 
+			else
+			{
+				out.println("username not exist,you can use it");
+			}
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		
 		RegisterForm registerForm = (RegisterForm) form;// TODO Auto-generated
 
 		if (null == registerForm.getUsername()

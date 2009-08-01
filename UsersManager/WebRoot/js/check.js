@@ -135,6 +135,7 @@ function verify(){
     //2.将文本框中的数据发送给服务器段的servelt
     //使用jquery的XMLHTTPrequest对象get请求的封装
     $.get("CheckUser?name=" + userName,null,callback);
+//    $.get("register.do?name=" + userName,null,callback);
 
 
 }
@@ -148,6 +149,6 @@ function callback(data) {
     //找到保存结果信息的节点
     var resultObj = $("#checkusernameinfo");
     //动态的改变页面中div节点中的内容
-    if(data == "username exist,please change username\r\n")
+//    if(data == "username exist,please change username\r\n")
     	resultObj.html(data);
 }

@@ -43,19 +43,19 @@ public class CheckUser extends HttpServlet
 			// System.out.println(um.checkUserName(name));
 
 			// 2.检查参数是否有问题
-			if (null != name && !um.checkUserName(name))
+			if (!um.checkUserName(name))
 
 			{
-//				System.out.println("exist");
+				// System.out.println("exist");
 				// 4。和传统应用不同之处。这一步需要将用户感兴趣的数据返回给页面段，而不是将一个新的页面发送给用户
 				// 写法没有变化，本质发生了改变
 
 				out.println("username exist,please change username");
+			} 
+			else
+			{
+				out.println("username not exist,you can use it");
 			}
-			// else
-			// {
-			// out.println("username not exist,you can use it");
-			// }
 		} catch (Exception e)
 		{
 			e.printStackTrace();
