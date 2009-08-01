@@ -47,7 +47,7 @@ public class RegisterAction extends Action
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 	{
-		//测试
+		//
 //		try
 //		{
 //			PrintWriter out=response.getWriter();//用于向客户端输出信息
