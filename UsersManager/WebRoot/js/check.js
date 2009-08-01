@@ -28,7 +28,8 @@ function checkusername() {
 		submitflag1 =1;
 // verify();
 //	alert(username);
-	send("register.do?name="+username); 
+//	send("register.do?name="+username); ]
+	verify();
 	initsubmit();
 	
 }
@@ -116,154 +117,37 @@ function cleanrepassworderror() {
 	$("#repassword").select();
 }
 
-//function verify() {
-//    // 0。使用dom的方式获取文本框中的值
-//    // document.getElementById("userName")是dom中获取元素节点的一种方法，一个元素节点对应HTML页面中的一个标签，如果<input>
-//    // 。value可以获取一个元素节点的value属性值
-//    var userName = document.getElementById("username").value;
-//
-//    // 1.创建XMLHttpRequest对象
-//    // 这是XMLHttpReuquest对象无部使用中最复杂的一步
-//    // 需要针对IE和其他类型的浏览器建立这个对象的不同方式写不同的代码
-//
-//    if (window.XMLHttpRequest) {
-//        // 针对FireFox，Mozillar，Opera，Safari，IE7，IE8
-//        xmlhttp = new XMLHttpRequest();
-//        // 针对某些特定版本的mozillar浏览器的BUG进行修正
-//        if (xmlhttp.overrideMimeType) {
-//            xmlhttp.overrideMimeType("text/xml");
-//        }
-//    } else if (window.ActiveXObject) {
-//         // 针对IE6，IE5.5，IE5
-//        // 两个可以用于创建XMLHTTPRequest对象的控件名称，保存在一个js的数组中
-//        // 排在前面的版本较新
-//        var activexName = ["MSXML2.XMLHTTP","Microsoft.XMLHTTP"];
-//        for (var i = 0; i < activexName.length; i++) {
-//            try{
-//                // 取出一个控件名进行创建，如果创建成功就终止循环
-//                // 如果创建失败，回抛出异常，然后可以继续循环，继续尝试创建
-//                xmlhttp = new ActiveXObject(activexName[i]);
-//                break;
-//            } catch(e){
-//            }
-//        }
-//    }
-//    // 确认XMLHTtpRequest对象创建成功
-//    if (!xmlhttp) {
-//        alert("XMLHttpRequest对象创建失败!!");
-//        return;
-//    }
-//// else {
-//// alert("hello");
-//// alert(xmlhttp.readyState);
-//// }
-//
-//    // 2.注册回调函数
-//    // 注册回调函数时，之需要函数名，不要加括号
-//    // 我们需要将函数名注册，如果加上括号，就会把函数的返回值注册上，这是错误的
-//    xmlhttp.onreadystatechange = callback;
-//
-//    // 3。设置连接信息
-//    // 第一个参数表示http的请求方式，支持所有http的请求方式，主要使用get和post
-//    // 第二个参数表示请求的url地址，get方式请求的参数也在url中
-//    // 第三个参数表示采用异步还是同步方式交互，true表示异步
-//    xmlhttp.open("GET","register.do?username="+ userName,true);
-//
-//// //POST方式请求的代码
-//// xmlhttp.open("POST","register.do",true);
-//// //POST方式需要自己设置http的请求头
-//// xmlhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-//// //POST方式发送数据
-//// xmlhttp.send("username=" + userName);
-////
-//// //4.发送数据，开始和服务器端进行交互
-//// //同步方式下，send这句话会在服务器段数据回来后才执行完
-//// //异步方式下，send这句话会立即完成执行
-//    xmlhttp.send(null);
-//}
-//
-//// 回调函数
-//function callback() {
-//    // alert(xmlhttp.readyState);
-//    // 5。接收响应数据
-//    // 判断对象的状态是交互完成
-//    if (xmlhttp.readyState == 4) {
-//        // 判断http的交互是否成功
-//        if (xmlhttp.status == 200) {
-//// alert("rigth");
-//            // 获取服务漆器端返回的数据
-//            // 获取服务器段输出的纯文本数据
-//            var responseText = xmlhttp.responseText;
-//// alert(responseText);
-//            // 将数据显示在页面上
-//            // 通过dom的方式找到div标签所对应的元素节点
-//            var divNode = document.getElementById("checkusernameinfo");
-//            // 设置元素节点中的html内容
-//// divNode.innerHTML = responseText;
-//        } 
-//        else {
-//            alert("HELLO ,ERROR");
-//        }
-//    }
-//}
+//定义用户名校验的方法
+function verify(){
+    //首先测试一下页面的按钮按下，可以调用这个方法
+    //使用javascript的alert方法，显示一个探出提示框
+    //alert("按钮被点击了！！！");
+
+    //1.获取文本框中的内容
+    //document.getElementById("userName");  dom的方式
+    //Jquery的查找节点的方式，参数中#加上id属性值可以找到一个节点。
+    //jquery的方法返回的都是jquery的对象，可以继续在上面执行其他的jquery方法
+    var jqueryObj = $("#username");
+    //获取节点的值
+    var userName = jqueryObj.val();
+    //alert(userName);
+
+    //2.将文本框中的数据发送给服务器段的servelt
+    //使用jquery的XMLHTTPrequest对象get请求的封装
+    $.get("CheckUser?name=" + userName,null,callback);
 
 
+}
 
-
-// 创建一个XMLHttpRequest对象
-function createXMLHttpRequest(){ 
-  if(window.XMLHttpRequest){ // Mozilla
-   XMLHttpReq=new XMLHttpRequest(); 
-   } 
-   else if(window.ActiveXObject){ 
-    try{ 
-     XMLHttpReq=new ActiveXObject("MSXML2.XMLHTTP"); 
-     }catch(e){ 
-      try{ 
-       XMLHttpReq=new ActiveXObject("Microsoft.XMLHTTP"); 
-       }catch(e){} 
-       } 
-      } 
-     } 
-// 发送请求函数
-function send(url){ 
- createXMLHttpRequest(); 
- XMLHttpReq.open("get",url,true); 
- XMLHttpReq.onreadystatechange=proce;   // 指定响应的函数
- XMLHttpReq.send(null);  // 发送请求
- } 
-function proce(){ 
-
-if(XMLHttpReq.readyState==4){ // 对象状态
-  if(XMLHttpReq.status==200){// 信息已成功返回，开始处理信息
-// <!--测试读取xml开始-->
-//	  alert("sdaljfj");	
-  var root=XMLHttpReq.responseXML; 
-  var res=root.getElementsByTagName("content")[0].firstChild.data; 
-  var test=root.getElementsByTagName("test")[0].firstChild.data; 
-  window.alert(res); 
-  window.alert("test："+test); 
-   <!--测试读取xml结束-->   
-  // var xmlReturn = XMLHttpReq.responseText;
-  // window.alert(xmlReturn);
-  }else{ 
-   window.alert("error"); 
-   } 
-   } 
-   } 
-// 身份验证
-// function check(){
-// var name=document.getElementById("name").value;
-//  
-// if(name==""){
-// alert("请输入姓名!");
-// return false;
-// }
-// else{
-// //send('login?name='+name);
-// document.getElementById("load").style.display='';
-// send('loginAction.do?name='+name);
-// document.getElementById("load").style.display='none';
-// }
-// }
-
+//回调函数
+function callback(data) {
+//    alert("服务器段的数据回来了！！");
+    //3.接收服务器端返回的数据
+//    alert(data);
+    //4.将服务器段返回的数据动态的显示在页面上
+    //找到保存结果信息的节点
+    var resultObj = $("#checkusernameinfo");
+    //动态的改变页面中div节点中的内容
+    if(data == "username exist,please change username\r\n")
+    	resultObj.html(data);
+}
