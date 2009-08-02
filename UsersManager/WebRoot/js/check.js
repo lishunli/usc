@@ -30,6 +30,7 @@ function checkusername() {
 //	alert(username);
 //	send("register.do?name="+username); ]
 	verify();
+	
 	initsubmit();
 	
 }
@@ -130,7 +131,7 @@ function verify(){
     var jqueryObj = $("#username");
     //获取节点的值
     var userName = jqueryObj.val();
-    //alert(userName);
+//    alert(userName);
 
     //2.将文本框中的数据发送给服务器段的servelt
     //使用jquery的XMLHTTPrequest对象get请求的封装
