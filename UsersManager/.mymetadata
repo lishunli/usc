@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-module
   type="WEB"
-  name="UsersManagerWithAJAX"
+  name="UsersWithAJAXAndVerifyCode"
   id="myeclipse.1245995484692"
-  context-root="/UsersManagerWithAJAX"
+  context-root="/UsersWithAJAXAndVerifyCode"
   j2ee-spec="5.0"
-  archive="UsersManagerWithAJAX.war">
+  archive="UsersWithAJAXAndVerifyCode.war">
   <attributes>
     <attribute name="webrootdir" value="/WebRoot" />
   </attributes>
