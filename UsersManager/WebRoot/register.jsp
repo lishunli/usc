@@ -31,8 +31,21 @@
 			<input type="password" name="repassword" id="repassword"
 				onblur="checkrepassword()" onfocus="cleanrepassworderror()" />
 			<font color="red">* <span id="checkrepasswordinfo"><html:errors
-						property="repassword" /> </span> </font>
-
+						property="repassword" />
+			</span> </font>
+			<br>
+			verifycode :
+			<input type="text" id="verifycode" maxlength="4" size="4"
+				onblur="checkverifycode()" onfocus="cleanverifyerror()" />
+			<font color="red">*<span id="checkverifycodeinfo"></span>
+			</font>
+			<br>
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
+			<img src="ImageServlet"
+				onclick="javascript:this.src='ImageServlet?id='+  Math.random();"
+				alt="看不清,换一个,请点我">
+			看不清，换一张
+			<br>
 			<br>
 			<input type="submit" value="submit" id="submit" onclick="check()" />
 			<%--			<input type="reset" value="reset"/>--%>
