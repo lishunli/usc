@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="Image_Verification"
+  id="myeclipse.1249291879355"
+  context-root="/Image_Verification"
+  j2ee-spec="5.0"
+  archive="Image_Verification.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
