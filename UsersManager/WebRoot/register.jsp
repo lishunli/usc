@@ -37,13 +37,13 @@
 			verifycode :
 			<input type="text" id="verifycode" maxlength="4" size="4"
 				onblur="checkverifycode()" onfocus="cleanverifyerror()" />
+			<img src="ImageServlet"
+				onclick="javascript:this.src='ImageServlet?id='+  Math.random();"
+				alt="看不清,换一个,请点我">
 			<font color="red">*<span id="checkverifycodeinfo"></span>
 			</font>
 			<br>
 			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
-			<img src="ImageServlet"
-				onclick="javascript:this.src='ImageServlet?id='+  Math.random();"
-				alt="看不清,换一个,请点我">
 			看不清，换一张
 			<br>
 			<br>

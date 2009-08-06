@@ -74,17 +74,17 @@ public class CheckUser extends HttpServlet
 						+ "</usernamemes>");
 			}
 			String verifycodeold = request.getParameter("verify");
-			System.out.println("verifycodeold" + verifycodeold);
+//			System.out.println("verifycodeold" + verifycodeold);
 			if (verifycodeold != null)// 不是检查verifycode，是检测后面非空的字段
 			{
 				String verifycode = URLDecoder.decode(verifycodeold, "UTF-8");
-				System.out.println("verifycode" + verifycode);
+//				System.out.println("verifycode" + verifycode);
 				if (verifycode != null
 						&& !verifycode.equalsIgnoreCase((String) request
 								.getSession().getAttribute("verify")))
 				{
 
-					System.out.println("error");
+//					System.out.println("error");
 					out.println("<verifycodemes>" + "verifycode is error"
 							+ "</verifycodemes>");
 				}
