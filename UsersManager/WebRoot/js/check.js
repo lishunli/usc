@@ -1,10 +1,14 @@
+
+//下面为设置检查的时候的一些标志位，用于设置错误的时候submit按钮无效
+var usernameSubmitflag = 1;
+var passwordSubmitflag = 1;
+var repasswordSubmitflag = 1;
+var verifycodeSubmitflag = 1;
+
+var into = 0;//密码和重复密码错误显示取消标志位
+//var XMLHttpReq=false; 
+
 //用户名检测，不能为空，长度在6到12之间
-var submitflag1 = 1;
-var submitflag2 = 1;
-var submitflag3 = 1;
-var submitflag4 = 1;
-var into = 0;
-var XMLHttpReq=false; 
 function checkusername() {
 	
 	var username = document.getElementById("username").value;// dom获得username
@@ -14,7 +18,7 @@ function checkusername() {
 	{
 // alert("username is required");
 		checkusernameinfo.html("username is required");// span填充提示信息
-		submitflag1 =0;
+		usernameSubmitflag =0;
 // document.getElementById("submit").disabled = true;//设置提交按钮不可用
 	}
 	else if(trim(username).length > 12  || trim(username).length < 5)// 长度 5-
@@ -23,21 +27,21 @@ function checkusername() {
 // alert("username length must between 6 in 12");
 		checkusernameinfo.html("username length must between 5  in 12");// span填充提示信息
 // document.getElementById("submit").disabled = true;//设置提交按钮不可用
-		submitflag1 =0;
+		usernameSubmitflag =0;
 	}
-	else if(submitflag1 == 1)
+	else if(usernameSubmitflag == 1)
 	{
-		verify();
+		verifyusername();
 	}
 	else
-		submitflag1 = 1;
+		usernameSubmitflag = 1;
 
-//		submitflag1 =1;
+//		usernameSubmitflag =1;
 // verify();
 //	alert(username);
 //	send("register.do?name="+username); ]
 	
-//	alert(submitflag1);
+//	alert(usernameSubmitflag);
 	initsubmit();
 	
 }
@@ -51,11 +55,11 @@ function checkpassword() {
 	{
 // alert("username is required");
 		checkpasswordinfo.html("password is required");// span填充提示信息
-		submitflag2 =0;
+		passwordSubmitflag =0;
 // document.getElementById("submit").disabled = true;//设置提交按钮不可用
 	}
 	else 
-		submitflag2 =1;
+		passwordSubmitflag =1;
 	if(into)
 		checkrepassword();
 	initsubmit();
@@ -71,31 +75,32 @@ function checkrepassword() {
 // alert("username is required");
 		checkrepasswordinfo.html("repassword is required");// span填充提示信息
 // document.getElementById("submit").disabled = true;//设置提交按钮不可用
-		submitflag3 =0;
+		repasswordSubmitflag =0;
 	}
 	else if(repassword != trim(document.getElementById("password").value))// 密码和重复密码不相同
 	{
 // alert("username length must between 6 in 12");
 		checkrepasswordinfo.html("password not equal repassword");// span填充提示信息
 // document.getElementById("submit").disabled = true;//设置提交按钮不可用
-		submitflag3 =0;
+		repasswordSubmitflag =0;
 	}
 	else
-		submitflag3 =1;
+		repasswordSubmitflag =1;
 	into = 1;
 	initsubmit();
 }
+//检查验证码是否正确
 function checkverifycode() {
-	var verifycode = document.getElementById("verifycode").value;// dom获得repassword
+	var verifycode = document.getElementById("verifycode").value;// dom获得verifycode
 	var checkverifycodeinfo = $("#checkverifycodeinfo");// jquery获得checkverifycodeinfo节点
 	if("" == verifycode)
-		checkverifycodeinfo.html("verifycode is required");
+		checkverifycodeinfo.html("verifycode is required");//为空
 	else
-		verify2();
+		codeverify();//正确性判断
 	initsubmit();
 }
 
-// 提交之前的检查，也就是包含上面的所有的检查
+// 提交之前的检查，也就是包含上面的所有的检查,防止出现没有输入直接提交表单的情况
 function check() {
 	checkusername();
 	checkpassword();
@@ -103,24 +108,14 @@ function check() {
 	checkverifycode();
 }
 
-// 删除左右两端的空格
-function trim(str) {
-	return str.replace(/(^\s*)|(\s*$)/g, "");
-}
-// 设置提交按钮的可用性
-function initsubmit() {
-	if(submitflag1 == 0 || submitflag2 == 0 || submitflag3 == 0 || submitflag3 == 0 || submitflag4 == 0 )
-		document.getElementById("submit").disabled = true;// 设置提交按钮不可用
-	else
-		document.getElementById("submit").disabled = false;// 设置提交按钮可用
-}
 
+//下面的都是进行一些初始化，象清空错误，高亮全部，设置提交标志位
 function cleanusernameerror() {
 // var checkusernameinfo = $("#checkusernameinfo");//jquery获得checkusernameinfo节点
 	$("#checkusernameinfo").html("");// 初始化span
 	$("#username").select();
-	submitflag1 = 1;
-//	alert(submitflag1);
+	usernameSubmitflag = 1;
+//	alert(usernameSubmitflag);
 	
 }
 
@@ -129,7 +124,7 @@ function cleanpassworderror(){
 // var checkpasswordinfo = $("#checkpasswordinfo");//jquery获得checkusernameinfo节点
 	$("#checkpasswordinfo").html("");// 初始化span
 	$("#password").select();
-	submitflag2 = 1;
+	passwordSubmitflag = 1;
 	
 }
 
@@ -138,21 +133,18 @@ function cleanrepassworderror() {
 // $("#checkrepasswordinfo");//jquery获得checkusernameinfo节点
 	$("#checkrepasswordinfo").html("");// 初始化span
 	$("#repassword").select();
-	submitflag3 = 1;
+	repasswordSubmitflag = 1;
 	
 }
 
 function cleanverifyerror() {
 		$("#checkverifycodeinfo").html("");// 初始化span
 		$("#verifycode").select();
-		submitflag4 = 1;
+		verifycodeSubmitflag = 1;
 	}
 
 //定义用户名校验的方法
-function verify(){
-    //首先测试一下页面的按钮按下，可以调用这个方法
-    //使用javascript的alert方法，显示一个探出提示框
-    //alert("按钮被点击了！！！");
+function verifyusername(){
 
     //1.获取文本框中的内容
     //document.getElementById("userName");  dom的方式
@@ -173,14 +165,14 @@ function verify(){
         url: "CheckUser",    //服务器段url地址
         data: "name=" + userName,           //发送给服务器段的数据
         dataType: "xml",  //告诉JQuery返回的数据格式
-        success: callback  //定义交互完成，并且服务器正确返回数据时调用的回调函数
+        success: usernamecallback  //定义交互完成，并且服务器正确返回数据时调用的回调函数
     });
 
 
 }
 
 //回调函数
-function callback(data) {
+function usernamecallback(data) {
 //    alert("服务器段的数据回来了！！");
     //3.接收服务器端返回的数据
 //    alert(data);
@@ -195,26 +187,26 @@ function callback(data) {
 //    	resultObj.html(jqueryObj.children().children("verifycodemes"));
 //    checkverifycodeinfo.html(jqueryObj.children("message").children("verifycodemes").text());
     	
-    	submitflag1 =0;
-//    	alert(submitflag1);
+    	usernameSubmitflag =0;
+//    	alert(usernameSubmitflag);
 //    	checkusernameinfo.html(jqueryObj.children("message").children("usernamemes").text());
     	
     }
     else 
     {
-    	submitflag1 = 1;
-//    	alert(submitflag1);
+    	usernameSubmitflag = 1;
+//    	alert(usernameSubmitflag);
     }
     initsubmit();
 //    alert(jqueryObj.children("message").children("usernamemes").text());
     checkusernameinfo.html(jqueryObj.children("message").children("usernamemes").text());
-//    submitflag1 =1;
-//    alert(submitflag1);
+//    usernameSubmitflag =1;
+//    alert(usernameSubmitflag);
     	
 }
 
 
-function verify2(){
+function codeverify(){
 //	alert("dd");
     //首先测试一下页面的按钮按下，可以调用这个方法
     //使用javascript的alert方法，显示一个探出提示框
@@ -239,18 +231,17 @@ function verify2(){
     $.ajax({
         type: "POST",            //http请求方式
         url: "CheckUser",    //服务器段url地址
-//        data: "name=" + userName&"verify=" +verifyCode,           //发送给服务器段的数据
-//        data: {"name" : userName , "verify" : verifyCode},           //发送给服务器段的数据
+//        data: {"name" : userName , "verify" : verifyCode},           //发送给服务器段的数据，key，value对，是可以的
         data: {"verify" : verifyCode},           //发送给服务器段的数据
         dataType: "xml",  //告诉JQuery返回的数据格式
-        success: callback2  //定义交互完成，并且服务器正确返回数据时调用的回调函数
+        success: codecallback  //定义交互完成，并且服务器正确返回数据时调用的回调函数
     });
 
 
 }
 
 //回调函数
-function callback2(data) {
+function codecallback(data) {
 //    alert("服务器段的数据回来了！！");
     //3.接收服务器端返回的数据
 //    alert(data);
@@ -262,9 +253,9 @@ function callback2(data) {
     var verifycodemes = jqueryObj.children("message").children("verifycodemes").text();
     //动态的改变页面中div节点中的内容
     if(verifycodemes == "verifycode is error")
-    	submitflag4 = 0;
+    	verifycodeSubmitflag = 0;
     else
-    	submitflag4 =1;
+    	verifycodeSubmitflag =1;
 //    	resultObj.html(jqueryObj.children().children("verifycodemes"));
     checkverifycodeinfo.html(verifycodemes);
 //    checkverifycodeinfo.html(data);
@@ -272,3 +263,17 @@ function callback2(data) {
     initsubmit();
 }
 
+
+
+//删除左右两端的空格
+function trim(str) {
+	return str.replace(/(^\s*)|(\s*$)/g, "");
+}
+
+// 设置提交按钮的可用性
+function initsubmit() {
+	if(usernameSubmitflag == 0 || passwordSubmitflag == 0 || repasswordSubmitflag == 0 || repasswordSubmitflag == 0 || verifycodeSubmitflag == 0 )
+		document.getElementById("submit").disabled = true;// 设置提交按钮不可用
+	else
+		document.getElementById("submit").disabled = false;// 设置提交按钮可用
+}
