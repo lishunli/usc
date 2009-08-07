@@ -42,10 +42,10 @@
 				alt="看不清,换一个,请点我">
 			<font color="red">*<span id="checkverifycodeinfo"></span>
 			</font>
-			<br>
-			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
-			看不清，换一张
-			<br>
+<%--			<br>--%>
+<%--			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;--%>
+<%--			看不清，换一张--%>
+<%--			<br>--%>
 			<br>
 			<input type="submit" value="submit" id="submit" onclick="check()" />
 			<%--			<input type="reset" value="reset"/>--%>

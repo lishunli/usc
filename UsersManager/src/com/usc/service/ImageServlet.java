@@ -200,7 +200,7 @@ public class ImageServlet extends HttpServlet {
 	    }
 	    public String writeImg(OutputStream out){
 	        int width = 75;
-	        int height = 18;
+	        int height = 20;
 	        /**应用绘图对象**/
 	        BufferedImage bi = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
 	        Graphics2D gd = (Graphics2D)bi.getGraphics();
