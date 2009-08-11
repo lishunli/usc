@@ -67,7 +67,7 @@ public class GetAllCountrys extends HttpServlet
 			
 			if(ps.getCountrys(pid+cid).isEmpty())
 			{
-				System.out.println("empty");
+//				System.out.println("empty");
 				
 			}
 			else
