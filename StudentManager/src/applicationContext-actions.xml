@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+	<bean name="/init" class="com.usc.struts.action.InitAction">
+		<property name="ss" ref="studentService"></property>
+	</bean>
+	<bean name="/login" class="com.usc.struts.action.LoginAction">
+	</bean>
+	<bean name="/addStudent" class="com.usc.struts.action.AddStudentAction">
+		<property name="ss" ref="studentService"></property>
+		<property name="s" ref="Student"></property>
+	</bean>
+	<bean name="/listAllStudent" class="com.usc.struts.action.ListAllStudentAction">
+		<property name="ss" ref="studentService"></property>
+		<property name="pm" ref="pageModel"></property>
+	</bean>
+	<bean name="/updateStudent" class="com.usc.struts.action.UpdateStudentAction">
+		<property name="ss" ref="studentService"></property>
+		<property name="s" ref="Student"></property>
+	</bean>
+	<bean name="/deleteStudent" class="com.usc.struts.action.DeleteStudentAction">
+		<property name="ss" ref="studentService"></property>
+	</bean>
+	<bean name="/loginOut" class="com.usc.struts.action.LoginOutAction">
+	</bean>
+	<bean name="/updatePStudent" class="com.usc.struts.action.UpdatePStudentAction">
+		<property name="ss" ref="studentService"></property>
+	</bean>
+	<bean name="/searchbyno" class="com.usc.struts.action.SearchbynoAction">
+		<property name="ss" ref="studentService"></property>
+	</bean>
+	<bean name="/serachbyname" class="com.usc.struts.action.SerachbynameAction">
+		<property name="ss" ref="studentService"></property>
+	</bean>
+	<bean name="/excel" class="com.usc.struts.action.ExcelAction">
+		<property name="ss" ref="studentService"></property>
+	</bean>
+	<bean name="/pdf" class="com.usc.struts.action.PdfAction">
+		<property name="ss" ref="studentService"></property>
+	</bean>
+</beans>
