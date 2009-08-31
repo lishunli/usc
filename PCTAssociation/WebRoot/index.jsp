@@ -29,7 +29,7 @@
 		省市县关联 <br>
 <table>
     <tr>
-    <td>省/直辖市:<select id="province" onchange="getCountrys(1)">]
+    <td>省/直辖市:<select id="province" onchange="getCountrys(1)">
 <%--	<option value="1">M</option>--%>
 <%--	<option value="2">F</option>--%>
 	</select></td>
