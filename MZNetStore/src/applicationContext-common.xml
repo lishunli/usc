@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	     xmlns:aop="http://www.springframework.org/schema/aop"
+	     xmlns:tx="http://www.springframework.org/schema/tx"
+	     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+		
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+		<property name="url"
+			value="jdbc:mysql://localhost:3306/netstore?useUnicode=true&amp;characterEncoding=utf-8"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="lishunli"></property>
+		<property name="maxActive" value="100"></property>
+		<property name="maxIdle" value="30"></property>
+		<property name="maxWait" value="500"></property>
+		<property name="defaultAutoCommit" value="true"></property>
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>				
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+				<!--hibernate的配置在下面			-->
+				<value>com/usc/daos/Operator.hbm.xml</value>
+				<value>com/usc/daos/Stockin.hbm.xml</value>
+				<value>com/usc/daos/Favorite.hbm.xml</value>
+				<value>com/usc/daos/Ucurrencydetail.hbm.xml</value>
+				<value>com/usc/daos/Shiplist.hbm.xml</value>
+				<value>com/usc/daos/Custom.hbm.xml</value>
+				<value>com/usc/daos/Orderform.hbm.xml</value>
+				<value>com/usc/daos/Shoppingcart.hbm.xml</value>
+				<value>com/usc/daos/Consumptiondetail.hbm.xml</value>
+				<value>com/usc/daos/Book.hbm.xml</value>
+				<value>com/usc/daos/Orderproducts.hbm.xml</value>
+				<value>com/usc/daos/Blacklist.hbm.xml</value>
+				<value>com/usc/daos/Stockout.hbm.xml</value>
+				<value>com/usc/daos/Remark.hbm.xml</value>
+				<value>com/usc/daos/Products.hbm.xml</value>
+				<value>com/usc/daos/Benefitsdetail.hbm.xml</value>
+				<value>com/usc/daos/Digital.hbm.xml</value>
+				<value>com/usc/daos/Latencyorderform.hbm.xml</value>
+				<value>com/usc/daos/Suggestion.hbm.xml</value>
+				<value>com/usc/daos/Orderstate.hbm.xml</value>
+				<value>com/usc/daos/Sale.hbm.xml</value>
+				<value>com/usc/daos/Commodity.hbm.xml</value>
+				<value>com/usc/daos/Stock.hbm.xml</value>
+				<value>com/usc/daos/Producttype.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
+</beans>

@@ -1,0 +1,42 @@
+@CHARSET "UTF-8";
+.button{
+	font-family:"宋体";
+	font-size:9pt;
+	background-image:url(image/button.gif);
+	height:25px;
+	border:1px solid #000000;
+}
+.text{
+	font-family:"宋体";
+	font-size:9pt;
+}
+.title{
+	font-family:"宋体";
+	font-size:9pt;
+	background-color: #99cc66;
+	height:20px;
+	border:1px solid #000000;
+}
+.body{
+	font-family:"宋体";
+	font-size:9pt;
+	border-bottom-width:2px;
+	border-bottom-style:solid;
+	border-bottom-color:#cc6600;
+}
+.login{
+	font-family:"宋体";
+	font-size:9pt;
+	height:20px;
+	width:100px;
+}
+.date{
+	font-family:"宋体";
+	font-size:9pt;
+	color: #666666;
+}
+.error{
+	font-family:"宋体";
+	font-size:9pt;
+	color: #FF0000;
+}

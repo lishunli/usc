@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="user" extends="struts-default">
+		<!-- 注册 -->
+		<action name="RegisterAction" class="RegisterAction">
+			<result name="success" type="redirect"> /customjsp/RegisterSuccess.jsp
+			</result>
+			<result name="error" type="redirect">/customjsp/Register.jsp
+			</result>
+		</action>
+
+		<!-- 登录 -->
+		<action name="LoginAction" class="LoginAction">
+			<result name="success" type="redirect">/customjsp/Main.jsp</result>
+			<result name="error" type="redirect">/customjsp/Login.jsp
+			</result>
+			<result name="input" type="redirect">/customjsp/Login.jsp
+			</result>
+		</action>
+		
+		<!-- 搜索产品 -->
+		<action name="FuzzySearchAction" class="FuzzySearchAction">
+			<result name="success">/customjsp/FuzzySearch.jsp
+			</result>
+			<result name="input">/customjsp/FuzzySearch.jsp
+			</result>
+		</action>
+		
+		
+		<!--图书高级搜索	-->
+		<action name="advancedBookSearch" class="AdvancedBookSearchAction">
+			<result name="success">/customjsp/FuzzySearch.jsp
+			</result>
+			<result name="input">/customjsp/FuzzySearch.jsp
+			</result>
+		</action>
+		
+		<!--数码高级搜索	-->
+		<action name="advancedDigitalSearch" class="AdvancedSearchDigitalAction">
+			<result name="success">/customjsp/FuzzySearch.jsp
+			</result>
+			<result name="input">/customjsp/FuzzySearch.jsp
+			</result>
+		</action>
+		<action name="info" class="InformationAction">
+			<result name="bookInfo">/customjsp/BookInfo.jsp
+			</result>
+			<result name="digitalInfo">/customjsp/DigitalInfo.jsp
+			</result>
+			<result name="input">/customjsp/Main.jsp
+			</result>
+		</action>
+		
+		<!-- 用户信息修改 -->
+		<action name="UserInforChangeAction" class="UserInforChangeAction">
+			<result name="success">/customjsp/UserInforChangeSuccess.jsp
+			</result>
+		</action>
+
+     
+		<!--   首页面的初始化操作，获得加载页面的数据  -->
+		<action name="init" class="InitAction">
+		</action>
+     
+
+     
+     <!-- 用户修改密码 -->
+		<action name="PersonManagerCPasswordAction" class="PersonManagerCPasswordAction">
+			<result name="success">/customjsp/UserPassChangeSuccess.jsp
+			</result>
+			<result name="error">/customjsp/PersonManagerCPassword.jsp
+			</result>
+		</action>
+     
+     <!--  用户修改Email-->
+		<action name="PersonManagerCEmailAction" class="PersonManagerCEmailAction">
+			<result name="success">/customjsp/UserEmailChangeSuccess.jsp
+			</result>
+		</action>
+
+     
+     <!-- U币转换 -->
+		<action name="UTransforAction" class="UTransforAction">
+			<result name="success">/customjsp/UTransforSuccess.jsp
+			</result>
+		</action>
+     
+     <!-- 建议 -->
+		<action name="PersonManagerSuggestionAction" class="PersonManagerSuggestionAction">
+			<result name="success">/customjsp/SuggestionSuccess.jsp
+			</result>
+		</action>
+     <!-- 积分换U币 -->
+     <action name="PersonManagerBSwapUAction" class="PersonManagerBSwapUAction">
+     <result name="success">/customjsp/BswapUSuccess.jsp</result>
+     </action>
+     
+     <!-- 购物车表中存入 -->
+     <action name="ShoppingcartInsertAction" class="ShoppingcartInsertAction">
+     <result name="success" type="redirect">ShoppingCartAction.action</result>
+     </action>
+     
+     <!-- 购物车显示 -->
+     <action name="ShoppingCartAction" class="ShoppingCartAction">
+     <result name="success">/customjsp/ShoppingCart.jsp</result>
+     </action>
+	</package>
+</struts>
