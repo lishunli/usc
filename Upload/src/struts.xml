@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+<!-- <constant name="struts.objectFactory" value="spring"/>-->
+	<constant name="struts.i18n.encoding" value="GBK" />
+	<package name="upload1" extends="struts-default">
+		<action name="upload" class="org.example.action.Upload" method="upload">
+			<interceptor-ref name="fileUpload">
+<!--				<param name="allowedTypes">-->
+<!--					image/bmp,image/PNG,image/gif,image/JPEG,image/jpg,image/pjpeg -->
+<!--				</param>-->
+				<param name="maximumSize"> 102400000 </param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack" />
+			<param name="savePath">/photo</param>
+			<result name="success">success.jsp</result>
+			<result name="input"> /index.jsp</result>
+		</action>
+	</package>
+</struts>

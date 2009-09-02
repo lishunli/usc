@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.i18n.encoding" value="GB2312" />
+	<package name="NG" namespace="/" extends="struts-default">
+		<action name="showUpload">
+			<result>/upload.jsp</result>
+		</action>
+		<action name="doUpload" class="com.sterning.StrutsFileUpload">
+			<result name="input">/upload.jsp</result>
+			<result name="success">/upload_success.jsp</result>
+			<interceptor-ref name="fileUpload">
+				<param name="maximumSize">2097152</param>
+<!--单位是字节	2M	（2097152B）		-->
+				<param name="allowedTypes">image/bmp,image/x-png,image/png,image/gif,image/jpeg,image/jpg,image/pjpeg</param>
+<!--容许文件类型为doc,ppt,xls,pdf,txt,java			-->
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+	</package>
+</struts>
