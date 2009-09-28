@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+<!--
+     This is a blank Struts configuration file with an example
+     welcome action/page and other commented sample elements.
+
+     Tiles and the Struts Validator are configured using the factory defaults
+     and are ready-to-use.
+
+     NOTE: If you have a generator tool to create the corresponding Java classes
+     for you, you could include the details in the "form-bean" declarations.
+     Otherwise, you would only define the "form-bean" element itself, with the
+     corresponding "name" and "type" attributes, as shown here.
+-->
+
+
+<struts-config>
+
+	<form-beans>
+		<form-bean name="dispatchForm" type="cn.itcast.strutsdemo.user.web.struts.forms.DispatchForm"></form-bean>
+		<form-bean name="userForm" type="cn.itcast.strutsdemo.user.web.struts.forms.UserForm"></form-bean>
+		<form-bean name="localeForm" type="org.apache.struts.action.DynaActionForm">
+			<form-property name="language" type="java.lang.String"></form-property>
+			<form-property name="country" type="java.lang.String"></form-property>
+			<form-property name="page" type="java.lang.String"></form-property>						
+		</form-bean>
+	</form-beans>
+	<global-exceptions>
+		<exception key="errors.myglobal" type="java.lang.ArithmeticException" path="/WEB-INF/globalException.jsp"></exception>
+	</global-exceptions>	
+	<global-forwards>
+			<forward name="reguserui" path="/RegUserUI.htm"></forward>	
+			<forward name="xxx" path="/WEB-INF/user/reguser.jsp"></forward>
+
+	</global-forwards>
+	
+	<action-mappings>
+		<action path="/ChangeLocale" name="localeForm" scope="request" type="org.apache.struts.actions.LocaleAction"></action>
+		<action path="/DispatchInput" type="org.apache.struts.actions.ForwardAction" parameter="/WEB-INF/dispatchInput.jsp"></action>
+		<action path="/DispatchInput2"  forward="/WEB-INF/dispatchInput.jsp"></action>
+	 
+		<action path="/UserManager" validate="false" type="cn.itcast.strutsdemo.user.web.struts.actions.UserManagerAction" scope="request" input="/WEB-INF/dispatchInput.jsp" name="dispatchForm" parameter="xxx"></action>
+	
+		<action path="/addUser" type="cn.itcast.strutsdemo.user.web.struts.actions.UserManagerAction" scope="request" input="/WEB-INF/dispatchInput.jsp" name="dispatchForm" parameter="addUser"></action>
+		<action path="/addUserUI" type="cn.itcast.strutsdemo.user.web.struts.actions.UserManagerAction" parameter="addUserUI"></action>
+		<action path="/itcastDownLoad" type="cn.itcast.strutsdemo.user.web.struts.actions.ItcastDownLoad"></action>
+		<action path="/ExceptionTest" type="cn.itcast.strutsdemo.user.web.struts.actions.ExceptionAction">
+			<exception key="errors.mylocal" type="java.lang.ArithmeticException" path="/WEB-INF/localException.jsp"></exception>
+		</action>
+
+		<action path="/RegUserUI" type="cn.itcast.strutsdemo.user.web.struts.actions.RegUserUI">
+			<forward name="success" path="/WEB-INF/user/reguser.jsp"></forward>
+		</action>
+		<action input="/RegUserUI.htm" name="userForm" scope="request" path="/RegUser" type="cn.itcast.strutsdemo.user.web.struts.actions.RegUser">
+			<forward name="success" path="/WEB-INF/user/main.jsp"></forward>
+			<forward name="failure" path="/WEB-INF/user/reguser.jsp"></forward>
+			
+		</action>		
+	</action-mappings>
+	<controller  maxFileSize="2M" processorClass="cn.itcast.strutsdemo.user.web.struts.utils.ItcastRequestProccessor"></controller>
+	<message-resources parameter="cn.itcast.resources.Application"></message-resources>
+	<message-resources parameter="cn.itcast.resources.xxx" key="xxx" ></message-resources>
+
+	<plug-in className="cn.itcast.strutsdemo.user.web.struts.utils.ItcastPlugIn">
+		<set-property property="converterClassName" value="cn.itcast.strutsdemo.user.web.struts.utils.DateConverter"/>
+		<set-property property="typeName" value="java.util.Date"/>
+	</plug-in>
+
+	<plug-in className="cn.itcast.strutsdemo.user.web.struts.utils.ItcastPlugIn">
+		<set-property property="converterClassName" value="cn.itcast.strutsdemo.user.web.struts.utils.GenderConverter"/>
+		<set-property property="typeName" value="cn.itcast.strutsdemo.user.domain.Gender"/>
+	</plug-in>	
+
+	
+</struts-config>
+

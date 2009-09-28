@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+  <data-sources />
+  <form-beans >
+    <form-bean name="userForm" type="cn.itcast.validatordemo.form.UserForm" />
+ <!-- 
+    <form-bean name="reguser2Form" type="org.apache.struts.action.DynaActionForm">
+  --> 
+     <form-bean name="reguser2Form" type="org.apache.struts.validator.DynaValidatorForm"> 
+      <form-property name="password" type="java.lang.String" />
+      <form-property name="name" type="java.lang.String" />
+    </form-bean>
+
+  </form-beans>
+
+  <global-exceptions />
+  <global-forwards />
+  <action-mappings >
+    <action
+      attribute="userForm"
+      input="/WEB-INF/page/reguser.jsp"
+      name="userForm"
+      parameter="xxx"
+      path="/RegUser"
+      scope="request"
+      type="cn.itcast.validatordemo.action.RegUserAction">
+      <forward name="success" path="/WEB-INF/page/main.jsp" />
+      <forward name="failure" path="/WEB-INF/page/reguser.jsp" />
+    </action>
+    <action
+      path="/RegUserUI"
+      type="cn.itcast.validatordemo.action.RegUserUIAction"
+      validate="false" >
+      <forward name="success" path="/WEB-INF/page/reguser.jsp" />
+    </action>
+    <!--  
+    <action  path="/RegUserUI2" type="org.apache.struts.actions.ForwardAction" parameter="/WEB-INF/page/reguser2.jsp"></action>
+    -->
+    <action path="/RegUserUI2" forward="/WEB-INF/page/reguser2.jsp"></action>
+    <action
+      attribute="reguser2Form"
+      input="/WEB-INF/page/reguser2.jsp"
+      name="reguser2Form"
+      path="/RegUser2"
+      scope="request"
+      type="cn.itcast.validatordemo.action.Reguser2Action">
+      <forward name="success" path="/WEB-INF/page/main2.jsp" />
+    </action>
+
+
+  </action-mappings>
+
+  <message-resources parameter="cn.itcast.validatordemo.ApplicationResources" />
+  <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+  	<set-property property="pathnames"
+   	value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml"/>
+  	<set-property property="stopOnFirstError" value="true"/>
+  </plug-in>
+
+
+</struts-config>
+

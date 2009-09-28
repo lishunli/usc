@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="validatordemo"
+  id="myeclipse.1238653569406"
+  context-root="/validatordemo"
+  j2ee-spec="5.0"
+  archive="validatordemo.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
