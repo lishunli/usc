@@ -39,7 +39,7 @@ public class EJBClient
 			InitialContext ctx= new InitialContext();
 			//4.通过JNDI获得接口代理
 			IHelloWorld helloWorld = (IHelloWorld)ctx.lookup("HelloWorldBean/remote");
-			System.out.println(helloWorld.sayHello("ShunLi Lee"));
+			System.out.println(helloWorld.sayHello("Remote : ShunLi Lee"));
 		} catch (NamingException e)
 		{
 			// TODO Auto-generated catch block
