@@ -9,13 +9,13 @@
 </head>
 <body>
 <%
-try
+	try
 {
 	//3.获得上下文环境
 //	InitialContext ctx= new InitialContext(props);
 	InitialContext ctx= new InitialContext();
 	//4.通过JNDI获得接口代理
-	IHelloWorld helloWorld = (IHelloWorld)ctx.lookup("HelloWorldBean/local");
+	IHelloWorldLocal helloWorld = (IHelloWorldLocal)ctx.lookup("HelloWorldBean/local");
 	out.println(helloWorld.sayHello("Local : ShunLi Lee"));
 } catch (NamingException e)
 {
