@@ -4,10 +4,11 @@ import javax.ejb.Local;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
-import org.usc.ejb3.IHelloWorld;
+import org.usc.ejb3.IHelloWorldRemote;
+import org.usc.ejb3.IHelloWorldLocal;
 
 /**
- * 接口实现类
+ * 接口实现类，既实现远程接口又实现本地接口
  * 
  * @author MZ
  *
@@ -15,9 +16,9 @@ import org.usc.ejb3.IHelloWorld;
  */
 
 @Stateless
-//@Remote(IHelloWorld.class)
-@Local(IHelloWorld.class)
-public class HelloWorldBean implements IHelloWorld
+@Remote(IHelloWorldRemote.class)
+@Local(IHelloWorldLocal.class)
+public class HelloWorldBean implements IHelloWorldRemote,IHelloWorldLocal
 {
 	@Override
 	public String sayHello(String name)

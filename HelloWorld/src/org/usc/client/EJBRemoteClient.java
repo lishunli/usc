@@ -5,7 +5,7 @@ import java.util.Properties;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-import org.usc.ejb3.IHelloWorld;
+import org.usc.ejb3.IHelloWorldRemote;
 import org.usc.ejb3.impl.HelloWorldBean;
 
 /**
@@ -15,7 +15,7 @@ import org.usc.ejb3.impl.HelloWorldBean;
  *
  * @2009-10-18下午08:42:00
  */
-public class EJBClient
+public class EJBRemoteClient
 {
 
 	/**
@@ -38,7 +38,7 @@ public class EJBClient
 //			InitialContext ctx= new InitialContext(props);
 			InitialContext ctx= new InitialContext();
 			//4.通过JNDI获得接口代理
-			IHelloWorld helloWorld = (IHelloWorld)ctx.lookup("HelloWorldBean/remote");
+			IHelloWorldRemote helloWorld = (IHelloWorldRemote)ctx.lookup("HelloWorldBean/remote");
 			System.out.println(helloWorld.sayHello("Remote : ShunLi Lee"));
 		} catch (NamingException e)
 		{
