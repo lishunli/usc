@@ -1,5 +1,6 @@
 package org.usc.ejb3.impl;
 
+import javax.ejb.Local;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
@@ -14,7 +15,8 @@ import org.usc.ejb3.IHelloWorld;
  */
 
 @Stateless
-@Remote(IHelloWorld.class)
+//@Remote(IHelloWorld.class)
+@Local(IHelloWorld.class)
 public class HelloWorldBean implements IHelloWorld
 {
 	@Override
