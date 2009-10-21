@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="EntityBean" basedir="." default="deploy">
+	<property name="src.dir" value="${basedir}/src">
+	</property>
+	<property name="jboss.name" value="D:\jboss-5.1.0.GA">
+	</property>
+	<!--JBOSS服务器的物理路径，如果不同情修改-->
+	<property name="jboss.server.config" value="default">
+	</property>
+	<property name="build.dir" value="${basedir}/build">
+	</property>
+
+	<path id="build.classpath">
+		<fileset dir="${jboss.name}\client">
+			<include name="*.jar" />
+		</fileset>
+		<pathelement location="${build.dir}" />
+	</path>
+
+	<target name="prepare">
+		<delete dir="${build.dir}">
+		</delete>
+		<mkdir dir="${build.dir}" />
+	</target>
+	<target name="compile" depends="prepare" description="编译项目">
+		<javac srcdir="${src.dir}" destdir="${build.dir}" excludes="junit/test/**">
+			<classpath refid="build.classpath"></classpath>
+		</javac>
+
+	</target>
+
+	<target name="ejbjar" depends="compile" description="打包成jar文件">
+		<jar jarfile="${basedir}\${ant.project.name}.jar">
+			<fileset dir="${build.dir}">
+				<include name="**/*.class" />
+			</fileset>
+			<metainf dir="${src.dir}/META-INF"></metainf>
+		</jar>
+	</target>
+
+	<target name="deploy" depends="ejbjar" description="发布EJB">
+		<copy file="${basedir}\${ant.project.name}.jar" todir="${jboss.name}\server\${jboss.server.config}\deploy">
+		</copy>
+	</target>
+
+	<target name="undeploy" description="卸载EJB">
+		<delete
+			file="${jboss.name}\server\${jboss.server.config}\deploy\${ant.project.name}.jar">
+		</delete>
+	</target>
+
+</project>
