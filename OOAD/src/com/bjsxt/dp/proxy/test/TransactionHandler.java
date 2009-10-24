@@ -1,8 +1,8 @@
-package com.bjsxt.proxy.test;
+package com.bjsxt.dp.proxy.test;
 
 import java.lang.reflect.Method;
 
-import com.bjsxt.proxy.InvocationHandler;
+import com.bjsxt.dp.proxy.InvocationHandler;
 
 public class TransactionHandler implements InvocationHandler {
 	

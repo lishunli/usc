@@ -1,4 +1,4 @@
-package com.bjsxt.proxy;
+package com.bjsxt.dp.proxy;
 
 public interface Moveable {
 	void move();

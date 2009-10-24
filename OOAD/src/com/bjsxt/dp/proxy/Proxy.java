@@ -1,4 +1,4 @@
-package com.bjsxt.proxy;
+package com.bjsxt.dp.proxy;
 
 import java.io.File;
 import java.io.FileWriter;

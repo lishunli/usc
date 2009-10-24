@@ -1,8 +1,8 @@
-package com.bjsxt.proxy.test;
+package com.bjsxt.dp.proxy.test;
 
-import com.bjsxt.proxy.InvocationHandler;
-import com.bjsxt.proxy.Proxy;
-import com.bjsxt.proxy.TimeHandler;
+import com.bjsxt.dp.proxy.InvocationHandler;
+import com.bjsxt.dp.proxy.Proxy;
+import com.bjsxt.dp.proxy.TimeHandler;
 
 public class Client {
 	public static void main(String[] args) throws Exception {

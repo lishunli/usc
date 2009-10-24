@@ -1,4 +1,4 @@
-package com.bjsxt.proxy.test;
+package com.bjsxt.dp.proxy.test;
 
 public interface UserMgr {
 	void addUser();
