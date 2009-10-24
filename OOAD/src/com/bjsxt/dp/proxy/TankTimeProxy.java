@@ -19,5 +19,4 @@ public class TankTimeProxy implements Moveable
 		long end = System.currentTimeMillis();
 		System.out.println("Time is used :"+(end - start));
 	}
-	
 }
