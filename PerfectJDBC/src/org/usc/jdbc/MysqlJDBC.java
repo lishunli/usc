@@ -7,11 +7,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
+ *
  * Mysql connect JDBC
  * 
  * @author MZ
- * 
- *         2009-10-28обнГ02:06:07
+ *
+ * 2009-10-28обнГ02:38:58
  */
 public class MysqlJDBC
 {
