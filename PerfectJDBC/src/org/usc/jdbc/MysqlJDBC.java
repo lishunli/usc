@@ -7,12 +7,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- *
+ * 
  * Mysql connect JDBC
  * 
  * @author MZ
- *
- * 2009-10-28下午02:38:58
+ * 
+ *         2009-10-28下午02:38:58
  */
 public class MysqlJDBC
 {
@@ -30,10 +30,10 @@ public class MysqlJDBC
 			Class.forName("com.mysql.jdbc.Driver");// 1.加载驱动，获得DriverManager
 			try
 			{
-				conn = DriverManager
-						.getConnection(
-								"jdbc:mysql://localhost:3306/netstore?useUnicode=true&amp;characterEncoding=utf8",
-								"root", "lishunli");// 2.获得连接
+				String url = "jdbc:mysql://localhost:3306/netstore?useUnicode=true&amp;characterEncoding=utf8";
+				String user = "root";
+				String password = "lishunli";
+				conn = DriverManager.getConnection(url, user, password);// 2.获得连接
 				stmt = conn.createStatement();// 3.获得创建语句
 				String Sql = "select * from custom";// 执行的sql语句
 				rs = stmt.executeQuery(Sql);// 4.执行sql
@@ -58,34 +58,34 @@ public class MysqlJDBC
 			{
 				try
 				{
-					rs.close();//关闭
+					rs.close();// 关闭
 				} catch (SQLException e)
 				{
 					e.printStackTrace();
 				}
-				rs = null;//内存管理，垃圾回收
+				rs = null;// 内存管理，垃圾回收
 			}
 			if (stmt != null)
 			{
 				try
 				{
-					stmt.close();//关闭
+					stmt.close();// 关闭
 				} catch (SQLException e)
 				{
 					e.printStackTrace();
 				}
-				stmt = null;//内存管理，垃圾回收
+				stmt = null;// 内存管理，垃圾回收
 			}
 			if (conn != null)
 			{
 				try
 				{
-					conn.close();//关闭
+					conn.close();// 关闭
 				} catch (SQLException e)
 				{
 					e.printStackTrace();
 				}
-				conn = null;//内存管理，垃圾回收
+				conn = null;// 内存管理，垃圾回收
 			}
 		}
 	}
