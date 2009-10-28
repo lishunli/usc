@@ -93,7 +93,7 @@ public class Tree
 		try
 		{
 			stmt = conn.createStatement();// 3.获得创建语句
-			String Sql = "select * from tree where pid = " + pid;// 执行的sql语句
+			String Sql = "select * from tree where pid = " + pid;// 执行的sql语句，传入父类节点
 			rs = stmt.executeQuery(Sql);// 4.执行sql
 			while(rs.next())// 5.信息结果
 			{
