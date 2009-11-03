@@ -5,10 +5,12 @@ import java.util.*;
 import org.usc.javautils.string.StringUtil;
 
 /**
- * 生成 Insert SQL 语句的类.
+ * 生成 Insert SQL 语句的类
  * 
  * @author MZ
- * @date 2009-11-3
+ *
+ * @date 2009-11-3下午07:25:07
+ *
  */
 public class SQLInsert extends HashMap<String, Object>
 {
