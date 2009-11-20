@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="TestSyntaxHighlighter"
+  id="myeclipse.1258686659767"
+  context-root="/TestSyntaxHighlighter"
+  j2ee-spec="5.0"
+  archive="TestSyntaxHighlighter.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

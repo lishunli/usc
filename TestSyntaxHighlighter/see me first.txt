@@ -1,0 +1,237 @@
+﻿syntaxhighlighter的使用详解
+
+将你要高亮显示的代码放在 pre 或 textarea 中
+<pre name="code" class="c-sharp">
+... some code here ...
+</pre>
+<textarea name="code" class="c#" cols="60" rows="10">
+... some code here ...
+</textarea>
+
+class选项允许你单独配置文本块。
+nogutter 将不会显示行号。
+nocontrols 将不会在顶部显示控制器。
+collapse 将默认折叠代码。
+firstline[value] 行计数开始值。默认值是 1
+showcolumns 将在第一行显示行列。
+这些选项和别名放置在一起，使用冒号 : 字符分隔。
+<pre name="code" class="html:nocontrols:firstline[10]">
+... some code here ...
+</pre>
+语言 别名
+C++ cpp, c, c++
+C# c#, c-sharp, csharp
+CSS css
+Delphi delphi, pascal
+Java java
+Java Script js, jscript, javascript
+PHP php
+Python py, python
+Ruby rb, ruby, rails, ror
+Sql sql
+VB vb, vb.net
+XML/HTML xml, html, xhtml, xslt
+在页面最后添加JS和CSS引用JS有很多，若是语言固定的话，只要引入 shCore 和 shBrushXml(相应) 的JS文件就行了
+<link type="text/css" rel="stylesheet" href="css/SyntaxHighlighter.css"></link>
+<script language="javascript" src="js/shCore.js"></script>
+<script language="javascript" src="js/shBrushCSharp.js"></script>
+<script language="javascript" src="js/shBrushXml.js"></script>
+<script language="javascript">
+dp.SyntaxHighlighter.ClipboardSwf = '/flash/clipboard.swf';
+dp.SyntaxHighlighter.HighlightAll('code');//这里的 ‘code’ 为上面放置代码的容器
+</script>
+* SyntaxHighlighter－HighlightAll 方法
+这是一个全局函数，它找出网页上所有的代码块，将他们转换成高亮的代码块。
+参数
+function dp.SyntaxHighlighter.HighlightAll(name, [showGutter], [showControls],
+[collapseAll], [firstLine], [showColumns])
+name 必要 <pre> 和 <textarea> 元素使用的名称。
+showGutter 可选 打开或关闭所有处理的代码块的行号。（默认为 true）
+showControls 可选 打开或关闭所有处理的 <pre> 的控制器。（默认为 true）
+collapseAll 可选 打开或关闭所有处理的 <pre> 的折叠。如果 showControls 是 false 或被交换了，这个值将被忽略。（默认为 false）
+firstLine 可选 允许指定行号开始的第一行。当你想指明代码块在文件的哪个相对位置时有用。（默认为 1）
+showColumns 可选 将在第一行显示行列。（默认为 false）
+所有传到 HighlightAll 调用的值将重载配置的对应选项.
+下载地址：
+http://code.google.com/p/syntaxhighlighter/
+附一个小例子说一下 textarea 和 pre 的区别
+<html>
+<head>
+<title>高亮测试</title>
+<link type="text/css" rel="stylesheet" href="Styles/SyntaxHighlighter.css"/>
+<script language="javascript" src="Scripts/shCore.js"></script>
+<script language="javascript" src="Scripts/shBrushXml.js"></script>
+</head>
+<body>
+<textarea name="code" class="xml" rows="15" cols="100">
+程序源代码放在这儿afds
+dp.SyntaxHighlighter.HighlightAll('code');
+dp.SyntaxHighlighter.HighlightAll('code2');
+请注译掉这二句查看效果,注意 textarea 和 pre 的分别。pre中的 《 号需要转译，要不然就原样输出了,在高亮代码没有生效的情况下。
+<h1>adsfadfadf</h1>
+-------------------
+&lt;h1>adsfadfadf&lt;/h1>
+</textarea>
+<pre name="code2" class="xml" rows="15" cols="100">
+程序源代码放在这儿afds
+dp.SyntaxHighlighter.HighlightAll('code');
+dp.SyntaxHighlighter.HighlightAll('code2');
+<h1>adsfadfadf</h1>
+-------------------
+&lt;h1>adsfadfadf&lt;/h1>
+</pre>
+<script class="javascript">
+dp.SyntaxHighlighter.HighlightAll('code');
+dp.SyntaxHighlighter.HighlightAll('code2');
+</script>
+</body>
+</html>
+SyntaxHighlighter代码加色使用方法发布：dxy 字体：[增加 减小] 类型：转载
+原名：SyntaxHighlighter，是一款用于web页面的代码着色工具，可以用来着色多种语言，可以是HTML,CSS,Javascript,还可以是C,JAVA等编程语言。最早见于Yahoo的YUI，当时还属于自由软件，最近打开官方网站发现已被goolge收编。
+它可以在网页中对各种程序源代码语法进行加亮显示。支持当前流行的各种编程语言：C#、CSS、C++、Delphi、Java、JavaScript、PHP、Python、Ruby、SQL、Visual Basic、XML / HTML
+下载地址：http://www.dreamprojections.com/syntaxhighlighter/
+或http://code.google.com/p/syntaxhighlighter/
+演示地址：http://www.dreamprojections.com/syntaxhighlighter/Tests/PHP.html
+该工具核心基于javascript，使用起来很简单：
+1、假设网页文件test.htm存放在一个目录，将dp.SyntaxHighlighter解压缩，并复制其中的Scripts文件夹和styles文件夹，确保和test.html在同一个目录下面。
+2、在网页的<head></head>之间插入以下代码：
+<link type="text/css" rel="stylesheet" href="Styles/SyntaxHighlighter.css"></link>
+3、在网页要显示程序源代码的地方插入以下代码，若是HTML类型的话，用XML（其它的如class="js"表示以js语法显示源代码，其他可设定的class值分别为c#、css、c、elphi、java、js、php、python、ruby、sql、vb、xml）：
+<textarea name="code" class="js" rows="15" cols="100">
+程序源代码放在这儿
+</textarea>
+说明：
+name="code"是必须的，不能更改；
+class="xml"是着色的方式，即需要着色的代码的类型，根据需要进行更改。
+4、在网页尾部的</body>之前插入以下代码：
+<script type="text/javascript" src="SyntaxHighlighter/Scripts/shCore.js"></script>
+<script type="text/javascript" src="SyntaxHighlighter/Scripts/shBrushCSharp.js"></script>
+<script type="text/javascript" src="SyntaxHighlighter/Scripts/shBrushPhp.js"></script>
+<script type="text/javascript" src="SyntaxHighlighter/Scripts/shBrushJScript.js"></script>
+<script type="text/javascript" src="SyntaxHighlighter/Scripts/shBrushJava.js"></script>
+<script type="text/javascript" src="SyntaxHighlighter/Scripts/shBrushVb.js"></script>
+<script type="text/javascript" src="SyntaxHighlighter/Scripts/shBrushSql.js"></script>
+<script type="text/javascript" src="SyntaxHighlighter/Scripts/shBrushXml.js"></script>
+<script type="text/javascript" src="SyntaxHighlighter/Scripts/shBrushDelphi.js"></script>
+<script type="text/javascript" src="SyntaxHighlighter/Scripts/shBrushPython.js"></script>
+<script type="text/javascript" src="SyntaxHighlighter/Scripts/shBrushRuby.js"></script>
+<script type="text/javascript" src="SyntaxHighlighter/Scripts/shBrushCss.js"></script>
+<script type="text/javascript" src="SyntaxHighlighter/Scripts/shBrushCpp.js"></script>
+<script class="javascript">
+dp.SyntaxHighlighter.HighlightAll('code');
+</script>
+一个页面里面可以包含任意多个需要着色的代码段；
+压缩包中有各种着色代码类型的着色案例，大家可以参照使用。
+方法二：
+1. 首先在页面上添加如下代码（假设下载后的SyntaxHighlighter放在SyntaxHighlighter目录下面，注意目录结构）：
+<link type="text/css" rel="stylesheet" href="SyntaxHighlighter/Styles/SyntaxHighlighter.css"></link>
+<script language="javascript" src="SyntaxHighlighter/Scripts/shCore.js"></script>
+<script language="javascript" src="SyntaxHighlighter/Scripts/shBrushCSharp.js"></script>
+<script language="javascript" src="SyntaxHighlighter/Scripts/shBrushXml.js"></script>
+<script language="javascript">
+window.onload = function () {
+dp.SyntaxHighlighter.ClipboardSwf = 'SyntaxHighlighter/Scripts/clipboard.swf';
+dp.SyntaxHighlighter.HighlightAll('code');
+}
+</script>
+官方的安装中没有window.onload，我想这个还是需要的，毕竟，页面加载的时候我就需要给代码着色。
+2. 使用方法如下：
+方法一：使用pre
+<pre name="code" class="c-sharp">
+... some code here ...
+</pre>
+方法二：使用textarea
+<textarea name="code" class="c#" cols="60" rows="10">
+... some code here ...
+</textarea>
+另外，这里还有一些高级特性的设置方法可供参考，诸如代码折叠等。
+
+
+附我测试的一个工程
+
+
+目录结构
+Web-Root\SyntaxHighlighter\Scripts
+Web-Root\SyntaxHighlighter\Styles
+Web-Root\SyntaxHighlighter\Uncompressed
+
+jsp页面如下：
+
+
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<base href="<%=basePath%>">
+
+		<title>TestSyntaxHighlighter</title>
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">
+		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+		<meta http-equiv="description" content="This is my page">
+
+		<link type="text/css" rel="stylesheet"
+			href="SyntaxHighlighter/Styles/SyntaxHighlighter.css"></link>
+		<script type="text/javascript" src="SyntaxHighlighter/Scripts/shCore.js"></script>
+		<script type="text/javascript" src="SyntaxHighlighter/Scripts/shBrushCSharp.js"></script>
+		<script type="text/javascript" src="SyntaxHighlighter/Scripts/shBrushPhp.js"></script>
+		<script type="text/javascript" src="SyntaxHighlighter/Scripts/shBrushJScript.js"></script>
+		<script type="text/javascript" src="SyntaxHighlighter/Scripts/shBrushJava.js"></script>
+		<script type="text/javascript" src="SyntaxHighlighter/Scripts/shBrushVb.js"></script>
+		<script type="text/javascript" src="SyntaxHighlighter/Scripts/shBrushSql.js"></script>
+		<script type="text/javascript" src="SyntaxHighlighter/Scripts/shBrushXml.js"></script>
+		<script type="text/javascript" src="SyntaxHighlighter/Scripts/shBrushDelphi.js"></script>
+		<script type="text/javascript" src="SyntaxHighlighter/Scripts/shBrushPython.js"></script>
+		<script type="text/javascript" src="SyntaxHighlighter/Scripts/shBrushRuby.js"></script>
+		<script type="text/javascript" src="SyntaxHighlighter/Scripts/shBrushCss.js"></script>
+		<script type="text/javascript" src="SyntaxHighlighter/Scripts/shBrushCpp.js"></script>
+
+		<script language="javascript">
+			window.onload = function() {
+				dp.SyntaxHighlighter.ClipboardSwf = 'SyntaxHighlighter/Scripts/clipboard.swf';
+				dp.SyntaxHighlighter.HighlightAll('code');
+			}
+		</script>
+
+	</head>
+
+	<body>
+		<textarea name="code" class="java" cols="160" rows="100"> 
+			package com.usc.actions.back;
+			import com.opensymphony.xwork2.ActionContext;
+			import com.opensymphony.xwork2.ActionSupport;
+			
+			/**
+			 * 后台退出Action
+			 * 
+			 * @author MZ
+			 *
+			 * 2009-8-26下午16:27:02
+			 */
+			public class BackExitAction extends ActionSupport
+			{
+			
+					@Override
+					public String execute() throws Exception
+					{
+					ActionContext.getContext().getSession().remove("manger");//session移除
+					return SUCCESS;
+				}
+				
+			
+			}
+		</textarea>
+		<br>
+	</body>
+</html>
+
+
+
