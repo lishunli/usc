@@ -10,9 +10,24 @@
 		<%--				<a href="download.action?name=<s:property value='%{#downloadFileName}'/>"><s:property value="%{#%{#downloadFileName}}" /> </a>--%>
 		<%--				<br>--%>
 		<%--	</s:iterator>--%>
-		<c:forEach var="uploadFiles" items="${uploadFiles}">
-			<a href="download.action?name=${uploadFiles.uploadRealName }&realname=${uploadFiles.uploadFileName }">${uploadFiles.uploadFileName }</a>
-			<br>
-		</c:forEach>
+		<table align="center" width="40%" border="1">
+			<tr>
+				<td align="center">
+					文件下载
+				</td>
+			</tr>
+			<c:forEach var="uploadFiles" items="${uploadFiles}">
+				<tr>
+					<td>
+						<a
+							href="download.action?name=${uploadFiles.uploadRealName }&realname=${uploadFiles.uploadFileName }">${uploadFiles.uploadFileName
+							}</a>
+					</td>
+				</tr>
+
+			</c:forEach>
+
+
+		</table>
 	</body>
 </html>
