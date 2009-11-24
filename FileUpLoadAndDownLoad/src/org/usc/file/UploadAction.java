@@ -1,21 +1,21 @@
 package org.usc.file;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 import java.util.UUID;
-
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
-import org.usc.utils.UploadFilePath;
-
+import org.usc.utils.UploadConfigurationRead;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class UploadAction extends ActionSupport
 {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private File[] upload;// 实际上传文件
 	private String[] uploadContentType; // 文件的内容类型
 	private String[] uploadFileName; // 上传文件名
@@ -25,11 +25,13 @@ public class UploadAction extends ActionSupport
 	{
 		try
 		{
+//			String targetDirectory = ServletActionContext.getServletContext()
+//					.getRealPath(
+//							"/"
+//									+ new UploadFilePath().p.getProperty(
+//											"uploadFilePath").trim());//获得路径
 			String targetDirectory = ServletActionContext.getServletContext()
-					.getRealPath(
-							"/"
-									+ new UploadFilePath().p.getProperty(
-											"uploadFilePath").trim());//获得路径
+					.getRealPath("/"+ UploadConfigurationRead.getInstance().getConfigItem("uploadFilePath").trim());//获得路径
 			for (int i = 0; i < upload.length; i++)
 			{
 				String fileName = uploadFileName[i];

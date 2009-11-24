@@ -1,13 +1,10 @@
 package org.usc.file;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.util.Properties;
-
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
-import org.usc.utils.UploadFilePath;
+import org.usc.utils.UploadConfigurationRead;
 
 public class DownloadAction extends ActionSupport
 {
@@ -60,7 +57,7 @@ public class DownloadAction extends ActionSupport
 	{
 
 		this.setFileName();
-		return ServletActionContext.getServletContext().getResourceAsStream("/"+new UploadFilePath().p.getProperty("uploadFilePath").trim()+"/" + fileName);
+		return ServletActionContext.getServletContext().getResourceAsStream("/"+UploadConfigurationRead.getInstance().getConfigItem("uploadFilePath").trim()+"/" + fileName);
 	}
 
 	@Override
