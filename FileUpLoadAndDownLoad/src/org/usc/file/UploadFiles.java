@@ -1,7 +1,7 @@
 package org.usc.file;
 
 /**
- * 上传的文件
+ * 文件类，需要的时候，可以和数据库进行关联
  * 
  * @author MZ
  *
