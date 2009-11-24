@@ -61,7 +61,7 @@ function addMore()
 
 		<!--<h3><font color="red">上传文件类型后缀为doc,ppt,xls,pdf,txt,java，每个文件大小不能大于50M</font></h3>-->
 
-		<table align="center" width="40%">
+		<table align="center" width="50%">
 			<tr>
 				<td>
 
@@ -75,18 +75,17 @@ function addMore()
 		<s:form action="upload.action" theme="simple" method="post"
 			enctype="multipart/form-data">
 
-			<table align="center" width="40%" border="1">
+			<table align="center" width="50%" border="1">
 				<tr>
 					<td>
 						上传文件
 					</td>
-					<td id="more">
+					<td id="more" >
 						<s:file name="upload"></s:file>
 						<input type="button" value="上传更多..." onclick="addMore()">
 					</td>
 				</tr>
 				<tr>
-
 					<td>
 						<s:submit value=" 确认 "></s:submit>
 					</td>

@@ -10,7 +10,7 @@
 		<%--				<a href="download.action?name=<s:property value='%{#downloadFileName}'/>"><s:property value="%{#%{#downloadFileName}}" /> </a>--%>
 		<%--				<br>--%>
 		<%--	</s:iterator>--%>
-		<table align="center" width="40%" border="1">
+		<table align="center" width="50%" border="1">
 			<tr>
 				<td align="center">
 					文件下载
