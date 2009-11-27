@@ -13,7 +13,7 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>/customjsp/Main.jsp</welcome-file>
 	</welcome-file-list>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
