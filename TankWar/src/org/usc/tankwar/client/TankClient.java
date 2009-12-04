@@ -19,13 +19,15 @@ public class TankClient extends Frame
 	 */
 	private static final long serialVersionUID = 1L;
 
+	int x =50,y=50;
 	@Override
 	public void paint(Graphics g)
 	{
 		Color c = g.getColor();
 		g.setColor(Color.RED);
-		g.fillOval(50, 50, 30, 30);
+		g.fillOval(x, y, 30, 30);
 		g.setColor(c);
+		y +=5;
 
 	}
 
@@ -46,12 +48,35 @@ public class TankClient extends Frame
 		this.setResizable(false);// 设置窗体大小不可以变
 		this.setBackground(Color.GREEN);// 设置背景颜色
 		this.setVisible(true);// 设置窗体可见
+		
+		new Thread(new PaintThread()).start();//启动线程
 	}
 
 	public static void main(String[] args)
 	{
 		TankClient tankClient = new TankClient();// 实例化对象
 		tankClient.lanchFrame();// 显示窗体
+	}
+	
+	private class PaintThread implements Runnable
+	{
+		@Override
+		public void run()
+		{
+			while(true)
+			{
+				repaint();//父类的repaint的方法，调用类
+				try
+				{
+					Thread.sleep(50);
+				} catch (InterruptedException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+		}
 	}
 
 }
