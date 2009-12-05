@@ -9,6 +9,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import com.sun.org.apache.bcel.internal.generic.NEW;
+
 /**
  * 坦克的客户端
  * 
@@ -24,8 +26,8 @@ public class TankClient extends Frame
 	public static final int GAME_WINDTH = 800;
 	public static final int GAME_HEIGHT = 600;
 
-	int x = 50, y = 50;// 位置
-
+	Tank tank = new Tank(50,50);
+	
 	Image offScreenImage = null;// 虚拟的背景图片
 
 	@Override
@@ -51,11 +53,7 @@ public class TankClient extends Frame
 	@Override
 	public void paint(Graphics g)
 	{
-		Color c = g.getColor();// 获得当前颜色
-		g.setColor(Color.RED);// 设置颜色
-		g.fillOval(x, y, 30, 30);// 使用当前颜色填充外接指定矩形框的椭圆
-		g.setColor(c);// 恢复颜色
-
+		tank.draw(g);//调用坦克的draw方法
 	}
 
 	public void lanchFrame()
@@ -114,26 +112,7 @@ public class TankClient extends Frame
 		@Override
 		public void keyPressed(KeyEvent e)
 		{
-			int key = e.getKeyCode();// 获得key码
-			switch (key)
-			{
-
-			case KeyEvent.VK_LEFT:
-				x -= 5;
-				break;
-			case KeyEvent.VK_UP:
-				y -= 5;
-				break;
-			case KeyEvent.VK_RIGHT:
-				x += 5;
-				break;
-			case KeyEvent.VK_DOWN:
-				y += 5;
-				break;
-			default:
-				break;
-			}
-
+			tank.keyPressed(e);//调用坦克的键盘监听方法
 		}
 
 	}
