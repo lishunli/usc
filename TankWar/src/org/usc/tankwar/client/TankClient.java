@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -22,28 +24,28 @@ public class TankClient extends Frame
 	public static final int GAME_WINDTH = 800;
 	public static final int GAME_HEIGHT = 600;
 
-	int x = 50, y = 50;//位置
+	int x = 50, y = 50;// 位置
 
 	Image offScreenImage = null;// 虚拟的背景图片
 
 	@Override
 	public void update(Graphics g)
 	{
-		
+
 		if (offScreenImage == null)
 		{
-			offScreenImage = this.createImage(GAME_WINDTH, GAME_HEIGHT);//创建一张图片
+			offScreenImage = this.createImage(GAME_WINDTH, GAME_HEIGHT);// 创建一张图片
 		}
 		Graphics gOffScreen = offScreenImage.getGraphics();
-		//设置颜色
+		// 设置颜色
 		Color c = gOffScreen.getColor();
 		gOffScreen.setColor(Color.GREEN);
-		
+
 		gOffScreen.fillRect(0, 0, GAME_WINDTH, GAME_HEIGHT);
 		gOffScreen.setColor(c);
-		paint(gOffScreen);//画背景图片上
+		paint(gOffScreen);// 画背景图片上
 		g.drawImage(offScreenImage, 0, 0, null);
-		
+
 	}
 
 	@Override
@@ -53,7 +55,6 @@ public class TankClient extends Frame
 		g.setColor(Color.RED);// 设置颜色
 		g.fillOval(x, y, 30, 30);// 使用当前颜色填充外接指定矩形框的椭圆
 		g.setColor(c);// 恢复颜色
-		y += 5;
 
 	}
 
@@ -73,6 +74,9 @@ public class TankClient extends Frame
 		});// 关闭窗体事件
 		this.setResizable(false);// 设置窗体大小不可以变
 		this.setBackground(Color.GREEN);// 设置背景颜色
+
+		this.addKeyListener(new KeyMonitor());// 添加键盘监听
+
 		this.setVisible(true);// 设置窗体可见
 
 		new Thread(new PaintThread()).start();// 启动线程
@@ -97,12 +101,41 @@ public class TankClient extends Frame
 					Thread.sleep(50);
 				} catch (InterruptedException e)
 				{
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 
 		}
+	}
+
+	private class KeyMonitor extends KeyAdapter
+	{
+
+		@Override
+		public void keyPressed(KeyEvent e)
+		{
+			int key = e.getKeyCode();// 获得key码
+			switch (key)
+			{
+
+			case KeyEvent.VK_LEFT:
+				x -= 5;
+				break;
+			case KeyEvent.VK_UP:
+				y -= 5;
+				break;
+			case KeyEvent.VK_RIGHT:
+				x += 5;
+				break;
+			case KeyEvent.VK_DOWN:
+				y += 5;
+				break;
+			default:
+				break;
+			}
+
+		}
+
 	}
 
 }
