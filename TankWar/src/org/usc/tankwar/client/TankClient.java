@@ -3,6 +3,7 @@ package org.usc.tankwar.client;
 import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -19,15 +20,37 @@ public class TankClient extends Frame
 	 */
 	private static final long serialVersionUID = 1L;
 
-	int x =50,y=50;
+	int x = 50, y = 50;
+
+	Image offScreenImage = null;// 虚拟的背景图片
+
+	@Override
+	public void update(Graphics g)
+	{
+		if (offScreenImage == null)
+		{
+			offScreenImage = this.createImage(800, 600);//创建一张图片
+		}
+		Graphics gOffScreen = offScreenImage.getGraphics();
+		//设置颜色
+		Color c = gOffScreen.getColor();
+		gOffScreen.setColor(Color.GREEN);
+		
+		gOffScreen.fillRect(0, 0, 800, 600);
+		gOffScreen.setColor(c);
+		paint(gOffScreen);//画背景图片上
+		g.drawImage(offScreenImage, 0, 0, null);
+		
+	}
+
 	@Override
 	public void paint(Graphics g)
 	{
-		Color c = g.getColor();
-		g.setColor(Color.RED);
-		g.fillOval(x, y, 30, 30);
-		g.setColor(c);
-		y +=5;
+		Color c = g.getColor();// 获得当前颜色
+		g.setColor(Color.RED);// 设置颜色
+		g.fillOval(x, y, 30, 30);// 使用当前颜色填充外接指定矩形框的椭圆
+		g.setColor(c);// 恢复颜色
+		y += 5;
 
 	}
 
@@ -48,8 +71,8 @@ public class TankClient extends Frame
 		this.setResizable(false);// 设置窗体大小不可以变
 		this.setBackground(Color.GREEN);// 设置背景颜色
 		this.setVisible(true);// 设置窗体可见
-		
-		new Thread(new PaintThread()).start();//启动线程
+
+		new Thread(new PaintThread()).start();// 启动线程
 	}
 
 	public static void main(String[] args)
@@ -57,15 +80,15 @@ public class TankClient extends Frame
 		TankClient tankClient = new TankClient();// 实例化对象
 		tankClient.lanchFrame();// 显示窗体
 	}
-	
+
 	private class PaintThread implements Runnable
 	{
 		@Override
 		public void run()
 		{
-			while(true)
+			while (true)
 			{
-				repaint();//父类的repaint的方法，调用类
+				repaint();// 父类的repaint的方法，调用类
 				try
 				{
 					Thread.sleep(50);
@@ -75,7 +98,7 @@ public class TankClient extends Frame
 					e.printStackTrace();
 				}
 			}
-			
+
 		}
 	}
 
