@@ -9,6 +9,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import org.usc.tankwar.client.Tank.Direction;
+
 import com.sun.org.apache.bcel.internal.generic.NEW;
 
 /**
@@ -26,7 +28,8 @@ public class TankClient extends Frame
 	public static final int GAME_WINDTH = 800;
 	public static final int GAME_HEIGHT = 600;
 
-	Tank tank = new Tank(50,50);
+	Tank tank = new Tank(50,50);//坦克
+	Missile missile = new Missile(50,50,Tank.Direction.R);//子弹
 	
 	Image offScreenImage = null;// 虚拟的背景图片
 
@@ -54,6 +57,7 @@ public class TankClient extends Frame
 	public void paint(Graphics g)
 	{
 		tank.draw(g);//调用坦克的draw方法
+		missile.draw(g);
 	}
 
 	public void lanchFrame()
@@ -84,6 +88,7 @@ public class TankClient extends Frame
 	{
 		TankClient tankClient = new TankClient();// 实例化对象
 		tankClient.lanchFrame();// 显示窗体
+		
 	}
 
 	private class PaintThread implements Runnable
