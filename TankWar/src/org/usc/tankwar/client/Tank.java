@@ -31,6 +31,7 @@ public class Tank
 	}
 
 	private Direction dir = Direction.STOP;
+	private Direction ptDir = Direction.D;//炮筒
 
 	public Tank(int x, int y)
 	{
@@ -75,6 +76,40 @@ public class Tank
 		g.setColor(Color.RED);// 设置颜色
 		g.fillOval(x, y, WIDTH, HEIGHT);// 使用当前颜色填充外接指定矩形框的椭圆
 		g.setColor(c);// 恢复颜色
+		
+		
+		switch (ptDir)
+		{
+		case L:
+			g.drawLine(this.x+Tank.WIDTH/2, this.y+Tank.HEIGHT/2, this.x, this.y+Tank.HEIGHT/2);
+			break;
+		case LU:
+			g.drawLine(this.x+Tank.WIDTH/2, this.y+Tank.HEIGHT/2, this.x, this.y);
+			break;
+		case U:
+			g.drawLine(this.x+Tank.WIDTH/2, this.y+Tank.HEIGHT/2, this.x+Tank.WIDTH/2, this.y);
+			break;
+		case RU:
+			g.drawLine(this.x+Tank.WIDTH/2, this.y+Tank.HEIGHT/2, this.x+Tank.WIDTH, this.y);
+			break;
+		case R:
+			g.drawLine(this.x+Tank.WIDTH/2, this.y+Tank.HEIGHT/2, this.x+Tank.WIDTH, this.y+Tank.HEIGHT/2);
+			break;
+		case RD:
+			g.drawLine(this.x+Tank.WIDTH/2, this.y+Tank.HEIGHT/2, this.x+Tank.WIDTH, this.y+Tank.HEIGHT);
+			break;
+		case D:
+			g.drawLine(this.x+Tank.WIDTH/2, this.y+Tank.HEIGHT/2, this.x+Tank.WIDTH/2, this.y+Tank.HEIGHT);
+			break;
+		case LD:
+			g.drawLine(this.x+Tank.WIDTH/2, this.y+Tank.HEIGHT/2, this.x, this.y+Tank.HEIGHT);
+			break;
+
+		default:
+			break;
+		}
+		
+		
 		move();
 
 	}
@@ -116,6 +151,10 @@ public class Tank
 
 		default:
 			break;
+		}
+		if(this.dir != Direction.STOP)
+		{
+			this.ptDir = this.dir;
 		}
 	}
 
@@ -202,7 +241,7 @@ public class Tank
 	
 	public Missile fire()
 	{
-		return new Missile(this.x+Tank.WIDTH/2-Missile.WIDTH/2,this.y+Tank.HEIGHT/2-Missile.HEIGHT/2,dir);
+		return new Missile(this.x+Tank.WIDTH/2-Missile.WIDTH/2,this.y+Tank.HEIGHT/2-Missile.HEIGHT/2,ptDir);
 		
 	}
 }
