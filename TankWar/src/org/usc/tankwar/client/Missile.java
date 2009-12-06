@@ -15,12 +15,13 @@ public class Missile
 {
 	public static final int XSPEED = 10;
 	public static final int YSPEED = 10;//子弹的速度
+	public static final int WIDTH = 10;
+	public static final int HEIGHT = 10;
 	int x;
 	int y;
 	Tank.Direction direction;
-	public Missile(int x, int y, Direction direction)
+	public Missile(int x, int y, Tank.Direction direction)
 	{
-		super();
 		this.x = x;
 		this.y = y;
 		this.direction = direction;
@@ -29,7 +30,7 @@ public class Missile
 	{
 		Color c = g.getColor();// 获得当前颜色
 		g.setColor(Color.BLACK);// 设置颜色
-		g.fillOval(x, y, 10, 10);// 使用当前颜色填充外接指定矩形框的椭圆
+		g.fillOval(x, y, WIDTH, HEIGHT);// 使用当前颜色填充外接指定矩形框的椭圆
 		g.setColor(c);// 恢复颜色
 		move();
 	}

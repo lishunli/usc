@@ -14,6 +14,9 @@ public class Tank
 {
 	public static final int XSPEED = 5;
 	public static final int YSPEED = 5;
+	public static final int WIDTH = 30;
+	public static final int HEIGHT = 30;
+	TankClient tankClient;
 	int x;
 	int y;// 坦克的坐标
 
@@ -34,6 +37,12 @@ public class Tank
 		this.x = x;
 		this.y = y;
 	}
+	public Tank(int x, int y,TankClient tankClient)
+	{
+		this(x, y);
+		this.tankClient = tankClient;
+	}
+
 
 	public int getX()
 	{
@@ -64,7 +73,7 @@ public class Tank
 	{
 		Color c = g.getColor();// 获得当前颜色
 		g.setColor(Color.RED);// 设置颜色
-		g.fillOval(x, y, 30, 30);// 使用当前颜色填充外接指定矩形框的椭圆
+		g.fillOval(x, y, WIDTH, HEIGHT);// 使用当前颜色填充外接指定矩形框的椭圆
 		g.setColor(c);// 恢复颜色
 		move();
 
@@ -120,7 +129,9 @@ public class Tank
 		int key = e.getKeyCode();// 获得key码
 		switch (key)
 		{
-
+		case KeyEvent.VK_CONTROL://Ctrl
+			tankClient.missile=fire();
+			break;
 		case KeyEvent.VK_LEFT:
 			bL = true;
 			break;
@@ -187,5 +198,11 @@ public class Tank
 			break;
 		}
 		locateDirection();
+	}
+	
+	public Missile fire()
+	{
+		return new Missile(this.x+Tank.WIDTH/2-Missile.WIDTH/2,this.y+Tank.HEIGHT/2-Missile.HEIGHT/2,dir);
+		
 	}
 }

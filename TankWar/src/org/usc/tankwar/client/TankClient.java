@@ -28,8 +28,8 @@ public class TankClient extends Frame
 	public static final int GAME_WINDTH = 800;
 	public static final int GAME_HEIGHT = 600;
 
-	Tank tank = new Tank(50,50);//坦克
-	Missile missile = new Missile(50,50,Tank.Direction.R);//子弹
+	Tank tank = new Tank(50,50,this);//坦克
+	Missile missile = null;//子弹
 	
 	Image offScreenImage = null;// 虚拟的背景图片
 
@@ -57,7 +57,7 @@ public class TankClient extends Frame
 	public void paint(Graphics g)
 	{
 		tank.draw(g);//调用坦克的draw方法
-		missile.draw(g);
+		if(null!=missile) missile.draw(g);
 	}
 
 	public void lanchFrame()
