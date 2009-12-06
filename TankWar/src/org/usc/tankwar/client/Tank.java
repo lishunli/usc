@@ -158,36 +158,7 @@ public class Tank
 		}
 	}
 
-	/**
-	 * 键盘监听
-	 * 
-	 * @param e
-	 */
-	public void keyPressed(KeyEvent e)
-	{
-		int key = e.getKeyCode();// 获得key码
-		switch (key)
-		{
-		case KeyEvent.VK_CONTROL://Ctrl
-			tankClient.missile=fire();
-			break;
-		case KeyEvent.VK_LEFT:
-			bL = true;
-			break;
-		case KeyEvent.VK_UP:
-			bU = true;
-			break;
-		case KeyEvent.VK_RIGHT:
-			bR = true;
-			break;
-		case KeyEvent.VK_DOWN:
-			bD = true;
-			break;
-		default:
-			break;
-		}
-		locateDirection();
-	}
+	
 
 	void locateDirection()
 	{
@@ -210,6 +181,36 @@ public class Tank
 		else if (!bL && !bU && !bR && !bD)
 			dir = Direction.STOP;
 	}
+	
+	/**
+	 * 键盘监听
+	 * 
+	 * @param e
+	 */
+	public void keyPressed(KeyEvent e)
+	{
+		int key = e.getKeyCode();// 获得key码
+		switch (key)
+		{
+		
+		case KeyEvent.VK_LEFT:
+			bL = true;
+			break;
+		case KeyEvent.VK_UP:
+			bU = true;
+			break;
+		case KeyEvent.VK_RIGHT:
+			bR = true;
+			break;
+		case KeyEvent.VK_DOWN:
+			bD = true;
+			break;
+		default:
+			break;
+		}
+		locateDirection();
+	}
+	
 	/**
 	 * 键盘按下监听
 	 * @param e
@@ -220,7 +221,9 @@ public class Tank
 		int key = e.getKeyCode();// 获得key码
 		switch (key)
 		{
-
+		case KeyEvent.VK_CONTROL://Ctrl
+			fire();
+			break;
 		case KeyEvent.VK_LEFT:
 			bL = false; 
 			break;
@@ -241,7 +244,9 @@ public class Tank
 	
 	public Missile fire()
 	{
-		return new Missile(this.x+Tank.WIDTH/2-Missile.WIDTH/2,this.y+Tank.HEIGHT/2-Missile.HEIGHT/2,ptDir);
+		Missile missile = new Missile(this.x+Tank.WIDTH/2-Missile.WIDTH/2,this.y+Tank.HEIGHT/2-Missile.HEIGHT/2,ptDir);
+		tankClient.missiles.add(missile);
+		return missile;
 		
 	}
 }

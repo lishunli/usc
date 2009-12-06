@@ -8,10 +8,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
-import org.usc.tankwar.client.Tank.Direction;
-
-import com.sun.org.apache.bcel.internal.generic.NEW;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 坦克的客户端
@@ -29,7 +27,7 @@ public class TankClient extends Frame
 	public static final int GAME_HEIGHT = 600;
 
 	Tank tank = new Tank(50,50,this);//坦克
-	Missile missile = null;//子弹
+	List<Missile> missiles = new ArrayList<Missile>();//子弹
 	
 	Image offScreenImage = null;// 虚拟的背景图片
 
@@ -56,8 +54,15 @@ public class TankClient extends Frame
 	@Override
 	public void paint(Graphics g)
 	{
+		g.drawString("missiles count:"+missiles.size(), 10, 50);
 		tank.draw(g);//调用坦克的draw方法
-		if(null!=missile) missile.draw(g);
+		
+		for(int i=0;i<missiles.size();i++)
+		{
+			Missile missile = missiles.get(i);
+			missile.draw(g);
+		}
+//		if(null!=missile) missile.draw(g);
 	}
 
 	public void lanchFrame()
