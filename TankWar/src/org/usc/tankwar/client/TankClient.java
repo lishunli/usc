@@ -115,6 +115,12 @@ public class TankClient extends Frame
 			tank.keyPressed(e);//调用坦克的键盘监听方法
 		}
 
+		@Override
+		public void keyReleased(KeyEvent e)
+		{
+			tank.keyReleased(e);
+		}
+
 	}
 
 }
