@@ -46,4 +46,9 @@
 	</bean>
 	<bean id="UploadAction" class="org.usc.actions.UploadAction"></bean>
 	
+	<bean id="ExportXLSAction" class="org.usc.actions.ExportXLSAction">
+		<property name="sDAO" ref="StudentDAO"></property>
+	</bean>
+	
+	
 </beans>

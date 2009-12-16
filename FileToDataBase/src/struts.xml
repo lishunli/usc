@@ -8,7 +8,7 @@
 	<package name="file" namespace="/" extends="struts-default">
 		<action name="upload" class="UploadAction">
 			<result name="input">/upload.jsp</result>
-<!--			<result name="success">fileConver</result>-->
+			<!--			<result name="success">fileConver</result>-->
 			<result name="success" type="chain">
 				<param name="actionName">fileConver</param>
 			</result>
@@ -31,5 +31,14 @@
 			<result name="input" type="redirect">/upload.jsp</result>
 			<result name="success">/upload_success.jsp</result>
 		</action>
+
+
+		<action name="exportXLS" class="ExportXLSAction">
+			<result name="success">upload.jsp</result>
+		</action>
+
+		<action name="exportDBF" class="org.usc.actions.ExportDBFAction">
+		</action>
+		
 	</package>
 </struts>
