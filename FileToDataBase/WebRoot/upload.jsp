@@ -44,6 +44,16 @@
 			</table>
 
 		</s:form>
+		<hr><hr>
+		<br>
+		<center>
+		<h1><a href="exportXLS.action">导出为Excel文件</a>	</h1>
+		<h1><a href="exportDBF.action">导出为DBF文件</a>	</h1>
+		</center>
+		
+	
+		
+		
 
 	</body>
 

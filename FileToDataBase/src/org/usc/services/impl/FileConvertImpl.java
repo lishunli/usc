@@ -18,7 +18,8 @@ import org.usc.services.FileConvert;
 public class FileConvertImpl implements FileConvert
 {
 	private StudentDAO sDAO;
-	
+	private boolean convertFlag = true;
+
 	public void setsDAO(StudentDAO sDAO)
 	{
 		this.sDAO = sDAO;
@@ -46,9 +47,9 @@ public class FileConvertImpl implements FileConvert
 	 */
 	private boolean XLSConvert(String fileName)
 	{
-		
-		System.out.println("XLSCONVET");
-		long start = System.currentTimeMillis();
+
+		// long start = System.currentTimeMillis();
+		// System.out.println("开始时间"+start);
 		try
 		{
 			// 构建Workbook对象, 只读Workbook对象
@@ -84,11 +85,21 @@ public class FileConvertImpl implements FileConvert
 					setParm(student, rs.getCell(j, 0).getContents(), rs
 							.getCell(j, i).getContents());
 				}
-				System.out.println(student.getNo() + ":" + student.getName()
-						+ ":" + student.getSex() + ":" + student.getAge() + ":"
-						+ student.getScore() + ":" + student.getEduTime());
-				sDAO.save(student);
-//				System.out.println();
+				// System.out.println(student.getNo() + ":" + student.getName()
+				// + ":" + student.getSex() + ":" + student.getAge() + ":"
+				// + student.getScore() + ":" + student.getEduTime());
+				if (convertFlag)
+					sDAO.save(student);
+				else
+				{
+					System.out.println("此条记录有错误，请修正后重新导入，错误记录信息如下：");
+					System.out.println(student.getNo() + ":"
+							+ student.getName() + ":" + student.getSex() + ":"
+							+ student.getAge() + ":" + student.getScore() + ":"
+							+ student.getEduTime());
+					convertFlag = true;
+				}
+				// System.out.println();
 			}
 			// System.out.println("Cell(1, 1)" + " value : " + strc11 +
 			// "; type : " + c11.getType());
@@ -96,8 +107,9 @@ public class FileConvertImpl implements FileConvert
 		{
 			e.printStackTrace();
 		}
-		long end = System.currentTimeMillis();
-		System.out.println("所用时间" + (end-start));
+		// long end = System.currentTimeMillis();
+		// System.out.println("结束时间"+end);
+		// System.out.println("所用时间" + (end-start));
 		return false;
 	}
 
@@ -107,31 +119,54 @@ public class FileConvertImpl implements FileConvert
 		try
 		{
 			if ("no".equals(parm))
-				student.setNo(value);
-			else if ("name".equals(parm))
-				student.setName(value);
-			else if ("sex".equals(parm))
-				student.setSex(value);
-			else if ("age".equals(parm))
-				student.setAge(Integer.parseInt(value));
-			else if ("score".equals(parm))
-				student.setScore(Double.parseDouble(value));
-			else if ("eduTime".equals(parm))
 			{
+				student.setNo(value);
+
+				if (value == null || "".equals(value.trim())
+						|| value.length() != 11 || sDAO.findById(value) != null)
+				{
+					convertFlag = false;
+				}
+			} else if ("name".equals(parm))
+			{
+				student.setName(value);
+				
+				if(value == null || "".equals(value.trim()))
+				{
+					convertFlag = false;
+				}
+
+			} else if ("sex".equals(parm))
+			{
+				student.setSex(value);
+				
+				if(value == null || "".equals(value.trim()))
+				{
+					convertFlag = false;
+				}
+
+			} else if ("age".equals(parm))
+			{
+				student.setAge(Integer.parseInt(value));
+			} else if ("score".equals(parm))
+			{
+				student.setScore(Double.parseDouble(value));
+			} else if ("eduTime".equals(parm))
+			{
+
 				// // Date date = sdf.parse("2005-04-22");
 				java.util.Date cDate = sdf.parse(value);
 				java.sql.Date dd = new java.sql.Date(cDate.getTime());
 
-//				System.out.println(value + ":" + dd);
+				// System.out.println(value + ":" + dd);
 				student.setEduTime(dd);
 
 			}
 
 		} catch (Exception e)
 		{
-			e.printStackTrace();
+			convertFlag = false;
 		}
-
 	}
 
 	/**
