@@ -38,7 +38,9 @@
 	</bean>
 	
 	
-	<bean id="FileConvert" class="org.usc.services.impl.FileConvertImpl"></bean>
+	<bean id="FileConvert" class="org.usc.services.impl.FileConvertImpl">
+		<property name="sDAO" ref="StudentDAO"></property>
+	</bean>
 	<bean id="FileConvertAction" class="org.usc.actions.FileConvertAction">
 		<property name="fileConvert" ref="FileConvert"></property>
 	</bean>
