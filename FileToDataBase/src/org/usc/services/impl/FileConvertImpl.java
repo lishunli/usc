@@ -18,7 +18,9 @@ import org.usc.services.FileConvert;
 public class FileConvertImpl implements FileConvert
 {
 	private StudentDAO sDAO;
-	private boolean convertFlag = true;
+	private  boolean convertFlag = true;
+	private  int correctCount = 0;
+	private  int errorCount = 0;
 
 	public void setsDAO(StudentDAO sDAO)
 	{
@@ -89,8 +91,10 @@ public class FileConvertImpl implements FileConvert
 				// + ":" + student.getSex() + ":" + student.getAge() + ":"
 				// + student.getScore() + ":" + student.getEduTime());
 				if (convertFlag)
+				{
 					sDAO.save(student);
-				else
+					correctCount++;
+				} else
 				{
 					System.out.println("此条记录有错误，请修正后重新导入，错误记录信息如下：");
 					System.out.println(student.getNo() + ":"
@@ -98,11 +102,22 @@ public class FileConvertImpl implements FileConvert
 							+ student.getAge() + ":" + student.getScore() + ":"
 							+ student.getEduTime());
 					convertFlag = true;
+					errorCount++;
 				}
 				// System.out.println();
 			}
 			// System.out.println("Cell(1, 1)" + " value : " + strc11 +
 			// "; type : " + c11.getType());
+			System.out.println();
+			System.out.println("导入完毕");
+			System.out.println("正确导入记录条数："+correctCount);
+			System.out.println("错误记录条数："+errorCount);
+			System.out.println();
+			
+			errorCount=0;
+			correctCount=0;
+			convertFlag = true;
+			
 		} catch (Exception e)
 		{
 			e.printStackTrace();
@@ -130,8 +145,8 @@ public class FileConvertImpl implements FileConvert
 			} else if ("name".equals(parm))
 			{
 				student.setName(value);
-				
-				if(value == null || "".equals(value.trim()))
+
+				if (value == null || "".equals(value.trim()))
 				{
 					convertFlag = false;
 				}
@@ -139,8 +154,8 @@ public class FileConvertImpl implements FileConvert
 			} else if ("sex".equals(parm))
 			{
 				student.setSex(value);
-				
-				if(value == null || "".equals(value.trim()))
+
+				if (value == null || "".equals(value.trim()))
 				{
 					convertFlag = false;
 				}
