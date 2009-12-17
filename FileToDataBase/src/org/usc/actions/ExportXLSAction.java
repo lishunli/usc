@@ -36,27 +36,27 @@ public class ExportXLSAction extends ActionSupport
 
 		HSSFCell cell = row.createCell((short) 0);
 		cell.setEncoding(HSSFCell.ENCODING_UTF_16);
-		cell.setCellValue("学号");
+		cell.setCellValue("no");
 
 		cell = row.createCell((short) 1);
 		cell.setEncoding(HSSFCell.ENCODING_UTF_16);
-		cell.setCellValue("姓名");
+		cell.setCellValue("name");
 
 		cell = row.createCell((short) 2);
 		cell.setEncoding(HSSFCell.ENCODING_UTF_16);
-		cell.setCellValue("性别");
+		cell.setCellValue("sex");
 
 		cell = row.createCell((short) 3);
 		cell.setEncoding(HSSFCell.ENCODING_UTF_16);
-		cell.setCellValue("年龄");
+		cell.setCellValue("age");
 
 		cell = row.createCell((short) 4);
 		cell.setEncoding(HSSFCell.ENCODING_UTF_16);
-		cell.setCellValue("分数");
+		cell.setCellValue("score");
 		
 		cell = row.createCell((short) 5);
 		cell.setEncoding(HSSFCell.ENCODING_UTF_16);
-		cell.setCellValue("入学时间");
+		cell.setCellValue("eduTime");
 		
 
 		List<Student> list = sDAO.findAll();
