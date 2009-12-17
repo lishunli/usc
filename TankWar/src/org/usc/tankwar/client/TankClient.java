@@ -26,7 +26,9 @@ public class TankClient extends Frame
 	public static final int GAME_WINDTH = 800;
 	public static final int GAME_HEIGHT = 600;
 
-	Tank tank = new Tank(50,50,this);//坦克
+	Tank tank = new Tank(50,50,true,this);//坦克
+	Tank enemyTank  = new Tank(150,150,false,this);//坦克
+	
 	List<Missile> missiles = new ArrayList<Missile>();//子弹
 	
 	Image offScreenImage = null;// 虚拟的背景图片
@@ -55,7 +57,9 @@ public class TankClient extends Frame
 	public void paint(Graphics g)
 	{
 		g.drawString("missiles count:"+missiles.size(), 10, 50);
+		
 		tank.draw(g);//调用坦克的draw方法
+		enemyTank.draw(g);
 		
 		for(int i=0;i<missiles.size();i++)
 		{

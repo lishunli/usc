@@ -17,8 +17,10 @@ public class Tank
 	public static final int WIDTH = 30;
 	public static final int HEIGHT = 30;
 	TankClient tankClient;
-	int x;
-	int y;// 坦克的坐标
+	private int x;
+	private int y;// 坦克的坐标
+
+	private boolean good;
 
 	private boolean bL = false;
 	private boolean bU = false;
@@ -33,15 +35,16 @@ public class Tank
 	private Direction dir = Direction.STOP;
 	private Direction ptDir = Direction.D;// 炮筒
 
-	public Tank(int x, int y)
+	public Tank(int x, int y, boolean good)
 	{
 		this.x = x;
 		this.y = y;
+		this.good = good;
 	}
 
-	public Tank(int x, int y, TankClient tankClient)
+	public Tank(int x, int y, boolean good, TankClient tankClient)
 	{
-		this(x, y);
+		this(x, y, good);
 		this.tankClient = tankClient;
 	}
 
@@ -73,7 +76,11 @@ public class Tank
 	public void draw(Graphics g)
 	{
 		Color c = g.getColor();// 获得当前颜色
-		g.setColor(Color.RED);// 设置颜色
+		if (good)
+			g.setColor(Color.RED);
+		else
+			g.setColor(Color.BLUE);
+		// g.setColor(Color.RED);// 设置颜色
 		g.fillOval(x, y, WIDTH, HEIGHT);// 使用当前颜色填充外接指定矩形框的椭圆
 		g.setColor(c);// 恢复颜色
 
