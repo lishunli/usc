@@ -20,6 +20,20 @@ public class Missile
 	int x;
 	int y;
 	Tank.Direction direction;
+	
+	private boolean live = true;
+	private TankClient tc;
+	
+	public boolean isLive()
+	{
+		return live;
+	}
+
+	public Missile(int x, int y, Tank.Direction direction,TankClient tc)
+	{
+		this(x,y,direction);
+		this.tc = tc;
+	}
 	public Missile(int x, int y, Tank.Direction direction)
 	{
 		this.x = x;
@@ -69,6 +83,13 @@ public class Missile
 		
 		default:
 			break;
+		}
+		
+		
+		if(x<0 || y<0 || x>TankClient.GAME_WINDTH || y>TankClient.GAME_HEIGHT)
+		{
+			live = false;
+			tc.missiles.remove(this);
 		}
 	}
 	

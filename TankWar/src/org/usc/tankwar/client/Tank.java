@@ -31,19 +31,19 @@ public class Tank
 	}
 
 	private Direction dir = Direction.STOP;
-	private Direction ptDir = Direction.D;//炮筒
+	private Direction ptDir = Direction.D;// 炮筒
 
 	public Tank(int x, int y)
 	{
 		this.x = x;
 		this.y = y;
 	}
-	public Tank(int x, int y,TankClient tankClient)
+
+	public Tank(int x, int y, TankClient tankClient)
 	{
 		this(x, y);
 		this.tankClient = tankClient;
 	}
-
 
 	public int getX()
 	{
@@ -76,40 +76,46 @@ public class Tank
 		g.setColor(Color.RED);// 设置颜色
 		g.fillOval(x, y, WIDTH, HEIGHT);// 使用当前颜色填充外接指定矩形框的椭圆
 		g.setColor(c);// 恢复颜色
-		
-		
+
 		switch (ptDir)
 		{
 		case L:
-			g.drawLine(this.x+Tank.WIDTH/2, this.y+Tank.HEIGHT/2, this.x, this.y+Tank.HEIGHT/2);
+			g.drawLine(this.x + Tank.WIDTH / 2, this.y + Tank.HEIGHT / 2,
+					this.x, this.y + Tank.HEIGHT / 2);
 			break;
 		case LU:
-			g.drawLine(this.x+Tank.WIDTH/2, this.y+Tank.HEIGHT/2, this.x, this.y);
+			g.drawLine(this.x + Tank.WIDTH / 2, this.y + Tank.HEIGHT / 2,
+					this.x, this.y);
 			break;
 		case U:
-			g.drawLine(this.x+Tank.WIDTH/2, this.y+Tank.HEIGHT/2, this.x+Tank.WIDTH/2, this.y);
+			g.drawLine(this.x + Tank.WIDTH / 2, this.y + Tank.HEIGHT / 2,
+					this.x + Tank.WIDTH / 2, this.y);
 			break;
 		case RU:
-			g.drawLine(this.x+Tank.WIDTH/2, this.y+Tank.HEIGHT/2, this.x+Tank.WIDTH, this.y);
+			g.drawLine(this.x + Tank.WIDTH / 2, this.y + Tank.HEIGHT / 2,
+					this.x + Tank.WIDTH, this.y);
 			break;
 		case R:
-			g.drawLine(this.x+Tank.WIDTH/2, this.y+Tank.HEIGHT/2, this.x+Tank.WIDTH, this.y+Tank.HEIGHT/2);
+			g.drawLine(this.x + Tank.WIDTH / 2, this.y + Tank.HEIGHT / 2,
+					this.x + Tank.WIDTH, this.y + Tank.HEIGHT / 2);
 			break;
 		case RD:
-			g.drawLine(this.x+Tank.WIDTH/2, this.y+Tank.HEIGHT/2, this.x+Tank.WIDTH, this.y+Tank.HEIGHT);
+			g.drawLine(this.x + Tank.WIDTH / 2, this.y + Tank.HEIGHT / 2,
+					this.x + Tank.WIDTH, this.y + Tank.HEIGHT);
 			break;
 		case D:
-			g.drawLine(this.x+Tank.WIDTH/2, this.y+Tank.HEIGHT/2, this.x+Tank.WIDTH/2, this.y+Tank.HEIGHT);
+			g.drawLine(this.x + Tank.WIDTH / 2, this.y + Tank.HEIGHT / 2,
+					this.x + Tank.WIDTH / 2, this.y + Tank.HEIGHT);
 			break;
 		case LD:
-			g.drawLine(this.x+Tank.WIDTH/2, this.y+Tank.HEIGHT/2, this.x, this.y+Tank.HEIGHT);
+			g.drawLine(this.x + Tank.WIDTH / 2, this.y + Tank.HEIGHT / 2,
+					this.x, this.y + Tank.HEIGHT);
 			break;
 
 		default:
 			break;
 		}
-		
-		
+
 		move();
 
 	}
@@ -152,13 +158,20 @@ public class Tank
 		default:
 			break;
 		}
-		if(this.dir != Direction.STOP)
+		if (this.dir != Direction.STOP)
 		{
 			this.ptDir = this.dir;
 		}
-	}
 
-	
+		if (x < 0)
+			x = 0;
+		if (y < 30)
+			y = 30;
+		if (x + Tank.WIDTH > TankClient.GAME_WINDTH)
+			x = TankClient.GAME_WINDTH - Tank.WIDTH;
+		if (y + Tank.HEIGHT > TankClient.GAME_HEIGHT)
+			y = TankClient.GAME_HEIGHT - Tank.HEIGHT;
+	}
 
 	void locateDirection()
 	{
@@ -181,7 +194,7 @@ public class Tank
 		else if (!bL && !bU && !bR && !bD)
 			dir = Direction.STOP;
 	}
-	
+
 	/**
 	 * 键盘监听
 	 * 
@@ -192,7 +205,7 @@ public class Tank
 		int key = e.getKeyCode();// 获得key码
 		switch (key)
 		{
-		
+
 		case KeyEvent.VK_LEFT:
 			bL = true;
 			break;
@@ -210,9 +223,10 @@ public class Tank
 		}
 		locateDirection();
 	}
-	
+
 	/**
 	 * 键盘按下监听
+	 * 
 	 * @param e
 	 */
 
@@ -221,14 +235,14 @@ public class Tank
 		int key = e.getKeyCode();// 获得key码
 		switch (key)
 		{
-		case KeyEvent.VK_CONTROL://Ctrl
+		case KeyEvent.VK_CONTROL:// Ctrl
 			fire();
 			break;
 		case KeyEvent.VK_LEFT:
-			bL = false; 
+			bL = false;
 			break;
 		case KeyEvent.VK_UP:
-			bU = false; 
+			bU = false;
 			break;
 		case KeyEvent.VK_RIGHT:
 			bR = false;
@@ -241,12 +255,14 @@ public class Tank
 		}
 		locateDirection();
 	}
-	
+
 	public Missile fire()
 	{
-		Missile missile = new Missile(this.x+Tank.WIDTH/2-Missile.WIDTH/2,this.y+Tank.HEIGHT/2-Missile.HEIGHT/2,ptDir);
+		Missile missile = new Missile(this.x + Tank.WIDTH / 2 - Missile.WIDTH
+				/ 2, this.y + Tank.HEIGHT / 2 - Missile.HEIGHT / 2, ptDir,
+				this.tankClient);
 		tankClient.missiles.add(missile);
 		return missile;
-		
+
 	}
 }
