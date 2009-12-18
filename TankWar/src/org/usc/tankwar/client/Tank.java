@@ -2,6 +2,7 @@ package org.usc.tankwar.client;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 
 /**
@@ -21,6 +22,17 @@ public class Tank
 	private int y;// 坦克的坐标
 
 	private boolean good;
+	private boolean live = true;
+
+	public void setLive(boolean live)
+	{
+		this.live = live;
+	}
+
+	public boolean isLive()
+	{
+		return live;
+	}
 
 	private boolean bL = false;
 	private boolean bU = false;
@@ -75,6 +87,8 @@ public class Tank
 	 */
 	public void draw(Graphics g)
 	{
+		if (!live)
+			return;
 		Color c = g.getColor();// 获得当前颜色
 		if (good)
 			g.setColor(Color.RED);
@@ -272,4 +286,10 @@ public class Tank
 		return missile;
 
 	}
+
+	public Rectangle getRect()
+	{
+		return new Rectangle(x, y, WIDTH, HEIGHT);
+	}
+
 }
