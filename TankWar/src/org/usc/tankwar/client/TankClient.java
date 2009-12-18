@@ -41,6 +41,8 @@ public class TankClient extends Frame
 	List<Explode> explodes = new ArrayList<Explode>();
 	List<Tank> tanks = new ArrayList<Tank>();
 	
+	Blood b = new Blood();
+	
 	Image offScreenImage = null;// 虚拟的背景图片
 
 	@Override
@@ -108,9 +110,11 @@ public class TankClient extends Frame
 		}
 		
 		tank.draw(g);//调用坦克的draw方法
+		tank.eat(b);
 //		enemyTank.draw(g);
 		w1.draw(g);
 		w2.draw(g);
+		b.draw(g);
 	}
 
 	public void lanchFrame()

@@ -2,7 +2,12 @@ package org.usc.tankwar.client;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
-
+/**
+ * 墙
+ * 
+ * @author ShunLi
+ * @Time 2009-12-18
+ */
 public class Wall
 {
 	int x,y,w,h;
