@@ -3,8 +3,7 @@ package org.usc.tankwar.client;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
-
-import org.usc.tankwar.client.Tank.Direction;
+import java.util.List;
 
 /**
  * 子弹类
@@ -121,6 +120,18 @@ public class Missile
 			return true;
 		}
 			
+		return false;
+	}
+	
+	public boolean hitTanks(List<Tank> tanks)
+	{
+		for (int i = 0; i < tanks.size(); i++)
+		{
+			if(hitTank(tanks.get(i)))
+			{
+				return true;
+			}
+		}
 		return false;
 	}
 

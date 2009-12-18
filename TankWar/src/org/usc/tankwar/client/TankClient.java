@@ -29,7 +29,7 @@ public class TankClient extends Frame
 	public static final int GAME_HEIGHT = 600;
 
 	Tank tank = new Tank(50,50,true,this);//坦克
-	Tank enemyTank  = new Tank(150,150,false,this);//坦克
+//	Tank enemyTank  = new Tank(150,150,false,this);//坦克
 	
 	
 	Explode e = new Explode(70,70,this);
@@ -37,6 +37,7 @@ public class TankClient extends Frame
 	
 	List<Missile> missiles = new ArrayList<Missile>();//子弹
 	List<Explode> explodes = new ArrayList<Explode>();
+	List<Tank> tanks = new ArrayList<Tank>();
 	
 	Image offScreenImage = null;// 虚拟的背景图片
 
@@ -63,14 +64,16 @@ public class TankClient extends Frame
 	@Override
 	public void paint(Graphics g)
 	{
-		g.drawString("missiles count:"+missiles.size(), 10, 50);
-		g.drawString("explodes count:"+explodes.size(), 10, 70);
+		g.drawString("Missiles count:"+missiles.size(), 10, 50);
+		g.drawString("Explodes count:"+explodes.size(), 10, 70);
+		g.drawString("Tanks count:"+tanks.size(), 10, 90);
 		
 		for(int i=0;i<missiles.size();i++)
 		{
 			Missile missile = missiles.get(i);
 			
-			missile.hitTank(enemyTank);
+//			missile.hitTank(enemyTank);
+			missile.hitTanks(tanks);
 			
 			missile.draw(g);
 			
@@ -89,13 +92,25 @@ public class TankClient extends Frame
 			e.draw(g);
 		}
 		
+		for (int i = 0; i < tanks.size(); i++)
+		{
+			Tank t = tanks.get(i);
+			t.draw(g);
+		}
+		
 		tank.draw(g);//调用坦克的draw方法
-		enemyTank.draw(g);
+//		enemyTank.draw(g);
 		
 	}
 
 	public void lanchFrame()
 	{
+		
+		for (int i = 0; i < 10; i++)
+		{
+			tanks.add(new Tank(50+40*(i+1),50,false,this));
+		}
+		
 		this.setTitle("坦克大战");// 设置窗体名称
 		this.setLocation(400, 300);// 设置位置
 		this.setSize(GAME_WINDTH, GAME_HEIGHT);// 设置窗体大小

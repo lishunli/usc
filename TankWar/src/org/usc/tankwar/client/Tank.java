@@ -88,7 +88,13 @@ public class Tank
 	public void draw(Graphics g)
 	{
 		if (!live)
+		{
+			if(!good)
+			{
+				tankClient.tanks.remove(this);
+			}
 			return;
+		}
 		Color c = g.getColor();// 获得当前颜色
 		if (good)
 			g.setColor(Color.RED);
