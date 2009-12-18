@@ -21,7 +21,9 @@ public class Tank
 	TankClient tankClient;
 	private int x;
 	private int y;// 坦克的坐标
-
+	private int oldX;
+	private int oldY;
+	
 	private boolean good;
 	public boolean isGood()
 	{
@@ -65,6 +67,8 @@ public class Tank
 	{
 		this.x = x;
 		this.y = y;
+		this.oldX = x;
+		this.oldY = y;
 		this.good = good;
 	}
 
@@ -164,6 +168,9 @@ public class Tank
 
 	void move()
 	{
+		this.oldX = x;
+		this.oldY = y;
+		
 		switch (dir)
 		{
 		case L:
@@ -227,6 +234,7 @@ public class Tank
 			if(r.nextInt(40) > 38)
 				this.fire();
 		}
+		
 	}
 
 	void locateDirection()
@@ -328,4 +336,21 @@ public class Tank
 		return new Rectangle(x, y, WIDTH, HEIGHT);
 	}
 
+	
+	public boolean collidesWiteWall(Wall w)
+	{
+		if(this.live && this.getRect().intersects(w.getRect()))
+		{
+			this.stay();
+			return true;
+		}
+		return  false;
+	}
+	
+	
+	private void stay()
+	{
+		x = oldX;
+		y = oldY;
+	}
 }

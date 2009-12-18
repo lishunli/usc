@@ -34,6 +34,8 @@ public class TankClient extends Frame
 	
 	Explode e = new Explode(70,70,this);
 	
+	Wall w1 = new Wall(100,200,20,150,this);
+	Wall w2 = new Wall(300,100,300,20,this);
 	
 	List<Missile> missiles = new ArrayList<Missile>();//子弹
 	List<Explode> explodes = new ArrayList<Explode>();
@@ -75,6 +77,8 @@ public class TankClient extends Frame
 //			missile.hitTank(enemyTank);
 			missile.hitTanks(tanks);
 			missile.hitTank(tank);
+			missile.hitWall(w1);
+			missile.hitWall(w2);
 			
 			missile.draw(g);
 			
@@ -96,12 +100,15 @@ public class TankClient extends Frame
 		for (int i = 0; i < tanks.size(); i++)
 		{
 			Tank t = tanks.get(i);
+			t.collidesWiteWall(w1);
+			t.collidesWiteWall(w2);
 			t.draw(g);
 		}
 		
 		tank.draw(g);//调用坦克的draw方法
 //		enemyTank.draw(g);
-		
+		w1.draw(g);
+		w2.draw(g);
 	}
 
 	public void lanchFrame()
