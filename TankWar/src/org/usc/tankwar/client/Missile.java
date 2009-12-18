@@ -113,7 +113,17 @@ public class Missile
 	{
 		if (this.live && this.getRect().intersects(t.getRect()) && t.isLive() && this.good != t.isGood())
 		{
-			t.setLive(false);
+			if(t.isGood())
+			{
+				t.setLife(t.getLife()-20);
+				if(t.getLife()<=0)t.setLive(false);
+			}
+			else {
+				t.setLive(false);
+			}
+					
+//			t.setLive(false);
+			
 			this.live = false;//打掉坦克后，子弹也消失
 			
 			Explode e = new Explode(x,y,tc);

@@ -26,6 +26,17 @@ public class Tank
 	private int oldY;
 
 	private boolean good;
+	private int life=100;
+
+	public int getLife()
+	{
+		return life;
+	}
+
+	public void setLife(int life)
+	{
+		this.life = life;
+	}
 
 	public boolean isGood()
 	{
