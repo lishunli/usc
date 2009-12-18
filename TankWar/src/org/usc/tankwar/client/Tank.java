@@ -316,6 +316,9 @@ public class Tank
 		case KeyEvent.VK_DOWN:
 			bD = false;
 			break;
+		case KeyEvent.VK_A:
+			superFire();
+			break;
 		default:
 			break;
 		}
@@ -329,6 +332,17 @@ public class Tank
 		Missile missile = new Missile(this.x + Tank.WIDTH / 2 - Missile.WIDTH
 				/ 2, this.y + Tank.HEIGHT / 2 - Missile.HEIGHT / 2, good,
 				ptDir, this.tankClient);
+		tankClient.missiles.add(missile);
+		return missile;
+
+	}
+	public Missile fire(Direction dir)
+	{
+		if (!live)
+			return null;
+		Missile missile = new Missile(this.x + Tank.WIDTH / 2 - Missile.WIDTH
+				/ 2, this.y + Tank.HEIGHT / 2 - Missile.HEIGHT / 2, good,
+				dir, this.tankClient);
 		tankClient.missiles.add(missile);
 		return missile;
 
@@ -370,5 +384,14 @@ public class Tank
 				}
 		}
 		return false;
+	}
+	
+	private void superFire()
+	{
+		Direction[] dirs = Direction.values();
+		for (int i = 0; i <8; i++)
+		{
+			fire(dirs[i]);
+		}
 	}
 }
