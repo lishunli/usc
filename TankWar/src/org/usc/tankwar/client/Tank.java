@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.util.Random;
 
 /**
  * 坦克类
@@ -22,8 +23,20 @@ public class Tank
 	private int y;// 坦克的坐标
 
 	private boolean good;
+	public boolean isGood()
+	{
+		return good;
+	}
+
+	public void setGood(boolean good)
+	{
+		this.good = good;
+	}
+
 	private boolean live = true;
 
+	private static Random r= new Random();
+	
 	public void setLive(boolean live)
 	{
 		this.live = live;
@@ -46,6 +59,7 @@ public class Tank
 
 	private Direction dir = Direction.STOP;
 	private Direction ptDir = Direction.D;// 炮筒
+	private int step = r.nextInt(12)+3;
 
 	public Tank(int x, int y, boolean good)
 	{
@@ -54,10 +68,11 @@ public class Tank
 		this.good = good;
 	}
 
-	public Tank(int x, int y, boolean good, TankClient tankClient)
+	public Tank(int x, int y, boolean good, Direction dir,TankClient tankClient)
 	{
 		this(x, y, good);
 		this.tankClient = tankClient;
+		this.dir = dir;
 	}
 
 	public int getX()
@@ -198,6 +213,20 @@ public class Tank
 			x = TankClient.GAME_WINDTH - Tank.WIDTH;
 		if (y + Tank.HEIGHT > TankClient.GAME_HEIGHT)
 			y = TankClient.GAME_HEIGHT - Tank.HEIGHT;
+		
+		if(!good)
+		{
+			Direction[] dirs = Direction.values();
+			if(step ==0)
+			{
+				step  = r.nextInt(12)+3;
+				int rn =r.nextInt(dirs.length);
+				dir = dirs[rn];
+			}
+			step--;
+			if(r.nextInt(40) > 38)
+				this.fire();
+		}
 	}
 
 	void locateDirection()
@@ -285,8 +314,9 @@ public class Tank
 
 	public Missile fire()
 	{
+		if(!live) return null;
 		Missile missile = new Missile(this.x + Tank.WIDTH / 2 - Missile.WIDTH
-				/ 2, this.y + Tank.HEIGHT / 2 - Missile.HEIGHT / 2, ptDir,
+				/ 2, this.y + Tank.HEIGHT / 2 - Missile.HEIGHT / 2, good ,ptDir,
 				this.tankClient);
 		tankClient.missiles.add(missile);
 		return missile;

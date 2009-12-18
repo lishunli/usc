@@ -23,16 +23,18 @@ public class Missile
 
 	private boolean live = true;
 	private TankClient tc;
-
+	private boolean good;
+	
 	public boolean isLive()
 	{
 		return live;
 	}
 
-	public Missile(int x, int y, Tank.Direction direction, TankClient tc)
+	public Missile(int x, int y, boolean good,Tank.Direction direction, TankClient tc)
 	{
 		this(x, y, direction);
 		this.tc = tc;
+		this.good = good;
 	}
 
 	public Missile(int x, int y, Tank.Direction direction)
@@ -109,7 +111,7 @@ public class Missile
 
 	public boolean hitTank(Tank t)
 	{
-		if (this.getRect().intersects(t.getRect()) && t.isLive())
+		if (this.live && this.getRect().intersects(t.getRect()) && t.isLive() && this.good != t.isGood())
 		{
 			t.setLive(false);
 			this.live = false;//打掉坦克后，子弹也消失

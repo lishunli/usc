@@ -28,7 +28,7 @@ public class TankClient extends Frame
 	public static final int GAME_WINDTH = 800;
 	public static final int GAME_HEIGHT = 600;
 
-	Tank tank = new Tank(50,50,true,this);//坦克
+	Tank tank = new Tank(50,50,true,Tank.Direction.STOP,this);//坦克
 //	Tank enemyTank  = new Tank(150,150,false,this);//坦克
 	
 	
@@ -74,6 +74,7 @@ public class TankClient extends Frame
 			
 //			missile.hitTank(enemyTank);
 			missile.hitTanks(tanks);
+			missile.hitTank(tank);
 			
 			missile.draw(g);
 			
@@ -108,7 +109,7 @@ public class TankClient extends Frame
 		
 		for (int i = 0; i < 10; i++)
 		{
-			tanks.add(new Tank(50+40*(i+1),50,false,this));
+			tanks.add(new Tank(50+40*(i+1),50,false,Tank.Direction.D,this));
 		}
 		
 		this.setTitle("坦克大战");// 设置窗体名称
