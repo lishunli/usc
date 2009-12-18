@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -23,8 +24,9 @@ public class Tank
 	private int y;// 坦克的坐标
 	private int oldX;
 	private int oldY;
-	
+
 	private boolean good;
+
 	public boolean isGood()
 	{
 		return good;
@@ -37,8 +39,8 @@ public class Tank
 
 	private boolean live = true;
 
-	private static Random r= new Random();
-	
+	private static Random r = new Random();
+
 	public void setLive(boolean live)
 	{
 		this.live = live;
@@ -61,7 +63,7 @@ public class Tank
 
 	private Direction dir = Direction.STOP;
 	private Direction ptDir = Direction.D;// 炮筒
-	private int step = r.nextInt(12)+3;
+	private int step = r.nextInt(12) + 3;
 
 	public Tank(int x, int y, boolean good)
 	{
@@ -72,7 +74,7 @@ public class Tank
 		this.good = good;
 	}
 
-	public Tank(int x, int y, boolean good, Direction dir,TankClient tankClient)
+	public Tank(int x, int y, boolean good, Direction dir, TankClient tankClient)
 	{
 		this(x, y, good);
 		this.tankClient = tankClient;
@@ -108,7 +110,7 @@ public class Tank
 	{
 		if (!live)
 		{
-			if(!good)
+			if (!good)
 			{
 				tankClient.tanks.remove(this);
 			}
@@ -170,7 +172,7 @@ public class Tank
 	{
 		this.oldX = x;
 		this.oldY = y;
-		
+
 		switch (dir)
 		{
 		case L:
@@ -220,21 +222,21 @@ public class Tank
 			x = TankClient.GAME_WINDTH - Tank.WIDTH;
 		if (y + Tank.HEIGHT > TankClient.GAME_HEIGHT)
 			y = TankClient.GAME_HEIGHT - Tank.HEIGHT;
-		
-		if(!good)
+
+		if (!good)
 		{
 			Direction[] dirs = Direction.values();
-			if(step ==0)
+			if (step == 0)
 			{
-				step  = r.nextInt(12)+3;
-				int rn =r.nextInt(dirs.length);
+				step = r.nextInt(12) + 3;
+				int rn = r.nextInt(dirs.length);
 				dir = dirs[rn];
 			}
 			step--;
-			if(r.nextInt(40) > 38)
+			if (r.nextInt(40) > 38)
 				this.fire();
 		}
-		
+
 	}
 
 	void locateDirection()
@@ -322,10 +324,11 @@ public class Tank
 
 	public Missile fire()
 	{
-		if(!live) return null;
+		if (!live)
+			return null;
 		Missile missile = new Missile(this.x + Tank.WIDTH / 2 - Missile.WIDTH
-				/ 2, this.y + Tank.HEIGHT / 2 - Missile.HEIGHT / 2, good ,ptDir,
-				this.tankClient);
+				/ 2, this.y + Tank.HEIGHT / 2 - Missile.HEIGHT / 2, good,
+				ptDir, this.tankClient);
 		tankClient.missiles.add(missile);
 		return missile;
 
@@ -336,21 +339,36 @@ public class Tank
 		return new Rectangle(x, y, WIDTH, HEIGHT);
 	}
 
-	
 	public boolean collidesWiteWall(Wall w)
 	{
-		if(this.live && this.getRect().intersects(w.getRect()))
+		if (this.live && this.getRect().intersects(w.getRect()))
 		{
 			this.stay();
 			return true;
 		}
-		return  false;
+		return false;
 	}
-	
-	
+
 	private void stay()
 	{
 		x = oldX;
 		y = oldY;
+	}
+
+	public boolean collidesWithTanks(List<Tank> tanks)
+	{
+		for (int i = 0; i < tanks.size(); i++)
+		{
+			Tank t = tanks.get(i);
+			if (this != t)
+				if (this.live && t.isLive()
+						&& this.getRect().intersects(t.getRect()))
+				{
+					this.stay();
+					t.stay();
+					return true;
+				}
+		}
+		return false;
 	}
 }
