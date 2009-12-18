@@ -27,6 +27,7 @@ public class Tank
 
 	private boolean good;
 	private int life=100;
+	private BloodBar bar = new BloodBar();
 
 	public int getLife()
 	{
@@ -135,6 +136,8 @@ public class Tank
 		// g.setColor(Color.RED);// 设置颜色
 		g.fillOval(x, y, WIDTH, HEIGHT);// 使用当前颜色填充外接指定矩形框的椭圆
 		g.setColor(c);// 恢复颜色
+		
+		if(good)bar.draw(g);
 
 		switch (ptDir)
 		{
@@ -405,4 +408,22 @@ public class Tank
 			fire(dirs[i]);
 		}
 	}
+	
+	
+	private class BloodBar
+	{
+		public void draw(Graphics g)
+		{
+			Color c = g.getColor();
+			
+			g.setColor(Color.RED);
+			g.drawRect(x, y-10, WIDTH, 10);
+			int w = WIDTH * life /100;
+			g.fillRect(x, y-10, w, 10);
+			
+			g.setColor(c);
+			
+		}
+	}
+	
 }
