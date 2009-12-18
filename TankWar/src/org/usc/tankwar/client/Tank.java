@@ -333,6 +333,13 @@ public class Tank
 		case KeyEvent.VK_A:
 			superFire();
 			break;
+		case KeyEvent.VK_F2:
+			if(!this.live)
+			{
+				this.live = true;
+				this.setLife(100);
+			}
+			break;
 		default:
 			break;
 		}
