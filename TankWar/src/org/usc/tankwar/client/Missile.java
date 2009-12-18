@@ -114,6 +114,10 @@ public class Missile
 		{
 			t.setLive(false);
 			this.live = false;//打掉坦克后，子弹也消失
+			
+			Explode e = new Explode(x,y,tc);
+			tc.explodes.add(e);
+			
 			return true;
 		}
 			

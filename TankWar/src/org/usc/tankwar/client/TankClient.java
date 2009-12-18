@@ -11,6 +11,8 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sun.org.apache.bcel.internal.generic.NEW;
+
 /**
  * 坦克的客户端
  * 
@@ -29,7 +31,12 @@ public class TankClient extends Frame
 	Tank tank = new Tank(50,50,true,this);//坦克
 	Tank enemyTank  = new Tank(150,150,false,this);//坦克
 	
+	
+	Explode e = new Explode(70,70,this);
+	
+	
 	List<Missile> missiles = new ArrayList<Missile>();//子弹
+	List<Explode> explodes = new ArrayList<Explode>();
 	
 	Image offScreenImage = null;// 虚拟的背景图片
 
@@ -57,9 +64,7 @@ public class TankClient extends Frame
 	public void paint(Graphics g)
 	{
 		g.drawString("missiles count:"+missiles.size(), 10, 50);
-		
-		tank.draw(g);//调用坦克的draw方法
-		enemyTank.draw(g);
+		g.drawString("explodes count:"+explodes.size(), 10, 70);
 		
 		for(int i=0;i<missiles.size();i++)
 		{
@@ -77,6 +82,16 @@ public class TankClient extends Frame
 //				missile.draw(g);
 		}
 //		if(null!=missile) missile.draw(g);
+		
+		for (int i = 0; i < explodes.size(); i++)
+		{
+			Explode e = explodes.get(i);
+			e.draw(g);
+		}
+		
+		tank.draw(g);//调用坦克的draw方法
+		enemyTank.draw(g);
+		
 	}
 
 	public void lanchFrame()
