@@ -8,10 +8,10 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.sun.org.apache.bcel.internal.generic.NEW;
+import java.util.Properties;
 
 /**
  * 坦克的客户端
@@ -73,6 +73,8 @@ public class TankClient extends Frame
 		g.drawString("Tanks count:"+tanks.size(), 10, 90);
 		g.drawString("Tanks life:"+tank.getLife(), 10, 110);
 		
+		
+		
 		if(tanks.size()<=0)
 		{
 			for (int i = 0; i < 5; i++)
@@ -127,8 +129,22 @@ public class TankClient extends Frame
 
 	public void lanchFrame()
 	{
+		Properties p = new Properties();
+		int initTankCount = 0;
+		try
+		{
+			p.load(this.getClass().getClassLoader().getResourceAsStream("config/tank.properties"));
+			initTankCount = Integer.parseInt(p.get("initTankCount").toString());
+			
+		} catch (IOException e1)
+		{
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
-		for (int i = 0; i < 10; i++)
+		
+		
+		for (int i = 0; i < initTankCount; i++)
 		{
 			tanks.add(new Tank(50+40*(i+1),50,false,Direction.D,this));
 		}
