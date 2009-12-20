@@ -68,10 +68,6 @@ public class Tank
 	private boolean bR = false;
 	private boolean bD = false;
 
-	enum Direction
-	{
-		L, LU, U, RU, R, RD, D, LD, STOP;
-	}
 
 	private Direction dir = Direction.STOP;
 	private Direction ptDir = Direction.D;// 炮筒
