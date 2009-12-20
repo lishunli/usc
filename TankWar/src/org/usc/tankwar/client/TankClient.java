@@ -73,11 +73,20 @@ public class TankClient extends Frame
 		g.drawString("Tanks count:"+tanks.size(), 10, 90);
 		g.drawString("Tanks life:"+tank.getLife(), 10, 110);
 		
-		
+		int reProduceTankCount=0;
+		try
+		{
+			reProduceTankCount = Integer.parseInt(PropertyMgr.getProperty("reProduceTankCount"));
+			
+		} catch (Exception e1)
+		{
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		if(tanks.size()<=0)
 		{
-			for (int i = 0; i < 5; i++)
+			for (int i = 0; i < reProduceTankCount; i++)
 			{
 				tanks.add(new Tank(50+40*(i+1),50,false,Direction.D,this));
 			}
@@ -133,10 +142,9 @@ public class TankClient extends Frame
 		int initTankCount = 0;
 		try
 		{
-			p.load(this.getClass().getClassLoader().getResourceAsStream("config/tank.properties"));
-			initTankCount = Integer.parseInt(p.get("initTankCount").toString());
+			initTankCount = Integer.parseInt(PropertyMgr.getProperty("initTankCount"));
 			
-		} catch (IOException e1)
+		} catch (Exception e1)
 		{
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
