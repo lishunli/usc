@@ -112,7 +112,7 @@ public class Missile
 //					this.x + Tank.WIDTH / 2, this.y);
 			g.drawImage(imgs.get("U"), x, y, null);
 			break;
-		case RU:
+		case RU: 
 //			g.drawLine(this.x + Tank.WIDTH / 2, this.y + Tank.HEIGHT / 2,
 //					this.x + Tank.WIDTH, this.y);
 			g.drawImage(imgs.get("RU"), x, y, null);
