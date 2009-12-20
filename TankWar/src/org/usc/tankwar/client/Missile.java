@@ -24,13 +24,14 @@ public class Missile
 	private boolean live = true;
 	private TankClient tc;
 	private boolean good;
-	
+
 	public boolean isLive()
 	{
 		return live;
 	}
 
-	public Missile(int x, int y, boolean good,Direction direction, TankClient tc)
+	public Missile(int x, int y, boolean good, Direction direction,
+			TankClient tc)
 	{
 		this(x, y, direction);
 		this.tc = tc;
@@ -46,14 +47,17 @@ public class Missile
 
 	public void draw(Graphics g)
 	{
-		if(!isLive())
+		if (!isLive())
 		{
 			tc.missiles.remove(this);
 			return;
 		}
-		
+
 		Color c = g.getColor();// 获得当前颜色
-		g.setColor(Color.BLACK);// 设置颜色
+		if (good)
+			g.setColor(Color.RED);
+		else
+			g.setColor(Color.BLACK);// 设置颜色
 		g.fillOval(x, y, WIDTH, HEIGHT);// 使用当前颜色填充外接指定矩形框的椭圆
 		g.setColor(c);// 恢复颜色
 		move();
@@ -100,7 +104,7 @@ public class Missile
 				|| y > TankClient.GAME_HEIGHT)
 		{
 			live = false;
-//			tc.missiles.remove(this);
+			// tc.missiles.remove(this);
 		}
 	}
 
@@ -111,35 +115,37 @@ public class Missile
 
 	public boolean hitTank(Tank t)
 	{
-		if (this.live && this.getRect().intersects(t.getRect()) && t.isLive() && this.good != t.isGood())
+		if (this.live && this.getRect().intersects(t.getRect()) && t.isLive()
+				&& this.good != t.isGood())
 		{
-			if(t.isGood())
+			if (t.isGood())
 			{
-				t.setLife(t.getLife()-20);
-				if(t.getLife()<=0)t.setLive(false);
-			}
-			else {
+				t.setLife(t.getLife() - 20);
+				if (t.getLife() <= 0)
+					t.setLive(false);
+			} else
+			{
 				t.setLive(false);
 			}
-					
-//			t.setLive(false);
-			
-			this.live = false;//打掉坦克后，子弹也消失
-			
-			Explode e = new Explode(x,y,tc);
+
+			// t.setLive(false);
+
+			this.live = false;// 打掉坦克后，子弹也消失
+
+			Explode e = new Explode(x, y, tc);
 			tc.explodes.add(e);
-			
+
 			return true;
 		}
-			
+
 		return false;
 	}
-	
+
 	public boolean hitTanks(List<Tank> tanks)
 	{
 		for (int i = 0; i < tanks.size(); i++)
 		{
-			if(hitTank(tanks.get(i)))
+			if (hitTank(tanks.get(i)))
 			{
 				return true;
 			}
@@ -149,11 +155,11 @@ public class Missile
 
 	public boolean hitWall(Wall w)
 	{
-		if(this.live && this.getRect().intersects(w.getRect()))
+		if (this.live && this.getRect().intersects(w.getRect()))
 		{
 			this.live = false;
 			return true;
 		}
-		return  false;
+		return false;
 	}
 }
