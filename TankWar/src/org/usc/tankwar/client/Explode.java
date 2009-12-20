@@ -55,10 +55,10 @@ public class Explode
 	}
 
 	private static boolean init = false;
-	
+
 	public void draw(Graphics g)
 	{
-		if(!init)
+		if (!init)
 		{
 			for (int i = 0; i < imgs.length; i++)
 			{

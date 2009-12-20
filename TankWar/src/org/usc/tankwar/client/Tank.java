@@ -2,9 +2,13 @@ package org.usc.tankwar.client;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -26,7 +30,7 @@ public class Tank
 	private int oldY;
 
 	private boolean good;
-	private int life=100;
+	private int life = 100;
 	private BloodBar bar = new BloodBar();
 
 	public int getLife()
@@ -68,11 +72,41 @@ public class Tank
 	private boolean bR = false;
 	private boolean bD = false;
 
-
 	private Direction dir = Direction.STOP;
 	private Direction ptDir = Direction.D;// 炮筒
 	private int step = r.nextInt(12) + 3;
 
+	private static Toolkit tk = Toolkit.getDefaultToolkit();
+	private static Map<String , Image> imgs  = new HashMap<String, Image>();
+	private static Image[] tankImages = null;
+
+	static
+	{
+		tankImages = new Image[]
+		{
+				tk.getImage(Explode.class.getClassLoader().getResource("images/tankL.gif")),
+				tk.getImage(Explode.class.getClassLoader().getResource("images/tankLU.gif")),
+				tk.getImage(Explode.class.getClassLoader().getResource("images/tankU.gif")),
+				tk.getImage(Explode.class.getClassLoader().getResource("images/tankRU.gif")),
+				tk.getImage(Explode.class.getClassLoader().getResource("images/tankR.gif")),
+				tk.getImage(Explode.class.getClassLoader().getResource("images/tankRD.gif")),
+				tk.getImage(Explode.class.getClassLoader().getResource("images/tankD.gif")),
+				tk.getImage(Explode.class.getClassLoader().getResource("images/tankLD.gif"))
+		};
+		
+		imgs.put("L", tankImages[0]);
+		imgs.put("LU", tankImages[1]);
+		imgs.put("U", tankImages[2]);
+		imgs.put("RU", tankImages[3]);
+		imgs.put("R", tankImages[4]);
+		imgs.put("RD", tankImages[5]);
+		imgs.put("D", tankImages[6]);
+		imgs.put("LD", tankImages[7]);
+				
+	}
+
+	
+	
 	public Tank(int x, int y, boolean good)
 	{
 		this.x = x;
@@ -124,50 +158,59 @@ public class Tank
 			}
 			return;
 		}
-		Color c = g.getColor();// 获得当前颜色
+//		Color c = g.getColor();// 获得当前颜色
+//		if (good)
+//			g.setColor(Color.RED);
+//		else
+//			g.setColor(Color.BLUE);
+//		// g.setColor(Color.RED);// 设置颜色
+//		g.fillOval(x, y, WIDTH, HEIGHT);// 使用当前颜色填充外接指定矩形框的椭圆
+//		g.setColor(c);// 恢复颜色
+
 		if (good)
-			g.setColor(Color.RED);
-		else
-			g.setColor(Color.BLUE);
-		// g.setColor(Color.RED);// 设置颜色
-		g.fillOval(x, y, WIDTH, HEIGHT);// 使用当前颜色填充外接指定矩形框的椭圆
-		g.setColor(c);// 恢复颜色
-		
-		if(good)bar.draw(g);
+			bar.draw(g);
 
 		switch (ptDir)
 		{
 		case L:
-			g.drawLine(this.x + Tank.WIDTH / 2, this.y + Tank.HEIGHT / 2,
-					this.x, this.y + Tank.HEIGHT / 2);
+//			g.drawLine(this.x + Tank.WIDTH / 2, this.y + Tank.HEIGHT / 2,
+//					this.x, this.y + Tank.HEIGHT / 2);
+			g.drawImage(imgs.get("L"), x, y, null);
 			break;
 		case LU:
-			g.drawLine(this.x + Tank.WIDTH / 2, this.y + Tank.HEIGHT / 2,
-					this.x, this.y);
+//			g.drawLine(this.x + Tank.WIDTH / 2, this.y + Tank.HEIGHT / 2,
+//					this.x, this.y);
+			g.drawImage(imgs.get("LU"), x, y, null);
 			break;
 		case U:
-			g.drawLine(this.x + Tank.WIDTH / 2, this.y + Tank.HEIGHT / 2,
-					this.x + Tank.WIDTH / 2, this.y);
+//			g.drawLine(this.x + Tank.WIDTH / 2, this.y + Tank.HEIGHT / 2,
+//					this.x + Tank.WIDTH / 2, this.y);
+			g.drawImage(imgs.get("U"), x, y, null);
 			break;
 		case RU:
-			g.drawLine(this.x + Tank.WIDTH / 2, this.y + Tank.HEIGHT / 2,
-					this.x + Tank.WIDTH, this.y);
+//			g.drawLine(this.x + Tank.WIDTH / 2, this.y + Tank.HEIGHT / 2,
+//					this.x + Tank.WIDTH, this.y);
+			g.drawImage(imgs.get("RU"), x, y, null);
 			break;
 		case R:
-			g.drawLine(this.x + Tank.WIDTH / 2, this.y + Tank.HEIGHT / 2,
-					this.x + Tank.WIDTH, this.y + Tank.HEIGHT / 2);
+//			g.drawLine(this.x + Tank.WIDTH / 2, this.y + Tank.HEIGHT / 2,
+//					this.x + Tank.WIDTH, this.y + Tank.HEIGHT / 2);
+			g.drawImage(imgs.get("R"), x, y, null);
 			break;
 		case RD:
-			g.drawLine(this.x + Tank.WIDTH / 2, this.y + Tank.HEIGHT / 2,
-					this.x + Tank.WIDTH, this.y + Tank.HEIGHT);
+//			g.drawLine(this.x + Tank.WIDTH / 2, this.y + Tank.HEIGHT / 2,
+//					this.x + Tank.WIDTH, this.y + Tank.HEIGHT);
+			g.drawImage(imgs.get("RD"), x, y, null);
 			break;
 		case D:
-			g.drawLine(this.x + Tank.WIDTH / 2, this.y + Tank.HEIGHT / 2,
-					this.x + Tank.WIDTH / 2, this.y + Tank.HEIGHT);
+//			g.drawLine(this.x + Tank.WIDTH / 2, this.y + Tank.HEIGHT / 2,
+//					this.x + Tank.WIDTH / 2, this.y + Tank.HEIGHT);
+			g.drawImage(imgs.get("D"), x, y, null);
 			break;
 		case LD:
-			g.drawLine(this.x + Tank.WIDTH / 2, this.y + Tank.HEIGHT / 2,
-					this.x, this.y + Tank.HEIGHT);
+//			g.drawLine(this.x + Tank.WIDTH / 2, this.y + Tank.HEIGHT / 2,
+//					this.x, this.y + Tank.HEIGHT);
+			g.drawImage(imgs.get("LD"), x, y, null);
 			break;
 
 		default:
@@ -330,7 +373,7 @@ public class Tank
 			superFire();
 			break;
 		case KeyEvent.VK_F2:
-			if(!this.live)
+			if (!this.live)
 			{
 				this.live = true;
 				this.setLife(100);
@@ -353,13 +396,14 @@ public class Tank
 		return missile;
 
 	}
+
 	public Missile fire(Direction dir)
 	{
 		if (!live)
 			return null;
 		Missile missile = new Missile(this.x + Tank.WIDTH / 2 - Missile.WIDTH
-				/ 2, this.y + Tank.HEIGHT / 2 - Missile.HEIGHT / 2, good,
-				dir, this.tankClient);
+				/ 2, this.y + Tank.HEIGHT / 2 - Missile.HEIGHT / 2, good, dir,
+				this.tankClient);
 		tankClient.missiles.add(missile);
 		return missile;
 
@@ -402,43 +446,41 @@ public class Tank
 		}
 		return false;
 	}
-	
+
 	private void superFire()
 	{
 		Direction[] dirs = Direction.values();
-		for (int i = 0; i <8; i++)
+		for (int i = 0; i < 8; i++)
 		{
 			fire(dirs[i]);
 		}
 	}
-	
-	
+
 	private class BloodBar
 	{
 		public void draw(Graphics g)
 		{
 			Color c = g.getColor();
-			
+
 			g.setColor(Color.RED);
-			g.drawRect(x, y-10, WIDTH, 10);
-			int w = WIDTH * life /100;
-			g.fillRect(x, y-10, w, 10);
-			
+			g.drawRect(x, y - 10, WIDTH, 10);
+			int w = WIDTH * life / 100;
+			g.fillRect(x, y - 10, w, 10);
+
 			g.setColor(c);
-			
+
 		}
 	}
-	
+
 	public boolean eat(Blood b)
 	{
-		if(this.live &&b.isLive() && this.getRect().intersects(b.getRect()))
+		if (this.live && b.isLive() && this.getRect().intersects(b.getRect()))
 		{
 			this.setLife(100);
 			b.setLive(false);
 			return true;
 		}
-		return  false;
+		return false;
 	}
-	
-}
 
+}
