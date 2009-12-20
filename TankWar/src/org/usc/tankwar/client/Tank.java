@@ -21,8 +21,7 @@ public class Tank
 {
 	public static final int XSPEED = 5;
 	public static final int YSPEED = 5;
-	public static final int WIDTH = 30;
-	public static final int HEIGHT = 30;
+	
 	TankClient tankClient;
 	private int x;
 	private int y;// 坦克的坐标
@@ -79,19 +78,19 @@ public class Tank
 	private static Toolkit tk = Toolkit.getDefaultToolkit();
 	private static Map<String , Image> imgs  = new HashMap<String, Image>();
 	private static Image[] tankImages = null;
-
+	
 	static
 	{
 		tankImages = new Image[]
 		{
-				tk.getImage(Explode.class.getClassLoader().getResource("images/tankL.gif")),
-				tk.getImage(Explode.class.getClassLoader().getResource("images/tankLU.gif")),
-				tk.getImage(Explode.class.getClassLoader().getResource("images/tankU.gif")),
-				tk.getImage(Explode.class.getClassLoader().getResource("images/tankRU.gif")),
-				tk.getImage(Explode.class.getClassLoader().getResource("images/tankR.gif")),
-				tk.getImage(Explode.class.getClassLoader().getResource("images/tankRD.gif")),
-				tk.getImage(Explode.class.getClassLoader().getResource("images/tankD.gif")),
-				tk.getImage(Explode.class.getClassLoader().getResource("images/tankLD.gif"))
+				tk.getImage(Tank.class.getClassLoader().getResource("images/tankL.gif")),
+				tk.getImage(Tank.class.getClassLoader().getResource("images/tankLU.gif")),
+				tk.getImage(Tank.class.getClassLoader().getResource("images/tankU.gif")),
+				tk.getImage(Tank.class.getClassLoader().getResource("images/tankRU.gif")),
+				tk.getImage(Tank.class.getClassLoader().getResource("images/tankR.gif")),
+				tk.getImage(Tank.class.getClassLoader().getResource("images/tankRD.gif")),
+				tk.getImage(Tank.class.getClassLoader().getResource("images/tankD.gif")),
+				tk.getImage(Tank.class.getClassLoader().getResource("images/tankLD.gif"))
 		};
 		
 		imgs.put("L", tankImages[0]);
@@ -104,7 +103,9 @@ public class Tank
 		imgs.put("LD", tankImages[7]);
 				
 	}
-
+	
+	public static final int WIDTH = 30;
+	public static final int HEIGHT = 30;
 	
 	
 	public Tank(int x, int y, boolean good)
@@ -411,7 +412,7 @@ public class Tank
 
 	public Rectangle getRect()
 	{
-		return new Rectangle(x, y, WIDTH, HEIGHT);
+		return new Rectangle(x, y, WIDTH,HEIGHT);
 	}
 
 	public boolean collidesWiteWall(Wall w)

@@ -56,7 +56,7 @@ public class TankClient extends Frame
 		Graphics gOffScreen = offScreenImage.getGraphics();
 		// 设置颜色
 		Color c = gOffScreen.getColor();
-		gOffScreen.setColor(Color.GREEN);
+		gOffScreen.setColor(Color.BLACK);
 
 		gOffScreen.fillRect(0, 0, GAME_WINDTH, GAME_HEIGHT);
 		gOffScreen.setColor(c);

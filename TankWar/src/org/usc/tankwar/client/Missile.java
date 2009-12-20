@@ -2,8 +2,12 @@ package org.usc.tankwar.client;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 子弹类
@@ -25,6 +29,36 @@ public class Missile
 	private TankClient tc;
 	private boolean good;
 
+	private static Toolkit tk = Toolkit.getDefaultToolkit();
+	private static Map<String , Image> imgs  = new HashMap<String, Image>();
+	private static Image[] tankImages = null;
+	
+	static
+	{
+		tankImages = new Image[]
+		{
+				tk.getImage(Tank.class.getClassLoader().getResource("images/missileL.gif")),
+				tk.getImage(Tank.class.getClassLoader().getResource("images/missileLU.gif")),
+				tk.getImage(Tank.class.getClassLoader().getResource("images/missileU.gif")),
+				tk.getImage(Tank.class.getClassLoader().getResource("images/missileRU.gif")),
+				tk.getImage(Tank.class.getClassLoader().getResource("images/missileR.gif")),
+				tk.getImage(Tank.class.getClassLoader().getResource("images/missileRD.gif")),
+				tk.getImage(Tank.class.getClassLoader().getResource("images/missileD.gif")),
+				tk.getImage(Tank.class.getClassLoader().getResource("images/missileLD.gif"))
+		};
+		
+		imgs.put("L", tankImages[0]);
+		imgs.put("LU", tankImages[1]);
+		imgs.put("U", tankImages[2]);
+		imgs.put("RU", tankImages[3]);
+		imgs.put("R", tankImages[4]);
+		imgs.put("RD", tankImages[5]);
+		imgs.put("D", tankImages[6]);
+		imgs.put("LD", tankImages[7]);
+				
+	}
+	
+	
 	public boolean isLive()
 	{
 		return live;
@@ -53,13 +87,62 @@ public class Missile
 			return;
 		}
 
-		Color c = g.getColor();// 获得当前颜色
-		if (good)
-			g.setColor(Color.RED);
-		else
-			g.setColor(Color.BLACK);// 设置颜色
-		g.fillOval(x, y, WIDTH, HEIGHT);// 使用当前颜色填充外接指定矩形框的椭圆
-		g.setColor(c);// 恢复颜色
+//		Color c = g.getColor();// 获得当前颜色
+//		if (good)
+//			g.setColor(Color.RED);
+//		else
+//			g.setColor(Color.BLACK);// 设置颜色
+//		g.fillOval(x, y, WIDTH, HEIGHT);// 使用当前颜色填充外接指定矩形框的椭圆
+//		g.setColor(c);// 恢复颜色
+		
+		switch (direction)
+		{
+		case L:
+//			g.drawLine(this.x + Tank.WIDTH / 2, this.y + Tank.HEIGHT / 2,
+//					this.x, this.y + Tank.HEIGHT / 2);
+			g.drawImage(imgs.get("L"), x, y, null);
+			break;
+		case LU:
+//			g.drawLine(this.x + Tank.WIDTH / 2, this.y + Tank.HEIGHT / 2,
+//					this.x, this.y);
+			g.drawImage(imgs.get("LU"), x, y, null);
+			break;
+		case U:
+//			g.drawLine(this.x + Tank.WIDTH / 2, this.y + Tank.HEIGHT / 2,
+//					this.x + Tank.WIDTH / 2, this.y);
+			g.drawImage(imgs.get("U"), x, y, null);
+			break;
+		case RU:
+//			g.drawLine(this.x + Tank.WIDTH / 2, this.y + Tank.HEIGHT / 2,
+//					this.x + Tank.WIDTH, this.y);
+			g.drawImage(imgs.get("RU"), x, y, null);
+			break;
+		case R:
+//			g.drawLine(this.x + Tank.WIDTH / 2, this.y + Tank.HEIGHT / 2,
+//					this.x + Tank.WIDTH, this.y + Tank.HEIGHT / 2);
+			g.drawImage(imgs.get("R"), x, y, null);
+			break;
+		case RD:
+//			g.drawLine(this.x + Tank.WIDTH / 2, this.y + Tank.HEIGHT / 2,
+//					this.x + Tank.WIDTH, this.y + Tank.HEIGHT);
+			g.drawImage(imgs.get("RD"), x, y, null);
+			break;
+		case D:
+//			g.drawLine(this.x + Tank.WIDTH / 2, this.y + Tank.HEIGHT / 2,
+//					this.x + Tank.WIDTH / 2, this.y + Tank.HEIGHT);
+			g.drawImage(imgs.get("D"), x, y, null);
+			break;
+		case LD:
+//			g.drawLine(this.x + Tank.WIDTH / 2, this.y + Tank.HEIGHT / 2,
+//					this.x, this.y + Tank.HEIGHT);
+			g.drawImage(imgs.get("LD"), x, y, null);
+			break;
+
+		default:
+			break;
+		}
+		
+		
 		move();
 	}
 
