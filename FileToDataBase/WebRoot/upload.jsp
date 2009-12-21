@@ -51,6 +51,12 @@
 		<h1><a href="exportDBF.action">导出为DBF文件</a>	</h1>
 		</center>
 		
+		<br>
+		<center>
+			Copyright @ 2009-2010 林淼. All Rights Reserved
+		</center>
+		
+		
 	
 		
 		
