@@ -11,6 +11,8 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.usc.tankwar.server.TankServer;
+
 import com.sun.org.apache.bcel.internal.generic.NEW;
 
 /**
@@ -41,6 +43,9 @@ public class TankClient extends Frame
 	
 	Image offScreenImage = null;// 虚拟的背景图片
 
+	NetClient nc = new NetClient();
+	
+	
 	@Override
 	public void update(Graphics g)
 	{
@@ -132,6 +137,8 @@ public class TankClient extends Frame
 		this.setVisible(true);// 设置窗体可见
 
 		new Thread(new PaintThread()).start();// 启动线程
+		
+		nc.conncet("127.0.0.1", TankServer.TCP_PORT);
 	}
 
 	public static void main(String[] args)
