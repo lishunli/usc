@@ -14,6 +14,8 @@ import java.util.Random;
  */
 public class Tank
 {
+	int id;
+	
 	public static final int XSPEED = 5;
 	public static final int YSPEED = 5;
 	public static final int WIDTH = 30;
@@ -97,6 +99,9 @@ public class Tank
 	 */
 	public void draw(Graphics g)
 	{
+		
+		
+		
 		if (!live)
 		{
 			if(!good)
@@ -112,6 +117,7 @@ public class Tank
 			g.setColor(Color.BLUE);
 		// g.setColor(Color.RED);// 设置颜色
 		g.fillOval(x, y, WIDTH, HEIGHT);// 使用当前颜色填充外接指定矩形框的椭圆
+		g.drawString("ID:"+id, x, y-10);
 		g.setColor(c);// 恢复颜色
 
 		switch (ptDir)

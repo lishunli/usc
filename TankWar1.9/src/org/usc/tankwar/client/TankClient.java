@@ -43,7 +43,7 @@ public class TankClient extends Frame
 	
 	Image offScreenImage = null;// 虚拟的背景图片
 
-	NetClient nc = new NetClient();
+	NetClient nc = new NetClient(this);
 	
 	
 	@Override
