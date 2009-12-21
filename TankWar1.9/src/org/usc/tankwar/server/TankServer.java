@@ -3,8 +3,11 @@ package org.usc.tankwar.server;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,11 +21,14 @@ public class TankServer
 {
 	private static int ID = 100;
 	public static final int TCP_PORT = 8888;
-
+	public static final int UDP_PORT = 6666;
+	
 	List<Client> clients = new ArrayList<Client>();
 
 	public void start()
 	{
+		new Thread(new UDPThread()).start();
+		
 		ServerSocket ss = null;
 		try
 		{
@@ -92,4 +98,40 @@ public class TankServer
 			this.udpPort = udpPort;
 		}
 	}
+	
+	private class UDPThread implements Runnable
+	{
+		byte[] buf = new byte[1024];
+		
+		@Override
+		public void run()
+		{
+			DatagramSocket ds = null;
+			try
+			{
+				ds = new DatagramSocket(UDP_PORT);
+				
+			} catch (SocketException e)
+			{
+				e.printStackTrace();
+			}
+			System.out.println("UDP thread started at port:"+UDP_PORT);
+			while(ds != null)
+			{
+				DatagramPacket dp = new DatagramPacket(buf,buf.length);
+				try
+				{
+					ds.receive(dp);
+					System.out.println("A packert received!");
+					
+				} catch (IOException e)
+				{
+					e.printStackTrace();
+				}
+			}
+			
+			
+		}
+	}
+	
 }
