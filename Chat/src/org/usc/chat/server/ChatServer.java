@@ -14,34 +14,62 @@ import java.net.Socket;
 public class ChatServer
 {
 	public static final int TCP_PORT = 8888;
-	
 
 	public static void main(String[] args)
 	{
 		boolean started = false;
+
+		ServerSocket ss = null;
+		Socket s = null;
+		DataInputStream dis = null;
 		try
 		{
-			ServerSocket ss = new ServerSocket(TCP_PORT);
+			ss = new ServerSocket(TCP_PORT);
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		try
+		{
 			started = true;
 			while (started)
 			{
 				boolean bConnected = false;
-				Socket s = ss.accept();
+				s = ss.accept();
 				bConnected = true;
 				System.out.println("A Client Connected!");
-				
-				DataInputStream dis = new DataInputStream(s.getInputStream());
+
+				dis = new DataInputStream(s.getInputStream());
 				while (bConnected)
 				{
 					String str = dis.readUTF();
 					System.out.println(str);
 				}
-				dis.close();
 			}
 
-		} catch (IOException e)
+		} catch (Exception e)
 		{
-			e.printStackTrace();
+			System.out.println("Client Closed!");
+			// e.printStackTrace();
+		} finally
+		{
+			try
+			{
+				if (dis != null)
+				{
+					dis.close();
+					dis = null;
+				}
+				if (s != null)
+				{
+					s.close();
+					s = null;
+				}
+			} catch (IOException e1)
+			{
+				e1.printStackTrace();
+			}
 		}
+
 	}
 }
