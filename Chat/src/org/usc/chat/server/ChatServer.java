@@ -10,7 +10,6 @@ import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.List;
 
-import sun.misc.Cleaner;
 
 /**
  * 聊天的服务器端
@@ -25,7 +24,7 @@ public class ChatServer
 	ServerSocket ss = null;
 
 	List<Client> clients = new ArrayList<Client>();
-	
+
 	public static void main(String[] args)
 	{
 		new ChatServer().start();
@@ -85,7 +84,7 @@ public class ChatServer
 		private DataInputStream dis = null;
 		private DataOutputStream dos = null;
 		private boolean bConnected = false;
-		
+
 		public Client(Socket s)
 		{
 			this.s = s;
@@ -99,7 +98,7 @@ public class ChatServer
 				e.printStackTrace();
 			}
 		}
-		
+
 		public void send(String str)
 		{
 			try
@@ -110,10 +109,11 @@ public class ChatServer
 				e.printStackTrace();
 			}
 		}
-		
+
 		@Override
 		public void run()
 		{
+			Client c = null;
 			try
 			{
 				while (bConnected)
@@ -122,11 +122,16 @@ public class ChatServer
 					System.out.println(str);
 					for (int i = 0; i < clients.size(); i++)
 					{
-						Client c = clients.get(i);
+						c = clients.get(i);
 						c.send(str);
 					}
 				}
-			} catch (EOFException e)
+			} 
+			catch(SocketException e)
+			{
+				System.out.println("服务器端正在关闭...");
+			}
+			catch (EOFException e)
 			{
 				System.out.println("Client Closed!");
 			}
@@ -143,7 +148,7 @@ public class ChatServer
 						dis.close();
 						dis = null;
 					}
-					if(dos != null)
+					if (dos != null)
 					{
 						dos.close();
 						dos = null;
@@ -157,6 +162,9 @@ public class ChatServer
 				{
 					e1.printStackTrace();
 				}
+
+				if (c != null)
+					clients.remove(c);
 			}
 
 		}

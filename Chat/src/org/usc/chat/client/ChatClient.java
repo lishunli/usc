@@ -10,6 +10,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.EOFException;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.SocketException;
@@ -148,7 +149,11 @@ public class ChatClient extends Frame
 			{
 				System.out.println("客户端正在关闭...");
 				System.exit(0);
-			} catch (IOException e)
+			} 
+			catch(EOFException e)
+			{
+			}
+			catch (IOException e)
 			{
 				e.printStackTrace();
 			}
