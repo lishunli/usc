@@ -1,12 +1,16 @@
 package org.usc.chat.server;
 
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.EOFException;
 import java.io.IOException;
-import java.net.BindException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.ArrayList;
+import java.util.List;
+
+import sun.misc.Cleaner;
 
 /**
  * 聊天的服务器端
@@ -20,6 +24,8 @@ public class ChatServer
 	boolean started = false;
 	ServerSocket ss = null;
 
+	List<Client> clients = new ArrayList<Client>();
+	
 	public static void main(String[] args)
 	{
 		new ChatServer().start();
@@ -48,6 +54,7 @@ public class ChatServer
 				Client c = new Client(s);
 
 				new Thread(c).start();
+				clients.add(c);
 
 				System.out.println("A Client Connected!");
 
@@ -76,21 +83,34 @@ public class ChatServer
 	{
 		private Socket s;
 		private DataInputStream dis = null;
+		private DataOutputStream dos = null;
 		private boolean bConnected = false;
-
+		
 		public Client(Socket s)
 		{
 			this.s = s;
 			try
 			{
 				dis = new DataInputStream(s.getInputStream());
+				dos = new DataOutputStream(s.getOutputStream());
 				bConnected = true;
 			} catch (IOException e)
 			{
 				e.printStackTrace();
 			}
 		}
-
+		
+		public void send(String str)
+		{
+			try
+			{
+				dos.writeUTF(str);
+			} catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		
 		@Override
 		public void run()
 		{
@@ -100,7 +120,11 @@ public class ChatServer
 				{
 					String str = dis.readUTF();
 					System.out.println(str);
-
+					for (int i = 0; i < clients.size(); i++)
+					{
+						Client c = clients.get(i);
+						c.send(str);
+					}
 				}
 			} catch (EOFException e)
 			{
@@ -118,6 +142,11 @@ public class ChatServer
 					{
 						dis.close();
 						dis = null;
+					}
+					if(dos != null)
+					{
+						dos.close();
+						dos = null;
 					}
 					if (s != null)
 					{
