@@ -23,6 +23,8 @@ public class ChatClient extends Frame
 {
 	private static final long serialVersionUID = 1L;
 	Socket s=null;
+	DataOutputStream dos = null;
+	
 	
 	TextField tfTxt = new TextField();
 	TextArea taContent = new TextArea();
@@ -44,6 +46,7 @@ public class ChatClient extends Frame
 			@Override
 			public void windowClosing(WindowEvent e)
 			{
+				disConncet();
 				System.exit(0);
 			}
 		});
@@ -59,6 +62,7 @@ public class ChatClient extends Frame
 		try
 		{
 			s = new Socket("127.0.0.1",8888);
+			dos = new DataOutputStream(s.getOutputStream());
 			
 			System.out.println("Connected!");
 			
@@ -70,23 +74,34 @@ public class ChatClient extends Frame
 			e.printStackTrace();
 		}
 	}
-
+	public void disConncet()
+	{
+		try
+		{
+			dos.close();
+			s.close();
+		} catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
 	private class TFListener implements ActionListener
 	{
 		@Override
 		public void actionPerformed(ActionEvent e)
 		{
 			String str = tfTxt.getText().trim().toString();
-			
-			taContent.setText(str);
+			taContent.setText(taContent.getText()+("".equals(taContent.getText())?"":"\n")+str);
 			tfTxt.setText("");
 			
 			try
 			{
-				DataOutputStream dos = new DataOutputStream(s.getOutputStream());
 				dos.writeUTF(str);
 				dos.flush();
-				dos.close();
+//				dos.close();
 				
 			} catch (IOException e1)
 			{
