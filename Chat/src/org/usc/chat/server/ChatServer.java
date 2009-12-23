@@ -1,9 +1,12 @@
 package org.usc.chat.server;
 
 import java.io.DataInputStream;
+import java.io.EOFException;
 import java.io.IOException;
+import java.net.BindException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 
 /**
  * 聊天的服务器端
@@ -25,7 +28,14 @@ public class ChatServer
 		try
 		{
 			ss = new ServerSocket(TCP_PORT);
-		} catch (IOException e)
+		}
+		catch (SocketException e)
+		{
+			System.out.println("端口正在使用...");
+			System.out.println("请关掉服务器程序，并重启服务器！");
+			System.exit(0);
+		}
+		catch (IOException e)
 		{
 			e.printStackTrace();
 		}
@@ -47,10 +57,12 @@ public class ChatServer
 				}
 			}
 
-		} catch (Exception e)
+		} catch (EOFException e)
 		{
 			System.out.println("Client Closed!");
-			// e.printStackTrace();
+		} catch (IOException e)
+		{
+			e.printStackTrace();
 		} finally
 		{
 			try
