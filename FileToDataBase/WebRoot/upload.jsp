@@ -6,15 +6,15 @@
 	</head>
 	<body>
 
-		<table align="center" width="50%">
-			<tr>
-				<td>
-
-					<s:fielderror cssStyle="color:red" />
-
-				</td>
-			</tr>
-		</table>
+<%--		<table align="center" width="50%">--%>
+<%--			<tr>--%>
+<%--				<td>--%>
+<%----%>
+<%--					<s:fielderror cssStyle="color:red" />--%>
+<%----%>
+<%--				</td>--%>
+<%--			</tr>--%>
+<%--		</table>--%>
 		<br>
 		<p align="right">
 			<a href="index.jsp">回到首页</a>

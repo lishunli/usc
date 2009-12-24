@@ -104,7 +104,7 @@ public class FileConvertImpl implements FileConvert
 
 		} catch (Exception e)
 		{
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		// long end = System.currentTimeMillis();
 		// System.out.println("结束时间"+end);
@@ -256,7 +256,7 @@ public class FileConvertImpl implements FileConvert
 		} catch (Exception e)
 		{
 			convertFlag = false;
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 	}
 

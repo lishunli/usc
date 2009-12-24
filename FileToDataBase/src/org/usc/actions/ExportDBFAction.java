@@ -105,7 +105,6 @@ public class ExportDBFAction extends ActionSupport
 			writer.write(os);
 			os.flush();
 			os.close();
-			System.out.println("OK");
 
 		} catch (IOException e)
 		{
