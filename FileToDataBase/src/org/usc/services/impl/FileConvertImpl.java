@@ -144,8 +144,8 @@ public class FileConvertImpl implements FileConvert
 				Student student = new Student();
 				for (int i = 0; i < rowValues.length; i++)
 				{
-					setParm(student, reader.getField(i).getName().toString(),
-							rowValues[i].toString());
+					setParm(student, reader.getField(i).getName().toString().trim(),
+							rowValues[i].toString().trim());
 				}
 				if (convertFlag)
 				{
