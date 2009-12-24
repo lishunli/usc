@@ -47,7 +47,7 @@ public class ExportDBFAction extends ActionSupport
 		fields[0] = new DBFField();
 		fields[0].setName("no");
 		fields[0].setDataType(DBFField.FIELD_TYPE_C);
-		fields[0].setFieldLength(10);
+		fields[0].setFieldLength(11);
 
 		fields[1] = new DBFField();
 		fields[1].setName("name");
@@ -57,17 +57,17 @@ public class ExportDBFAction extends ActionSupport
 		fields[2] = new DBFField();
 		fields[2].setName("sex");
 		fields[2].setDataType(DBFField.FIELD_TYPE_C);
-		fields[2].setFieldLength(20);
+		fields[2].setFieldLength(4);
 
 		fields[3] = new DBFField();
 		fields[3].setName("age");
 		fields[3].setDataType(DBFField.FIELD_TYPE_N); 
-		fields[3].setFieldLength(20);
+		fields[3].setFieldLength(4);
 
 		fields[4] = new DBFField();
 		fields[4].setName("score");
 		fields[4].setDataType(DBFField.FIELD_TYPE_N);
-		fields[4].setFieldLength(20);
+		fields[4].setFieldLength(5);
 		fields[4].setDecimalCount(1);
 
 		fields[5] = new DBFField();

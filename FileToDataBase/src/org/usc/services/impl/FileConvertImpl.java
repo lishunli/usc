@@ -5,7 +5,9 @@ import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import jxl.Cell;
 import jxl.Sheet;
@@ -15,12 +17,15 @@ import org.usc.daos.Student;
 import org.usc.daos.StudentDAO;
 import org.usc.services.FileConvert;
 
+import com.linuxense.javadbf.DBFField;
+import com.linuxense.javadbf.DBFReader;
+
 public class FileConvertImpl implements FileConvert
 {
 	private StudentDAO sDAO;
-	private  boolean convertFlag = true;
-	private  int correctCount = 0;
-	private  int errorCount = 0;
+	private boolean convertFlag = true;
+	private int correctCount = 0;
+	private int errorCount = 0;
 
 	public void setsDAO(StudentDAO sDAO)
 	{
@@ -49,7 +54,7 @@ public class FileConvertImpl implements FileConvert
 	 */
 	private boolean XLSConvert(String fileName)
 	{
-
+		boolean result = false;
 		// long start = System.currentTimeMillis();
 		// System.out.println("开始时间"+start);
 		try
@@ -61,7 +66,7 @@ public class FileConvertImpl implements FileConvert
 			jxl.Workbook rwb = Workbook.getWorkbook(is);
 			// 获取第一张Sheet表
 			Sheet rs = rwb.getSheet(0);
-			int Columns = rs.getColumns();//获取行数
+			int Columns = rs.getColumns();// 获取行数
 			for (int i = 1; i < rs.getRows(); i++)
 			{
 				Student student = new Student();
@@ -87,14 +92,16 @@ public class FileConvertImpl implements FileConvert
 			}
 			System.out.println();
 			System.out.println("导入完毕");
-			System.out.println("正确导入记录条数："+correctCount);
-			System.out.println("错误记录条数："+errorCount);
+			System.out.println("正确导入记录条数：" + correctCount);
+			System.out.println("错误记录条数：" + errorCount);
 			System.out.println();
-			
-			errorCount=0;
-			correctCount=0;
+			if (correctCount > 0)
+				result = true;
+
+			errorCount = 0;
+			correctCount = 0;
 			convertFlag = true;
-			
+
 		} catch (Exception e)
 		{
 			e.printStackTrace();
@@ -102,11 +109,93 @@ public class FileConvertImpl implements FileConvert
 		// long end = System.currentTimeMillis();
 		// System.out.println("结束时间"+end);
 		// System.out.println("所用时间" + (end-start));
-		return false;
+		return result;
+	}
+
+	/**
+	 * DBF处理
+	 * 
+	 * @param fileName
+	 * @return
+	 */
+	private boolean DBFConvert(String fileName)
+	{
+		boolean result = false;
+		InputStream fis = null;
+		try
+		{
+			// 读取文件的输入流
+			fis = new FileInputStream(fileName);
+			// 根据输入流初始化一个DBFReader实例，用来读取DBF文件信息
+			DBFReader reader = new DBFReader(fis);
+			reader.setCharactersetName("GB2312");
+			// 调用DBFReader对实例方法得到path文件中字段的个数
+			int fieldsCount = reader.getFieldCount();
+			// 取出字段信息
+			// for (int i = 0; i < fieldsCount; i++)
+			// {
+			// DBFField field = reader.getField(i);
+			// System.out.println(field.getName());
+			// }
+			Object[] rowValues;
+			// 一条条取出path文件中记录
+			while ((rowValues = reader.nextRecord()) != null)
+			{
+				Student student = new Student();
+				for (int i = 0; i < rowValues.length; i++)
+				{
+					setParm(student, reader.getField(i).getName().toString(),
+							rowValues[i].toString());
+				}
+				if (convertFlag)
+				{
+					sDAO.save(student);
+					correctCount++;
+				} else
+				{
+					System.out.println("此条记录有错误，请修正后重新导入，错误记录信息如下：");
+					System.out.println(student.getNo() + ":"
+							+ student.getName() + ":" + student.getSex() + ":"
+							+ student.getAge() + ":" + student.getScore() + ":"
+							+ student.getEduTime());
+					convertFlag = true;
+					errorCount++;
+				}
+			}
+			System.out.println();
+			System.out.println("导入完毕");
+			System.out.println("正确导入记录条数：" + correctCount);
+			System.out.println("错误记录条数：" + errorCount);
+			System.out.println();
+			if (correctCount > 0)
+				result = true;
+
+			errorCount = 0;
+			correctCount = 0;
+			convertFlag = true;
+			
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		} finally
+		{
+			try
+			{
+
+				fis.close();
+
+			} catch (Exception e)
+			{
+			}
+
+		}
+
+		return result;
 	}
 
 	private void setParm(Student student, String parm, String value)
 	{
+		// System.out.println(parm);
 		SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
 		try
 		{
@@ -139,18 +228,27 @@ public class FileConvertImpl implements FileConvert
 
 			} else if ("age".equals(parm))
 			{
+				value = ageMng(value);
 				student.setAge(Integer.parseInt(value));
+
 			} else if ("score".equals(parm))
 			{
 				student.setScore(Double.parseDouble(value));
 			} else if ("eduTime".equals(parm))
 			{
+				if (value.contains("CST"))
+				{
+					SimpleDateFormat sdfCST = new SimpleDateFormat(
+							"EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
+					Date d = sdfCST.parse(value);
+					Calendar c = Calendar.getInstance();
+					c.setTime(d);
+					value = new SimpleDateFormat("yyyy-MM-dd").format(c
+							.getTime());
+				}
 
-				// // Date date = sdf.parse("2005-04-22");
 				java.util.Date cDate = sdf.parse(value);
 				java.sql.Date dd = new java.sql.Date(cDate.getTime());
-
-				// System.out.println(value + ":" + dd);
 				student.setEduTime(dd);
 
 			}
@@ -158,18 +256,16 @@ public class FileConvertImpl implements FileConvert
 		} catch (Exception e)
 		{
 			convertFlag = false;
+			e.printStackTrace();
 		}
 	}
 
-	/**
-	 * DBF处理
-	 * 
-	 * @param fileName
-	 * @return
-	 */
-	private boolean DBFConvert(String fileName)
+	private String ageMng(String age)
 	{
-		System.out.println("DBFConvert");
-		return false;
+		if (".0".equals(age.substring(age.length() - 2, age.length())))
+			return age.substring(0, age.length() - 2);
+		else
+			return age;
+
 	}
 }
