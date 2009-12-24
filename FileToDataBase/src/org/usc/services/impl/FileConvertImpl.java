@@ -2,22 +2,15 @@ package org.usc.services.impl;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-
-import jxl.Cell;
 import jxl.Sheet;
 import jxl.Workbook;
-
 import org.usc.daos.Student;
 import org.usc.daos.StudentDAO;
 import org.usc.services.FileConvert;
-
-import com.linuxense.javadbf.DBFField;
 import com.linuxense.javadbf.DBFReader;
 
 public class FileConvertImpl implements FileConvert
@@ -193,6 +186,12 @@ public class FileConvertImpl implements FileConvert
 		return result;
 	}
 
+	/**
+	 * 设置属性
+	 * @param student
+	 * @param parm
+	 * @param value
+	 */
 	private void setParm(Student student, String parm, String value)
 	{
 		// System.out.println(parm);
