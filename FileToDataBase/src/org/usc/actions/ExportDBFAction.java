@@ -38,6 +38,7 @@ public class ExportDBFAction extends ActionSupport
 	/**
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public String execute()
 	{
 
@@ -60,13 +61,14 @@ public class ExportDBFAction extends ActionSupport
 
 		fields[3] = new DBFField();
 		fields[3].setName("age");
-		fields[3].setDataType(DBFField.FIELD_TYPE_N);
+		fields[3].setDataType(DBFField.FIELD_TYPE_N); 
 		fields[3].setFieldLength(20);
 
 		fields[4] = new DBFField();
 		fields[4].setName("score");
-		fields[4].setDataType(DBFField.FIELD_TYPE_F);
+		fields[4].setDataType(DBFField.FIELD_TYPE_N);
 		fields[4].setFieldLength(20);
+		fields[4].setDecimalCount(1);
 
 		fields[5] = new DBFField();
 		fields[5].setName("eduTime");
@@ -87,12 +89,9 @@ public class ExportDBFAction extends ActionSupport
 				rowData[0] = stu.getNo();
 				rowData[1] = stu.getName();
 				rowData[2] = stu.getSex();
-//				rowData[3] = new Double(20);
-//				rowData[4] = new Double(90);
 				rowData[3] = new Double(stu.getAge());
 				rowData[4] = new Double(stu.getScore());
-				rowData[5] = new java.util.Date(stu.getEduTime().getDate());
-//				rowData[5] = stu.getEduTime();
+				rowData[5] = stu.getEduTime();
 				
 				writer.addRecord(rowData);
 			}
