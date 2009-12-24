@@ -61,35 +61,15 @@ public class FileConvertImpl implements FileConvert
 			jxl.Workbook rwb = Workbook.getWorkbook(is);
 			// 获取第一张Sheet表
 			Sheet rs = rwb.getSheet(0);
-
-			// 获取第一行，第一列的值
-			Cell c00 = rs.getCell(0, 0);
-			String strc00 = c00.getContents();
-			// 获取第一行，第二列的值
-			Cell c10 = rs.getCell(1, 0);
-			String strc10 = c10.getContents();
-			// 获取第二行，第二列的值
-			// Cell c11 = rs.getCell(1, 1);
-			// String strc11 = c11.getContents();
-			int Columns = rs.getColumns();
-
-			// System.out.println("Cell(0, 0)" + " value : " + strc00 +
-			// "; type : " + c00.getType());
-			// System.out.println("Cell(1, 0)" + " value : " + strc10 +
-			// "; type : " + c10.getType());
+			int Columns = rs.getColumns();//获取行数
 			for (int i = 1; i < rs.getRows(); i++)
 			{
 				Student student = new Student();
 				for (int j = 0; j < Columns; j++)
 				{
-					// System.out.print(rs.getCell(j,i).getContents()+"	");
-					// System.out.println(rs.getCell(j, 0).getContents());
 					setParm(student, rs.getCell(j, 0).getContents(), rs
 							.getCell(j, i).getContents());
 				}
-				// System.out.println(student.getNo() + ":" + student.getName()
-				// + ":" + student.getSex() + ":" + student.getAge() + ":"
-				// + student.getScore() + ":" + student.getEduTime());
 				if (convertFlag)
 				{
 					sDAO.save(student);
@@ -104,10 +84,7 @@ public class FileConvertImpl implements FileConvert
 					convertFlag = true;
 					errorCount++;
 				}
-				// System.out.println();
 			}
-			// System.out.println("Cell(1, 1)" + " value : " + strc11 +
-			// "; type : " + c11.getType());
 			System.out.println();
 			System.out.println("导入完毕");
 			System.out.println("正确导入记录条数："+correctCount);

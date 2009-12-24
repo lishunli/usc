@@ -14,7 +14,12 @@ import org.usc.daos.Student;
 import org.usc.daos.StudentDAO;
 
 import com.opensymphony.xwork2.ActionSupport;
-
+/**
+ * 从MySql数据库导出为Excel格式文件 
+ * 
+ * @author ShunLi
+ * @Time 2009-12-24
+ */
 public class ExportXLSAction extends ActionSupport
 {
 	private StudentDAO sDAO;

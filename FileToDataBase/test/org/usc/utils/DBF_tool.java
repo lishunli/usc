@@ -298,7 +298,7 @@ public class DBF_tool {
 		/************************************************/
 		System.out.println("向dbf文件中添加内容 ...");
 		String dbfLine;//dbf每行的内容，filed之间以","分隔
-		dbfLine = "20064440150,李顺利,男,20,95.5,88-12-9";
+		dbfLine = "20064440151,李顺利,男,20,95.5,88-12-9";
 		dbf.writeDBFLine(dbfLine);
 		dbfLine = "20064440150,李顺利,男,20,95.5,88-12-9";
 		dbf.writeDBFLine(dbfLine);

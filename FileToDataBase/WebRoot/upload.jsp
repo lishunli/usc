@@ -2,23 +2,29 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <html>
 	<head>
-		<title>upload</title>
+		<title>Excel或DBF文件导入MySql数据库</title>
 	</head>
 	<body>
-		<!--<h3><font color="red">上传文件类型后缀为doc,ppt,xls,pdf,txt,java，每个文件大小不能大于50M</font></h3>-->
 
 		<table align="center" width="50%">
 			<tr>
 				<td>
 
-					<!--		<s:actionerror cssStyle="color:red"/>-->
 					<s:fielderror cssStyle="color:red" />
 
 				</td>
 			</tr>
 		</table>
+		<br>
+		<p align="right">
+			<a href="index.jsp">回到首页</a>
+		</p>
+		<br>
+		<br>
+		<br>
+
 		<h1 align="center">
-			Excel或DBF文件导入数据库（MySql）
+			Excel或DBF文件导入MySql数据库
 		</h1>
 		<s:form action="upload.action" theme="simple" method="post"
 			enctype="multipart/form-data">
@@ -26,7 +32,7 @@
 			<table align="center" width="50%" border="1">
 				<tr>
 					<td>
-						导入源文件
+						导入数据文件
 					</td>
 					<td>
 						<s:file name="upload"></s:file>
@@ -34,33 +40,22 @@
 				</tr>
 				<tr>
 					<td>
-						<s:submit value=" 确认 "></s:submit>
+
 					</td>
 					<td>
-						<s:reset value=" 重置 "></s:reset>
+						<s:submit value=" 导入 "></s:submit>
 					</td>
 				</tr>
 
 			</table>
 
 		</s:form>
-		<hr><hr>
-		<br>
 		<center>
-		<h1><a href="exportXLS.action">导出为Excel文件</a>	</h1>
-		<h1><a href="exportDBF.action">导出为DBF文件</a>	</h1>
+			<br>
+			<br>
+			<br>
+			Copyright @ 2009-2010 章爱国. All Rights Reserved
 		</center>
-		
-		<br>
-		<center>
-			Copyright @ 2009-2010 林淼. All Rights Reserved
-		</center>
-		
-		
-	
-		
-		
-
 	</body>
 
 

@@ -29,15 +29,16 @@
 
 		<action name="fileConver" class="FileConvertAction">
 			<result name="input" type="redirect">/upload.jsp</result>
-			<result name="success">/upload_success.jsp</result>
+			<result name="success">/index.jsp</result>
 		</action>
 
 
 		<action name="exportXLS" class="ExportXLSAction">
-			<result name="success">upload.jsp</result>
+			<result name="success">index.jsp</result>
 		</action>
 
-		<action name="exportDBF" class="org.usc.actions.ExportDBFAction">
+		<action name="exportDBF" class="ExportDBFAction">
+			<result name="success">index.jsp</result>
 		</action>
 		
 	</package>

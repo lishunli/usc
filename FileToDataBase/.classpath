@@ -79,6 +79,6 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jdom.jar"/>
 	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.struts2.MYECLIPSE_STRUTS21_CORE"/>
 	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.struts2.MYECLIPSE_STRUTS21_SPRING"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/javadbf-0.4.0.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/javadbf.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>

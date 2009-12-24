@@ -50,5 +50,11 @@
 		<property name="sDAO" ref="StudentDAO"></property>
 	</bean>
 	
+	<bean id="ExportDBFAction" class="org.usc.actions.ExportDBFAction">
+		<property name="sDAO" ref="StudentDAO"></property>
+	</bean>
+	
+	
+	
 	
 </beans>
