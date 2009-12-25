@@ -3,7 +3,6 @@ package org.usc.key.gen;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.util.Scanner;
 
 /**
@@ -64,12 +63,21 @@ public class MyEclipseKeyGen
 		k = ac.length;
 		while (j < k)
 		{
-			i = (31 * i) + ac[j];
+			i = (31 * i) + ac[j];//加密算法，不理解为什么这样子？有可能就是这样子定义的
 			j++;
 		}
-		return Math.abs(i);
+		System.out.println();
+		return Math.abs(i);//取绝对值
 	}
 
+	/**
+	 * 变化原则是
+	 * 把数字（10个）或者字母表（大小写个26个）折半对调（两个相互改变），也即
+	 * 0与5对调（0变5，5变0）
+	 * A与N，a与n对调
+	 * @param 原字符串
+	 * @return 变化后的字符串
+	 */
 	private String change(String s)
 	{
 		byte[] abyte0;
@@ -84,7 +92,7 @@ public class MyEclipseKeyGen
 		while (i < k)
 		{
 			j = abyte0[i];
-			if ((j >= 48) && (j <= 57))// 0-9
+			if ((j >= 48) && (j <= 57))// 0-9,实现01234和56789相应的相互对调，也即0与5对调，1与6对调
 			{
 				j = (((j - 48) + 5) % 10) + 48;
 			} else if ((j >= 65) && (j <= 90))// A-Z
@@ -94,8 +102,8 @@ public class MyEclipseKeyGen
 			{
 				j = (((j - 97) + 13) % 26) + 97;
 			}
-			ac[i] = (char) j;
-			i++;
+			ac[i] = (char) j;   
+			i++;   
 		}
 		return String.valueOf(ac);
 	}
