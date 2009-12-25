@@ -66,7 +66,6 @@ public class MyEclipseKeyGen
 			i = (31 * i) + ac[j];//加密算法，不理解为什么这样子？有可能就是这样子定义的
 			j++;
 		}
-		System.out.println();
 		return Math.abs(i);//取绝对值
 	}
 
