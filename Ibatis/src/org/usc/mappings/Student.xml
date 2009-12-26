@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Student">
+
+	<!-- Use type aliases to avoid typing the full classname every time. -->
+	<typeAlias alias="Student" type="org.usc.beans.Student" />
+
+	<!--
+		Result maps describe the mapping between the columns returned from a
+		query, and the class properties. A result map isn't necessary if the
+		columns (or aliases) match to the properties exactly.
+	-->
+	<resultMap id="StudentResult" class="Student">
+		<result property="no" column="no" />
+		<result property="name" column="name" />
+		<result property="sex" column="sex" />
+		<result property="age" column="age" />
+		<result property="score" column="score" />
+		<result property="eduTime" column="eduTime" />
+	</resultMap>
+
+	<!--
+		Select with no parameters using the result map for Student class.
+	-->
+	<select id="selectAllStudents" resultClass="Student">
+		select * from student
+	</select>
+
+	<!--   A simpler select example without the result map.  Note the -->
+	<!--
+		aliases to match the properties of the target result class.
+	-->
+	<select id="selectStudentById" parameterClass="int" resultClass="Student">
+		select * from student where no = #no#
+	</select>
+
+	<!--	   Insert example, using the Student parameter class -->
+	<insert id="insertStudent" parameterClass="Student">
+		insert into
+		student(no,name,sex,age,score,eduTime)
+		values
+		(#no#,#name#,#sex#,#age#,#score#,#eduTime#)
+	 </insert>
+
+	<!--	   Delete example, using an integer as the parameter class -->
+	<delete id="deleteStudentById" parameterClass="int">
+		delete from student where no = #no#
+	 </delete>
+</sqlMap>

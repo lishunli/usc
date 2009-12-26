@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="Ibatis"
+  id="myeclipse.1261802206406"
+  context-root="/Ibatis"
+  j2ee-spec="5.0"
+  archive="Ibatis.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
