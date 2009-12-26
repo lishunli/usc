@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-module
   type="WEB"
-  name="Ibatis2"
+  name="Ibatis3"
   id="myeclipse.1261802206406"
   context-root="/Ibatis"
   j2ee-spec="5.0"
-  archive="Ibatis2.war">
+  archive="Ibatis3.war">
   <attributes>
     <attribute name="webrootdir" value="WebRoot" />
   </attributes>
