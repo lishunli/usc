@@ -3,11 +3,11 @@
   type="WEB"
   name="Ibatis2"
   id="myeclipse.1261802206406"
-  context-root="/Ibatis"
+  context-root="/Ibatis2"
   j2ee-spec="5.0"
   archive="Ibatis2.war">
   <attributes>
-    <attribute name="webrootdir" value="WebRoot" />
+    <attribute name="webrootdir" value="/WebRoot" />
   </attributes>
 </project-module>
 
