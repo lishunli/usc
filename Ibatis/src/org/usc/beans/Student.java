@@ -8,6 +8,14 @@ import java.util.Date;
  */
 public class Student
 {
+	/*
+	 * 学号
+	 * 姓名
+	 * 性别
+	 * 年龄
+	 * 分数
+	 * 入学日期
+	 */
 	private Integer no;
 	private String name;
 	private String sex;

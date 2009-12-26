@@ -31,7 +31,7 @@ public class TestIbatis
 //		 * 3.插入一条学生信息
 //		 */
 //		Student student = new Student();
-//		student.setNo(22);
+//		student.setNo(21);
 //		student.setName("HelloWorld");
 //		student.setSex("女");
 //		student.setAge(20);
@@ -39,12 +39,30 @@ public class TestIbatis
 //		student.setEduTime(new Date());
 //		studentDAO.addStudent(student);
 		
-		/**
-		 * 4.根据no删除学生信息
-		 */
-		studentDAO.deleteStudentById(22);
+//		/**
+//		 * 4.根据no删除学生信息
+//		 */
+//		studentDAO.deleteStudentById(21);
 		
+//		/**
+//		 * 5.根据no更新学生信息
+//		 */
+//		Student student = new Student();
+//		student.setNo(21);
+//		student.setName("呵呵");
+//		student.setSex("女");
+//		student.setAge(18);
+//		student.setScore(100.0);
+//		student.setEduTime(new Date());
+//		studentDAO.updateStudentById(student);
 		
+//		/**
+//		 * 6.根据姓名模糊查询学生信息
+//		 */
+//		for(Student student:studentDAO.queryStudentByName("李"))
+//		{
+//			System.out.println(student);
+//		}
 		
 	}
 }
