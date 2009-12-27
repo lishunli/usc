@@ -1,9 +1,12 @@
 package org.usc.tankwar.client;
 
+import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.DatagramSocket;
 import java.net.Socket;
+import java.net.SocketException;
 import java.net.UnknownHostException;
 
 /**
@@ -16,12 +19,21 @@ public class NetClient
 {
 	TankClient tc;
 	private static int UDP_PORT_START = 2223;
+	
 	private int udpPort;
+	DatagramSocket ds = null;
 
 	public NetClient(TankClient tc)
 	{
 		udpPort = UDP_PORT_START++;
 		this.tc = tc;
+		try
+		{
+			ds = new DatagramSocket(udpPort);
+		} catch (SocketException e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	public void conncet(String IP, int port)
@@ -59,11 +71,15 @@ public class NetClient
 					e.printStackTrace();
 				}
 		}
+		
+		TankNewMsg msg = new TankNewMsg(tc.tank);
+		send(msg);
 	}
 
-	public static void main(String[] args)
+	public void send(TankNewMsg msg)
 	{
-
+		msg.send(ds, "127.0.0.1", udpPort);
 	}
+	
 
 }

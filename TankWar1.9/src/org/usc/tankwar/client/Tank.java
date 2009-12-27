@@ -21,8 +21,8 @@ public class Tank
 	public static final int WIDTH = 30;
 	public static final int HEIGHT = 30;
 	TankClient tankClient;
-	private int x;
-	private int y;// 坦克的坐标
+	int x;
+	int y;// 坦克的坐标
 
 	private boolean good;
 	public boolean isGood()
@@ -54,7 +54,7 @@ public class Tank
 	private boolean bR = false;
 	private boolean bD = false;
 
-	private Direction dir = Direction.STOP;
+	Direction dir = Direction.STOP;
 	private Direction ptDir = Direction.D;// 炮筒
 	private int step = r.nextInt(12)+3;
 
