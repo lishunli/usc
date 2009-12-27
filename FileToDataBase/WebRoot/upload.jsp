@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ include file="shortcut_icon.jsp" %>
 <html>
 	<head>
 		<title>Excel或DBF文件导入MySql数据库</title>

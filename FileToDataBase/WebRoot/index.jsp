@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ include file="shortcut_icon.jsp" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -8,6 +9,7 @@
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
 <html>
 	<head>
 		<base href="<%=basePath%>">
@@ -21,6 +23,7 @@
 		<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
+<%--		<link rel="shortcut icon" href="imgs/favicon.ico" />--%>
 	</head>
 
 	<body>
