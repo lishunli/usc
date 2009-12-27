@@ -31,7 +31,7 @@ public class TestIbatis
 //		 * 3.插入一条学生信息
 //		 */
 //		Student student = new Student();
-//		student.setNo(21);
+////		student.setNo(21);//注释掉此句的话，就有MySQL自动生成主键（自动增长）
 //		student.setName("HelloWorld");
 //		student.setSex("女");
 //		student.setAge(20);
