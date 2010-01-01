@@ -33,11 +33,11 @@ public class StudentDaoImpl implements IStudentDAO
 	{
 		try
 		{
-			Reader reader = Resources
-					.getResourceAsReader("org/usc/mappings/SqlMapConfig.xml");
+			Reader reader = Resources.getResourceAsReader("org/usc/mappings/SqlMapConfig.xml");
 			sqlMapClient = SqlMapClientBuilder.buildSqlMapClient(reader);
 			reader.close();
-		} catch (IOException e)
+		}
+		catch (IOException e)
 		{
 			e.printStackTrace();
 		}
@@ -51,7 +51,8 @@ public class StudentDaoImpl implements IStudentDAO
 		try
 		{
 			sqlMapClient.insert("insertStudent", student);
-		} catch (SQLException e)
+		}
+		catch (SQLException e)
 		{
 			e.printStackTrace();
 		}
@@ -73,7 +74,8 @@ public class StudentDaoImpl implements IStudentDAO
 		try
 		{
 			System.out.println(sqlMapClient.delete("deleteStudentById", no));
-		} catch (SQLException e)
+		}
+		catch (SQLException e)
 		{
 			e.printStackTrace();
 		}
@@ -88,7 +90,8 @@ public class StudentDaoImpl implements IStudentDAO
 		try
 		{
 			studentList = sqlMapClient.queryForList("selectAllStudents");
-		} catch (SQLException e)
+		}
+		catch (SQLException e)
 		{
 			e.printStackTrace();
 		}
@@ -103,9 +106,9 @@ public class StudentDaoImpl implements IStudentDAO
 		Student student = null;
 		try
 		{
-			student = (Student) sqlMapClient.queryForObject(
-					"selectStudentById", no);
-		} catch (SQLException e)
+			student = (Student) sqlMapClient.queryForObject("selectStudentById", no);
+		}
+		catch (SQLException e)
 		{
 			e.printStackTrace();
 		}
@@ -121,7 +124,8 @@ public class StudentDaoImpl implements IStudentDAO
 		try
 		{
 			studentList = sqlMapClient.queryForList("selectStudentByName", name);
-		} catch (SQLException e)
+		}
+		catch (SQLException e)
 		{
 			e.printStackTrace();
 		}
@@ -135,9 +139,9 @@ public class StudentDaoImpl implements IStudentDAO
 	{
 		try
 		{
-			System.out.println(sqlMapClient
-					.update("updateStudentById", student));
-		} catch (SQLException e)
+			System.out.println(sqlMapClient.update("updateStudentById", student));
+		}
+		catch (SQLException e)
 		{
 			e.printStackTrace();
 		}

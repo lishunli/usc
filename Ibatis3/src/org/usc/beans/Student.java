@@ -4,17 +4,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Student entity. @author MyEclipse Persistence Tools
+ * 学生类
+ * 
+ * @author ShunLi
+ * @Time 2010-1-1
  */
 public class Student
 {
 	/*
-	 * 学号
-	 * 姓名
-	 * 性别
-	 * 年龄
-	 * 分数
-	 * 入学日期
+	 * 学号 姓名 性别 年龄 分数 入学日期
 	 */
 	private Integer no;
 	private String name;
@@ -23,7 +21,7 @@ public class Student
 	private Double score;
 	private Date eduTime;
 	private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-	
+
 	// Constructors
 
 	public Integer getNo()
@@ -100,8 +98,7 @@ public class Student
 	}
 
 	/** full constructor */
-	public Student(Integer no, String name, String sex, Integer age,
-			Double score, Date eduTime)
+	public Student(Integer no, String name, String sex, Integer age, Double score, Date eduTime)
 	{
 		this.no = no;
 		this.name = name;
@@ -110,11 +107,11 @@ public class Student
 		this.score = score;
 		this.eduTime = eduTime;
 	}
-	
+
 	@Override
 	public String toString()
 	{
-		String result = "no:"+no+",name:"+name+",age:"+age+",sex:"+sex+",score"+score+",eduTime:"+sdf.format(eduTime);
+		String result = "no:" + no + ",name:" + name + ",age:" + age + ",sex:" + sex + ",score" + score + ",eduTime:" + sdf.format(eduTime);
 		return result;
 	}
 
