@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE sqlMapConfig 
     PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN" 
-    "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
-
+    "./sql-map-config-2.dtd">
+	<!--
+		"./sql-map-config-2.dtd"
+		.表示当前路径，以前的是一个网址http://www.ibatis.com/dtd/sql-map-config-2.dtd，现在已经不能访问了
+	-->
+	<!--
+		dtd的目录在
+		"ibatis-2.3.0.677\com.ibatis.sqlmap.engine.builder.xml\sql-map-config-2.dtd"
+		"ibatis-2.3.0.677\com.ibatis.sqlmap.engine.builder.xml\sql-map-2.dtd"
+	-->
 <sqlMapConfig>
 	<transactionManager type="JDBC" commitRequired="false">
 		<dataSource type="SIMPLE">
 			<property name="JDBC.Driver" value="com.mysql.jdbc.Driver" />
-			<property name="JDBC.ConnectionURL" value="jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&amp;amp;characterEncoding=utf-8" />
+			<property name="JDBC.ConnectionURL"
+				value="jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&amp;amp;characterEncoding=utf-8" />
 			<property name="JDBC.Username" value="root" />
 			<property name="JDBC.Password" value="lishunli" />
 		</dataSource>
@@ -46,3 +55,6 @@
 <!---->
 	<!--	<sqlMap resource="com/ctgusec/zhupan/maps/User.xml" />-->
 </sqlMapConfig>
+
+    
+

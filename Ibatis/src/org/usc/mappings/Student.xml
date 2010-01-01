@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <!DOCTYPE sqlMap      
-    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
-    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"  
+    "./sql-map-2.dtd">
+	<!--    "http://ibatis.apache.org/dtd/sql-map-2.dtd" 原网址已不能访问-->
+	<!--
+		dtd的目录在
+		"ibatis-2.3.0.677\com.ibatis.sqlmap.engine.builder.xml\sql-map-config-2.dtd"
+		"ibatis-2.3.0.677\com.ibatis.sqlmap.engine.builder.xml\sql-map-2.dtd"
+	-->
 
 <sqlMap namespace="Student">
 
@@ -65,7 +71,8 @@
 		age=#age#,
 		score=#score#,
 		eduTime=#eduTime#
-		where no = #no#
+		where
+		no = #no#
 	</update>
 
 
