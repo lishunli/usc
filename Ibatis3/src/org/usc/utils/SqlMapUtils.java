@@ -38,7 +38,7 @@ public class SqlMapUtils
 		try
 		{
 			reader = Resources.getResourceAsReader(CONFIG_FILE_PATH);
-			sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader, "development_mysql");
+			sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
 			session = sqlSessionFactory.openSession();
 		}
 		catch (IOException e)
@@ -81,15 +81,14 @@ public class SqlMapUtils
 			{
 				instance = new SqlMapUtils();
 			}
-			System.out.println("123111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111dd");
 		}
 
 		return instance;
 	}
 
 	/**
-	 * 
-	 * @return
+	 * 获得SqlSession
+	 * @return SqlSession
 	 */
 	public SqlSession getSession()
 	{
@@ -100,5 +99,11 @@ public class SqlMapUtils
 
 		return session;
 	}
+	
+//	public static void main(String[] args)
+//	{
+//		SqlSession session = SqlMapUtils.getInstance().getSession();
+//
+//	}
 
 }

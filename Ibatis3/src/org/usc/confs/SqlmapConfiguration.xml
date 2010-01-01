@@ -2,29 +2,34 @@
 <!DOCTYPE configuration PUBLIC "-//ibatis.apache.org//DTD Config 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-config.dtd">
 <configuration>
 	<properties resource="org/usc/confs/Database.properties" />
+	
+	<typeAliases>
+		<typeAlias alias="Student" type="org.usc.beans.Student"/>
+	</typeAliases>
+
 	<environments default="development_mysql">
 		<environment id="development_mysql">
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
-				<property name="driver" value="${mysql.database.driver}"/>
-				<property name="url" value="${mysql.database.url}"/>
-				<property name="username" value="${mysql.database.user}"/>
-				<property name="password" value="${mysql.database.password}"/>
+				<property name="driver" value="${mysql.database.driver}" />
+				<property name="url" value="${mysql.database.url}" />
+				<property name="username" value="${mysql.database.user}" />
+				<property name="password" value="${mysql.database.password}" />
 			</dataSource>
 		</environment>
-		
+
 		<environment id="development_oracle">
-			<transactionManager type="JDBC"/>
+			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
-				<property name="driver" value="${oracle.database.driver}"/>
-				<property name="url" value="${oracle.database.url}"/>
-				<property name="username" value="${oracle.database.user}"/>
-				<property name="password" value="${oracle.database.password}"/>
+				<property name="driver" value="${oracle.database.driver}" />
+				<property name="url" value="${oracle.database.url}" />
+				<property name="username" value="${oracle.database.user}" />
+				<property name="password" value="${oracle.database.password}" />
 			</dataSource>
 		</environment>
 	</environments>
 	
 	<mappers>
-		<mapper resource="org/usc/mappings/Student.xml"/>
+		<mapper resource="org/usc/confs/Student.xml" />
 	</mappers>
 </configuration> 
