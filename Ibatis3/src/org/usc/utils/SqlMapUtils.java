@@ -40,6 +40,12 @@ public class SqlMapUtils
 			reader = Resources.getResourceAsReader(CONFIG_FILE_PATH);
 			sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
 			session = sqlSessionFactory.openSession();
+			/**
+			 * 需要注意的是如果TransactionType设置JDBC的话，iBATIS 3默认Auto Commit为false,
+			 * 所以在执行完持久化操作后，需要调用session.commit()方法来提交事务，或是首先
+			 * 调用session.getConnection().setAutoCommit(true)来设置Auto Commit策略
+			 */
+			session.getConnection().setAutoCommit(true);
 		}
 		catch (IOException e)
 		{
@@ -88,6 +94,7 @@ public class SqlMapUtils
 
 	/**
 	 * 获得SqlSession
+	 * 
 	 * @return SqlSession
 	 */
 	public SqlSession getSession()
@@ -99,11 +106,11 @@ public class SqlMapUtils
 
 		return session;
 	}
-	
-//	public static void main(String[] args)
-//	{
-//		SqlSession session = SqlMapUtils.getInstance().getSession();
-//
-//	}
+
+	// public static void main(String[] args)
+	// {
+	// SqlSession session = SqlMapUtils.getInstance().getSession();
+	//
+	// }
 
 }

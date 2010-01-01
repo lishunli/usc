@@ -2,18 +2,57 @@
 
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD iBatis Mapper 3.0 //EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="Studnet">
-	<resultMap id="studentResultMap" type="Student">
-		<id property="no" column="no" />
-		<result property="sex" column="sex" />
-		<result property="age" column="age" />
-		<result property="score" column="score" />
-		<result property="eduTime" column="eduTime" />
-	</resultMap>
+<!--	<resultMap id="studentResultMap" type="Student">-->
+<!--		<id property="no" column="no" />-->
+<!--		<result property="name" column="name"/>-->
+<!--		<result property="sex" column="sex" />-->
+<!--		<result property="age" column="age" />-->
+<!--		<result property="score" column="score" />-->
+<!--		<result property="eduTime" column="eduTime" />-->
+<!--	</resultMap>-->
 
 	<!--查询所有学生信息-->
 	<select id="selectAllStudents" resultType="Student">
 		select * from student
 	</select>
+	
+	<!--根据no查询学生信息-->
+	<select id="selectStudentById" parameterType="int" resultType="Student" >
+		select * from student
+		where no = #{no}
+	</select>
+	
+	<!--根据姓名模糊查询学生信息	-->
+	<select id="selectStudentByName" parameterType="String" resultType="Student">
+		select * from student where name like #{name}
+	</select>
+	
+	
+	<!--	添加学生 -->
+	<insert id="insertStudent" parameterType="Student">
+		insert into
+		student(name,sex,age,score,eduTime)
+		values
+		(#{name},#{sex},#{age},#{score},#{eduTime})
+	</insert>
+	
+	<!--	根据no删除学生信息 -->
+	<delete id="deleteStudentById" parameterType="int">
+		delete from
+		student where no = #{no}
+	</delete>
 
+	<!--	   根据no更新学生信息-->
+	<update id="updateStudentById" parameterType="Student">
+		update Student
+		set
+		name=#{name},
+		sex=#{sex},
+		age=#{age},
+		score=#{score},
+		eduTime=#{eduTime}
+		where
+		no = #{no}
+	</update>
 
 </mapper>

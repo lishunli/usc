@@ -2,11 +2,15 @@
 <!DOCTYPE configuration PUBLIC "-//ibatis.apache.org//DTD Config 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-config.dtd">
 <configuration>
 	<properties resource="org/usc/confs/Database.properties" />
-	
-	<typeAliases>
-		<typeAlias alias="Student" type="org.usc.beans.Student"/>
-	</typeAliases>
 
+	<settings>
+		<setting name="cacheEnabled" value="false" />
+		<setting name="lazyLoadingEnabled" value="false" />
+	</settings>
+
+	<typeAliases>
+		<typeAlias alias="Student" type="org.usc.beans.Student" />
+	</typeAliases>
 	<environments default="development_mysql">
 		<environment id="development_mysql">
 			<transactionManager type="JDBC" />
@@ -28,7 +32,7 @@
 			</dataSource>
 		</environment>
 	</environments>
-	
+
 	<mappers>
 		<mapper resource="org/usc/confs/Student.xml" />
 	</mappers>
