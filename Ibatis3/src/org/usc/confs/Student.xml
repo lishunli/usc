@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD iBatis Mapper 3.0 //EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<!--namespace必须写-->
 <mapper namespace="Studnet">
 <!--	<resultMap id="studentResultMap" type="Student">-->
 <!--		<id property="no" column="no" />-->

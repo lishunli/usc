@@ -18,12 +18,27 @@ import org.apache.log4j.Logger;
  */
 public class SqlMapUtils
 {
+	/**
+	 * 日志管理器
+	 */
 	private static final Logger logger = LogManager.getLogger(SqlMapUtils.class);
 
+	/**
+	 * SqlmapConfiguration配置文件路径
+	 */
 	private static final String CONFIG_FILE_PATH = "org/usc/confs/SqlmapConfiguration.xml";
 
+	/**
+	 * SqlSessionFactory
+	 */
 	private SqlSessionFactory sqlSessionFactory = null;
+	/**
+	 * SqlSession
+	 */
 	private SqlSession session = null;
+	/**
+	 * 静态的实例化对象
+	 */
 	private static SqlMapUtils instance = null;
 
 	/**
@@ -31,6 +46,9 @@ public class SqlMapUtils
 	 * 中的静态类SqlMapClientBuilder也被SqlSessionFactoryBuilder所替代，
 	 * 变为了非静态的，此外最重要的是iBATIS3中需要使用openSession()方法来
 	 * 返回SqlSession的实例，至于上述代码中build方法的第二参数 “development_mysql”是环境配置ID
+	 */
+	/**
+	 * 私有的构造
 	 */
 	private SqlMapUtils()
 	{

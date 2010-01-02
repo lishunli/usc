@@ -11,15 +11,33 @@ import java.util.Date;
  */
 public class Student
 {
-	/*
-	 * 学号 姓名 性别 年龄 分数 入学日期
+	/**
+	 * 学号 
 	 */
 	private Integer no;
+	/**
+	 * 姓名 
+	 */
 	private String name;
+	/**
+	 * 性别 
+	 */
 	private String sex;
+	/**
+	 * 年龄 
+	 */
 	private Integer age;
+	/**
+	 * 分数 
+	 */
 	private Double score;
+	/**
+	 * 入学日期
+	 */
 	private Date eduTime;
+	/**
+	 * 转化日期格式yyyy-MM-dd
+	 */
 	private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 	// Constructors
@@ -108,6 +126,9 @@ public class Student
 		this.eduTime = eduTime;
 	}
 
+	/**
+	 * 重写student的toString方法，好方便以后打印student对象
+	 */
 	@Override
 	public String toString()
 	{
