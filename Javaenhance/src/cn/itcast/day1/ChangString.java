@@ -10,12 +10,12 @@ import java.lang.reflect.*;
  */
 public class ChangString
 {
-	public static void main(String[] args)throws Exception
+	public static void main(String[] args) throws Exception
 	{
 		StringObj obj = new StringObj("ball", "baskball", "ShunLi");
-		for(Field f: obj.getClass().getFields())
+		for (Field f : obj.getClass().getFields())
 		{
-			if(f.getType() == String.class)
+			if (f.getType() == String.class)
 			{
 				String oldStr = (String) f.get(obj);
 				String newStr = oldStr.replace('b', 'a');

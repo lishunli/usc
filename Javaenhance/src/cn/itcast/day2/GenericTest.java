@@ -67,8 +67,7 @@ public class GenericTest
 		Number x1 = add(3.5, 3);
 		Object x2 = add(3, "abc");
 
-		swap(new String[]
-		{ "abc", "xyz", "itcast" }, 1, 2);
+		swap(new String[] { "abc", "xyz", "itcast" }, 1, 2);
 		// swap(new int[]{1,3,5,4,5},3,4);
 
 		Object obj = "abc";
