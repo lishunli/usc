@@ -3,11 +3,11 @@
   type="WEB"
   name="USCNetStore"
   id="myeclipse.1249272222781"
-  context-root="/NetStore"
+  context-root="/USCNetStore"
   j2ee-spec="5.0"
   archive="USCNetStore.war">
   <attributes>
-    <attribute name="webrootdir" value="WebRoot" />
+    <attribute name="webrootdir" value="/WebRoot" />
   </attributes>
 </project-module>
 
