@@ -35,9 +35,7 @@ public class Orderform implements java.io.Serializable
 	}
 
 	/** minimal constructor */
-	public Orderform(Date orderFormTime, String realName, String address,
-			String postCode, String mobile, String orderFormState,
-			Integer cargoListId)
+	public Orderform(Date orderFormTime, String realName, String address, String postCode, String mobile, String orderFormState, Integer cargoListId)
 	{
 		this.orderFormTime = orderFormTime;
 		this.realName = realName;
@@ -49,10 +47,8 @@ public class Orderform implements java.io.Serializable
 	}
 
 	/** full constructor */
-	public Orderform(Custom custom, Date orderFormTime, String realName,
-			String address, String postCode, String mobile, String phone,
-			String orderFormState, Integer cargoListId, Set consumptiondetails,
-			Set orderstates, Set orderproductses)
+	public Orderform(Custom custom, Date orderFormTime, String realName, String address, String postCode, String mobile, String phone, String orderFormState,
+			Integer cargoListId, Set consumptiondetails, Set orderstates, Set orderproductses)
 	{
 		this.custom = custom;
 		this.orderFormTime = orderFormTime;

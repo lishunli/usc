@@ -106,7 +106,8 @@ public class SystemAdminImpl implements ISystemAdmin
 			book = bookDao.findById(entityID);// 找到book
 			book.setProductsPflag(flag);// 设置发布标志位
 			bookDao.merge(book);// 更新book
-		} else if (2 == productTypeID)
+		}
+		else if (2 == productTypeID)
 		{
 			digital = digitalDao.findById(entityID);// 找到数码
 			digital.setProductsPflag(flag);// 设置发布标志位
@@ -123,8 +124,7 @@ public class SystemAdminImpl implements ISystemAdmin
 		 * 1.通过实物ID和分类ID找到产品ID 2.通过产品ID在商品表中找到商品 3.返回商品的折扣
 		 */
 
-		for (Commodity commodity : commodityDao.findByProductsID(this
-				.getProductID(productTypeID, entityID)))
+		for (Commodity commodity : commodityDao.findByProductsID(this.getProductID(productTypeID, entityID)))
 		{
 			return commodity.getDiscount();
 		}
@@ -140,11 +140,9 @@ public class SystemAdminImpl implements ISystemAdmin
 		 * 1.通过实物ID和分类ID找到产品ID 2.通过产品ID在商品表中找到商品 3.通过商品ID在促销表中找到促销商品
 		 * 4.返回促销商品的优先级
 		 */
-		for (Commodity commodity : commodityDao.findByProductsID(getProductID(
-				productTypeID, entityID)))
+		for (Commodity commodity : commodityDao.findByProductsID(getProductID(productTypeID, entityID)))
 		{
-			for (Sale sale : saleDao.findByCommodityId(commodity
-					.getCommodityId()))
+			for (Sale sale : saleDao.findByCommodityId(commodity.getCommodityId()))
 			{
 				return sale.getPriority();
 			}
@@ -161,11 +159,9 @@ public class SystemAdminImpl implements ISystemAdmin
 		 * 1.通过实物ID和分类ID找到产品ID 2.通过产品ID在商品表中找到商品 3.通过商品ID在促销表中找到促销商品
 		 * 4.返回促销商品的促销价
 		 */
-		for (Commodity commodity : commodityDao.findByProductsID(getProductID(
-				productTypeID, entityID)))
+		for (Commodity commodity : commodityDao.findByProductsID(getProductID(productTypeID, entityID)))
 		{
-			for (Sale sale : saleDao.findByCommodityId(commodity
-					.getCommodityId()))
+			for (Sale sale : saleDao.findByCommodityId(commodity.getCommodityId()))
 			{
 				return sale.getSalePrice();
 			}
@@ -191,13 +187,11 @@ public class SystemAdminImpl implements ISystemAdmin
 	 */
 	public void setsaleFlag(int productTypeID, int entityID, int flag)
 	{
-		for (Commodity commodity : commodityDao.findByProductsID(getProductID(
-				productTypeID, entityID)))
+		for (Commodity commodity : commodityDao.findByProductsID(getProductID(productTypeID, entityID)))
 		{
 			commodity.setSaleFlag(flag);// 设置促销商品标志位
 			commodityDao.merge(commodity);// 更新
-			for (Sale sale : saleDao.findByCommodityId(commodity
-					.getCommodityId()))
+			for (Sale sale : saleDao.findByCommodityId(commodity.getCommodityId()))
 			{
 				saleDao.delete(sale);// 从促销表里删除
 			}
@@ -223,8 +217,7 @@ public class SystemAdminImpl implements ISystemAdmin
 	 */
 	public int getCommodityID(int productTypeID, int entityID)
 	{
-		for (Commodity commodity : commodityDao.findByProductsID(getProductID(
-				productTypeID, entityID)))
+		for (Commodity commodity : commodityDao.findByProductsID(getProductID(productTypeID, entityID)))
 		{
 			return commodity.getCommodityId();
 		}
@@ -241,7 +234,8 @@ public class SystemAdminImpl implements ISystemAdmin
 		{
 			Book book = (Book) bookDao.findById(EntityID);
 			return book.getPublishedPrice();
-		} else
+		}
+		else
 		{
 			Digital digital = (Digital) digitalDao.findById(EntityID);
 			return digital.getPublishedPrice();
@@ -258,7 +252,8 @@ public class SystemAdminImpl implements ISystemAdmin
 		{
 			Book book = (Book) bookDao.findById(EntityID);
 			return book.getBookName();
-		} else
+		}
+		else
 		{
 			Digital digital = (Digital) digitalDao.findById(EntityID);
 			return digital.getDigitalName();
@@ -275,11 +270,9 @@ public class SystemAdminImpl implements ISystemAdmin
 		 * 1.通过实物ID和分类ID找到产品ID 2.通过产品ID在商品表中找到商品 3.通过商品ID在促销表中找到促销商品
 		 * 4.修改促销商品的促销价和优先级
 		 */
-		for (Commodity commodity : commodityDao.findByProductsID(getProductID(
-				type, entityID)))
+		for (Commodity commodity : commodityDao.findByProductsID(getProductID(type, entityID)))
 		{
-			for (Sale sale : saleDao.findByCommodityId(commodity
-					.getCommodityId()))
+			for (Sale sale : saleDao.findByCommodityId(commodity.getCommodityId()))
 			{
 				if (!saleDao.findByPriority(priority).isEmpty())// 在促销表中有找到该优先级
 				{

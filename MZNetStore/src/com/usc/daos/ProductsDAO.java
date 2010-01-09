@@ -38,7 +38,8 @@ public class ProductsDAO extends HibernateDaoSupport
 		{
 			getHibernateTemplate().save(transientInstance);
 			log.debug("save successful");
-		} catch (RuntimeException re)
+		}
+		catch (RuntimeException re)
 		{
 			log.error("save failed", re);
 			throw re;
@@ -52,7 +53,8 @@ public class ProductsDAO extends HibernateDaoSupport
 		{
 			getHibernateTemplate().delete(persistentInstance);
 			log.debug("delete successful");
-		} catch (RuntimeException re)
+		}
+		catch (RuntimeException re)
 		{
 			log.error("delete failed", re);
 			throw re;
@@ -64,10 +66,10 @@ public class ProductsDAO extends HibernateDaoSupport
 		log.debug("getting Products instance with id: " + id);
 		try
 		{
-			Products instance = (Products) getHibernateTemplate().get(
-					"com.usc.daos.Products", id);
+			Products instance = (Products) getHibernateTemplate().get("com.usc.daos.Products", id);
 			return instance;
-		} catch (RuntimeException re)
+		}
+		catch (RuntimeException re)
 		{
 			log.error("get failed", re);
 			throw re;
@@ -80,10 +82,10 @@ public class ProductsDAO extends HibernateDaoSupport
 		try
 		{
 			List results = getHibernateTemplate().findByExample(instance);
-			log.debug("find by example successful, result size: "
-					+ results.size());
+			log.debug("find by example successful, result size: " + results.size());
 			return results;
-		} catch (RuntimeException re)
+		}
+		catch (RuntimeException re)
 		{
 			log.error("find by example failed", re);
 			throw re;
@@ -92,14 +94,13 @@ public class ProductsDAO extends HibernateDaoSupport
 
 	public List findByProperty(String propertyName, Object value)
 	{
-		log.debug("finding Products instance with property: " + propertyName
-				+ ", value: " + value);
+		log.debug("finding Products instance with property: " + propertyName + ", value: " + value);
 		try
 		{
-			String queryString = "from Products as model where model."
-					+ propertyName + "= ?";
+			String queryString = "from Products as model where model." + propertyName + "= ?";
 			return getHibernateTemplate().find(queryString, value);
-		} catch (RuntimeException re)
+		}
+		catch (RuntimeException re)
 		{
 			log.error("find by property name failed", re);
 			throw re;
@@ -118,7 +119,8 @@ public class ProductsDAO extends HibernateDaoSupport
 		{
 			String queryString = "from Products";
 			return getHibernateTemplate().find(queryString);
-		} catch (RuntimeException re)
+		}
+		catch (RuntimeException re)
 		{
 			log.error("find all failed", re);
 			throw re;
@@ -130,11 +132,11 @@ public class ProductsDAO extends HibernateDaoSupport
 		log.debug("merging Products instance");
 		try
 		{
-			Products result = (Products) getHibernateTemplate().merge(
-					detachedInstance);
+			Products result = (Products) getHibernateTemplate().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
-		} catch (RuntimeException re)
+		}
+		catch (RuntimeException re)
 		{
 			log.error("merge failed", re);
 			throw re;
@@ -148,7 +150,8 @@ public class ProductsDAO extends HibernateDaoSupport
 		{
 			getHibernateTemplate().saveOrUpdate(instance);
 			log.debug("attach successful");
-		} catch (RuntimeException re)
+		}
+		catch (RuntimeException re)
 		{
 			log.error("attach failed", re);
 			throw re;
@@ -162,7 +165,8 @@ public class ProductsDAO extends HibernateDaoSupport
 		{
 			getHibernateTemplate().lock(instance, LockMode.NONE);
 			log.debug("attach successful");
-		} catch (RuntimeException re)
+		}
+		catch (RuntimeException re)
 		{
 			log.error("attach failed", re);
 			throw re;

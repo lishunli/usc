@@ -12,8 +12,8 @@ import com.usc.daos.DigitalDAO;
  * 后台模糊搜索
  * 
  * @author MZ
- *
- * 2009-8-28上午09:43:59
+ * 
+ *         2009-8-28上午09:43:59
  */
 public class BackSerachAction extends ActionSupport
 {
@@ -60,16 +60,17 @@ public class BackSerachAction extends ActionSupport
 	@Override
 	public String execute() throws Exception
 	{
-		
+
 		if (null != type)
 		{
 			Map request = (Map) ActionContext.getContext().get("request");
 			if ("图书".equals(type.trim()))
 			{
-				request.put("bookSerach", bookDao.findByLikeBookName(productsName.trim()));//未发布的图书模糊查找，
-			} else if ("数码".equals(type.trim()))
+				request.put("bookSerach", bookDao.findByLikeBookName(productsName.trim()));// 未发布的图书模糊查找，
+			}
+			else if ("数码".equals(type.trim()))
 			{
-				request.put("digitalSerach",digitalDao.findByLikeDigitalName(productsName.trim()));//未发布的书面模糊查找，
+				request.put("digitalSerach", digitalDao.findByLikeDigitalName(productsName.trim()));// 未发布的书面模糊查找，
 			}
 		}
 		return SUCCESS;

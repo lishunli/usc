@@ -19,20 +19,16 @@ import com.usc.daos.DigitalDAO;
 
 public class ShowImage extends HttpServlet
 {
-	public void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 
 		doPost(request, response);
 	}
 
-	public void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		ServletContext servletContext = request.getSession()
-				.getServletContext();
-		ApplicationContext ctx = WebApplicationContextUtils
-				.getWebApplicationContext(servletContext);
+		ServletContext servletContext = request.getSession().getServletContext();
+		ApplicationContext ctx = WebApplicationContextUtils.getWebApplicationContext(servletContext);
 		BookDAO bookDao = (BookDAO) ctx.getBean("BookDAO");
 		DigitalDAO digitalDao = (DigitalDAO) ctx.getBean("DigitalDAO");
 		try
@@ -41,7 +37,7 @@ public class ShowImage extends HttpServlet
 			int type = Integer.parseInt(request.getParameter("type"));
 			int entityId = Integer.parseInt(request.getParameter("entityId"));
 
-//			System.out.println("type:" + type + "  entityID:" + entityId);
+			// System.out.println("type:" + type + "  entityID:" + entityId);
 			if (type == 1)// Í¼Êé
 			{
 				InputStream is = null;
@@ -58,7 +54,8 @@ public class ShowImage extends HttpServlet
 				}
 				is.close();
 				os.close();
-			} else if (type == 2)// ÊýÂë
+			}
+			else if (type == 2)// ÊýÂë
 			{
 				InputStream is = null;
 				OutputStream os = null;
@@ -74,11 +71,13 @@ public class ShowImage extends HttpServlet
 				}
 				is.close();
 				os.close();
-			} else
+			}
+			else
 			{
 				// response.sendRedirect("ok");
 			}
-		} catch (Exception e)
+		}
+		catch (Exception e)
 		{
 			// e.printStackTrace();
 		}

@@ -54,56 +54,50 @@ public class MainImpl implements IMain
 		this.saleDao = saleDao;
 	}
 
-	public List<BookExtra> AdvancedBookSearchCommon(String bookName,
-			String author, String isbn, String publisher)
+	public List<BookExtra> AdvancedBookSearchCommon(String bookName, String author, String isbn, String publisher)
 	{
 		bookExtraCommonList.clear();
-		for (Book book : bookdao.AdvancedBookSearch(bookName, author, isbn,
-				publisher))
+		for (Book book : bookdao.AdvancedBookSearch(bookName, author, isbn, publisher))
 		{
-			if (0 == commodityDao.findById(
-					sysAdmin.getCommodityID(1, book.getBookId())).getSaleFlag())
+			if (0 == commodityDao.findById(sysAdmin.getCommodityID(1, book.getBookId())).getSaleFlag())
 			{
 				BookExtra bookExtra = new BookExtra();
 				try
 				{
 					BeanUtils.copyProperties(bookExtra, book);
-				} catch (IllegalAccessException e)
-				{
-				} catch (InvocationTargetException e)
+				}
+				catch (IllegalAccessException e)
 				{
 				}
-				bookExtra
-						.setDiscount(sysAdmin.getDiscount(1, book.getBookId()));
-				bookExtra.setPrivilegePrice(bookExtra.getPublishedPrice()
-						* bookExtra.getDiscount() / 100);
+				catch (InvocationTargetException e)
+				{
+				}
+				bookExtra.setDiscount(sysAdmin.getDiscount(1, book.getBookId()));
+				bookExtra.setPrivilegePrice(bookExtra.getPublishedPrice() * bookExtra.getDiscount() / 100);
 				bookExtraCommonList.add(bookExtra);
 			}
 		}
 		return bookExtraCommonList;
 	}
 
-	public List<BookExtra> AdvancedBookSearchSale(String bookName,
-			String author, String isbn, String publisher)
+	public List<BookExtra> AdvancedBookSearchSale(String bookName, String author, String isbn, String publisher)
 	{
 		bookExtraSaleList.clear();
-		for (Book book : bookdao.AdvancedBookSearch(bookName, author, isbn,
-				publisher))
+		for (Book book : bookdao.AdvancedBookSearch(bookName, author, isbn, publisher))
 		{
-			if (1 == commodityDao.findById(
-					sysAdmin.getCommodityID(1, book.getBookId())).getSaleFlag())
+			if (1 == commodityDao.findById(sysAdmin.getCommodityID(1, book.getBookId())).getSaleFlag())
 			{
-				for (Sale sale : saleDao.findByCommodityId(commodityDao
-						.findById(sysAdmin.getCommodityID(1, book.getBookId()))
-						.getCommodityId()))
+				for (Sale sale : saleDao.findByCommodityId(commodityDao.findById(sysAdmin.getCommodityID(1, book.getBookId())).getCommodityId()))
 				{
 					BookExtra bookExtra = new BookExtra();
 					try
 					{
 						BeanUtils.copyProperties(bookExtra, book);
-					} catch (IllegalAccessException e)
+					}
+					catch (IllegalAccessException e)
 					{
-					} catch (InvocationTargetException e)
+					}
+					catch (InvocationTargetException e)
 					{
 					}
 					bookExtra.setSalePrice(sale.getSalePrice());
@@ -117,61 +111,52 @@ public class MainImpl implements IMain
 		return bookExtraSaleList;
 	}
 
-	public List<DigitalExtra> AdvancedSearchDigitalCommon(String digitalName,
-			String brand)
+	public List<DigitalExtra> AdvancedSearchDigitalCommon(String digitalName, String brand)
 	{
 		digitalExtraCommonList.clear();
-		for (Digital digital : digitaldao.AdvancedSearchDigital(digitalName,
-				brand))
+		for (Digital digital : digitaldao.AdvancedSearchDigital(digitalName, brand))
 		{
-			if (0 == commodityDao.findById(
-					sysAdmin.getCommodityID(2, digital.getDigitalId()))
-					.getSaleFlag())
+			if (0 == commodityDao.findById(sysAdmin.getCommodityID(2, digital.getDigitalId())).getSaleFlag())
 			{
 				DigitalExtra digitalExtra = new DigitalExtra();
 
 				try
 				{
 					BeanUtils.copyProperties(digitalExtra, digital);
-				} catch (IllegalAccessException e)
+				}
+				catch (IllegalAccessException e)
 				{
-				} catch (InvocationTargetException e)
+				}
+				catch (InvocationTargetException e)
 				{
 				}
 
-				digitalExtra.setDiscount(sysAdmin.getDiscount(2, digital
-						.getDigitalId()));
-				digitalExtra.setPrivilegePrice(digitalExtra.getPublishedPrice()
-						* digitalExtra.getDiscount() / 100);
+				digitalExtra.setDiscount(sysAdmin.getDiscount(2, digital.getDigitalId()));
+				digitalExtra.setPrivilegePrice(digitalExtra.getPublishedPrice() * digitalExtra.getDiscount() / 100);
 				digitalExtraCommonList.add(digitalExtra);
 			}
 		}
 		return digitalExtraCommonList;
 	}
 
-	public List<DigitalExtra> AdvancedSearchDigitalSale(String digitalName,
-			String brand)
+	public List<DigitalExtra> AdvancedSearchDigitalSale(String digitalName, String brand)
 	{
 		digitalExtraSaleList.clear();
-		for (Digital digital : digitaldao.AdvancedSearchDigital(digitalName,
-				brand))
+		for (Digital digital : digitaldao.AdvancedSearchDigital(digitalName, brand))
 		{
-			if (1 == commodityDao.findById(
-					sysAdmin.getCommodityID(2, digital.getDigitalId()))
-					.getSaleFlag())
+			if (1 == commodityDao.findById(sysAdmin.getCommodityID(2, digital.getDigitalId())).getSaleFlag())
 			{
-				for (Sale sale : saleDao.findByCommodityId(commodityDao
-						.findById(
-								sysAdmin.getCommodityID(2, digital
-										.getDigitalId())).getCommodityId()))
+				for (Sale sale : saleDao.findByCommodityId(commodityDao.findById(sysAdmin.getCommodityID(2, digital.getDigitalId())).getCommodityId()))
 				{
 					DigitalExtra digitalExtra = new DigitalExtra();
 					try
 					{
 						BeanUtils.copyProperties(digitalExtra, digital);
-					} catch (IllegalAccessException e)
+					}
+					catch (IllegalAccessException e)
 					{
-					} catch (InvocationTargetException e)
+					}
+					catch (InvocationTargetException e)
 					{
 					}
 					digitalExtra.setSalePrice(sale.getSalePrice());
@@ -187,24 +172,21 @@ public class MainImpl implements IMain
 	public List<BookExtra> BookCommonInfo(int typeId, int bookId)
 	{
 		bookExtraCommonList.clear();
-		if (0 == commodityDao
-				.findById(
-						sysAdmin.getCommodityID(1, bookdao.findById(bookId)
-								.getBookId())).getSaleFlag())
+		if (0 == commodityDao.findById(sysAdmin.getCommodityID(1, bookdao.findById(bookId).getBookId())).getSaleFlag())
 		{
 			BookExtra bookExtra = new BookExtra();
 			try
 			{
 				BeanUtils.copyProperties(bookExtra, bookdao.findById(bookId));
-			} catch (IllegalAccessException e)
-			{
-			} catch (InvocationTargetException e)
+			}
+			catch (IllegalAccessException e)
 			{
 			}
-			bookExtra.setDiscount(sysAdmin.getDiscount(1, bookdao.findById(
-					bookId).getBookId()));
-			bookExtra.setPrivilegePrice(bookExtra.getPublishedPrice()
-					* bookExtra.getDiscount() / 100);
+			catch (InvocationTargetException e)
+			{
+			}
+			bookExtra.setDiscount(sysAdmin.getDiscount(1, bookdao.findById(bookId).getBookId()));
+			bookExtra.setPrivilegePrice(bookExtra.getPublishedPrice() * bookExtra.getDiscount() / 100);
 			bookExtraCommonList.add(bookExtra);
 		}
 		return bookExtraCommonList;
@@ -213,23 +195,20 @@ public class MainImpl implements IMain
 	public List<BookExtra> BookSaleInfo(int typeId, int bookId)
 	{
 		bookExtraSaleList.clear();
-		if (1 == commodityDao
-				.findById(
-						sysAdmin.getCommodityID(1, bookdao.findById(bookId)
-								.getBookId())).getSaleFlag())
+		if (1 == commodityDao.findById(sysAdmin.getCommodityID(1, bookdao.findById(bookId).getBookId())).getSaleFlag())
 		{
-			for (Sale sale : saleDao.findByCommodityId(commodityDao.findById(
-					sysAdmin.getCommodityID(1, bookdao.findById(bookId)
-							.getBookId())).getCommodityId()))
+			for (Sale sale : saleDao
+					.findByCommodityId(commodityDao.findById(sysAdmin.getCommodityID(1, bookdao.findById(bookId).getBookId())).getCommodityId()))
 			{
 				BookExtra bookExtra = new BookExtra();
 				try
 				{
-					BeanUtils.copyProperties(bookExtra, bookdao
-							.findById(bookId));
-				} catch (IllegalAccessException e)
+					BeanUtils.copyProperties(bookExtra, bookdao.findById(bookId));
+				}
+				catch (IllegalAccessException e)
 				{
-				} catch (InvocationTargetException e)
+				}
+				catch (InvocationTargetException e)
 				{
 				}
 				bookExtra.setSalePrice(sale.getSalePrice());
@@ -245,26 +224,23 @@ public class MainImpl implements IMain
 	public List<DigitalExtra> DigitalCommonInfo(int typeId, int digitalId)
 	{
 		digitalExtraCommonList.clear();
-		if (0 == commodityDao.findById(
-				sysAdmin.getCommodityID(2, digitaldao.findById(digitalId)
-						.getDigitalId())).getSaleFlag())
+		if (0 == commodityDao.findById(sysAdmin.getCommodityID(2, digitaldao.findById(digitalId).getDigitalId())).getSaleFlag())
 		{
 			DigitalExtra digitalExtra = new DigitalExtra();
 
 			try
 			{
-				BeanUtils.copyProperties(digitalExtra, digitaldao
-						.findById(digitalId));
-			} catch (IllegalAccessException e)
+				BeanUtils.copyProperties(digitalExtra, digitaldao.findById(digitalId));
+			}
+			catch (IllegalAccessException e)
 			{
-			} catch (InvocationTargetException e)
+			}
+			catch (InvocationTargetException e)
 			{
 			}
 
-			digitalExtra.setDiscount(sysAdmin.getDiscount(2, digitaldao
-					.findById(digitalId).getDigitalId()));
-			digitalExtra.setPrivilegePrice(digitalExtra.getPublishedPrice()
-					* digitalExtra.getDiscount() / 100);
+			digitalExtra.setDiscount(sysAdmin.getDiscount(2, digitaldao.findById(digitalId).getDigitalId()));
+			digitalExtra.setPrivilegePrice(digitalExtra.getPublishedPrice() * digitalExtra.getDiscount() / 100);
 			digitalExtraCommonList.add(digitalExtra);
 		}
 		return digitalExtraCommonList;
@@ -273,22 +249,20 @@ public class MainImpl implements IMain
 	public List<DigitalExtra> DigitalSaleInfo(int typeId, int digitalId)
 	{
 		digitalExtraSaleList.clear();
-		if (1 == commodityDao.findById(
-				sysAdmin.getCommodityID(2, digitaldao.findById(digitalId)
-						.getDigitalId())).getSaleFlag())
+		if (1 == commodityDao.findById(sysAdmin.getCommodityID(2, digitaldao.findById(digitalId).getDigitalId())).getSaleFlag())
 		{
-			for (Sale sale : saleDao.findByCommodityId(commodityDao.findById(
-					sysAdmin.getCommodityID(2, digitaldao.findById(digitalId)
-							.getDigitalId())).getCommodityId()))
+			for (Sale sale : saleDao.findByCommodityId(commodityDao.findById(sysAdmin.getCommodityID(2, digitaldao.findById(digitalId).getDigitalId()))
+					.getCommodityId()))
 			{
 				DigitalExtra digitalExtra = new DigitalExtra();
 				try
 				{
-					BeanUtils.copyProperties(digitalExtra, digitaldao
-							.findById(digitalId));
-				} catch (IllegalAccessException e)
+					BeanUtils.copyProperties(digitalExtra, digitaldao.findById(digitalId));
+				}
+				catch (IllegalAccessException e)
 				{
-				} catch (InvocationTargetException e)
+				}
+				catch (InvocationTargetException e)
 				{
 				}
 				digitalExtra.setSalePrice(sale.getSalePrice());

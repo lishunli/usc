@@ -19,8 +19,8 @@ import com.usc.services.back.Impl.SystemAdminImpl;
  * 发布产品
  * 
  * @author MZ
- *
- * 2009-8-28上午09:44:23
+ * 
+ *         2009-8-28上午09:44:23
  */
 public class PublisheAction extends ActionSupport
 {
@@ -33,7 +33,6 @@ public class PublisheAction extends ActionSupport
 	private CommodityDAO commodityDao;// 商品对象DAO，通过Spring注入
 
 	// System.out.println("bookId:"+bookId+"type:"+type+"discount:"+discount);
-
 
 	public int getType()
 	{
@@ -83,13 +82,13 @@ public class PublisheAction extends ActionSupport
 	@Override
 	public String execute() throws Exception
 	{
-		sysAdmin.setProductPFlag(type, entityID, 1);//设置产品发布标志位1
-		commodity.setDiscount(discount);//设置折扣
-		commodity.setOperatorID(sysAdmin.getOperatorID(ActionContext.getContext().getSession().get("manger").toString()));//设置操作员ID
-		commodity.setProductsID(sysAdmin.getProductID(type, entityID));//设置产品ID
-		commodity.setPublisheTime(new Date());//设置产品发布时间为当前系统时间
-		commodity.setSaleFlag(0);//促销商品标志位，默认为0，1的话就是促销商品
-		commodityDao.save(commodity);//添加到商品表中
+		sysAdmin.setProductPFlag(type, entityID, 1);// 设置产品发布标志位1
+		commodity.setDiscount(discount);// 设置折扣
+		commodity.setOperatorID(sysAdmin.getOperatorID(ActionContext.getContext().getSession().get("manger").toString()));// 设置操作员ID
+		commodity.setProductsID(sysAdmin.getProductID(type, entityID));// 设置产品ID
+		commodity.setPublisheTime(new Date());// 设置产品发布时间为当前系统时间
+		commodity.setSaleFlag(0);// 促销商品标志位，默认为0，1的话就是促销商品
+		commodityDao.save(commodity);// 添加到商品表中
 		return SUCCESS;
 	}
 }

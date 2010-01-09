@@ -34,8 +34,7 @@ public class Products implements java.io.Serializable
 	}
 
 	/** full constructor */
-	public Products(Integer productTypeId, Integer entityId, Set commodities,
-			Set stockouts, Set stocks, Set stockins)
+	public Products(Integer productTypeId, Integer entityId, Set commodities, Set stockouts, Set stocks, Set stockins)
 	{
 		this.productTypeId = productTypeId;
 		this.entityId = entityId;
@@ -56,7 +55,6 @@ public class Products implements java.io.Serializable
 	{
 		this.productsId = productsId;
 	}
-
 
 	public Integer getProductTypeId()
 	{

@@ -24,8 +24,8 @@ import com.usc.services.back.ISystemAdmin;
  * 后台普通商品搜索
  * 
  * @author MZ
- *
- * 2009-8-28上午09:42:16
+ * 
+ *         2009-8-28上午09:42:16
  */
 public class BackCommonSerachAction extends ActionSupport
 {
@@ -98,39 +98,32 @@ public class BackCommonSerachAction extends ActionSupport
 			digitalExtraList.clear();
 			if ("图书".equals(type.trim()))
 			{
-				for (Book book : bookDao.findByLikeCommonBookName(productsName
-						.trim()))
+				for (Book book : bookDao.findByLikeCommonBookName(productsName.trim()))
 				{
-					for (Commodity commodity : commodityDao
-							.findByProductsID(sysAdmin.getProductID(1, book
-									.getBookId())))
+					for (Commodity commodity : commodityDao.findByProductsID(sysAdmin.getProductID(1, book.getBookId())))
 					{
 						if (commodity.getSaleFlag() == 0)// 发布，但不是促销商品
 						{
-							BookExtra bookExtra = new BookExtra();//实例化扩展Book的对象
-							BeanUtils.copyProperties(bookExtra, book);//类copy
-							bookExtra.setDiscount(sysAdmin.getDiscount(1, book
-									.getBookId()));//设置折扣
+							BookExtra bookExtra = new BookExtra();// 实例化扩展Book的对象
+							BeanUtils.copyProperties(bookExtra, book);// 类copy
+							bookExtra.setDiscount(sysAdmin.getDiscount(1, book.getBookId()));// 设置折扣
 							bookExtraList.add(bookExtra);
 						}
 					}
 				}
 				request.put("bookCommon", bookExtraList);
-			} else if ("数码".equals(type.trim()))
+			}
+			else if ("数码".equals(type.trim()))
 			{
-				for (Digital digital : digitalDao
-						.findByLikeCommonDigitalName(productsName.trim()))
+				for (Digital digital : digitalDao.findByLikeCommonDigitalName(productsName.trim()))
 				{
-					for (Commodity commodity : commodityDao
-							.findByProductsID(sysAdmin.getProductID(2, digital
-									.getDigitalId())))
+					for (Commodity commodity : commodityDao.findByProductsID(sysAdmin.getProductID(2, digital.getDigitalId())))
 					{
 						if (commodity.getSaleFlag() == 0)// 发布，但不是促销商品
 						{
 							DigitalExtra digitalExtra = new DigitalExtra();
 							BeanUtils.copyProperties(digitalExtra, digital);
-							digitalExtra.setDiscount(sysAdmin.getDiscount(2,
-									digitalExtra.getDigitalId()));//设置折扣
+							digitalExtra.setDiscount(sysAdmin.getDiscount(2, digitalExtra.getDigitalId()));// 设置折扣
 							digitalExtraList.add(digitalExtra);
 						}
 					}

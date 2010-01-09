@@ -26,15 +26,15 @@
 		<servlet-name>getAllType</servlet-name>
 		<servlet-class>com.usc.servlets.getAllType</servlet-class>
 	</servlet>
+	<servlet-mapping>
+		<servlet-name>getAllType</servlet-name>
+		<url-pattern>/getAllType</url-pattern>
+	</servlet-mapping>
   <servlet>
     <servlet-name>ShowImage</servlet-name>
     <servlet-class>com.usc.servlets.ShowImage</servlet-class>
   </servlet>
 
-	<servlet-mapping>
-		<servlet-name>getAllType</servlet-name>
-		<url-pattern>/getAllType</url-pattern>
-	</servlet-mapping>
   <servlet-mapping>
     <servlet-name>ShowImage</servlet-name>
     <url-pattern>*.image</url-pattern>

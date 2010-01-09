@@ -34,8 +34,7 @@ public class Book implements java.io.Serializable
 	}
 
 	/** minimal constructor */
-	public Book(String bookName, String publisher, String isbn,
-			Float publishedPrice, Integer productsPflag)
+	public Book(String bookName, String publisher, String isbn, Float publishedPrice, Integer productsPflag)
 	{
 		this.bookName = bookName;
 		this.publisher = publisher;
@@ -45,10 +44,8 @@ public class Book implements java.io.Serializable
 	}
 
 	/** full constructor */
-	public Book(Integer productTypeID, String bookName, String author,
-			String publisher, Date publishingTime, String version, String isbn,
-			Float publishedPrice, String catalog, Blob picture,
-			String briefIntroduction, Integer productsPflag)
+	public Book(Integer productTypeID, String bookName, String author, String publisher, Date publishingTime, String version, String isbn,
+			Float publishedPrice, String catalog, Blob picture, String briefIntroduction, Integer productsPflag)
 	{
 		this.productTypeID = productTypeID;
 		this.bookName = bookName;
@@ -75,7 +72,6 @@ public class Book implements java.io.Serializable
 	{
 		this.bookId = bookId;
 	}
-
 
 	public Integer getProductTypeID()
 	{

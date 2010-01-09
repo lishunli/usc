@@ -40,8 +40,7 @@ public class MangerImpl implements IManger
 	{
 		// 此管理员姓名存在
 		// 遍历此姓名的管理员，是否密码匹配（重名现象了）
-		for (Operator oper : operDao.findByOperatorName(operator
-				.getOperatorName().trim()))
+		for (Operator oper : operDao.findByOperatorName(operator.getOperatorName().trim()))
 		{
 			if (oper.getOperatorPass().equals(operator.getOperatorPass()))
 				return true;// 姓名和密码都能匹配，返回真
@@ -56,8 +55,7 @@ public class MangerImpl implements IManger
 	{
 
 		// 遍历此姓名的管理员，是否密码匹配（重名现象了）
-		for (Operator oper : operDao.findByOperatorName(operator
-				.getOperatorName().trim()))
+		for (Operator oper : operDao.findByOperatorName(operator.getOperatorName().trim()))
 		{
 			if (oper.getOperatorPass().equals(operator.getOperatorPass()))
 			{

@@ -12,8 +12,8 @@ import com.usc.services.back.ISystemAdmin;
  * 修改产品折扣
  * 
  * @author MZ
- *
- * 2009-8-28上午09:45:00
+ * 
+ *         2009-8-28上午09:45:00
  */
 public class UpdateDiscountAction extends ActionSupport
 {
@@ -24,7 +24,6 @@ public class UpdateDiscountAction extends ActionSupport
 	private ISystemAdmin sysAdmin;// 系统管理员实现实例化对象，通过Spring注入
 	private Commodity commodity;// 商品对象，通过Spring注入
 	private CommodityDAO commodityDao;// 商品对象DAO，通过Spring注入
-
 
 	public int getType()
 	{
@@ -75,12 +74,9 @@ public class UpdateDiscountAction extends ActionSupport
 	public String execute() throws Exception
 	{
 		/**
-		 * 1.获得产品ID
-		 * 2.通过产品ID获得商品（应该唯一）
-		 * 3.设置此商品的折扣
-		 * 4.修改此商品
+		 * 1.获得产品ID 2.通过产品ID获得商品（应该唯一） 3.设置此商品的折扣 4.修改此商品
 		 */
-		for(Commodity commodity : commodityDao.findByProductsID(sysAdmin.getProductID(type, entityID)))
+		for (Commodity commodity : commodityDao.findByProductsID(sysAdmin.getProductID(type, entityID)))
 		{
 			commodity.setDiscount(discount);
 			commodityDao.merge(commodity);

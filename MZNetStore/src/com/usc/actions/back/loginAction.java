@@ -9,8 +9,9 @@ import com.usc.services.back.IManger;
 
 /**
  * 后台登陆
+ * 
  * @author MZ
- *
+ * 
  */
 public class loginAction extends ActionSupport
 {
@@ -38,16 +39,15 @@ public class loginAction extends ActionSupport
 		if (null == operator)// 对象为空，返回，避免空指针异常
 		{
 			return;
-		} else
+		}
+		else
 		{
 
-			if (null == operator.getOperatorName()
-					|| "".equals(operator.getOperatorName().trim()))// 姓名空
+			if (null == operator.getOperatorName() || "".equals(operator.getOperatorName().trim()))// 姓名空
 			{
 				this.addFieldError("operator.operatorName", "姓名不能为空");
 			}
-			if (null == operator.getOperatorPass()
-					|| "".equals(operator.getOperatorPass().trim()))// 密码空
+			if (null == operator.getOperatorPass() || "".equals(operator.getOperatorPass().trim()))// 密码空
 			{
 				this.addFieldError("operator.operatorPass", "密码不能为空");
 			}
@@ -66,10 +66,10 @@ public class loginAction extends ActionSupport
 			if (!manger.checkManger(operator))
 			{
 				this.addFieldError("operator.operatorName", "管理员登录失败，姓名或密码错误");
-			} else
+			}
+			else
 			{
-				ActionContext.getContext().getSession().put("manger",
-						operator.getOperatorName());
+				ActionContext.getContext().getSession().put("manger", operator.getOperatorName());
 				return SUCCESS;
 			}
 		}
