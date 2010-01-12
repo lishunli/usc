@@ -1,7 +1,7 @@
 package org.usc.javadoc;
 
 /**
- * 
+ * 个性化地生成Javadoc文档
  * 
  * @author <a href="http://www.blogjava.net/lishunli/" target="_blank">ShunLi</a>
  * @notes Created on 2010-1-12<br>
