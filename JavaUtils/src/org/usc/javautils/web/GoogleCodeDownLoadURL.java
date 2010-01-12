@@ -5,7 +5,7 @@ import java.net.URLEncoder;
 import java.util.Scanner;
 
 /**
- * 获取Google Code 下载地址
+ * 获取Google Code 下载地址 
  * 
  * @author <a href="http://www.blogjava.net/lishunli/" target="_blank">ShunLi</a>
  * @notes Created on 2010-1-12<br>
