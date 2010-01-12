@@ -3,6 +3,10 @@ package org.usc.javadoc;
 /**
  * 测试Javadoc自定义标记
  * 
+ *
+$ svn propset svn:keywords "Date Author" weather.txt
+property 'svn:keywords' set on 'weather.txt'
+$
  * @version $Rev$
  */
 public class JavadocTest1
