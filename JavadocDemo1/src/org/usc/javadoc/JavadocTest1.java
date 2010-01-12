@@ -1,14 +1,14 @@
 package org.usc.javadoc;
 
 /**
- * 个性化地生成Javadoc文档
+ * 
  * 
  * @author <a href="http://www.blogjava.net/lishunli/" target="_blank">ShunLi</a>
  * @notes Created on ${date}<br>
  *        Revision of last commit:$Revision$<br>
  *        Author of last commit:$Author$<br>
  *        Date of last commit:$Date$<br>
- * 		  <p>
+ *        <p>
  */
 public class JavadocTest1
 /**
