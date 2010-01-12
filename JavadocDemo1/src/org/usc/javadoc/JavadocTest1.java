@@ -1,34 +1,28 @@
 package org.usc.javadoc;
 
-
 /**
  * 个性化地生成Javadoc文档
  * 
  * @author <a href="http://www.blogjava.net/lishunli/" target="_blank">ShunLi</a>
- * @created on 2010-1-12
- * $Revision$: Revision of last commit
- * <br>
- * $Author$: Author of last commit
- * <br>
- * $Date$:Date of last commit
- * <br>
+ * @notes Created on ${date}<br>
+ *        Revision of last commit:$Revision$<br>
+ *        Author of last commit:$Author$<br>
+ *        Date of last commit:$Date$<br>
+ * <p>
  */
-public class JavadocTest1  
+public class JavadocTest1
 /**
  * 测试Javadoc自定义标记
+ * 
  * @author s
  * 
  * @Time ${}
- * <p>
- * <li>Test svn:keywords</li>
- * $Id$
- * <br>
- * $Revision$: Revision of last commit
- * <br>
- * $Author$: Author of last commit
- * <br>
- * $Date$:Date of last commit
- * <br>
+ *       <p>
+ *       <li>Test svn:keywords</li>
+ *       $Id$ <br>
+ *       $Revision$: Revision of last commit <br>
+ *       $Author$: Author of last commit <br>
+ *       $Date$:Date of last commit <br>
  * 
  */
 {
