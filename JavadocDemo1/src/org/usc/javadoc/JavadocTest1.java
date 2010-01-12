@@ -5,7 +5,7 @@ package org.usc.javadoc;
  * 
  * $Id$
  * <p>
- * $Rev$: Revision of last commit
+ * $Revision$: Revision of last commit
  * <p>
  * $Author$: Author of last commit
  * <p>
