@@ -2,7 +2,7 @@ package org.usc.javadoc3;
 /**
  * 测试Javadoc自定义标记3
  * 
- * $Id$
+ * $Id$ 
  * <p>
  * $Rev$: Revision of last commit
  * <p>
