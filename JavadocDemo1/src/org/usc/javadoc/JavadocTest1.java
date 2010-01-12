@@ -11,7 +11,7 @@ package org.usc.javadoc;
  * <p>
  * $Date$:Date of last commit
  */
-public class JavadocTest1 
+public class JavadocTest1  
 {
 	// * @version $Rev$ $Date: 2010-01-12 11:51:40 +0800 (周二, 12 一月 2010)
 	// $
