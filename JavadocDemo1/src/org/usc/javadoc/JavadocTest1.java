@@ -3,7 +3,7 @@ package org.usc.javadoc;
 /**
  * 测试Javadoc自定义标记
  * 
- * @version $Revision $
+ * @version $Author $
  */
 public class JavadocTest1
 {
