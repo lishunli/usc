@@ -2,20 +2,16 @@ package org.usc.javadoc;
 
 
 /**
- * 测试Javadoc自定义标记
+ * 个性化地生成Javadoc文档
  * 
  * @author <a href="http://www.blogjava.net/lishunli/" target="_blank">ShunLi</a>
  * @created on 2010-1-12
- * <p>
- * <li>Test svn:keywords</li>
- * $Id$
- * <br>
  * $Revision$: Revision of last commit
  * <br>
  * $Author$: Author of last commit
  * <br>
  * $Date$:Date of last commit
- * <br> 
+ * <br>
  */
 public class JavadocTest1  
 /**
