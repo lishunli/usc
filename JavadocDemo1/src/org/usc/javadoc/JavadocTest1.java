@@ -5,7 +5,7 @@ package org.usc.javadoc;
  * 测试Javadoc自定义标记
  * 
  * @author <a href="http://www.blogjava.net/lishunli/" target="_blank">ShunLi</a>
- * @Time 2010-1-12
+ * @created on 2010-1-12
  * <p>
  * <li>Test svn:keywords</li>
  * $Id$
