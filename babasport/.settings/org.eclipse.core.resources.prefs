@@ -1,4 +1,4 @@
-#Fri Nov 13 21:37:36 CST 2009
+#Mon Jan 11 22:26:19 CST 2010
 eclipse.preferences.version=1
 encoding//WebRoot/WEB-INF/page/user/errorresult.jsp=UTF-8
 encoding//WebRoot/WEB-INF/page/user/findPassword.jsp=UTF-8
@@ -9,4 +9,5 @@ encoding//WebRoot/WEB-INF/vm/product/productview.vm=UTF-8
 encoding//WebRoot/js=UTF-8
 encoding//WebRoot/js/FoshanRen.js=UTF-8
 encoding//WebRoot/js/calendar.js=UTF-8
+encoding/<project>=GBK
 encoding/\u8FD0\u884C\u8BF4\u660E.txt=GBK
