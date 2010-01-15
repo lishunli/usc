@@ -1,7 +1,7 @@
 package org.usc.javadoc;
 
 /**
- * 测试SVN提交的时候的Time的字符集问题
+ * 测试SVN提交的时候的Time的字符集问题 
  * <p>
  * 第一必须设置为UTF-8格式
  * <p>
