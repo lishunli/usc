@@ -1,15 +1,12 @@
 package org.usc.javadoc;
 
 /**
- * 测试SVN提交的时候的Time的字符集问题 
- * <p>
- * 第一必须设置为UTF-8格式
- * <p>
- * 第二可以设置eclipse.ini中-Duser.language=en 更改为英文显示
- * <p>
+ * 测试SVN提交的时候的Time的字符集问题 <br>
+ * 第一必须设置为UTF-8格式 <br>
+ * 第二可以设置eclipse.ini中-Duser.language=en 更改为英文显示 <br>
  * 
  * @author <a href="http://www.blogjava.net/lishunli/" target="_blank">ShunLi</a>
- * @notes Created on Jan 15, 2010 5:26:33 PM<br>
+ * @notes Created on 2010-1-15 下午05:51:47<br>
  *        Revision of last commit:$Revision$<br>
  *        Author of last commit:$Author$<br>
  *        Date of last commit:$Date$<br>
