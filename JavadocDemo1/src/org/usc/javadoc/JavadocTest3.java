@@ -1,7 +1,7 @@
 package org.usc.javadoc;
 
 /**
- * 测试SVN提交的时候的Time的字符集问题 <br>
+ * 测试SVN提交的时候的Time的字符集问题 <br> 
  * 第一必须设置为UTF-8格式 <br>
  * 第二可以设置eclipse.ini中-Duser.language=en 更改为英文显示 <br>
  * 
