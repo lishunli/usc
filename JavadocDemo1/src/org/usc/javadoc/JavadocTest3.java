@@ -1,13 +1,10 @@
-/**
- * 
- */
 package org.usc.javadoc;
 
 /**
- * 日期的修改，把中文修改为英文
  * 
+ *
  * @author <a href="http://www.blogjava.net/lishunli/" target="_blank">ShunLi</a>
- * @notes Created on Jan 15, 2010<br>
+ * @notes Created on Jan 15, 2010 3:57:42 PM<br>
  *        Revision of last commit:$Revision$<br>
  *        Author of last commit:$Author$<br>
  *        Date of last commit:$Date$<br>
