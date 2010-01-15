@@ -2,9 +2,10 @@ package org.usc.javadoc;
 
 /**
  * 
+ * 
  *
  * @author <a href="http://www.blogjava.net/lishunli/" target="_blank">ShunLi</a>
- * @notes Created on Jan 15, 2010 3:57:42 PM<br>
+ * @notes Created on Jan 15, 2010 4:22:10 PM<br>
  *        Revision of last commit:$Revision$<br>
  *        Author of last commit:$Author$<br>
  *        Date of last commit:$Date$<br>
