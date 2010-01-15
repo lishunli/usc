@@ -1,7 +1,7 @@
 package org.usc.javadoc;
 
 /**
- * 
+ *  
  * 
  *
  * @author <a href="http://www.blogjava.net/lishunli/" target="_blank">ShunLi</a>
