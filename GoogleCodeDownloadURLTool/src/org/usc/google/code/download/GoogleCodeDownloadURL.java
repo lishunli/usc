@@ -12,11 +12,8 @@ import java.awt.datatransfer.StringSelection;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
-import javax.swing.JEditorPane;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
-import javax.swing.text.html.HTMLDocument;
-import javax.swing.text.html.HTMLFrameHyperlinkEvent;
 
 /**
  * 
@@ -252,6 +249,16 @@ public class GoogleCodeDownloadURL extends javax.swing.JFrame
 		{
 			e.printStackTrace();
 		}
+		/*		
+		# 用来标志特定的文档位置 %23 
+		% 对特殊字符进行编码 %25 
+		& 分隔不同的变量值对 %26 
+		+ 在变量值中表示空格 %2B 
+		\ 表示目录路径 %2F 
+		= 用来连接键和值 %3D 
+		? 表示查询字符串的开始 %3F */
+		
+		retVal = retVal.replaceAll("\\+", "%20");
 		return retVal;
 	}
 
