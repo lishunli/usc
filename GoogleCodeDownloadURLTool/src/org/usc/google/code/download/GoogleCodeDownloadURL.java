@@ -6,6 +6,12 @@
 
 package org.usc.google.code.download;
 
+import java.awt.FileDialog;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 /**
  *
  * @author  __USER__
@@ -42,13 +48,21 @@ public class GoogleCodeDownloadURL extends javax.swing.JFrame
 		jScrollPane1 = new javax.swing.JScrollPane();
 		jEditorPane1 = new javax.swing.JEditorPane();
 		jButton4 = new javax.swing.JButton();
-
+		fileDialog = new FileDialog(this,"打开文件对话框",FileDialog.LOAD);
+		
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setTitle("Google Code\u5730\u5740\u83b7\u53d6\u5668");
 		setFont(new java.awt.Font("微软雅黑", 0, 14));
 
 		jButton1.setFont(new java.awt.Font("微软雅黑", 0, 18));
 		jButton1.setText("\u4e0a\u4f20\u6587\u4ef6\u5e76\u83b7\u53d6\u4e0b\u8f7d\u4fe1\u606f");
+		jButton1.addMouseListener(new java.awt.event.MouseAdapter()
+		{
+			public void mouseClicked(java.awt.event.MouseEvent evt)
+			{
+				jButton1MouseClicked(evt);
+			}
+		});
 
 		jLabel1.setFont(new java.awt.Font("微软雅黑", 0, 24));
 		jLabel1.setText("Google Code\u4e0b\u8f7d\u5730\u5740\u83b7\u53d6\u5668");
@@ -65,16 +79,19 @@ public class GoogleCodeDownloadURL extends javax.swing.JFrame
 		jLabel5.setFont(new java.awt.Font("微软雅黑", 0, 18));
 		jLabel5.setText("\u4e0b\u8f7d\u4fe1\u606f\uff1a");
 
+		jTextField1.setEditable(false);
 		jTextField1.setFont(new java.awt.Font("微软雅黑", 0, 18));
 
 		jButton2.setFont(new java.awt.Font("微软雅黑", 0, 18));
 		jButton2.setText("\u590d\u5236\u5230\u526a\u8d34\u677f");
 
+		jTextField2.setEditable(false);
 		jTextField2.setFont(new java.awt.Font("微软雅黑", 0, 18));
 
 		jButton3.setFont(new java.awt.Font("微软雅黑", 0, 18));
 		jButton3.setText("\u590d\u5236\u5230\u526a\u8d34\u677f");
 
+		jEditorPane1.setEditable(false);
 		jEditorPane1.setFont(new java.awt.Font("微软雅黑", 0, 18));
 		jScrollPane1.setViewportView(jEditorPane1);
 
@@ -89,58 +106,105 @@ public class GoogleCodeDownloadURL extends javax.swing.JFrame
 						layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING).addGroup(
 								layout.createSequentialGroup().addContainerGap().addComponent(jLabel2)).addGroup(
 								layout.createSequentialGroup().addGroup(
-										layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING).addGroup(
-												javax.swing.GroupLayout.Alignment.LEADING,
+										layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
 												layout.createSequentialGroup().addGap(20, 20, 20).addGroup(
 														layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-																layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING).addComponent(jLabel1)
-																		.addGroup(
-																				layout.createSequentialGroup().addComponent(jLabel3).addPreferredGap(
-																						javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addComponent(
-																						jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 337,
-																						javax.swing.GroupLayout.PREFERRED_SIZE))).addGroup(
-																layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING).addGroup(
-																		javax.swing.GroupLayout.Alignment.LEADING,
-																		layout.createSequentialGroup().addPreferredGap(
-																				javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(jLabel5)
-																				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-																				.addComponent(jScrollPane1, 0, 0, Short.MAX_VALUE)).addGroup(
-																		javax.swing.GroupLayout.Alignment.LEADING,
-																		layout.createSequentialGroup().addComponent(jLabel4).addPreferredGap(
-																				javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addComponent(jTextField2,
-																				javax.swing.GroupLayout.PREFERRED_SIZE, 337,
-																				javax.swing.GroupLayout.PREFERRED_SIZE))))).addGroup(
-												javax.swing.GroupLayout.Alignment.LEADING,
-												layout.createSequentialGroup().addGap(157, 157, 157).addComponent(jButton1))).addGroup(
+																layout.createSequentialGroup().addComponent(jLabel4).addPreferredGap(
+																		javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addComponent(jTextField2,
+																		javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
+																		.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)).addGroup(
+																layout.createSequentialGroup().addComponent(jLabel3).addPreferredGap(
+																		javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addComponent(jTextField1,
+																		javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE))
+																.addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))).addGroup(
+												layout.createSequentialGroup().addGap(114, 114, 114).addComponent(jScrollPane1, 0, 0, Short.MAX_VALUE)
+														.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))).addGroup(
 										layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-												layout.createSequentialGroup().addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14,
+												layout.createSequentialGroup().addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18,
 														Short.MAX_VALUE).addGroup(
 														layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(jButton3)
 																.addComponent(jButton2))).addGroup(
-												layout.createSequentialGroup().addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-														.addComponent(jButton4))))).addGap(35, 35, 35)));
-		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-				layout.createSequentialGroup().addContainerGap().addComponent(jLabel1).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(jLabel2).addGap(13, 13, 13).addComponent(jButton1).addGap(25, 25, 25).addGroup(
+												layout.createSequentialGroup().addGap(18, 18, 18).addComponent(jButton4))))).addGap(35, 35, 35)).addGroup(
+				layout.createSequentialGroup().addGap(189, 189, 189).addComponent(jButton1).addContainerGap(235, Short.MAX_VALUE)).addGroup(
+				layout.createSequentialGroup().addContainerGap().addComponent(jLabel5).addContainerGap(553, Short.MAX_VALUE)));
+		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(
+						layout.createSequentialGroup().addContainerGap().addComponent(jLabel1).addGroup(
 								layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-										layout.createSequentialGroup().addComponent(jLabel3).addGap(30, 30, 30).addGroup(
-												layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(jLabel4).addComponent(
-														jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-														javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(jButton3))).addGroup(
-										layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(jTextField1,
-												javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-												javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(jButton2))).addGroup(
-								layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING).addGroup(
-										layout.createSequentialGroup().addGap(18, 18, 18).addComponent(jLabel5).addContainerGap(131, Short.MAX_VALUE))
-										.addGroup(
-												layout.createSequentialGroup().addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-														layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(jButton4)
-																.addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 137,
-																		javax.swing.GroupLayout.PREFERRED_SIZE)).addContainerGap()))));
+										layout.createSequentialGroup().addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+												.addComponent(jLabel2)).addGroup(layout.createSequentialGroup().addGap(35, 35, 35).addComponent(jButton1)))
+								.addGap(35, 35, 35).addGroup(
+										layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+												layout.createSequentialGroup().addComponent(jLabel3).addGap(30, 30, 30).addGroup(
+														layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(jLabel4)
+																.addComponent(jButton3).addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 94,
+																		javax.swing.GroupLayout.PREFERRED_SIZE))).addGroup(
+												layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(jTextField1,
+														javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+														javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(jButton2))).addGap(49, 49, 49).addGroup(
+										layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(jLabel5).addComponent(jScrollPane1,
+												javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(jButton4))
+								.addGap(88, 88, 88)));
 
 		pack();
 	}// </editor-fold>
 	//GEN-END:initComponents
+
+	private void jButton1MouseClicked(java.awt.event.MouseEvent evt)
+	{
+		fileDialog.setVisible(true);
+		String fileName = fileDialog.getFile();
+		jTextField1.setText(fileName);
+		jTextField2.setText(googleCodeDownLoadURL(fileName));
+
+	}
+
+	/**
+	 * 字符串URL编码
+	 * 
+	 * @param filename
+	 *            文件名
+	 * @return URL编码后的文件名
+	 */
+	private static String stringToURL(String filename)
+	{
+		String retVal = null;
+		try
+		{
+			retVal = URLEncoder.encode(filename, "UTF-8");// URL编码，GBK 到 UTF-8格式
+		}
+		catch (UnsupportedEncodingException e)
+		{
+			e.printStackTrace();
+		}
+		return retVal;
+	}
+
+	/**
+	 * 获取Google Code 下载地址
+	 * 
+	 * @param filename
+	 *            文件名
+	 * @return Google Code 下载地址
+	 */
+	private static String googleCodeDownLoadURL(String filename)
+	{
+		final String prefixURL = "http://usc.googlecode.com/files/";// 前缀
+		String retVal = prefixURL + stringToURL(filename);// Google Code 下载地址
+		return retVal;
+	}
+
+	/**
+	 * 复制到剪贴板
+	 * 
+	 * @param String
+	 *            需要复制的文本
+	 */
+	public static void copy(String str)
+	{
+		StringSelection stsel = new StringSelection(str);
+		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stsel, stsel);
+	}
 
 	/**
 	 * @param args the command line arguments
@@ -171,6 +235,7 @@ public class GoogleCodeDownloadURL extends javax.swing.JFrame
 	private javax.swing.JScrollPane jScrollPane1;
 	private javax.swing.JTextField jTextField1;
 	private javax.swing.JTextField jTextField2;
+	private FileDialog fileDialog;
 	// End of variables declaration//GEN-END:variables
 
 }
