@@ -17,7 +17,7 @@ import org.usc.beans.Student;
  */
 @Repository("studentDao")
 // 声明此类为数据持久层的类
-public class StudentDaoBean extends MyHibernateDaoSupport implements IStudentDao
+public class StudentDaoImpl extends MyHibernateDaoSupport implements IStudentDao
 {
 	/*
 	 * (non-Javadoc)
