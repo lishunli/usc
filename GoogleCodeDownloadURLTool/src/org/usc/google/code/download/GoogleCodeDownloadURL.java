@@ -1,9 +1,3 @@
-/*
- * GoogleCodeDownloadURL.java
- *
- * Created on __DATE__, __TIME__
- */
-
 package org.usc.google.code.download;
 
 import java.awt.FileDialog;
@@ -16,7 +10,7 @@ import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 
 /**
- * Google CodeÏÂÔØµØÖ·»ñÈ¡Æ÷
+ * Google Codeä¸‹è½½åœ°å€è·å–å™¨
  * 
  * @author <a href="http://www.blogjava.net/lishunli/" target="_blank">ShunLi</a>
  * @notes Created on 2010-1-21<br>
@@ -57,17 +51,17 @@ public class GoogleCodeDownloadURL extends javax.swing.JFrame
 		jButton4 = new javax.swing.JButton();
 		jScrollPane2 = new javax.swing.JScrollPane();
 		jEditorPane2 = new javax.swing.JEditorPane();
-		fileDialog = new FileDialog(this, "´ò¿ªÎÄ¼ş¶Ô»°¿ò", FileDialog.LOAD);
+		fileDialog = new FileDialog(this, "æ‰“å¼€æ–‡ä»¶å¯¹è¯æ¡†", FileDialog.LOAD);
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setTitle("Google Code\u4e0b\u8f7d\u5730\u5740\u83b7\u53d6\u5668");
-		setFont(new java.awt.Font("Î¢ÈíÑÅºÚ", 0, 14));
+		setFont(new java.awt.Font("å¾®è½¯é›…é»‘", 0, 14));
 
 		double width = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 		double height = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 		setLocation((int) (width - this.getWidth()) / 4, (int) (height - this.getHeight()) / 6);
 
-		jButton1.setFont(new java.awt.Font("Î¢ÈíÑÅºÚ", 0, 18));
+		jButton1.setFont(new java.awt.Font("å¾®è½¯é›…é»‘", 0, 18));
 		jButton1.setText("\u4e0a\u4f20\u6587\u4ef6\u5e76\u83b7\u53d6\u4e0b\u8f7d\u4fe1\u606f");
 		jButton1.addMouseListener(new java.awt.event.MouseAdapter()
 		{
@@ -77,25 +71,25 @@ public class GoogleCodeDownloadURL extends javax.swing.JFrame
 			}
 		});
 
-		jLabel1.setFont(new java.awt.Font("Î¢ÈíÑÅºÚ", 0, 24));
+		jLabel1.setFont(new java.awt.Font("å¾®è½¯é›…é»‘", 0, 24));
 		jLabel1.setText("Google Code\u4e0b\u8f7d\u5730\u5740\u83b7\u53d6\u5668");
 
-		jLabel2.setFont(new java.awt.Font("Î¢ÈíÑÅºÚ", 0, 18));
+		jLabel2.setFont(new java.awt.Font("å¾®è½¯é›…é»‘", 0, 18));
 		jLabel2.setText("\u987a\u5229\u5236\u4f5cV0.1");
 
-		jLabel3.setFont(new java.awt.Font("Î¢ÈíÑÅºÚ", 0, 18));
+		jLabel3.setFont(new java.awt.Font("å¾®è½¯é›…é»‘", 0, 18));
 		jLabel3.setText("\u6587  \u4ef6  \u540d\uff1a");
 
-		jLabel4.setFont(new java.awt.Font("Î¢ÈíÑÅºÚ", 0, 18));
+		jLabel4.setFont(new java.awt.Font("å¾®è½¯é›…é»‘", 0, 18));
 		jLabel4.setText("\u4e0b\u8f7d\u5730\u5740\uff1a");
 
-		jLabel5.setFont(new java.awt.Font("Î¢ÈíÑÅºÚ", 0, 18));
+		jLabel5.setFont(new java.awt.Font("å¾®è½¯é›…é»‘", 0, 18));
 		jLabel5.setText("\u4e0b\u8f7d\u4fe1\u606f\uff1a");
 
 		jTextField1.setEditable(false);
-		jTextField1.setFont(new java.awt.Font("Î¢ÈíÑÅºÚ", 0, 16));
+		jTextField1.setFont(new java.awt.Font("å¾®è½¯é›…é»‘", 0, 16));
 
-		jButton2.setFont(new java.awt.Font("Î¢ÈíÑÅºÚ", 0, 18));
+		jButton2.setFont(new java.awt.Font("å¾®è½¯é›…é»‘", 0, 18));
 		jButton2.setText("\u590d\u5236\u5230\u526a\u8d34\u677f");
 		jButton2.addMouseListener(new java.awt.event.MouseAdapter()
 		{
@@ -105,7 +99,7 @@ public class GoogleCodeDownloadURL extends javax.swing.JFrame
 			}
 		});
 
-		jButton3.setFont(new java.awt.Font("Î¢ÈíÑÅºÚ", 0, 18));
+		jButton3.setFont(new java.awt.Font("å¾®è½¯é›…é»‘", 0, 18));
 		jButton3.setText("\u590d\u5236\u5230\u526a\u8d34\u677f");
 		jButton3.addMouseListener(new java.awt.event.MouseAdapter()
 		{
@@ -116,10 +110,10 @@ public class GoogleCodeDownloadURL extends javax.swing.JFrame
 		});
 
 		jEditorPane1.setEditable(false);
-		jEditorPane1.setFont(new java.awt.Font("Î¢ÈíÑÅºÚ", 0, 16));
+		jEditorPane1.setFont(new java.awt.Font("å¾®è½¯é›…é»‘", 0, 16));
 		jScrollPane1.setViewportView(jEditorPane1);
 
-		jButton4.setFont(new java.awt.Font("Î¢ÈíÑÅºÚ", 0, 18));
+		jButton4.setFont(new java.awt.Font("å¾®è½¯é›…é»‘", 0, 18));
 		jButton4.setText("\u590d\u5236\u5230\u526a\u8d34\u677f");
 		jButton4.addMouseListener(new java.awt.event.MouseAdapter()
 		{
@@ -130,23 +124,23 @@ public class GoogleCodeDownloadURL extends javax.swing.JFrame
 		});
 
 		jEditorPane2.setEditable(false);
-		jEditorPane2.setFont(new java.awt.Font("Î¢ÈíÑÅºÚ", 0, 14));
+		jEditorPane2.setFont(new java.awt.Font("å¾®è½¯é›…é»‘", 0, 14));
 		jScrollPane2.setViewportView(jEditorPane2);
 
 		jEditorPane2.setContentType("text/html");
 
-		// ÒªÄÜÏìÓ¦ÍøÒ³ÖĞµÄÁ´½Ó£¬Ôò±ØĞë¼ÓÉÏ³¬Á´¼àÌıÆ÷
+		// è¦èƒ½å“åº”ç½‘é¡µä¸­çš„é“¾æ¥ï¼Œåˆ™å¿…é¡»åŠ ä¸Šè¶…é“¾ç›‘å¬å™¨
 		jEditorPane2.addHyperlinkListener(new HyperlinkListener()
 		{
 			@Override
-			// ³¬Á´¼àÌıÆ÷£¬´¦Àí¶Ô³¬¼¶Á´½ÓµÄµã»÷ÊÂ¼ş£¬µ«¶Ô°´Å¥µÄµã»÷»¹²¶»ñ²»µ½
+			// è¶…é“¾ç›‘å¬å™¨ï¼Œå¤„ç†å¯¹è¶…çº§é“¾æ¥çš„ç‚¹å‡»äº‹ä»¶ï¼Œä½†å¯¹æŒ‰é’®çš„ç‚¹å‡»è¿˜æ•è·ä¸åˆ°
 			public void hyperlinkUpdate(HyperlinkEvent e)
 			{
 				if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED)
 				{
 					try
 					{
-						String command = "explorer.exe "// Èç¹ûÊÇ¼ÇÊÂ±¾´ò¿ª,¿ÉÓÃ notepad.exe
+						String command = "explorer.exe "// å¦‚æœæ˜¯è®°äº‹æœ¬æ‰“å¼€,å¯ç”¨ notepad.exe
 								+ e.getURL().toString();
 						Runtime.getRuntime().exec(command);
 					}
@@ -232,61 +226,61 @@ public class GoogleCodeDownloadURL extends javax.swing.JFrame
 		jEditorPane1.setText(googleCodeDownLoadURL);
 		// jEditorPane1
 
-		jEditorPane2.setText("<html><body>ÎÄ¼şÃû£º" + fileName + "<br>ÏÂÔØµØÖ·£º" + googleCodeDownLoadURL + "<br>ÏÂÔØ£º<a href=" + googleCodeDownLoadURL + ">" + fileName
+		jEditorPane2.setText("<html><body>æ–‡ä»¶åï¼š" + fileName + "<br>ä¸‹è½½åœ°å€ï¼š" + googleCodeDownLoadURL + "<br>ä¸‹è½½ï¼š<a href=" + googleCodeDownLoadURL + ">" + fileName
 				+ "</a></body></html>");
 
 	}
 
 	/**
-	 * ×Ö·û´®URL±àÂë
+	 * å­—ç¬¦ä¸²URLç¼–ç 
 	 * 
 	 * @param filename
-	 *            ÎÄ¼şÃû
-	 * @return URL±àÂëºóµÄÎÄ¼şÃû
+	 *            æ–‡ä»¶å
+	 * @return URLç¼–ç åçš„æ–‡ä»¶å
 	 */
 	private static String stringToURL(String filename)
 	{
 		String retVal = null;
 		try
 		{
-			retVal = URLEncoder.encode(filename, "UTF-8");// URL±àÂë£¬GBK µ½ UTF-8¸ñÊ½
+			retVal = URLEncoder.encode(filename, "UTF-8");// URLç¼–ç ï¼ŒGBK åˆ° UTF-8æ ¼å¼
 		}
 		catch (UnsupportedEncodingException e)
 		{
 			e.printStackTrace();
 		}
 		/*		
-		# ÓÃÀ´±êÖ¾ÌØ¶¨µÄÎÄµµÎ»ÖÃ %23 
-		% ¶ÔÌØÊâ×Ö·û½øĞĞ±àÂë %25 
-		& ·Ö¸ô²»Í¬µÄ±äÁ¿Öµ¶Ô %26 
-		+ ÔÚ±äÁ¿ÖµÖĞ±íÊ¾¿Õ¸ñ %2B 
-		\ ±íÊ¾Ä¿Â¼Â·¾¶ %2F 
-		= ÓÃÀ´Á¬½Ó¼üºÍÖµ %3D 
-		? ±íÊ¾²éÑ¯×Ö·û´®µÄ¿ªÊ¼ %3F */
+		# ç”¨æ¥æ ‡å¿—ç‰¹å®šçš„æ–‡æ¡£ä½ç½® %23 
+		% å¯¹ç‰¹æ®Šå­—ç¬¦è¿›è¡Œç¼–ç  %25 
+		& åˆ†éš”ä¸åŒçš„å˜é‡å€¼å¯¹ %26 
+		+ åœ¨å˜é‡å€¼ä¸­è¡¨ç¤ºç©ºæ ¼ %2B 
+		\ è¡¨ç¤ºç›®å½•è·¯å¾„ %2F 
+		= ç”¨æ¥è¿æ¥é”®å’Œå€¼ %3D 
+		? è¡¨ç¤ºæŸ¥è¯¢å­—ç¬¦ä¸²çš„å¼€å§‹ %3F */
 		
 		retVal = retVal.replaceAll("\\+", "%20");
 		return retVal;
 	}
 
 	/**
-	 * »ñÈ¡Google Code ÏÂÔØµØÖ·
+	 * è·å–Google Code ä¸‹è½½åœ°å€
 	 * 
 	 * @param filename
-	 *            ÎÄ¼şÃû
-	 * @return Google Code ÏÂÔØµØÖ·
+	 *            æ–‡ä»¶å
+	 * @return Google Code ä¸‹è½½åœ°å€
 	 */
 	private static String googleCodeDownLoadURL(String filename)
 	{
-		final String prefixURL = "http://usc.googlecode.com/files/";// Ç°×º
-		String retVal = prefixURL + stringToURL(filename);// Google Code ÏÂÔØµØÖ·
+		final String prefixURL = "http://usc.googlecode.com/files/";// å‰ç¼€
+		String retVal = prefixURL + stringToURL(filename);// Google Code ä¸‹è½½åœ°å€
 		return retVal;
 	}
 
 	/**
-	 * ¸´ÖÆµ½¼ôÌù°å
+	 * å¤åˆ¶åˆ°å‰ªè´´æ¿
 	 * 
 	 * @param String
-	 *            ĞèÒª¸´ÖÆµÄÎÄ±¾
+	 *            éœ€è¦å¤åˆ¶çš„æ–‡æœ¬
 	 */
 	public static void copy(String str)
 	{
