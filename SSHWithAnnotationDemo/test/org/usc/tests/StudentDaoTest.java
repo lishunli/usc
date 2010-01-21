@@ -10,7 +10,6 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.usc.beans.Student;
-import org.usc.daos.IStudentDao;
 import org.usc.services.student.IStudentService;
 
 /**
@@ -29,8 +28,6 @@ import org.usc.services.student.IStudentService;
 public class StudentDaoTest
 {
 //	@Resource(name = "studentDao")
-	@Autowired
-	private IStudentDao sDao;
 	
 //	@Resource(name = "studentService")
 	@Autowired
@@ -44,5 +41,10 @@ public class StudentDaoTest
 		{
 			System.out.println(student);
 		}
+	}
+	
+	@Test
+	public void testDelete()
+	{
 	}
 }

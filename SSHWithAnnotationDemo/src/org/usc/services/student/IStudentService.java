@@ -18,5 +18,6 @@ public interface IStudentService
 {
 
 	public abstract List<Student> findAll();
+	public abstract void delete();
 
 }
