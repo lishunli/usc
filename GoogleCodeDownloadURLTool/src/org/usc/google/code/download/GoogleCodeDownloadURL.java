@@ -54,7 +54,7 @@ public class GoogleCodeDownloadURL extends javax.swing.JFrame
 		fileDialog = new FileDialog(this, "打开文件对话框", FileDialog.LOAD);
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-		setTitle("Google Code\u5730\u5740\u83b7\u53d6\u5668");
+		setTitle("Google Code\u4e0b\u8f7d\u5730\u5740\u83b7\u53d6\u5668");
 		setFont(new java.awt.Font("微软雅黑", 0, 14));
 
 		double width = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
@@ -221,7 +221,7 @@ public class GoogleCodeDownloadURL extends javax.swing.JFrame
 	{
 		fileDialog.setVisible(true);
 		String fileName = fileDialog.getFile();
-		jTextField1.setText(fileName);
+		jTextField1.setText(fileName.substring(0, fileName.lastIndexOf('.')));
 		String googleCodeDownLoadURL = googleCodeDownLoadURL(fileName);
 		jEditorPane1.setText(googleCodeDownLoadURL);
 		// jEditorPane1
