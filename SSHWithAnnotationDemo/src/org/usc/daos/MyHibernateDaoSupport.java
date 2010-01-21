@@ -1,4 +1,4 @@
-package org.usc.utils;
+package org.usc.daos;
 
 import javax.annotation.Resource;
 

@@ -11,7 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.usc.beans.Student;
 import org.usc.daos.IStudentDao;
-import org.usc.services.IStudentService;
+import org.usc.services.student.IStudentService;
 
 /**
  * 

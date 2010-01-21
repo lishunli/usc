@@ -1,4 +1,4 @@
-package org.usc.services;
+package org.usc.services.student.impl;
 
 import java.util.List;
 
@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.usc.beans.Student;
 import org.usc.daos.IStudentDao;
+import org.usc.services.student.IStudentService;
 
 /**
  * 

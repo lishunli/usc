@@ -7,7 +7,7 @@ import org.apache.struts2.convention.annotation.Results;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.usc.beans.Student;
-import org.usc.services.IStudentService;
+import org.usc.services.student.IStudentService;
 
 import com.opensymphony.xwork2.ActionSupport;
 

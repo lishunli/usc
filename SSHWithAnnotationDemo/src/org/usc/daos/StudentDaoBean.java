@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 import org.usc.beans.Student;
-import org.usc.utils.MyHibernateDaoSupport;
 
 /**
  * 
