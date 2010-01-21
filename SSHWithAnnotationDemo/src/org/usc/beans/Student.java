@@ -120,4 +120,10 @@ public class Student implements java.io.Serializable
 		this.eduTime = eduTime;
 	}
 
+	@Override
+	public String toString()
+	{
+		return "Student [no=" + no + ", name=" + name + ", age=" + age + ", eduTime=" + eduTime + ", score=" + score + ", sex=" + sex + "]";
+	}
+
 }

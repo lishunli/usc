@@ -37,7 +37,7 @@ public abstract class DaoSupport<T> extends MyHibernateDaoSupport implements DAO
 	{
 		for(Object id : entityids)
 		{
-			super.getHibernateTemplate().delete(id);
+			super.getHibernateTemplate().delete(find((Serializable) id));
 		}
 	}
 
@@ -48,8 +48,7 @@ public abstract class DaoSupport<T> extends MyHibernateDaoSupport implements DAO
 	@Override
 	public T find(Serializable entityId)
 	{
-		
-		return null;
+		return (T) super.getHibernateTemplate().get(entityClass, entityId);
 	}
 
 
@@ -59,10 +58,8 @@ public abstract class DaoSupport<T> extends MyHibernateDaoSupport implements DAO
 	@Override
 	public long getCount()
 	{
-		
-		return 0;
+		return findAll().size();
 	}
-
 
 	/* 
 	 * @see org.usc.daos.DAO#getScrollData(int, int, java.lang.String, java.lang.Object[], java.util.LinkedHashMap)

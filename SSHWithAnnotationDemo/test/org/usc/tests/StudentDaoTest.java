@@ -46,5 +46,6 @@ public class StudentDaoTest
 	@Test
 	public void testDelete()
 	{
+		studentService.delete(2);
 	}
 }

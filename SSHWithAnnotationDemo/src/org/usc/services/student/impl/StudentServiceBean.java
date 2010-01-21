@@ -2,12 +2,8 @@ package org.usc.services.student.impl;
 
 import java.util.List;
 
-import javax.annotation.Resource;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.usc.beans.Student;
-import org.usc.daos.DAO;
 import org.usc.daos.DaoSupport;
 import org.usc.services.student.IStudentService;
 
@@ -25,18 +21,38 @@ import org.usc.services.student.IStudentService;
 // 声明此类为业务逻辑层的类
 public class StudentServiceBean extends DaoSupport<Student> implements IStudentService
 {
+	/* 
+	 * @see org.usc.services.student.impl.IStudentService#findAll()
+	 */
 	public List<Student> findAll()
 	{
-		System.out.println("findAll");
 		return super.findAll();
 	}
 
 	/* 
 	 * @see org.usc.services.student.IStudentService#delete()
 	 */
-	@Override
-	public void delete()
+	/* 
+	 * @see org.usc.services.student.impl.IStudentService#save(org.usc.beans.Student)
+	 */
+	public void save(Student student)
 	{
-		 
+		super.save(student);
+	}
+	
+	/* 
+	 * @see org.usc.services.student.impl.IStudentService#delete(int)
+	 */
+	public void delete(int no)
+	{
+		super.delete(no);
+	}
+	
+	/* 
+	 * @see org.usc.services.student.impl.IStudentService#update(org.usc.beans.Student)
+	 */
+	public void update(Student student)
+	{
+		super.update(student);
 	}
 }
