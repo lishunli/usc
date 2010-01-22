@@ -230,7 +230,7 @@ public class GoogleCodeDownloadURL extends javax.swing.JFrame
 		jEditorPane1.setText(googleCodeDownLoadURL);
 		// jEditorPane1
 
-		jEditorPane2.setText("<html><body>文&nbsp;件&nbsp;名：" + fileName + "<br>下载地址：" + googleCodeDownLoadURL + "<br>下载地址：<a href=" + googleCodeDownLoadURL
+		jEditorPane2.setText("<html><body>文&nbsp;件&nbsp;名：" + fileName + "<br>下载地址：" + googleCodeDownLoadURL + "<br>提供下载：<a href=" + googleCodeDownLoadURL
 				+ ">" + fileName + "</a></body></html>");
 
 	}
