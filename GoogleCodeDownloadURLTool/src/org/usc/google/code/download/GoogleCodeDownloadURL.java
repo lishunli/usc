@@ -204,7 +204,11 @@ public class GoogleCodeDownloadURL extends javax.swing.JFrame
 
 	private void jButton4MouseClicked(java.awt.event.MouseEvent evt)
 	{
-		copy(jEditorPane2.getText());
+		String src = jEditorPane2.getText().trim();
+		src = src.replaceAll("\n", "").replaceAll("\\<html>", "").replaceAll("\\</html>", "").replaceAll("\\<head>", "").replaceAll("\\</head>", "")
+				.replaceAll("\\<body>", "<br>").replaceAll("\\</body>", "<br>");
+
+		copy(src);
 	}
 
 	private void jButton3MouseClicked(java.awt.event.MouseEvent evt)
@@ -226,8 +230,8 @@ public class GoogleCodeDownloadURL extends javax.swing.JFrame
 		jEditorPane1.setText(googleCodeDownLoadURL);
 		// jEditorPane1
 
-		jEditorPane2.setText("<html><body>文件名：" + fileName + "<br>下载地址：" + googleCodeDownLoadURL + "<br>下载：<a href=" + googleCodeDownLoadURL + ">" + fileName
-				+ "</a></body></html>");
+		jEditorPane2.setText("<html><body>文&nbsp;件&nbsp;名：" + fileName + "<br>下载地址：" + googleCodeDownLoadURL + "<br>下载地址：<a href=" + googleCodeDownLoadURL
+				+ ">" + fileName + "</a></body></html>");
 
 	}
 
@@ -249,15 +253,10 @@ public class GoogleCodeDownloadURL extends javax.swing.JFrame
 		{
 			e.printStackTrace();
 		}
-		/*		
-		# 用来标志特定的文档位置 %23 
-		% 对特殊字符进行编码 %25 
-		& 分隔不同的变量值对 %26 
-		+ 在变量值中表示空格 %2B 
-		\ 表示目录路径 %2F 
-		= 用来连接键和值 %3D 
-		? 表示查询字符串的开始 %3F */
-		
+		/*
+		 * # 用来标志特定的文档位置 %23 % 对特殊字符进行编码 %25 & 分隔不同的变量值对 %26 + 在变量值中表示空格 %2B \ 表示目录路径 %2F = 用来连接键和值 %3D ? 表示查询字符串的开始 %3F
+		 */
+
 		retVal = retVal.replaceAll("\\+", "%20");
 		return retVal;
 	}
