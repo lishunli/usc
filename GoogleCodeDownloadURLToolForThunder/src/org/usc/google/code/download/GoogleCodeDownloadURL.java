@@ -87,7 +87,7 @@ public class GoogleCodeDownloadURL extends javax.swing.JFrame
 		jLabel5.setText("\u4e0b\u8f7d\u4fe1\u606f\uff1a");
 
 		jTextField1.setEditable(false);
-		jTextField1.setFont(new java.awt.Font("微软雅黑", 0, 16));
+		jTextField1.setFont(new java.awt.Font("微软雅黑", 0, 14));
 
 		jButton2.setFont(new java.awt.Font("微软雅黑", 0, 18));
 		jButton2.setText("\u590d\u5236\u5230\u526a\u8d34\u677f");
@@ -110,7 +110,7 @@ public class GoogleCodeDownloadURL extends javax.swing.JFrame
 		});
 
 		jEditorPane1.setEditable(false);
-		jEditorPane1.setFont(new java.awt.Font("微软雅黑", 0, 16));
+		jEditorPane1.setFont(new java.awt.Font("微软雅黑", 0, 14));
 		jScrollPane1.setViewportView(jEditorPane1);
 
 		jButton4.setFont(new java.awt.Font("微软雅黑", 0, 18));
