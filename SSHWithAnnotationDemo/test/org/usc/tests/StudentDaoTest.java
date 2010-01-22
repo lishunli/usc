@@ -1,5 +1,7 @@
 package org.usc.tests;
 
+import java.util.Date;
+
 import javax.annotation.Resource;
 
 import org.junit.Test;
@@ -11,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.usc.beans.Student;
 import org.usc.services.student.IStudentService;
+import static org.junit.Assert.*;
 
 /**
  * 
@@ -37,15 +40,46 @@ public class StudentDaoTest
 	@Test
 	public void testFindAll()
 	{
-		for (Student student : studentService.findAll())
-		{
-			System.out.println(student);
-		}
+//		for (Student student : studentService.findAll())
+//		{
+//			System.out.println(student);
+//		}
 	}
 	
 	@Test
 	public void testDelete()
 	{
 		studentService.delete(2);
+	}
+	
+	@Test
+	public void testFindByName()
+	{
+		String name = "章爱国";
+		for(Student student : studentService.findByName(name))
+		{
+			System.out.println(student);
+			assertTrue(name.equals(student.getName()));
+		}
+		
+	}
+	@Test
+	public void testSave()
+	{
+		Student student = new Student("李顺利", "男", 20, 90.0, new Date());
+		studentService.save(student);
+	}
+	
+	@Test
+	public void testFindEntiey()
+	{
+		Student student = new Student("李顺利", "男", 20, 90.0, new Date());
+//		studentService.(student);
+	}
+	
+	@Test
+	public void testGetCount()
+	{
+		System.out.println(studentService.getCount());
 	}
 }

@@ -24,9 +24,16 @@ public class StudentServiceBean extends DaoSupport<Student> implements IStudentS
 	/* 
 	 * @see org.usc.services.student.impl.IStudentService#findAll()
 	 */
-	public List<Student> findAll()
+	
+	public long getCount()
 	{
-		return super.findAll();
+		return super.getCount();
+	}
+	
+	@Override
+	public List<Student> findByName(Object value)
+	{
+		return super.findByProperty("name", value);
 	}
 
 	/* 
@@ -55,4 +62,12 @@ public class StudentServiceBean extends DaoSupport<Student> implements IStudentS
 	{
 		super.update(student);
 	}
+	/* 
+	 * @see org.usc.services.student.IStudentService#findByName(java.lang.Object)
+	 */
+
+	/* 
+	 * @see org.usc.daos.DAO#findAll()
+	 */
+
 }

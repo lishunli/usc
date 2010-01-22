@@ -4,12 +4,16 @@ import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.io.Serializable;
 import java.lang.reflect.Method;
+import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.springframework.orm.hibernate3.HibernateCallback;
 import org.usc.beans.QueryResult;
 import org.usc.utils.GenericsUtils;
 
@@ -17,32 +21,45 @@ import org.usc.utils.GenericsUtils;
 public abstract class DaoSupport<T> extends MyHibernateDaoSupport implements DAO<T>
 {
 	protected Class<T> entityClass = GenericsUtils.getSuperClassGenricType(this.getClass());
+	protected String entityClassName = getEntityName(this.entityClass);
 
 	/*
-	 * @see org.usc.daos.DAO#findAll()
+	 * @see org.usc.daos.DAO#findByEntity(java.lang.Object)
 	 */
 	@Override
-	public List<T> findAll()
+	public List<T> findByEntity(Object entiey)
 	{
-		return super.getHibernateTemplate().find("from " + getEntityName(entityClass));
+		/*
+		 * super.getHibernateTemplate().execute(new HibernateCallback<T>() {
+		 * 
+		 * @Override public T doInHibernate(Session arg0) throws HibernateException, SQLException { return (T) getSession().createQuery("").list(); } });
+		 */
+		return super.getHibernateTemplate().findByExample(entiey);
 	}
 
-	
+	/*
+	 * @see org.usc.daos.DAO#findByProperty(java.lang.String, java.lang.Object)
+	 */
+	@Override
+	public List<T> findByProperty(String propertyName, Object value)
+	{
+		String queryString = "from " + entityClassName + " as model where model." + propertyName + "= ?";
+		return super.getHibernateTemplate().find(queryString, value);
+	}
 
-	/* 
+	/*
 	 * @see org.usc.daos.DAO#delete(java.io.Serializable[])
 	 */
 	@Override
 	public void delete(Serializable... entityids)
 	{
-		for(Object id : entityids)
+		for (Object id : entityids)
 		{
 			super.getHibernateTemplate().delete(find((Serializable) id));
 		}
 	}
 
-
-	/* 
+	/*
 	 * @see org.usc.daos.DAO#find(java.io.Serializable)
 	 */
 	@Override
@@ -51,61 +68,73 @@ public abstract class DaoSupport<T> extends MyHibernateDaoSupport implements DAO
 		return (T) super.getHibernateTemplate().get(entityClass, entityId);
 	}
 
-
-	/* 
+	/*
 	 * @see org.usc.daos.DAO#getCount()
 	 */
 	@Override
 	public long getCount()
 	{
-		return findAll().size();
+		String queryString = "select count( " + getKeyFieldName(this.entityClass) + ") from " + entityClassName;
+		long count = Long.parseLong(super.getHibernateTemplate().find(queryString).get(0).toString());
+		return count;
+	}
+	
+	@Override
+	public void save(Object entity)
+	{
+		super.getHibernateTemplate().save(entity);
 	}
 
-	/* 
+	/*
+	 * @see org.usc.daos.DAO#update(java.lang.Object)
+	 */
+	@Override
+	public void update(Object entity)
+	{
+		super.getHibernateTemplate().update(entity);
+	}
+
+	/*
 	 * @see org.usc.daos.DAO#getScrollData(int, int, java.lang.String, java.lang.Object[], java.util.LinkedHashMap)
 	 */
 	@Override
 	public QueryResult<T> getScrollData(int firstindex, int maxresult, String wherejpql, Object[] queryParams, LinkedHashMap<String, String> orderby)
 	{
-		
+
 		return null;
 	}
 
-
-	/* 
+	/*
 	 * @see org.usc.daos.DAO#getScrollData(int, int, java.lang.String, java.lang.Object[])
 	 */
 	@Override
 	public QueryResult<T> getScrollData(int firstindex, int maxresult, String wherejpql, Object[] queryParams)
 	{
-		
+
 		return null;
 	}
 
-
-	/* 
+	/*
 	 * @see org.usc.daos.DAO#getScrollData(int, int, java.util.LinkedHashMap)
 	 */
 	@Override
 	public QueryResult<T> getScrollData(int firstindex, int maxresult, LinkedHashMap<String, String> orderby)
 	{
-		
+
 		return null;
 	}
 
-
-	/* 
+	/*
 	 * @see org.usc.daos.DAO#getScrollData(int, int)
 	 */
 	@Override
 	public QueryResult<T> getScrollData(int firstindex, int maxresult)
 	{
-		
+
 		return null;
 	}
 
-
-	/* 
+	/*
 	 * @see org.usc.daos.DAO#getScrollData()
 	 */
 	@Override
@@ -115,24 +144,11 @@ public abstract class DaoSupport<T> extends MyHibernateDaoSupport implements DAO
 		return null;
 	}
 
-
-	/* 
+	/*
 	 * @see org.usc.daos.DAO#save(java.lang.Object)
 	 */
-	@Override
-	public void save(Object entity)
-	{
-	}
-
-
-	/* 
-	 * @see org.usc.daos.DAO#update(java.lang.Object)
-	 */
-	@Override
-	public void update(Object entity)
-	{
-	}
 	
+
 	/**
 	 * 获取实体的名称
 	 * 
@@ -152,20 +168,23 @@ public abstract class DaoSupport<T> extends MyHibernateDaoSupport implements DAO
 		return entityname;
 	}
 
-	protected static <E> String getCountField(Class<E> clazz)
+	/**
+	 * 获取实体的主键
+	 * @param <E>
+	 * @param clazz 实体类
+	 * @return 主键名
+	 */
+	protected static <E> String getKeyFieldName(Class<E> clazz)
 	{
-		String out = "o";
 		try
 		{
 			PropertyDescriptor[] propertyDescriptors = Introspector.getBeanInfo(clazz).getPropertyDescriptors();
 			for (PropertyDescriptor propertydesc : propertyDescriptors)
 			{
 				Method method = propertydesc.getReadMethod();
-				if (method != null && method.isAnnotationPresent(EmbeddedId.class))
+				if(null != method && null !=method.getAnnotation(javax.persistence.Id.class))
 				{
-					PropertyDescriptor[] ps = Introspector.getBeanInfo(propertydesc.getPropertyType()).getPropertyDescriptors();
-					out = "o." + propertydesc.getName() + "." + (!ps[1].getName().equals("class") ? ps[1].getName() : ps[0].getName());
-					break;
+					return propertydesc.getName();
 				}
 			}
 		}
@@ -173,8 +192,7 @@ public abstract class DaoSupport<T> extends MyHibernateDaoSupport implements DAO
 		{
 			e.printStackTrace();
 		}
-		return out;
+		return "id";
 	}
-
 
 }

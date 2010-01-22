@@ -10,11 +10,21 @@ import org.usc.beans.QueryResult;
 
 public interface DAO<T> {
 	
+
 	/**
-	 * 获取所有对象
-	 * @return 所有对象
+	 * 根据属性查找对象
+	 * @param propertyName 属性（对应Bean）
+	 * @param value 属性
+	 * @return 根据属性查找对象
 	 */
-	public List<T> findAll();
+	public List<T> findByProperty(String propertyName, Object value);
+	/**
+	 * 根据实体查找对象
+	 * @param entiey 实体（T类型）
+	 * @return 根据属性查找对象
+	 */
+	public List<T> findByEntity(Object entiey);
+	
 	
 	/**
 	 * 获取记录总数
@@ -63,5 +73,9 @@ public interface DAO<T> {
 	
 	public QueryResult<T> getScrollData(int firstindex, int maxresult);
 	
+	/**
+	 * 获取所有对象
+	 * @return 所有对象
+	 */
 	public QueryResult<T> getScrollData();
 }

@@ -34,10 +34,10 @@ public class FindAllAction extends ActionSupport
 
 	public String execute() throws Exception
 	{
-		for (Student student : studentService.findAll())
-		{
-			System.out.println(student);
-		}
+//		for (Student student : studentService.findAll())
+//		{
+//			System.out.println(student);
+//		}
 		return SUCCESS;
 	}
 

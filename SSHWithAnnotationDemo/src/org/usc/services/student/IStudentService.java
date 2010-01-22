@@ -17,7 +17,6 @@ import org.usc.beans.Student;
 public interface IStudentService
 {
 
-	public abstract List<Student> findAll();
 
 	/* 
 	 * @see org.usc.services.student.IStudentService#delete()
@@ -27,5 +26,9 @@ public interface IStudentService
 	public abstract void delete(int no);
 
 	public abstract void update(Student student);
+	
+	public abstract List<Student> findByName(Object value);
+	
+	public abstract long getCount();
 
 }
