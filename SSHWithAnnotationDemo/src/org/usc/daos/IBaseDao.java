@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.usc.beans.QueryResult;
 
-public interface DAO<T>
+public interface IBaseDao<T>
 {
 
 	/**

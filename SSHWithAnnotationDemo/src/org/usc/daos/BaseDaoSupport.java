@@ -14,7 +14,7 @@ import org.usc.beans.QueryResult;
 import org.usc.utils.GenericsUtils;
 
 @SuppressWarnings("unchecked")
-public abstract class DaoSupport<T> extends MyHibernateDaoSupport implements DAO<T>
+public abstract class BaseDaoSupport<T> extends MyHibernateDaoSupport implements IBaseDao<T>
 {
 	protected Class<T> entityClass = GenericsUtils.getSuperClassGenricType(this.getClass());
 	protected String entityClassName = getEntityName(this.entityClass);
