@@ -4,16 +4,12 @@ import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.io.Serializable;
 import java.lang.reflect.Method;
-import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.springframework.orm.hibernate3.HibernateCallback;
+import org.hibernate.Query;
 import org.usc.beans.QueryResult;
 import org.usc.utils.GenericsUtils;
 
@@ -29,11 +25,6 @@ public abstract class DaoSupport<T> extends MyHibernateDaoSupport implements DAO
 	@Override
 	public List<T> findByEntity(Object entiey)
 	{
-		/*
-		 * super.getHibernateTemplate().execute(new HibernateCallback<T>() {
-		 * 
-		 * @Override public T doInHibernate(Session arg0) throws HibernateException, SQLException { return (T) getSession().createQuery("").list(); } });
-		 */
 		return super.getHibernateTemplate().findByExample(entiey);
 	}
 
@@ -43,7 +34,7 @@ public abstract class DaoSupport<T> extends MyHibernateDaoSupport implements DAO
 	@Override
 	public List<T> findByProperty(String propertyName, Object value)
 	{
-		String queryString = "from " + entityClassName + " as model where model." + propertyName + "= ?";
+		String queryString = "from " + entityClassName + " o where o." + propertyName + "= ?";
 		return super.getHibernateTemplate().find(queryString, value);
 	}
 
@@ -65,7 +56,9 @@ public abstract class DaoSupport<T> extends MyHibernateDaoSupport implements DAO
 	@Override
 	public T find(Serializable entityId)
 	{
-		return (T) super.getHibernateTemplate().get(entityClass, entityId);
+		if (null != entityId)
+			return (T) super.getHibernateTemplate().get(entityClass, entityId);
+		return null;
 	}
 
 	/*
@@ -74,11 +67,13 @@ public abstract class DaoSupport<T> extends MyHibernateDaoSupport implements DAO
 	@Override
 	public long getCount()
 	{
-		String queryString = "select count( " + getKeyFieldName(this.entityClass) + ") from " + entityClassName;
-		long count = Long.parseLong(super.getHibernateTemplate().find(queryString).get(0).toString());
+		long count = 0;
+		String hql = "select count( " + getKeyFieldName(this.entityClass) + ") from " + entityClassName;
+		Query query = getSession().createQuery(hql);
+		count = Long.parseLong(query.list().get(0).toString());
 		return count;
 	}
-	
+
 	@Override
 	public void save(Object entity)
 	{
@@ -98,10 +93,27 @@ public abstract class DaoSupport<T> extends MyHibernateDaoSupport implements DAO
 	 * @see org.usc.daos.DAO#getScrollData(int, int, java.lang.String, java.lang.Object[], java.util.LinkedHashMap)
 	 */
 	@Override
-	public QueryResult<T> getScrollData(int firstindex, int maxresult, String wherejpql, Object[] queryParams, LinkedHashMap<String, String> orderby)
+	public QueryResult<T> getScrollData(final int firstindex, final int maxresult, final String wherejpql, final Object[] queryParams,
+			final LinkedHashMap<String, String> orderby)
 	{
+		final QueryResult<T> queryResult = new QueryResult<T>();
 
-		return null;
+		String hql1 = "from " + entityClassName + " o " + (wherejpql == null || "".equals(wherejpql.trim()) ? "" : " where " + wherejpql)
+				+ buildOrderby(orderby);
+		Query query1 = getSession().createQuery(hql1);
+		if (firstindex != -1 && maxresult != -1)
+			query1.setFirstResult(firstindex).setMaxResults(maxresult);
+		setQueryParams(query1, queryParams);
+		queryResult.setResultlist(query1.list());
+
+		String hql2 = "select count( " + getKeyFieldName(this.entityClass) + ") from " + entityClassName + " o "
+				+ (wherejpql == null || "".equals(wherejpql.trim()) ? "" : " where " + wherejpql);
+		Query query2 = getSession().createQuery(hql2);
+		setQueryParams(query2, queryParams);
+		queryResult.setTotalrecord(Long.parseLong(query2.list().get(0).toString()));
+
+		return queryResult;
+
 	}
 
 	/*
@@ -110,28 +122,26 @@ public abstract class DaoSupport<T> extends MyHibernateDaoSupport implements DAO
 	@Override
 	public QueryResult<T> getScrollData(int firstindex, int maxresult, String wherejpql, Object[] queryParams)
 	{
-
-		return null;
+		return getScrollData(firstindex,maxresult,wherejpql,queryParams,null);
 	}
 
 	/*
 	 * @see org.usc.daos.DAO#getScrollData(int, int, java.util.LinkedHashMap)
 	 */
 	@Override
-	public QueryResult<T> getScrollData(int firstindex, int maxresult, LinkedHashMap<String, String> orderby)
+	public QueryResult<T> getScrollData(final int firstindex, final int maxresult, final LinkedHashMap<String, String> orderby)
 	{
+		return getScrollData(firstindex,maxresult,null,null,orderby);
 
-		return null;
 	}
 
 	/*
 	 * @see org.usc.daos.DAO#getScrollData(int, int)
 	 */
 	@Override
-	public QueryResult<T> getScrollData(int firstindex, int maxresult)
+	public QueryResult<T> getScrollData(final int firstindex, final int maxresult)
 	{
-
-		return null;
+		return getScrollData(firstindex,maxresult,null,null,null);
 	}
 
 	/*
@@ -140,14 +150,12 @@ public abstract class DaoSupport<T> extends MyHibernateDaoSupport implements DAO
 	@Override
 	public QueryResult<T> getScrollData()
 	{
-		
-		return null;
+		return getScrollData(-1,-1,null,null,null);
 	}
 
 	/*
 	 * @see org.usc.daos.DAO#save(java.lang.Object)
 	 */
-	
 
 	/**
 	 * 获取实体的名称
@@ -170,8 +178,10 @@ public abstract class DaoSupport<T> extends MyHibernateDaoSupport implements DAO
 
 	/**
 	 * 获取实体的主键
+	 * 
 	 * @param <E>
-	 * @param clazz 实体类
+	 * @param clazz
+	 *            实体类
 	 * @return 主键名
 	 */
 	protected static <E> String getKeyFieldName(Class<E> clazz)
@@ -182,7 +192,7 @@ public abstract class DaoSupport<T> extends MyHibernateDaoSupport implements DAO
 			for (PropertyDescriptor propertydesc : propertyDescriptors)
 			{
 				Method method = propertydesc.getReadMethod();
-				if(null != method && null !=method.getAnnotation(javax.persistence.Id.class))
+				if (null != method && null != method.getAnnotation(javax.persistence.Id.class))
 				{
 					return propertydesc.getName();
 				}
@@ -195,4 +205,64 @@ public abstract class DaoSupport<T> extends MyHibernateDaoSupport implements DAO
 		return "id";
 	}
 
+	/**
+	 * 设置HQL里边的属性值
+	 * @param query
+	 * @param queryParams
+	 */
+	protected static void setQueryParams(Query query, Object[] queryParams)
+	{
+		if (queryParams != null && queryParams.length > 0)
+		{
+			for (int i = 0; i < queryParams.length; i++)
+			{
+				query.setParameter(i, queryParams[i]);//从0开始
+			}
+		}
+	}
+
+	/**
+	 * 组装order by语句
+	 * 
+	 * @param orderby
+	 * @return
+	 */
+	protected static String buildOrderby(LinkedHashMap<String, String> orderby)
+	{
+		StringBuffer orderbyql = new StringBuffer("");
+		if (orderby != null && orderby.size() > 0)
+		{
+			orderbyql.append(" order by ");
+			for (String key : orderby.keySet())
+			{
+				orderbyql.append("o.").append(key).append(" ").append(orderby.get(key)).append(",");
+			}
+			orderbyql.deleteCharAt(orderbyql.length() - 1);
+		}
+		return orderbyql.toString();
+	}
+
+	protected static <E> String getCountField(Class<E> clazz)
+	{
+		String out = "o";
+		try
+		{
+			PropertyDescriptor[] propertyDescriptors = Introspector.getBeanInfo(clazz).getPropertyDescriptors();
+			for (PropertyDescriptor propertydesc : propertyDescriptors)
+			{
+				Method method = propertydesc.getReadMethod();
+				if (method != null && method.isAnnotationPresent(EmbeddedId.class))
+				{
+					PropertyDescriptor[] ps = Introspector.getBeanInfo(propertydesc.getPropertyType()).getPropertyDescriptors();
+					out = "o." + propertydesc.getName() + "." + (!ps[1].getName().equals("class") ? ps[1].getName() : ps[0].getName());
+					break;
+				}
+			}
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		return out;
+	}
 }

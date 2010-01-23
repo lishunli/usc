@@ -1,6 +1,7 @@
 package org.usc.tests;
 
 import java.util.Date;
+import java.util.LinkedHashMap;
 
 import javax.annotation.Resource;
 
@@ -11,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import org.usc.beans.QueryResult;
 import org.usc.beans.Student;
 import org.usc.services.student.IStudentService;
 import static org.junit.Assert.*;
@@ -38,24 +40,77 @@ public class StudentDaoTest
 
 
 	@Test
-	public void testFindAll()
+	public void testGetScrollData1()
 	{
-//		for (Student student : studentService.findAll())
-//		{
-//			System.out.println(student);
-//		}
+		QueryResult<Student> scrollData = studentService.getScrollData();
+		for (Student student : scrollData.getResultlist())
+		{
+			System.out.println(student);
+		}
+		System.out.println(scrollData.getTotalrecord());
+	}
+	
+	
+	@Test
+	public void testGetScrollData2()
+	{
+		QueryResult<Student> scrollData = studentService.getScrollData(0,5);
+		for (Student student : scrollData.getResultlist())
+		{
+			System.out.println(student);
+		}
+		System.out.println(scrollData.getTotalrecord());
+	}
+	
+	@Test
+	public void testGetScrollData3()
+	{
+		LinkedHashMap<String, String> orderby = new LinkedHashMap<String, String>();
+//		orderby.put("no", "asc");
+		orderby.put("age", "desc");
+		orderby.put("score", "desc");
+		QueryResult<Student> scrollData = studentService.getScrollData(0,5,orderby);
+		for (Student student : scrollData.getResultlist())
+		{
+			System.out.println(student);
+		}
+		System.out.println(scrollData.getTotalrecord());
+	}
+	
+	@Test
+	public void testGetScrollData4()
+	{
+		QueryResult<Student> scrollData = studentService.getScrollData(0,5,"o.sex=? and o.age=?",new Object[]{"男",20});
+		for (Student student : scrollData.getResultlist())
+		{
+			System.out.println(student);
+		}
+		System.out.println(scrollData.getTotalrecord());
+	}
+	
+	@Test
+	public void testGetScrollData5()
+	{
+		LinkedHashMap<String, String> orderby = new LinkedHashMap<String, String>();
+		orderby.put("no", "asc");
+		QueryResult<Student> scrollData = studentService.getScrollData(0,5,"o.sex=? and o.age=?",new Object[]{"男",20},orderby);
+		for (Student student : scrollData.getResultlist())
+		{
+			System.out.println(student);
+		}
+		System.out.println(scrollData.getTotalrecord());
 	}
 	
 	@Test
 	public void testDelete()
 	{
-		studentService.delete(2);
+		studentService.delete(20);
 	}
 	
 	@Test
 	public void testFindByName()
 	{
-		String name = "章爱国";
+		String name = "李顺利";
 		for(Student student : studentService.findByName(name))
 		{
 			System.out.println(student);
@@ -74,7 +129,12 @@ public class StudentDaoTest
 	public void testFindEntiey()
 	{
 		Student student = new Student("李顺利", "男", 20, 90.0, new Date());
-//		studentService.(student);
+		for(Student stu: studentService.findByEntity(student))
+		{
+			System.out.println(stu);
+		}
+		
+		
 	}
 	
 	@Test
