@@ -1,4 +1,4 @@
-package org.usc.beans;
+package org.usc.beans.base;
 
 public class PageIndex {
 	private int startIndex;

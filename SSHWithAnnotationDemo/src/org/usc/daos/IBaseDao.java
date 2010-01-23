@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import org.usc.beans.QueryResult;
+import org.usc.beans.base.QueryResult;
 
 public interface IBaseDao<T>
 {

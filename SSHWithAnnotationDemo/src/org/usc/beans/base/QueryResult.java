@@ -1,4 +1,4 @@
-package org.usc.beans;
+package org.usc.beans.base;
 
 import java.util.List;
 

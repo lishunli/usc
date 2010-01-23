@@ -10,8 +10,8 @@ import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-import org.usc.beans.PageView;
 import org.usc.beans.Student;
+import org.usc.beans.base.PageView;
 import org.usc.services.student.IStudentService;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -61,9 +61,13 @@ public class StudentListAction extends ActionSupport
 		HttpServletRequest request = (HttpServletRequest)ctx.get(ServletActionContext.HTTP_REQUEST);   
 		int maxResult = 5;
 		PageView<Student> pageView = new PageView<Student>(maxResult, getPage());
-		
+		/**
+		 * 下面修改service即可
+		 */
 		pageView.setQueryResult(studentService.getScrollData(pageView.getFirstResult(),maxResult));
-		
+		/**
+		 * request.setAttribute("pageView", pageView)中key尽量为pageView，不然需要修改代码
+		 */
 		request.setAttribute("pageView", pageView);
 		return SUCCESS;
 	}

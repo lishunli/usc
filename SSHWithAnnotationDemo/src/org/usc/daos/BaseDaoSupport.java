@@ -17,7 +17,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate3.HibernateCallback;
-import org.usc.beans.QueryResult;
+import org.usc.beans.base.QueryResult;
 import org.usc.utils.GenericsUtils;
 
 @SuppressWarnings("unchecked")

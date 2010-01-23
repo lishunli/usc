@@ -4,8 +4,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-import org.usc.beans.QueryResult;
 import org.usc.beans.Student;
+import org.usc.beans.base.QueryResult;
 import org.usc.daos.BaseDaoSupport;
 import org.usc.services.student.IStudentService;
 
