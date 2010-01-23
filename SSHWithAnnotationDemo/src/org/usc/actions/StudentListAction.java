@@ -3,11 +3,14 @@ package org.usc.actions;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.usc.beans.PageView;
 import org.usc.beans.Student;
 import org.usc.services.student.IStudentService;
 
@@ -35,12 +38,38 @@ public class StudentListAction extends ActionSupport
 {
 	@Resource(name = "studentService")
 	private IStudentService studentService;
+	private int page;
+	
+	public int getPage()
+	{
+		return page;
+	}
+
+
+	public void setPage(int page)
+	{
+		this.page = page;
+	}
+
 
 	@SuppressWarnings("unchecked")
 	public String execute() throws Exception
 	{
-		Map request = (Map) ActionContext.getContext().get("request");
-		request.put("studentList", studentService.getScrollData().getResultlist());
+//		System.out.println((getPage()<=0?1:getPage())-1);
+//		System.err.println(getPage());
+		
+		ActionContext ctx = ActionContext.getContext();       
+		HttpServletRequest request = (HttpServletRequest)ctx.get(ServletActionContext.HTTP_REQUEST);   
+		int maxResult = 7;
+//		Map request1 = (Map) ActionContext.getContext().get("request");
+		PageView<Student> pageView = new PageView<Student>(maxResult, getPage()<=0?1:getPage());
+		pageView.setQueryResult(studentService.getScrollData(((getPage()<=0?1:getPage())-1)*maxResult,maxResult));
+//		for(Student student:studentService.getScrollData(0,5).getResultlist())
+//		{
+//			System.out.println(student);
+//		}
+		request.setAttribute("pageView", pageView);
+//		request1.put("studentList",studentService.getScrollData().getResultlist());
 		return SUCCESS;
 	}
 
