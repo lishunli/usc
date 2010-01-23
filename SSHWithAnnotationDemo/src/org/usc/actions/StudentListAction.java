@@ -45,7 +45,6 @@ public class StudentListAction extends ActionSupport
 		return page;
 	}
 
-
 	public void setPage(int page)
 	{
 		this.page = page;
@@ -55,21 +54,17 @@ public class StudentListAction extends ActionSupport
 	@SuppressWarnings("unchecked")
 	public String execute() throws Exception
 	{
-//		System.out.println((getPage()<=0?1:getPage())-1);
-//		System.err.println(getPage());
-		
+		/**
+		 * 下面4句固定
+		 */
 		ActionContext ctx = ActionContext.getContext();       
 		HttpServletRequest request = (HttpServletRequest)ctx.get(ServletActionContext.HTTP_REQUEST);   
-		int maxResult = 7;
-//		Map request1 = (Map) ActionContext.getContext().get("request");
-		PageView<Student> pageView = new PageView<Student>(maxResult, getPage()<=0?1:getPage());
-		pageView.setQueryResult(studentService.getScrollData(((getPage()<=0?1:getPage())-1)*maxResult,maxResult));
-//		for(Student student:studentService.getScrollData(0,5).getResultlist())
-//		{
-//			System.out.println(student);
-//		}
+		int maxResult = 5;
+		PageView<Student> pageView = new PageView<Student>(maxResult, getPage());
+		
+		pageView.setQueryResult(studentService.getScrollData(pageView.getFirstResult(),maxResult));
+		
 		request.setAttribute("pageView", pageView);
-//		request1.put("studentList",studentService.getScrollData().getResultlist());
 		return SUCCESS;
 	}
 

@@ -130,7 +130,7 @@ public abstract class BaseDaoSupport<T> extends MyHibernateDaoSupport implements
 						+ (wherejpql == null || "".equals(wherejpql.trim()) ? "" : " where " + wherejpql);
 				Query query2 = session.createQuery(hql2);
 				setQueryParams(query2, queryParams);
-				queryResult.setTotalrecord(Long.parseLong(query2.list().get(0).toString()));
+				queryResult.setTotalrecord(Integer.parseInt(query2.list().get(0).toString()));
 
 				return null;
 			}

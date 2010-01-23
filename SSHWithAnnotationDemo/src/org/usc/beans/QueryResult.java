@@ -4,7 +4,7 @@ import java.util.List;
 
 public class QueryResult<T> {
 	private List<T> resultlist;
-	private long totalrecord;
+	private int totalrecord;
 	
 	public List<T> getResultlist() {
 		return resultlist;
@@ -12,10 +12,10 @@ public class QueryResult<T> {
 	public void setResultlist(List<T> resultlist) {
 		this.resultlist = resultlist;
 	}
-	public long getTotalrecord() {
+	public int getTotalrecord() {
 		return totalrecord;
 	}
-	public void setTotalrecord(long totalrecord) {
+	public void setTotalrecord(int totalrecord) {
 		this.totalrecord = totalrecord;
 	}
 }

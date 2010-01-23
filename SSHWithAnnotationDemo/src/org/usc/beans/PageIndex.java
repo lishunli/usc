@@ -1,29 +1,29 @@
 package org.usc.beans;
 
 public class PageIndex {
-	private long startindex;
-	private long endindex;
+	private int startindex;
+	private int endindex;
 	
-	public PageIndex(long startindex, long endindex) {
+	public PageIndex(int startindex, int endindex) {
 		this.startindex = startindex;
 		this.endindex = endindex;
 	}
-	public long getStartindex() {
+	public int getStartindex() {
 		return startindex;
 	}
-	public void setStartindex(long startindex) {
+	public void setStartindex(int startindex) {
 		this.startindex = startindex;
 	}
-	public long getEndindex() {
+	public int getEndindex() {
 		return endindex;
 	}
-	public void setEndindex(long endindex) {
+	public void setEndindex(int endindex) {
 		this.endindex = endindex;
 	}
 	 
-	public static PageIndex getPageIndex(long viewpagecount, int currentPage, long totalpage){
-			long startpage = currentPage-(viewpagecount%2==0? viewpagecount/2-1 : viewpagecount/2);
-			long endpage = currentPage+viewpagecount/2;
+	public static PageIndex getPageIndex(int viewpagecount, int currentPage, int totalpage){
+			int startpage = currentPage-(viewpagecount%2==0? viewpagecount/2-1 : viewpagecount/2);
+			int endpage = currentPage+viewpagecount/2;
 			if(startpage<1){
 				startpage = 1;
 				if(totalpage>=viewpagecount) endpage = viewpagecount;

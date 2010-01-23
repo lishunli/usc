@@ -9,13 +9,13 @@ public class PageView<T> {
 	/** 页码开始索引和结束索引 **/
 	private PageIndex pageindex;
 	/** 总页数 **/
-	private long totalpage = 1;
+	private int totalpage = 1;
 	/** 每页显示记录数 **/
 	private int maxresult = 10;
 	/** 当前页 **/
 	private int currentpage = 1;
 	/** 总记录数 **/
-	private long totalrecord;
+	private int totalrecord;
 	/** 页码数量 **/
 	private int pagecode = 10;
 	/** 要获取记录的开始索引 **/
@@ -32,7 +32,7 @@ public class PageView<T> {
 
 	public PageView(int maxresult, int currentpage) {
 		this.maxresult = maxresult;
-		this.currentpage = (currentpage<=0?1:(currentpage>(int)totalpage?(int)totalpage:currentpage));
+		this.currentpage = (currentpage<=0?1:currentpage);
 	}
 	
 	public void setQueryResult(QueryResult<T> qr){
@@ -40,10 +40,10 @@ public class PageView<T> {
 		setRecords(qr.getResultlist());
 	}
 	
-	public long getTotalrecord() {
+	public int getTotalrecord() {
 		return totalrecord;
 	}
-	public void setTotalrecord(long totalrecord) {
+	public void setTotalrecord(int totalrecord) {
 		this.totalrecord = totalrecord;
 		setTotalpage(this.totalrecord%this.maxresult==0? this.totalrecord/this.maxresult : this.totalrecord/this.maxresult+1);
 	}
@@ -56,10 +56,10 @@ public class PageView<T> {
 	public PageIndex getPageindex() {
 		return pageindex;
 	}
-	public long getTotalpage() {
+	public int getTotalpage() {
 		return totalpage;
 	}
-	public void setTotalpage(long totalpage) {
+	public void setTotalpage(int totalpage) {
 		this.totalpage = totalpage;
 		this.pageindex = PageIndex.getPageIndex(pagecode, currentpage, totalpage);
 	}
