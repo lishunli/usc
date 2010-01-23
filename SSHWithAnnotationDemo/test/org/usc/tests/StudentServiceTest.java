@@ -30,7 +30,7 @@ import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/applicationContext.xml"})
 @TestExecutionListeners({DependencyInjectionTestExecutionListener.class})
-public class StudentDaoTest
+public class StudentServiceTest
 {
 //	@Resource(name = "studentDao")
 	
