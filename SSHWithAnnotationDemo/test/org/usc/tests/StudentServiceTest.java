@@ -43,11 +43,11 @@ public class StudentServiceTest
 	public void testGetScrollData1()
 	{
 		QueryResult<Student> scrollData = studentService.getScrollData();
-		for (Student student : scrollData.getResultlist())
+		for (Student student : scrollData.getResultList())
 		{
 			System.out.println(student);
 		}
-		System.out.println(scrollData.getTotalrecord());
+		System.out.println(scrollData.getTotalRecord());
 	}
 	
 	
@@ -55,11 +55,11 @@ public class StudentServiceTest
 	public void testGetScrollData2()
 	{
 		QueryResult<Student> scrollData = studentService.getScrollData(0,5);
-		for (Student student : scrollData.getResultlist())
+		for (Student student : scrollData.getResultList())
 		{
 			System.out.println(student);
 		}
-		System.out.println(scrollData.getTotalrecord());
+		System.out.println(scrollData.getTotalRecord());
 	}
 	
 	@Test
@@ -70,22 +70,22 @@ public class StudentServiceTest
 		orderby.put("age", "desc");
 		orderby.put("score", "desc");
 		QueryResult<Student> scrollData = studentService.getScrollData(0,5,orderby);
-		for (Student student : scrollData.getResultlist())
+		for (Student student : scrollData.getResultList())
 		{
 			System.out.println(student);
 		}
-		System.out.println(scrollData.getTotalrecord());
+		System.out.println(scrollData.getTotalRecord());
 	}
 	
 	@Test
 	public void testGetScrollData4()
 	{
 		QueryResult<Student> scrollData = studentService.getScrollData(0,5,"o.sex=? and o.age=?",new Object[]{"男",20});
-		for (Student student : scrollData.getResultlist())
+		for (Student student : scrollData.getResultList())
 		{
 			System.out.println(student);
 		}
-		System.out.println(scrollData.getTotalrecord());
+		System.out.println(scrollData.getTotalRecord());
 	}
 	
 	@Test
@@ -94,11 +94,11 @@ public class StudentServiceTest
 		LinkedHashMap<String, String> orderby = new LinkedHashMap<String, String>();
 		orderby.put("no", "asc");
 		QueryResult<Student> scrollData = studentService.getScrollData(0,5,"o.sex=? and o.age=?",new Object[]{"男",20},orderby);
-		for (Student student : scrollData.getResultlist())
+		for (Student student : scrollData.getResultList())
 		{
 			System.out.println(student);
 		}
-		System.out.println(scrollData.getTotalrecord());
+		System.out.println(scrollData.getTotalRecord());
 	}
 	
 	@Test

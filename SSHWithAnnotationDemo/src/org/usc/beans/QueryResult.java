@@ -3,19 +3,19 @@ package org.usc.beans;
 import java.util.List;
 
 public class QueryResult<T> {
-	private List<T> resultlist;
-	private int totalrecord;
+	private List<T> resultList;
+	private int totalRecord;
 	
-	public List<T> getResultlist() {
-		return resultlist;
+	public List<T> getResultList() {
+		return resultList;
 	}
-	public void setResultlist(List<T> resultlist) {
-		this.resultlist = resultlist;
+	public void setResultList(List<T> resultList) {
+		this.resultList = resultList;
 	}
-	public int getTotalrecord() {
-		return totalrecord;
+	public int getTotalRecord() {
+		return totalRecord;
 	}
-	public void setTotalrecord(int totalrecord) {
-		this.totalrecord = totalrecord;
+	public void setTotalRecord(int totalRecord) {
+		this.totalRecord = totalRecord;
 	}
 }

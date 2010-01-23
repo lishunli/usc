@@ -7,45 +7,45 @@ public class PageView<T> {
 	/** 分页数据 **/
 	private List<T> records;
 	/** 页码开始索引和结束索引 **/
-	private PageIndex pageindex;
+	private PageIndex pageIndex;
 	/** 总页数 **/
-	private int totalpage = 1;
+	private int totalPage = 1;
 	/** 每页显示记录数 **/
-	private int maxresult = 10;
+	private int maxResult = 10;
 	/** 当前页 **/
-	private int currentpage = 1;
+	private int currentPage = 1;
 	/** 总记录数 **/
-	private int totalrecord;
+	private int totalRecord;
 	/** 页码数量 **/
-	private int pagecode = 10;
+	private int pageCode = 10;
 	/** 要获取记录的开始索引 **/
 	public int getFirstResult() {
-		return (this.currentpage-1)*this.maxresult;
+		return (this.currentPage-1)*this.maxResult;
 	}
-	public int getPagecode() {
-		return pagecode;
-	}
-
-	public void setPagecode(int pagecode) {
-		this.pagecode = pagecode;
+	public int getPageCode() {
+		return pageCode;
 	}
 
-	public PageView(int maxresult, int currentpage) {
-		this.maxresult = maxresult;
-		this.currentpage = (currentpage<=0?1:currentpage);
+	public void setPageCode(int pageCode) {
+		this.pageCode = pageCode;
+	}
+
+	public PageView(int maxResult, int currentPage) {
+		this.maxResult = maxResult;
+		this.currentPage = (currentPage<=0?1:currentPage);
 	}
 	
 	public void setQueryResult(QueryResult<T> qr){
-		setTotalrecord(qr.getTotalrecord());
-		setRecords(qr.getResultlist());
+		setTotalRecord(qr.getTotalRecord());
+		setRecords(qr.getResultList());
 	}
 	
-	public int getTotalrecord() {
-		return totalrecord;
+	public int getTotalRecord() {
+		return totalRecord;
 	}
-	public void setTotalrecord(int totalrecord) {
-		this.totalrecord = totalrecord;
-		setTotalpage(this.totalrecord%this.maxresult==0? this.totalrecord/this.maxresult : this.totalrecord/this.maxresult+1);
+	public void setTotalRecord(int totalRecord) {
+		this.totalRecord = totalRecord;
+		setTotalPage(this.totalRecord%this.maxResult==0? this.totalRecord/this.maxResult : this.totalRecord/this.maxResult+1);
 	}
 	public List<T> getRecords() {
 		return records;
@@ -53,20 +53,20 @@ public class PageView<T> {
 	public void setRecords(List<T> records) {
 		this.records = records;
 	}
-	public PageIndex getPageindex() {
-		return pageindex;
+	public PageIndex getPageIndex() {
+		return pageIndex;
 	}
-	public int getTotalpage() {
-		return totalpage;
+	public int getTotalPage() {
+		return totalPage;
 	}
-	public void setTotalpage(int totalpage) {
-		this.totalpage = totalpage;
-		this.pageindex = PageIndex.getPageIndex(pagecode, currentpage, totalpage);
+	public void setTotalPage(int totalPage) {
+		this.totalPage = totalPage;
+		this.pageIndex = PageIndex.getPageIndex(pageCode, currentPage, totalPage);
 	}
-	public int getMaxresult() {
-		return maxresult;
+	public int getMaxResult() {
+		return maxResult;
 	}
-	public int getCurrentpage() {
-		return currentpage;
+	public int getCurrentPage() {
+		return currentPage;
 	}
 }

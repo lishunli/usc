@@ -124,13 +124,13 @@ public abstract class BaseDaoSupport<T> extends MyHibernateDaoSupport implements
 				if (firstindex != -1 && maxresult != -1)
 					query1.setFirstResult(firstindex).setMaxResults(maxresult);
 				setQueryParams(query1, queryParams);
-				queryResult.setResultlist(query1.list());
+				queryResult.setResultList(query1.list());
 
 				String hql2 = "select count( " + keyFieldName + ") from " + entityClassName + " o "
 						+ (wherejpql == null || "".equals(wherejpql.trim()) ? "" : " where " + wherejpql);
 				Query query2 = session.createQuery(hql2);
 				setQueryParams(query2, queryParams);
-				queryResult.setTotalrecord(Integer.parseInt(query2.list().get(0).toString()));
+				queryResult.setTotalRecord(Integer.parseInt(query2.list().get(0).toString()));
 
 				return null;
 			}
