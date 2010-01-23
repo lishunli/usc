@@ -1,5 +1,7 @@
 package org.usc.actions;
 
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.apache.struts2.convention.annotation.Result;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.usc.beans.Student;
 import org.usc.services.student.IStudentService;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
@@ -22,23 +25,22 @@ import com.opensymphony.xwork2.ActionSupport;
  *        <p>
  */
 
+@SuppressWarnings("serial")
 @Controller
 @Scope("prototype")
 // 声明此类为控制层的类,且为prototype模式调用
 @Results(
-{ @Result(name = "success", location = "/index.jsp"), @Result(name = "input", location = "/index.jsp") })
-public class FindAllAction extends ActionSupport
+{ @Result(name = "success", location = "student/studentList.jsp"), @Result(name = "input", location = "/index.jsp") })
+public class StudentListAction extends ActionSupport
 {
 	@Resource(name = "studentService")
 	private IStudentService studentService;
 
+	@SuppressWarnings("unchecked")
 	public String execute() throws Exception
 	{
-		for (Student student : studentService.getScrollData().getResultlist())
-		{
-			System.out.println(student);
-		}
-		
+		Map request = (Map) ActionContext.getContext().get("request");
+		request.put("studentList", studentService.getScrollData().getResultlist());
 		return SUCCESS;
 	}
 

@@ -4,12 +4,19 @@ import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.io.Serializable;
 import java.lang.reflect.Method;
+import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+
+import junit.framework.Protectable;
+
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
+import org.hibernate.Session;
+import org.springframework.orm.hibernate3.HibernateCallback;
 import org.usc.beans.QueryResult;
 import org.usc.utils.GenericsUtils;
 
@@ -18,6 +25,7 @@ public abstract class BaseDaoSupport<T> extends MyHibernateDaoSupport implements
 {
 	protected Class<T> entityClass = GenericsUtils.getSuperClassGenricType(this.getClass());
 	protected String entityClassName = getEntityName(this.entityClass);
+	protected String keyFieldName = getKeyFieldName(this.entityClass);
 
 	/*
 	 * @see org.usc.daos.DAO#findByEntity(java.lang.Object)
@@ -68,9 +76,16 @@ public abstract class BaseDaoSupport<T> extends MyHibernateDaoSupport implements
 	public long getCount()
 	{
 		long count = 0;
-		String hql = "select count( " + getKeyFieldName(this.entityClass) + ") from " + entityClassName;
-		Query query = getSession().createQuery(hql);
-		count = Long.parseLong(query.list().get(0).toString());
+		count = Long.parseLong(super.getHibernateTemplate().executeFind(new HibernateCallback<T>()
+		{
+			@Override
+			public T doInHibernate(Session session) throws HibernateException, SQLException
+			{
+				String hql = "select count( " + keyFieldName + ") from " + entityClassName;
+				Query query = session.createQuery(hql);
+				return (T) query.list();
+			}
+		}).get(0).toString());
 		return count;
 	}
 
@@ -98,19 +113,28 @@ public abstract class BaseDaoSupport<T> extends MyHibernateDaoSupport implements
 	{
 		final QueryResult<T> queryResult = new QueryResult<T>();
 
-		String hql1 = "from " + entityClassName + " o " + (wherejpql == null || "".equals(wherejpql.trim()) ? "" : " where " + wherejpql)
-				+ buildOrderby(orderby);
-		Query query1 = getSession().createQuery(hql1);
-		if (firstindex != -1 && maxresult != -1)
-			query1.setFirstResult(firstindex).setMaxResults(maxresult);
-		setQueryParams(query1, queryParams);
-		queryResult.setResultlist(query1.list());
+		super.getHibernateTemplate().execute(new HibernateCallback<T>()
+		{
+			@Override
+			public T doInHibernate(Session session) throws HibernateException, SQLException
+			{
+				String hql1 = "from " + entityClassName + " o " + (wherejpql == null || "".equals(wherejpql.trim()) ? "" : " where " + wherejpql)
+						+ buildOrderby(orderby);
+				Query query1 = session.createQuery(hql1);
+				if (firstindex != -1 && maxresult != -1)
+					query1.setFirstResult(firstindex).setMaxResults(maxresult);
+				setQueryParams(query1, queryParams);
+				queryResult.setResultlist(query1.list());
 
-		String hql2 = "select count( " + getKeyFieldName(this.entityClass) + ") from " + entityClassName + " o "
-				+ (wherejpql == null || "".equals(wherejpql.trim()) ? "" : " where " + wherejpql);
-		Query query2 = getSession().createQuery(hql2);
-		setQueryParams(query2, queryParams);
-		queryResult.setTotalrecord(Long.parseLong(query2.list().get(0).toString()));
+				String hql2 = "select count( " + keyFieldName + ") from " + entityClassName + " o "
+						+ (wherejpql == null || "".equals(wherejpql.trim()) ? "" : " where " + wherejpql);
+				Query query2 = session.createQuery(hql2);
+				setQueryParams(query2, queryParams);
+				queryResult.setTotalrecord(Long.parseLong(query2.list().get(0).toString()));
+
+				return null;
+			}
+		});
 
 		return queryResult;
 
@@ -122,7 +146,7 @@ public abstract class BaseDaoSupport<T> extends MyHibernateDaoSupport implements
 	@Override
 	public QueryResult<T> getScrollData(int firstindex, int maxresult, String wherejpql, Object[] queryParams)
 	{
-		return getScrollData(firstindex,maxresult,wherejpql,queryParams,null);
+		return getScrollData(firstindex, maxresult, wherejpql, queryParams, null);
 	}
 
 	/*
@@ -131,7 +155,7 @@ public abstract class BaseDaoSupport<T> extends MyHibernateDaoSupport implements
 	@Override
 	public QueryResult<T> getScrollData(final int firstindex, final int maxresult, final LinkedHashMap<String, String> orderby)
 	{
-		return getScrollData(firstindex,maxresult,null,null,orderby);
+		return getScrollData(firstindex, maxresult, null, null, orderby);
 
 	}
 
@@ -141,7 +165,7 @@ public abstract class BaseDaoSupport<T> extends MyHibernateDaoSupport implements
 	@Override
 	public QueryResult<T> getScrollData(final int firstindex, final int maxresult)
 	{
-		return getScrollData(firstindex,maxresult,null,null,null);
+		return getScrollData(firstindex, maxresult, null, null, null);
 	}
 
 	/*
@@ -150,7 +174,7 @@ public abstract class BaseDaoSupport<T> extends MyHibernateDaoSupport implements
 	@Override
 	public QueryResult<T> getScrollData()
 	{
-		return getScrollData(-1,-1,null,null,null);
+		return getScrollData(-1, -1, null, null, null);
 	}
 
 	/*
@@ -207,6 +231,7 @@ public abstract class BaseDaoSupport<T> extends MyHibernateDaoSupport implements
 
 	/**
 	 * 设置HQL里边的属性值
+	 * 
 	 * @param query
 	 * @param queryParams
 	 */
@@ -216,7 +241,7 @@ public abstract class BaseDaoSupport<T> extends MyHibernateDaoSupport implements
 		{
 			for (int i = 0; i < queryParams.length; i++)
 			{
-				query.setParameter(i, queryParams[i]);//从0开始
+				query.setParameter(i, queryParams[i]);// 从0开始
 			}
 		}
 	}
