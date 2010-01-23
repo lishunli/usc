@@ -2,9 +2,7 @@
 <%@ include file="/WEB-INF/content/share/taglib.jsp"%>
 <%
 	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -12,7 +10,7 @@
 	<head>
 		<base href="<%=basePath%>">
 
-		<title>My JSP 'allStudentList.jsp' starting page</title>
+		<title>Student List</title>
 
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
@@ -22,86 +20,69 @@
 		<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-		<script language="JavaScript">
-	//到指定的分页页面
-	function topage(page)
-	{
-		var form = document.forms[0];
-		form.page.value = page;
-		form.submit();
-	}
-	//-->
-</script>
+	
+		<%--要包含下面的base.js，以能分页	--%>
+		<script type="text/javascript" src="js/base.js"></script>
+		
 	</head>
 
 	<body>
-	<s:form action="student-list" method="post">
-	
-	
-		<s:hidden name="page"></s:hidden>
-		<%@ include file="/WEB-INF/content/share/fenye.jsp"%>
-		<table border="1">
-			
-			<tr>
-				<td>
-					学号
-				</td>
-				<td>
-					姓名
-				</td>
-				<td>
-					性别
-				</td>
-				<td>
-					年龄
-				</td>
-				<td>
-					分数
-				</td>
-				<td>
-					入学日期
-				</td>
-			</tr>
-			<c:forEach items="${pageView.records}" var="entry">
-    <tr>
-    <td>${entry.no }</td>
-    <td>${entry.name }</td>
-    <td>${entry.sex }</td>
-    <td>${entry.age }</td>
-    <td>${entry.score }</td>
-    <td>${entry.eduTime }</td>
-	</tr>
-</c:forEach>
-<%--			<s:iterator value="#request.pageView" id="student">--%>
-<%--			--%>
-<%--			</s:iterator>--%>
-<%--			<s:if test="#request.studentList">--%>
-<%--						<s:iterator value="#request.studentList" id="student">--%>
-<%--				<tr>--%>
-<%--					<td>--%>
-<%--						<s:property value="#student.no" />--%>
-<%--					</td>--%>
-<%--					<td>--%>
-<%--						<s:property value="#student.name" />--%>
-<%--					</td>--%>
-<%--					<td>--%>
-<%--						<s:property value="#student.sex" />--%>
-<%--					</td>--%>
-<%--					<td>--%>
-<%--						<s:property value="#student.age" />--%>
-<%--					</td>--%>
-<%--					<td>--%>
-<%--							<s:property value="#student.score" />--%>
-<%--						</td>--%>
-<%--					<td>--%>
-<%--						<s:property value="#student.eduTime" />--%>
-<%--					</td>--%>
-<%--				</tr>--%>
-<%--			</s:iterator>--%>
-<%--			</s:if>--%>
+		<s:form action="student-list" method="post">
+
+			<%--下面三句可以不动			--%>
+			<s:hidden name="page"></s:hidden>
+			<s:if test="#request.pageView">
+				<%@ include file="/WEB-INF/content/share/page.jsp"%>
+
+				<table border="1">
+					<tr>
+						<td>
+							学号
+						</td>
+						<td>
+							姓名
+						</td>
+						<td>
+							性别
+						</td>
+						<td>
+							年龄
+						</td>
+						<td>
+							分数
+						</td>
+						<td>
+							入学日期
+						</td>
+					</tr>
+					<s:if test="#request.pageView.records">
+						<s:iterator value="#request.pageView.records" id="student">
+							<tr>
+								<td>
+									<s:property value="#student.no" />
+								</td>
+								<td>
+									<s:property value="#student.name" />
+								</td>
+								<td>
+									<s:property value="#student.sex" />
+								</td>
+								<td>
+									<s:property value="#student.age" />
+								</td>
+								<td>
+									<s:property value="#student.score" />
+								</td>
+								<td>
+									<s:property value="#student.eduTime" />
+								</td>
+							</tr>
+						</s:iterator>
+					</s:if>
 
 
-		</table>
+				</table>
+			</s:if>
 		</s:form>
 	</body>
 </html>
