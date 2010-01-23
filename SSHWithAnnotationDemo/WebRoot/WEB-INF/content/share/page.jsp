@@ -1,5 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/content/share/taglib.jsp"%>
+<%@ taglib uri="/struts-tags"  prefix="s" %>
 当前页:第${pageView.currentpage}页 | 总记录数:${pageView.totalrecord}条 |
 每页显示:${pageView.maxresult}条 | 总页数:${pageView.totalpage}页
 <s:iterator begin="#request.pageView.pageindex.startindex"
