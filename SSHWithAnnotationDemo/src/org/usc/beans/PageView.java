@@ -11,7 +11,7 @@ public class PageView<T> {
 	/** 总页数 **/
 	private long totalpage = 1;
 	/** 每页显示记录数 **/
-	private int maxresult = 12;
+	private int maxresult = 10;
 	/** 当前页 **/
 	private int currentpage = 1;
 	/** 总记录数 **/
@@ -32,7 +32,7 @@ public class PageView<T> {
 
 	public PageView(int maxresult, int currentpage) {
 		this.maxresult = maxresult;
-		this.currentpage = currentpage;
+		this.currentpage = (currentpage<=0?1:(currentpage>(int)totalpage?(int)totalpage:currentpage));
 	}
 	
 	public void setQueryResult(QueryResult<T> qr){
