@@ -30,8 +30,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 @SuppressWarnings("serial")
 @Controller
-@Scope("prototype")
-// 声明此类为控制层的类,且为prototype模式调用
+@Scope("prototype")// 声明此类为控制层的类,且为prototype模式调用
 @Results(
 { @Result(name = "success", location = "student/studentList.jsp"), @Result(name = "input", location = "/index.jsp") })
 public class StudentListAction extends ActionSupport
@@ -39,7 +38,7 @@ public class StudentListAction extends ActionSupport
 	@Resource(name = "studentService")
 	private IStudentService studentService;
 	private int page;
-	
+
 	public int getPage()
 	{
 		return page;
@@ -50,21 +49,20 @@ public class StudentListAction extends ActionSupport
 		this.page = page;
 	}
 
-
 	@SuppressWarnings("unchecked")
 	public String execute() throws Exception
 	{
 		/**
 		 * 下面4句固定
 		 */
-		ActionContext ctx = ActionContext.getContext();       
-		HttpServletRequest request = (HttpServletRequest)ctx.get(ServletActionContext.HTTP_REQUEST);   
+		ActionContext ctx = ActionContext.getContext();
+		HttpServletRequest request = (HttpServletRequest) ctx.get(ServletActionContext.HTTP_REQUEST);
 		int maxResult = 5;
 		PageView<Student> pageView = new PageView<Student>(maxResult, getPage());
 		/**
 		 * 下面修改service即可
 		 */
-		pageView.setQueryResult(studentService.getScrollData(pageView.getFirstResult(),maxResult));
+		pageView.setQueryResult(studentService.getScrollData(pageView.getFirstResult(), maxResult));
 		/**
 		 * request.setAttribute("pageView", pageView)中key尽量为pageView，不然需要修改代码
 		 */
