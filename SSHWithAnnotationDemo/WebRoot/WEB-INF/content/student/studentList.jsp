@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ taglib uri="/struts-tags"  prefix="s" %>
+<%@ taglib uri="/struts-tags" prefix="s"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -20,10 +20,10 @@
 		<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-	
+
 		<%--要包含下面的base.js，以能分页	--%>
 		<script type="text/javascript" src="js/base.js"></script>
-		
+
 	</head>
 
 	<body>
@@ -31,7 +31,7 @@
 
 			<%--下面三句可以不动			--%>
 			<s:hidden name="page"></s:hidden>
-			<s:if test="#request.pageView">
+			<s:if test="#request.pageView.totalRecord">
 				<%@ include file="/WEB-INF/content/share/page.jsp"%>
 
 				<table border="1">
@@ -55,34 +55,33 @@
 							入学日期
 						</td>
 					</tr>
-					<s:if test="#request.pageView.records">
-						<s:iterator value="#request.pageView.records" id="student">
-							<tr>
-								<td>
-									<s:property value="#student.no" />
-								</td>
-								<td>
-									<s:property value="#student.name" />
-								</td>
-								<td>
-									<s:property value="#student.sex" />
-								</td>
-								<td>
-									<s:property value="#student.age" />
-								</td>
-								<td>
-									<s:property value="#student.score" />
-								</td>
-								<td>
-									<s:property value="#student.eduTime" />
-								</td>
-							</tr>
-						</s:iterator>
-					</s:if>
-
-
+					<s:iterator value="#request.pageView.records" id="student">
+						<tr>
+							<td>
+								<s:property value="#student.no" />
+							</td>
+							<td>
+								<s:property value="#student.name" />
+							</td>
+							<td>
+								<s:property value="#student.sex" />
+							</td>
+							<td>
+								<s:property value="#student.age" />
+							</td>
+							<td>
+								<s:property value="#student.score" />
+							</td>
+							<td>
+								<s:property value="#student.eduTime" />
+							</td>
+						</tr>
+					</s:iterator>
 				</table>
 			</s:if>
+			<s:else>
+				没有记录
+			</s:else>
 		</s:form>
 	</body>
 </html>
