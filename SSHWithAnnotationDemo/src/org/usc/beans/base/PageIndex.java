@@ -1,5 +1,14 @@
 package org.usc.beans.base;
-
+/**
+ * 页索引，主要是起始页和终止页
+ * 
+ * @author <a href="http://www.blogjava.net/lishunli/" target="_blank">ShunLi</a>
+ * @notes Created on 2010-1-24<br>
+ *        Revision of last commit:$Revision$<br>
+ *        Author of last commit:$Author$<br>
+ *        Date of last commit:$Date$<br>
+ *        <p>
+ */
 public class PageIndex
 {
 	/**开始索引**/
@@ -33,6 +42,13 @@ public class PageIndex
 		this.endIndex = endIndex;
 	}
 
+	/**
+	 * 起始页和终止页
+	 * @param viewPageCount 显示多少页
+	 * @param currentPage 当前页
+	 * @param totalpage 总页数
+	 * @return PageIndex 起始页和终止页
+	 */
 	public static PageIndex getPageIndex(int viewPageCount, int currentPage, int totalpage)
 	{
 		int startpage = currentPage - (viewPageCount % 2 == 0 ? viewPageCount / 2 - 1 : viewPageCount / 2);

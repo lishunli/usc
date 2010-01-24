@@ -18,7 +18,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
- * 
+ * 列出所有的学生action，访问时action名称为student-list.action
  * 
  * @author <a href="http://www.blogjava.net/lishunli/" target="_blank">ShunLi</a>
  * @notes Created on 2010-1-17<br>

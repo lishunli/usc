@@ -6,7 +6,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 /**
- * 
+ * 基础HibernateDaoSupport，主要是为了注入SessionFactory
  * 
  * @author <a href="http://www.blogjava.net/lishunli/" target="_blank">ShunLi</a>
  * @notes Created on 2010-1-17<br>
@@ -15,7 +15,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
  *        Date of last commit:$Date$<br>
  *        <p>
  */
-public class MyHibernateDaoSupport extends HibernateDaoSupport
+public class BaseHibernateDaoSupport extends HibernateDaoSupport
 {
 	@Resource(name = "sessionFactory")
 	// 为父类HibernateDaoSupport注入sessionFactory的值

@@ -8,7 +8,7 @@ import org.usc.beans.base.QueryResult;
 import org.usc.daos.IBaseDao;
 
 /**
- * 
+ * 学生服务类接口
  * 
  * @author <a href="http://www.blogjava.net/lishunli/" target="_blank">ShunLi</a>
  * @notes Created on 2010-1-21<br>
@@ -19,5 +19,10 @@ import org.usc.daos.IBaseDao;
  */
 public interface IStudentService extends IBaseDao<Student>
 {
+	/**
+	 * 根据姓名查找学生
+	 * @param value 姓名
+	 * @return 该姓名的学生集
+	 */
 	public abstract List<Student> findByName(String value);
 }

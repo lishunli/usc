@@ -11,8 +11,6 @@ import java.util.List;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
-import junit.framework.Protectable;
-
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -20,8 +18,18 @@ import org.springframework.orm.hibernate3.HibernateCallback;
 import org.usc.beans.base.QueryResult;
 import org.usc.utils.GenericsUtils;
 
+/**
+ * DAO层封装使用了泛型，包含常用的CURD和分页操作
+ * 
+ * @author <a href="http://www.blogjava.net/lishunli/" target="_blank">ShunLi</a>
+ * @notes Created on 2010-1-24<br>
+ *        Revision of last commit:$Revision$<br>
+ *        Author of last commit:$Author$<br>
+ *        Date of last commit:$Date$<br>
+ *        <p>
+ */
 @SuppressWarnings("unchecked")
-public abstract class BaseDaoSupport<T> extends MyHibernateDaoSupport implements IBaseDao<T>
+public abstract class BaseDaoSupport<T> extends BaseHibernateDaoSupport implements IBaseDao<T>
 {
 	protected Class<T> entityClass = GenericsUtils.getSuperClassGenricType(this.getClass());
 	protected String entityClassName = getEntityName(this.entityClass);
