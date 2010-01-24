@@ -27,7 +27,7 @@
 	</head>
 
 	<body>
-		<s:form action="student-list" method="post">
+		<s:form action="teacher-list" method="post">
 
 			<%--下面三句可以不动			--%>
 			<s:hidden name="page"></s:hidden>
@@ -37,7 +37,7 @@
 				<table border="1">
 					<tr>
 						<td>
-							学号
+							ID
 						</td>
 						<td>
 							姓名
@@ -46,19 +46,13 @@
 							性别
 						</td>
 						<td>
-							年龄
-						</td>
-						<td>
-							分数
-						</td>
-						<td>
-							入学日期
+							职称
 						</td>
 					</tr>
 					<s:iterator value="#request.pageView.records" id="entity">
 						<tr>
 							<td>
-								<s:property value="#entity.no" />
+								<s:property value="#entity.id" />
 							</td>
 							<td>
 								<s:property value="#entity.name" />
@@ -67,13 +61,7 @@
 								<s:property value="#entity.sex" />
 							</td>
 							<td>
-								<s:property value="#entity.age" />
-							</td>
-							<td>
-								<s:property value="#entity.score" />
-							</td>
-							<td>
-								<s:property value="#entity.eduTime" />
+								<s:property value="#entity.positional" />
 							</td>
 						</tr>
 					</s:iterator>
