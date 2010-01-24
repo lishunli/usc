@@ -16,8 +16,8 @@ public class PageView<T>
 	private int currentPage = 1;
 	/** 总记录数 **/
 	private int totalRecord;
-	/** 页码数量 **/
-	private int pageCode = 2;
+	/** 每次显示多少页，必须保证大于3页，保证左右链接都可以使用**/
+	private int viewPageCount = 10;
 
 	/** 要获取记录的开始索引 **/
 	public int getFirstResult()
@@ -25,14 +25,14 @@ public class PageView<T>
 		return (this.currentPage - 1) * this.maxResult;
 	}
 
-	public int getPageCode()
+	public int getViewPageCount()
 	{
-		return pageCode;
+		return viewPageCount;
 	}
 
-	public void setPageCode(int pageCode)
+	public void setViewPageCount(int viewPageCount)
 	{
-		this.pageCode = pageCode;
+		this.viewPageCount = viewPageCount;
 	}
 
 	public PageView(int maxResult, int currentPage)
@@ -86,7 +86,7 @@ public class PageView<T>
 	public void setTotalPage(int totalPage)
 	{
 		this.totalPage = totalPage;
-		this.pageIndex = PageIndex.getPageIndex(pageCode, currentPage, totalPage);
+		this.pageIndex = PageIndex.getPageIndex(viewPageCount, currentPage, totalPage);
 	}
 
 	public int getMaxResult()
