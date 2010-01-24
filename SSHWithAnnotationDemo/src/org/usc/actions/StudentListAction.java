@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.usc.beans.Student;
@@ -35,7 +36,8 @@ import com.opensymphony.xwork2.ActionSupport;
 { @Result(name = "success", location = "student/studentList.jsp"), @Result(name = "input", location = "/index.jsp") })
 public class StudentListAction extends ActionSupport
 {
-	@Resource(name = "studentService")
+//	@Resource(name = "studentServiceBean")
+	@Autowired
 	private IStudentService studentService;
 	private int page;
 
