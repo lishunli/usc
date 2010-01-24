@@ -19,8 +19,7 @@ import org.usc.services.student.IStudentService;
  *        Date of last commit:$Date$<br>
  *        <p>
  */
-@Service("studentService")
-// 声明此类为业务逻辑层的类
+@Service// 声明此类为业务逻辑层的类
 public class StudentServiceBean extends BaseDaoSupport<Student> implements IStudentService
 {
 
