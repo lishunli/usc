@@ -56,11 +56,12 @@ public class GoogleCodeDownloadURL extends javax.swing.JFrame
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setTitle("Google Code\u5730\u5740\u83b7\u53d6\u5668");
 		setFont(new java.awt.Font("微软雅黑", 0, 14));
+		setResizable(false);
 
 		double width = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 		double height = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 		setLocation((int) (width - this.getWidth()) / 6, (int) (height - this.getHeight()) / 8);
-
+		
 		jButton1.setFont(new java.awt.Font("微软雅黑", 0, 18));
 		jButton1.setText("\u4e0a\u4f20\u6587\u4ef6\u5e76\u83b7\u53d6\u4e0b\u8f7d\u4fe1\u606f");
 		jButton1.addMouseListener(new java.awt.event.MouseAdapter()
@@ -153,6 +154,7 @@ public class GoogleCodeDownloadURL extends javax.swing.JFrame
 			}
 		});
 
+
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
 		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
@@ -164,36 +166,30 @@ public class GoogleCodeDownloadURL extends javax.swing.JFrame
 								javax.swing.GroupLayout.Alignment.TRAILING,
 								layout.createSequentialGroup().addGroup(
 										layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-												layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING).addGroup(
-														layout.createSequentialGroup().addComponent(jLabel4).addGap(2, 2, 2)).addGroup(
-														layout.createSequentialGroup().addComponent(jLabel5).addPreferredGap(
-																javax.swing.LayoutStyle.ComponentPlacement.RELATED))).addComponent(jLabel3)).addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-										layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-												javax.swing.GroupLayout.Alignment.TRAILING,
+												layout.createSequentialGroup().addComponent(jLabel4).addGap(2, 2, 2)).addComponent(jLabel3)).addGroup(
+										layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING).addGroup(
+												layout.createSequentialGroup().addGap(5, 5, 5).addComponent(jTextField1,
+														javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)).addGroup(
 												layout.createSequentialGroup().addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-														.addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 540,
-																javax.swing.GroupLayout.PREFERRED_SIZE)).addComponent(jScrollPane2, 0, 0, Short.MAX_VALUE)
-												.addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)).addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-										layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(jButton3).addGroup(
-												layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(jButton4,
-														javax.swing.GroupLayout.Alignment.TRAILING).addComponent(jButton2,
-														javax.swing.GroupLayout.Alignment.TRAILING))))).addContainerGap()).addGroup(
-				javax.swing.GroupLayout.Alignment.TRAILING,
-				layout.createSequentialGroup().addContainerGap(664, Short.MAX_VALUE).addComponent(jLabel2).addGap(33, 33, 33)));
+														.addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)))
+										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+												layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(jButton3).addComponent(
+														jButton2)))).addContainerGap()).addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
+				layout.createSequentialGroup().addContainerGap(666, Short.MAX_VALUE).addComponent(jLabel2).addGap(33, 33, 33)).addGroup(
+				layout.createSequentialGroup().addContainerGap().addComponent(jLabel5).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE).addPreferredGap(
+								javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(jButton4).addContainerGap()));
 		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
 				layout.createSequentialGroup().addContainerGap().addComponent(jLabel1).addGap(20, 20, 20).addComponent(jLabel2).addGap(9, 9, 9).addComponent(
 						jButton1).addGap(35, 35, 35).addGroup(
 						layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(jButton2).addComponent(jTextField1,
 								javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(jLabel3)).addPreferredGap(
 						javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-						layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(jLabel4).addComponent(jScrollPane1,
-								javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(jButton3)).addGap(16, 16, 16)
-						.addGroup(
-								layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(jButton4).addComponent(jScrollPane2,
-										javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(jLabel5)).addGap(39,
-								39, 39)));
+						layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(jLabel4).addComponent(jButton3).addComponent(
+								jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
+						javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+						layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(jButton4).addComponent(jLabel5).addComponent(
+								jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)).addGap(64, 64, 64)));
 
 		pack();
 	}// </editor-fold>
