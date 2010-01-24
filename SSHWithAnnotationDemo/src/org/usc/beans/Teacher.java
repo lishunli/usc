@@ -9,6 +9,7 @@ import javax.persistence.Table;
 /**
  * Teacher entity. @author MyEclipse Persistence Tools
  */
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "teacher", catalog = "test")
 public class Teacher implements java.io.Serializable

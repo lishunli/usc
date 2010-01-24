@@ -1,8 +1,5 @@
 package org.usc.actions;
 
-import java.util.Map;
-
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
@@ -51,7 +48,6 @@ public class StudentListAction extends ActionSupport
 		this.page = page;
 	}
 
-	@SuppressWarnings("unchecked")
 	public String execute() throws Exception
 	{
 		/**

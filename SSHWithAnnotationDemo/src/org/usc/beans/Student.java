@@ -12,6 +12,7 @@ import javax.persistence.TemporalType;
 /**
  * Student entity. @author MyEclipse Persistence Tools
  */
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "student", catalog = "test")
 public class Student implements java.io.Serializable

@@ -1,10 +1,8 @@
 package org.usc.services.student;
 
-import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.usc.beans.Student;
-import org.usc.beans.base.QueryResult;
 import org.usc.daos.IBaseDao;
 
 /**

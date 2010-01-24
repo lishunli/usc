@@ -1,8 +1,5 @@
 package org.usc.actions;
 
-import java.util.Map;
-
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
@@ -13,7 +10,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.usc.beans.Teacher;
 import org.usc.beans.base.PageView;
-import org.usc.services.student.IStudentService;
 import org.usc.services.teacher.ITeacherService;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -51,7 +47,6 @@ public class TeacherListAction extends ActionSupport
 		this.page = page;
 	}
 
-	@SuppressWarnings("unchecked")
 	public String execute() throws Exception
 	{
 		/**
