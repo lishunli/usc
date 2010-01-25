@@ -88,23 +88,41 @@ public interface IBaseDao<T>
 
 	/**
 	 * 获取分页数据
-	 * 
-	 * @param <T>
-	 * @param entityClass
-	 *            实体类
-	 * @param firstindex
-	 *            开始索引
-	 * @param maxresult
-	 *            需要获取的记录数
-	 * @return
+	 * @param firstindex 开始索引
+	 * @param maxresult 每页显示记录数
+	 * @param wherejpql where语句
+	 * @param queryParams 查询参数
+	 * @param orderby 排序序列
+	 * @return 分页数据
 	 */
 	public QueryResult<T> getScrollData(final int firstindex, final int maxresult, final String wherejpql, final Object[] queryParams,
 			final LinkedHashMap<String, String> orderby);
 
+	/**
+	 * 获取分页数据
+	 * @param firstindex 开始索引
+	 * @param maxresult 每页显示记录数
+	 * @param wherejpql where语句
+	 * @param queryParams 查询参数
+	 * @return 分页数据
+	 */
 	public QueryResult<T> getScrollData(final int firstindex, final int maxresult, final String wherejpql, final Object[] queryParams);
 
+	/**
+	 * 获取分页数据
+	 * @param firstindex 开始索引
+	 * @param maxresult 每页显示记录数
+	 * @param orderby 排序序列
+	 * @return 分页数据
+	 */
 	public QueryResult<T> getScrollData(final int firstindex, final int maxresult, final LinkedHashMap<String, String> orderby);
 
+	/**
+	 * 获取分页数据
+	 * @param firstindex 开始索引
+	 * @param maxresult 每页显示记录数
+	 * @return 分页数据
+	 */
 	public QueryResult<T> getScrollData(final int firstindex, final int maxresult);
 
 	/**
