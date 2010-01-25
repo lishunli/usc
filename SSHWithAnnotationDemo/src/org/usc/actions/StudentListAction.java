@@ -28,12 +28,13 @@ import com.opensymphony.xwork2.ActionSupport;
 
 @SuppressWarnings("serial")
 @Controller
-@Scope("prototype")// 声明此类为控制层的类,且为prototype模式调用
+@Scope("prototype")
+// 声明此类为控制层的类,且为prototype模式调用
 @Results(
 { @Result(name = "success", location = "student/studentList.jsp"), @Result(name = "input", location = "/index.jsp") })
 public class StudentListAction extends ActionSupport
 {
-//	@Resource(name = "studentServiceBean")
+	// @Resource(name = "studentServiceBean")
 	@Autowired
 	private IStudentService studentService;
 	private int page;

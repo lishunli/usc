@@ -17,11 +17,12 @@ import org.usc.services.teacher.ITeacherService;
  *        Date of last commit:$Date$<br>
  *        <p>
  */
-@Service// 声明此类为业务逻辑层的类
+@Service
+// 声明此类为业务逻辑层的类
 public class TeacherServiceBean extends BaseDaoSupport<Teacher> implements ITeacherService
 {
 
-	/* 
+	/*
 	 * @see org.usc.services.student.IStudentService#findByName(java.lang.String)
 	 */
 	@Override

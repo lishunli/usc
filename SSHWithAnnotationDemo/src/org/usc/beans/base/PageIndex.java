@@ -1,4 +1,5 @@
 package org.usc.beans.base;
+
 /**
  * 页索引，主要是起始页和终止页
  * 
@@ -11,9 +12,9 @@ package org.usc.beans.base;
  */
 public class PageIndex
 {
-	/**开始索引**/
+	/** 开始索引 **/
 	private int startIndex;
-	/**结束索引**/
+	/** 结束索引 **/
 	private int endIndex;
 
 	public PageIndex(int startIndex, int endIndex)
@@ -44,9 +45,13 @@ public class PageIndex
 
 	/**
 	 * 起始页和终止页
-	 * @param viewPageCount 显示多少页
-	 * @param currentPage 当前页
-	 * @param totalpage 总页数
+	 * 
+	 * @param viewPageCount
+	 *            显示多少页
+	 * @param currentPage
+	 *            当前页
+	 * @param totalpage
+	 *            总页数
 	 * @return PageIndex 起始页和终止页
 	 */
 	public static PageIndex getPageIndex(int viewPageCount, int currentPage, int totalpage)

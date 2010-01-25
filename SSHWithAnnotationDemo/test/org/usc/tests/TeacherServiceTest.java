@@ -40,23 +40,24 @@ public class TeacherServiceTest
 	@Test
 	public void testSave()
 	{
-		for(int i =20 ;i<40;i++)
+		for (int i = 20; i < 40; i++)
 		{
 			Teacher teacher = new Teacher();
-			teacher.setName("老师"+i);
+			teacher.setName("老师" + i);
 			teacher.setSex("男");
 			teacher.setPositional("讲师");
 			teacherService.save(teacher);
 		}
 	}
-	
+
 	@Test
 	public void testGetScrollDate()
 	{
 		LinkedHashMap<String, String> orderby = new LinkedHashMap<String, String>();
 		orderby.put("id", "asc");
-		String name ="老师3";
-		for(Teacher teacher: teacherService.getScrollData(0, 5, "o.name like ?", new Object[]{"%"+name+"%"}, orderby).getResultList())
+		String name = "老师3";
+		for (Teacher teacher : teacherService.getScrollData(0, 5, "o.name like ?", new Object[]
+		{ "%" + name + "%" }, orderby).getResultList())
 		{
 			System.out.println(teacher);
 		}

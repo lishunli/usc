@@ -28,7 +28,8 @@ import com.opensymphony.xwork2.ActionSupport;
 
 @SuppressWarnings("serial")
 @Controller
-@Scope("prototype")// 声明此类为控制层的类,且为prototype模式调用
+@Scope("prototype")
+// 声明此类为控制层的类,且为prototype模式调用
 @Results(
 { @Result(name = "success", location = "teacher/teacherList.jsp"), @Result(name = "input", location = "/index.jsp") })
 public class TeacherListAction extends ActionSupport

@@ -17,11 +17,12 @@ import org.usc.services.student.IStudentService;
  *        Date of last commit:$Date$<br>
  *        <p>
  */
-@Service// 声明此类为业务逻辑层的类
+@Service
+// 声明此类为业务逻辑层的类
 public class StudentServiceBean extends BaseDaoSupport<Student> implements IStudentService
 {
 
-	/* 
+	/*
 	 * @see org.usc.services.student.IStudentService#findByName(java.lang.String)
 	 */
 	@Override

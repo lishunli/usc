@@ -26,7 +26,7 @@ public class PageView<T>
 	private int currentPage = 1;
 	/** 总记录数 **/
 	private int totalRecord;
-	/** 每次显示多少页，必须保证大于3页，保证左右链接都可以使用**/
+	/** 每次显示多少页，必须保证大于3页，保证左右链接都可以使用 **/
 	private int viewPageCount = 10;
 
 	/** 要获取记录的开始索引 **/
@@ -55,7 +55,7 @@ public class PageView<T>
 	{
 		this.currentPage = (currentPage <= 0 ? 1 : currentPage);
 	}
-	
+
 	public void setQueryResult(QueryResult<T> qr)
 	{
 		setTotalRecord(qr.getTotalRecord());

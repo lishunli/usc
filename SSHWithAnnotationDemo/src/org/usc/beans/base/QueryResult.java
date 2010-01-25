@@ -14,9 +14,9 @@ import java.util.List;
  */
 public class QueryResult<T>
 {
-	/**查询得出的数据List**/
+	/** 查询得出的数据List **/
 	private List<T> resultList;
-	/**查询得出的总数**/
+	/** 查询得出的总数 **/
 	private int totalRecord;
 
 	public List<T> getResultList()

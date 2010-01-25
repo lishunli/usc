@@ -33,7 +33,7 @@ public abstract class BaseDaoSupport<T> extends BaseHibernateDaoSupport implemen
 {
 	protected Class<T> entityClass = GenericsUtils.getSuperClassGenricType(this.getClass());
 	protected String entityClassName = getEntityName(this.entityClass);
-	
+
 	/*
 	 * @see org.usc.daos.DAO#findByEntity(java.lang.Object)
 	 */
@@ -118,12 +118,12 @@ public abstract class BaseDaoSupport<T> extends BaseHibernateDaoSupport implemen
 				String hql = "from " + entityClassName + " o " + (wherejpql == null || "".equals(wherejpql.trim()) ? "" : " where " + wherejpql)
 						+ buildOrderby(orderby);
 				Query query = session.createQuery(hql);
-				setQueryParams(query, queryParams);//where
-				queryResult.setTotalRecord(query.list().size());//first get size
-				
+				setQueryParams(query, queryParams);// where
+				queryResult.setTotalRecord(query.list().size());// first get size
+
 				if (firstindex != -1 && maxresult != -1)
-					query.setFirstResult(firstindex).setMaxResults(maxresult);//last page
-				
+					query.setFirstResult(firstindex).setMaxResults(maxresult);// last page
+
 				queryResult.setResultList(query.list());
 
 				return null;
