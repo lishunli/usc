@@ -46,7 +46,7 @@ public interface IBaseDao<T>
 	 *            实体类
 	 * @return
 	 */
-	public long getCount();
+	public int getCount();
 
 	/**
 	 * 保存实体

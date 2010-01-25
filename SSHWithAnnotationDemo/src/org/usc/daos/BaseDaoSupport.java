@@ -80,7 +80,7 @@ public abstract class BaseDaoSupport<T> extends BaseHibernateDaoSupport implemen
 	 * @see org.usc.daos.DAO#getCount()
 	 */
 	@Override
-	public long getCount()
+	public int getCount()
 	{
 		String queryString = "from " + entityClassName;
 		return super.getHibernateTemplate().find(queryString).size();
