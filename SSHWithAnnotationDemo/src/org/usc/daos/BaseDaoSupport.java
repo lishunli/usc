@@ -33,8 +33,7 @@ public abstract class BaseDaoSupport<T> extends BaseHibernateDaoSupport implemen
 {
 	protected Class<T> entityClass = GenericsUtils.getSuperClassGenricType(this.getClass());
 	protected String entityClassName = getEntityName(this.entityClass);
-	protected String keyFieldName = getKeyFieldName(this.entityClass);
-
+	
 	/*
 	 * @see org.usc.daos.DAO#findByEntity(java.lang.Object)
 	 */
@@ -83,18 +82,8 @@ public abstract class BaseDaoSupport<T> extends BaseHibernateDaoSupport implemen
 	@Override
 	public long getCount()
 	{
-		long count = 0;
-		count = Long.parseLong(super.getHibernateTemplate().executeFind(new HibernateCallback<T>()
-		{
-			@Override
-			public T doInHibernate(Session session) throws HibernateException, SQLException
-			{
-				String hql = "select count( " + keyFieldName + ") from " + entityClassName;
-				Query query = session.createQuery(hql);
-				return (T) query.list();
-			}
-		}).get(0).toString());
-		return count;
+		String queryString = "from " + entityClassName;
+		return super.getHibernateTemplate().find(queryString).size();
 	}
 
 	@Override
@@ -126,19 +115,16 @@ public abstract class BaseDaoSupport<T> extends BaseHibernateDaoSupport implemen
 			@Override
 			public T doInHibernate(Session session) throws HibernateException, SQLException
 			{
-				String hql1 = "from " + entityClassName + " o " + (wherejpql == null || "".equals(wherejpql.trim()) ? "" : " where " + wherejpql)
+				String hql = "from " + entityClassName + " o " + (wherejpql == null || "".equals(wherejpql.trim()) ? "" : " where " + wherejpql)
 						+ buildOrderby(orderby);
-				Query query1 = session.createQuery(hql1);
+				Query query = session.createQuery(hql);
+				setQueryParams(query, queryParams);//where
+				queryResult.setTotalRecord(query.list().size());//first get size
+				
 				if (firstindex != -1 && maxresult != -1)
-					query1.setFirstResult(firstindex).setMaxResults(maxresult);
-				setQueryParams(query1, queryParams);
-				queryResult.setResultList(query1.list());
-
-				String hql2 = "select count( " + keyFieldName + ") from " + entityClassName + " o "
-						+ (wherejpql == null || "".equals(wherejpql.trim()) ? "" : " where " + wherejpql);
-				Query query2 = session.createQuery(hql2);
-				setQueryParams(query2, queryParams);
-				queryResult.setTotalRecord(Integer.parseInt(query2.list().get(0).toString()));
+					query.setFirstResult(firstindex).setMaxResults(maxresult);//last page
+				
+				queryResult.setResultList(query.list());
 
 				return null;
 			}
