@@ -1,4 +1,4 @@
-package org.usc.actions;
+package org.usc.actions.base;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;

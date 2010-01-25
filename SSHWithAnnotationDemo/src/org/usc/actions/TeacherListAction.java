@@ -6,6 +6,7 @@ import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.usc.actions.base.BaseActionSupport;
 import org.usc.beans.Teacher;
 import org.usc.beans.base.PageView;
 import org.usc.services.teacher.ITeacherService;
