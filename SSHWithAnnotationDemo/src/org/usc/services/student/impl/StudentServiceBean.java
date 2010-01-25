@@ -25,7 +25,6 @@ public class StudentServiceBean extends BaseDaoSupport<Student> implements IStud
 	/*
 	 * @see org.usc.services.student.IStudentService#findByName(java.lang.String)
 	 */
-	@Override
 	public List<Student> findByName(String value)
 	{
 		return super.findByProperty("name", value);
