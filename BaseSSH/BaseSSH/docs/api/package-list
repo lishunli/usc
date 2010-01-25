@@ -1,0 +1,4 @@
+org.usc.actions.base
+org.usc.beans.base
+org.usc.daos.base
+org.usc.utils.base
