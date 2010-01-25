@@ -6,14 +6,11 @@ import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Controller;
 import org.usc.beans.Teacher;
 import org.usc.beans.base.PageView;
 import org.usc.services.teacher.ITeacherService;
 
 import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ActionSupport;
 
 /**
  * 列出所有的学生action，访问时action名称为teacher-list.action
@@ -27,35 +24,22 @@ import com.opensymphony.xwork2.ActionSupport;
  */
 
 @SuppressWarnings("serial")
-@Controller
-@Scope("prototype")
-// 声明此类为控制层的类,且为prototype模式调用
 @Results(
 { @Result(name = "success", location = "teacher/teacherList.jsp"), @Result(name = "input", location = "/index.jsp") })
-public class TeacherListAction extends ActionSupport
+public class TeacherListAction extends BaseActionSupport
 {
 	@Autowired
 	private ITeacherService teacherService;
-	private int page;
-
-	public int getPage()
-	{
-		return page;
-	}
-
-	public void setPage(int page)
-	{
-		this.page = page;
-	}
 
 	public String execute() throws Exception
 	{
 		/**
-		 * 下面4句固定
+		 * 下面3句固定
 		 */
 		ActionContext ctx = ActionContext.getContext();
 		HttpServletRequest request = (HttpServletRequest) ctx.get(ServletActionContext.HTTP_REQUEST);
 		int maxResult = 5;
+		
 		PageView<Teacher> pageView = new PageView<Teacher>(maxResult, getPage());
 		/**
 		 * 下面修改service即可
