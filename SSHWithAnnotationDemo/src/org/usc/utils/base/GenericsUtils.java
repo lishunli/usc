@@ -1,4 +1,4 @@
-package org.usc.utils;
+package org.usc.utils.base;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;

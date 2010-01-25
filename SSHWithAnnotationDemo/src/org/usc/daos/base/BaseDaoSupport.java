@@ -16,7 +16,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.usc.beans.base.QueryResult;
-import org.usc.utils.GenericsUtils;
+import org.usc.utils.base.GenericsUtils;
 
 /**
  * DAO层封装使用了泛型，包含常用的CURD和分页操作
