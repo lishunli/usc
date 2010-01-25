@@ -8,7 +8,7 @@ import org.usc.daos.BaseDaoSupport;
 import org.usc.services.teacher.ITeacherService;
 
 /**
- * 学生服务实现类
+ * 老师服务实现类
  * 
  * @author <a href="http://www.blogjava.net/lishunli/" target="_blank">ShunLi</a>
  * @notes Created on 2010-1-17<br>

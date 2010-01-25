@@ -6,7 +6,7 @@ import org.usc.beans.Teacher;
 import org.usc.daos.IBaseDao;
 
 /**
- * 学生服务类接口
+ * 老师服务类接口
  * 
  * @author <a href="http://www.blogjava.net/lishunli/" target="_blank">ShunLi</a>
  * @notes Created on 2010-1-21<br>
