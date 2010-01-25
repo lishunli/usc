@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.usc.beans.Teacher;
-import org.usc.daos.BaseDaoSupport;
+import org.usc.daos.base.BaseDaoSupport;
 import org.usc.services.teacher.ITeacherService;
 
 /**

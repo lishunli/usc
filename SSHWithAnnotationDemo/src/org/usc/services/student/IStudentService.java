@@ -3,7 +3,7 @@ package org.usc.services.student;
 import java.util.List;
 
 import org.usc.beans.Student;
-import org.usc.daos.IBaseDao;
+import org.usc.daos.base.IBaseDao;
 
 /**
  * 学生服务类接口

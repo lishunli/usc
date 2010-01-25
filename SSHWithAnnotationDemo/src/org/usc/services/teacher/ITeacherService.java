@@ -3,7 +3,7 @@ package org.usc.services.teacher;
 import java.util.List;
 
 import org.usc.beans.Teacher;
-import org.usc.daos.IBaseDao;
+import org.usc.daos.base.IBaseDao;
 
 /**
  * 老师服务类接口

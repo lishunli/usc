@@ -1,4 +1,4 @@
-package org.usc.daos;
+package org.usc.daos.base;
 
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
