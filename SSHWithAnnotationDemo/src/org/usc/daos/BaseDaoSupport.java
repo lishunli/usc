@@ -37,7 +37,6 @@ public abstract class BaseDaoSupport<T> extends BaseHibernateDaoSupport implemen
 	/*
 	 * @see org.usc.daos.DAO#findByEntity(java.lang.Object)
 	 */
-	@Override
 	public List<T> findByEntity(Object entiey)
 	{
 		return super.getHibernateTemplate().findByExample(entiey);
@@ -46,7 +45,6 @@ public abstract class BaseDaoSupport<T> extends BaseHibernateDaoSupport implemen
 	/*
 	 * @see org.usc.daos.DAO#findByProperty(java.lang.String, java.lang.Object)
 	 */
-	@Override
 	public List<T> findByProperty(String propertyName, Object value)
 	{
 		String queryString = "from " + entityClassName + " o where o." + propertyName + "= ?";
@@ -56,7 +54,6 @@ public abstract class BaseDaoSupport<T> extends BaseHibernateDaoSupport implemen
 	/*
 	 * @see org.usc.daos.DAO#delete(java.io.Serializable[])
 	 */
-	@Override
 	public void delete(Serializable... entityids)
 	{
 		for (Object id : entityids)
@@ -68,7 +65,6 @@ public abstract class BaseDaoSupport<T> extends BaseHibernateDaoSupport implemen
 	/*
 	 * @see org.usc.daos.DAO#find(java.io.Serializable)
 	 */
-	@Override
 	public T find(Serializable entityId)
 	{
 		if (null != entityId)
@@ -79,14 +75,12 @@ public abstract class BaseDaoSupport<T> extends BaseHibernateDaoSupport implemen
 	/*
 	 * @see org.usc.daos.DAO#getCount()
 	 */
-	@Override
 	public int getCount()
 	{
 		String queryString = "from " + entityClassName;
 		return super.getHibernateTemplate().find(queryString).size();
 	}
 
-	@Override
 	public void save(Object entity)
 	{
 		super.getHibernateTemplate().save(entity);
@@ -95,7 +89,6 @@ public abstract class BaseDaoSupport<T> extends BaseHibernateDaoSupport implemen
 	/*
 	 * @see org.usc.daos.DAO#update(java.lang.Object)
 	 */
-	@Override
 	public void update(Object entity)
 	{
 		super.getHibernateTemplate().update(entity);
@@ -104,7 +97,6 @@ public abstract class BaseDaoSupport<T> extends BaseHibernateDaoSupport implemen
 	/*
 	 * @see org.usc.daos.DAO#getScrollData(int, int, java.lang.String, java.lang.Object[], java.util.LinkedHashMap)
 	 */
-	@Override
 	public QueryResult<T> getScrollData(final int firstindex, final int maxresult, final String wherejpql, final Object[] queryParams,
 			final LinkedHashMap<String, String> orderby)
 	{
@@ -112,7 +104,6 @@ public abstract class BaseDaoSupport<T> extends BaseHibernateDaoSupport implemen
 
 		super.getHibernateTemplate().execute(new HibernateCallback<T>()
 		{
-			@Override
 			public T doInHibernate(Session session) throws HibernateException, SQLException
 			{
 				String hql = "from " + entityClassName + " o " + (wherejpql == null || "".equals(wherejpql.trim()) ? "" : " where " + wherejpql)
@@ -128,6 +119,7 @@ public abstract class BaseDaoSupport<T> extends BaseHibernateDaoSupport implemen
 
 				return null;
 			}
+
 		});
 
 		return queryResult;
@@ -137,7 +129,6 @@ public abstract class BaseDaoSupport<T> extends BaseHibernateDaoSupport implemen
 	/*
 	 * @see org.usc.daos.DAO#getScrollData(int, int, java.lang.String, java.lang.Object[])
 	 */
-	@Override
 	public QueryResult<T> getScrollData(int firstindex, int maxresult, String wherejpql, Object[] queryParams)
 	{
 		return getScrollData(firstindex, maxresult, wherejpql, queryParams, null);
@@ -146,7 +137,6 @@ public abstract class BaseDaoSupport<T> extends BaseHibernateDaoSupport implemen
 	/*
 	 * @see org.usc.daos.DAO#getScrollData(int, int, java.util.LinkedHashMap)
 	 */
-	@Override
 	public QueryResult<T> getScrollData(final int firstindex, final int maxresult, final LinkedHashMap<String, String> orderby)
 	{
 		return getScrollData(firstindex, maxresult, null, null, orderby);
@@ -156,7 +146,6 @@ public abstract class BaseDaoSupport<T> extends BaseHibernateDaoSupport implemen
 	/*
 	 * @see org.usc.daos.DAO#getScrollData(int, int)
 	 */
-	@Override
 	public QueryResult<T> getScrollData(final int firstindex, final int maxresult)
 	{
 		return getScrollData(firstindex, maxresult, null, null, null);
@@ -165,7 +154,6 @@ public abstract class BaseDaoSupport<T> extends BaseHibernateDaoSupport implemen
 	/*
 	 * @see org.usc.daos.DAO#getScrollData()
 	 */
-	@Override
 	public QueryResult<T> getScrollData()
 	{
 		return getScrollData(-1, -1, null, null, null);
