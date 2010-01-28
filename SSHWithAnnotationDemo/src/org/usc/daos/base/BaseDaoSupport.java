@@ -33,7 +33,8 @@ public abstract class BaseDaoSupport<T> extends BaseHibernateDaoSupport implemen
 {
 	protected Class<T> entityClass = GenericsUtils.getSuperClassGenricType(this.getClass());
 	protected String entityClassName = getEntityName(this.entityClass);
-
+	protected String keyFieldName = getKeyFieldName(this.entityClass);
+	
 	/*
 	 * @see org.usc.daos.DAO#findByEntity(java.lang.Object)
 	 */
@@ -77,8 +78,9 @@ public abstract class BaseDaoSupport<T> extends BaseHibernateDaoSupport implemen
 	 */
 	public int getCount()
 	{
-		String queryString = "from " + entityClassName;
-		return super.getHibernateTemplate().find(queryString).size();
+		String hql = "select count( " + keyFieldName + ") from " + entityClassName;
+		int count = Integer.parseInt(super.getHibernateTemplate().find(hql).get(0).toString());
+		return count;
 	}
 
 	public void save(Object entity)
