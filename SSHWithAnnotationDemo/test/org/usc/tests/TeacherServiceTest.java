@@ -62,4 +62,10 @@ public class TeacherServiceTest
 			System.out.println(teacher);
 		}
 	}
+	
+	@Test
+	public void testGetCount()
+	{
+		System.out.println(teacherService.getCount());
+	}
 }
