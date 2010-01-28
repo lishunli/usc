@@ -14,16 +14,14 @@
 	<a href="javascript:topage('<s:property value="#request.pageView.currentPage - 1"/>')">上一页</a>&nbsp;
 </s:if>
 <s:else>
-首页&nbsp;上一页&nbsp; 
+首页 &nbsp;上一页&nbsp; 
 </s:else>
 <s:iterator begin="#request.pageView.pageIndex.startIndex" end="#request.pageView.pageIndex.endIndex" var="wp">
 	<s:if test="#request.pageView.currentPage== #wp">
-		<b><s:property value="#wp" />
-		</b>&nbsp;
+	<font color="#FF0000"><s:property value="#wp" /></font>&nbsp;
 	</s:if>
 	<s:else>
-		<a href="javascript:topage('<s:property value="#wp"/>')"><s:property value="#wp" />
-		</a>&nbsp;
+		<a href="javascript:topage('<s:property value="#wp"/>')"><s:property value="#wp" /></a>&nbsp;
 	</s:else>
 </s:iterator>
 <s:if test="#request.pageView.currentPage < #request.pageView.totalPage">
