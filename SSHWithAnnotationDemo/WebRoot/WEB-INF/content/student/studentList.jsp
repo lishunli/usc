@@ -32,8 +32,10 @@
 			<%--下面三句可以不动			--%>
 			<s:hidden name="page"></s:hidden>
 			<s:if test="#request.pageView.totalRecord">
-				<%@ include file="/WEB-INF/content/share/page.jsp"%>
-
+				<%--页数大于1才显示导航			--%>
+				<s:if test="#request.pageView.totalPage > 1">
+					<%@ include file="/WEB-INF/content/share/page.jsp"%>
+				</s:if>
 				<table border="1">
 					<tr>
 						<td>
