@@ -8,13 +8,16 @@ import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.usc.beans.base.QueryResult;
 import org.usc.utils.base.GenericsUtils;
 
@@ -29,11 +32,18 @@ import org.usc.utils.base.GenericsUtils;
  *        <p>
  */
 @SuppressWarnings("unchecked")
-public abstract class BaseDaoSupport<T> extends BaseHibernateDaoSupport implements IBaseDao<T>
+public abstract class BaseDaoSupport<T> extends HibernateDaoSupport implements IBaseDao<T>
 {
 	protected Class<T> entityClass = GenericsUtils.getSuperClassGenricType(this.getClass());
 	protected String entityClassName = getEntityName(this.entityClass);
 	protected String keyFieldName = getKeyFieldName(this.entityClass);
+	
+	// 为父类HibernateDaoSupport注入sessionFactory的值
+	@Resource(name = "sessionFactory")
+	public void setSuperSessionFactory(SessionFactory sessionFactory)
+	{
+		super.setSessionFactory(sessionFactory);
+	}
 	
 	/*
 	 * @see org.usc.daos.DAO#findByEntity(java.lang.Object)
