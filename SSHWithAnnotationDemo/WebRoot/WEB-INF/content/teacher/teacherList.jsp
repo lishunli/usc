@@ -10,7 +10,7 @@
 	<head>
 		<base href="<%=basePath%>">
 
-		<title>Student List</title>
+		<title>Teacher List</title>
 
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
