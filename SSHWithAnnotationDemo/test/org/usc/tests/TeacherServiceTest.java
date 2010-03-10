@@ -40,7 +40,7 @@ public class TeacherServiceTest
 	@Test
 	public void testSave()
 	{
-		for (int i = 20; i < 40; i++)
+		for (int i = 40; i < 80; i++)
 		{
 			Teacher teacher = new Teacher();
 			teacher.setName("老师" + i);
