@@ -9,14 +9,17 @@
 		<link rel="stylesheet" href="../../../css/error.css" type="text/css"></link>
 	</head>
 	<body>
+	
+		<h1 align="center"  style="color:blue">电子图书后台管理系统之信息发布系统</h1>
+		<br>
 		<s:form action="backLogin" method="post" theme="simple">
 			<table width="500" border="1" align="center">
 				<tr>
 					<td colspan="3">
 						<div align="center">
-							<h1>
+							<h2>
 								后台登陆
-							</h1>
+							</h2>
 						</div>
 					</td>
 				</tr>
