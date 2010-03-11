@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	     xmlns:aop="http://www.springframework.org/schema/aop"
+	     xmlns:tx="http://www.springframework.org/schema/tx"
+	     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+
+
+	<bean id="OperatorDAO" class="com.usc.daos.OperatorDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="StockinDAO" class="com.usc.daos.StockinDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FavoriteDAO" class="com.usc.daos.FavoriteDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="UcurrencydetailDAO" class="com.usc.daos.UcurrencydetailDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ShiplistDAO" class="com.usc.daos.ShiplistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CustomDAO" class="com.usc.daos.CustomDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="OrderformDAO" class="com.usc.daos.OrderformDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ShoppingcartDAO" class="com.usc.daos.ShoppingcartDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ConsumptiondetailDAO" class="com.usc.daos.ConsumptiondetailDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BookDAO" class="com.usc.daos.BookDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="OrderproductsDAO" class="com.usc.daos.OrderproductsDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BlacklistDAO" class="com.usc.daos.BlacklistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="StockoutDAO" class="com.usc.daos.StockoutDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RemarkDAO" class="com.usc.daos.RemarkDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ProductsDAO" class="com.usc.daos.ProductsDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BenefitsdetailDAO" class="com.usc.daos.BenefitsdetailDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DigitalDAO" class="com.usc.daos.DigitalDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="LatencyorderformDAO" class="com.usc.daos.LatencyorderformDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SuggestionDAO" class="com.usc.daos.SuggestionDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="OrderstateDAO" class="com.usc.daos.OrderstateDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SaleDAO" class="com.usc.daos.SaleDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CommodityDAO" class="com.usc.daos.CommodityDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="StockDAO" class="com.usc.daos.StockDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ProducttypeDAO" class="com.usc.daos.ProducttypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<!--前台管理Beans	-->
+	<!-- 业务逻辑bean -->
+	<bean id="BeforeMain" class="com.usc.services.custom.Impl.BeforeMainImpl">
+	<property name="customdao" ref="CustomDAO"/>
+	</bean>
+	<bean id="PersonManage" class="com.usc.services.custom.Impl.IPersonManageImpl">
+	<property name="customdao" ref="CustomDAO"/>
+	<property name="suggestiondao" ref="SuggestionDAO"></property>
+	</bean>
+	
+	<!--主界面实现	-->
+	<bean id="MainImpl" class="com.usc.services.custom.Impl.MainImpl">
+		<property name="bookdao" ref="BookDAO"></property>
+		<property name="digitaldao" ref="DigitalDAO"></property>
+		<property name="sysAdmin" ref="SystemAdminImpl"></property>
+		<property name="saleDao" ref="SaleDAO"></property>
+		<property name="commodityDao" ref="CommodityDAO"></property>
+	</bean>
+	
+	
+	
+	
+	<!--后台管理Beans	-->
+	
+	<bean id="Products" class="com.usc.daos.Products"></bean>
+	<bean id="Book" class="com.usc.daos.Book"></bean>
+	<bean id="Digital" class="com.usc.daos.Digital"></bean>
+	<bean id="Commodity" class="com.usc.daos.Commodity"></bean>
+	<bean id="Sale" class="com.usc.daos.Sale"></bean>
+	<!-- 后台管理员实现 -->
+	<bean id="MangerImpl" class="com.usc.services.back.Impl.MangerImpl">
+		<property name="operDao" ref="OperatorDAO"></property>
+		<property name="bookDao" ref="BookDAO"></property>
+		<property name="digitalDAO" ref="DigitalDAO"></property>
+	</bean>
+	<!--系统管理员实现	-->
+	<bean id="SystemAdminImpl" class="com.usc.services.back.Impl.SystemAdminImpl">
+		<property name="book" ref="Book"></property>
+		<property name="digital" ref="Digital"></property>
+		<property name="bookDao" ref="BookDAO"></property>
+		<property name="digitalDao" ref="DigitalDAO"></property>
+		<property name="operDao" ref="OperatorDAO"></property>
+		<property name="productDao" ref="ProductsDAO"></property>
+		<property name="saleDao" ref="SaleDAO"></property>
+		<property name="commodityDao" ref="CommodityDAO"></property>
+	</bean>
+	
+</beans>

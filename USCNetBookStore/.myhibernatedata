@@ -1,0 +1,22 @@
+#
+#Fri Aug 21 11:25:54 CST 2009
+genBasicCompId=false
+sessionFactoryName=
+profile=
+daoSFId=sessionFactory
+version=3.2
+jndiPath=
+detectM2M=false
+reStrategyClass=
+springDaoFile=src/applicationContext.xml
+useJavaTypes=true
+keyGenerator=native
+libInstallFolder=/WebRoot/WEB-INF/lib
+addLibs2Project=true
+genVersionTag=false
+sessionFactoryId=
+basePersistenceClass=
+reSettingsFile=/NetStore/hibernate.reveng.xml
+configFile=/NetStore/src/hibernate.cfg.xml
+createConfigFile=false
+addLibs2Classpath=true

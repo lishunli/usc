@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.custom.i18n.resources" value="message"></constant>
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<package name="back" extends="struts-default">
+		<!--
+			后台登陆页面 <action name="backLogin">
+			<result>/WEB-INF/jsp/back/login.jsp</result> </action>
+		-->
+		<!-- 后台登陆(后台登陆页面) -->
+		<action name="backLogin" class="BackLoginAction">
+			<result name="success">/WEB-INF/jsp/back/back.jsp
+			</result>
+			<result name="input">/WEB-INF/jsp/back/login.jsp
+			</result>
+		</action>
+		<!-- 后台退出 -->
+		<action name="backExit" class="BackExitAction">
+			<result name="success">/WEB-INF/jsp/back/login.jsp
+			</result>
+		</action>
+		<!-- 后台修改密码 -->
+		<action name="updatePass" class="UpdatePassAction">
+			<result name="success">/WEB-INF/jsp/back/back.jsp
+			</result>
+			<result name="input">/WEB-INF/jsp/back/updatePass.jsp
+			</result>
+		</action>
+		<!--后台搜索		-->
+		<action name="backSerach" class="BackSerachAction">
+			<result name="success">/WEB-INF/jsp/back/publishe.jsp
+			</result>
+			<result name="input">/WEB-INF/jsp/back/publishe.jsp
+			</result>
+		</action>
+		<!--后台普通商品搜索		-->
+		<action name="backCommonSerach" class="BackCommonSerachAction">
+			<result name="success">/WEB-INF/jsp/back/commonProductOperate.jsp
+			</result>
+			<result name="input">/WEB-INF/jsp/back/commonProductOperate.jsp
+			</result>
+		</action>
+		<!--后台促销商品搜索		-->
+		<action name="backSaleSerach" class="BackSaleSerachAction">
+			<result name="success">/WEB-INF/jsp/back/saleProductOperate.jsp
+			</result>
+			<result name="input">/WEB-INF/jsp/back/saleProductOperate.jsp
+			</result>
+		</action>
+		<!--撤销发布		-->
+		<action name="unPublishe" class="UnPublisheAction">
+			<result name="success" type="redirect">backCommonSerach.action
+			</result>
+			<result name="input">/WEB-INF/jsp/back/commonProductOperate.jsp
+			</result>
+		</action>
+		<!--产品发布		-->
+		<action name="publishe" class="PublisheAction">
+			<result name="success" type="redirect">backSerach.action
+			</result>
+			<result name="input">/WEB-INF/jsp/back/publishe.jsp
+			</result>
+		</action>
+		<!--修改普通商品的折扣		-->
+		<action name="updateDiscount" class="UpdateDiscountAction">
+			<result name="success" type="redirect">backCommonSerach.action
+			</result>
+			<result name="input">/WEB-INF/jsp/back/commonProductOperate.jsp
+			</result>
+		</action>
+		<!--设置促销商品		-->
+		<action name="saleSet" class="SaleSetAction">
+			<result name="success" type="redirect">backCommonSerach.action
+			</result>
+			<result name="input">/WEB-INF/jsp/back/commonProductOperate.jsp
+			</result>
+		</action>
+		<!--修改促销商品（折扣或优先级） -->
+		<action name="mergeSale" class="MergeSaleAction">
+			<result name="success" type="redirect">backSaleSerach.action
+			</result>
+			<result name="input">/WEB-INF/jsp/back/saleProductOperate.jsp
+			</result>
+		</action>	
+		<!--设为普通商品		-->
+		<action name="unSale" class="UnSaleAction">
+			<result name="success" type="redirect">backSaleSerach.action
+			</result>
+			<result name="input">/WEB-INF/jsp/back/saleProductOperate.jsp
+			</result>
+		</action>
+		<!--返回后台首页		-->
+		<action name="indexBack">
+			<result>/WEB-INF/jsp/back/back.jsp</result>
+		</action>
+		
+	</package>
+	<package name="uploadImage" extends="struts-default">
+		<!--图书录入	-->
+		<action name="bookEntry" class="BookEntryAction">
+			<result name="success" type="redirect">bookEntry.action
+			</result>
+			<result name="input">/WEB-INF/jsp/back/bookEntry.jsp
+			</result>
+			<interceptor-ref name="fileUpload">
+				<param name="maximumSize">1048576</param>
+				<!--单位是字节	1M	（2097152B）		-->
+				<param name="allowedTypes">image/bmp,image/x-png,image/png,image/gif,image/jpeg,image/jpg,image/pjpeg</param>
+				<!--容许文件类型为doc,ppt,xls,pdf,txt,java			-->
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+		
+		<!--数码录入		-->
+		<action name="digitalEntry" class="DigitalEntryAction">
+			<result name="success" type="redirect">digitalEntry.action
+			</result>
+			<result name="input">/WEB-INF/jsp/back/digitalEntry.jsp
+			</result>
+			<interceptor-ref name="fileUpload">
+				<param name="maximumSize">1048576</param>
+				<!--单位是字节	1M	（2097152B）		-->
+				<param name="allowedTypes">image/bmp,image/x-png,image/png,image/gif,image/jpeg,image/jpg,image/pjpeg</param>
+				<!--容许文件类型为doc,ppt,xls,pdf,txt,java			-->
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+	</package>
+</struts>

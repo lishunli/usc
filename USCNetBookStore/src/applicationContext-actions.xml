@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+	<!--前台管理Action	-->
+	<!-- 注册 -->
+	<bean id="RegisterAction" class="com.usc.actions.custom.RegisterAction">
+		<property name="beforemainimpl" ref="BeforeMain"></property>
+	</bean>
+	<!-- 登录 -->
+	<bean id="LoginAction" class="com.usc.actions.custom.LoginAction">
+		<property name="beforemainimpl" ref="BeforeMain"></property>
+	</bean>
+	<!-- 搜索产品 -->
+	<bean id="FuzzySearchAction" class="com.usc.actions.custom.FuzzySearchAction" scope="prototype">
+		<property name="bookDao" ref="BookDAO" />
+		<property name="digitalDao" ref="DigitalDAO"></property>
+		<property name="sysAdmin" ref="SystemAdminImpl"></property>
+		<property name="saleDao" ref="SaleDAO"></property>
+		<property name="commodityDao" ref="CommodityDAO"></property>
+	</bean>
+	<!--图书高级搜索	-->
+	<bean id="AdvancedBookSearchAction" class="com.usc.actions.custom.AdvancedBookSearchAction" scope="prototype">
+		<property name="mainImpl" ref="MainImpl"></property>
+	</bean>
+
+	<!--数码高级搜索	-->
+	<bean id="AdvancedSearchDigitalAction" class="com.usc.actions.custom.AdvancedSearchDigitalAction" scope="prototype">
+		<property name="mainImpl" ref="MainImpl"></property>
+	</bean>
+	
+	<!--显示图书或数码的详细信息	-->
+	<bean id="InformationAction" class="com.usc.actions.custom.InformationAction" scope="prototype">
+		<property name="mainImpl" ref="MainImpl"></property>
+	</bean>
+	
+	
+	<!-- 用户信息修改 -->
+	<bean id="UserInforChangeAction" class="com.usc.actions.custom.UserInforChangeAction">
+		<property name="personmanage" ref="PersonManage" />
+	</bean>
+	<!--首页面的初始化操作，获得加载页面的数据	-->
+	<bean id="InitAction" class="com.usc.actions.custom.InitAction"
+		scope="prototype">
+		<property name="bookDao" ref="BookDAO"></property>
+		<property name="digitalDao" ref="DigitalDAO"></property>
+		<property name="sysAdmin" ref="SystemAdminImpl"></property>
+		<property name="commodityDao" ref="CommodityDAO"></property>
+		<property name="saleDao" ref="SaleDAO"></property>
+		<property name="productDao" ref="ProductsDAO"></property>
+	</bean>
+	
+	<!-- 用户密码修改 -->
+	<bean id="PersonManagerCPasswordAction" class="com.usc.actions.custom.PersonManagerCPasswordAction">
+		<property name="personmanage" ref="PersonManage" />
+	</bean>
+	<!-- 用户Email修改 -->
+	<bean id="PersonManagerCEmailAction" class="com.usc.actions.custom.PersonManagerCEmailAction">
+		<property name="personmanage" ref="PersonManage" />
+	</bean>
+	
+	<!-- U币转换 -->
+	<bean id="UTransforAction" class="com.usc.actions.custom.UTransforAction">
+		<property name="personmanage" ref="PersonManage" />
+	</bean>
+	
+	<!-- 建议 -->
+	<bean id="PersonManagerSuggestionAction" class="com.usc.actions.custom.PersonManagerSuggestionAction">
+		<property name="personmanage" ref="PersonManage"></property>
+	</bean>
+	
+	<!-- 积分换U币 -->
+	<bean id="PersonManagerBSwapUAction" class="com.usc.actions.custom.PersonManagerBSwapUAction">
+		<property name="personmanage" ref="PersonManage"></property>
+	</bean>
+	
+	<!-- 购物车表中存入 -->
+	<bean id="ShoppingcartInsertAction" class="com.usc.actions.custom.ShoppingcartInsertAction">
+	<property name="shoppingcartdao" ref="ShoppingcartDAO"></property>
+	<property name="bookdao" ref="BookDAO"></property>
+	<property name="digitaldao" ref="DigitalDAO"></property>
+	<property name="admin" ref="SystemAdminImpl"></property>
+	</bean>
+	
+	<!-- 购物车显示 -->
+	<bean id="ShoppingCartAction" class="com.usc.actions.custom.ShoppingCartAction">
+	<property name="shoppingcartdao" ref="ShoppingcartDAO"></property>
+	<property name="admin" ref="SystemAdminImpl"></property>
+	</bean>
+	
+	
+	
+	
+	
+	
+	
+	
+	<!--后台管理Action	-->
+	<!-- 后台管理员登陆 -->
+	<bean id="BackLoginAction" class="com.usc.actions.back.loginAction"
+		scope="prototype">
+		<property name="manger" ref="MangerImpl"></property>
+	</bean>
+	<!-- 后台退出 -->
+	<bean id="BackExitAction" class="com.usc.actions.back.BackExitAction"
+		scope="prototype">
+	</bean>
+	<!-- 后台修改密码 -->
+	<bean id="UpdatePassAction" class="com.usc.actions.back.UpdatePassAction"
+		scope="prototype">
+		<property name="manger" ref="MangerImpl"></property>
+	</bean>
+	<!--后台的图书录入	-->
+	<bean id="BookEntryAction" class="com.usc.actions.back.BookEntryAction"
+		scope="prototype">
+		<property name="bookDao" ref="BookDAO"></property>
+		<property name="manger" ref="MangerImpl"></property>
+		<property name="PTypeDao" ref="ProducttypeDAO"></property>
+		<property name="PDao" ref="ProductsDAO"></property>
+		<property name="product" ref="Products"></property>
+	</bean>
+	<!--后台的数码录入	-->
+	<bean id="DigitalEntryAction" class="com.usc.actions.back.DigitalEntryAction"
+		scope="prototype">
+		<property name="digitalDao" ref="DigitalDAO"></property>
+		<property name="manger" ref="MangerImpl"></property>
+		<property name="PTypeDao" ref="ProducttypeDAO"></property>
+		<property name="PDao" ref="ProductsDAO"></property>
+		<property name="product" ref="Products"></property>
+	</bean>
+	<!--后台的搜索	-->
+	<bean id="BackSerachAction" class="com.usc.actions.back.BackSerachAction"
+		scope="prototype">
+		<property name="bookDao" ref="BookDAO"></property>
+		<property name="digitalDao" ref="DigitalDAO"></property>
+	</bean>
+	
+	<!--后台普通商品的搜索	-->
+	<bean id="BackCommonSerachAction" class="com.usc.actions.back.BackCommonSerachAction"
+		scope="prototype">
+		<property name="bookDao" ref="BookDAO"></property>
+		<property name="digitalDao" ref="DigitalDAO"></property>
+		<property name="sysAdmin" ref="SystemAdminImpl"></property>
+		<property name="commodityDao" ref="CommodityDAO"></property>
+	</bean>
+	<!--后台促销商品搜索	-->
+	<bean id="BackSaleSerachAction" class="com.usc.actions.back.BackSaleSerachAction">
+		<property name="bookDao" ref="BookDAO"></property>
+		<property name="digitalDao" ref="DigitalDAO"></property>
+		<property name="sysAdmin" ref="SystemAdminImpl"></property>
+		<property name="commodityDao" ref="CommodityDAO"></property>
+		<property name="saleDao" ref="SaleDAO"></property>
+	</bean>
+	<!--产品发布	-->
+	<bean id="PublisheAction" class="com.usc.actions.back.PublisheAction"
+		scope="prototype">
+		<property name="commodity" ref="Commodity"></property>
+		<property name="commodityDao" ref="CommodityDAO"></property>
+		<property name="sysAdmin" ref="SystemAdminImpl"></property>
+	</bean>
+	<!--修改普通商品的折扣	-->
+	<bean id="UpdateDiscountAction" class="com.usc.actions.back.UpdateDiscountAction"
+		scope="prototype">
+		<property name="commodity" ref="Commodity"></property>
+		<property name="commodityDao" ref="CommodityDAO"></property>
+		<property name="sysAdmin" ref="SystemAdminImpl"></property>
+	</bean>
+	<!--撤销发布	-->
+	<bean id="UnPublisheAction" class="com.usc.actions.back.UnPublisheAction"
+		scope="prototype">
+		<property name="commodity" ref="Commodity"></property>
+		<property name="commodityDao" ref="CommodityDAO"></property>
+		<property name="sysAdmin" ref="SystemAdminImpl"></property>
+	</bean>
+	<!--设置为促销商品-->
+	<bean id="SaleSetAction" class="com.usc.actions.back.SaleSetAction"
+		scope="prototype">
+		<property name="commodity" ref="Commodity"></property>
+		<property name="commodityDao" ref="CommodityDAO"></property>
+		<property name="sysAdmin" ref="SystemAdminImpl"></property>
+		<property name="sale" ref="Sale"></property>
+		<property name="saleDao" ref="SaleDAO"></property>
+	</bean>
+	<!--修改促销商品（促销价或优先级）	-->
+	<bean id="MergeSaleAction" class="com.usc.actions.back.MergeSaleAction"
+		scope="prototype">
+		<property name="sysAdmin" ref="SystemAdminImpl"></property>
+	</bean>
+	
+	<!--设为普通商品-->
+	<bean id="UnSaleAction" class="com.usc.actions.back.UnSaleAction"
+		scope="prototype">
+		<property name="sysAdmin" ref="SystemAdminImpl"></property>
+	</bean>
+</beans>
