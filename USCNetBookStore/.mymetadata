@@ -3,7 +3,7 @@
   type="WEB"
   name="USCNetBookStore"
   id="myeclipse.1249272222781"
-  context-root="/USCNetStore"
+  context-root="/USCNetBookStore"
   j2ee-spec="5.0"
   archive="USCNetBookStore.war">
   <attributes>
