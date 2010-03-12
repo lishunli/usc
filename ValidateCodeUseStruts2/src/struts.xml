@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="validate" extends="struts-default">
+		<action name="validateCode" class="org.usc.validate.action.ValidateCodeAction" method="getValidateImage">
+			<result type="stream">
+				<param name="contentType">image/jpeg</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+		
+		<action name="validateCode2" class="org.usc.validate.action.ValidateCode2Action" method="getValidateImage">
+			<result type="stream">
+				<param name="contentType">image/jpeg</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+		
+		<action name="validate" class="org.usc.validate.action.ValidateAction">
+			<result name="input">/error.jsp</result>
+			<result name="success">/success.jsp</result>
+		</action>
+	</package>
+</struts>    
