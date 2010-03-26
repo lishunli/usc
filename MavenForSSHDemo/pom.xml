@@ -6,6 +6,20 @@
 	<name />
 	<version>0.0.1</version>
 	<description />
+	<!--nexux私服配置	-->
+	<distributionManagement>
+		<repository>
+			<id>releases</id>
+			<name>Internal Releases</name>
+			<url>http://localhost:8081/nexus/content/repositories/releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>Snapshots</id>
+			<name>Internal Snapshots</name>
+			<url>http://localhost:8081/nexus/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+
 	<build>
 		<sourceDirectory>${basedir}/src</sourceDirectory>
 		<outputDirectory>${basedir}/WebRoot/WEB-INF/classes</outputDirectory>
@@ -133,11 +147,11 @@
 			<version>2.1.8.1</version>
 		</dependency>
 		<!--	Hibernate3	-->
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>3.3.2.GA</version>
-		</dependency>
+		<!--		<dependency>-->
+		<!--			<groupId>org.hibernate</groupId>-->
+		<!--			<artifactId>hibernate-core</artifactId>-->
+		<!--			<version>3.3.2.GA</version>-->
+		<!--		</dependency>-->
 		<!--Mysql的驱动		-->
 		<dependency>
 			<groupId>mysql</groupId>
@@ -166,6 +180,11 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>1.5.10</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>3.3.2.GA</version>
 		</dependency>
 	</dependencies>
 </project>
