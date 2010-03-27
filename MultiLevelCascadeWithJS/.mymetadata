@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="MultiLevelCascadeWithJS"
+  id="myeclipse.1269657473506"
+  context-root="/MultiLevelCascadeWithJS"
+  j2ee-spec="5.0"
+  archive="MultiLevelCascadeWithJS.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
