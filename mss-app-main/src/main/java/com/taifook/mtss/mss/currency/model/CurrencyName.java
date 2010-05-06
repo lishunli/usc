@@ -26,7 +26,8 @@ import com.taifook.mtss.mss.common.model.ModelConstants;
 @Entity
 @Table(name = "MC_CCY_NAM")
 @GenericGenerator(name = "seqCurrencyNameID", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", parameters = {
-        @Parameter(name = "sequence_name", value = "CCY_NAM_SEQ"),// don't know seq
+        @Parameter(name = "sequence_name", value = "CCY_NAM_SEQ"),// don't know
+                                                                  // seq
         @Parameter(name = "increment_size", value = ModelConstants.SEQUENCE_INCREMENT_SIZE) })
 public class CurrencyName extends BaseModel<Long> {
 
@@ -41,7 +42,7 @@ public class CurrencyName extends BaseModel<Long> {
     @JoinColumn(name = "CCY_CDE")
     private Currency currency;
 
-    @Enumerated(value=EnumType.STRING)
+    @Enumerated(value = EnumType.STRING)
     @Column(name = "LANG_TYP")
     private Language langCode;
 
@@ -57,8 +58,11 @@ public class CurrencyName extends BaseModel<Long> {
     public CurrencyName() {
     }
 
-    public CurrencyName(Long id, Currency currency, Language langCode,
-            String name, String unitName, Boolean isPrimary) {
+    public CurrencyName(Long id, Language langCode, String name, String unitName, Boolean isPrimary) {
+        this(id, null, langCode, name, unitName, isPrimary);
+    }
+
+    public CurrencyName(Long id, Currency currency, Language langCode, String name, String unitName, Boolean isPrimary) {
         this.id = id;
         this.currency = currency;
         this.langCode = langCode;
@@ -127,9 +131,8 @@ public class CurrencyName extends BaseModel<Long> {
 
     @Override
     public String toString() {
-        return "CurrencyName [currency=" + currency + ", id=" + id
-                + ", isPrimary=" + isPrimary + ", langCode=" + langCode
-                + ", name=" + name + ", unitName=" + unitName + "]";
+        return "CurrencyName [currency=" + currency + ", id=" + id + ", isPrimary=" + isPrimary + ", langCode="
+                + langCode + ", name=" + name + ", unitName=" + unitName + "]";
     }
 
 }
