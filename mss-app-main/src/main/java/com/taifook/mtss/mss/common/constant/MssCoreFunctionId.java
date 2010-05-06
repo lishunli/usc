@@ -1,3 +1,6 @@
+/**
+ *
+ */
 package com.taifook.mtss.mss.common.constant;
 
 /**
@@ -7,7 +10,73 @@ package com.taifook.mtss.mss.common.constant;
  *
  */
 public interface MssCoreFunctionId {
-
+    public static final String FUND_AUTHORIZATION_GROUP = "FMT_M_FUND_AUTH_GP_MAIN";
+    public static final String CLIENT_FUND_IN = "FMT_M_CL_FUND_IN";
+    public static final String CLIENT_FUND_OUT = "FMT_M_CL_FUND_OUT";
+    public static final String CLIENT_FUND_HOLD = "FMT_M_CL_FUND_HLD";
+    public static final String CLIENT_FUND_TRANSFER_CCY_EXCHANGE = "FMT_M_CL_FUND_TRS_CUR_EX";
+    public static final String CLIENT_FUND_IMPORT = "FMT_M_CL_FILE_IMP";
+    public static final String CLIENT_CHEQUE_STATUS = "FMT_M_CHEQUE_STATUS";
+    public static final String CLIENT_CHEQUE_EXPORT = "FMT_M_CHQ_EXP";
+    public static final String CLIENT_CHEQUE_ASSIGNMENT = "FMT_M_CHQ_ASSIGN";
+    public static final String BROKER_FUND_IN = "FMT_M_BRK_FUND_IN";
+    public static final String BROKER_FUND_OUT = "FMT_M_BRK_FUND_OUT";
+    public static final String BROKER_FUND_TRANSFER_CCY_EXCHANGE = "FMT_M_BRK_FUND_CUR_EX";
+    public static final String COMPANY_BANK_MAINTENANCE = "MAS_D_COMP_BK_ACC";
+    public static final String EXCHANGE_RATE_MARGIN_MAINTENANCE = "MAS_D_EXCH_RATE_MARGIN";
+    public static final String COMPANY_FUND_SETTING_MAINTENANCE = "MAS_D_FUND_SET";
+    public static final String COMPANY_SEGREGATED_FUND_MAINTENANCE = "MAS_D_SEG_FUND";
+    public static final String COMPANY_TRANSACTION_TYPE_MAPPING_MAINTENANCE = "MAS_D_TRANS_TYPE_MAP";
+    public static final String REFERENCE_NUMBER_CONTROL_MAINTENANCE = "MAS_D_REF_NUM_DTL";
     public static final String CURRENCY_MAINTENANCE = "MAS_M_CCY_MAIN";
+    public static final String DAILY_EXCHANGE_RATE_MAINTENANCE = "MAS_M_DAILY_EXCH_RATE_MAIN";
+    public static final String DCASS_EXCHANGE_RATE_MAINTENANCE = "MAS_M_DCASS_EXCH_RATE_MAIN";
+    public static final String CALENDAR_MAINTENANCE = "MAS_M_CALENDAR_MAIN";
+    public static final String MARKET_MAINTENANCE = "MAS_M_MKT_MAIN";
+    public static final String MARKET_GROUP_MAINTENANCE = "MAS_M_MKTGRP_MAIN";
+    public static final String INSTRUMENT_BATCH_GROUP_MAINTENANCE = "MAS_M_INST_BATCH_GRP_MAIN";
+    public static final String INSTRUMENT_GROUP_MAINTENANCE = "MAS_M_INSTGRP_MAIN";
+    public static final String INSTRUMENT_CATEGORY_MAINTENANCE = "MAS_M_INST_CAT_MAIN";
+    public static final String ORIGIN_MAINTENANCE = "MAS_M_ORIGIN_MAIN";
+    public static final String UNDERLYING_MAINTENANCE = "MAS_M_UNDERLYING_MAIN";
+    public static final String INSTRUMENT_CLASS_MAINTENANCE = "MAS_M_INST_CLASS_MAIN";
+    public static final String INSTRUMENT_CLASS_OFFSET_MAINTENANCE = "MAS_M_INST_CLS_OFFSET_MAIN";
+    public static final String INSTRUMENT_MAINTENANCE = "MAS_M_INST_MAIN";
+    public static final String PRICE_STRUCTURE_MAINTENANCE = "MAS_M_PRICE_STRUCTURE_MAIN";
+    public static final String CLOSING_PRICE_MAINTENANCE = "MAS_M_CLOSING_PRICE_MAIN";
+    public static final String BROKER_MAINTENANCE = "MAS_M_BROKER_MAIN";
+    public static final String BROKER_ACCOUNT_MAINTENANCE = "MAS_M_BROKER_AC_MAIN";
+    public static final String SYSTEM_PARAMETER_MAINTENANCE = "MAS_M_SYS_PARAMETER_MAIN";
+    public static final String TRANSACTION_TYPE_MAINTENANCE = "MAS_M_TXN_TYPE_MAIN";
+    public static final String STATEMENT_CYCLE_MAINTENANCE = "MAS_M_STAT_CYC_MAIN";
+    public static final String STATEMENT_CYCLE_DATE_MAPPING_MAINENANCE = "MAS_M_STAT_CYC_CAL_MAP_MAIN";
+    public static final String CLIENT_CHEQUE_STATUS_REPORT = "RPT_M_FMT_044";
+    public static final String CLIENT_COMPANY_BANK_MOVEMENT_REPORT = "RPT_M_FMT_201";
+    public static final String CLIENT_FUND_IN_OUT_REPORT = "RPT_M_FMT_049";
+    public static final String CLIENT_FUND_MOVEMENT_REPORT = "RPT_M_FMT_454";
+    public static final String CLIENT_DISHONORED_CHEQUE_REPORT = "RPT_M_FMT_290";
+    public static final String CLIENT_FUND_HOLD_REPORT = "RPT_M_FMT_493";
+    public static final String BROKER_COMPANY_BANK_MOVEMENT_REPORT = "RPT_M_FMT_448";
+    public static final String BROKER_FUND_IN_OUT_REPORT = "RPT_M_FMT_075";
+    public static final String BROKER_ACCOUNT_REPORT = "RPT_M_MAS_344";
+    public static final String CURRENCY_EXCHANGE_RATE_PEPORT = "RPT_M_MAS_061";
+    public static final String INSTRUMENT_CLASS_REPORT = "RPT_M_MAS_349";
+    public static final String INSTRUMENT_REPORT = "RPT_M_MAS_348";
+    public static final String OUTSTANDING_COMMODITY_QUOTE_REPORT = "RPT_M_MAS_036";
+    public static final String BATCH_INSTRUMENT_DAY_BATCH = "OPS_M_INST_DAY_BATCH";
+    public static final String BATCH_COMPANY_DAY_BATCH = "OPS_M_COMP_DAY_BATCH";
+    public static final String BATCH_ENTERPRISE_DAY_BATCH = "OPS_M_ENT_DAY_BATCH";
+    public static final String BATCH_TYPHOON = "OPS_M_TYPHOON_RAINSTORM";
+    public static final String CLIENT_CLIENT_MEMO_DEBIT_API = "API_M_CLIENT_MEMO_DEBIT";
+    public static final String CLIENT_CLIENT_FUND_TRANSFER_API = "API_M_CLIENT_FUND_TRANSFER";
+    public static final String CHECK_ACCOUNT_CLOSE_API = "API_M_CHECK_ACCOUNT_CLOSE";
+    public static final String ACCT_LIST_RPT = "RPT_M_INT_437";
+    public static final String SA_LETTER = "RPT_M_INT_442";
+    public static final String TPA_LETTER = "RPT_M_INT_443";
+
+    // Integration System
+    public static final String GET_LIGHT_WEIGHT_ACCOUNT_API = "API_M_GET_LIGHT_WEIGHT_ACCOUNT";
+    public static final String GET_LIGHT_WEIGHT_BROKER_API = "API_M_GET_LIGHT_WEIGHT_BROKER";
+    public static final String GET_LIGHT_WEIGHT_INSTRUMENT_API = "API_M_GET_LIGHT_WEIGHT_INSTR";
 
 }

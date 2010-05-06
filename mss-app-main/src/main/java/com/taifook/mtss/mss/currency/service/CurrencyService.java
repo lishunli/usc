@@ -2,6 +2,7 @@ package com.taifook.mtss.mss.currency.service;
 
 import java.util.List;
 
+import com.taifook.mtss.mss.common.exception.DataDuplicatedException;
 import com.taifook.mtss.mss.currency.model.Currency;
 import com.taifook.mtss.mss.currency.model.CurrencyEnquiryParam;
 
@@ -15,8 +16,9 @@ public interface CurrencyService {
     /**
      * Create a new Currency
      * @param currency
+     * @throws DataDuplicatedException
      */
-    void addCurrency(Currency currency);
+    void addCurrency(Currency currency) throws DataDuplicatedException;
 
     /**
      * Modify a new Currency

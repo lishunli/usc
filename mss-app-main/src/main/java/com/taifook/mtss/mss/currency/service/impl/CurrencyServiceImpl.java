@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.taifook.mtss.mss.common.exception.DataDuplicatedException;
 import com.taifook.mtss.framework.app.service.AbstractService;
 import com.taifook.mtss.mss.currency.dao.CurrencyDao;
 import com.taifook.mtss.mss.currency.model.Currency;
@@ -20,7 +21,15 @@ public class CurrencyServiceImpl extends AbstractService implements CurrencyServ
     //@Resource(name = "currency.dao.CurrencyDao")
     private CurrencyDao ccyDao;
 
-    public void addCurrency(Currency currency) {
+    public void addCurrency(Currency currency) throws DataDuplicatedException{
+
+        String ccyCode = currency.getCode();
+
+        //find currency
+        if(ccyDao.read(ccyCode) != null){
+            throw new DataDuplicatedException();
+        }
+
         ccyDao.create(currency);
     }
 

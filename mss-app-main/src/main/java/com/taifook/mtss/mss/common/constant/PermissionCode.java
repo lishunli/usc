@@ -6,10 +6,8 @@ package com.taifook.mtss.mss.common.constant;
  * with new/undefined Permission Code, this is intended to use String
  * constants as the values of Permission Code.
  */
-
 public interface PermissionCode {
-
-	public static final String VIEW = "V";
+    public static final String VIEW = "V";
     public static final String CREATE = "I";
     public static final String CREATE_BACK_DATE = "B";
     public static final String EDIT = "E";
