@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:jaxws="http://cxf.apache.org/jaxws"
+    xmlns:jee="http://www.springframework.org/schema/jee"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:amq="http://activemq.apache.org/schema/core"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+                            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+                            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+                            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                            http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.0.xsd
+                            http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+                            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+                            http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd">
+
+    <context:annotation-config/>
+
+    <context:component-scan base-package="com.taifook.mtss.mss">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+    </context:component-scan>
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <value>classpath:com/taifook/mtss/mss/DeploymentTest-system.properties</value>
+        </property>
+        <!-- Default properties -->
+        <property name="properties">
+            <value>
+                mss.batch.reportScheduler.autoStartup=true
+                batch.server.id=SVR1
+                batch.server.cluster=MSS-BATCH
+                batch.requestQueueListener.autoStartup=true
+                notificationService.extConfig=notification-service-ext-config.xml
+            </value>
+        </property>
+    </bean>
+
+    <!--  Shared Data Source Setup -->
+    <bean id="dataSource" class="com.taifook.mtss.framework.test.SharedDataSourceFactoryBean">
+        <property name="driverClassName" value="org.h2.Driver" />
+        <property name="url" value="jdbc:h2:mem:test;DB_CLOSE_DELAY=-1"/>
+        <property name="username" value="sa"/>
+        <property name="password" value=""/>
+    </bean>
+
+    <alias name="dataSource" alias="batch.dataSource" />
+    <alias name="dataSource" alias="archive.current.dataSource" />
+    <alias name="dataSource" alias="archive.history.dataSource" />
+
+    <bean id="genericDao.jdbcTemplate" class="org.springframework.jdbc.core.simple.SimpleJdbcTemplate">
+        <constructor-arg>
+            <ref bean="dataSource"/>
+        </constructor-arg>
+    </bean>
+
+    <alias name="genericDao.jdbcTemplate" alias="batch.jdbcTemplate" />
+
+    <bean id="entityManagerFactory" class="com.taifook.mtss.framework.test.SharedLocalEntityManagerFactoryBean">
+        <property name="shareId" value="H2EMF"/>
+        <property name="persistenceXmlLocation" value="classpath:/META-INF/mss-persistence.xml" />
+        <property name="persistenceUnitName" value="mss" />
+        <property name="dataSource" ref="dataSource" />
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <property name="showSql" value="false" />
+                <property name="generateDdl" value="true" />
+                <property name="databasePlatform" value="org.hibernate.dialect.H2Dialect" />
+            </bean>
+        </property>
+    </bean>
+
+    <alias name="entityManagerFactory" alias="batch.entityManagerFactory" />
+
+    <bean id="genericDao.entityManager" class="org.springframework.orm.jpa.support.SharedEntityManagerBean">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+
+    <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
+
+    <bean class="com.taifook.mtss.framework.dao.GenericDaoPersistenceExceptionTranslationPostProcessor"/>
+
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="namingStrategy" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+        <property name="staticField">
+            <value>org.hibernate.cfg.ImprovedNamingStrategy.INSTANCE</value>
+        </property>
+    </bean>
+
+    <bean id="extendedFinderNamingStrategy" class="com.taifook.mtss.framework.dao.finder.impl.ExtendedFinderNamingStrategy" />
+
+    <!-- Dummy Session Factory to provide Hibernate Exception Translator -->
+    <bean class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop>
+                <prop key="hibernate.hbm2ddl.auto">none</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- DAO -->
+    <bean id="abstractDaoTarget" class="com.taifook.mtss.framework.app.dao.impl.GenericModelDaoImpl" abstract="true">
+        <property name="namingStrategy">
+            <ref bean="extendedFinderNamingStrategy" />
+        </property>
+    </bean>
+
+    <bean id="abstractVersionDaoTarget" class="com.taifook.mtss.framework.app.dao.impl.GenericVersionDaoImpl" abstract="true">
+        <property name="namingStrategy">
+            <ref bean="extendedFinderNamingStrategy" />
+        </property>
+    </bean>
+
+    <bean id="queryInterceptor" class="com.taifook.mtss.framework.dao.finder.impl.FinderIntroductionInterceptor" />
+
+    <aop:config>
+        <aop:aspect ref="queryInterceptor">
+        <aop:pointcut id="getQuery"
+                expression="execution(* com.taifook.mtss.mss..*Dao.get*(..)) and this(com.taifook.mtss.framework.dao.finder.FinderExecutor)" />
+            <aop:pointcut id="findQuery"
+                expression="execution(* com.taifook.mtss.mss..*Dao.find*(..)) and this(com.taifook.mtss.framework.dao.finder.FinderExecutor)" />
+            <aop:pointcut id="listQuery"
+                expression="execution(* com.taifook.mtss.mss..*Dao.list*(..,int,int)) and this(com.taifook.mtss.framework.dao.finder.FinderExecutor)" />
+            <aop:around pointcut-ref="findQuery" method="invokeFind" />
+            <aop:around pointcut-ref="listQuery" method="invokeFind" />
+            <aop:around pointcut-ref="getQuery" method="invokeFind" />
+        </aop:aspect>
+
+    </aop:config>
+
+    <bean id="mss.incrementer.tagSequence" class="org.springframework.jdbc.support.incrementer.H2SequenceMaxValueIncrementer">
+        <constructor-arg index="0"><ref bean="dataSource"/></constructor-arg>
+        <constructor-arg index="1"><value>CO_TAG_SEQ</value></constructor-arg>
+    </bean>
+
+    <bean id="mss.incrementer.nsUniqueKeySeq" class="org.springframework.jdbc.support.incrementer.OracleSequenceMaxValueIncrementer">
+        <constructor-arg index="0"><ref bean="dataSource"/></constructor-arg>
+        <constructor-arg index="1"><value>NS_MSG_UNIQUE_KEY_SEQ</value></constructor-arg>
+    </bean>
+
+
+    <bean id="datasync.jms.dataSyncJmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <property name="connectionFactory" ref="datasync.jms.XAJmsConnectionFactory" />
+        <property name="defaultDestination" ref="datasync.jms.dataSyncXADestination" />
+    </bean>
+
+    <!-- Dummy bean for JMS -->
+    <amq:queue id="datasync.jms.dataSyncXADestination"  physicalName="org.apache.activemq.spring.Test.spring.embedded"/>
+    <amq:connectionFactory id="datasync.jms.XAJmsConnectionFactory" brokerURL="vm://localhost?broker.persistent=false"/>
+    <amq:queue id="batch.reqQueue.destination" physicalName="org.apache.activemq.spring.Test.spring.embedded" />
+    <amq:queue id="batch.eventTopic.destination" physicalName="org.apache.activemq.spring.Test.spring.embedded" />
+    <amq:connectionFactory id="batch.jmsFactory" brokerURL="vm://localhost?broker.persistent=false" />
+
+
+    <!--
+        Import only one application context file per module here
+        For DAO and other config files, please import them inside
+        module's application context file. E.g.   appctx-mss-app-main-commission.xml
+     -->
+<!--    <import resource="classpath:appctx/currency/appctx-mss-app-main-currency-dao.xml" />-->
+
+</beans>

@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.taifook.mtss.mss-t.mss-app</groupId>
+        <artifactId>mss-app-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>mss-app-main</artifactId>
+    <name>MSS Application Main</name>
+    <packaging>jar</packaging>
+    <description>MSS Application Main</description>
+
+    <!--
+    #####################################################
+    ## Build properties
+    #####################################################
+    -->
+    <properties>
+        <mss.dbschema.version>0.0.1.0</mss.dbschema.version>
+    </properties>
+
+    <dependencies>
+
+        <!--
+        #####################################################
+        ## MSS App and Framework
+        #####################################################
+         -->
+        <dependency>
+            <groupId>com.taifook.mtss.mtss-fw</groupId>
+            <artifactId>mtss-fw-core</artifactId>
+        </dependency>
+
+         <dependency>
+            <groupId>com.taifook.mtss.mtss-fw</groupId>
+            <artifactId>mtss-fw-foundation</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.taifook.mtss.mtss-fw</groupId>
+            <artifactId>mtss-fw-dao</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.taifook.mtss.mtss-fw</groupId>
+            <artifactId>mtss-fw-dto</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.taifook.mtss.mtss-fw</groupId>
+            <artifactId>mtss-fw-app-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.taifook.mtss.mtss-fw</groupId>
+            <artifactId>mtss-fw-app-proc-ws-runtime</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.taifook.mtss.mtss-fw</groupId>
+            <artifactId>mtss-fw-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!--
+        #####################################################
+        ## Spring
+        #####################################################
+         -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!--
+        #####################################################
+        ## JavaEE API
+        #####################################################
+         -->
+        <dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>persistence-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-jms_1.1_spec</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-saaj_1.1_spec</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-jaxrpc_1.1_spec</artifactId>
+        </dependency>
+
+        <!--
+        #####################################################
+        ## Apache Common
+        #####################################################
+         -->
+        <dependency>
+            <groupId>commons-validator</groupId>
+            <artifactId>commons-validator</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-configuration</groupId>
+            <artifactId>commons-configuration</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
+        <!--
+        #####################################################
+        ## Logging
+        #####################################################
+         -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+        </dependency>
+
+        <!--
+        #####################################################
+        ## WebService (CXF etc)
+        #####################################################
+         -->
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-databinding-jaxb</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxws</artifactId>
+        </dependency>
+        <!--
+        #####################################################
+        ## WebService (jaxb databinding)
+        #####################################################
+        -->
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+        </dependency>
+
+        <!--
+        #####################################################
+        ## Concurrent Library
+        #####################################################
+        -->
+        <dependency>
+            <groupId>concurrent</groupId>
+            <artifactId>concurrent</artifactId>
+        </dependency>
+
+        <!--
+        #####################################################
+        ## Open CSV
+        #####################################################
+         -->
+        <dependency>
+            <groupId>net.sf.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+        </dependency>
+
+        <!--
+        #####################################################
+        ## Unit Test
+        #####################################################
+         -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.easymock</groupId>
+            <artifactId>easymock</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.easymock</groupId>
+            <artifactId>easymockclassextension</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.sourceforge.sevenmock</groupId>
+            <artifactId>sevenmock</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc14</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.stephenduncanjr</groupId>
+            <artifactId>easymock-propertyutils</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.xbean</groupId>
+            <artifactId>xbean-spring</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <resources>
+            <!--
+                ####################################################
+                ## Main application resources
+                ####################################################
+             -->
+            <resource>
+                <directory>${basedir}/src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>build-info.properties</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>${basedir}/src/main/resources</directory>
+                <filtering>false</filtering>
+                <excludes>
+                    <exclude>build-info.properties</exclude>
+                </excludes>
+            </resource>
+            <!--
+                ####################################################
+                ## Main application external config
+                ####################################################
+             -->
+            <resource>
+                <directory>${basedir}/src/main/extconf</directory>
+                <targetPath>extconf</targetPath>
+            </resource>
+
+        </resources>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <DB-Schema-Version>${mss.dbschema.version}</DB-Schema-Version>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!--
+    #####################################################
+    ## Profiles
+    #####################################################
+    -->
+    <profiles>
+        <profile>
+            <id>mss.skipGenProcWs</id>
+            <activation>
+                <property>
+                    <name>mss.genProcWs</name>
+                    <value>false</value>
+                </property>
+            </activation>
+
+            <properties>
+                <maven.apt.skip>true</maven.apt.skip>
+                <mss.java2wsdl.skip>true</mss.java2wsdl.skip>
+            </properties>
+
+        </profile>
+    </profiles>
+</project>
