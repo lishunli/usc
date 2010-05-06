@@ -12,16 +12,16 @@ import com.taifook.mtss.mss.currency.model.CurrencyName;
  * @author slli
  *
  */
-@Dto(sourceModelClass=CurrencyName.class)
-public class CurrencyNameDto extends BaseModelDto implements Serializable{
+@Dto(sourceModelClass = CurrencyName.class,idField="langCode")
+public class CurrencyNameDto extends BaseModelDto implements Serializable {
 
     private static final long serialVersionUID = -5684529182395603157L;
 
     @DtoField
     private Long id;
 
-    @DtoField(field="currency.code")
-    private String ccyCode;
+//    @DtoField(field = "currency.code")
+//    private String ccyCode;
 
     @DtoField
     private Language langCode;
@@ -38,10 +38,9 @@ public class CurrencyNameDto extends BaseModelDto implements Serializable{
     public CurrencyNameDto() {
     }
 
-    public CurrencyNameDto(Long id, String ccyCode, Language langCode,
-            String name, String unitName, Boolean isPrimary) {
+    public CurrencyNameDto(Long id, Language langCode, String name, String unitName, Boolean isPrimary) {
+        super();
         this.id = id;
-        this.ccyCode = ccyCode;
         this.langCode = langCode;
         this.name = name;
         this.unitName = unitName;
@@ -56,13 +55,6 @@ public class CurrencyNameDto extends BaseModelDto implements Serializable{
         this.id = id;
     }
 
-    public String getCcyCode() {
-        return ccyCode;
-    }
-
-    public void setCcyCode(String ccyCode) {
-        this.ccyCode = ccyCode;
-    }
 
     public Language getLangCode() {
         return langCode;

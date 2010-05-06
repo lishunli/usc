@@ -3,12 +3,10 @@ package com.taifook.mtss.mss.currency.dto;
 import java.io.Serializable;
 import java.util.List;
 
-
 import com.taifook.mtss.framework.dto.annotation.Dto;
 import com.taifook.mtss.framework.dto.annotation.DtoField;
 import com.taifook.mtss.mss.common.dto.BaseModelDto;
 import com.taifook.mtss.mss.currency.model.Currency;
-import com.taifook.mtss.mss.currency.model.CurrencyName;
 
 /**
  * @author slli
@@ -44,14 +42,14 @@ public class CurrencyDto extends BaseModelDto implements Serializable{
     private Boolean isRestricted ;
 
     @DtoField
-    private List<CurrencyName> names;
+    private List<CurrencyNameDto> names;
 
     public CurrencyDto() {
     }
 
     public CurrencyDto(String code, String prefixSymbol, String primaryName,
             String isoAlpha, Long isoNumeric, Integer decimalPlace,
-            Boolean isValid, Boolean isRestricted, List<CurrencyName> names) {
+            Boolean isValid, Boolean isRestricted, List<CurrencyNameDto> names) {
         this.code = code;
         this.prefixSymbol = prefixSymbol;
         this.primaryName = primaryName;
@@ -127,11 +125,12 @@ public class CurrencyDto extends BaseModelDto implements Serializable{
         this.isRestricted = isRestricted;
     }
 
-    public List<CurrencyName> getNames() {
+    public List<CurrencyNameDto> getNames() {
         return names;
     }
 
-    public void setNames(List<CurrencyName> names) {
+    public void setNames(List<CurrencyNameDto> names) {
         this.names = names;
     }
+
 }
