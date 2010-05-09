@@ -21,7 +21,6 @@ import com.usc.services.back.ISystemAdmin;
 
 public class BackSaleSerachAction extends ActionSupport
 {
-	private String type;
 	private String productsName;
 	private BookDAO bookDao;
 	private DigitalDAO digitalDao;
@@ -30,16 +29,6 @@ public class BackSaleSerachAction extends ActionSupport
 	private SaleDAO saleDao;
 	private List<BookExtra> bookExtraList = new ArrayList<BookExtra>();
 	private List<DigitalExtra> digitalExtraList = new ArrayList<DigitalExtra>();
-
-	public String getType()
-	{
-		return type;
-	}
-
-	public void setType(String type)
-	{
-		this.type = type;
-	}
 
 	public String getProductsName()
 	{
@@ -86,56 +75,29 @@ public class BackSaleSerachAction extends ActionSupport
 		this.saleDao = saleDao;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public String execute() throws Exception
 	{
-		if (null != type)
+		Map request = (Map) ActionContext.getContext().get("request");
+		bookExtraList.clear();
+		for (Book book : bookDao.findByLikeCommonBookName(productsName == null ? "" : productsName.trim()))// 普通商品（已发布）模糊查找
 		{
-			Map request = (Map) ActionContext.getContext().get("request");
-			bookExtraList.clear();
-			digitalExtraList.clear();// 清空List，防止List累积
-			if ("图书".equals(type.trim()))
+			for (Commodity commodity : commodityDao.findByProductsID(sysAdmin.getProductID(1, book.getBookId())))// 通过产品ID找到商品
 			{
-				for (Book book : bookDao.findByLikeCommonBookName(productsName.trim()))// 普通商品（已发布）模糊查找
+				if (commodity.getSaleFlag() == 1)// 发布，是促销商品
 				{
-					for (Commodity commodity : commodityDao.findByProductsID(sysAdmin.getProductID(1, book.getBookId())))// 通过产品ID找到商品
+					BookExtra bookExtra = new BookExtra();// 实例化扩展Book的对象
+					BeanUtils.copyProperties(bookExtra, book);// 类copy
+					for (Sale sale : saleDao.findByCommodityId(commodity.getCommodityId()))
 					{
-						if (commodity.getSaleFlag() == 1)// 发布，是促销商品
-						{
-							BookExtra bookExtra = new BookExtra();// 实例化扩展Book的对象
-							BeanUtils.copyProperties(bookExtra, book);// 类copy
-							for (Sale sale : saleDao.findByCommodityId(commodity.getCommodityId()))
-							{
-								bookExtra.setSalePrice(sale.getSalePrice());// 设置促销价
-								bookExtra.setPriority(sale.getPriority());// 设置优先级
-							}
-							bookExtraList.add(bookExtra);
-						}
+						bookExtra.setSalePrice(sale.getSalePrice());// 设置促销价
+						bookExtra.setPriority(sale.getPriority());// 设置优先级
 					}
+					bookExtraList.add(bookExtra);
 				}
-				request.put("bookSale", bookExtraList);// 放进List
 			}
-			else if ("数码".equals(type.trim()))
-			{
-				for (Digital digital : digitalDao.findByLikeCommonDigitalName(productsName.trim()))
-				{
-					for (Commodity commodity : commodityDao.findByProductsID(sysAdmin.getProductID(2, digital.getDigitalId())))
-					{
-						if (commodity.getSaleFlag() == 1)// 发布，是促销商品
-						{
-							DigitalExtra digitalExtra = new DigitalExtra();// 实例化扩展Book的对象
-							BeanUtils.copyProperties(digitalExtra, digital);// 类copy
-							for (Sale sale : saleDao.findByCommodityId(commodity.getCommodityId()))
-							{
-								digitalExtra.setSalePrice(sale.getSalePrice());// 设置促销价
-								digitalExtra.setPriority(sale.getPriority());// 设置优先级
-							}
-							digitalExtraList.add(digitalExtra);
-						}
-					}
-				}
-				request.put("digitalSale", digitalExtraList);// 放进List
-			}
+			request.put("bookSale", bookExtraList);// 放进List
 		}
 		return SUCCESS;
 	}

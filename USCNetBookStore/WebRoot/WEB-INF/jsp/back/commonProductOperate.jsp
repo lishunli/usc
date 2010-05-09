@@ -12,7 +12,7 @@
 	<head>
 		<base href="<%=basePath%>">
 
-		<title>普通商品操作</title>
+		<title>普通图书操作</title>
 
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
@@ -26,12 +26,10 @@
 		<p align="right"><a href="indexBack.action">回到后台首页</a></p>
 
 		<s:form name="backCommonSerach" method="post" theme="simple">
-		产品分类
-		<s:select list="{'图书','数码'}" id="type" name="type" value="type"></s:select>
-		产品名称
+		图书名称
 		<s:textfield name="productsName"></s:textfield>
 			<s:submit value="搜搜"></s:submit>
-			<s:if test="#request.bookCommon">
+			<s:if test="#request.bookCommon.size">
 				<table border="1" width="80%" align="center">
 					<tr>
 						<td>
@@ -88,67 +86,6 @@
 				</table>
 			</s:if>
 
-			<s:if test="#request.digitalCommon">
-				<table border="1" width="80%" align="center">
-					<tr>
-						<td>
-							数码名称
-						</td>
-						<td>
-							条形码
-						</td>
-						<td>
-							厂家
-						</td>
-						<td>
-							品牌
-						</td>
-						<td>
-							型号
-						</td>
-						<td>
-							定价
-						</td>
-						<td>
-							折扣
-						</td>
-						<td>
-							操作
-						</td>
-					</tr>
-					<s:iterator value="#request.digitalCommon" id="digitalCommon">
-						<tr>
-							<td>
-								<s:property value="#digitalCommon.digitalName" />
-							</td>
-							<td>
-								<s:property value="#digitalCommon.barcode" />
-							</td>
-							<td>
-								<s:property value="#digitalCommon.manufacturer" />
-							</td>
-							<td>
-								<s:property value="#digitalCommon.brand" />
-							</td>
-							<td>
-								<s:property value="#digitalCommon.modelNumber" />
-							</td>
-							<td>
-								<s:property value="#digitalCommon.publishedPrice" />
-							</td>
-							<td>
-								<s:property value="#digitalCommon.discount" />
-							</td>
-							<td>
-								<input type="button" onclick="mergeDiscount(<s:property value="#digitalCommon.digitalId" />,2)" value="修改折扣">
-								<input type="button" onclick="unPublishe(<s:property value="#digitalCommon.digitalId" />,2)" value="撤销发布">
-								<input type="button" onclick="saleSet(<s:property value="#digitalCommon.digitalId" />,2)" value="设为促销">
-							</td>
-
-						</tr>
-					</s:iterator>
-				</table>
-			</s:if>
 		</s:form>
 	</body>
 </html>

@@ -1,9 +1,13 @@
 package com.usc.actions.back;
 
+import java.util.List;
 import java.util.Map;
+
+import org.apache.struts2.components.If;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.usc.daos.Book;
 import com.usc.daos.BookDAO;
 import com.usc.daos.Digital;
 import com.usc.daos.DigitalDAO;
@@ -17,20 +21,9 @@ import com.usc.daos.DigitalDAO;
  */
 public class BackSerachAction extends ActionSupport
 {
-	private String type;
 	private String productsName;
 	private BookDAO bookDao;
 	private DigitalDAO digitalDao;
-
-	public String getType()
-	{
-		return type;
-	}
-
-	public void setType(String type)
-	{
-		this.type = type;
-	}
 
 	public String getProductsName()
 	{
@@ -57,23 +50,15 @@ public class BackSerachAction extends ActionSupport
 	{
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public String execute() throws Exception
 	{
-
-		if (null != type)
-		{
-			Map request = (Map) ActionContext.getContext().get("request");
-			if ("图书".equals(type.trim()))
-			{
-				request.put("bookSerach", bookDao.findByLikeBookName(productsName.trim()));// 未发布的图书模糊查找，
-			}
-			else if ("数码".equals(type.trim()))
-			{
-				request.put("digitalSerach", digitalDao.findByLikeDigitalName(productsName.trim()));// 未发布的书面模糊查找，
-			}
-		}
+		Map request = (Map) ActionContext.getContext().get("request");
+		request.put("bookSerach",  bookDao.findByLikeBookName(productsName == null ? "" : productsName.trim()));// 未发布的图书模糊查找，
+		
 		return SUCCESS;
+		
 	}
 
 }
