@@ -92,6 +92,7 @@ public class BackCommonSerachAction extends ActionSupport
 					BookExtra bookExtra = new BookExtra();// 实例化扩展Book的对象
 					BeanUtils.copyProperties(bookExtra, book);// 类copy
 					bookExtra.setDiscount(sysAdmin.getDiscount(1, book.getBookId()));// 设置折扣
+					bookExtra.setSalePrice(book.getPublishedPrice()*bookExtra.getDiscount()/100);
 					bookExtraList.add(bookExtra);
 				}
 			}

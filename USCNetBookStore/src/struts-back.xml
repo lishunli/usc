@@ -17,6 +17,15 @@
 			<result name="input">/WEB-INF/jsp/back/login.jsp
 			</result>
 		</action>
+		
+		<!-- 添加管理员 -->
+		<action name="addManger" class="AddMangerAction">
+			<result name="success">/WEB-INF/jsp/back/back.jsp
+			</result>
+			<result name="input">/WEB-INF/jsp/back/addManger.jsp
+			</result>
+		</action>
+		
 		<!-- 后台退出 -->
 		<action name="backExit" class="BackExitAction">
 			<result name="success">/WEB-INF/jsp/back/login.jsp

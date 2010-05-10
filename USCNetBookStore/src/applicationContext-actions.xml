@@ -14,6 +14,7 @@
 	<bean id="LoginAction" class="com.usc.actions.custom.LoginAction">
 		<property name="beforemainimpl" ref="BeforeMain"></property>
 	</bean>
+	
 	<!-- 搜索产品 -->
 	<bean id="FuzzySearchAction" class="com.usc.actions.custom.FuzzySearchAction" scope="prototype">
 		<property name="bookDao" ref="BookDAO" />
@@ -104,6 +105,13 @@
 		scope="prototype">
 		<property name="manger" ref="MangerImpl"></property>
 	</bean>
+	
+	<!-- 添加新的管理员 -->
+	<bean id="AddMangerAction" class="com.usc.actions.back.AddMangerAction" scope="prototype">
+		<property name="manger" ref="MangerImpl"></property>
+	</bean>
+	
+	
 	<!-- 后台退出 -->
 	<bean id="BackExitAction" class="com.usc.actions.back.BackExitAction"
 		scope="prototype">

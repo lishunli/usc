@@ -23,8 +23,8 @@ function BackExit()
 	</head>
 	<body>
 		<h1 align="center"  style="color:blue">电子图书后台管理系统之信息发布系统</h1>
-		欢迎您：<%=session.getAttribute("manger")%>&nbsp;&nbsp;
-		<s:if test="%{#session.manger == 'admin'}"> 
+		欢迎您：<s:property value="#session.manger.operatorName" />&nbsp;&nbsp;
+		<s:if test="#session.manger.operatorType == '系统管理员'"> 
 			<a href="addManger.action">【添加新管理员】</a>&nbsp;&nbsp;
 		</s:if>
 		<a href="updatePass.action">【修改密码】</a>&nbsp;&nbsp;<a href="backExit.action" onclick="return BackExit()">【退出】</a>&nbsp;&nbsp;

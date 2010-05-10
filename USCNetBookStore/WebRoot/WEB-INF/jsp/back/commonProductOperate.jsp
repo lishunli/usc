@@ -50,6 +50,9 @@
 						<td>
 							折扣
 						</td>
+						<td style="color:red">
+							优惠价
+						</td>
 						<td>
 							操作
 						</td>
@@ -73,6 +76,9 @@
 							</td>
 							<td>
 								<s:property value="#bookCommon.discount" />
+							</td>
+							<td style="color:red">
+								<s:property value="#bookCommon.salePrice" />
 							</td>
 							<td>
 								<input type="button" onclick="mergeDiscount(<s:property value="#bookCommon.bookId" />,1)" value="修改折扣">

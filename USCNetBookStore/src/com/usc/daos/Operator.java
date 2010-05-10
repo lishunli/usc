@@ -146,4 +146,12 @@ public class Operator implements java.io.Serializable
 		this.stockins = stockins;
 	}
 
+	@Override
+	public String toString()
+	{
+		return "Operator [operatorName=" + operatorName + ", operatorPass=" + operatorPass + ", operatorSex=" + operatorSex + ", operatorType=" + operatorType
+				+ "]";
+	}
+	
+
 }
