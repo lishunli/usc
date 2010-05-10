@@ -11,7 +11,7 @@
 		<p align="right"><a href="indexBack.action">回到后台首页</a></p>
 
 		<s:form action="updatePass" method="post" theme="simple">
-姓名：<%=session.getAttribute("manger")%><br>
+姓名：<s:property value="#session.manger.operatorName" /><br>
 原密码： <s:password name="operator.operatorPass"></s:password>
 
 			<font color="red">* <span id="operatorPassError"></span> <s:fielderror>
