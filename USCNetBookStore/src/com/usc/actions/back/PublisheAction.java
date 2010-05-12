@@ -4,16 +4,10 @@ import java.util.Date;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import com.usc.daos.Book;
-import com.usc.daos.BookDAO;
 import com.usc.daos.Commodity;
 import com.usc.daos.CommodityDAO;
-import com.usc.daos.Digital;
-import com.usc.daos.DigitalDAO;
-import com.usc.daos.Products;
-import com.usc.daos.ProductsDAO;
+import com.usc.daos.Operator;
 import com.usc.services.back.ISystemAdmin;
-import com.usc.services.back.Impl.SystemAdminImpl;
 
 /**
  * 发布产品
@@ -84,7 +78,8 @@ public class PublisheAction extends ActionSupport
 	{
 		sysAdmin.setProductPFlag(type, entityID, 1);// 设置产品发布标志位1
 		commodity.setDiscount(discount);// 设置折扣
-		commodity.setOperatorID(sysAdmin.getOperatorID(ActionContext.getContext().getSession().get("manger").toString()));// 设置操作员ID
+		Operator operator = (Operator)ActionContext.getContext().getSession().get("manger");
+		commodity.setOperatorID(operator.getOperatorId());// 设置操作员ID
 		commodity.setProductsID(sysAdmin.getProductID(type, entityID));// 设置产品ID
 		commodity.setPublisheTime(new Date());// 设置产品发布时间为当前系统时间
 		commodity.setSaleFlag(0);// 促销商品标志位，默认为0，1的话就是促销商品

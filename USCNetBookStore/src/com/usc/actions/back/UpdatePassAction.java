@@ -27,7 +27,8 @@ public class UpdatePassAction extends ActionSupport
 	public void setOperator(Operator operator)
 	{
 		this.operator = operator;
-		this.operator.setOperatorName(ActionContext.getContext().getSession().get("manger").toString());
+		Operator oper = (Operator)ActionContext.getContext().getSession().get("manger");
+		this.operator.setOperatorName(oper.getOperatorName());
 	}
 
 	public void setManger(IManger manger)

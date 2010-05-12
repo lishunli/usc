@@ -4,6 +4,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.usc.daos.Commodity;
 import com.usc.daos.CommodityDAO;
+import com.usc.daos.Operator;
 import com.usc.daos.Sale;
 import com.usc.daos.SaleDAO;
 import com.usc.services.back.ISystemAdmin;
@@ -100,7 +101,8 @@ public class SaleSetAction extends ActionSupport
 		// 2.写人到促销表中
 		sysAdmin.setsaleFlag(type, entityID, 1);
 		sale.setCommodityId(sysAdmin.getCommodityID(type, entityID));
-		sale.setOperatorID(sysAdmin.getOperatorID(ActionContext.getContext().getSession().get("manger").toString()));
+		Operator operator = (Operator)ActionContext.getContext().getSession().get("manger");
+		sale.setOperatorID(operator.getOperatorId());
 		sale.setSalePrice(salePrice);
 		sale.setPriority(priority);
 		// 设置表中属性

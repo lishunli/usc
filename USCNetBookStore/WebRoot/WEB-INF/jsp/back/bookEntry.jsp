@@ -12,66 +12,152 @@
 		<h1 align="center" style="color: blue">
 			<img alt="usc" src="images/custom/Log.jpg" width="995" height="131" align="top">
 			<br>
-			电子图书后台管理系统之信息发布系统——图书录入
+			电子图书后台管理系统之信息发布系统
 		</h1>
 		<p align="right">
 			<a href="indexBack.action">回到后台首页</a>
 		</p>
 
 		<s:form action="bookEntry" method="post" theme="simple" enctype="multipart/form-data">
-			ISBN:<s:textfield name="book.isbn"></s:textfield>
-			<font color="red">* <s:fielderror>
-					<s:param>book.isbn</s:param>
-				</s:fielderror> </font>
-			<br>
-			图书名：<s:textfield name="book.bookName"></s:textfield>
-			<font color="red">* <s:fielderror>
-					<s:param>book.bookName</s:param>
-				</s:fielderror> </font>
-			<br>
-			定价：<s:textfield name="book.publishedPrice"></s:textfield>
-			<font color="red">* <s:fielderror>
-					<s:param>book.publishedPrice</s:param>
-				</s:fielderror> </font>
-			<br>
-			作者：<s:textfield name="book.author"></s:textfield>
-			<br>
-			出版社：<s:textfield name="book.publisher"></s:textfield>
-			<font color="red">* <s:fielderror>
-					<s:param>book.publisher</s:param>
-				</s:fielderror> </font>
-			<br>
-			版次：<s:textfield name="book.version"></s:textfield>
-			<br>
-			分类：
-			<s:select list="{}" id="fType" name="PTypeID" onchange="getFType(1)"></s:select>
-			<s:select list="{}" id="sType" name="PTypeID" onchange="getSType(2)"></s:select>
-			<s:select list="{}" id="tType" name="PTypeID" onchange="gettType(3)"></s:select>
-			<s:select list="{}" id="frType" name="PTypeID"></s:select>
-			<%--			<select id="fType" name="PTypeID" onchange="getFType(1)"></select>--%>
-			<%--			<select  id="sType" name="PTypeID" onchange="getSType(2)"></select>--%>
-			<%--			<select id="tType" name="PTypeID" onchange="gettType(3)"></select>--%>
-			<%--			<select  id="frType"  name="PTypeID" ></select>--%>
-			<font color="red">* <s:fielderror>
-					<s:param>PTypeID</s:param>
-				</s:fielderror> </font>
-			<br>
-			出版时间：<s:textfield name="book.publishingTime"></s:textfield>
-			<font color="red"> <s:fielderror>
-					<s:param>book.publishingTime</s:param>
-				</s:fielderror> </font>
-			<br>
-			目录：<s:textarea name="book.catalog"></s:textarea>
-			<br>
-			内容简介：<s:textarea name="book.briefIntroduction"></s:textarea>
-			<br>
-			图片：<s:file name="upload"></s:file>
-			<font color="red"> <s:fielderror>
-					<s:param>upload</s:param>
-				</s:fielderror> </font>
-			<br>
-			<s:submit value="录入"></s:submit>
-			<s:reset value="重置"></s:reset>
+			<table width="600" border="1" align="center">
+				<tr>
+					<td colspan="2">
+						<div align="center">
+							<h2>
+								图书录入
+							</h2>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td width="16%">
+						ISBN
+					</td>
+					<td width="84%">
+						<s:textfield name="book.isbn"></s:textfield>
+						<font color="red">* <s:fielderror>
+								<s:param>book.isbn</s:param>
+							</s:fielderror> </font>
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						图书名
+					</td>
+					<td>
+						<s:textfield name="book.bookName"></s:textfield>
+						<font color="red">* <s:fielderror>
+								<s:param>book.bookName</s:param>
+							</s:fielderror> </font>
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						定价
+					</td>
+					<td>
+						<s:textfield name="book.publishedPrice"></s:textfield>
+						<font color="red">* <s:fielderror>
+								<s:param>book.publishedPrice</s:param>
+							</s:fielderror> </font>
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						作者
+					</td>
+					<td>
+						<s:textfield name="book.author"></s:textfield>
+					</td>
+				</tr>
+
+
+				<tr>
+					<td>
+						出版社
+					</td>
+					<td>
+						<s:textfield name="book.publisher"></s:textfield>
+						<font color="red">* <s:fielderror>
+								<s:param>book.publisher</s:param>
+							</s:fielderror> </font>
+					</td>
+				</tr>
+
+
+				<tr>
+					<td>
+						版次
+					</td>
+					<td>
+						<s:textfield name="book.version"></s:textfield>
+					</td>
+				</tr>
+
+
+				<tr>
+					<td>
+						分类
+					</td>
+					<td>
+						<s:select list="{}" id="fType" name="PTypeID" onchange="getFType(1)"></s:select>
+						<s:select list="{}" id="sType" name="PTypeID" onchange="getSType(2)"></s:select>
+						<s:select list="{}" id="tType" name="PTypeID" onchange="gettType(3)"></s:select>
+						<s:select list="{}" id="frType" name="PTypeID"></s:select>
+						<font color="red">* <s:fielderror>
+								<s:param>PTypeID</s:param>
+							</s:fielderror> </font>
+					</td>
+				</tr>
+
+
+				<tr>
+					<td>
+						出版时间
+					</td>
+					<td>
+						<s:textfield name="book.publishingTime"></s:textfield>
+						<font color="red"> <s:fielderror>
+								<s:param>book.publishingTime</s:param>
+							</s:fielderror> </font>
+					</td>
+				</tr>
+
+
+				<tr>
+					<td>
+						内容简介
+					</td>
+					<td>
+						<s:textarea name="book.briefIntroduction"></s:textarea>
+					</td>
+				</tr>
+
+
+				<tr>
+					<td>
+						图片
+					</td>
+					<td>
+						<s:file name="upload"></s:file>
+						<font color="red"> <s:fielderror>
+								<s:param>upload</s:param>
+							</s:fielderror> </font>
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+					</td>
+					<td>
+						<s:submit value="录入"></s:submit>
+						<s:reset value="重置"></s:reset>
+					</td>
+				</tr>
+			</table>
 		</s:form>
 
 	</body>
