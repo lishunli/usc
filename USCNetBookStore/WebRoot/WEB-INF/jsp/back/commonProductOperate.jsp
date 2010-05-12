@@ -2,9 +2,7 @@
 <%@taglib prefix="s" uri="/struts-tags"%>
 <%
 	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -23,8 +21,15 @@
 	</head>
 
 	<body>
-		<p align="right"><a href="indexBack.action">回到后台首页</a></p>
-
+		<h1 align="center" style="color: blue">
+			<img alt="usc" src="images/custom/Log.jpg" width="995" height="131" align="top">
+			<br>
+			电子图书后台管理系统之信息发布系统——普通图书操作
+		</h1>
+		<p align="right">
+			<a href="indexBack.action">回到后台首页</a>
+		</p>
+		
 		<s:form name="backCommonSerach" method="post" theme="simple">
 		图书名称
 		<s:textfield name="productsName"></s:textfield>
@@ -50,7 +55,7 @@
 						<td>
 							折扣
 						</td>
-						<td style="color:red">
+						<td style="color: red">
 							优惠价
 						</td>
 						<td>
@@ -77,7 +82,7 @@
 							<td>
 								<s:property value="#bookCommon.discount" />
 							</td>
-							<td style="color:red">
+							<td style="color: red">
 								<s:property value="#bookCommon.salePrice" />
 							</td>
 							<td>

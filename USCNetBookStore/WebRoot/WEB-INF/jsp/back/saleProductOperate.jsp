@@ -2,9 +2,7 @@
 <%@taglib prefix="s" uri="/struts-tags"%>
 <%
 	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -23,7 +21,14 @@
 	</head>
 
 	<body>
-		<p align="right"><a href="indexBack.action">回到后台首页</a></p>
+		<h1 align="center" style="color: blue">
+			<img alt="usc" src="images/custom/Log.jpg" width="995" height="131" align="top">
+			<br>
+			电子图书后台管理系统之信息发布系统——促销图书操作
+		</h1>
+		<p align="right">
+			<a href="indexBack.action">回到后台首页</a>
+		</p>
 
 		<s:form name="backSaleSerach" method="post" theme="simple">
 		图书名称
@@ -84,9 +89,7 @@
 								<input type="button"
 									onclick="mergeSale(<s:property value="#bookSale.bookId"/>,1,<s:property value="#bookSale.salePrice" />,<s:property value="#bookSale.priority" />)"
 									value="修改促销价或优先级">
-								<input type="button"
-									onclick="unSale(<s:property value="#bookSale.bookId" />,1)"
-									value="设为普通商品">
+								<input type="button" onclick="unSale(<s:property value="#bookSale.bookId" />,1)" value="设为普通商品">
 							</td>
 
 						</tr>

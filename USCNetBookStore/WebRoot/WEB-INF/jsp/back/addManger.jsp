@@ -24,12 +24,14 @@
 	</head>
 
 	<body>
-		<p align="right"><a href="indexBack.action">回到后台首页</a></p>
-		
 		<h1 align="center" style="color: blue">
-			电子图书后台管理系统之信息发布系统
+			<img alt="usc" src="images/custom/Log.jpg" width="995" height="131" align="top">
+			<br>
+			电子图书后台管理系统之信息发布系统——添加新管理员
 		</h1>
-		
+		<p align="right">
+			<a href="indexBack.action">回到后台首页</a>
+		</p>
 		
 		<br>
 		<s:form action="addManger.action" method="post" theme="simple">

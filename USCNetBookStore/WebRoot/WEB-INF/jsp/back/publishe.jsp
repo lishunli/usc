@@ -2,9 +2,7 @@
 <%@taglib prefix="s" uri="/struts-tags"%>
 <%
 	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -23,7 +21,14 @@
 	</head>
 
 	<body>
-		<p align="right"><a href="indexBack.action">回到后台首页</a></p>
+		<h1 align="center" style="color: blue">
+			<img alt="usc" src="images/custom/Log.jpg" width="995" height="131" align="top">
+			<br>
+			电子图书后台管理系统之信息发布系统——图书发布
+		</h1>
+		<p align="right">
+			<a href="indexBack.action">回到后台首页</a>
+		</p>
 
 		<s:form name="backSerach" method="post" theme="simple">
 		
@@ -70,9 +75,7 @@
 								<s:property value="#book.publishedPrice" />
 							</td>
 							<td>
-								<input type="button"
-									onclick="publishe(<s:property value='#book.bookId'/>,1)"
-									value="发布" />
+								<input type="button" onclick="publishe(<s:property value='#book.bookId'/>,1)" value="发布" />
 								<%--onclick="publishe('<s:property value="#book.bookName"/>')"上面是传一个Int值，这个传String字符串--%>
 							</td>
 

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -10,10 +9,16 @@
 		<script type="text/javascript" src="js/back.js"></script>
 	</head>
 	<body>
-		<p align="right"><a href="indexBack.action">回到后台首页</a></p>
-		
-		<s:form action="bookEntry" method="post" theme="simple"
-			enctype="multipart/form-data">
+		<h1 align="center" style="color: blue">
+			<img alt="usc" src="images/custom/Log.jpg" width="995" height="131" align="top">
+			<br>
+			电子图书后台管理系统之信息发布系统——图书录入
+		</h1>
+		<p align="right">
+			<a href="indexBack.action">回到后台首页</a>
+		</p>
+
+		<s:form action="bookEntry" method="post" theme="simple" enctype="multipart/form-data">
 			ISBN:<s:textfield name="book.isbn"></s:textfield>
 			<font color="red">* <s:fielderror>
 					<s:param>book.isbn</s:param>

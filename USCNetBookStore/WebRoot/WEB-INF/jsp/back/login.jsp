@@ -8,8 +8,9 @@
 		<link rel="stylesheet" href="../../../css/error.css" type="text/css"></link>
 	</head>
 	<body>
-
 		<h1 align="center" style="color: blue">
+			<img alt="usc" src="images/custom/Log.jpg" width="995" height="131" align="top">
+			<br>
 			电子图书后台管理系统之信息发布系统
 		</h1>
 		<br>

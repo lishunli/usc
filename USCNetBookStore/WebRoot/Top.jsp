@@ -116,14 +116,14 @@ function AdvancedSearch() {
 			</tr>
 			<tr>
 				<td colspan="2" background="images/custom/Log.jpg" alt="x"
-					width="987" height="50" hspace="0" vspace="0" border="0"></td>
+					width="995" height="131" hspace="0" vspace="0" border="0"></td>
 			</tr>
 			<tr>
-				<td width="542" height="0" bgcolor="#76946D">
-				</td>
-				<td bgcolor="#76946D">
-					&nbsp;
-				</td>
+<%--				<td width="542" height="0" bgcolor="#76946D">--%>
+<%--				</td>--%>
+<%--				<td bgcolor="#76946D">--%>
+<%--					&nbsp;--%>
+<%--				</td>--%>
 			</tr>
 			<tr>
 				<td width="542" bgcolor="#E7E7E7">

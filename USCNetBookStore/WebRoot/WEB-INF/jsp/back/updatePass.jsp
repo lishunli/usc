@@ -1,17 +1,24 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>Insert title here</title>
+		<title>修改密码</title>
 	</head>
 	<body>
-		<p align="right"><a href="indexBack.action">回到后台首页</a></p>
+		<h1 align="center" style="color: blue">
+			<img alt="usc" src="images/custom/Log.jpg" width="995" height="131" align="top">
+			<br>
+			电子图书后台管理系统之信息发布系统——修改密码
+		</h1>
+		<p align="right">
+			<a href="indexBack.action">回到后台首页</a>
+		</p>
 
 		<s:form action="updatePass" method="post" theme="simple">
-姓名：<s:property value="#session.manger.operatorName" /><br>
+姓名：<s:property value="#session.manger.operatorName" />
+			<br>
 原密码： <s:password name="operator.operatorPass"></s:password>
 
 			<font color="red">* <span id="operatorPassError"></span> <s:fielderror>
