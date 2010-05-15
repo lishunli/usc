@@ -31,7 +31,7 @@ body {
 <script type="text/javascript">
 function CTime(bgclock){
 	var now=new Date();
-	var year=now.getYear();
+	var year=now.getFullYear();
 	var month=now.getMonth();
 	var date=now.getDate();
 	var day=now.getDay();
