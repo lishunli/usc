@@ -19,9 +19,48 @@ function BackExit()
 	}
 }
 
+function CTime(bgclock){
+	var now=new Date();
+	var year=now.getFullYear();
+	var month=now.getMonth();
+	var date=now.getDate();
+	var day=now.getDay();
+	var hour=now.getHours();
+	var minu=now.getMinutes();
+	var sec=now.getSeconds();
+	var week;
+	month=month+1;
+	if(month<10) month="0"+month;
+	if(date<10) date="0"+date;
+	if(hour<10) hour="0"+hour;
+	if(minu<10) minu="0"+minu;
+	if(sec<10) sec="0"+sec;
+	var time="";
+	time="当前时间："+year+"年"+month+"月"+date+"日 "+hour+":"+minu+":"+sec;
+	//if(document.all){
+		bgclock.innerHTML='<b><font color="green">'+time+'</font></b>'
+//}
+	var timer=setTimeout("CTime(bgclock)",200);
+} 
+
+
+function AdvancedSearch() {
+	var type = document.getElementById("type").value;//类型 
+	if(1 ==  type)
+	{
+		window.self.location = "AdvancedSearchBook.jsp";
+	}
+	else if(2 ==  type)
+	{
+		window.self.location = "AdvancedSearchDigital.jsp";
+	}
+}
+
 </script>
+
+
 	</head>
-	<body>
+	<body onload="CTime(bgclock)">
 
 		<h1 align="center" style="color: blue">
 			<img alt="usc" src="images/custom/Log.jpg" width="995" height="131" align="top">
@@ -39,6 +78,7 @@ function BackExit()
 					</s:if>
 					<a href="updatePass.action">【修改密码】</a>&nbsp;&nbsp;
 					<a href="backExit.action" onclick="return BackExit()">【退出】</a>&nbsp;&nbsp;
+					<span id="bgclock"></span>
 					<br>
 					<br>
 					<br>
