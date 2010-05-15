@@ -29,74 +29,86 @@
 		<p align="right">
 			<a href="indexBack.action">回到后台首页</a>
 		</p>
-		
+
 		<s:form name="backCommonSerach" method="post" theme="simple">
-		图书名称
-		<s:textfield name="productsName"></s:textfield>
-			<s:submit value="搜搜"></s:submit>
-			<s:if test="#request.bookCommon.size">
-				<table border="1" width="80%" align="center">
+			<table align="center">
+				<tr>
+					<td>
+						图书名称
+					</td>
+					<td>
+						<s:textfield name="productsName"></s:textfield>
+					</td>
+					<td>
+						<s:submit value="搜搜" cssStyle="color:red"></s:submit>
+					</td>
+				</tr>
+			</table>
+		</s:form>
+		
+		<s:if test="#request.bookCommon.size">
+			<table border="1" width="80%" align="center">
+				<tr>
+					<td>
+						图书名称
+					</td>
+					<td>
+						ISBN
+					</td>
+					<td>
+						作者
+					</td>
+					<td>
+						出版社
+					</td>
+					<td>
+						定价
+					</td>
+					<td>
+						折扣
+					</td>
+					<td style="color: red">
+						优惠价
+					</td>
+					<td>
+						操作
+					</td>
+				</tr>
+				<s:iterator value="#request.bookCommon" id="bookCommon">
 					<tr>
 						<td>
-							图书名称
+							<s:property value="#bookCommon.bookName" />
 						</td>
 						<td>
-							ISBN
+							<s:property value="#bookCommon.isbn" />
 						</td>
 						<td>
-							作者
+							<s:property value="#bookCommon.author" />
 						</td>
 						<td>
-							出版社
+							<s:property value="#bookCommon.publisher" />
 						</td>
 						<td>
-							定价
+							<s:property value="#bookCommon.publishedPrice" />
 						</td>
 						<td>
-							折扣
+							<s:property value="#bookCommon.discount" />
 						</td>
 						<td style="color: red">
-							优惠价
+							<s:property value="#bookCommon.salePrice" />
 						</td>
 						<td>
-							操作
+							<input type="button" onclick="mergeDiscount(<s:property value="#bookCommon.bookId" />,1)" value="修改折扣">
+							<input type="button" onclick="unPublishe(<s:property value="#bookCommon.bookId" />,1)" value="撤销发布">
+							<input type="button" onclick="saleSet(<s:property value="#bookCommon.bookId" />,1)" value="设为促销">
 						</td>
+
 					</tr>
-					<s:iterator value="#request.bookCommon" id="bookCommon">
-						<tr>
-							<td>
-								<s:property value="#bookCommon.bookName" />
-							</td>
-							<td>
-								<s:property value="#bookCommon.isbn" />
-							</td>
-							<td>
-								<s:property value="#bookCommon.author" />
-							</td>
-							<td>
-								<s:property value="#bookCommon.publisher" />
-							</td>
-							<td>
-								<s:property value="#bookCommon.publishedPrice" />
-							</td>
-							<td>
-								<s:property value="#bookCommon.discount" />
-							</td>
-							<td style="color: red">
-								<s:property value="#bookCommon.salePrice" />
-							</td>
-							<td>
-								<input type="button" onclick="mergeDiscount(<s:property value="#bookCommon.bookId" />,1)" value="修改折扣">
-								<input type="button" onclick="unPublishe(<s:property value="#bookCommon.bookId" />,1)" value="撤销发布">
-								<input type="button" onclick="saleSet(<s:property value="#bookCommon.bookId" />,1)" value="设为促销">
-							</td>
+				</s:iterator>
 
-						</tr>
-					</s:iterator>
+			</table>
+		</s:if>
 
-				</table>
-			</s:if>
 
-		</s:form>
 	</body>
 </html>

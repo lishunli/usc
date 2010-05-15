@@ -10,7 +10,7 @@
 	<head>
 		<base href="<%=basePath%>">
 
-		<title>发布商品</title>
+		<title>图书发布</title>
 
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
@@ -29,61 +29,71 @@
 		<p align="right">
 			<a href="indexBack.action">回到后台首页</a>
 		</p>
-
 		<s:form name="backSerach" method="post" theme="simple">
-		
-		图书名称
-		<s:textfield name="productsName"></s:textfield>
-			<s:submit value="搜搜"></s:submit>
-			<s:if test="#request.bookSerach.size">
-				<table border="1" width="80%" align="center">
+			<table  align="center" >
+				<tr>
+					<td>
+						图书名称
+					</td>
+					<td>
+						<s:textfield name="productsName"></s:textfield>
+					</td>
+					<td>
+						<s:submit value="搜搜" cssStyle="color:red"></s:submit>
+					</td>
+				</tr>
+			</table>
+		</s:form>
+
+		<s:if test="#request.bookSerach.size">
+			<table border="1" width="80%" align="center">
+				<tr>
+					<td>
+						图书名称
+					</td>
+					<td>
+						ISBN
+					</td>
+					<td>
+						作者
+					</td>
+					<td>
+						出版社
+					</td>
+					<td>
+						定价
+					</td>
+					<td>
+						操作
+					</td>
+				</tr>
+				<s:iterator value="#request.bookSerach" id="book">
 					<tr>
 						<td>
-							图书名称
+							<s:property value="#book.bookName" />
 						</td>
 						<td>
-							ISBN
+							<s:property value="#book.isbn" />
 						</td>
 						<td>
-							作者
+							<s:property value="#book.author" />
 						</td>
 						<td>
-							出版社
+							<s:property value="#book.publisher" />
 						</td>
 						<td>
-							定价
+							<s:property value="#book.publishedPrice" />
 						</td>
 						<td>
-							操作
+							<input type="button" onclick="publishe(<s:property value='#book.bookId'/>,1)" value="发布" />
+							<%--onclick="publishe('<s:property value="#book.bookName"/>')"上面是传一个Int值，这个传String字符串--%>
 						</td>
+
 					</tr>
-					<s:iterator value="#request.bookSerach" id="book">
-						<tr>
-							<td>
-								<s:property value="#book.bookName" />
-							</td>
-							<td>
-								<s:property value="#book.isbn" />
-							</td>
-							<td>
-								<s:property value="#book.author" />
-							</td>
-							<td>
-								<s:property value="#book.publisher" />
-							</td>
-							<td>
-								<s:property value="#book.publishedPrice" />
-							</td>
-							<td>
-								<input type="button" onclick="publishe(<s:property value='#book.bookId'/>,1)" value="发布" />
-								<%--onclick="publishe('<s:property value="#book.bookName"/>')"上面是传一个Int值，这个传String字符串--%>
-							</td>
+				</s:iterator>
+			</table>
+		</s:if>
 
-						</tr>
-					</s:iterator>
-				</table>
-			</s:if>
 
-		</s:form>
 	</body>
 </html>

@@ -22,14 +22,14 @@ function BackExit()
 </script>
 	</head>
 	<body>
-		
+
 		<h1 align="center" style="color: blue">
-			<img alt="usc" src="images/custom/Log.jpg" width="995" height="131" align="top" ><br>
+			<img alt="usc" src="images/custom/Log.jpg" width="995" height="131" align="top">
+			<br>
 			电子图书后台管理系统之信息发布系统
 		</h1>
 		欢迎您：
-		<s:property value="#session.manger.operatorName" />
-		&nbsp;&nbsp;
+		<font color="red"> <s:property value="#session.manger.operatorName" /> </font> &nbsp;&nbsp;
 		<s:if test="#session.manger.operatorType == '系统管理员'">
 			<a href="addManger.action">【添加新管理员】</a>&nbsp;&nbsp;
 		</s:if>

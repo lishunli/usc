@@ -31,72 +31,84 @@
 		</p>
 
 		<s:form name="backSaleSerach" method="post" theme="simple">
-		图书名称
-		<s:textfield name="productsName"></s:textfield>
-			<s:submit value="搜搜"></s:submit>
-			<s:if test="#request.bookSale.size">
-				<table border="1" width="80%" align="center">
+			<table align="center">
+				<tr>
+					<td>
+						图书名称
+					</td>
+					<td>
+						<s:textfield name="productsName"></s:textfield>
+					</td>
+					<td>
+						<s:submit value="搜搜" cssStyle="color:red"></s:submit>
+					</td>
+				</tr>
+			</table>
+		</s:form>
+
+		<s:if test="#request.bookSale.size">
+			<table border="1" width="80%" align="center">
+				<tr>
+					<td>
+						图书名称
+					</td>
+					<td>
+						ISBN
+					</td>
+					<td>
+						作者
+					</td>
+					<td>
+						出版社
+					</td>
+					<td>
+						定价
+					</td>
+					<td>
+						促销价
+					</td>
+					<td>
+						优先级
+					</td>
+					<td>
+						操作
+					</td>
+				</tr>
+				<s:iterator value="#request.bookSale" id="bookSale">
 					<tr>
 						<td>
-							图书名称
+							<s:property value="#bookSale.bookName" />
 						</td>
 						<td>
-							ISBN
+							<s:property value="#bookSale.isbn" />
 						</td>
 						<td>
-							作者
+							<s:property value="#bookSale.author" />
 						</td>
 						<td>
-							出版社
+							<s:property value="#bookSale.publisher" />
 						</td>
 						<td>
-							定价
+							<s:property value="#bookSale.publishedPrice" />
 						</td>
 						<td>
-							促销价
+							<s:property value="#bookSale.salePrice" />
 						</td>
 						<td>
-							优先级
+							<s:property value="#bookSale.priority" />
 						</td>
 						<td>
-							操作
+							<input type="button"
+								onclick="mergeSale(<s:property value="#bookSale.bookId"/>,1,<s:property value="#bookSale.salePrice" />,<s:property value="#bookSale.priority" />)"
+								value="修改促销价或优先级">
+							<input type="button" onclick="unSale(<s:property value="#bookSale.bookId" />,1)" value="设为普通商品">
 						</td>
+
 					</tr>
-					<s:iterator value="#request.bookSale" id="bookSale">
-						<tr>
-							<td>
-								<s:property value="#bookSale.bookName" />
-							</td>
-							<td>
-								<s:property value="#bookSale.isbn" />
-							</td>
-							<td>
-								<s:property value="#bookSale.author" />
-							</td>
-							<td>
-								<s:property value="#bookSale.publisher" />
-							</td>
-							<td>
-								<s:property value="#bookSale.publishedPrice" />
-							</td>
-							<td>
-								<s:property value="#bookSale.salePrice" />
-							</td>
-							<td>
-								<s:property value="#bookSale.priority" />
-							</td>
-							<td>
-								<input type="button"
-									onclick="mergeSale(<s:property value="#bookSale.bookId"/>,1,<s:property value="#bookSale.salePrice" />,<s:property value="#bookSale.priority" />)"
-									value="修改促销价或优先级">
-								<input type="button" onclick="unSale(<s:property value="#bookSale.bookId" />,1)" value="设为普通商品">
-							</td>
+				</s:iterator>
 
-						</tr>
-					</s:iterator>
+			</table>
+		</s:if>
 
-				</table>
-			</s:if>
-		</s:form>
 	</body>
 </html>
