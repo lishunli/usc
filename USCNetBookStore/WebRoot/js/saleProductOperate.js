@@ -12,42 +12,42 @@
 //	}
 //}
 
-//修改折扣
-function mergeSale(entityID, type, salePrice, priority)
-{
-	var mergeFlag = 0;// 修改标志
-	if (confirm("你确定修改促销价吗？"))
-	{
-		salePrice = prompt("请输入促销价", salePrice);// 输入促销价
-		if (!check_num(salePrice))
-		{// 判断输入的是否为float
-			alert("促销价输入错误，请输入正确的促销价格");
-			return;
-		} else
-		{
-			mergeFlag = 1;// 修改标志
-		}
-	}
-	if (confirm("你确定修改优先级吗？"))
-	{
-		priority = prompt("请输入优先级 (正整数)", priority);// 输入优先级
-		if (null == priority)// 取消
-		{
-			return;
-		} else if (priority < 1 || priority != parseInt(priority))
-		{// 输入的为正整数？
-			alert("优先级输入错误，请输入正整数");
-			return;
-		} else
-		{
-			mergeFlag = 1;// 修改标志
-		}
-	}
-	if (mergeFlag == 1)
-	{
-		window.self.location = "mergeSale.action?entityID=" + entityID + "&type=" + type + "&salePrice=" + salePrice + "&priority=" + priority;
-	}
-}
+////修改折扣
+//function mergeSale(entityID, type, salePrice, priority)
+//{
+//	var mergeFlag = 0;// 修改标志
+//	if (confirm("你确定修改促销价吗？"))
+//	{
+//		salePrice = prompt("请输入促销价", salePrice);// 输入促销价
+//		if (!check_num(salePrice))
+//		{// 判断输入的是否为float
+//			alert("促销价输入错误，请输入正确的促销价格");
+//			return;
+//		} else
+//		{
+//			mergeFlag = 1;// 修改标志
+//		}
+//	}
+//	if (confirm("你确定修改优先级吗？"))
+//	{
+//		priority = prompt("请输入优先级 (正整数)", priority);// 输入优先级
+//		if (null == priority)// 取消
+//		{
+//			return;
+//		} else if (priority < 1 || priority != parseInt(priority))
+//		{// 输入的为正整数？
+//			alert("优先级输入错误，请输入正整数");
+//			return;
+//		} else
+//		{
+//			mergeFlag = 1;// 修改标志
+//		}
+//	}
+//	if (mergeFlag == 1)
+//	{
+//		window.self.location = "mergeSale.action?entityID=" + entityID + "&type=" + type + "&salePrice=" + salePrice + "&priority=" + priority;
+//	}
+//}
 
 // 设为普通商品
 function unSale(entityID, type)

@@ -98,10 +98,15 @@
 							<s:property value="#bookSale.priority" />
 						</td>
 						<td>
+<%--							<input type="button"--%>
+<%--								onclick="mergeSale(<s:property value="#bookSale.bookId"/>,1,<s:property value="#bookSale.salePrice" />,<s:property value="#bookSale.priority" />)"--%>
+<%--								value="修改促销价或优先级">--%>
+
 							<input type="button"
-								onclick="mergeSale(<s:property value="#bookSale.bookId"/>,1,<s:property value="#bookSale.salePrice" />,<s:property value="#bookSale.priority" />)"
+								onclick="window.showModalDialog('mergeSaleChild.action?bookName=<s:property value="#bookSale.bookName" />&entityID=<s:property value="#bookSale.bookId" />&publishedPrice=<s:property value="#bookSale.publishedPrice" />&salePrice=<s:property value="#bookSale.salePrice" />&priority=<s:property value="#bookSale.priority" />',window);"
 								value="修改促销价或优先级">
-							<input type="button" onclick="unSale(<s:property value="#bookSale.bookId" />,1)" value="设为普通商品">
+								
+							<input type="button" onclick="unSale(<s:property value="#bookSale.bookId" />,1)" value="撤销促销图书">
 						</td>
 
 					</tr>
@@ -111,4 +116,11 @@
 		</s:if>
 
 	</body>
+	
+	
+	<div
+		style="background: #ededed; height: 31px; width: 100%; position: fixed; left: auto; right: auto; bottom: 0; _position: absolute; _top: e xpression(document.documentElement.clientHeight +     document.documentElement.scrollTop -     this.offsetHeight); text-align: center;">
+		Powered by: 南华大学计算机科学与技术学院 指导老师：谢卫星 Copyright ©2010
+		<a href="http://www.blogjava.net/lishunli/" target="_blank">李顺利</a>
+	</div>
 </html>

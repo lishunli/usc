@@ -15,7 +15,7 @@
 		</h1>
 		<br>
 		<s:form action="backLogin" method="post" theme="simple">
-			<table width="500" border="1" align="center">
+			<table width="600" border="1" align="center" background="images/back/login_back.png">
 				<tr>
 					<td colspan="2">
 						<div align="center">
@@ -26,10 +26,10 @@
 					</td>
 				</tr>
 				<tr>
-					<td width="12%">
+					<td width="20%" align="center" style="color: blue">
 						姓名
 					</td>
-					<td width="88%">
+					<td width="80%">
 						<s:textfield name="operator.operatorName" id="operatorName" value="%{operator.operatorName}"></s:textfield>
 
 						<font color="red">* <span id="operatorNameError"></span> <s:fielderror>
@@ -38,7 +38,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>
+					<td align="center" style="color: blue">
 						密码
 					</td>
 					<td>
@@ -73,4 +73,11 @@
 			<%--			<s:reset value="重置"></s:reset>--%>
 		</s:form>
 	</body>
+
+	<div
+		style="background: #ededed; height: 31px; width: 100%; position: fixed; left: auto; right: auto; bottom: 0; _position: absolute; _top: e xpression(document.documentElement.clientHeight +     document.documentElement.scrollTop -     this.offsetHeight); text-align: center;">
+		Powered by: 南华大学计算机科学与技术学院 指导老师：谢卫星 Copyright ©2010
+		<a href="http://www.blogjava.net/lishunli/" target="_blank">李顺利</a>
+	</div>
+
 </html>

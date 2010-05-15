@@ -18,10 +18,12 @@ function mergeDiscount(entityID, type)
 	var discount = prompt("请输入修改的折扣 (1-100)", "100");// 折扣
 	if (null == discount)
 	{// 取消
-	} else if (discount < 1 || discount != parseInt(discount) || discount > 100)
+	}
+	else if (discount < 1 || discount != parseInt(discount) || discount > 100)
 	{// 正整数 1-100
 		alert("折扣输入错误，请输入1-100 之间的正整数");
-	} else
+	}
+	else
 	{
 		window.self.location = "updateDiscount.action?entityID=" + entityID + "&type=" + type + "&discount=" + discount;
 	}
@@ -37,28 +39,32 @@ function unPublishe(entityID, type)
 }
 
 // 设为促销
-function saleSet(entityID, type)
-{
-	var salePrice = prompt("请输入促销价", "0.0");
-	if (check_num(salePrice))
-	{
-		var priority = prompt("请输入优先级 (正整数)", "1");
-		if (null == priority)
-		{
-		} else if (priority < 1 || priority != parseInt(priority))
-		{
-			alert("优先级输入错误，请输入正整数");
-		} else
-		{
-			window.self.location = "saleSet.action?entityID=" + entityID + "&type=" + type + "&salePrice=" + salePrice + "&priority=" + priority;
-		}
-	} else
-	{
-		alert("促销价输入错误，请输入正确的促销价格");
-	}
-	// private Float salePrice;//特价
-	// private Integer priority; //优先级
-}
+//function saleSet(entityID, type)
+//{
+//	var salePrice = prompt("请输入促销价", "0.0");
+//	if (check_num(salePrice))
+//	{
+//		var priority = prompt("请输入优先级 (正整数)", "1");
+//		if (null == priority)
+//		{
+//		}
+//		else if (priority < 1 || priority != parseInt(priority))
+//		{
+//			alert("优先级输入错误，请输入正整数");
+//		}
+//		else
+//		{
+//			window.self.location = "saleSet.action?entityID=" + entityID + "&type=" + type + "&salePrice=" + salePrice + "&priority=" + priority;
+//		}
+//	}
+//	else
+//	{
+//		alert("促销价输入错误，请输入正确的促销价格");
+//	}
+//	// private Float salePrice;//特价
+//	// private Integer priority; //优先级
+//}
+
 
 // 判断是否为float型数据
 function check_num(val_num)

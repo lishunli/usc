@@ -42,4 +42,11 @@
 			<br>
 		</s:form>
 	</body>
+	
+	
+	<div
+		style="background: #ededed; height: 31px; width: 100%; position: fixed; left: auto; right: auto; bottom: 0; _position: absolute; _top: e xpression(document.documentElement.clientHeight +     document.documentElement.scrollTop -     this.offsetHeight); text-align: center;">
+		Powered by: 南华大学计算机科学与技术学院 指导老师：谢卫星 Copyright ©2010
+		<a href="http://www.blogjava.net/lishunli/" target="_blank">李顺利</a>
+	</div>
 </html>

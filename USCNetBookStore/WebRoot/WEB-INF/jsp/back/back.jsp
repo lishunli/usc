@@ -28,27 +28,56 @@ function BackExit()
 			<br>
 			电子图书后台管理系统之信息发布系统
 		</h1>
-		欢迎您：
-		<font color="red"> <s:property value="#session.manger.operatorName" /> </font> &nbsp;&nbsp;
-		<s:if test="#session.manger.operatorType == '系统管理员'">
-			<a href="addManger.action">【添加新管理员】</a>&nbsp;&nbsp;
-		</s:if>
-		<a href="updatePass.action">【修改密码】</a>&nbsp;&nbsp;
-		<a href="backExit.action" onclick="return BackExit()">【退出】</a>&nbsp;&nbsp;
 
-		<br>
-		<br>
-		<a href="bookEntry.action">图书录入</a>
-		<br>
-		<br>
-		<a href="backSerach.action">图书发布</a>
-		<br>
-		<br>
-		<a href="backCommonSerach.action">普通图书操作</a>
-		<br>
-		<br>
-		<a href="backSaleSerach.action">促销图书操作</a>
-		<br>
-		<br>
+		<table align="center" width="995">
+			<tr>
+				<td>
+					欢迎您：
+					<font color="red"> <s:property value="#session.manger.operatorName" /> </font> &nbsp;&nbsp;
+					<s:if test="#session.manger.operatorType == '系统管理员'">
+						<a href="addManger.action">【添加新管理员】</a>&nbsp;&nbsp;
+					</s:if>
+					<a href="updatePass.action">【修改密码】</a>&nbsp;&nbsp;
+					<a href="backExit.action" onclick="return BackExit()">【退出】</a>&nbsp;&nbsp;
+					<br>
+					<br>
+					<br>
+					<br>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<a href="bookEntry.action">图书录入</a>
+					<br>
+					<br>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<a href="backSerach.action">图书发布</a>
+					<br>
+					<br>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<a href="backCommonSerach.action">普通图书操作</a>
+					<br>
+					<br>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<a href="backSaleSerach.action">促销图书操作</a>
+					<br>
+					<br>
+				</td>
+		</table>
 	</body>
+
+	<div
+		style="background: #ededed; height: 31px; width: 100%; position: fixed; left: auto; right: auto; bottom: 0; _position: absolute; _top: e xpression(document.documentElement.clientHeight +           document.documentElement.scrollTop -           this.offsetHeight); text-align: center;">
+		Powered by: 南华大学计算机科学与技术学院 指导老师：谢卫星 Copyright ©2010
+		<a href="http://www.blogjava.net/lishunli/" target="_blank">李顺利</a>
+	</div>
 </html>

@@ -45,7 +45,7 @@
 				</tr>
 			</table>
 		</s:form>
-		
+
 		<s:if test="#request.bookCommon.size">
 			<table border="1" width="80%" align="center">
 				<tr>
@@ -100,7 +100,10 @@
 						<td>
 							<input type="button" onclick="mergeDiscount(<s:property value="#bookCommon.bookId" />,1)" value="修改折扣">
 							<input type="button" onclick="unPublishe(<s:property value="#bookCommon.bookId" />,1)" value="撤销发布">
-							<input type="button" onclick="saleSet(<s:property value="#bookCommon.bookId" />,1)" value="设为促销">
+<%--														<input type="button" onclick="saleSet(<s:property value="#bookCommon.bookId" />,1)" value="设为促销">--%>
+							<input type="button"
+								onclick="window.showModalDialog('saleSetChild.action?bookName=<s:property value="#bookCommon.bookName" />&entityID=<s:property value="#bookCommon.bookId" />&publishedPrice=<s:property value="#bookCommon.publishedPrice" />&discount=<s:property value="#bookCommon.discount" />&salePrice=<s:property value="#bookCommon.salePrice" />',window);"
+								value="设为促销">
 						</td>
 
 					</tr>
@@ -111,4 +114,12 @@
 
 
 	</body>
+	
+	
+	
+	<div
+		style="background: #ededed; height: 31px; width: 100%; position: fixed; left: auto; right: auto; bottom: 0; _position: absolute; _top: e xpression(document.documentElement.clientHeight +     document.documentElement.scrollTop -     this.offsetHeight); text-align: center;">
+		Powered by: 南华大学计算机科学与技术学院 指导老师：谢卫星 Copyright ©2010
+		<a href="http://www.blogjava.net/lishunli/" target="_blank">李顺利</a>
+	</div>
 </html>

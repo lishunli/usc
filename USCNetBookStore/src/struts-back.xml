@@ -137,5 +137,13 @@
 			</interceptor-ref>
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 		</action>
+		
+		<action name="saleSetChild">
+			<result>/WEB-INF/jsp/back/saleSet.jsp</result>
+		</action>
+		
+		<action name="mergeSaleChild">
+			<result>/WEB-INF/jsp/back/mergeSale.jsp</result>
+		</action>
 	</package>
 </struts>
