@@ -102,7 +102,7 @@
 							<input type="button" onclick="unPublishe(<s:property value="#bookCommon.bookId" />,1)" value="撤销发布">
 <%--														<input type="button" onclick="saleSet(<s:property value="#bookCommon.bookId" />,1)" value="设为促销">--%>
 							<input type="button"
-								onclick="window.showModalDialog('saleSetChild.action?bookName=<s:property value="#bookCommon.bookName" />&entityID=<s:property value="#bookCommon.bookId" />&publishedPrice=<s:property value="#bookCommon.publishedPrice" />&discount=<s:property value="#bookCommon.discount" />&salePrice=<s:property value="#bookCommon.salePrice" />',window);"
+								onclick="window.showModalDialog('saleSetChild.action?bookName=<s:property value="#bookCommon.bookName" />&entityID=<s:property value="#bookCommon.bookId" />&publishedPrice=<s:property value="#bookCommon.publishedPrice" />&discount=<s:property value="#bookCommon.discount" />&salePrice=<s:property value="#bookCommon.salePrice" />',window,'dialogWidth=600px;dialogHeight=300px;');"
 								value="设为促销">
 						</td>
 

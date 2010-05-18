@@ -103,7 +103,7 @@
 <%--								value="修改促销价或优先级">--%>
 
 							<input type="button"
-								onclick="window.showModalDialog('mergeSaleChild.action?bookName=<s:property value="#bookSale.bookName" />&entityID=<s:property value="#bookSale.bookId" />&publishedPrice=<s:property value="#bookSale.publishedPrice" />&salePrice=<s:property value="#bookSale.salePrice" />&priority=<s:property value="#bookSale.priority" />',window);"
+								onclick="window.showModalDialog('mergeSaleChild.action?bookName=<s:property value="#bookSale.bookName" />&entityID=<s:property value="#bookSale.bookId" />&publishedPrice=<s:property value="#bookSale.publishedPrice" />&salePrice=<s:property value="#bookSale.salePrice" />&priority=<s:property value="#bookSale.priority" />',window,'dialogWidth=600px;dialogHeight=300px;');"
 								value="修改促销价或优先级">
 								
 							<input type="button" onclick="unSale(<s:property value="#bookSale.bookId" />,1)" value="撤销促销图书">

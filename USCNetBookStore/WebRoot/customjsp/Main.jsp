@@ -27,7 +27,7 @@
 	<body>
 
 		<s:action name="init"></s:action>
-		<s:if test="#request.bookCommonInit">
+		<s:if test="#request.bookCommonInit.size">
 			<table width="75%" align="center">
 				<tr>
 					图书
@@ -70,7 +70,7 @@
 			</table>
 		</s:if>
 
-		<s:if test="#request.digitalCommonInit">
+		<s:if test="#request.digitalCommonInit.size">
 			<table width="800" align="center">
 				<tr>
 					数码
@@ -113,7 +113,7 @@
 			</table>
 		</s:if>
 
-		<s:if test="#request.bookSaleInit">
+		<s:if test="#request.bookSaleInit.size">
 			<table width="800" align="center">
 				<tr>
 					图书促销
@@ -151,7 +151,7 @@
 			</table>
 		</s:if>
 
-		<s:if test="#request.digitalSaleInit">
+		<s:if test="#request.digitalSaleInit.size">
 			<table width="800" align="center">
 				<tr>
 					数码促销
