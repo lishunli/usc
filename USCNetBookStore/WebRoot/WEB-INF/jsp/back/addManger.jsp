@@ -47,10 +47,10 @@
 					</td>
 				</tr>
 				<tr>
-					<td width="12%">
+					<td width="20%">
 						管理员姓名
 					</td>
-					<td width="88%">
+					<td width="80%">
 						<s:textfield name="operator.operatorName" id="operatorName" value="%{operator.operatorName}"></s:textfield>
 						<font color="red">* <span id="operatorNameError"></span> <s:fielderror>
 								<s:param>operator.operatorName</s:param>
