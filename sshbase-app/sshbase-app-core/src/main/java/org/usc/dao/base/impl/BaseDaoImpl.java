@@ -32,7 +32,7 @@ import org.usc.util.base.GenericsUtils;
  *        Date of last commit:$Date$<br>
  *        <p>
  */
-@SuppressWarnings({ "unchecked", "restriction" })
+@SuppressWarnings("unchecked")
 public abstract class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T>
 {
 	protected Class<T> entityClass = GenericsUtils.getSuperClassGenricType(this.getClass());
