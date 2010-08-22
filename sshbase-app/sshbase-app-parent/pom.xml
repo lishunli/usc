@@ -24,17 +24,6 @@
 
 	<build>
 		<plugins>
-			<!--	Maven对Tomcat的插件，配置成功后能够自动部署到Tomcat中（不在需要手动拷贝war文件）		-->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>tomcat-maven-plugin</artifactId>
-				<version>1.0-beta-1</version>
-				<configuration>
-					<url>http://localhost:8080/manager/html</url>
-					<server>tomcat</server>
-					<path>/${project.build.finalName}</path>
-				</configuration>
-			</plugin>
 			<!--	Maven的编译插件		-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

@@ -43,7 +43,7 @@ public class StudentListAction extends BaseActionSupport
 		 * 修改Bean和service即可
 		 */
 		PageView<Student> pageView = new PageView<Student>(maxResult, getPage());
-		pageView.setQueryResult(studentService.getScrollData(pageView.getFirstResult(), maxResult));
+		pageView.setQueryResult(studentService.getScrollData(pageView.getFirstResult(), maxResult," o.name = ?",new Object[]{"李顺利"}));
 
 		/**
 		 * request.setAttribute("pageView", pageView)中key尽量为pageView，不然需要修改代码
