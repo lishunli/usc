@@ -84,6 +84,7 @@
 			<s:else>
 				没有记录
 			</s:else>
+
 		</s:form>
 	</body>
 </html>
