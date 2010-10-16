@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="Demo" extends="struts-default">
+
+		<!-- 登陆(登陆页面) -->
+		<action name="displayErrorInfo" class="org.usc.actions.DisplayErrorInfoAction">
+			<result name="success">displayErrorInfo.jsp</result>
+			<result name="input">displayErrorInfo.jsp</result>
+		</action>
+
+	</package>
+</struts>
