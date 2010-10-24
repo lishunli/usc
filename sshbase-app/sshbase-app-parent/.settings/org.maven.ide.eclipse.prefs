@@ -1,5 +1,5 @@
-#Sun Aug 22 19:53:01 CST 2010
-activeProfiles=
+#Sun Oct 24 11:36:18 CST 2010
+activeProfiles=eclipse-target-folder
 eclipse.preferences.version=1
 fullBuildGoals=process-test-resources
 includeModules=false
