@@ -28,7 +28,7 @@ public class GenericsUtils
 	 *            泛型参数所在索引,从0开始.
 	 * @return 范型参数的实际类型, 如果没有实现ParameterizedType接口，即不支持泛型，所以直接返回<code>Object.class</code>
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public static Class getSuperClassGenricType(Class clazz, int index)
 	{
 		Type genType = clazz.getGenericSuperclass();// 得到泛型父类
@@ -57,7 +57,7 @@ public class GenericsUtils
 	 *            clazz 需要反射的类,该类必须继承泛型父类
 	 * @return 泛型参数的实际类型, 如果没有实现ParameterizedType接口，即不支持泛型，所以直接返回<code>Object.class</code>
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public static Class getSuperClassGenricType(Class clazz)
 	{
 		return getSuperClassGenricType(clazz, 0);
@@ -71,7 +71,7 @@ public class GenericsUtils
 	 * @param int index 泛型参数所在索引,从0开始.
 	 * @return 泛型参数的实际类型, 如果没有实现ParameterizedType接口，即不支持泛型，所以直接返回<code>Object.class</code>
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public static Class getMethodGenericReturnType(Method method, int index)
 	{
 		Type returnType = method.getGenericReturnType();
@@ -95,7 +95,7 @@ public class GenericsUtils
 	 *            method 方法
 	 * @return 泛型参数的实际类型, 如果没有实现ParameterizedType接口，即不支持泛型，所以直接返回<code>Object.class</code>
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public static Class getMethodGenericReturnType(Method method)
 	{
 		return getMethodGenericReturnType(method, 0);
@@ -109,7 +109,7 @@ public class GenericsUtils
 	 * @param int index 第几个输入参数
 	 * @return 输入参数的泛型参数的实际类型集合, 如果没有实现ParameterizedType接口，即不支持泛型，所以直接返回空集合
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public static List<Class> getMethodGenericParameterTypes(Method method, int index)
 	{
 		List<Class> results = new ArrayList<Class>();
@@ -140,7 +140,7 @@ public class GenericsUtils
 	 *            method 方法
 	 * @return 输入参数的泛型参数的实际类型集合, 如果没有实现ParameterizedType接口，即不支持泛型，所以直接返回空集合
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public static List<Class> getMethodGenericParameterTypes(Method method)
 	{
 		return getMethodGenericParameterTypes(method, 0);
@@ -154,7 +154,7 @@ public class GenericsUtils
 	 * @param int index 泛型参数所在索引,从0开始.
 	 * @return 泛型参数的实际类型, 如果没有实现ParameterizedType接口，即不支持泛型，所以直接返回<code>Object.class</code>
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public static Class getFieldGenericType(Field field, int index)
 	{
 		Type genericFieldType = field.getGenericType();
@@ -180,7 +180,7 @@ public class GenericsUtils
 	 * @param int index 泛型参数所在索引,从0开始.
 	 * @return 泛型参数的实际类型, 如果没有实现ParameterizedType接口，即不支持泛型，所以直接返回<code>Object.class</code>
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public static Class getFieldGenericType(Field field)
 	{
 		return getFieldGenericType(field, 0);
