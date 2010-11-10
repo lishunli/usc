@@ -25,7 +25,7 @@ public class User implements java.io.Serializable
 	private static final long serialVersionUID = 4230186551226007292L;
 
 	private Integer id;
-	private String name;
+	private String username;
 	private String password;
 	private Blob picture;
 
@@ -35,14 +35,14 @@ public class User implements java.io.Serializable
 
 	public User(String name, String password)
 	{
-		this.name = name;
+		this.username = name;
 		this.password = password;
 	}
 
 	public User(Integer id, String name, String password, Blob picture)
 	{
 		this.id = id;
-		this.name = name;
+		this.username = name;
 		this.password = password;
 		this.picture = picture;
 	}
@@ -60,15 +60,15 @@ public class User implements java.io.Serializable
 		this.id = id;
 	}
 
-	@Column(name = "name", nullable = false, length = 100)
-	public String getName()
+	@Column(name = "username", nullable = false, length = 100)
+	public String getUsername()
 	{
-		return this.name;
+		return username;
 	}
 
-	public void setName(String name)
+	public void setUsername(String username)
 	{
-		this.name = name;
+		this.username = username;
 	}
 
 	@Column(name = "password", nullable = false, length = 100)

@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="/struts-tags" prefix="s"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -9,7 +10,7 @@
 	<head>
 		<base href="<%=basePath%>">
 
-		<title>Index</title>
+		<title>添加用户</title>
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
 		<meta http-equiv="expires" content="0">
@@ -21,16 +22,18 @@
 	</head>
 
 	<body>
-		使用Struts2上传图片存取到Mysql中并读取出来显示在页面上
-		<br>
-		1.上传图片
-		<br>
-		2.存取到Mysql中
-		<br>
-		3.从Mysql读取图片显示在页面
-		<br>
-		<a href="add-user.action">添加用户</a>
-		<br>
-		<a href="get-all-user.action">所有用户</a>
+		<s:form action="add-user" method="post" theme="simple" enctype="multipart/form-data">
+			UserName<s:textfield name="user.username"></s:textfield>
+			<font color="red"> *<s:property value="fieldErrors['user.username'][0]" /> </font>
+			<br>
+			
+			PassWord<s:password name="user.password"></s:password>
+			<font color="red"> *<s:property value="fieldErrors['user.password'][0]" /> </font>
+			<br>		
+			
+			Image<s:file name="image"></s:file>
+			<br>
+			<s:submit value="Submit" />
+		</s:form>
 	</body>
 </html>
