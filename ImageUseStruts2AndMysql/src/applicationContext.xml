@@ -43,8 +43,7 @@
 		<!--主键Bean类		-->
 		<property name="annotatedClasses">
 			<list>
-				<value>org.usc.beans.Student</value>
-				<value>org.usc.beans.Teacher</value>
+				<value>org.usc.beans.User</value>
 			</list>
 		</property>
 	</bean>
