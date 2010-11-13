@@ -80,4 +80,13 @@ public class User implements java.io.Serializable {
 	public void setPicture(Blob picture) {
 		this.picture = picture;
 	}
+
+	/* 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", password=" + password + ", username=" + username + "]";
+	}
+	
 }

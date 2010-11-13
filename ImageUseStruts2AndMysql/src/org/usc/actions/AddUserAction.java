@@ -19,7 +19,7 @@ import org.usc.services.IUserService;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
- * Access please User : add-user.action
+ * Access : add-user.action
  * 
  * @author <a href="http://www.blogjava.net/lishunli/" target="_blank">ShunLi</a>
  * @notes Created on 2010-11-10<br>
@@ -31,7 +31,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 @Controller
 @Scope("prototype")
-@Results( { @Result(name = "success", location = "/index.jsp"), @Result(name = "input", location = "user/addUser.jsp") })
+@Results( { @Result(name = "success", location = "/index.jsp"), @Result(name = "input", location = "addUser.jsp") })
 @InterceptorRefs(value = {
 		@InterceptorRef(value = "fileUpload", params = { "maximumSize", "1048576", "allowedTypes",
 				"image/bmp,image/x-png,image/png,image/gif,image/jpeg,image/jpg,image/pjpeg" }), @InterceptorRef(value = "defaultStack") })
@@ -45,46 +45,43 @@ public class AddUserAction extends ActionSupport {
 	private IUserService userService;
 
 	public void setUser(User user) {
-		System.out.println(1);
-
 		this.user = user;
 	}
 
 	public User getUser() {
-		System.out.println(2);
 		return user;
 	}
 
 	public void setImage(File image) {
-		System.out.println(3);
 		this.image = image;
 	}
 
 	public File getImage() {
-		System.out.println(4);
 		return image;
+	}
+
+	public void setUserService(IUserService userService) {
+		this.userService = userService;
 	}
 
 	@Override
 	public void validate() {
-		System.out.println(5);
 		if (user == null) {
 			this.addFieldError("user", "user is null");
 		}
 		else {
-			System.out.println(6);
-			if (user.getUsername() == null) {
+			if (user.getUsername() == null || "".equals(user.getUsername().trim())) {
 				this.addFieldError("user.username", "username is null");
 			}
-			if (user.getPassword() == null) {
+			if (user.getPassword() == null || "".equals(user.getPassword().trim())) {
 				this.addFieldError("user.password", "password is null");
 			}
 		}
 
 	}
 
+	@Override
 	public String execute() throws Exception {
-		System.out.println(7);
 		if (image != null) {
 			FileInputStream fin = new FileInputStream(image);// File 转 InputStream
 			Blob blob = Hibernate.createBlob(fin);// InputStream 转 Blob
@@ -94,9 +91,5 @@ public class AddUserAction extends ActionSupport {
 		userService.save(user);
 
 		return SUCCESS;
-	}
-
-	protected void print() {
-
 	}
 }

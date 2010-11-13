@@ -10,7 +10,7 @@
 	<head>
 		<base href="<%=basePath%>">
 
-		<title>添加用户</title>
+		<title>Input User</title>
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
 		<meta http-equiv="expires" content="0">
@@ -32,8 +32,9 @@
 			<br>		
 			
 			Image<s:file name="image"></s:file>
+			<font color="red"><s:property value="fieldErrors['image'][0]" /> </font>
 			<br>
-			<s:submit value="Submit" />
+			<s:submit value="Submit" /><s:reset value="Reset"></s:reset>
 		</s:form>
 	</body>
 </html>
