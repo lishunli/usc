@@ -10,36 +10,30 @@ package org.usc.beans.base;
  *        Date of last commit:$Date$<br>
  *        <p>
  */
-public class PageIndex
-{
+public class PageIndex {
 	/** 开始索引 **/
 	private int startIndex;
 	/** 结束索引 **/
 	private int endIndex;
 
-	public PageIndex(int startIndex, int endIndex)
-	{
+	public PageIndex(int startIndex, int endIndex) {
 		this.startIndex = startIndex;
 		this.endIndex = endIndex;
 	}
 
-	public int getStartIndex()
-	{
+	public int getStartIndex() {
 		return startIndex;
 	}
 
-	public void setStartIndex(int startIndex)
-	{
+	public void setStartIndex(int startIndex) {
 		this.startIndex = startIndex;
 	}
 
-	public int getEndIndex()
-	{
+	public int getEndIndex() {
 		return endIndex;
 	}
 
-	public void setEndIndex(int endIndex)
-	{
+	public void setEndIndex(int endIndex) {
 		this.endIndex = endIndex;
 	}
 
@@ -54,20 +48,17 @@ public class PageIndex
 	 *            总页数
 	 * @return PageIndex 起始页和终止页
 	 */
-	public static PageIndex getPageIndex(int viewPageCount, int currentPage, int totalpage)
-	{
+	public static PageIndex getPageIndex(int viewPageCount, int currentPage, int totalpage) {
 		int startpage = currentPage - (viewPageCount % 2 == 0 ? viewPageCount / 2 - 1 : viewPageCount / 2);
 		int endpage = currentPage + viewPageCount / 2;
-		if (startpage < 1)
-		{
+		if (startpage < 1) {
 			startpage = 1;
 			if (totalpage >= viewPageCount)
 				endpage = viewPageCount;
 			else
 				endpage = totalpage;
 		}
-		if (endpage > totalpage)
-		{
+		if (endpage > totalpage) {
 			endpage = totalpage;
 			if ((endpage - viewPageCount) > 0)
 				startpage = endpage - viewPageCount + 1;

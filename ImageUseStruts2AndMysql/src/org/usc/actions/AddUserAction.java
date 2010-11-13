@@ -14,7 +14,7 @@ import org.hibernate.Hibernate;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.usc.beans.User;
-import org.usc.services.user.IUserService;
+import org.usc.services.IUserService;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -33,78 +33,59 @@ import com.opensymphony.xwork2.ActionSupport;
 @Scope("prototype")
 @Results( { @Result(name = "success", location = "/index.jsp"), @Result(name = "input", location = "user/addUser.jsp") })
 @InterceptorRefs(value = {
-		@InterceptorRef(value = "fileUpload", 
-						params = { "maximumSize", "1048576", "allowedTypes", "image/bmp,image/x-png,image/png,image/gif,image/jpeg,image/jpg,image/pjpeg" }), 
-				@InterceptorRef(value = "defaultStack") })
-public class AddUserAction extends ActionSupport
-{
+		@InterceptorRef(value = "fileUpload", params = { "maximumSize", "1048576", "allowedTypes",
+				"image/bmp,image/x-png,image/png,image/gif,image/jpeg,image/jpg,image/pjpeg" }), @InterceptorRef(value = "defaultStack") })
+public class AddUserAction extends ActionSupport {
 	private static final long serialVersionUID = -4829467290275994251L;
 
 	private User user;
 	private File image;
 
-	@Resource(name = "org.usc.services.user.userService")
+	@Resource(name = "org.usc.services.userService")
 	private IUserService userService;
 
-	public void setUser(User user)
-	{
+	public void setUser(User user) {
 		System.out.println(1);
+
 		this.user = user;
 	}
 
-	public User getUser()
-	{
+	public User getUser() {
 		System.out.println(2);
 		return user;
 	}
 
-	public void setImage(File image)
-	{
+	public void setImage(File image) {
 		System.out.println(3);
 		this.image = image;
 	}
-	
-	
-	public File getImage()
-	{
+
+	public File getImage() {
 		System.out.println(4);
 		return image;
 	}
 
-	public void setUserService(IUserService userService)
-	{
-		System.out.println(0);
-		this.userService = userService;
-	}
-
 	@Override
-	public void validate()
-	{
+	public void validate() {
 		System.out.println(5);
-		if (user == null)
-		{
+		if (user == null) {
 			this.addFieldError("user", "user is null");
 		}
-		else
-		{
-			System.out.println(7);
-			if (user.getUsername() == null)
-			{
+		else {
+			System.out.println(6);
+			if (user.getUsername() == null) {
 				this.addFieldError("user.username", "username is null");
 			}
-			if (user.getPassword() == null)
-			{
+			if (user.getPassword() == null) {
 				this.addFieldError("user.password", "password is null");
 			}
 		}
 
 	}
 
-	public String execute() throws Exception
-	{
-		System.out.println(8);
-		if (image != null)
-		{
+	public String execute() throws Exception {
+		System.out.println(7);
+		if (image != null) {
 			FileInputStream fin = new FileInputStream(image);// File 转 InputStream
 			Blob blob = Hibernate.createBlob(fin);// InputStream 转 Blob
 			user.setPicture(blob);
@@ -113,5 +94,9 @@ public class AddUserAction extends ActionSupport
 		userService.save(user);
 
 		return SUCCESS;
+	}
+
+	protected void print() {
+
 	}
 }

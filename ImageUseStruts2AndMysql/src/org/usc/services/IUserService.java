@@ -1,4 +1,4 @@
-package org.usc.services.user;
+package org.usc.services;
 
 import org.usc.beans.User;
 import org.usc.daos.base.IBaseDao;
@@ -13,7 +13,6 @@ import org.usc.daos.base.IBaseDao;
  *        Date of last commit:$Date$<br>
  *        <p>
  */
-public interface IUserService extends IBaseDao<User>
-{
+public interface IUserService extends IBaseDao<User> {
 
 }

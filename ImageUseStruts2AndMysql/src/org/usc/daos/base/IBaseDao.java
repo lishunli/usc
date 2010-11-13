@@ -16,8 +16,7 @@ import org.usc.beans.base.QueryResult;
  *        Date of last commit:$Date$<br>
  *        <p>
  */
-public interface IBaseDao<T>
-{
+public interface IBaseDao<T> {
 
 	/**
 	 * 根据属性查找对象
@@ -88,11 +87,17 @@ public interface IBaseDao<T>
 
 	/**
 	 * 获取分页数据
-	 * @param firstindex 开始索引
-	 * @param maxresult 每页显示记录数
-	 * @param wherejpql where语句
-	 * @param queryParams 查询参数
-	 * @param orderby 排序序列
+	 * 
+	 * @param firstindex
+	 *            开始索引
+	 * @param maxresult
+	 *            每页显示记录数
+	 * @param wherejpql
+	 *            where语句
+	 * @param queryParams
+	 *            查询参数
+	 * @param orderby
+	 *            排序序列
 	 * @return 分页数据
 	 */
 	public QueryResult<T> getScrollData(final int firstindex, final int maxresult, final String wherejpql, final Object[] queryParams,
@@ -100,27 +105,39 @@ public interface IBaseDao<T>
 
 	/**
 	 * 获取分页数据
-	 * @param firstindex 开始索引
-	 * @param maxresult 每页显示记录数
-	 * @param wherejpql where语句
-	 * @param queryParams 查询参数
+	 * 
+	 * @param firstindex
+	 *            开始索引
+	 * @param maxresult
+	 *            每页显示记录数
+	 * @param wherejpql
+	 *            where语句
+	 * @param queryParams
+	 *            查询参数
 	 * @return 分页数据
 	 */
 	public QueryResult<T> getScrollData(final int firstindex, final int maxresult, final String wherejpql, final Object[] queryParams);
 
 	/**
 	 * 获取分页数据
-	 * @param firstindex 开始索引
-	 * @param maxresult 每页显示记录数
-	 * @param orderby 排序序列
+	 * 
+	 * @param firstindex
+	 *            开始索引
+	 * @param maxresult
+	 *            每页显示记录数
+	 * @param orderby
+	 *            排序序列
 	 * @return 分页数据
 	 */
 	public QueryResult<T> getScrollData(final int firstindex, final int maxresult, final LinkedHashMap<String, String> orderby);
 
 	/**
 	 * 获取分页数据
-	 * @param firstindex 开始索引
-	 * @param maxresult 每页显示记录数
+	 * 
+	 * @param firstindex
+	 *            开始索引
+	 * @param maxresult
+	 *            每页显示记录数
 	 * @return 分页数据
 	 */
 	public QueryResult<T> getScrollData(final int firstindex, final int maxresult);
