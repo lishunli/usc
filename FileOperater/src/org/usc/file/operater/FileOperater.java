@@ -92,12 +92,13 @@ public class FileOperater extends javax.swing.JFrame {
 		setLocation((int) (width - this.getWidth()) / 6, (int) (height - this.getHeight()) / 8);
 
 		jTextArea1.setColumns(20);
+		jTextArea1.setEditable(false);
 		jTextArea1.setFont(new java.awt.Font("微软雅黑", 0, 16));
 		jTextArea1.setRows(5);
 		jScrollPane1.setViewportView(jTextArea1);
 
 		jLabel6.setFont(new java.awt.Font("微软雅黑", 0, 18));
-		jLabel6.setText("\uff08\u4e3a\u4e86\u66f4\u597d\u7684\u6392\u5e8f\u548c\u663e\u793a\uff09");
+		jLabel6.setText("\uff08\u4e3a\u4e86\u66f4\u597d\u5730\u6392\u5e8f\u548c\u663e\u793a\uff09");
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
@@ -119,8 +120,8 @@ public class FileOperater extends javax.swing.JFrame {
 																layout.createSequentialGroup().addComponent(jLabel3).addGap(18, 18, 18).addComponent(
 																		jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 649, Short.MAX_VALUE))).addGap(18,
 														18, 18).addComponent(jButton1).addGap(18, 18, 18)))).addGroup(
-								layout.createSequentialGroup().addContainerGap().addComponent(jLabel6).addGap(226, 226, 226).addComponent(jLabel2))).addGap(22,
-						22, 22)).addGroup(layout.createSequentialGroup().addGap(346, 346, 346).addComponent(jLabel1).addContainerGap(349, Short.MAX_VALUE)));
+								layout.createSequentialGroup().addContainerGap().addComponent(jLabel6).addGap(226, 226, 226).addComponent(jLabel2))).addGap(48,
+						48, 48)).addGroup(layout.createSequentialGroup().addGap(346, 346, 346).addComponent(jLabel1).addContainerGap(375, Short.MAX_VALUE)));
 		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
 				layout.createSequentialGroup().addGap(28, 28, 28).addComponent(jLabel1).addGap(18, 18, 18).addGroup(
 						layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(jLabel2).addComponent(jLabel6)).addGap(42, 42, 42)
