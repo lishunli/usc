@@ -49,7 +49,7 @@ public class FileOperater extends javax.swing.JFrame {
 		setResizable(false);
 
 		jLabel1.setFont(new java.awt.Font("微软雅黑", 0, 24));
-		jLabel1.setText("\u6587\u4ef6\u540d\u5927\u5c0f\u5199\u8f6c\u6362");
+		jLabel1.setText(" \u6587\u4ef6\u540d\u5927\u5c0f\u5199\u8f6c\u6362");
 
 		jLabel2.setFont(new java.awt.Font("微软雅黑", 0, 18));
 		jLabel2.setText("\u987a\u5229\u5236\u4f5cV0.1");
@@ -77,12 +77,12 @@ public class FileOperater extends javax.swing.JFrame {
 		jRadioButton1.setText("\u5927\u5199\u8f6c\u5c0f\u5199");
 		jRadioButton1
 				.setToolTipText("\u5927\u5199\u8f6c\u5c0f\u5199\u5b9e\u4f8b:\u4e00 -> 1;\u5341 -> 10;\u5341\u4e8c -> 12;\u4e09\u5341 -> 30;\u4e00\u767e\u56db\u5341\u4e8c -> 42;\u4e00\u767e\u96f6\u4e8c\u70b9\u4e8c\u4e94 -> 102.25");
+		jRadioButton1.setSelected(true);
 
 		jRadioButton2.setFont(new java.awt.Font("微软雅黑", 0, 18));
 		jRadioButton2.setText("\u5c0f\u5199\u8f6c\u5927\u5199");
 		jRadioButton2
 				.setToolTipText("\u8f6c\u6362\u89c4\u5219:1 -> \u4e00;10 -> \u5341;12 -> \u5341\u4e8c;30 -> \u4e09\u5341;142 -> \u4e00\u767e\u56db\u5341\u4e8c;102.25 -> \u4e00\u767e\u96f6\u4e8c\u70b9\u4e8c\u4e94");
-		
 		
 		buttonGroup1.add(jRadioButton1);
 		buttonGroup1.add(jRadioButton2);
@@ -120,7 +120,7 @@ public class FileOperater extends javax.swing.JFrame {
 																		jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 649, Short.MAX_VALUE))).addGap(18,
 														18, 18).addComponent(jButton1).addGap(18, 18, 18)))).addGroup(
 								layout.createSequentialGroup().addContainerGap().addComponent(jLabel6).addGap(226, 226, 226).addComponent(jLabel2))).addGap(22,
-						22, 22)).addGroup(layout.createSequentialGroup().addGap(366, 366, 366).addComponent(jLabel1).addContainerGap(377, Short.MAX_VALUE)));
+						22, 22)).addGroup(layout.createSequentialGroup().addGap(366, 366, 366).addComponent(jLabel1).addContainerGap(370, Short.MAX_VALUE)));
 		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
 				layout.createSequentialGroup().addGap(28, 28, 28).addComponent(jLabel1).addGap(18, 18, 18).addGroup(
 						layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(jLabel2).addComponent(jLabel6)).addGap(42, 42, 42)
