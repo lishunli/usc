@@ -25,7 +25,7 @@ public class BigToSmallConvertRule implements ConvertRule {
 		unitMap.put("百", 100);
 		unitMap.put("千", 1000);
 		unitMap.put("万", 10000);
-		
+
 		Map<String, Integer> levelMap = new HashMap<String, Integer>();
 		levelMap.put("万", 10000);
 
@@ -52,10 +52,10 @@ public class BigToSmallConvertRule implements ConvertRule {
 						small += sum;
 						factor = 0;
 					}
-					
-					if ((i + 2 < size) && levelMap.keySet().contains(oldName.substring(i + 2, i +3))) {
+
+					if ((i + 2 < size) && levelMap.keySet().contains(oldName.substring(i + 2, i + 3))) {
 						small = small * big + sum;
-						big = unitMap.get(oldName.substring(i + 2, i +3));
+						big = unitMap.get(oldName.substring(i + 2, i + 3));
 						i++;
 					}
 
@@ -73,7 +73,8 @@ public class BigToSmallConvertRule implements ConvertRule {
 				}
 				newName.append(oldName.substring(i, i + 1));
 				sum = 0;
-			} else {
+			}
+			else {
 				if (sum == 0 && "零".equals(oldName.substring(i, i + 1))) {
 					newName.append(sum.toString());
 				}
@@ -84,7 +85,7 @@ public class BigToSmallConvertRule implements ConvertRule {
 			newName.append(sum.toString());
 		}
 
-		return newName.toString(); 
+		return newName.toString();
 	}
 
 }
