@@ -7,6 +7,7 @@
 package org.usc.file.operater;
 
 import java.awt.Toolkit;
+import java.text.SimpleDateFormat;
 
 /**
  * 
@@ -140,9 +141,8 @@ public class FileOperater extends javax.swing.JFrame {
 	//GEN-END:initComponents
 
 	private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {
-		jTextArea1.setText(null);
-
 		Rule rule = null;
+		jTextArea1.setText("");
 
 		String path = jTextField1.getText().trim();
 
@@ -150,6 +150,12 @@ public class FileOperater extends javax.swing.JFrame {
 			jTextArea1.setText("请输入路径");
 		}
 		else {
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss:SSS");
+			
+			long start = System.currentTimeMillis();
+			jTextArea1.setText(jTextArea1.getText() +"------------------------------------------------\n");
+			jTextArea1.setText(jTextArea1.getText() +"开始时间：" + dateFormat.format(new java.util.Date()) + "\n");
+			
 			if (jRadioButton1.isSelected()) {
 				rule = Rule.BigToSmall;
 			}
@@ -159,7 +165,14 @@ public class FileOperater extends javax.swing.JFrame {
 
 			String info = new FileOperaterTool(rule).fileRename(path);
 
-			jTextArea1.setText(info);
+			
+			long end = System.currentTimeMillis();
+			
+			jTextArea1.setText(jTextArea1.getText() +"结束时间：" + dateFormat.format(new java.util.Date())  + "\n");
+			jTextArea1.setText(jTextArea1.getText() +"总用时：" + (end - start)  + " ms\n");
+			jTextArea1.setText(jTextArea1.getText() +"------------------------------------------------\n");
+			
+			jTextArea1.setText(jTextArea1.getText() + info);
 		}
 
 	}
