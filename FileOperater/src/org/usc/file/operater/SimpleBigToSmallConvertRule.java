@@ -3,11 +3,9 @@ package org.usc.file.operater;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BigToSmallConvertRule implements ConvertRule {
+public class SimpleBigToSmallConvertRule implements ConvertRule {
 	private static Map<String, Long> numberMap = new HashMap<String, Long>();
 	private static Map<String, Long> unitMap = new HashMap<String, Long>();
-	private static Map<String, Long> levelMap = new HashMap<String, Long>();
-	private static Map<String, Long> upperLevelMap = new HashMap<String, Long>();
 
 	static {
 		numberMap.put("零", 0L);
@@ -24,14 +22,6 @@ public class BigToSmallConvertRule implements ConvertRule {
 
 		unitMap.put("十", 10L);
 		unitMap.put("百", 100L);
-		unitMap.put("千", 1000L);
-		unitMap.put("万", 10000L);
-		unitMap.put("亿", 100000000L);
-
-		levelMap.put("万", 10000L);
-		levelMap.put("亿", 100000000L);
-
-		upperLevelMap.put("亿", 100000000L);
 	}
 
 	@Override
@@ -52,24 +42,6 @@ public class BigToSmallConvertRule implements ConvertRule {
 
 				if ((i + 1 < size) && unitMap.keySet().contains(oldName.substring(i + 1, i + 2))) {
 					big = unitMap.get(oldName.substring(i + 1, i + 2));
-
-					if ("万".equals(oldName.substring(i + 1, i + 2)) || "亿".equals(oldName.substring(i + 1, i + 2))) {
-						small += sum;
-						sum = 0L;
-					}
-
-					if ((i + 2 < size) && levelMap.keySet().contains(oldName.substring(i + 2, i + 3))) {
-						small = small * big;
-						big = levelMap.get(oldName.substring(i + 2, i + 3));
-
-						if ((i + 3 < size) && upperLevelMap.keySet().contains(oldName.substring(i + 3, i + 4))) {
-							small = small * big;
-							big = upperLevelMap.get(oldName.substring(i + 3, i + 4));
-							i++;
-						}
-
-						i++;
-					}
 
 					i++;
 				}

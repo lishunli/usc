@@ -140,7 +140,7 @@ public class FileOperater extends javax.swing.JFrame {
 	//GEN-END:initComponents
 
 	private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {
-		jTextArea1.removeAll();
+		jTextArea1.setText(null);
 
 		Rule rule = null;
 
