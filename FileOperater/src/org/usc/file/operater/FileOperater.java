@@ -9,9 +9,17 @@ package org.usc.file.operater;
 import java.awt.Toolkit;
 import java.text.SimpleDateFormat;
 
+import javax.swing.JFileChooser;
+
 /**
  * 
- * @author __USER__
+ *
+ * @author <a href="http://www.blogjava.net/lishunli/" target="_blank">ShunLi</a>
+ * @notes Created on 2010-11-27<br>
+ *        Revision of last commit:$Revision$<br>
+ *        Author of last commit:$Author$<br>
+ *        Date of last commit:$Date$<br>
+ *        <p>
  */
 public class FileOperater extends javax.swing.JFrame {
 
@@ -43,6 +51,12 @@ public class FileOperater extends javax.swing.JFrame {
 		jScrollPane1 = new javax.swing.JScrollPane();
 		jTextArea1 = new javax.swing.JTextArea();
 		jLabel6 = new javax.swing.JLabel();
+		jButton2 = new javax.swing.JButton();
+		jButton3 = new javax.swing.JButton();
+		
+		jFileChooser = new JFileChooser();
+		jFileChooser.setDialogTitle("浏览");
+		jFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setTitle("\u6587\u4ef6\u540d\u5927\u5c0f\u5199\u6279\u91cf\u8f6c\u6362-\u987a\u5229(QQ:506817493)");
@@ -53,7 +67,7 @@ public class FileOperater extends javax.swing.JFrame {
 		jLabel1.setText("\u6587\u4ef6\u540d\u5927\u5c0f\u5199\u6279\u91cf\u8f6c\u6362");
 
 		jLabel2.setFont(new java.awt.Font("微软雅黑", 0, 18));
-		jLabel2.setText("\u987a\u5229\u5236\u4f5cV0.1");
+		jLabel2.setText("\u987a\u5229\u00a9V0.2");
 
 		jLabel3.setFont(new java.awt.Font("微软雅黑", 0, 20));
 		jLabel3.setText("\u8def\u5f84\u540d\u79f0");
@@ -85,12 +99,13 @@ public class FileOperater extends javax.swing.JFrame {
 		jRadioButton2
 				.setToolTipText("\u8f6c\u6362\u89c4\u5219:1 -> \u4e00;10 -> \u5341;12 -> \u5341\u4e8c;30 -> \u4e09\u5341;142 -> \u4e00\u767e\u56db\u5341\u4e8c;102.25 -> \u4e00\u767e\u96f6\u4e8c\u70b9\u4e8c\u4e94");
 		
+
 		buttonGroup1.add(jRadioButton1);
 		buttonGroup1.add(jRadioButton2);
 		
 		double width = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 		double height = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
-		setLocation((int) (width - this.getWidth()) / 6, (int) (height - this.getHeight()) / 8);
+		setLocation((int) (width - this.getWidth()) / 9, (int) (height - this.getHeight()) / 8);
 
 		jTextArea1.setColumns(20);
 		jTextArea1.setEditable(false);
@@ -101,18 +116,35 @@ public class FileOperater extends javax.swing.JFrame {
 		jLabel6.setFont(new java.awt.Font("微软雅黑", 0, 18));
 		jLabel6.setText("\uff08\u4e3a\u4e86\u66f4\u597d\u5730\u6392\u5e8f\u548c\u663e\u793a\uff09");
 
+		jButton2.setFont(new java.awt.Font("微软雅黑", 0, 18));
+		jButton2.setText("\u6e05\u7a7a");
+		jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mouseClicked(java.awt.event.MouseEvent evt) {
+				jButton2MouseClicked(evt);
+			}
+		});
+		jButton2.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				jButton2ActionPerformed(evt);
+			}
+		});
+
+		jButton3.setFont(new java.awt.Font("微软雅黑", 0, 18));
+		jButton3.setText("\u6d4f\u89c8");
+		jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mouseClicked(java.awt.event.MouseEvent evt) {
+				jButton3MouseClicked(evt);
+			}
+		});
+
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
 		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
 				javax.swing.GroupLayout.Alignment.TRAILING,
 				layout.createSequentialGroup().addGroup(
-						layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING).addGroup(
-								javax.swing.GroupLayout.Alignment.LEADING,
+						layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
 								layout.createSequentialGroup().addGap(61, 61, 61).addGroup(
 										layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-												layout.createSequentialGroup().addComponent(jLabel4).addGap(18, 18, 18).addComponent(jRadioButton1).addGap(18,
-														18, 18).addComponent(jRadioButton2)).addGroup(
-												javax.swing.GroupLayout.Alignment.TRAILING,
 												layout.createSequentialGroup().addGroup(
 														layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING).addGroup(
 																javax.swing.GroupLayout.Alignment.LEADING,
@@ -120,25 +152,52 @@ public class FileOperater extends javax.swing.JFrame {
 																		jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 649, Short.MAX_VALUE)).addGroup(
 																layout.createSequentialGroup().addComponent(jLabel3).addGap(18, 18, 18).addComponent(
 																		jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 649, Short.MAX_VALUE))).addGap(18,
-														18, 18).addComponent(jButton1).addGap(18, 18, 18)))).addGroup(
-								layout.createSequentialGroup().addContainerGap().addComponent(jLabel6).addGap(226, 226, 226).addComponent(jLabel2))).addGap(48,
-						48, 48)).addGroup(layout.createSequentialGroup().addGap(346, 346, 346).addComponent(jLabel1).addContainerGap(375, Short.MAX_VALUE)));
+														18, 18)).addGroup(
+												layout.createSequentialGroup().addComponent(jLabel4).addGap(18, 18, 18).addComponent(jRadioButton1).addGap(18,
+														18, 18).addComponent(jRadioButton2).addGap(419, 419, 419)))).addGroup(
+								javax.swing.GroupLayout.Alignment.TRAILING,
+								layout.createSequentialGroup().addContainerGap().addComponent(jLabel6).addGap(253, 253, 253))).addGroup(
+						layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(jButton3).addComponent(jButton1).addComponent(
+								jButton2).addGroup(
+								layout.createSequentialGroup().addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(jLabel2)))
+						.addGap(97, 97, 97)).addGroup(
+				layout.createSequentialGroup().addGap(346, 346, 346).addComponent(jLabel1).addContainerGap(428, Short.MAX_VALUE)));
 		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
 				layout.createSequentialGroup().addGap(28, 28, 28).addComponent(jLabel1).addGap(18, 18, 18).addGroup(
 						layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(jLabel2).addComponent(jLabel6)).addGap(42, 42, 42)
 						.addGroup(
 								layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(jLabel3).addComponent(jTextField1,
 										javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addComponent(jButton1)).addGap(18, 18, 18).addGroup(
+										.addComponent(jButton3)).addGap(18, 18, 18).addGroup(
 								layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(jLabel4).addComponent(jRadioButton1)
-										.addComponent(jRadioButton2)).addGap(18, 18, 18).addGroup(
+										.addComponent(jRadioButton2).addComponent(jButton1)).addGap(18, 18, 18).addGroup(
 								layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(jLabel5).addComponent(jScrollPane1,
-										javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)).addContainerGap(35,
-								Short.MAX_VALUE)));
+										javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(jButton2))
+						.addContainerGap(35, Short.MAX_VALUE)));
 
 		pack();
 	}// </editor-fold>
 	//GEN-END:initComponents
+
+	private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {
+		jFileChooser.setVisible(true);
+		int open = jFileChooser.showOpenDialog(this);
+		
+		if(open  == JFileChooser.APPROVE_OPTION){
+			String path = jFileChooser.getSelectedFile().getAbsolutePath();
+			
+			jTextField1.setText(path);
+		}
+		
+	}
+
+	private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
+		// TODO add your handling code here:
+	}
+
+	private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {
+		jTextArea1.setText("");
+	}
 
 	private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {
 		Rule rule = null;
@@ -151,11 +210,11 @@ public class FileOperater extends javax.swing.JFrame {
 		}
 		else {
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss:SSS");
-			
+
 			long start = System.currentTimeMillis();
-			jTextArea1.setText(jTextArea1.getText() +"------------------------------------------------\n");
-			jTextArea1.setText(jTextArea1.getText() +"开始时间：" + dateFormat.format(new java.util.Date()) + "\n");
-			
+			jTextArea1.setText(jTextArea1.getText() + "------------------------------------------------\n");
+			jTextArea1.setText(jTextArea1.getText() + "开始时间：" + dateFormat.format(new java.util.Date()) + "\n");
+
 			if (jRadioButton1.isSelected()) {
 				rule = Rule.BigToSmall;
 			}
@@ -165,13 +224,12 @@ public class FileOperater extends javax.swing.JFrame {
 
 			String info = new FileOperaterTool(rule).fileRename(path);
 
-			
 			long end = System.currentTimeMillis();
-			
-			jTextArea1.setText(jTextArea1.getText() +"结束时间：" + dateFormat.format(new java.util.Date())  + "\n");
-			jTextArea1.setText(jTextArea1.getText() +"总用时：" + (end - start)  + " ms\n");
-			jTextArea1.setText(jTextArea1.getText() +"------------------------------------------------\n");
-			
+
+			jTextArea1.setText(jTextArea1.getText() + "结束时间：" + dateFormat.format(new java.util.Date()) + "\n");
+			jTextArea1.setText(jTextArea1.getText() + "总用时：" + (end - start) + " ms\n");
+			jTextArea1.setText(jTextArea1.getText() + "------------------------------------------------\n");
+
 			jTextArea1.setText(jTextArea1.getText() + info);
 		}
 
@@ -193,6 +251,8 @@ public class FileOperater extends javax.swing.JFrame {
 	// Variables declaration - do not modify
 	private javax.swing.ButtonGroup buttonGroup1;
 	private javax.swing.JButton jButton1;
+	private javax.swing.JButton jButton2;
+	private javax.swing.JButton jButton3;
 	private javax.swing.JLabel jLabel1;
 	private javax.swing.JLabel jLabel2;
 	private javax.swing.JLabel jLabel3;
@@ -204,6 +264,7 @@ public class FileOperater extends javax.swing.JFrame {
 	private javax.swing.JScrollPane jScrollPane1;
 	private javax.swing.JTextArea jTextArea1;
 	private javax.swing.JTextField jTextField1;
+	private JFileChooser jFileChooser;
 	// End of variables declaration//GEN-END:variables
 
 }
