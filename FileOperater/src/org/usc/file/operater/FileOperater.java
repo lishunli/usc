@@ -160,8 +160,8 @@ public class FileOperater extends javax.swing.JFrame {
 						layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(jButton3).addComponent(jButton1).addComponent(
 								jButton2).addGroup(
 								layout.createSequentialGroup().addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(jLabel2)))
-						.addGap(97, 97, 97)).addGroup(
-				layout.createSequentialGroup().addGap(346, 346, 346).addComponent(jLabel1).addContainerGap(428, Short.MAX_VALUE)));
+						.addGap(47, 47, 47)).addGroup(
+				layout.createSequentialGroup().addGap(346, 346, 346).addComponent(jLabel1).addContainerGap(378, Short.MAX_VALUE)));
 		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
 				layout.createSequentialGroup().addGap(28, 28, 28).addComponent(jLabel1).addGap(18, 18, 18).addGroup(
 						layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(jLabel2).addComponent(jLabel6)).addGap(42, 42, 42)

@@ -90,12 +90,12 @@
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="97" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="346" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="428" max="32767" attributes="0"/>
+              <EmptySpace pref="378" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
