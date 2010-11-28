@@ -61,6 +61,7 @@ public class FileOperater extends javax.swing.JFrame {
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setTitle("\u6587\u4ef6\u540d\u5927\u5c0f\u5199\u6279\u91cf\u8f6c\u6362-\u987a\u5229(QQ:506817493)");
 		setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+		setIconImage(Toolkit.getDefaultToolkit().createImage(this.getClass().getResource("img/default.gif")));
 		setResizable(false);
 
 		jLabel1.setFont(new java.awt.Font("微软雅黑", 0, 24));
