@@ -392,7 +392,7 @@ public class FileOperater extends javax.swing.JFrame {
 																																										.addComponent(
 																																												jTextField6,
 																																												javax.swing.GroupLayout.PREFERRED_SIZE,
-																																												313,
+																																												306,
 																																												javax.swing.GroupLayout.PREFERRED_SIZE)
 																																										.addPreferredGap(
 																																												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
