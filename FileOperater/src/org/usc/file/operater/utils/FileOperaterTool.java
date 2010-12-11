@@ -10,7 +10,7 @@ import org.usc.file.operater.rules.Rule;
 
 /**
  * 文件操作工具
- *
+ * 
  * @author <a href="http://www.blogjava.net/lishunli/" target="_blank">ShunLi</a>
  * @notes Created on 2010-12-11<br>
  *        Revision of last commit:$Revision$<br>
@@ -191,15 +191,14 @@ public class FileOperaterTool {
 
 		return info.toString();
 	}
-	
+
 	/**
 	 * 修改path路径下所有的文件名
 	 * 
 	 * @param path
 	 */
-	public String fileRename(String path,String fix,String newFix) {
+	public String fileRename(String path, String fix, String newFix) {
 
-		//TODO-ShunLi no impl
 		StringBuffer info = new StringBuffer();
 
 		File file = new File(path);
@@ -221,13 +220,13 @@ public class FileOperaterTool {
 				}
 
 				if (temp.isFile()) {
-					info.append(fileRename(temp,fix,newFix) + "\n");
+					info.append(fileRename(temp, fix, newFix) + "\n");
 				}
 				if (temp.isDirectory()) {
 					String folderName = path + "\\" + tempList[i];
 
-					info.append(fileRename(folderName,fix,newFix));
-					info.append(folderRename(folderName,fix,newFix) + "\n\n");
+					info.append(fileRename(folderName, fix, newFix));
+					info.append(folderRename(folderName, fix, newFix, true) + "\n\n");
 				}
 			}
 		} else {
@@ -257,7 +256,8 @@ public class FileOperaterTool {
 			if (!result) {
 				info = "文件\"" + file.getParent() + "\\" + oldName + "\"文件名转换失败，请查看是否存在文件重名";
 			} else {
-				info = "文件\"" + file.getParent() + "\\" + oldName + "\"文件名转换成功";
+				info = "文件\"" + file.getParent() + "\\" + oldName + "\"文件名转换为\"" + file.getParent() + "\\" + newName + "\"";
+				;
 			}
 
 		} else {
@@ -288,7 +288,7 @@ public class FileOperaterTool {
 			if (!result) {
 				info = "文件夹\"" + oldPath + "\"转换失败，请查看是否存在文件夹重名";
 			} else {
-				info = "文件夹\"" + oldPath + "\"名转换成功";
+				info = "文件夹\"" + oldPath + "\"名转换为\"" + newPath + "\"";
 			}
 
 		} else {
@@ -298,7 +298,7 @@ public class FileOperaterTool {
 		return info;
 
 	}
-	
+
 	/**
 	 * 修改文件名
 	 * 
@@ -306,12 +306,12 @@ public class FileOperaterTool {
 	 *            文件
 	 * @return N/A
 	 */
-	private String fileRename(File file,String fix,String newFix) {
+	private String fileRename(File file, String fix, String newFix) {
 
 		String info = null;
 
 		String oldName = file.getName();
-		String newName = this.convertRule.reNameByRule(oldName,fix,newFix);
+		String newName = this.convertRule.reNameByRule(oldName, fix, newFix);
 
 		if (!oldName.equals(newName)) {
 			Boolean result = file.renameTo(new File(file.getParent() + "\\" + newName));
@@ -319,7 +319,8 @@ public class FileOperaterTool {
 			if (!result) {
 				info = "文件\"" + file.getParent() + "\\" + oldName + "\"文件名转换失败，请查看是否存在文件重名";
 			} else {
-				info = "文件\"" + file.getParent() + "\\" + oldName + "\"文件名转换成功";
+				info = "文件\"" + file.getParent() + "\\" + oldName + "\"文件名转换为\"" + file.getParent() + "\\" + newName + "\"";
+				;
 			}
 
 		} else {
@@ -337,11 +338,11 @@ public class FileOperaterTool {
 	 *            文件夹
 	 * @return String msg
 	 */
-	private String folderRename(String folderName,String fix,String newFix) {
+	private String folderRename(String folderName, String fix, String newFix, Boolean isFolder) {
 		String info = null;
 
 		String oldPath = folderName;
-		String newPath = this.convertRule.reNameByRule(oldPath,fix,newFix);
+		String newPath = this.convertRule.reNameByRule(oldPath, fix, newFix, isFolder);
 
 		if (!oldPath.equals(newPath)) {
 
@@ -350,7 +351,7 @@ public class FileOperaterTool {
 			if (!result) {
 				info = "文件夹\"" + oldPath + "\"转换失败，请查看是否存在文件夹重名";
 			} else {
-				info = "文件夹\"" + oldPath + "\"名转换成功";
+				info = "文件夹\"" + oldPath + "\"名转换为\"" + newPath + "\"";
 			}
 
 		} else {

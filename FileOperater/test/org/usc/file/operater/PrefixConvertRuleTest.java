@@ -29,6 +29,8 @@ public class PrefixConvertRuleTest {
 		assertEquals("[XXX]XXX.rar", rule.reNameByRule("[XXX]XXX.rar", "[XX]", newFix));
 		assertEquals("[A][A][一百二十三]二十三.pdf", rule.reNameByRule("[李顺利][A][A][一百二十三]二十三.pdf", "[李顺利]", ""));
 
+		assertEquals("C:\\Temp\\[李顺利]XXX[XXX].rar", rule.reNameByRule("C:\\Temp\\XXX[XXX].rar", "", newFix, true));
+
 	}
 
 }

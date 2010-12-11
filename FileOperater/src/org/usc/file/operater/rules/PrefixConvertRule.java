@@ -22,11 +22,21 @@ public class PrefixConvertRule implements ConvertRule {
 
 		if (fix == null || fix.trim().length() == 0) {
 			return newFix.concat(oldName);
+		} else {
+			if (oldName.indexOf(fix) != -1 && fix.equals(oldName.substring(0, fix.length()))) {
+				return newFix.concat(oldName.substring(fix.length()));
+			}
+			return oldName;
 		}
-		else {
-			int indexByFix = oldName.indexOf(fix);
-			
-			return indexByFix != -1 ? newFix.concat(oldName.substring(fix.length())) : oldName;
+	}
+
+	@Override
+	public String reNameByRule(String oldName, String fix, String newFix, Boolean isFolder) {
+		int index = oldName.lastIndexOf("\\");
+		if (index != -1) {
+			return oldName.substring(0, index + 1).concat(reNameByRule(oldName.substring(index + 1), fix, newFix));
+		} else {
+			return reNameByRule(oldName, fix, newFix);
 		}
 	}
 }

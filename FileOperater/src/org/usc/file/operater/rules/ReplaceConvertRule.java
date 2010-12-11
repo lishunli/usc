@@ -22,4 +22,9 @@ public class ReplaceConvertRule implements ConvertRule {
 		return oldName.replaceAll(fix.replaceAll("\\[", "\\\\["), newFix);
 	}
 
+	@Override
+	public String reNameByRule(String oldName, String fix, String newFix, Boolean isFolder) {
+		return reNameByRule(oldName, fix, newFix);
+	}
+
 }

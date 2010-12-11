@@ -5,7 +5,7 @@ import java.util.Map;
 
 /**
  * 大写转小写规则
- *
+ * 
  * @author <a href="http://www.blogjava.net/lishunli/" target="_blank">ShunLi</a>
  * @notes Created on 2010-12-11<br>
  *        Revision of last commit:$Revision$<br>
@@ -95,8 +95,7 @@ public class BigToSmallConvertRule implements ConvertRule {
 				}
 				newName.append(oldName.substring(i, i + 1));
 				sum = 0L;
-			}
-			else {
+			} else {
 				if (sum == 0 && "零".equals(oldName.substring(i, i + 1))) {
 					newName.append(sum.toString());
 				}
@@ -112,6 +111,11 @@ public class BigToSmallConvertRule implements ConvertRule {
 
 	@Override
 	public String reNameByRule(String oldName, String fix, String newFix) {
+		return reNameByRule(oldName);
+	}
+
+	@Override
+	public String reNameByRule(String oldName, String fix, String newFix, Boolean isFolder) {
 		return reNameByRule(oldName);
 	}
 

@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * 小写转大写规则
- *
+ * 
  * @author <a href="http://www.blogjava.net/lishunli/" target="_blank">ShunLi</a>
  * @notes Created on 2010-12-11<br>
  *        Revision of last commit:$Revision$<br>
@@ -46,15 +46,13 @@ public class SmallToBigConvertRule implements ConvertRule {
 
 		if (".".equals(num.trim())) {
 			return ".";
-		}
-		else if (numString.indexOf(".") != -1) {
+		} else if (numString.indexOf(".") != -1) {
 			String[] intValueArray = String.valueOf(numString).split("\\.");
 			String[] decVauleArray = String.valueOf(num).split("\\.");
 
 			intValue = (intValueArray != null && intValueArray.length > 0 ? intValueArray[0] : "0");
 			decValue = (decVauleArray != null && decVauleArray.length > 1 ? decVauleArray[1] : "0");
-		}
-		else {
+		} else {
 			intValue = String.valueOf(numString);
 		}
 		// 翻译整数部分。
@@ -139,12 +137,11 @@ public class SmallToBigConvertRule implements ConvertRule {
 		for (int i = 0; i < oldName.length(); i++) {
 			if (num.contains(oldName.substring(i, i + 1))) {
 				numBuffer.append(oldName.substring(i, i + 1));
-			}
-			else {
+			} else {
 				if (numBuffer != null && numBuffer.length() > 0 && numBuffer.indexOf(".") == -1) {
 					stringBuffer.append(format(numBuffer.toString()));
 					numBuffer.delete(0, numBuffer.length());
-				}else{
+				} else {
 					stringBuffer.append(numBuffer.toString());
 					numBuffer.delete(0, numBuffer.length());
 				}
@@ -152,10 +149,10 @@ public class SmallToBigConvertRule implements ConvertRule {
 				stringBuffer.append(oldName.substring(i, i + 1));
 			}
 		}
-		
-		if(numBuffer != null && numBuffer.length() > 0 && numBuffer.indexOf(".") == -1){
+
+		if (numBuffer != null && numBuffer.length() > 0 && numBuffer.indexOf(".") == -1) {
 			stringBuffer.append(format(numBuffer.toString()));
-		} else{
+		} else {
 			stringBuffer.append(numBuffer.toString());
 		}
 
@@ -171,6 +168,11 @@ public class SmallToBigConvertRule implements ConvertRule {
 
 	@Override
 	public String reNameByRule(String oldName, String fix, String newFix) {
+		return reNameByRule(oldName);
+	}
+
+	@Override
+	public String reNameByRule(String oldName, String fix, String newFix, Boolean isFolder) {
 		return reNameByRule(oldName);
 	}
 

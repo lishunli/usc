@@ -28,6 +28,8 @@ public class SuffixConvertRuleTest {
 		assertEquals("XXX[XXX].rar", rule.reNameByRule("XXX[XXX].rar", "", ""));
 		assertEquals("XXX[XXX].rar", rule.reNameByRule("XXX[XXX].rar", "[XX]", newFix));
 
+		assertEquals("C:\\Temp\\XXX[XXX][李顺利].rar", rule.reNameByRule("C:\\Temp\\XXX[XXX].rar", "", newFix));
+		assertEquals("C:\\Temp\\XXX[XXX].rar[李顺利]", rule.reNameByRule("C:\\Temp\\XXX[XXX].rar", "", newFix, true));
 	}
 
 }
