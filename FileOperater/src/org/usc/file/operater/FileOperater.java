@@ -75,7 +75,7 @@ public class FileOperater extends javax.swing.JFrame {
 		jCheckBox4 = new javax.swing.JCheckBox();
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-		setTitle("\u6587\u4ef6\u540d\u5927\u5c0f\u5199\u6279\u91cf\u8f6c\u6362-\u987a\u5229(QQ:506817493)");
+		setTitle("\u6587\u4ef6\u540d\u6279\u91cf\u8f6c\u6362-\u987a\u5229(QQ:506817493)");
 		setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 		setIconImage(Toolkit.getDefaultToolkit().createImage("default.gif"));
 		setResizable(false);
