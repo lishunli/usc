@@ -19,8 +19,8 @@ public class ConvertFactory {
 		if (Rule.SmallToBig == rule) {
 			cr = new SmallToBigConvertRule();
 		} else if (Rule.BigToSmall == rule) {
-			// cr = new BigToSmallConvertRule();
-			cr = new SimpleBigToSmallConvertRule(); // simple 支持百一下的文件，快速一点
+			cr = new BigToSmallConvertRule();
+			// cr = new SimpleBigToSmallConvertRule(); // simple 支持百一下的文件，快速一点
 		} else if (Rule.Prefix == rule) {
 			cr = new PrefixConvertRule();
 		} else if (Rule.Suffix == rule) {
