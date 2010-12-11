@@ -169,4 +169,9 @@ public class SmallToBigConvertRule implements ConvertRule {
 
 	}
 
+	@Override
+	public String reNameByRule(String oldName, String fix, String newFix) {
+		return reNameByRule(oldName);
+	}
+
 }

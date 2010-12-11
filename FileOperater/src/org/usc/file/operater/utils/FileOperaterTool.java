@@ -191,6 +191,51 @@ public class FileOperaterTool {
 
 		return info.toString();
 	}
+	
+	/**
+	 * 修改path路径下所有的文件名
+	 * 
+	 * @param path
+	 */
+	public String fileRename(String path,String fix,String newFix) {
+
+		//TODO-ShunLi no impl
+		StringBuffer info = new StringBuffer();
+
+		File file = new File(path);
+
+		String[] tempList = file.list();
+
+		if (tempList != null) {
+			File temp = null;
+
+			if (tempList.length == 0) {
+				info.append("\"" + path + "\"路径下没有文件" + "\n");
+			}
+
+			for (int i = 0; i < tempList.length; i++) {
+				if (path.endsWith(File.separator)) {
+					temp = new File(path + tempList[i]);
+				} else {
+					temp = new File(path + File.separator + tempList[i]);
+				}
+
+				if (temp.isFile()) {
+					info.append(fileRename(temp,fix,newFix) + "\n");
+				}
+				if (temp.isDirectory()) {
+					String folderName = path + "\\" + tempList[i];
+
+					info.append(fileRename(folderName,fix,newFix));
+					info.append(folderRename(folderName,fix,newFix) + "\n\n");
+				}
+			}
+		} else {
+			info.append("\"" + path + "\"路径不存在" + "\n");
+		}
+
+		return info.toString();
+	}
 
 	/**
 	 * 修改文件名
@@ -235,6 +280,68 @@ public class FileOperaterTool {
 
 		String oldPath = folderName;
 		String newPath = this.convertRule.reNameByRule(oldPath);
+
+		if (!oldPath.endsWith(newPath)) {
+
+			Boolean result = moveFolder(oldPath, newPath);
+
+			if (!result) {
+				info = "文件夹\"" + oldPath + "\"转换失败，请查看是否存在文件夹重名";
+			} else {
+				info = "文件夹\"" + oldPath + "\"名转换成功";
+			}
+
+		} else {
+			info = "文件夹\"" + oldPath + "\"名不需要转换";
+		}
+
+		return info;
+
+	}
+	
+	/**
+	 * 修改文件名
+	 * 
+	 * @param file
+	 *            文件
+	 * @return N/A
+	 */
+	private String fileRename(File file,String fix,String newFix) {
+
+		String info = null;
+
+		String oldName = file.getName();
+		String newName = this.convertRule.reNameByRule(oldName,fix,newFix);
+
+		if (!oldName.endsWith(newName)) {
+			Boolean result = file.renameTo(new File(file.getParent() + "\\" + newName));
+
+			if (!result) {
+				info = "文件\"" + file.getParent() + "\\" + oldName + "\"文件名转换失败，请查看是否存在文件重名";
+			} else {
+				info = "文件\"" + file.getParent() + "\\" + oldName + "\"文件名转换成功";
+			}
+
+		} else {
+			info = "文件\"" + file.getParent() + "\\" + oldName + "\"文件名不需要转换";
+		}
+
+		return info;
+
+	}
+
+	/**
+	 * 修改文件夹名
+	 * 
+	 * @param file
+	 *            文件夹
+	 * @return String msg
+	 */
+	private String folderRename(String folderName,String fix,String newFix) {
+		String info = null;
+
+		String oldPath = folderName;
+		String newPath = this.convertRule.reNameByRule(oldPath,fix,newFix);
 
 		if (!oldPath.endsWith(newPath)) {
 

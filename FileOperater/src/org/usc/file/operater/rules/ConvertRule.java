@@ -13,5 +13,7 @@ package org.usc.file.operater.rules;
 public abstract interface ConvertRule {
 	
 	public String reNameByRule(String oldName);
+	
+	public String reNameByRule(String oldName,String fix,String newFix);
 
 }

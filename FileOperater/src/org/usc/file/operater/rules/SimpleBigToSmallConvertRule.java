@@ -82,4 +82,9 @@ public class SimpleBigToSmallConvertRule implements ConvertRule {
 		return newName.toString();
 	}
 
+	@Override
+	public String reNameByRule(String oldName, String fix, String newFix) {
+		return reNameByRule(oldName);
+	}
+
 }
