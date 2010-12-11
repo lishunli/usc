@@ -24,7 +24,9 @@ public class PrefixConvertRule implements ConvertRule {
 			return newFix.concat(oldName);
 		}
 		else {
-			return oldName.replaceFirst(fix.replaceAll("\\[", "\\\\["), newFix);
+			int indexByFix = oldName.indexOf(fix);
+			
+			return indexByFix != -1 ? newFix.concat(oldName.substring(fix.length())) : oldName;
 		}
 	}
 }

@@ -24,6 +24,7 @@ public class SuffixConvertRuleTest {
 	public void reNameBySuffixConvertRuleTest() {
 		assertEquals("第十讲[李顺利].avi", rule.reNameByRule("第十讲.avi", "", newFix));
 		assertEquals("XXX[李顺利].rar", rule.reNameByRule("XXX[XXX].rar", fix, newFix));
+		assertEquals("XXX.rar", rule.reNameByRule("XXX[XXX].rar", fix, ""));
 		assertEquals("XXX[XXX].rar", rule.reNameByRule("XXX[XXX].rar", "", ""));
 		assertEquals("XXX[XXX].rar", rule.reNameByRule("XXX[XXX].rar", "[XX]", newFix));
 

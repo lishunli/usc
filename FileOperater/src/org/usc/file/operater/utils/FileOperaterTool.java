@@ -251,7 +251,7 @@ public class FileOperaterTool {
 		String oldName = file.getName();
 		String newName = this.convertRule.reNameByRule(oldName);
 
-		if (!oldName.endsWith(newName)) {
+		if (!oldName.equals(newName)) {
 			Boolean result = file.renameTo(new File(file.getParent() + "\\" + newName));
 
 			if (!result) {
@@ -281,7 +281,7 @@ public class FileOperaterTool {
 		String oldPath = folderName;
 		String newPath = this.convertRule.reNameByRule(oldPath);
 
-		if (!oldPath.endsWith(newPath)) {
+		if (!oldPath.equals(newPath)) {
 
 			Boolean result = moveFolder(oldPath, newPath);
 
@@ -313,7 +313,7 @@ public class FileOperaterTool {
 		String oldName = file.getName();
 		String newName = this.convertRule.reNameByRule(oldName,fix,newFix);
 
-		if (!oldName.endsWith(newName)) {
+		if (!oldName.equals(newName)) {
 			Boolean result = file.renameTo(new File(file.getParent() + "\\" + newName));
 
 			if (!result) {
@@ -343,7 +343,7 @@ public class FileOperaterTool {
 		String oldPath = folderName;
 		String newPath = this.convertRule.reNameByRule(oldPath,fix,newFix);
 
-		if (!oldPath.endsWith(newPath)) {
+		if (!oldPath.equals(newPath)) {
 
 			Boolean result = moveFolder(oldPath, newPath);
 

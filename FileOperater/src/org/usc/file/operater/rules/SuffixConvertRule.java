@@ -30,12 +30,6 @@ public class SuffixConvertRule implements ConvertRule {
 			
 			return lastIndexByFix != -1 ? spitBeforeString.substring(0,lastIndexByFix).concat(newFix).concat(spitAfterString) : oldName;
 		}
-
-	}
-	public static void main(String[] args) {
-		String str1 = "[1]xxx[1]";
-		System.out.println(
-				str1.substring(6).replaceFirst("[1]".replaceAll("\\[", "\\\\["), "[一]"));
 	}
 
 }

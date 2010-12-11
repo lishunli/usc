@@ -51,6 +51,7 @@ public class FileOperater extends javax.swing.JFrame {
 		jButton1 = new javax.swing.JButton();
 		jRadioButton1 = new javax.swing.JRadioButton();
 		jRadioButton2 = new javax.swing.JRadioButton();
+		jRadioButton3 = new javax.swing.JRadioButton();
 		jScrollPane1 = new javax.swing.JScrollPane();
 		jTextArea1 = new javax.swing.JTextArea();
 		jLabel6 = new javax.swing.JLabel();
@@ -113,9 +114,12 @@ public class FileOperater extends javax.swing.JFrame {
 		jRadioButton2.setText("\u5c0f\u5199\u8f6c\u5927\u5199");
 		jRadioButton2
 				.setToolTipText("\u8f6c\u6362\u89c4\u5219:1 -> \u4e00;10 -> \u5341;12 -> \u5341\u4e8c;30 -> \u4e09\u5341;142 -> \u4e00\u767e\u56db\u5341\u4e8c;102.25 -> \u4e00\u767e\u96f6\u4e8c\u70b9\u4e8c\u4e94");
+		
+		jRadioButton3.setVisible(false);
 
 		buttonGroup1.add(jRadioButton1);
 		buttonGroup1.add(jRadioButton2);
+		buttonGroup1.add(jRadioButton3);
 
 		double width = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 		double height = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
@@ -148,10 +152,25 @@ public class FileOperater extends javax.swing.JFrame {
 
 		jCheckBox1.setFont(new java.awt.Font("微软雅黑", 0, 18));
 		jCheckBox1.setSelected(true);
+		jCheckBox1.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mouseClicked(java.awt.event.MouseEvent evt) {
+				jCheckBox1MouseClicked(evt);
+			}
+		});
 
 		jCheckBox2.setFont(new java.awt.Font("微软雅黑", 0, 18));
+		jCheckBox2.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mouseClicked(java.awt.event.MouseEvent evt) {
+				jCheckBox2MouseClicked(evt);
+			}
+		});
 
 		jCheckBox3.setFont(new java.awt.Font("微软雅黑", 0, 18));
+		jCheckBox3.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mouseClicked(java.awt.event.MouseEvent evt) {
+				jCheckBox3MouseClicked(evt);
+			}
+		});
 
 		jLabel7.setFont(new java.awt.Font("微软雅黑", 0, 18));
 		jLabel7.setText("\u524d\u7f00");
@@ -373,6 +392,28 @@ public class FileOperater extends javax.swing.JFrame {
 
 	// GEN-END:initComponents
 
+	private void jCheckBox3MouseClicked(java.awt.event.MouseEvent evt) {
+		if(!jCheckBox3.isSelected()){
+			jTextField4.setText("");
+			jTextField5.setText("");
+		}
+	}
+	
+	private void jCheckBox2MouseClicked(java.awt.event.MouseEvent evt) {
+		if(!jCheckBox2.isSelected()){
+			jTextField2.setText("");
+			jTextField3.setText("");
+		}
+	}
+
+	private void jCheckBox1MouseClicked(java.awt.event.MouseEvent evt) {
+		if(jCheckBox1.isSelected()){
+			jRadioButton1.setSelected(true);
+		}else{
+			jRadioButton3.setSelected(true);
+		}
+	}
+
 	private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {
 		jFileChooser.setVisible(true);
 		int open = jFileChooser.showOpenDialog(this);
@@ -476,6 +517,7 @@ public class FileOperater extends javax.swing.JFrame {
 	private javax.swing.JLabel jLabel9;
 	private javax.swing.JRadioButton jRadioButton1;
 	private javax.swing.JRadioButton jRadioButton2;
+	private javax.swing.JRadioButton jRadioButton3;
 	private javax.swing.JScrollPane jScrollPane1;
 	private javax.swing.JTextArea jTextArea1;
 	private javax.swing.JTextField jTextField1;
