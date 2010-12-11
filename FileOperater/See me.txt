@@ -50,6 +50,8 @@
 		xxx.rar -> xxx[李顺利].rar(rule:"","[李顺利]")
 		xxx[lishunli].rar -> xxx[李顺利].rar(rule:"[lishunli]","[李顺利]")
 		xxx[lishunli].rar -> xxx.rar(rule:"[lishunli]","")
+	2.5字符串修改
+		123.rar ->李顺利.rar(rule:"123","李顺利")
 
 请帮忙写一个快速高效的程序。
 

@@ -28,6 +28,8 @@ public class ConvertFactory {
 		}
 		else if (Rule.Suffix == rule) {
 			cr = new SuffixConvertRule();
+		}else if(Rule.Replace == rule){
+			cr = new ReplaceConvertRule();
 		}
 
 		return cr;
