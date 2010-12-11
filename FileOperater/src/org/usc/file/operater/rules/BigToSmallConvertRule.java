@@ -1,8 +1,18 @@
-package org.usc.file.operater;
+package org.usc.file.operater.rules;
 
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 大写转小写规则
+ *
+ * @author <a href="http://www.blogjava.net/lishunli/" target="_blank">ShunLi</a>
+ * @notes Created on 2010-12-11<br>
+ *        Revision of last commit:$Revision$<br>
+ *        Author of last commit:$Author$<br>
+ *        Date of last commit:$Date$<br>
+ *        <p>
+ */
 public class BigToSmallConvertRule implements ConvertRule {
 	private static Map<String, Long> numberMap = new HashMap<String, Long>();
 	private static Map<String, Long> unitMap = new HashMap<String, Long>();

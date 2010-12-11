@@ -3,6 +3,7 @@ package org.usc.file.operater;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+import org.usc.file.operater.rules.SmallToBigConvertRule;
 
 public class SmallToBigConvertRuleTest {
 

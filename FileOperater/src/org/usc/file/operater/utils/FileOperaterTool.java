@@ -1,9 +1,23 @@
-package org.usc.file.operater;
+package org.usc.file.operater.utils;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
+import org.usc.file.operater.rules.ConvertFactory;
+import org.usc.file.operater.rules.ConvertRule;
+import org.usc.file.operater.rules.Rule;
+
+/**
+ * 文件操作工具
+ *
+ * @author <a href="http://www.blogjava.net/lishunli/" target="_blank">ShunLi</a>
+ * @notes Created on 2010-12-11<br>
+ *        Revision of last commit:$Revision$<br>
+ *        Author of last commit:$Author$<br>
+ *        Date of last commit:$Date$<br>
+ *        <p>
+ */
 public class FileOperaterTool {
 	private ConvertRule convertRule;
 

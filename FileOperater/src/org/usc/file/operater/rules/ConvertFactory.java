@@ -1,5 +1,15 @@
-package org.usc.file.operater;
+package org.usc.file.operater.rules;
 
+/**
+ * 转换工厂
+ *
+ * @author <a href="http://www.blogjava.net/lishunli/" target="_blank">ShunLi</a>
+ * @notes Created on 2010-12-11<br>
+ *        Revision of last commit:$Revision$<br>
+ *        Author of last commit:$Author$<br>
+ *        Date of last commit:$Date$<br>
+ *        <p>
+ */
 public class ConvertFactory {
 
 	public static ConvertRule createConvertRule(Rule rule) {
