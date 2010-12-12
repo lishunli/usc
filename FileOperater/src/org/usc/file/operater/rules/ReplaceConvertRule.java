@@ -1,5 +1,7 @@
 package org.usc.file.operater.rules;
 
+import java.util.regex.Pattern;
+
 /**
  * 字符串转换规则
  * 
@@ -19,7 +21,7 @@ public class ReplaceConvertRule implements ConvertRule {
 
 	@Override
 	public String reNameByRule(String oldName, String fix, String newFix) {
-		return oldName.replaceAll(fix.replaceAll("\\[", "\\\\["), newFix);
+		return oldName.replaceAll(Pattern.quote(fix), newFix);
 	}
 
 	@Override
