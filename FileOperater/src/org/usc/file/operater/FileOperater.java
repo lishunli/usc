@@ -73,6 +73,8 @@ public class FileOperater extends javax.swing.JFrame {
 		jLabel12 = new javax.swing.JLabel();
 		jTextField7 = new javax.swing.JTextField();
 		jCheckBox4 = new javax.swing.JCheckBox();
+		jCheckBox5 = new javax.swing.JCheckBox();
+		jLabel13 = new javax.swing.JLabel();
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setTitle("\u6587\u4ef6\u540d\u6279\u91cf\u8f6c\u6362-\u987a\u5229(QQ:506817493)");
@@ -213,6 +215,12 @@ public class FileOperater extends javax.swing.JFrame {
 				jCheckBox4ActionPerformed(evt);
 			}
 		});
+		
+		jCheckBox5.setFont(new java.awt.Font("微软雅黑", 0, 18));
+		jCheckBox5.setSelected(true);
+		
+		jLabel13.setFont(new java.awt.Font("微软雅黑", 0, 18));
+		jLabel13.setText("\u8f6c\u6362\u6587\u4ef6\u5939");
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
@@ -368,7 +376,17 @@ public class FileOperater extends javax.swing.JFrame {
 																																				javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 																																		.addComponent(
 																																				jRadioButton2)
-																																		.addGap(508, 508, 508))
+																																		.addGap(172, 172, 172)
+																																		.addComponent(
+																																				jCheckBox5,
+																																				javax.swing.GroupLayout.PREFERRED_SIZE,
+																																				21,
+																																				javax.swing.GroupLayout.PREFERRED_SIZE)
+																																		.addPreferredGap(
+																																				javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																																		.addComponent(jLabel13)
+																																		.addPreferredGap(
+																																				javax.swing.LayoutStyle.ComponentPlacement.RELATED))
 																														.addGroup(
 																																layout
 																																		.createSequentialGroup()
@@ -392,7 +410,7 @@ public class FileOperater extends javax.swing.JFrame {
 																																										.addComponent(
 																																												jTextField6,
 																																												javax.swing.GroupLayout.PREFERRED_SIZE,
-																																												306,
+																																												313,
 																																												javax.swing.GroupLayout.PREFERRED_SIZE)
 																																										.addPreferredGap(
 																																												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -409,7 +427,7 @@ public class FileOperater extends javax.swing.JFrame {
 																						.addGroup(
 																								javax.swing.GroupLayout.Alignment.TRAILING,
 																								layout.createSequentialGroup().addComponent(jLabel6).addGap(
-																										300, 300, 300))).addGroup(
+																										276, 276, 276))).addGroup(
 																				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 																						.addComponent(jButton3).addComponent(jLabel2).addComponent(jButton1)
 																						.addComponent(jButton2)))).addGap(29, 29, 29)).addGroup(
@@ -420,12 +438,18 @@ public class FileOperater extends javax.swing.JFrame {
 								42, 42, 42).addGroup(
 								layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(jLabel3).addComponent(jTextField1,
 										javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addComponent(jButton3)).addGap(15, 15, 15).addGroup(
-								layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING).addGroup(
-										layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(jCheckBox1).addComponent(jLabel4))
-										.addGroup(
-												layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(jRadioButton1)
-														.addComponent(jRadioButton2).addComponent(jButton1))).addGap(14, 14, 14).addGroup(
+										.addComponent(jButton3)).addGroup(
+								layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+										layout.createSequentialGroup().addGap(15, 15, 15).addGroup(
+												layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING).addGroup(
+														layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(jCheckBox1)
+																.addComponent(jLabel4)).addGroup(
+														layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(jRadioButton1)
+																.addComponent(jRadioButton2).addComponent(jButton1)))).addGroup(
+										layout.createSequentialGroup().addGap(18, 18, 18).addGroup(
+												layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(jLabel13).addGroup(
+														layout.createSequentialGroup().addGap(2, 2, 2).addComponent(jCheckBox5))))).addPreferredGap(
+								javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
 								layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
 										layout.createSequentialGroup().addGroup(
 												layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(jLabel7).addComponent(
@@ -451,7 +475,7 @@ public class FileOperater extends javax.swing.JFrame {
 										layout.createSequentialGroup().addGap(21, 21, 21).addComponent(jCheckBox4))).addGap(16, 16, 16).addGroup(
 								layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(jLabel5).addComponent(jButton2)
 										.addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
-						.addContainerGap(30, Short.MAX_VALUE)));
+						.addContainerGap(36, Short.MAX_VALUE)));
 
 		pack();
 	}// </editor-fold>
@@ -580,6 +604,7 @@ public class FileOperater extends javax.swing.JFrame {
 	private javax.swing.JCheckBox jCheckBox2;
 	private javax.swing.JCheckBox jCheckBox3;
 	private javax.swing.JCheckBox jCheckBox4;
+	private javax.swing.JCheckBox jCheckBox5;
 	private javax.swing.JLabel jLabel1;
 	private javax.swing.JLabel jLabel10;
 	private javax.swing.JLabel jLabel11;
@@ -605,6 +630,7 @@ public class FileOperater extends javax.swing.JFrame {
 	private javax.swing.JTextField jTextField6;
 	private javax.swing.JTextField jTextField7;
 	private JFileChooser jFileChooser;
+	private javax.swing.JLabel jLabel13;
 	// End of variables declaration//GEN-END:variables
 
 }
