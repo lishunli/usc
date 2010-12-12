@@ -254,14 +254,14 @@ public class FileOperaterTool {
 			Boolean result = file.renameTo(new File(file.getParent() + "\\" + newName));
 
 			if (!result) {
-				info = "文件\"" + file.getParent() + "\\" + oldName + "\"文件名转换失败，请查看是否存在文件重名";
+				info = "文件\"" + file.getParent() + "\\" + oldName + "\"转换失败，请查看是否存在文件重名";
 			} else {
-				info = "文件\"" + file.getParent() + "\\" + oldName + "\"文件名转换为\"" + file.getParent() + "\\" + newName + "\"";
+				info = "文件\"" + file.getParent() + "\\" + oldName + "\"转换为\"" + file.getParent() + "\\" + newName + "\"";
 				;
 			}
 
 		} else {
-			info = "文件\"" + file.getParent() + "\\" + oldName + "\"文件名不需要转换";
+			info = "文件\"" + file.getParent() + "\\" + oldName + "\"不需要转换";
 		}
 
 		return info;
@@ -288,11 +288,11 @@ public class FileOperaterTool {
 			if (!result) {
 				info = "文件夹\"" + oldPath + "\"转换失败，请查看是否存在文件夹重名";
 			} else {
-				info = "文件夹\"" + oldPath + "\"名转换为\"" + newPath + "\"";
+				info = "文件夹\"" + oldPath + "\"转换为\"" + newPath + "\"";
 			}
 
 		} else {
-			info = "文件夹\"" + oldPath + "\"名不需要转换";
+			info = "文件夹\"" + oldPath + "\"不需要转换";
 		}
 
 		return info;
@@ -317,14 +317,14 @@ public class FileOperaterTool {
 			Boolean result = file.renameTo(new File(file.getParent() + "\\" + newName));
 
 			if (!result) {
-				info = "文件\"" + file.getParent() + "\\" + oldName + "\"文件名转换失败，请查看是否存在文件重名";
+				info = "文件\"" + file.getParent() + "\\" + oldName + "\"转换失败，请查看是否存在文件重名";
 			} else {
-				info = "文件\"" + file.getParent() + "\\" + oldName + "\"文件名转换为\"" + file.getParent() + "\\" + newName + "\"";
+				info = "文件\"" + file.getParent() + "\\" + oldName + "\"转换为\"" + file.getParent() + "\\" + newName + "\"";
 				;
 			}
 
 		} else {
-			info = "文件\"" + file.getParent() + "\\" + oldName + "\"文件名不需要转换";
+			info = "文件\"" + file.getParent() + "\\" + oldName + "\"不需要转换";
 		}
 
 		return info;
@@ -351,11 +351,11 @@ public class FileOperaterTool {
 			if (!result) {
 				info = "文件夹\"" + oldPath + "\"转换失败，请查看是否存在文件夹重名";
 			} else {
-				info = "文件夹\"" + oldPath + "\"名转换为\"" + newPath + "\"";
+				info = "文件夹\"" + oldPath + "\"转换为\"" + newPath + "\"";
 			}
 
 		} else {
-			info = "文件夹\"" + oldPath + "\"名不需要转换";
+			info = "文件夹\"" + oldPath + "\"不需要转换";
 		}
 
 		return info;

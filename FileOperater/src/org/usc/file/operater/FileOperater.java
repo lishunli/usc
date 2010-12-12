@@ -99,9 +99,9 @@ public class FileOperater extends javax.swing.JFrame {
 
 		jButton1.setFont(new java.awt.Font("微软雅黑", 0, 18));
 		jButton1.setText("\u8f6c\u6362");
-		jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				jButton1MouseClicked(evt);
+		jButton1.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				jButton1ActionPerformed(evt);
 			}
 		});
 
@@ -141,39 +141,39 @@ public class FileOperater extends javax.swing.JFrame {
 
 		jButton2.setFont(new java.awt.Font("微软雅黑", 0, 18));
 		jButton2.setText("\u6e05\u7a7a");
-		jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				jButton2MouseClicked(evt);
+		jButton2.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				jButton2ActionPerformed(evt);
 			}
 		});
 
 		jButton3.setFont(new java.awt.Font("微软雅黑", 0, 18));
 		jButton3.setText("\u6d4f\u89c8");
-		jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				jButton3MouseClicked(evt);
+		jButton3.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				jButton3ActionPerformed(evt);
 			}
 		});
 
 		jCheckBox1.setFont(new java.awt.Font("微软雅黑", 0, 18));
 		jCheckBox1.setSelected(true);
-		jCheckBox1.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				jCheckBox1MouseClicked(evt);
+		jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				jCheckBox1ActionPerformed(evt);
 			}
 		});
 
 		jCheckBox2.setFont(new java.awt.Font("微软雅黑", 0, 18));
-		jCheckBox2.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				jCheckBox2MouseClicked(evt);
+		jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				jCheckBox2ActionPerformed(evt);
 			}
 		});
 
 		jCheckBox3.setFont(new java.awt.Font("微软雅黑", 0, 18));
-		jCheckBox3.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				jCheckBox3MouseClicked(evt);
+		jCheckBox3.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				jCheckBox3ActionPerformed(evt);
 			}
 		});
 
@@ -208,9 +208,9 @@ public class FileOperater extends javax.swing.JFrame {
 		jTextField7.setFont(new java.awt.Font("微软雅黑", 0, 16));
 
 		jCheckBox4.setFont(new java.awt.Font("微软雅黑", 0, 18));
-		jCheckBox4.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				jCheckBox4MouseClicked(evt);
+		jCheckBox4.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				jCheckBox4ActionPerformed(evt);
 			}
 		});
 
@@ -458,36 +458,36 @@ public class FileOperater extends javax.swing.JFrame {
 
 	// GEN-END:initComponents
 
-	private void jCheckBox4MouseClicked(java.awt.event.MouseEvent evt) {
+	private void jCheckBox4ActionPerformed(java.awt.event.ActionEvent evt) {
 		if (!jCheckBox4.isSelected()) {
 			jTextField6.setText("");
 			jTextField7.setText("");
 		}
 	}
 
-	private void jCheckBox3MouseClicked(java.awt.event.MouseEvent evt) {
+	private void jCheckBox3ActionPerformed(java.awt.event.ActionEvent evt) {
 		if (!jCheckBox3.isSelected()) {
 			jTextField4.setText("");
 			jTextField5.setText("");
 		}
 	}
 
-	private void jCheckBox2MouseClicked(java.awt.event.MouseEvent evt) {
+	private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {
 		if (!jCheckBox2.isSelected()) {
 			jTextField2.setText("");
 			jTextField3.setText("");
 		}
 	}
 
-	private void jCheckBox1MouseClicked(java.awt.event.MouseEvent evt) {
+	private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {
 		if (jCheckBox1.isSelected()) {
 			jRadioButton1.setSelected(true);
 		} else {
 			jRadioButton3.setSelected(true);
 		}
 	}
-
-	private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {
+	
+	private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
 		jFileChooser.setVisible(true);
 		int open = jFileChooser.showOpenDialog(this);
 
@@ -496,14 +496,13 @@ public class FileOperater extends javax.swing.JFrame {
 
 			jTextField1.setText(path);
 		}
-
 	}
 
-	private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {
+	private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
 		jTextArea1.setText("");
 	}
 
-	private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {
+	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
 		Rule rule = null;
 		jTextArea1.setText("");
 
