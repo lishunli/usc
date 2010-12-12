@@ -215,10 +215,10 @@ public class FileOperater extends javax.swing.JFrame {
 				jCheckBox4ActionPerformed(evt);
 			}
 		});
-		
+
 		jCheckBox5.setFont(new java.awt.Font("微软雅黑", 0, 18));
 		jCheckBox5.setSelected(true);
-		
+
 		jLabel13.setFont(new java.awt.Font("微软雅黑", 0, 18));
 		jLabel13.setText("\u8f6c\u6362\u6587\u4ef6\u5939");
 
@@ -410,7 +410,7 @@ public class FileOperater extends javax.swing.JFrame {
 																																										.addComponent(
 																																												jTextField6,
 																																												javax.swing.GroupLayout.PREFERRED_SIZE,
-																																												313,
+																																												307,
 																																												javax.swing.GroupLayout.PREFERRED_SIZE)
 																																										.addPreferredGap(
 																																												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -427,7 +427,7 @@ public class FileOperater extends javax.swing.JFrame {
 																						.addGroup(
 																								javax.swing.GroupLayout.Alignment.TRAILING,
 																								layout.createSequentialGroup().addComponent(jLabel6).addGap(
-																										276, 276, 276))).addGroup(
+																										305, 305, 305))).addGroup(
 																				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 																						.addComponent(jButton3).addComponent(jLabel2).addComponent(jButton1)
 																						.addComponent(jButton2)))).addGap(29, 29, 29)).addGroup(
@@ -510,7 +510,7 @@ public class FileOperater extends javax.swing.JFrame {
 			jRadioButton3.setSelected(true);
 		}
 	}
-	
+
 	private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
 		jFileChooser.setVisible(true);
 		int open = jFileChooser.showOpenDialog(this);
@@ -552,23 +552,23 @@ public class FileOperater extends javax.swing.JFrame {
 					rule = Rule.SmallToBig;
 				}
 
-				info.append(new FileOperaterTool(rule).fileRename(path));
+				info.append(new FileOperaterTool(rule).fileRename(path, jCheckBox5.isSelected()));
 
 			}
 			if (jCheckBox2.isSelected()) {
 				rule = Rule.Prefix;
 
-				info.append(new FileOperaterTool(rule).fileRename(path, jTextField2.getText(), jTextField3.getText()));
+				info.append(new FileOperaterTool(rule).fileRename(path, jTextField2.getText(), jTextField3.getText(), jCheckBox5.isSelected()));
 			}
 			if (jCheckBox3.isSelected()) {
 				rule = Rule.Suffix;
 
-				info.append(new FileOperaterTool(rule).fileRename(path, jTextField4.getText(), jTextField5.getText()));
+				info.append(new FileOperaterTool(rule).fileRename(path, jTextField4.getText(), jTextField5.getText(), jCheckBox5.isSelected()));
 			}
 			if (jCheckBox4.isSelected()) {
 				rule = Rule.Replace;
 
-				info.append(new FileOperaterTool(rule).fileRename(path, jTextField6.getText(), jTextField7.getText()));
+				info.append(new FileOperaterTool(rule).fileRename(path, jTextField6.getText(), jTextField7.getText(), jCheckBox5.isSelected()));
 			}
 
 			long end = System.currentTimeMillis();

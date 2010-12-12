@@ -153,7 +153,7 @@ public class FileOperaterTool {
 	 * 
 	 * @param path
 	 */
-	public String fileRename(String path) {
+	public String fileRename(String path, Boolean isConvertFolder) {
 
 		StringBuffer info = new StringBuffer();
 
@@ -181,8 +181,10 @@ public class FileOperaterTool {
 				if (temp.isDirectory()) {
 					String folderName = path + "\\" + tempList[i];
 
-					info.append(fileRename(folderName));
-					info.append(folderRename(folderName) + "\n\n");
+					info.append(fileRename(folderName, isConvertFolder));
+					if (isConvertFolder) {
+						info.append(folderRename(folderName) + "\n\n");
+					}
 				}
 			}
 		} else {
@@ -197,7 +199,7 @@ public class FileOperaterTool {
 	 * 
 	 * @param path
 	 */
-	public String fileRename(String path, String fix, String newFix) {
+	public String fileRename(String path, String fix, String newFix, Boolean isConvertFolder) {
 
 		StringBuffer info = new StringBuffer();
 
@@ -225,8 +227,10 @@ public class FileOperaterTool {
 				if (temp.isDirectory()) {
 					String folderName = path + "\\" + tempList[i];
 
-					info.append(fileRename(folderName, fix, newFix));
-					info.append(folderRename(folderName, fix, newFix, true) + "\n\n");
+					info.append(fileRename(folderName, fix, newFix, isConvertFolder));
+					if (isConvertFolder) {
+						info.append(folderRename(folderName, fix, newFix, true) + "\n\n");
+					}
 				}
 			}
 		} else {

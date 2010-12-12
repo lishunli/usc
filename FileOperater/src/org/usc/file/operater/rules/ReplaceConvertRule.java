@@ -24,7 +24,12 @@ public class ReplaceConvertRule implements ConvertRule {
 
 	@Override
 	public String reNameByRule(String oldName, String fix, String newFix, Boolean isFolder) {
-		return reNameByRule(oldName, fix, newFix);
+		if (isFolder) {
+			int index = oldName.lastIndexOf("\\");
+			return oldName.substring(0, index + 1).concat(reNameByRule(oldName.substring(index + 1), fix, newFix));
+		} else {
+			return reNameByRule(oldName, fix, newFix);
+		}
 	}
 
 }
