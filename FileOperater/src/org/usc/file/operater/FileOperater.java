@@ -8,6 +8,7 @@ package org.usc.file.operater;
 
 import java.awt.Toolkit;
 import java.text.SimpleDateFormat;
+import java.util.regex.Pattern;
 
 import javax.swing.JFileChooser;
 
@@ -27,6 +28,8 @@ import org.usc.file.operater.utils.FileOperaterTool;
 public class FileOperater extends javax.swing.JFrame {
 
 	private static final long serialVersionUID = 7088862061652290688L;
+	private static final String FILE_IS_NOT_VALID = "文件名不能包含下列任何字符，";
+	private static final String SPECIFIC_CHAR = "\\/:*?\"<>|";
 
 	/** Creates new form FileOperater */
 	public FileOperater() {
@@ -558,17 +561,30 @@ public class FileOperater extends javax.swing.JFrame {
 			if (jCheckBox2.isSelected()) {
 				rule = Rule.Prefix;
 
-				info.append(new FileOperaterTool(rule).fileRename(path, jTextField2.getText(), jTextField3.getText(), jCheckBox5.isSelected()));
+				if (!checkFileNameIsNotValid(jTextField3.getText())) {
+					info.append(new FileOperaterTool(rule).fileRename(path, jTextField2.getText(), jTextField3.getText(), jCheckBox5.isSelected()));
+				} else {
+					info.append(FILE_IS_NOT_VALID).append("前缀转换失败\n").append(SPECIFIC_CHAR).append("\n");
+				}
+
 			}
 			if (jCheckBox3.isSelected()) {
 				rule = Rule.Suffix;
+				if (!checkFileNameIsNotValid(jTextField5.getText())) {
+					info.append(new FileOperaterTool(rule).fileRename(path, jTextField4.getText(), jTextField5.getText(), jCheckBox5.isSelected()));
+				} else {
+					info.append(FILE_IS_NOT_VALID).append("后缀转换失败\n").append(SPECIFIC_CHAR).append("\n");
+				}
 
-				info.append(new FileOperaterTool(rule).fileRename(path, jTextField4.getText(), jTextField5.getText(), jCheckBox5.isSelected()));
 			}
 			if (jCheckBox4.isSelected()) {
 				rule = Rule.Replace;
+				if (!checkFileNameIsNotValid(jTextField7.getText())) {
+					info.append(new FileOperaterTool(rule).fileRename(path, jTextField6.getText(), jTextField7.getText(), jCheckBox5.isSelected()));
+				}else {
+					info.append(FILE_IS_NOT_VALID).append("字符串转换失败\n").append(SPECIFIC_CHAR).append("\n");
+				}
 
-				info.append(new FileOperaterTool(rule).fileRename(path, jTextField6.getText(), jTextField7.getText(), jCheckBox5.isSelected()));
 			}
 
 			long end = System.currentTimeMillis();
@@ -579,6 +595,14 @@ public class FileOperater extends javax.swing.JFrame {
 
 			jTextArea1.setText(jTextArea1.getText() + info.toString());
 		}
+
+	}
+
+	protected Boolean checkFileNameIsNotValid(String fileName) {
+		String regEx = "[\\\\/:\\*\\?\\\"<>\\|]";
+		Pattern p = Pattern.compile(regEx);
+
+		return p.matcher(fileName).find();
 
 	}
 
