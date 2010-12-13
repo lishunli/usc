@@ -24,6 +24,9 @@ public class ReplaceConvertRuleTest {
 	public void reNameBySuffixConvertRuleTest() {
 		assertEquals("XXX[李顺利].rar", rule.reNameByRule("XXX[XXX].rar", fix, newFix));
 		assertEquals("C:\\temp\\XXX[李顺利].rar", rule.reNameByRule("C:\\temp\\XXX[XXX].rar", fix, newFix,true));
+		
+		assertEquals("XXX[XXX].rar", rule.reNameByRule("XXX[XXX].rar", "", newFix));
+		assertEquals("C:\\temp\\XXX[XXX].rar", rule.reNameByRule("C:\\temp\\XXX[XXX].rar", "", newFix,true));
 
 	}
 

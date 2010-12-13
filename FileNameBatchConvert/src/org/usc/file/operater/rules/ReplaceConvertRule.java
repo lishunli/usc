@@ -21,7 +21,11 @@ public class ReplaceConvertRule implements ConvertRule {
 
 	@Override
 	public String reNameByRule(String oldName, String fix, String newFix) {
-		return oldName.replaceAll(Pattern.quote(fix), newFix);
+		if (fix == null || fix.trim().length() == 0) {
+			return oldName;
+		}else{
+			return oldName.replaceAll(Pattern.quote(fix), newFix);
+		}
 	}
 
 	@Override

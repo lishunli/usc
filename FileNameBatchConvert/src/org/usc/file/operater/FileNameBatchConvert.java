@@ -8,6 +8,7 @@ package org.usc.file.operater;
 
 import java.awt.Toolkit;
 import java.text.SimpleDateFormat;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.swing.JFileChooser;
@@ -25,14 +26,14 @@ import org.usc.file.operater.utils.FileOperaterTool;
  *        Date of last commit:$Date$<br>
  *        <p>
  */
-public class FileOperater extends javax.swing.JFrame {
+public class FileNameBatchConvert extends javax.swing.JFrame {
 
 	private static final long serialVersionUID = 7088862061652290688L;
-	private static final String FILE_IS_NOT_VALID = "文件名不能包含下列任何字符，";
+	private static final String FILE_IS_NOT_VALID = "文件名不能包含下列任何字符";
 	private static final String SPECIFIC_CHAR = "\\/:*?\"<>|";
 
 	/** Creates new form FileOperater */
-	public FileOperater() {
+	public FileNameBatchConvert() {
 		initComponents();
 	}
 
@@ -89,7 +90,7 @@ public class FileOperater extends javax.swing.JFrame {
 		jLabel1.setText("\u6587\u4ef6\u540d\u6279\u91cf\u8f6c\u6362");
 
 		jLabel2.setFont(new java.awt.Font("微软雅黑", 0, 18));
-		jLabel2.setText("\u987a\u5229\u00a9V1.0");
+		jLabel2.setText("\u987a\u5229\u00a9V1.1");
 
 		jLabel3.setFont(new java.awt.Font("微软雅黑", 0, 20));
 		jLabel3.setText("\u8def\u5f84\u540d\u79f0");
@@ -561,29 +562,22 @@ public class FileOperater extends javax.swing.JFrame {
 			if (jCheckBox2.isSelected()) {
 				rule = Rule.Prefix;
 
-				if (!checkFileNameIsNotValid(jTextField3.getText())) {
-					info.append(new FileOperaterTool(rule).fileRename(path, jTextField2.getText(), jTextField3.getText(), jCheckBox5.isSelected()));
-				} else {
-					info.append(FILE_IS_NOT_VALID).append("前缀转换失败\n").append(SPECIFIC_CHAR).append("\n");
-				}
+				info.append(new FileOperaterTool(rule).fileRename(path, jTextField2.getText(), checkFileNameIsNotValid(jTextField3.getText(), info, "前缀"),
+						jCheckBox5.isSelected()));
 
 			}
 			if (jCheckBox3.isSelected()) {
 				rule = Rule.Suffix;
-				if (!checkFileNameIsNotValid(jTextField5.getText())) {
-					info.append(new FileOperaterTool(rule).fileRename(path, jTextField4.getText(), jTextField5.getText(), jCheckBox5.isSelected()));
-				} else {
-					info.append(FILE_IS_NOT_VALID).append("后缀转换失败\n").append(SPECIFIC_CHAR).append("\n");
-				}
+
+				info.append(new FileOperaterTool(rule).fileRename(path, jTextField4.getText(), checkFileNameIsNotValid(jTextField5.getText(), info, "后缀"),
+						jCheckBox5.isSelected()));
 
 			}
 			if (jCheckBox4.isSelected()) {
 				rule = Rule.Replace;
-				if (!checkFileNameIsNotValid(jTextField7.getText())) {
-					info.append(new FileOperaterTool(rule).fileRename(path, jTextField6.getText(), jTextField7.getText(), jCheckBox5.isSelected()));
-				}else {
-					info.append(FILE_IS_NOT_VALID).append("字符串转换失败\n").append(SPECIFIC_CHAR).append("\n");
-				}
+
+				info.append(new FileOperaterTool(rule).fileRename(path, jTextField6.getText(), checkFileNameIsNotValid(jTextField7.getText(), info, "字符串"),
+						jCheckBox5.isSelected()));
 
 			}
 
@@ -598,12 +592,26 @@ public class FileOperater extends javax.swing.JFrame {
 
 	}
 
-	protected Boolean checkFileNameIsNotValid(String fileName) {
+	/*protected Boolean checkFileNameIsNotValid(String fileName) {
 		String regEx = "[\\\\/:\\*\\?\\\"<>\\|]";
 		Pattern p = Pattern.compile(regEx);
 
 		return p.matcher(fileName).find();
+	}*/
+	
+	
+	protected String checkFileNameIsNotValid(String fileName,StringBuffer buffer,String choose) {
+		String regEx = "[\\\\/:\\*\\?\\\"<>\\|]";
 
+		Pattern p = Pattern.compile(regEx);
+		Matcher matcher = p.matcher(fileName);
+		
+		if(matcher.find()){
+			buffer.append(choose).append("转换中,").append(FILE_IS_NOT_VALID).append(",做过滤处理\n").append(SPECIFIC_CHAR).append("\n");
+			return matcher.replaceAll("");
+		}else{
+			return fileName;
+		}
 	}
 
 	/**
@@ -613,10 +621,11 @@ public class FileOperater extends javax.swing.JFrame {
 	public static void main(String args[]) {
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				new FileOperater().setVisible(true);
+				new FileNameBatchConvert().setVisible(true);
 			}
 		});
 	}
+
 
 	// GEN-BEGIN:variables
 	// Variables declaration - do not modify
