@@ -112,23 +112,6 @@ public class FileNameBatchConvert extends javax.swing.JFrame {
 			}
 		});
 
-//		/**
-//		 * choose folder
-//		 */
-//		
-//		pref = Preferences.userRoot().node("/org/usc"); 
-//		String lastPath = pref.get("lastpath", ""); 
-//		
-//		if(!"".equals(lastPath)){
-//			jFileChooser = new JFileChooser(lastPath);
-//		}else{
-//			jFileChooser = new JFileChooser();
-//		}
-//		jFileChooser.getSelectedFile();
-//		
-//		jFileChooser.setDialogTitle("浏览");
-//		jFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-
 		jRadioButton1.setFont(new java.awt.Font("微软雅黑", 0, 18));
 		jRadioButton1.setSelected(true);
 		jRadioButton1.setText("\u5927\u5199\u8f6c\u5c0f\u5199");
