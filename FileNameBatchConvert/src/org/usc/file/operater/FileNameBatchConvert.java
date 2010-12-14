@@ -8,6 +8,7 @@ package org.usc.file.operater;
 
 import java.awt.Toolkit;
 import java.text.SimpleDateFormat;
+import java.util.prefs.Preferences;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -111,9 +112,22 @@ public class FileNameBatchConvert extends javax.swing.JFrame {
 			}
 		});
 
-		jFileChooser = new JFileChooser();
-		jFileChooser.setDialogTitle("浏览");
-		jFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+//		/**
+//		 * choose folder
+//		 */
+//		
+//		pref = Preferences.userRoot().node("/org/usc"); 
+//		String lastPath = pref.get("lastpath", ""); 
+//		
+//		if(!"".equals(lastPath)){
+//			jFileChooser = new JFileChooser(lastPath);
+//		}else{
+//			jFileChooser = new JFileChooser();
+//		}
+//		jFileChooser.getSelectedFile();
+//		
+//		jFileChooser.setDialogTitle("浏览");
+//		jFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
 		jRadioButton1.setFont(new java.awt.Font("微软雅黑", 0, 18));
 		jRadioButton1.setSelected(true);
@@ -516,6 +530,29 @@ public class FileNameBatchConvert extends javax.swing.JFrame {
 	}
 
 	private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
+		/**
+		 * choose folder
+		 */
+		
+		/*
+		 * 从注册表中读取上次打开的文件夹路径
+		 * 注册表路径是
+		 * HKEY_CURRENT_USER\\Software\\JavaSoft\\Prefs\\org\\usc\\lastpath
+		 */
+		
+		pref = Preferences.userRoot().node("/org/usc"); 
+		String lastPath = pref.get("lastpath", ""); 
+		
+		if(!"".equals(lastPath)){
+			jFileChooser = new JFileChooser(lastPath);
+		}else{
+			jFileChooser = new JFileChooser();
+		}
+		
+		jFileChooser.setDialogTitle("浏览");
+		jFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		jFileChooser.getSelectedFile();
+		
 		jFileChooser.setVisible(true);
 		int open = jFileChooser.showOpenDialog(this);
 
@@ -523,6 +560,7 @@ public class FileNameBatchConvert extends javax.swing.JFrame {
 			String path = jFileChooser.getSelectedFile().getAbsolutePath();
 
 			jTextField1.setText(path);
+			pref.put("lastpath", path); 
 		}
 	}
 
@@ -556,27 +594,43 @@ public class FileNameBatchConvert extends javax.swing.JFrame {
 					rule = Rule.SmallToBig;
 				}
 
+				info.append("------------------------------------------------\n")
+					.append("大小写转换中...\n")
+					.append("------------------------------------------------\n");
+				
 				info.append(new FileOperaterTool(rule).fileRename(path, jCheckBox5.isSelected()));
 
 			}
 			if (jCheckBox2.isSelected()) {
 				rule = Rule.Prefix;
 
-				info.append(new FileOperaterTool(rule).fileRename(path, jTextField2.getText(), checkFileNameIsNotValid(jTextField3.getText(), info, "前缀"),
+				info.append("------------------------------------------------\n")
+					.append("前缀转换中...\n")
+					.append("------------------------------------------------\n");
+				
+				info.append(new FileOperaterTool(rule).fileRename(path, jTextField2.getText(), checkFileNameIsNotValid(jTextField3.getText(), info),
 						jCheckBox5.isSelected()));
 
 			}
 			if (jCheckBox3.isSelected()) {
 				rule = Rule.Suffix;
 
-				info.append(new FileOperaterTool(rule).fileRename(path, jTextField4.getText(), checkFileNameIsNotValid(jTextField5.getText(), info, "后缀"),
+				info.append("------------------------------------------------\n")
+					.append("后缀转换中...\n")
+					.append("------------------------------------------------\n");
+				
+				info.append(new FileOperaterTool(rule).fileRename(path, jTextField4.getText(), checkFileNameIsNotValid(jTextField5.getText(), info),
 						jCheckBox5.isSelected()));
 
 			}
 			if (jCheckBox4.isSelected()) {
 				rule = Rule.Replace;
 
-				info.append(new FileOperaterTool(rule).fileRename(path, jTextField6.getText(), checkFileNameIsNotValid(jTextField7.getText(), info, "字符串"),
+				info.append("------------------------------------------------\n")
+					.append("字符串转换中...\n")
+					.append("------------------------------------------------\n");
+
+				info.append(new FileOperaterTool(rule).fileRename(path, jTextField6.getText(), checkFileNameIsNotValid(jTextField7.getText(), info),
 						jCheckBox5.isSelected()));
 
 			}
@@ -585,7 +639,7 @@ public class FileNameBatchConvert extends javax.swing.JFrame {
 
 			jTextArea1.setText(jTextArea1.getText() + "结束时间：" + dateFormat.format(new java.util.Date()) + "\n");
 			jTextArea1.setText(jTextArea1.getText() + "总用时：" + (end - start) + " ms\n");
-			jTextArea1.setText(jTextArea1.getText() + "------------------------------------------------\n");
+//			jTextArea1.setText(jTextArea1.getText() + "------------------------------------------------\n");
 
 			jTextArea1.setText(jTextArea1.getText() + info.toString());
 		}
@@ -600,14 +654,14 @@ public class FileNameBatchConvert extends javax.swing.JFrame {
 	}*/
 	
 	
-	protected String checkFileNameIsNotValid(String fileName,StringBuffer buffer,String choose) {
+	protected String checkFileNameIsNotValid(String fileName,StringBuffer buffer) {
 		String regEx = "[\\\\/:\\*\\?\\\"<>\\|]";
 
 		Pattern p = Pattern.compile(regEx);
 		Matcher matcher = p.matcher(fileName);
 		
 		if(matcher.find()){
-			buffer.append(choose).append("转换中,").append(FILE_IS_NOT_VALID).append(",做过滤处理\n").append(SPECIFIC_CHAR).append("\n");
+			buffer.append(FILE_IS_NOT_VALID).append(",做过滤处理\n").append(SPECIFIC_CHAR).append("\n");
 			return matcher.replaceAll("");
 		}else{
 			return fileName;
@@ -664,6 +718,7 @@ public class FileNameBatchConvert extends javax.swing.JFrame {
 	private javax.swing.JTextField jTextField7;
 	private JFileChooser jFileChooser;
 	private javax.swing.JLabel jLabel13;
+	private Preferences pref;
 	// End of variables declaration//GEN-END:variables
 
 }
