@@ -79,6 +79,7 @@ public class FileNameBatchConvert extends javax.swing.JFrame {
 		jTextField7 = new javax.swing.JTextField();
 		jCheckBox4 = new javax.swing.JCheckBox();
 		jCheckBox5 = new javax.swing.JCheckBox();
+		jCheckBox6 = new javax.swing.JCheckBox();
 		jLabel13 = new javax.swing.JLabel();
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -91,7 +92,7 @@ public class FileNameBatchConvert extends javax.swing.JFrame {
 		jLabel1.setText("\u6587\u4ef6\u540d\u6279\u91cf\u8f6c\u6362");
 
 		jLabel2.setFont(new java.awt.Font("微软雅黑", 0, 18));
-		jLabel2.setText("\u987a\u5229\u00a9V1.1");
+		jLabel2.setText("\u987a\u5229\u00a9V1.2");
 
 		jLabel3.setFont(new java.awt.Font("微软雅黑", 0, 20));
 		jLabel3.setText("\u8def\u5f84\u540d\u79f0");
@@ -218,7 +219,16 @@ public class FileNameBatchConvert extends javax.swing.JFrame {
 		});
 
 		jCheckBox5.setFont(new java.awt.Font("微软雅黑", 0, 18));
-		jCheckBox5.setSelected(true);
+		
+		jCheckBox6.setFont(new java.awt.Font("微软雅黑", 0, 18));
+		/**
+		 * 修改下面的标记来显示更详细的信息
+		 * true 修改单个文件夹或文件信息
+		 * false 不显示，仅显示结果
+		 */
+		// TODO-ShunLi : maybe modify
+		jCheckBox6.setSelected(false);
+		jCheckBox6.setVisible(false);
 
 		jLabel13.setFont(new java.awt.Font("微软雅黑", 0, 18));
 		jLabel13.setText("\u8f6c\u6362\u6587\u4ef6\u5939");
@@ -553,6 +563,9 @@ public class FileNameBatchConvert extends javax.swing.JFrame {
 
 	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
 		Rule rule = null;
+		FileOperaterTool fileNameBatchConvertTool;
+		String result;
+		
 		jTextArea1.setText("");
 
 		String path = jTextField1.getText().trim();
@@ -578,43 +591,67 @@ public class FileNameBatchConvert extends javax.swing.JFrame {
 				}
 
 				info.append("------------------------------------------------\n")
-					.append("大小写转换中...\n")
-					.append("------------------------------------------------\n");
+					.append("大小写转换中...\n");
 				
-				info.append(new FileOperaterTool(rule).fileRename(path, jCheckBox5.isSelected()));
+				fileNameBatchConvertTool = new FileOperaterTool(rule);
+				result = fileNameBatchConvertTool.fileRename(path, jCheckBox5.isSelected());
+				
+				if(jCheckBox6.isSelected()){
+					info.append("\n").append(result);
+				}
+				
+				info.append(fileNameBatchConvertTool.getStatistics());
 
 			}
 			if (jCheckBox2.isSelected()) {
 				rule = Rule.Prefix;
 
 				info.append("------------------------------------------------\n")
-					.append("前缀转换中...\n")
-					.append("------------------------------------------------\n");
+					.append("前缀转换中...\n");
 				
-				info.append(new FileOperaterTool(rule).fileRename(path, jTextField2.getText(), checkFileNameIsNotValid(jTextField3.getText(), info),
-						jCheckBox5.isSelected()));
-
+				fileNameBatchConvertTool = new FileOperaterTool(rule);
+				result = fileNameBatchConvertTool.fileRename(path, jTextField2.getText(), checkFileNameIsNotValid(jTextField3.getText(), info),
+						jCheckBox5.isSelected());
+				
+				if(jCheckBox6.isSelected()){
+					info.append("\n").append(result);
+				}
+				
+				info.append(fileNameBatchConvertTool.getStatistics());
+				
 			}
 			if (jCheckBox3.isSelected()) {
 				rule = Rule.Suffix;
 
 				info.append("------------------------------------------------\n")
-					.append("后缀转换中...\n")
-					.append("------------------------------------------------\n");
+					.append("后缀转换中...\n");
 				
-				info.append(new FileOperaterTool(rule).fileRename(path, jTextField4.getText(), checkFileNameIsNotValid(jTextField5.getText(), info),
-						jCheckBox5.isSelected()));
+				fileNameBatchConvertTool = new FileOperaterTool(rule);
+				result = fileNameBatchConvertTool.fileRename(path, jTextField4.getText(), checkFileNameIsNotValid(jTextField5.getText(), info),
+						jCheckBox5.isSelected());
+				
+				if(jCheckBox6.isSelected()){
+					info.append("\n").append(result);
+				}
+				
+				info.append(fileNameBatchConvertTool.getStatistics());
 
 			}
 			if (jCheckBox4.isSelected()) {
 				rule = Rule.Replace;
 
 				info.append("------------------------------------------------\n")
-					.append("字符串转换中...\n")
-					.append("------------------------------------------------\n");
-
-				info.append(new FileOperaterTool(rule).fileRename(path, jTextField6.getText(), checkFileNameIsNotValid(jTextField7.getText(), info),
-						jCheckBox5.isSelected()));
+					.append("字符串转换中...\n");
+				
+				fileNameBatchConvertTool = new FileOperaterTool(rule);
+				result = fileNameBatchConvertTool.fileRename(path, jTextField6.getText(), checkFileNameIsNotValid(jTextField7.getText(), info),
+						jCheckBox5.isSelected());
+				
+				if(jCheckBox6.isSelected()){
+					info.append("\n").append(result);
+				}
+				
+				info.append(fileNameBatchConvertTool.getStatistics());
 
 			}
 
@@ -675,6 +712,7 @@ public class FileNameBatchConvert extends javax.swing.JFrame {
 	private javax.swing.JCheckBox jCheckBox3;
 	private javax.swing.JCheckBox jCheckBox4;
 	private javax.swing.JCheckBox jCheckBox5;
+	private javax.swing.JCheckBox jCheckBox6;
 	private javax.swing.JLabel jLabel1;
 	private javax.swing.JLabel jLabel10;
 	private javax.swing.JLabel jLabel11;
