@@ -18,6 +18,7 @@ import javax.swing.ButtonGroup;
 import java.awt.Toolkit;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
+import java.awt.FlowLayout;
 
 public class FileNameBatchConvertTool extends JFrame {
 
@@ -54,6 +55,7 @@ public class FileNameBatchConvertTool extends JFrame {
 	 * Create the frame.
 	 */
 	public FileNameBatchConvertTool() {
+		setResizable(false);
 		setTitle("文件名批量转换-顺利(QQ:506817493)");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(FileNameBatchConvertTool.class.getResource("/org/usc/file/operater/img/Ubuntu.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -68,9 +70,11 @@ public class FileNameBatchConvertTool extends JFrame {
 		label.setFont(new Font("Microsoft YaHei", Font.PLAIN, 24));
 
 		JLabel lblv = new JLabel("顺利©V2.0");
+		lblv.setEnabled(false);
 		lblv.setFont(new Font("Microsoft YaHei", Font.PLAIN, 20));
 
 		JPanel panel = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
 		panel.setFont(new Font("SimSun", Font.PLAIN, 12));
 
 		JPanel panel_1 = new JPanel();
@@ -170,21 +174,26 @@ public class FileNameBatchConvertTool extends JFrame {
 							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 756, GroupLayout.PREFERRED_SIZE))
 						.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 855, GroupLayout.PREFERRED_SIZE))
-					.addGap(10)
+						.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(button)
-						.addComponent(button_1)
-						.addComponent(button_2)
-						.addComponent(button_3)
-						.addComponent(button_4))
-					.addContainerGap(51, Short.MAX_VALUE))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(18)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addComponent(button_1)
+								.addComponent(button)
+								.addComponent(button_2)))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(18)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(button_4)
+								.addComponent(button_3))))
+					.addContainerGap(57, Short.MAX_VALUE))
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(854, Short.MAX_VALUE)
+					.addContainerGap(864, Short.MAX_VALUE)
 					.addComponent(lblv)
 					.addGap(42))
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(420, Short.MAX_VALUE)
+					.addContainerGap(430, Short.MAX_VALUE)
 					.addComponent(label)
 					.addGap(410))
 				.addGroup(gl_contentPane.createSequentialGroup()
@@ -193,7 +202,7 @@ public class FileNameBatchConvertTool extends JFrame {
 						.addComponent(panel_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(127, Short.MAX_VALUE))
+					.addContainerGap(137, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -218,22 +227,26 @@ public class FileNameBatchConvertTool extends JFrame {
 							.addComponent(panel_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(button)
-							.addGap(18)
+							.addGap(24)
 							.addComponent(button_1)))
 					.addGap(10)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(button_2)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(button_3)
-							.addGap(10)
-							.addComponent(button_4))
 						.addComponent(label_1)
-						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addGroup(gl_contentPane.createSequentialGroup()
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+									.addGroup(gl_contentPane.createSequentialGroup()
+										.addGap(38)
+										.addComponent(button_3))
+									.addComponent(button_2))
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(button_4))))
+					.addContainerGap(18, Short.MAX_VALUE))
 		);
 
 		JTextArea textArea = new JTextArea();
+		textArea.setEditable(false);
 		scrollPane.setViewportView(textArea);
 		textArea.setFont(new Font("Microsoft YaHei", Font.PLAIN, 16));
 		textArea.setRows(9);
@@ -302,9 +315,9 @@ public class FileNameBatchConvertTool extends JFrame {
 
 		textField = new JTextField();
 		textField.setToolTipText("输入路径或浏览文件夹");
-		textField.setFont(new Font("Microsoft YaHei", Font.PLAIN, 16));
+		textField.setFont(new Font("Microsoft YaHei", Font.PLAIN, 17));
 		panel.add(textField);
-		textField.setColumns(50);
+		textField.setColumns(47);
 		contentPane.setLayout(gl_contentPane);
 	}
 }
