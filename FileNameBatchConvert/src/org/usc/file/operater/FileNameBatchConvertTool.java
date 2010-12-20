@@ -16,6 +16,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.ButtonGroup;
 import java.awt.Toolkit;
+import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
 
 public class FileNameBatchConvertTool extends JFrame {
 
@@ -31,7 +33,6 @@ public class FileNameBatchConvertTool extends JFrame {
 	private JTextField textField_6;
 	private JRadioButton radioButton_2;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
-	private JTextField textField_7;
 
 	/**
 	 * Launch the application.
@@ -56,7 +57,9 @@ public class FileNameBatchConvertTool extends JFrame {
 		setTitle("文件名批量转换-顺利(QQ:506817493)");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(FileNameBatchConvertTool.class.getResource("/org/usc/file/operater/img/Ubuntu.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1024, 647);
+		double width = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+		double height = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+		setBounds((int) ((width-1024)/2), (int) ((height-648)/4), 1024, 648);// 128 = (1280-1024)/2
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -68,6 +71,7 @@ public class FileNameBatchConvertTool extends JFrame {
 		lblv.setFont(new Font("Microsoft YaHei", Font.PLAIN, 20));
 
 		JPanel panel = new JPanel();
+		panel.setFont(new Font("SimSun", Font.PLAIN, 12));
 
 		JPanel panel_1 = new JPanel();
 
@@ -129,10 +133,6 @@ public class FileNameBatchConvertTool extends JFrame {
 		textField_6.setColumns(21);
 		panel_5.add(textField_6);
 
-		textField_7 = new JTextField();
-		textField_7.setFont(new Font("Microsoft YaHei", Font.PLAIN, 16));
-		textField_7.setColumns(10);
-
 		JButton button = new JButton("浏览");
 		button.setToolTipText("打开文件夹");
 		button.setFont(new Font("Microsoft YaHei", Font.PLAIN, 16));
@@ -155,6 +155,8 @@ public class FileNameBatchConvertTool extends JFrame {
 		JButton button_4 = new JButton("打开");
 		button_4.setToolTipText("打开导出的文本文件");
 		button_4.setFont(new Font("Microsoft YaHei", Font.PLAIN, 16));
+
+		JScrollPane scrollPane = new JScrollPane();
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -164,12 +166,12 @@ public class FileNameBatchConvertTool extends JFrame {
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(label_1)
-							.addGap(9)
-							.addComponent(textField_7, 762, 762, 762))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 756, GroupLayout.PREFERRED_SIZE))
 						.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
+						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 855, GroupLayout.PREFERRED_SIZE))
+					.addGap(10)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addComponent(button)
 						.addComponent(button_1)
@@ -227,9 +229,15 @@ public class FileNameBatchConvertTool extends JFrame {
 							.addGap(10)
 							.addComponent(button_4))
 						.addComponent(label_1)
-						.addComponent(textField_7, GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE))
-					.addContainerGap())
+						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
+
+		JTextArea textArea = new JTextArea();
+		scrollPane.setViewportView(textArea);
+		textArea.setFont(new Font("Microsoft YaHei", Font.PLAIN, 16));
+		textArea.setRows(9);
+		textArea.setColumns(16);
 
 				JCheckBox checkBox_3 = new JCheckBox("前缀");
 				checkBox_3.setToolTipText("前缀转换规则");
