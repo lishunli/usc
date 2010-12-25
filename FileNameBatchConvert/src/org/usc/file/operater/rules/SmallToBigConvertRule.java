@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * 小写转大写规则
- * 
+ *
  * @author <a href="http://www.blogjava.net/lishunli/" target="_blank">ShunLi</a>
  * @notes Created on 2010-12-11<br>
  *        Revision of last commit:$Revision$<br>
@@ -69,7 +69,7 @@ public class SmallToBigConvertRule implements ConvertRule {
 	/**
 	 * 将阿拉伯整数数字翻译为汉语小写数字。 其核心思想是按照中文的读法，从后往前每四个数字为一组。每一组最后要加上对应的单位，分别为万、亿等。 每一组中从后往前每个数字后面加上对应的单位，分别为个十百千。 每一组中如果出现零千、零百、零十的情况下去掉单位。 每组中若出现多个连续的零，则通读为一个零。
 	 * 若每一组中若零位于开始或结尾的位置，则不读。
-	 * 
+	 *
 	 * @param num
 	 * @return
 	 */
@@ -97,7 +97,7 @@ public class SmallToBigConvertRule implements ConvertRule {
 
 	/**
 	 * 将小于一万的整数转换为中文汉语小写
-	 * 
+	 *
 	 * @param num
 	 * @return
 	 */
@@ -138,8 +138,16 @@ public class SmallToBigConvertRule implements ConvertRule {
 			if (num.contains(oldName.substring(i, i + 1))) {
 				numBuffer.append(oldName.substring(i, i + 1));
 			} else {
-				if (numBuffer != null && numBuffer.length() > 0 && numBuffer.indexOf(".") == -1) {
-					stringBuffer.append(format(numBuffer.toString()));
+				if (numBuffer != null && numBuffer.length() > 0) {
+					String convertTemp = numBuffer.toString();
+					// 去掉最后的小数点
+					if(convertTemp.endsWith(".") && !".".equals(convertTemp)){
+						convertTemp = convertTemp.substring(0,convertTemp.length()-1);
+						stringBuffer.append(format(convertTemp)).append(".");
+					}else{
+						stringBuffer.append(format(convertTemp));
+					}
+
 					numBuffer.delete(0, numBuffer.length());
 				} else {
 					stringBuffer.append(numBuffer.toString());
