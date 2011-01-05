@@ -33,7 +33,7 @@ import com.opensymphony.xwork2.ActionSupport;
 @Scope("prototype")
 @Results( { @Result(name = "success", location = "/index.jsp"), @Result(name = "input", location = "addUser.jsp") })
 @InterceptorRefs(value = {
-		@InterceptorRef(value = "fileUpload", params = { "maximumSize", "1048576", "allowedTypes",
+		@InterceptorRef(value = "fileUpload", params = { "maximumSize", "2097152", "allowedTypes",
 				"image/bmp,image/x-png,image/png,image/gif,image/jpeg,image/jpg,image/pjpeg" }), @InterceptorRef(value = "defaultStack") })
 public class AddUserAction extends ActionSupport {
 	private static final long serialVersionUID = -4829467290275994251L;
