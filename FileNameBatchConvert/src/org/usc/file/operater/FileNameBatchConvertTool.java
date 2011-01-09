@@ -1,15 +1,20 @@
 package org.usc.file.operater;
 
+import java.awt.Desktop;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.prefs.Preferences;
 import java.util.regex.Matcher;
@@ -116,6 +121,19 @@ public class FileNameBatchConvertTool extends JFrame {
 		JLabel lblv = new JLabel("顺利©V2.0");
 		lblv.setEnabled(false);
 		lblv.setFont(new Font("Microsoft YaHei", Font.PLAIN, 20));
+		lblv.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Desktop desktop = Desktop.getDesktop();
+				try {
+					desktop.browse(new URI("http://blogjava.net/lishunli"));
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				} catch (URISyntaxException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
 
 		JPanel panel = new JPanel();
 		panel.setFont(new Font("SimSun", Font.PLAIN, 12));
