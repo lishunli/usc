@@ -73,7 +73,7 @@ public class AddUserAction extends ActionSupport {
 					@RequiredFieldValidator(fieldName="user.password",shortCircuit = true)},
 			requiredStrings = { 
 					@RequiredStringValidator(fieldName = "user.username", message = "username is null"), 
-					@RequiredStringValidator(fieldName = "user.password", message = "password is null", trim = true)
+					@RequiredStringValidator(fieldName = "user.password", message = "password is null", trim = false)
 			})
 	public String execute() throws Exception {
 		if (image != null) {
