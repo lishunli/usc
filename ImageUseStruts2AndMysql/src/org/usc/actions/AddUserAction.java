@@ -17,6 +17,9 @@ import org.usc.beans.User;
 import org.usc.services.IUserService;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.validator.annotations.RequiredFieldValidator;
+import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
+import com.opensymphony.xwork2.validator.annotations.Validations;
 
 /**
  * Access : add-user.action
@@ -32,9 +35,9 @@ import com.opensymphony.xwork2.ActionSupport;
 @Controller
 @Scope("prototype")
 @Results( { @Result(name = "success", location = "/index.jsp"), @Result(name = "input", location = "addUser.jsp") })
-@InterceptorRefs(value = {
-		@InterceptorRef(value = "fileUpload", params = { "maximumSize", "2097152", "allowedTypes",
-				"image/bmp,image/x-png,image/png,image/gif,image/jpeg,image/jpg,image/pjpeg" }), @InterceptorRef(value = "defaultStack") })
+@InterceptorRefs(value = { 
+		@InterceptorRef(value = "fileUpload", params = { "maximumSize", "2097152", "allowedTypes", "image/bmp,image/x-png,image/png,image/gif,image/jpeg,image/jpg,image/pjpeg" }), 
+		@InterceptorRef(value = "defaultStack")})
 public class AddUserAction extends ActionSupport {
 	private static final long serialVersionUID = -4829467290275994251L;
 
@@ -63,24 +66,15 @@ public class AddUserAction extends ActionSupport {
 	public void setUserService(IUserService userService) {
 		this.userService = userService;
 	}
-
-	@Override
-	public void validate() {
-		if (user == null) {
-			this.addFieldError("user", "user is null");
-		}
-		else {
-			if (user.getUsername() == null || "".equals(user.getUsername().trim())) {
-				this.addFieldError("user.username", "username is null");
-			}
-			if (user.getPassword() == null || "".equals(user.getPassword().trim())) {
-				this.addFieldError("user.password", "password is null");
-			}
-		}
-
-	}
-
-	@Override
+	
+	@Validations(
+			requiredFields = {
+					@RequiredFieldValidator(fieldName="user.username",shortCircuit = true),
+					@RequiredFieldValidator(fieldName="user.password",shortCircuit = true)},
+			requiredStrings = { 
+					@RequiredStringValidator(fieldName = "user.username", message = "username is null"), 
+					@RequiredStringValidator(fieldName = "user.password", message = "password is null", trim = true)
+			})
 	public String execute() throws Exception {
 		if (image != null) {
 			FileInputStream fin = new FileInputStream(image);// File 转 InputStream
