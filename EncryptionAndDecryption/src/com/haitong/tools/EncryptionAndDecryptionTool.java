@@ -145,7 +145,6 @@ public class EncryptionAndDecryptionTool extends JFrame {
 
 		JButton button = new JButton("Decrypt");
 		button.setToolTipText("解密");
-		button.setBackground(Color.WHITE);
 		button.setForeground(Color.MAGENTA);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
