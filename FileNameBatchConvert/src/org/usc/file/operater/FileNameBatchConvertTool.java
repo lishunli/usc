@@ -430,13 +430,11 @@ public class FileNameBatchConvertTool extends JFrame {
 			}
 		});
 		checkBox_2.setToolTipText("大小写转换规则");
-		checkBox_2.setSelected(true);
 		checkBox_2.setFont(new Font("Microsoft YaHei", Font.BOLD, 16));
 		panel_2.add(checkBox_2);
 
 		radioButton = new JRadioButton("大写转小写");
 		radioButton.setToolTipText("例: 一.txt -> 1.txt");
-		radioButton.setSelected(true);
 		buttonGroup.add(radioButton);
 		radioButton.setFont(new Font("Microsoft YaHei", Font.PLAIN, 16));
 		panel_2.add(radioButton);
@@ -560,9 +558,8 @@ public class FileNameBatchConvertTool extends JFrame {
 
 		if (open == JFileChooser.APPROVE_OPTION) {
 			String path = fileChooser.getSelectedFile().getAbsolutePath();
-
-			textField.setText(path);
 			pref.put("lastpath", path);
+			textField.setText(path);
 		}
 	}
 
@@ -578,6 +575,7 @@ public class FileNameBatchConvertTool extends JFrame {
 		textArea.setText("");
 
 		String path = textField.getText().trim();
+		pref.put("lastpath", path);
 
 		if (path == null || path.length() == 0) {
 			textArea.setText("请输入路径");
