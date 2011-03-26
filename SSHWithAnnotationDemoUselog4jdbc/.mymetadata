@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-module
   type="WEB"
-  name="SSHWithAnnotationDemo"
+  name="SSHWithAnnotationDemoUseLog4jdbc"
   id="myeclipse.1263731764396"
-  context-root="/SSHWithAnnotationDemo"
+  context-root="/SSHWithAnnotationDemoUseLog4jdbc"
   j2ee-spec="5.0"
-  archive="SSHWithAnnotationDemo.war">
+  archive="SSHWithAnnotationDemoUseLog4jdbc.war">
   <attributes>
-    <attribute name="webrootdir" value="WebRoot" />
+    <attribute name="webrootdir" value="/WebRoot" />
   </attributes>
 </project-module>
 
