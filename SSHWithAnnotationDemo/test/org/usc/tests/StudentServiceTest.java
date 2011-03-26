@@ -1,9 +1,9 @@
 package org.usc.tests;
 
+import static org.junit.Assert.assertTrue;
+
 import java.util.Date;
 import java.util.LinkedHashMap;
-
-import javax.annotation.Resource;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,7 +15,6 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import org.usc.beans.Student;
 import org.usc.beans.base.QueryResult;
 import org.usc.services.student.IStudentService;
-import static org.junit.Assert.*;
 
 /**
  * 

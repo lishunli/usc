@@ -5,6 +5,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.usc.actions.base.BaseActionSupport;
 import org.usc.beans.Student;
@@ -29,6 +31,8 @@ import com.opensymphony.xwork2.ActionContext;
 { @Result(name = "success", location = "student/studentList.jsp"), @Result(name = "input", location = "/index.jsp") })
 public class StudentListAction extends BaseActionSupport
 {
+	 private Logger logger = LoggerFactory.getLogger(getClass());
+	
 	@Autowired
 	private IStudentService studentService;
 
@@ -50,6 +54,8 @@ public class StudentListAction extends BaseActionSupport
 		 * request.setAttribute("pageView", pageView)中key尽量为pageView，不然需要修改代码
 		 */
 		request.setAttribute("pageView", pageView);
+		
+		logger.info("Total Record " + pageView.getTotalRecord() );
 		return SUCCESS;
 	}
 

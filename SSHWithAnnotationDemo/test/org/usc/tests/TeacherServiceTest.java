@@ -2,8 +2,6 @@ package org.usc.tests;
 
 import java.util.LinkedHashMap;
 
-import javax.persistence.OrderBy;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
