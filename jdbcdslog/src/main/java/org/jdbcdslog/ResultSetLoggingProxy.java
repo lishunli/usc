@@ -12,13 +12,13 @@ import org.slf4j.LoggerFactory;
 public class ResultSetLoggingProxy  implements InvocationHandler {
 
 	static Logger logger = LoggerFactory.getLogger(ResultSetLoggingProxy.class);
-	
+
 	Object target = null;
-	
+
 	public ResultSetLoggingProxy(ResultSet target) {
 		this.target = target;
 	}
-	
+
 	public Object invoke(Object proxy, Method method, Object[] args)
 			throws Throwable {
 		Object r = null;
@@ -37,13 +37,16 @@ public class ResultSetLoggingProxy  implements InvocationHandler {
 			for(int i = 2; i <= md.getColumnCount(); i++)
 				s.append(", ").append(LogUtils.sqlValueToString(rs.getObject(i)));
 			s.append("}");
-			ResultSetLogger.info(s.toString());
-		} 
+
+			if(ConfigurationParameters.showStatementClass){
+				ResultSetLogger.info(s.toString());
+			}
+		}
 		return r;
 	}
 
 	static Object wrapByResultSetProxy(ResultSet r) {
-		return Proxy.newProxyInstance(r.getClass().getClassLoader(), new Class[]{ResultSet.class}, 
+		return Proxy.newProxyInstance(r.getClass().getClassLoader(), new Class[]{ResultSet.class},
 				new ResultSetLoggingProxy(r));
 	}
 

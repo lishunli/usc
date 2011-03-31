@@ -13,11 +13,11 @@ import org.slf4j.LoggerFactory;
 public class StatementLoggingProxy implements InvocationHandler {
 
 	static Logger logger = LoggerFactory.getLogger(StatementLoggingProxy.class);
-	
+
 	Object targetStatement = null;
-	
+
 	static List executeMethods = Arrays.asList(new String[]{"addBatch", "execute", "executeQuery", "executeUpdate"});
-	
+
 	public StatementLoggingProxy(Statement statement) {
 		targetStatement = statement;
 	}
@@ -39,16 +39,25 @@ public class StatementLoggingProxy implements InvocationHandler {
 				long t2 = System.currentTimeMillis();
 				StringBuffer sb = LogUtils.createLogEntry(method, args == null ? null : args[0], null, null);
 				long time = t2 - t1;
-				String logEntry = sb.append(" ").append(time).append(" ms.").toString();
-				StatementLogger.info(logEntry);
-				if(time >= ConfigurationParameters.slowQueryThreshold)
-					SlowQueryLogger.info(logEntry);
+
+				if(ConfigurationParameters.showTime){
+					sb.append(" ").append(t2 - t1).append(" ms.");
+				}
+
+				if(ConfigurationParameters.showStatementClass){
+					StatementLogger.info(sb.toString());
+				}
+
+				if(time >= ConfigurationParameters.slowQueryThreshold){
+					SlowQueryLogger.info(sb.toString());
+				}
+
 			}
 		} catch(Throwable t) {
 			LogUtils.handleException(t, StatementLogger.getLogger(), LogUtils.createLogEntry(method, args[0], null, null));
 		}
 		return r;
 	}
-	
-	
+
+
 }

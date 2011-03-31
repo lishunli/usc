@@ -13,13 +13,13 @@ import org.slf4j.LoggerFactory;
 public class CallableStatementLoggingProxy extends PreparedStatementLoggingProxy implements InvocationHandler {
 
 	static Logger logger = LoggerFactory.getLogger(CallableStatementLoggingProxy.class);
-	
+
 	Map namedParameters = new TreeMap();
-	
+
 	public CallableStatementLoggingProxy(CallableStatement ps, String sql) {
 		super(ps, sql);
 	}
-	
+
 	public Object invoke(Object proxy, Method method, Object[] args)
 			throws Throwable {
 		String methodName = "invoke() ";
@@ -43,19 +43,28 @@ public class CallableStatementLoggingProxy extends PreparedStatementLoggingProxy
 			if(toLog) {
 				long t2 = System.currentTimeMillis();
 				long time = t2 - t1;
+
 				StringBuffer s = LogUtils.createLogEntry(method, sql, parametersToString(), namedParameters.toString());
-				String logEntry = s.append(" ").append(t2 - t1).append(" ms.").toString();
-				StatementLogger.info(logEntry);
-				if(time >= ConfigurationParameters.slowQueryThreshold)
-					SlowQueryLogger.info(logEntry);
+
+				if(ConfigurationParameters.showTime){
+					s.append(" ").append(t2 - t1).append(" ms.");
+				}
+
+				if(ConfigurationParameters.showStatementClass){
+					StatementLogger.info(s.toString());
+				}
+
+				if(time >= ConfigurationParameters.slowQueryThreshold){
+					SlowQueryLogger.info(s.toString());
+				}
 			}
 			if(r instanceof ResultSet)
 				r = ResultSetLoggingProxy.wrapByResultSetProxy((ResultSet)r);
 		} catch(Throwable t) {
-			LogUtils.handleException(t, StatementLogger.getLogger(), 
+			LogUtils.handleException(t, StatementLogger.getLogger(),
 					LogUtils.createLogEntry(method, sql, parametersToString(), namedParameters.toString()));
 		}
-		return r;	
+		return r;
 	}
 
 }

@@ -14,24 +14,24 @@ import org.slf4j.LoggerFactory;
 public class PreparedStatementLoggingProxy implements InvocationHandler {
 
 	static Logger logger = LoggerFactory.getLogger(PreparedStatementLoggingProxy.class);
-	
+
 	TreeMap parameters = new TreeMap();
-	
+
 	Object target = null;
-	
+
 	String sql = null;
-		
+
 	static List setMethods = Arrays.asList(new String[]{"setAsciiStream", "setBigDecimal", "setBinaryStream"
 			, "setBoolean", "setByte", "setBytes", "setCharacterStream", "setDate", "setDouble", "setFloat"
 			, "setInt", "setLong", "setObject", "setShort", "setString", "setTime", "setTimestamp", "setURL"});
-	
+
 	static List executeMethods = Arrays.asList(new String[]{"addBatch", "execute", "executeQuery", "executeUpdate"});
-	
+
 	public PreparedStatementLoggingProxy(PreparedStatement ps, String sql) {
 		target = ps;
 		this.sql = sql;
 	}
-	
+
 	public Object invoke(Object proxy, Method method, Object[] args)
 			throws Throwable {
 		Object r = null;
@@ -49,14 +49,24 @@ public class PreparedStatementLoggingProxy implements InvocationHandler {
 			if(toLog) {
 				long t2 = System.currentTimeMillis();
 				long time = t2 - t1;
-				StringBuffer sb = LogUtils.createLogEntry(method, sql, parametersToString(), null);
-				String logEntry = sb.append(" ").append(time).append(" ms.").toString();
-				StatementLogger.info(logEntry);
-				if(time >= ConfigurationParameters.slowQueryThreshold)
-					SlowQueryLogger.info(logEntry);
+
+//				StringBuffer sb = LogUtils.createLogEntry(method, sql, parametersToString(), null);
+				StringBuffer sb = LogUtils.createLogEntry(sql, parameters);
+
+				if(ConfigurationParameters.showTime){
+					sb.append(" ").append(t2 - t1).append(" ms.");
+				}
+
+				if(ConfigurationParameters.showStatementClass){
+					StatementLogger.info(sb.toString());
+				}
+
+				if(time >= ConfigurationParameters.slowQueryThreshold){
+					SlowQueryLogger.info(sb.toString());
+				}
 			}
 			if(r instanceof ResultSet)
-				r = ResultSetLoggingProxy.wrapByResultSetProxy((ResultSet)r); 
+				r = ResultSetLoggingProxy.wrapByResultSetProxy((ResultSet)r);
 		} catch(Throwable t) {
 			LogUtils.handleException(t, StatementLogger.getLogger(), LogUtils.createLogEntry(method, sql, parametersToString(), null));
 		}
