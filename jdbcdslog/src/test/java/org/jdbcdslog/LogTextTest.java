@@ -3,7 +3,6 @@ package org.jdbcdslog;
 import java.io.StringReader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.Properties;
 
 import junit.framework.Test;

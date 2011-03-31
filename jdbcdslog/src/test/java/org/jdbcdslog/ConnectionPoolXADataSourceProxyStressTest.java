@@ -2,7 +2,6 @@ package org.jdbcdslog;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

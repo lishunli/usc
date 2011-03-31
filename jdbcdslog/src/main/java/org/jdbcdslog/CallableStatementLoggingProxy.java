@@ -3,7 +3,6 @@ package org.jdbcdslog;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.sql.CallableStatement;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Map;
 import java.util.TreeMap;

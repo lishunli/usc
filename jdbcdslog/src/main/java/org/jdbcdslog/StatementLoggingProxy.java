@@ -2,10 +2,7 @@ package org.jdbcdslog;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
-import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.SQLWarning;
 import java.sql.Statement;
 import java.util.Arrays;
 import java.util.List;

@@ -9,14 +9,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class LogUtils {
-	
+
 	static Logger logger = LoggerFactory.getLogger(LogUtils.class);
-	
-	public static void handleException(Throwable e, Logger l, StringBuffer msg) 
+
+	public static void handleException(Throwable e, Logger l, StringBuffer msg)
 		throws Throwable {
 		if(e instanceof InvocationTargetException) {
 			Throwable t = ((InvocationTargetException)e).getTargetException();
-			if(l.isErrorEnabled()) 
+			if(l.isErrorEnabled())
 				l.error(msg + " throws exception: " + t.getClass().getName() + ": "
 					+ t.getMessage(), t);
 			throw t;
@@ -27,7 +27,7 @@ public class LogUtils {
 			throw e;
 		}
 	}
-	
+
 	public static StringBuffer createLogEntry(Method method, Object sql, String parameters, String namedParameters) {
 		String methodName = "createLogEntry() ";
 		if(logger.isDebugEnabled()) logger.debug(methodName);
@@ -80,13 +80,15 @@ public class LogUtils {
 		sb.append("'");
 		return sb.toString();
 	}
-	
+
 	public static String getStackTrace() {
-		if(!ConfigurationParameters.printStackTrace)
+		return "";
+
+/*		if(!ConfigurationParameters.printStackTrace)
 			return "";
 		StackTraceElement stackTraces[] = new Throwable().getStackTrace();
 		StringBuffer sb = new StringBuffer(" at ");
 		sb.append(stackTraces[4]);
-		return sb.toString();
+		return sb.toString();*/
 	}
 }

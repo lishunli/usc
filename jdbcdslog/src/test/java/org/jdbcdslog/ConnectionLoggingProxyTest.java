@@ -3,11 +3,11 @@ package org.jdbcdslog;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-import org.hsqldb.jdbc.jdbcDataSource;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+
+import org.hsqldb.jdbc.jdbcDataSource;
 
 public class ConnectionLoggingProxyTest extends TestCase {
 	public ConnectionLoggingProxyTest(String name) {
