@@ -51,9 +51,7 @@ public class CallableStatementLoggingProxy extends PreparedStatementLoggingProxy
                     s.append(" ").append(t2 - t1).append(" ms.");
                 }
 
-                if (ConfigurationParameters.showStatementClass) {
-                    StatementLogger.info(s.toString());
-                }
+                StatementLogger.info(s.toString());
 
                 if (time >= ConfigurationParameters.slowQueryThreshold) {
                     SlowQueryLogger.info(s.toString());

@@ -12,13 +12,10 @@ public class ConfigurationParameters {
     static Logger logger = LoggerFactory.getLogger(ConfigurationParameters.class);
 
     static long slowQueryThreshold = Long.MAX_VALUE;
-
-    static boolean printStackTrace = true;
-
     static boolean logText = false;
 
     static Boolean showTime = false;
-    static Boolean showStatementClass = false;
+    static boolean printStackTrace = false;
 
     static {
         ClassLoader loader = ConfigurationParameters.class.getClassLoader();
@@ -35,22 +32,17 @@ public class ConfigurationParameters {
             if (slowQueryThreshold == -1)
                 slowQueryThreshold = Long.MAX_VALUE;
 
-            String sLogText = props.getProperty("jdbcdslog.logText");
+            String sLogText = props.getProperty("jdbcdslog.logText", "false");
             if ("true".equalsIgnoreCase(sLogText))
                 logText = true;
 
-            String sprintStackTrace = props.getProperty("jdbcdslog.printStackTrace");
+            String sprintStackTrace = props.getProperty("jdbcdslog.printStackTrace", "false");
             if ("true".equalsIgnoreCase(sprintStackTrace))
                 printStackTrace = true;
 
             String isShowTime = props.getProperty("jdbcdslog.showTime", "false");
             if ("true".equalsIgnoreCase(isShowTime)) {
                 showTime = true;
-            }
-
-            String isShowStatementClass = props.getProperty("jdbcdslog.showStatementClass", "false");
-            if ("true".equalsIgnoreCase(isShowStatementClass)) {
-                showStatementClass = true;
             }
 
         } catch (Exception e) {

@@ -37,9 +37,7 @@ public class ResultSetLoggingProxy implements InvocationHandler {
                 s.append(", ").append(LogUtils.sqlValueToString(rs.getObject(i)));
             s.append("}");
 
-            if (ConfigurationParameters.showStatementClass) {
-                ResultSetLogger.info(s.toString());
-            }
+            ResultSetLogger.info(s.toString());
         }
         return r;
     }

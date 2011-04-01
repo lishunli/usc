@@ -41,9 +41,7 @@ public class StatementLoggingProxy implements InvocationHandler {
                     sb.append(" ").append(t2 - t1).append(" ms.");
                 }
 
-                if (ConfigurationParameters.showStatementClass) {
-                    StatementLogger.info(sb.toString());
-                }
+                StatementLogger.info(sb.toString());
 
                 if (time >= ConfigurationParameters.slowQueryThreshold) {
                     SlowQueryLogger.info(sb.toString());
