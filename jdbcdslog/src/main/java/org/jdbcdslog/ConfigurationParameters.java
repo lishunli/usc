@@ -43,7 +43,7 @@ public class ConfigurationParameters {
             if ("true".equalsIgnoreCase(sprintStackTrace))
                 printStackTrace = true;
 
-            String isShowTime = props.getProperty("jdbcdslog.printStackTrace", "false");
+            String isShowTime = props.getProperty("jdbcdslog.showTime", "false");
             if ("true".equalsIgnoreCase(isShowTime)) {
                 showTime = true;
             }
