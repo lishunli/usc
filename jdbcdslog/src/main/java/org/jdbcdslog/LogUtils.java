@@ -77,7 +77,7 @@ public class LogUtils {
          */
 
         if (object == null) {
-            return "(null)";
+            return "null";
         } else if (object instanceof String) {
             return "'" + object + "'";
         } else if (object instanceof Timestamp) {
