@@ -9,73 +9,72 @@ import org.slf4j.LoggerFactory;
 
 public class ConfigurationParameters {
 
-	static Logger logger = LoggerFactory.getLogger(ConfigurationParameters.class);
+    static Logger logger = LoggerFactory.getLogger(ConfigurationParameters.class);
 
-	static long slowQueryThreshold = Long.MAX_VALUE;
+    static long slowQueryThreshold = Long.MAX_VALUE;
 
-	static boolean printStackTrace = true;
+    static boolean printStackTrace = true;
 
+    static boolean logText = false;
 
-	static boolean logText = false;
+    static Boolean showTime = false;
+    static Boolean showStatementClass = false;
 
-	static Boolean showTime = false;
-	static Boolean showStatementClass = false;
+    static {
+        ClassLoader loader = ConfigurationParameters.class.getClassLoader();
+        InputStream in = null;
+        try {
+            in = loader.getResourceAsStream("jdbcdslog.properties");
+            Properties props = new Properties(System.getProperties());
+            if (in != null)
+                props.load(in);
 
-	static {
-		ClassLoader loader = ConfigurationParameters.class.getClassLoader();
-		InputStream in = null;
-		try {
-			in = loader.getResourceAsStream("jdbcdslog.properties");
-			Properties props = new Properties(System.getProperties());
-			if (in != null)
-				props.load(in);
+            String sSlowQueryThreshold = props.getProperty("jdbcdslog.slowQueryThreshold");
+            if (sSlowQueryThreshold != null && isLong(sSlowQueryThreshold))
+                slowQueryThreshold = Long.parseLong(sSlowQueryThreshold);
+            if (slowQueryThreshold == -1)
+                slowQueryThreshold = Long.MAX_VALUE;
 
-			String sSlowQueryThreshold = props.getProperty("jdbcdslog.slowQueryThreshold");
-			if (sSlowQueryThreshold != null && isLong(sSlowQueryThreshold))
-				slowQueryThreshold = Long.parseLong(sSlowQueryThreshold);
-			if (slowQueryThreshold == -1)
-				slowQueryThreshold = Long.MAX_VALUE;
+            String sLogText = props.getProperty("jdbcdslog.logText");
+            if ("true".equalsIgnoreCase(sLogText))
+                logText = true;
 
-			String sLogText = props.getProperty("jdbcdslog.logText");
-			if ("true".equalsIgnoreCase(sLogText))
-				logText = true;
+            String sprintStackTrace = props.getProperty("jdbcdslog.printStackTrace");
+            if ("true".equalsIgnoreCase(sprintStackTrace))
+                printStackTrace = true;
 
-			String sprintStackTrace = props.getProperty("jdbcdslog.printStackTrace");
-			if ("true".equalsIgnoreCase(sprintStackTrace))
-				printStackTrace = true;
+            String isShowTime = props.getProperty("jdbcdslog.printStackTrace", "false");
+            if ("true".equalsIgnoreCase(isShowTime)) {
+                showTime = true;
+            }
 
-			String isShowTime = props.getProperty("jdbcdslog.printStackTrace","false");
-			if("true".equalsIgnoreCase(isShowTime)){
-				showTime = true;
-			}
+            String isShowStatementClass = props.getProperty("jdbcdslog.showStatementClass", "false");
+            if ("true".equalsIgnoreCase(isShowStatementClass)) {
+                showStatementClass = true;
+            }
 
-			String isShowStatementClass = props.getProperty("jdbcdslog.showStatementClass","false");
-			if("true".equalsIgnoreCase(isShowStatementClass)){
-				showStatementClass = true;
-			}
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+        } finally {
+            if (in != null)
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    logger.error(e.getMessage(), e);
+                }
+        }
+    }
 
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
-		} finally {
-			if (in != null)
-				try {
-					in.close();
-				} catch (IOException e) {
-					logger.error(e.getMessage(), e);
-				}
-		}
-	}
+    public static void setLogText(boolean alogText) {
+        logText = alogText;
+    }
 
-	public static void setLogText(boolean alogText) {
-		logText = alogText;
-	}
-
-	private static boolean isLong(String sSlowQueryThreshold) {
-		try {
-			Long.parseLong(sSlowQueryThreshold);
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
-	}
+    private static boolean isLong(String sSlowQueryThreshold) {
+        try {
+            Long.parseLong(sSlowQueryThreshold);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }
