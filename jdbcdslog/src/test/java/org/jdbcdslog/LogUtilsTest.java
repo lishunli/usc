@@ -16,9 +16,9 @@ public class LogUtilsTest {
         parameters.put(1, "INSTR03011");
         parameters.put(2, 1);
         parameters.put(3, new Date());
-        parameters.put(4, new Timestamp(12000));
+        parameters.put(4, new Timestamp(12000000000L));
 
-        utils.createLogEntry(sql, parameters);
+        System.out.println(utils.createLogEntry(sql, parameters));;
 
     }
 

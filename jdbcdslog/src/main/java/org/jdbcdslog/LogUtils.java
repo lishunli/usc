@@ -83,7 +83,7 @@ public class LogUtils {
         } else if (object instanceof Timestamp) {
             return "to_timestamp('" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(object) + "', 'yyyy-MM-dd hh24:mi:ss.ff3')";
         } else if (object instanceof Date) {
-            return "to_date('" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(object) + "', 'yyyy-MM-dd hh24:mi:ss')";
+            return "to_date('" + new SimpleDateFormat("yyyy-MM-dd").format(object) + "', 'yyyy-MM-dd')";
         } else if (object instanceof Boolean) {
             return ((Boolean) object).booleanValue() ? "Y" : "N";
         } else {
