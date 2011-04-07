@@ -57,7 +57,7 @@ public class LogUtils {
             Matcher m = p.matcher(sql);
             StringBuffer stringBuffer = new StringBuffer();
 
-            while (m.find()) {
+            while (m.find() && parameters.size() >= questionMarkCount) {
                 m.appendReplacement(stringBuffer, sqlValueToString(parameters.get(questionMarkCount)));
                 questionMarkCount++;
             }
@@ -76,7 +76,7 @@ public class LogUtils {
         if (object == null) {
             return "null";
         } else if (object instanceof String) {
-            return "'" + ((String)object).replaceAll("'", "''") + "'"; // Oracle sql ' is special characters
+            return "'" + ((String) object).replaceAll("'", "''").replaceAll("\\$", "\\\\\\$") + "'"; // Oracle sql ' is special characters
         } else if (object instanceof Timestamp) {
             return "to_timestamp('" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(object) + "', 'yyyy-MM-dd hh24:mi:ss.ff3')";
         } else if (object instanceof Date) {
