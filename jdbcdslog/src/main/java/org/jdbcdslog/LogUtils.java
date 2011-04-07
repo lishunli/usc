@@ -1,7 +1,5 @@
 package org.jdbcdslog;
 
-import java.io.IOException;
-import java.io.Reader;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.Timestamp;
@@ -13,7 +11,7 @@ import java.util.regex.Pattern;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+@SuppressWarnings("rawtypes")
 public class LogUtils {
 
     static Logger logger = LoggerFactory.getLogger(LogUtils.class);
@@ -75,11 +73,10 @@ public class LogUtils {
         /*
          * if (o == null) return "null"; if (o instanceof String) return "'" + o.toString() + "'"; else if (o instanceof Reader && ConfigurationParameters.logText) { return readFromReader((Reader) o); } else return o.toString();
          */
-
         if (object == null) {
             return "null";
         } else if (object instanceof String) {
-            return "'" + object + "'";
+            return "'" + ((String)object).replaceAll("'", "''") + "'"; // Oracle sql ' is special characters
         } else if (object instanceof Timestamp) {
             return "to_timestamp('" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(object) + "', 'yyyy-MM-dd hh24:mi:ss.ff3')";
         } else if (object instanceof Date) {
@@ -89,29 +86,6 @@ public class LogUtils {
         } else {
             return object.toString();
         }
-    }
-
-    private static String readFromReader(Reader sr) {
-        String methodName = "readFromReader() ";
-        StringBuffer sb = new StringBuffer();
-        int read = 0;
-        char buf[] = new char[1024];
-        try {
-            sr.reset();
-            do {
-                read = sr.read(buf, 0, 1024);
-                if (logger.isDebugEnabled())
-                    logger.debug(methodName + "read = " + read);
-                if (read != -1)
-                    sb.append(buf, 0, read);
-            } while (read != -1);
-            sr.reset();
-        } catch (IOException e) {
-            logger.error(e.getMessage(), e);
-        }
-        sb.insert(0, "'");
-        sb.append("'");
-        return sb.toString();
     }
 
     public static String getStackTrace() {

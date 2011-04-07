@@ -10,15 +10,14 @@ public class LogUtilsTest {
 
     @Test
     public void testCreateLogEntry() {
-        LogUtils utils = new LogUtils();
         String sql = "select * from mc_instr where instr_cde = ? and instcl_id = ? instrumentBusinessDate = ? and last_updat_time = ?";
         TreeMap<Integer, Object> parameters = new TreeMap<Integer, Object>();
-        parameters.put(1, "INSTR03011");
+        parameters.put(1, "INSTR0'30'11");
         parameters.put(2, 1);
         parameters.put(3, new Date());
         parameters.put(4, new Timestamp(12000000000L));
 
-        System.out.println(utils.createLogEntry(sql, parameters));;
+        System.out.println(LogUtils.createLogEntry(sql, parameters));;
 
     }
 

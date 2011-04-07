@@ -10,6 +10,7 @@ import java.util.TreeMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@SuppressWarnings({"unchecked","rawtypes"})
 public class CallableStatementLoggingProxy extends PreparedStatementLoggingProxy implements InvocationHandler {
 
     static Logger logger = LoggerFactory.getLogger(CallableStatementLoggingProxy.class);

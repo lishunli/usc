@@ -19,6 +19,7 @@ import javax.sql.XADataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@SuppressWarnings({"unchecked","rawtypes"})
 public class DataSourceProxyBase implements Serializable {
 
     private static final long serialVersionUID = -1209576641924549514L;

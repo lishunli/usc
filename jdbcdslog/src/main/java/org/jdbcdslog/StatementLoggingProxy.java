@@ -9,13 +9,13 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 public class StatementLoggingProxy implements InvocationHandler {
 
     static Logger logger = LoggerFactory.getLogger(StatementLoggingProxy.class);
 
     Object targetStatement = null;
 
+    @SuppressWarnings("rawtypes")
     static List executeMethods = Arrays.asList(new String[] { "addBatch", "execute", "executeQuery", "executeUpdate" });
 
     public StatementLoggingProxy(Statement statement) {

@@ -14,6 +14,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@SuppressWarnings("rawtypes")
 public class GenericLoggingProxy implements InvocationHandler {
 
     static Logger logger = LoggerFactory.getLogger(GenericLoggingProxy.class);
