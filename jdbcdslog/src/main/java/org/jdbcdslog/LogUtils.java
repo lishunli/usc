@@ -57,7 +57,7 @@ public class LogUtils {
             Matcher m = p.matcher(sql);
             StringBuffer stringBuffer = new StringBuffer();
 
-            while (m.find() && parameters.size() >= questionMarkCount) {
+            while (m.find()) {
                 m.appendReplacement(stringBuffer, sqlValueToString(parameters.get(questionMarkCount)));
                 questionMarkCount++;
             }
