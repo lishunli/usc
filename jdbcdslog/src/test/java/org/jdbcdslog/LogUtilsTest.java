@@ -15,9 +15,9 @@ public class LogUtilsTest {
         parameters.put(1, "INSTR0'30'11");
         parameters.put(2, 1);
         parameters.put(3, new Date());
-        parameters.put(4, new Timestamp(12000000000L));
+        parameters.put(4, new Timestamp(System.currentTimeMillis()));
 
-        System.out.println(LogUtils.createLogEntry(sql, parameters));;
+        System.out.println(LogUtils.createLogEntry(sql, parameters));
 
     }
 
