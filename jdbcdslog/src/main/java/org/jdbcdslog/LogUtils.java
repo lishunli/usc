@@ -76,7 +76,7 @@ public class LogUtils {
         if (object == null) {
             return "null";
         } else if (object instanceof String) {
-            return "'" + ((String) object).replaceAll("'", "''").replaceAll("\\$", "\\\\\\$") + "'"; // Oracle sql ' is special characters
+            return "'" + ((String) object).replaceAll("'", "''").replaceAll("\\\\", "\\\\\\\\").replaceAll("\\$", "\\\\\\$") + "'"; // Oracle sql ' is special characters
         } else if (object instanceof Timestamp) {
             return "to_timestamp('" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(object) + "', 'yyyy-MM-dd hh24:mi:ss.ff3')";
         } else if (object instanceof Date) {

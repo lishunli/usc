@@ -12,7 +12,7 @@
 	<appender name="out" class="org.apache.log4j.AsyncAppender">
     	<param name="blocking" value="false"/>
     	<param name="bufferSize" value="100000"/>
-    	<appender-ref ref="fileout"/>
+<!--    	<appender-ref ref="fileout"/>-->
   	</appender>
   	<logger name = "org.jdbcdslog">
   		<level value = "all"/>
