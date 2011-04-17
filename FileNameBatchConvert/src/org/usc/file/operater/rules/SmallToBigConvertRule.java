@@ -132,6 +132,13 @@ public class SmallToBigConvertRule implements ConvertRule {
 		List<String> num = Arrays.asList(str);
 
 		StringBuffer stringBuffer = new StringBuffer();
+
+		int index = oldName.lastIndexOf("\\");
+		if (index != -1) {
+			stringBuffer.append(oldName.substring(0, index + 1));
+			oldName = oldName.substring(index + 1);
+		}
+
 		StringBuffer numBuffer = new StringBuffer();
 
 		for (int i = 0; i < oldName.length(); i++) {

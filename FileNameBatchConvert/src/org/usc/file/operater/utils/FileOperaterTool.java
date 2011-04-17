@@ -246,19 +246,20 @@ public class FileOperaterTool {
 	}
 
 
-	///////////////////
+	// /////////////////
 	// Internal use
-	//////////////////
+	// ////////////////
 	private String moveFolder(String oldPath, String newPath) {
 		StringBuffer infos = new StringBuffer();
 		try {
 			FileUtils.moveDirectory(new File(oldPath), new File(newPath));
+
 			this.statisticsInfo.addConvertFolderNum();
 
 			infos.append("文件夹\"" + oldPath + "\"转换为\"" + newPath + "\"");
 		} catch (IOException e) {
-			infos.append("文件夹\"" + oldPath + "\"转换失败，请查看是否存在文件夹重名");
-//			infos.append(e.getMessage());
+			infos.append("文件夹\"" + oldPath + "\"转换失败，请查看是否存在文件夹重名\n");
+			infos.append(e.getMessage());
 		}
 
 		return infos.toString();
