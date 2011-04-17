@@ -1,16 +1,16 @@
 package org.usc.file.operater.utils;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.IOException;
 
+import org.apache.commons.io.FileUtils;
 import org.usc.file.operater.rules.ConvertFactory;
 import org.usc.file.operater.rules.ConvertRule;
 import org.usc.file.operater.rules.Rule;
 
 /**
  * 文件操作工具
- * 
+ *
  * @author <a href="http://www.blogjava.net/lishunli/" target="_blank">ShunLi</a>
  * @notes Created on 2010-12-11<br>
  *        Revision of last commit:$Revision$<br>
@@ -20,10 +20,7 @@ import org.usc.file.operater.rules.Rule;
  */
 public class FileOperaterTool {
 	private ConvertRule convertRule;
-	private int sumFileNum;
-	private int sumFolderNum;
-	private int convertFileNum;
-	private int convertFolderNum;
+	private StatisticsInfo statisticsInfo;
 
 	public FileOperaterTool() {
 	}
@@ -32,180 +29,20 @@ public class FileOperaterTool {
 		this.init();
 		this.convertRule = ConvertFactory.createConvertRule(rule);
 	}
-	
-	public int getSumFileNum() {
-		return sumFileNum;
-	}
 
-	public void setSumFileNum(int sumFileNum) {
-		this.sumFileNum = sumFileNum;
-	}
-
-	public int getSumFolderNum() {
-		return sumFolderNum;
-	}
-
-	public void setSumFolderNum(int sumFolderNum) {
-		this.sumFolderNum = sumFolderNum;
-	}
-
-	public int getConvertFileNum() {
-		return convertFileNum;
-	}
-
-	public void setConvertFileNum(int convertFileNum) {
-		this.convertFileNum = convertFileNum;
-	}
-
-	public int getConvertFolderNum() {
-		return convertFolderNum;
-	}
-
-	public void setConvertFolderNum(int convertFolderNum) {
-		this.convertFolderNum = convertFolderNum;
-	}
-	
 	public void init(){
-		this.sumFileNum = 0;
-		this.sumFolderNum = 0;
-		this.convertFileNum = 0;
-		this.convertFolderNum = 0;
+		this.statisticsInfo = new StatisticsInfo();
 	}
-	
+
 	public StringBuffer getStatistics(){
 		StringBuffer sb= new StringBuffer();
-		
-		sb.append("\n转换文件夹").append(this.sumFolderNum)
-		  .append("个,文件").append(this.sumFileNum)
-		  .append("个\n成功转换文件夹").append(this.convertFolderNum)
-		  .append("个,文件").append(this.convertFileNum).append("个\n\n");
-		
+		sb.append(this.statisticsInfo.toString());
 		return sb;
 	}
 
 	/**
-	 * 删除文件夹
-	 * 
-	 * @param folderPath
-	 *            文件夹完整绝对路径
-	 * @return
-	 */
-	public Boolean delFolder(String folderPath) {
-		Boolean result = true;
-
-		try {
-			delAllFile(folderPath); // 删除完里面所有内容
-			String filePath = folderPath;
-			filePath = filePath.toString();
-			java.io.File myFilePath = new java.io.File(filePath);
-			myFilePath.delete(); // 删除空文件夹
-		} catch (Exception e) {
-			result = false;
-		}
-
-		return result;
-	}
-
-	/**
-	 * 删除指定文件夹下所有文件
-	 * 
-	 * @param path
-	 *            文件夹完整绝对路径
-	 * @return
-	 * @return
-	 */
-	public boolean delAllFile(String path) {
-		boolean bea = false;
-		File file = new File(path);
-		if (!file.exists()) {
-			return bea;
-		}
-		if (!file.isDirectory()) {
-			return bea;
-		}
-		String[] tempList = file.list();
-		File temp = null;
-		for (int i = 0; i < tempList.length; i++) {
-			if (path.endsWith(File.separator)) {
-				temp = new File(path + tempList[i]);
-			} else {
-				temp = new File(path + File.separator + tempList[i]);
-			}
-			if (temp.isFile()) {
-				temp.delete();
-			}
-			if (temp.isDirectory()) {
-				delAllFile(path + "/" + tempList[i]);// 先删除文件夹里面的文件
-				delFolder(path + "/" + tempList[i]);// 再删除空文件夹
-				bea = true;
-			}
-		}
-		return bea;
-	}
-
-	/**
-	 * 复制整个文件夹的内容
-	 * 
-	 * @param oldPath
-	 *            准备拷贝的目录
-	 * @param newPath
-	 *            指定绝对路径的新目录
-	 * @return
-	 */
-	public Boolean copyFolder(String oldPath, String newPath) {
-		Boolean result = true;
-		try {
-			new File(newPath).mkdirs(); // 如果文件夹不存在 则建立新文件夹
-			File a = new File(oldPath);
-			String[] file = a.list();
-			File temp = null;
-			for (int i = 0; i < file.length; i++) {
-				if (oldPath.endsWith(File.separator)) {
-					temp = new File(oldPath + file[i]);
-				} else {
-					temp = new File(oldPath + File.separator + file[i]);
-				}
-				if (temp.isFile()) {
-					FileInputStream input = new FileInputStream(temp);
-					FileOutputStream output = new FileOutputStream(newPath + "/" + (temp.getName()).toString());
-					byte[] b = new byte[1024 * 5];
-					int len;
-					while ((len = input.read(b)) != -1) {
-						output.write(b, 0, len);
-					}
-					output.flush();
-					output.close();
-					input.close();
-				}
-				if (temp.isDirectory()) {// 如果是子文件夹
-					copyFolder(oldPath + "/" + file[i], newPath + "/" + file[i]);
-				}
-			}
-		} catch (Exception e) {
-			result = false;
-		}
-
-		return result;
-	}
-
-	/**
-	 * 移动目录
-	 * 
-	 * @param oldPath
-	 * @param newPath
-	 * @return
-	 */
-	public Boolean moveFolder(String oldPath, String newPath) {
-		if (copyFolder(oldPath, newPath) && delFolder(oldPath)) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	/**
 	 * 修改path路径下所有的文件名
-	 * 
+	 *
 	 * @param path
 	 */
 	public String fileRename(String path, Boolean isConvertFolder) {
@@ -231,11 +68,11 @@ public class FileOperaterTool {
 				}
 
 				if (temp.isFile()) {
-					this.sumFileNum ++ ;
+					this.statisticsInfo.addSumFileNum();
 					info.append(fileRename(temp) + "\n");
 				}
 				if (temp.isDirectory()) {
-					this.sumFolderNum ++;
+					this.statisticsInfo.addSumFolderNum();
 					String folderName = path + "\\" + tempList[i];
 
 					info.append(fileRename(folderName, isConvertFolder));
@@ -253,7 +90,7 @@ public class FileOperaterTool {
 
 	/**
 	 * 修改path路径下所有的文件名
-	 * 
+	 *
 	 * @param path
 	 */
 	public String fileRename(String path, String fix, String newFix, Boolean isConvertFolder) {
@@ -279,11 +116,11 @@ public class FileOperaterTool {
 				}
 
 				if (temp.isFile()) {
-					this.sumFileNum ++;
+					this.statisticsInfo.addSumFileNum();
 					info.append(fileRename(temp, fix, newFix) + "\n");
 				}
 				if (temp.isDirectory()) {
-					this.sumFolderNum ++;
+					this.statisticsInfo.addSumFolderNum();
 					String folderName = path + "\\" + tempList[i];
 
 					info.append(fileRename(folderName, fix, newFix, isConvertFolder));
@@ -301,7 +138,7 @@ public class FileOperaterTool {
 
 	/**
 	 * 修改文件名
-	 * 
+	 *
 	 * @param file
 	 *            文件
 	 * @return N/A
@@ -319,7 +156,7 @@ public class FileOperaterTool {
 			if (!result) {
 				info = "文件\"" + file.getParent() + "\\" + oldName + "\"转换失败，请查看是否存在文件重名";
 			} else {
-				this.convertFileNum ++;
+				this.statisticsInfo.addConvertFileNum();
 				info = "文件\"" + file.getParent() + "\\" + oldName + "\"转换为\"" + file.getParent() + "\\" + newName + "\"";
 			}
 
@@ -333,7 +170,7 @@ public class FileOperaterTool {
 
 	/**
 	 * 修改文件夹名
-	 * 
+	 *
 	 * @param file
 	 *            文件夹
 	 * @return String msg
@@ -345,16 +182,7 @@ public class FileOperaterTool {
 		String newPath = this.convertRule.reNameByRule(oldPath);
 
 		if (!oldPath.equals(newPath)) {
-
-			Boolean result = moveFolder(oldPath, newPath);
-
-			if (!result) {
-				info = "文件夹\"" + oldPath + "\"转换失败，请查看是否存在文件夹重名";
-			} else {
-				this.convertFolderNum ++;
-				info = "文件夹\"" + oldPath + "\"转换为\"" + newPath + "\"";
-			}
-
+			info =  moveFolder(oldPath, newPath);
 		} else {
 			info = "文件夹\"" + oldPath + "\"不需要转换";
 		}
@@ -365,7 +193,7 @@ public class FileOperaterTool {
 
 	/**
 	 * 修改文件名
-	 * 
+	 *
 	 * @param file
 	 *            文件
 	 * @return N/A
@@ -383,7 +211,7 @@ public class FileOperaterTool {
 			if (!result) {
 				info = "文件\"" + file.getParent() + "\\" + oldName + "\"转换失败，请查看是否存在文件重名";
 			} else {
-				this.convertFileNum ++;
+				this.statisticsInfo.addConvertFileNum();
 				info = "文件\"" + file.getParent() + "\\" + oldName + "\"转换为\"" + file.getParent() + "\\" + newName + "\"";
 			}
 
@@ -397,7 +225,7 @@ public class FileOperaterTool {
 
 	/**
 	 * 修改文件夹名
-	 * 
+	 *
 	 * @param file
 	 *            文件夹
 	 * @return String msg
@@ -409,21 +237,31 @@ public class FileOperaterTool {
 		String newPath = this.convertRule.reNameByRule(oldPath, fix, newFix, isFolder);
 
 		if (!oldPath.equals(newPath)) {
-
-			Boolean result = moveFolder(oldPath, newPath);
-
-			if (!result) {
-				info = "文件夹\"" + oldPath + "\"转换失败，请查看是否存在文件夹重名";
-			} else {
-				this.convertFolderNum ++;
-				info = "文件夹\"" + oldPath + "\"转换为\"" + newPath + "\"";
-			}
-
+			info =  moveFolder(oldPath, newPath);
 		} else {
 			info = "文件夹\"" + oldPath + "\"不需要转换";
 		}
 
 		return info;
-
 	}
+
+
+	///////////////////
+	// Internal use
+	//////////////////
+	private String moveFolder(String oldPath, String newPath) {
+		StringBuffer infos = new StringBuffer();
+		try {
+			FileUtils.moveDirectory(new File(oldPath), new File(newPath));
+			this.statisticsInfo.addConvertFolderNum();
+
+			infos.append("文件夹\"" + oldPath + "\"转换为\"" + newPath + "\"");
+		} catch (IOException e) {
+			infos.append("文件夹\"" + oldPath + "\"转换失败，请查看是否存在文件夹重名");
+//			infos.append(e.getMessage());
+		}
+
+		return infos.toString();
+	}
+
 }
