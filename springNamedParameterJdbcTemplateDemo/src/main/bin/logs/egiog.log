@@ -1,0 +1,7 @@
+2011-02-21 09:53:51,802 [INFO] main [egioginstrexport.Main] EGIOG Instrument Export Started
+2011-02-21 09:53:52,818 [INFO] main [egioginstrexport.EgiogExporter] EGIOG Export Ready
+2011-02-21 09:53:52,818 [INFO] main [egioginstrexport.EgiogExporter] Clear MSSE Temp DB
+2011-02-21 09:53:53,224 [INFO] main [egioginstrexport.EgiogExporter] MSSE Temp DB Cleared
+2011-02-21 09:53:53,224 [INFO] main [egioginstrexport.EgiogExporter] EGIOG Export started
+2011-02-21 09:53:53,599 [INFO] main [egioginstrexport.EgiogExporter] Total Records Exported:0
+2011-02-21 09:53:53,599 [INFO] main [egioginstrexport.EgiogExporter] EGIOG Export Ended
