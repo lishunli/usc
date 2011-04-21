@@ -2,12 +2,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.taifook.mtss.mss-e.integration</groupId>
-    <artifactId>manualOperation</artifactId>
+    <artifactId>egiogInstrImport</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <name>Manual Operation</name>
+    <name>Instrument Importer From Other DB</name>
     <packaging>jar</packaging>
-    <description>Manual Operation</description>
+    <description>EGI-OG Instrument Import for Local Env</description>
 
     <!--
         #####################################################
