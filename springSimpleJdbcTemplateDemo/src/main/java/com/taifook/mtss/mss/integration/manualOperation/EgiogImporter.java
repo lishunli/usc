@@ -15,7 +15,7 @@ import org.springframework.util.StopWatch;
  *
  * @author ShunLi
  */
-public class ManualOperation {
+public class EgiogImporter {
     private static int dataSyncBatchSize = 100;
 
     private static final String EGIOG_DELETE_SQL = "Delete FROM MC_TMP_OG_INSTR ";
