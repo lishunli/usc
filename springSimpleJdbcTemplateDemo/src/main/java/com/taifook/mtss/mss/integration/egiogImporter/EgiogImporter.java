@@ -1,4 +1,4 @@
-package com.taifook.mtss.mss.integration.manualOperation;
+package com.taifook.mtss.mss.integration.egiogImporter;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
