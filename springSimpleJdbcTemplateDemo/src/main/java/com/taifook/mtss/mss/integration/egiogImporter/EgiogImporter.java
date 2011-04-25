@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.beanutils.DynaProperty;
+import org.apache.commons.beanutils.ResultSetDynaClass;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -17,14 +19,13 @@ import org.springframework.util.StopWatch;
  */
 public class EgiogImporter {
     private static int dataSyncBatchSize = 100;
+    private static boolean isFirstSelect = true;
+    private static DynaProperty[] dynaProps = null;
+    private static String EGIOG_INSERT_SQL = null;
 
-    private static final String EGIOG_DELETE_SQL = "Delete FROM MC_TMP_OG_INSTR ";
-
-    private static final String EGIOG_ALL_DATE_SQL = "SELECT * FROM MC_TMP_OG_INSTR ";
-
-    private static final String EGIOG_INSERT_SQL = "Insert into MC_TMP_OG_INSTR " + "(INSTR_CDE ,ISIN_CDE,LOT_SIZ,CCY_CDE,IS_SUSPD,IS_CCASS_SETL,HAS_STAMP,LST_DATE,DELIST_DATE,LST_STAT,PREV_CLOS_PRICE , "
-            + "ENGLISH_INSTR_NAM ,BIG5_CHI_INSTR_NAM,GB_CHI_INSTR_NAM ,CALL_PUT_STAT ,STRK_PRICE,IS_CBBC,IS_WARRANT,CALL_PRICE,EXPR_DATE,WARRANT_UPPER_LVL_INSTR_CDE)" + " VALUES " + "(:INSTR_CDE ,:ISIN_CDE,:LOT_SIZ,:CCY_CDE,:IS_SUSPD,:IS_CCASS_SETL ,:HAS_STAMP,:LST_DATE,:DELIST_DATE,:LST_STAT,:PREV_CLOS_PRICE , "
-            + ":ENGLISH_INSTR_NAM ,:BIG5_CHI_INSTR_NAM,:GB_CHI_INSTR_NAM  ,:CALL_PUT_STAT ,:STRK_PRICE,:IS_CBBC,:IS_WARRANT,:CALL_PRICE,:EXPR_DATE,:WARRANT_UPPER_LVL_INSTR_CDE)";
+    private static final String TABLE_NAME = "MC_TMP_OG_INSTR";
+    private static final String EGIOG_DELETE_SQL = "Delete FROM " + TABLE_NAME;
+    private static final String EGIOG_ALL_DATE_SQL = "SELECT * FROM " + TABLE_NAME;
 
     @SuppressWarnings("unchecked")
     public static void main(String[] args) throws Exception {
@@ -54,34 +55,30 @@ public class EgiogImporter {
 
         HashMap<String, Object> paramMap = new HashMap<String, Object>();
 
+        StopWatch stopWatch = new StopWatch();
+
         // clear temp table first
+        stopWatch.start("batch delete");
         jdbcTemplateTo.update(EGIOG_DELETE_SQL, paramMap);
+        stopWatch.stop();
 
         RowMapper<Map<String, ?>> rowMapper = new RowMapper<Map<String, ?>>() {
             public Map<String, ?> mapRow(ResultSet rs, int paramInt) throws SQLException {
+                ResultSetDynaClass rsdc = new ResultSetDynaClass(rs);
+
+                if (isFirstSelect) {
+                    dynaProps = rsdc.getDynaProperties();
+
+                    EGIOG_INSERT_SQL = buildInsertSql(dynaProps);
+
+                    isFirstSelect = false;
+                }
+
                 Map<String, Object> param = new HashMap<String, Object>();
 
-                param.put("INSTR_CDE", rs.getString("INSTR_CDE"));
-                param.put("ISIN_CDE", rs.getString("ISIN_CDE"));
-                param.put("LOT_SIZ", rs.getString("LOT_SIZ"));
-                param.put("CCY_CDE", rs.getString("CCY_CDE"));
-                param.put("IS_SUSPD", rs.getString("IS_SUSPD"));
-                param.put("IS_CCASS_SETL", rs.getString("IS_CCASS_SETL"));
-                param.put("HAS_STAMP", rs.getString("HAS_STAMP"));
-                param.put("LST_DATE", rs.getDate("LST_DATE"));
-                param.put("DELIST_DATE", rs.getDate("DELIST_DATE"));
-                param.put("LST_STAT", rs.getString("LST_STAT"));
-                param.put("PREV_CLOS_PRICE", rs.getString("PREV_CLOS_PRICE"));
-                param.put("ENGLISH_INSTR_NAM", rs.getString("ENGLISH_INSTR_NAM"));
-                param.put("BIG5_CHI_INSTR_NAM", rs.getString("BIG5_CHI_INSTR_NAM"));
-                param.put("GB_CHI_INSTR_NAM", rs.getString("GB_CHI_INSTR_NAM"));
-                param.put("CALL_PUT_STAT", rs.getString("CALL_PUT_STAT"));
-                param.put("STRK_PRICE", rs.getString("STRK_PRICE"));
-                param.put("EXPR_DATE", rs.getDate("EXPR_DATE"));
-                param.put("IS_CBBC", rs.getString("IS_CBBC"));
-                param.put("IS_WARRANT", rs.getString("IS_WARRANT"));
-                param.put("CALL_PRICE", rs.getString("CALL_PRICE"));
-                param.put("WARRANT_UPPER_LVL_INSTR_CDE", rs.getString("WARRANT_UPPER_LVL_INSTR_CDE"));
+                for (DynaProperty dynaProp : dynaProps) {
+                    param.put(dynaProp.getName(), rsdc.getObjectFromResultSet(dynaProp.getName()));
+                }
 
                 System.out.println(String.format("%04d", paramInt) + " : " + param.toString());
 
@@ -89,7 +86,7 @@ public class EgiogImporter {
             }
         };
 
-        StopWatch stopWatch = new StopWatch();
+
         stopWatch.start("batch select");
         List<Map<String, ?>> egiList = jdbcTemplateFrom.query(EGIOG_ALL_DATE_SQL, rowMapper, paramMap);
         stopWatch.stop();
@@ -115,5 +112,30 @@ public class EgiogImporter {
         }
         System.out.println("batch all insert escaped time " + stopWatch.getTotalTimeSeconds() + " s");
         System.out.println("----------------------End----------------------");
+    }
+
+    private static String buildInsertSql(DynaProperty[] properties) {
+        StringBuffer insertSql = new StringBuffer("INSERT INTO " + TABLE_NAME + "(");
+        insertSql.append(buildParams(properties, ""));
+        insertSql.append(") VALUES (");
+        insertSql.append(buildParams(properties, ":"));
+        insertSql.append(") ");
+        return insertSql.toString();
+    }
+
+    private static String buildParams(DynaProperty[] properties, String prefix) {
+        StringBuffer params = new StringBuffer();
+
+        boolean isFirstCoulumn = true;
+        for (int i = 0; i < properties.length; i++) {
+            if (!isFirstCoulumn) {
+                params.append(", " + prefix + properties[i].getName());
+            } else {
+                params.append(prefix + properties[i].getName());
+                isFirstCoulumn = false;
+            }
+        }
+
+        return params.toString();
     }
 }
