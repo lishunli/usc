@@ -1,14 +1,10 @@
 package com.taifook.mtss.mss.integration.egiogImporter;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
-import org.apache.commons.beanutils.DynaProperty;
-import org.apache.commons.beanutils.ResultSetDynaClass;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.util.StopWatch;
@@ -17,15 +13,12 @@ import org.springframework.util.StopWatch;
  *
  * @author ShunLi
  */
-public class EgiogImporter {
+public class EgiogImporterM2 {
     private static int dataSyncBatchSize = 100;
-    private static boolean isFirstSelect = true;
-    private static DynaProperty[] dynaProps = null;
-    private static String EGIOG_INSERT_SQL = null;
 
-    private static final String TABLE_NAME = "MC_TMP_OG_INSTR";
+    private static final String TABLE_NAME = "MC_TMP_FUND_CBN";
     private static final String EGIOG_DELETE_SQL = "Delete FROM " + TABLE_NAME;
-    private static final String EGIOG_ALL_DATE_SQL = "SELECT * FROM " + TABLE_NAME;
+    private static final String EGIOG_ALL_DATE_SQL = "SELECT * FROM " + TABLE_NAME + " where rownum <=100";
 
     @SuppressWarnings("unchecked")
     public static void main(String[] args) throws Exception {
@@ -62,38 +55,20 @@ public class EgiogImporter {
         jdbcTemplateTo.update(EGIOG_DELETE_SQL, paramMap);
         stopWatch.stop();
 
-        RowMapper<Map<String, ?>> rowMapper = new RowMapper<Map<String, ?>>() {
-            public Map<String, ?> mapRow(ResultSet rs, int paramInt) throws SQLException {
-                ResultSetDynaClass rsdc = new ResultSetDynaClass(rs);
-
-                if (isFirstSelect) {
-                    dynaProps = rsdc.getDynaProperties();
-
-                    EGIOG_INSERT_SQL = buildInsertSql(dynaProps);
-
-                    isFirstSelect = false;
-                }
-
-                Map<String, Object> param = new HashMap<String, Object>();
-
-                for (DynaProperty dynaProp : dynaProps) {
-                    param.put(dynaProp.getName(), rsdc.getObjectFromResultSet(dynaProp.getName()));
-                }
-
-                System.out.println(String.format("%04d", paramInt) + " : " + param.toString());
-
-                return param;
-            }
-        };
-
-
+        // select all
         stopWatch.start("batch select");
-        List<Map<String, ?>> egiList = jdbcTemplateFrom.query(EGIOG_ALL_DATE_SQL, rowMapper, paramMap);
+        List<Map<String, Object>> egiList = jdbcTemplateFrom.queryForList(EGIOG_ALL_DATE_SQL, paramMap);
         stopWatch.stop();
 
         int size = egiList.size();
 
+        String egiOgInsertSql = null;
+
         for (int i = 0; i * dataSyncBatchSize < size; i++) {
+            if (i == 0) {
+                egiOgInsertSql = buildInsertSql(egiList.get(0).keySet());
+                System.out.println("insert sql is: " + egiOgInsertSql);
+            }
 
             int fromIndex = i * dataSyncBatchSize;
             int toIndex = size - fromIndex > dataSyncBatchSize ? fromIndex + dataSyncBatchSize : size;
@@ -101,8 +76,8 @@ public class EgiogImporter {
             System.out.println(msg);
 
             stopWatch.start(msg);
-            List<Map<String, ?>> subEgiList = egiList.subList(fromIndex, toIndex);
-            jdbcTemplateTo.batchUpdate(EGIOG_INSERT_SQL, subEgiList.toArray(new Map[0]));
+            List<Map<String, Object>> subEgiList = egiList.subList(fromIndex, toIndex);
+            jdbcTemplateTo.batchUpdate(egiOgInsertSql, subEgiList.toArray(new Map[0]));
             stopWatch.stop();
         }
 
@@ -110,28 +85,28 @@ public class EgiogImporter {
         for (StopWatch.TaskInfo taskInfo : stopWatch.getTaskInfo()) {
             System.out.println(taskInfo.getTaskName() + ",escaped time " + taskInfo.getTimeMillis() + " ms");
         }
-        System.out.println("batch all insert escaped time " + stopWatch.getTotalTimeSeconds() + " s");
+        System.out.println("batch all escaped time " + stopWatch.getTotalTimeSeconds() + " s");
         System.out.println("----------------------End----------------------");
     }
 
-    private static String buildInsertSql(DynaProperty[] properties) {
+    private static String buildInsertSql(Set<String> columnNames) {
         StringBuffer insertSql = new StringBuffer("INSERT INTO " + TABLE_NAME + "(");
-        insertSql.append(buildParams(properties, ""));
+        insertSql.append(buildParams(columnNames, ""));
         insertSql.append(") VALUES (");
-        insertSql.append(buildParams(properties, ":"));
+        insertSql.append(buildParams(columnNames, ":"));
         insertSql.append(") ");
         return insertSql.toString();
     }
 
-    private static String buildParams(DynaProperty[] properties, String prefix) {
+    private static String buildParams(Set<String> columnNames, String prefix) {
         StringBuffer params = new StringBuffer();
 
         boolean isFirstColumn = true;
-        for (int i = 0; i < properties.length; i++) {
+        for (String columnName : columnNames) {
             if (!isFirstColumn) {
-                params.append(", " + prefix + properties[i].getName());
+                params.append(", " + prefix + columnName);
             } else {
-                params.append(prefix + properties[i].getName());
+                params.append(prefix + columnName);
                 isFirstColumn = false;
             }
         }
