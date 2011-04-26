@@ -16,9 +16,9 @@ import org.springframework.util.StopWatch;
 public class EgiogImporterM2 {
     private static int dataSyncBatchSize = 100;
 
-    private static final String TABLE_NAME = "MC_TMP_FUND_CBN";
+    private static final String TABLE_NAME = "MC_TMP_OG_INSTR";
     private static final String EGIOG_DELETE_SQL = "Delete FROM " + TABLE_NAME;
-    private static final String EGIOG_ALL_DATE_SQL = "SELECT * FROM " + TABLE_NAME + " where rownum <=100";
+    private static final String EGIOG_ALL_DATE_SQL = "SELECT * FROM " + TABLE_NAME;
 
     @SuppressWarnings("unchecked")
     public static void main(String[] args) throws Exception {
