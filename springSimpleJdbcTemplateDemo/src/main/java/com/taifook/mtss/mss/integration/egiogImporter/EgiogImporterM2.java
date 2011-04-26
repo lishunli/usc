@@ -14,7 +14,7 @@ import org.springframework.util.StopWatch;
  * @author ShunLi
  */
 public class EgiogImporterM2 {
-    private static int dataSyncBatchSize = 100;
+    private static int batchSize = 100;
 
     private static final String TABLE_NAME = "MC_TMP_OG_INSTR";
     private static final String EGIOG_DELETE_SQL = "Delete FROM " + TABLE_NAME;
@@ -64,14 +64,14 @@ public class EgiogImporterM2 {
 
         String egiOgInsertSql = null;
 
-        for (int i = 0; i * dataSyncBatchSize < size; i++) {
+        for (int i = 0; i * batchSize < size; i++) {
             if (i == 0) {
                 egiOgInsertSql = buildInsertSql(egiList.get(0).keySet());
                 System.out.println("insert sql is: " + egiOgInsertSql);
             }
 
-            int fromIndex = i * dataSyncBatchSize;
-            int toIndex = size - fromIndex > dataSyncBatchSize ? fromIndex + dataSyncBatchSize : size;
+            int fromIndex = i * batchSize;
+            int toIndex = size - fromIndex > batchSize ? fromIndex + batchSize : size;
             String msg = "batch insert from " + String.format("%04d", fromIndex) + " to " + String.format("%04d", toIndex);
             System.out.println(msg);
 

@@ -18,7 +18,7 @@ import org.springframework.util.StopWatch;
  * @author ShunLi
  */
 public class EgiogImporter {
-    private static int dataSyncBatchSize = 100;
+    private static int batchSize = 100;
     private static boolean isFirstSelect = true;
     private static DynaProperty[] dynaProps = null;
     private static String EGIOG_INSERT_SQL = null;
@@ -93,10 +93,10 @@ public class EgiogImporter {
 
         int size = egiList.size();
 
-        for (int i = 0; i * dataSyncBatchSize < size; i++) {
+        for (int i = 0; i * batchSize < size; i++) {
 
-            int fromIndex = i * dataSyncBatchSize;
-            int toIndex = size - fromIndex > dataSyncBatchSize ? fromIndex + dataSyncBatchSize : size;
+            int fromIndex = i * batchSize;
+            int toIndex = size - fromIndex > batchSize ? fromIndex + batchSize : size;
             String msg = "batch insert from " + String.format("%04d", fromIndex) + " to " + String.format("%04d", toIndex);
             System.out.println(msg);
 
