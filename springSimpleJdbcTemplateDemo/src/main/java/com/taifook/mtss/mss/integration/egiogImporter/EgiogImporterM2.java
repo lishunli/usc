@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Timer;
 
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -50,12 +51,18 @@ public class EgiogImporterM2 {
 
         StopWatch stopWatch = new StopWatch();
 
+
+        Timer timer = new Timer();
         // clear temp table first
+        System.out.print("Delete Table ");
+        timer.schedule(new PrintTimerTask(), 0, 1000);
         stopWatch.start("batch delete");
         jdbcTemplateTo.update(EGIOG_DELETE_SQL, paramMap);
         stopWatch.stop();
 
         // select all
+
+        System.out.print("\nSelect Table ");
         stopWatch.start("batch select");
         List<Map<String, Object>> egiList = jdbcTemplateFrom.queryForList(EGIOG_ALL_DATE_SQL, paramMap);
         stopWatch.stop();
@@ -64,24 +71,26 @@ public class EgiogImporterM2 {
 
         String egiOgInsertSql = null;
 
+        System.out.print("\nInsert Table ");
         for (int i = 0; i * batchSize < size; i++) {
             if (i == 0) {
                 egiOgInsertSql = buildInsertSql(egiList.get(0).keySet());
-                System.out.println("insert sql is: " + egiOgInsertSql);
+//                System.out.println("insert sql is: " + egiOgInsertSql);
             }
 
             int fromIndex = i * batchSize;
             int toIndex = size - fromIndex > batchSize ? fromIndex + batchSize : size;
             String msg = "batch insert from " + String.format("%04d", fromIndex) + " to " + String.format("%04d", toIndex);
-            System.out.println(msg);
+//            System.out.println(msg);
 
             stopWatch.start(msg);
             List<Map<String, Object>> subEgiList = egiList.subList(fromIndex, toIndex);
             jdbcTemplateTo.batchUpdate(egiOgInsertSql, subEgiList.toArray(new Map[0]));
             stopWatch.stop();
         }
+        timer.cancel();
 
-        System.out.println("----------------------Result----------------------");
+        System.out.println("\n----------------------Result----------------------");
         for (StopWatch.TaskInfo taskInfo : stopWatch.getTaskInfo()) {
             System.out.println(taskInfo.getTaskName() + ",escaped time " + taskInfo.getTimeMillis() + " ms");
         }
@@ -112,5 +121,12 @@ public class EgiogImporterM2 {
         }
 
         return params.toString();
+    }
+
+    private static class PrintTimerTask extends java.util.TimerTask{
+        @Override
+        public void run() {
+            System.out.print("·");
+        }
     }
 }

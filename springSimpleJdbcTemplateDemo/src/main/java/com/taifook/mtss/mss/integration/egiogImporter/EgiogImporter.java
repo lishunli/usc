@@ -8,6 +8,8 @@ import java.util.Map;
 
 import org.apache.commons.beanutils.DynaProperty;
 import org.apache.commons.beanutils.ResultSetDynaClass;
+import org.apache.commons.configuration.ConfigurationException;
+import org.apache.commons.configuration.PropertiesConfiguration;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -27,8 +29,23 @@ public class EgiogImporter {
     private static final String EGIOG_DELETE_SQL = "Delete FROM " + TABLE_NAME;
     private static final String EGIOG_ALL_DATE_SQL = "SELECT * FROM " + TABLE_NAME;
 
+    private static final String CONF_FILE_NAME = "config.properties";
+
+    private void init(){
+        try {
+            PropertiesConfiguration config = new PropertiesConfiguration(this.getClass().getClassLoader().getResource(CONF_FILE_NAME));
+            System.out.println(config.getString("egiDbUrl","hello word"));
+        } catch (ConfigurationException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     @SuppressWarnings("unchecked")
     public static void main(String[] args) throws Exception {
+        // init
+        new EgiogImporter().init();
+
         // SIT
         DriverManagerDataSource dataSourceFrom = new DriverManagerDataSource();
         dataSourceFrom.setUrl("jdbc:oracle:thin:@172.30.201.15:1521:mseub");
