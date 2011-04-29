@@ -10,6 +10,8 @@ import org.apache.commons.beanutils.DynaProperty;
 import org.apache.commons.beanutils.ResultSetDynaClass;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -20,6 +22,7 @@ import org.springframework.util.StopWatch;
  * @author ShunLi
  */
 public class EgiogImporter {
+    private Logger logger = LoggerFactory.getLogger(getClass());
     private static int batchSize = 100;
     private static boolean isFirstSelect = true;
     private static DynaProperty[] dynaProps = null;
@@ -35,6 +38,7 @@ public class EgiogImporter {
         try {
             PropertiesConfiguration config = new PropertiesConfiguration(this.getClass().getClassLoader().getResource(CONF_FILE_NAME));
             System.out.println(config.getString("egiDbUrl","hello word"));
+            logger.debug("egiDbUrl is {} ",config.getString("egiDbUrl","hello word"));
         } catch (ConfigurationException e) {
             e.printStackTrace();
         }
@@ -45,6 +49,7 @@ public class EgiogImporter {
     public static void main(String[] args) throws Exception {
         // init
         new EgiogImporter().init();
+
 
         // SIT
         DriverManagerDataSource dataSourceFrom = new DriverManagerDataSource();
