@@ -1,0 +1,39 @@
+TableDataCopier
+tableDataCopier
+
+表数据复制工厂
+copy table's data from one database to another database(same table schema)
+
+From   =====Copy=====>   To
+
+
+
+
+
+        dataSourceFrom.setUrl("jdbc:oracle:thin:@172.30.201.15:1521:mseub");
+        dataSourceFrom.setDriverClassName("oracle.jdbc.driver.OracleDriver");
+        dataSourceFrom.setUsername("mssqry");
+        dataSourceFrom.setPassword("a0665");
+
+      String user="root";                           //用户名
+      String pass="lishunli";                         //口令
+      String url="jdbc:mysql://localhost:3306/test";  //数据源
+      String driver="com.mysql.jdbc.Driver";   //数据库驱动程序
+      String tableName="student";                   //数据库中表名
+
+
+内置一个配置文件
+外置一个配置文件，外置优先级高，如果没有找内置。
+（一个方法，getStringFromConfigruation()）
+
+Table Name
+
+Driver
+Url
+Username
+Password
+
+results
+
+leftMenuLength
+upMenuLength
