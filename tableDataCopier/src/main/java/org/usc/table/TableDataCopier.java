@@ -254,6 +254,7 @@ public class TableDataCopier extends JFrame {
 								.addContainerGap(103, Short.MAX_VALUE)));
 
 		results = new JTextArea();
+		results.setEditable(false);
 		results.setFont(new Font("Microsoft YaHei", Font.PLAIN, 16));
 		results.setRows(9);
 		scrollPane.setViewportView(results);
