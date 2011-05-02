@@ -1,7 +1,6 @@
 package org.usc.table;
 
 import java.awt.Desktop;
-import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Toolkit;
@@ -50,6 +49,7 @@ public class TableDataCopier extends JFrame {
 	private static int BATCH_SIZE = 100;
 
 	private JButton btnCopy;
+	private boolean stop = false;
 
 	private JTextField textField_0_0;
 	private JTextField textField_0_1;
@@ -67,16 +67,19 @@ public class TableDataCopier extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TableDataCopier frame = new TableDataCopier();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		TableDataCopier frame = new TableDataCopier();
+		frame.setVisible(true);
+//		frame.importer();
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					TableDataCopier frame = new TableDataCopier();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
 	}
 
 	/**
@@ -99,7 +102,7 @@ public class TableDataCopier extends JFrame {
 		JLabel label = new JLabel("TableDataCopier");
 		label.setFont(new Font("Microsoft YaHei", Font.PLAIN, 24));
 
-		JLabel lblv = new JLabel("ShunLi©V0.2");
+		JLabel lblv = new JLabel("ShunLi©V0.3");
 		lblv.setEnabled(false);
 		lblv.setFont(new Font("Microsoft YaHei", Font.PLAIN, 20));
 		lblv.addMouseListener(new MouseAdapter() {
@@ -330,8 +333,17 @@ public class TableDataCopier extends JFrame {
 		btnCopy = new JButton("Copy");
 		panel.add(btnCopy);
 		btnCopy.addActionListener(new ActionListener() {
+
 			public void actionPerformed(ActionEvent e) {
-				buttonActionPerformed(e);
+				stop = false;
+				new Thread() {
+		            public void run() {
+						while(! stop ) {
+		                	buttonActionPerformed();
+		                }
+		            }
+		        }.start();
+
 			}
 		});
 		btnCopy.setToolTipText("copy table's data from one database to another database(same table schema)");
@@ -346,12 +358,15 @@ public class TableDataCopier extends JFrame {
 	}
 
 	// Copy
-	private void buttonActionPerformed(java.awt.event.ActionEvent evt) {
+	private void buttonActionPerformed() {
 		importer();
 	}
 
 	@SuppressWarnings("unchecked")
 	private void importer() {
+		// clear
+		results.setText("");
+
 		String tableName = textField_4_0.getText();
 		String deleteSql = "Delete FROM " + tableName;
 		String selectSql = "SELECT * FROM " + tableName;
@@ -377,19 +392,19 @@ public class TableDataCopier extends JFrame {
 
 		StopWatch stopWatch = new StopWatch();
 
-		StringBuffer sb = new StringBuffer();
+//		StringBuffer sb = new StringBuffer();
 
 		// clear temp table first
-		sb.append("Delete Table ");
+		showResults("Delete Table ");
 		Timer timer = new Timer();
-		timer.schedule(new PrintTimerTask(sb), 0, 1000);
+		timer.schedule(new PrintTimerTask(), 0, 1000);
 		stopWatch.start("batch delete");
 		jdbcTemplateTo.update(deleteSql, paramMap);
 		stopWatch.stop();
 
 		// select all
 
-		sb.append("\nSelect Table ");
+		showResults("\nSelect Table ");
 		stopWatch.start("batch select");
 		List<Map<String, Object>> egiList = jdbcTemplateFrom.queryForList(selectSql, paramMap);
 		stopWatch.stop();
@@ -398,19 +413,19 @@ public class TableDataCopier extends JFrame {
 
 		String egiOgInsertSql = null;
 
-		sb.append("\nInsert Table ");
+		showResults("\nInsert Table ");
 		stopWatch.start("batch insert");
 		for (int i = 0; i * BATCH_SIZE < size; i++) {
 			if (i == 0) {
 				egiOgInsertSql = buildInsertSql(egiList.get(0).keySet(), tableName);
-				// sb.appendln("insert sql is: " + egiOgInsertSql);
+//				 showResults("insert sql is: " + egiOgInsertSql);
 			}
 
 			int fromIndex = i * BATCH_SIZE;
 			int toIndex = size - fromIndex > BATCH_SIZE ? fromIndex + BATCH_SIZE : size;
 			// String msg = "batch insert from " + String.format("%04d",
 			// fromIndex) + " to " + String.format("%04d", toIndex);
-			// sb.appendln(msg);
+			// showResultsln(msg);
 
 			List<Map<String, Object>> subEgiList = egiList.subList(fromIndex, toIndex);
 			jdbcTemplateTo.batchUpdate(egiOgInsertSql, subEgiList.toArray(new Map[0]));
@@ -418,19 +433,19 @@ public class TableDataCopier extends JFrame {
 		stopWatch.stop();
 		timer.cancel();
 
-		sb.append("\n----------------------Result----------------------\n");
+		showResults("\n----------------------Result----------------------\n");
 		for (StopWatch.TaskInfo taskInfo : stopWatch.getTaskInfo()) {
-			sb.append(taskInfo.getTaskName() + ",escaped time " + taskInfo.getTimeMillis() + " ms\n");
+			showResults(taskInfo.getTaskName() + ",escaped time " + taskInfo.getTimeMillis() + " ms\n");
 		}
-		sb.append("batch all escaped time " + stopWatch.getTotalTimeSeconds() + " s");
-		// sb.append("\n----------------------End----------------------\n");
-
-		results.setText(sb.toString());
+		showResults("batch all escaped time " + stopWatch.getTotalTimeSeconds() + " s");
+		// showResults("\n----------------------End----------------------\n");
+		stop = true;
 
 		if(openLogFileCheckBox.isSelected()){
 			Timer timer2 = new Timer();
 			timer2.schedule(new openLogTask(), 2000);
 		}
+
 
 	}
 
@@ -487,6 +502,10 @@ public class TableDataCopier extends JFrame {
 		// btnCopy.setEnabled(false);
 	}
 
+	private void showResults(String info){
+		results.setText(results.getText() + info);
+	}
+
 	// ///////////////////////////////////////////////////
 	// **
 	// Function
@@ -514,7 +533,7 @@ public class TableDataCopier extends JFrame {
 		return true;
 	}
 
-	private static String buildInsertSql(Set<String> columnNames, String tableName) {
+	private  String buildInsertSql(Set<String> columnNames, String tableName) {
 		StringBuffer insertSql = new StringBuffer("INSERT INTO " + tableName + "(");
 		insertSql.append(buildParams(columnNames, ""));
 		insertSql.append(") VALUES (");
@@ -523,7 +542,7 @@ public class TableDataCopier extends JFrame {
 		return insertSql.toString();
 	}
 
-	private static String buildParams(Set<String> columnNames, String prefix) {
+	private  String buildParams(Set<String> columnNames, String prefix) {
 		StringBuffer params = new StringBuffer();
 
 		boolean isFirstColumn = true;
@@ -539,20 +558,14 @@ public class TableDataCopier extends JFrame {
 		return params.toString();
 	}
 
-	private static class PrintTimerTask extends java.util.TimerTask {
-		private StringBuffer sb;
-
-		public PrintTimerTask(StringBuffer sb) {
-			this.sb = sb;
-		}
-
+	private  class PrintTimerTask extends java.util.TimerTask {
 		@Override
 		public void run() {
-			sb.append("·");
+			showResults("· ");
 		}
 	}
 
-	private static class openLogTask extends java.util.TimerTask {
+	private  class openLogTask extends java.util.TimerTask {
 		@Override
 		public void run() {
 			 try {
