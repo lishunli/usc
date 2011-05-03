@@ -1,10 +1,10 @@
 #Fat Jar Configuration File
-#Mon May 02 22:22:31 CST 2011
+#Tue May 03 22:45:38 CST 2011
 onejar.license.required=true
 manifest.classpath=
 manifest.removesigners=true
 onejar.checkbox=false
-jarname=C\:\\Users\\ShunLi\\Desktop\\TableDataImporterV0.4.jar
+jarname=F\:\\Software\\exe4j(\u628AJava\u6253\u5305\u6210exe\u6587\u4EF6)\\TableDataCopier\\TableDataImporterV0.5.jar
 manifest.mergeall=true
 manifest.mainclass=org.usc.table.TableDataCopier
 manifest.file=<createnew>

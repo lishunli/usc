@@ -25,7 +25,6 @@ import java.util.Timer;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -37,6 +36,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import org.apache.commons.configuration.PropertiesConfiguration;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
@@ -47,12 +47,14 @@ public class TableDataCopier extends JFrame {
 	private static final long serialVersionUID = 5840057159492381296L;
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
-	private static final String CONF_FILE_NAME = "config.properties";
-	private static int BATCH_SIZE = 100;
+	private final String CONF_FILE_NAME = "config.properties";
+	private final long PER_SECOND = 1000;
+	private int BATCH_SIZE = 100;
+	private boolean IS_OPEN_LOG_FILE = true;
+	private long DELAY_TIME = 1000;
+	private boolean STOP = false;
 
 	private JButton btnCopy;
-	private boolean stop = false;
-
 	private JTextField textField_0_0;
 	private JTextField textField_0_1;
 	private JTextField textField_1_0;
@@ -63,7 +65,6 @@ public class TableDataCopier extends JFrame {
 	private JTextField textField_3_1;
 	private JTextField textField_4_0;
 	private JTextArea results;
-	private JCheckBox openLogFileCheckBox = new JCheckBox();
 
 	/**
 	 * Launch the application.
@@ -101,7 +102,7 @@ public class TableDataCopier extends JFrame {
 		JLabel label = new JLabel("TableDataCopier");
 		label.setFont(new Font("Microsoft YaHei", Font.PLAIN, 24));
 
-		JLabel lblv = new JLabel("ShunLi©V0.4");
+		JLabel lblv = new JLabel("ShunLi©V0.5");
 		lblv.setEnabled(false);
 		lblv.setFont(new Font("Microsoft YaHei", Font.PLAIN, 20));
 		lblv.addMouseListener(new MouseAdapter() {
@@ -253,6 +254,7 @@ public class TableDataCopier extends JFrame {
 								.addContainerGap(103, Short.MAX_VALUE)));
 
 		results = new JTextArea();
+		results.setLineWrap(true);
 		results.setEditable(false);
 		results.setFont(new Font("Microsoft YaHei", Font.PLAIN, 16));
 		results.setRows(9);
@@ -335,14 +337,14 @@ public class TableDataCopier extends JFrame {
 		btnCopy.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				stop = false;
+				STOP = false;
 				new Thread() {
-		            public void run() {
-						while(! stop ) {
-		                	buttonActionPerformed();
-		                }
-		            }
-		        }.start();
+					public void run() {
+						while (!STOP) {
+							buttonActionPerformed();
+						}
+					}
+				}.start();
 
 			}
 		});
@@ -371,112 +373,130 @@ public class TableDataCopier extends JFrame {
 		String deleteSql = "Delete FROM " + tableName;
 		String selectSql = "SELECT * FROM " + tableName;
 
-		// From
-		DriverManagerDataSource dataSourceFrom = new DriverManagerDataSource();
-		dataSourceFrom.setDriverClassName(textField_0_0.getText());
-		dataSourceFrom.setUrl(textField_1_0.getText());
-		dataSourceFrom.setUsername(textField_2_0.getText());
-		dataSourceFrom.setPassword(textField_3_0.getText());
-
-		// To
-		DriverManagerDataSource dataSourceTo = new DriverManagerDataSource();
-		dataSourceTo.setDriverClassName(textField_0_1.getText());
-		dataSourceTo.setUrl(textField_1_1.getText());
-		dataSourceTo.setUsername(textField_2_1.getText());
-		dataSourceTo.setPassword(textField_3_1.getText());
-
-		SimpleJdbcTemplate jdbcTemplateFrom = new SimpleJdbcTemplate(dataSourceFrom);
-		final SimpleJdbcTemplate jdbcTemplateTo = new SimpleJdbcTemplate(dataSourceTo);
-
-		HashMap<String, Object> paramMap = new HashMap<String, Object>();
-
+		int updateNums = 0;
+		Timer timer = new Timer();
 		StopWatch stopWatch = new StopWatch();
 
-//		StringBuffer sb = new StringBuffer();
+		try {
+			// From
+			DriverManagerDataSource dataSourceFrom = new DriverManagerDataSource();
+			dataSourceFrom.setDriverClassName(textField_0_0.getText());
+			dataSourceFrom.setUrl(textField_1_0.getText());
+			dataSourceFrom.setUsername(textField_2_0.getText());
+			dataSourceFrom.setPassword(textField_3_0.getText());
 
-		// clear temp table first
-		showResults("Delete Table ");
-		Timer timer = new Timer();
-		timer.schedule(new PrintTimerTask(), 0, 1000);
-		stopWatch.start("batch delete");
-		jdbcTemplateTo.update(deleteSql, paramMap);
-		stopWatch.stop();
+			// To
+			DriverManagerDataSource dataSourceTo = new DriverManagerDataSource();
+			dataSourceTo.setDriverClassName(textField_0_1.getText());
+			dataSourceTo.setUrl(textField_1_1.getText());
+			dataSourceTo.setUsername(textField_2_1.getText());
+			dataSourceTo.setPassword(textField_3_1.getText());
 
-		// select all
+			SimpleJdbcTemplate jdbcTemplateFrom = new SimpleJdbcTemplate(dataSourceFrom);
+			SimpleJdbcTemplate jdbcTemplateTo = new SimpleJdbcTemplate(dataSourceTo);
+			HashMap<String, Object> paramMap = new HashMap<String, Object>();
 
-		showResults("\nSelect Table ");
-		stopWatch.start("batch select");
-		List<Map<String, Object>> egiList = jdbcTemplateFrom.queryForList(selectSql, paramMap);
-		stopWatch.stop();
+			// clear temp table first
+			showResults("Delete Table ");
+			timer.schedule(new PrintTimerTask(), 0, PER_SECOND);
 
-		int size = egiList.size();
+			logger.info("Successfully delete sql is {}", deleteSql);
 
-		String egiOgInsertSql = null;
+			stopWatch.start("batch delete");
+			logger.info("Delete {} records", jdbcTemplateTo.update(deleteSql, paramMap));
+			stopWatch.stop();
 
-		showResults("\nInsert Table ");
-		stopWatch.start("batch insert");
-		for (int i = 0; i * BATCH_SIZE < size; i++) {
-			if (i == 0) {
-				egiOgInsertSql = buildInsertSql(egiList.get(0).keySet(), tableName);
-//				 showResults("insert sql is: " + egiOgInsertSql);
+			// select all
+			showResults("\nSelect Table ");
+			logger.info("Select sql is {}", selectSql);
+			stopWatch.start("batch select");
+
+			List<Map<String, Object>> selectList = jdbcTemplateFrom.queryForList(selectSql, paramMap);
+			int size = selectList.size();
+			logger.info("Successfully select {} records", size);
+			for (int i = 0; i < size; i++) {
+				logger.info("{} : {}", String.format("%04d", i), selectList.get(i).toString());
 			}
 
-			int fromIndex = i * BATCH_SIZE;
-			int toIndex = size - fromIndex > BATCH_SIZE ? fromIndex + BATCH_SIZE : size;
-			// String msg = "batch insert from " + String.format("%04d",
-			// fromIndex) + " to " + String.format("%04d", toIndex);
-			// showResultsln(msg);
+			stopWatch.stop();
 
-			List<Map<String, Object>> subEgiList = egiList.subList(fromIndex, toIndex);
-			jdbcTemplateTo.batchUpdate(egiOgInsertSql, subEgiList.toArray(new Map[0]));
+			String egiOgInsertSql = null;
+
+			showResults("\nInsert Table ");
+			stopWatch.start("batch insert");
+			for (int i = 0; i * BATCH_SIZE < size; i++) {
+				if (i == 0) {
+					egiOgInsertSql = buildInsertSql(selectList.get(0).keySet(), tableName);
+					logger.info("Insert sql is {}", egiOgInsertSql);
+				}
+
+				int fromIndex = i * BATCH_SIZE;
+				int toIndex = size - fromIndex > BATCH_SIZE ? fromIndex + BATCH_SIZE : size;
+				// String msg = "batch insert from " + String.format("%04d",
+				// fromIndex) + " to " + String.format("%04d", toIndex);
+				// showResultsln(msg);
+
+				List<Map<String, Object>> subEgiList = selectList.subList(fromIndex, toIndex);
+				jdbcTemplateTo.batchUpdate(egiOgInsertSql, subEgiList.toArray(new Map[0]));
+				updateNums += subEgiList.size();
+			}
+			stopWatch.stop();
+
+			showResults("\n----------------------Result----------------------\n");
+			for (StopWatch.TaskInfo taskInfo : stopWatch.getTaskInfo()) {
+				showResults(taskInfo.getTaskName() + ",escaped time " + taskInfo.getTimeMillis() + " ms\n");
+			}
+			showResults("batch all escaped time " + stopWatch.getTotalTimeSeconds() + " s");
+
+			if (IS_OPEN_LOG_FILE) {
+				Timer timer2 = new Timer();
+				timer2.schedule(new openLogTask(), DELAY_TIME);
+			}
+
+		} catch (Exception e) {
+			exceptionHandler(e);
+		} finally {
+			timer.cancel();
+			if (stopWatch.isRunning()) {
+				stopWatch.stop();
+			}
+			STOP = true;
+			logger.info("Successfully update {} records", updateNums);
+
 		}
-		stopWatch.stop();
-		timer.cancel();
-
-		showResults("\n----------------------Result----------------------\n");
-		for (StopWatch.TaskInfo taskInfo : stopWatch.getTaskInfo()) {
-			showResults(taskInfo.getTaskName() + ",escaped time " + taskInfo.getTimeMillis() + " ms\n");
-		}
-		showResults("batch all escaped time " + stopWatch.getTotalTimeSeconds() + " s");
-		// showResults("\n----------------------End----------------------\n");
-		stop = true;
-
-		if(openLogFileCheckBox.isSelected()){
-			Timer timer2 = new Timer();
-			timer2.schedule(new openLogTask(), 2000);
-		}
-
 
 	}
 
 	private void initData(List<JTextField> fields) {
-		PropertiesConfiguration config = null;
 		try {
+			PropertiesConfiguration config = null;
+
 			File file = new File(System.getProperty("user.dir") + "\\" + CONF_FILE_NAME);
-			if(file.exists()){
+			if (file.exists()) {
 				// first get outside
 				config = new PropertiesConfiguration(file);
-			}else{
+			} else {
 				// second get inside
 				config = new PropertiesConfiguration(this.getClass().getClassLoader().getResource(CONF_FILE_NAME));
 			}
+
+			List<String> props = Arrays.asList("fromDbDriver", "toDbDriver", "fromDbUrl", "toDbUrl", "fromDbUsername", "toDbUsername", "fromDbPassword",
+					"toDbPassword", "tableName");
+
+			logger.info("Init data from configruation");
+			for (int i = 0; i < fields.size(); i++) {
+				String key = props.get(i);
+				String value = config.getString(key);
+				logger.info("{} is {} ", StringUtils.capitalize(key), value);
+				fields.get(i).setText(value);
+			}
+
+			IS_OPEN_LOG_FILE = config.getBoolean("openLogFile", true);
+			DELAY_TIME = config.getLong("delayTime", PER_SECOND);
+
 		} catch (Exception e) {
 			exceptionHandler(e);
-			System.exit(0);
 		}
-
-		List<String> props = Arrays.asList("fromDbDriver", "toDbDriver", "fromDbUrl", "toDbUrl", "fromDbUsername", "toDbUsername", "fromDbPassword",
-				"toDbPassword", "tableName");
-
-		logger.info("init data from configruation");
-		for (int i = 0; i < fields.size(); i++) {
-			String key = props.get(i);
-			String value = config.getString(key);
-			logger.info("{} is {} ", key, value);
-			fields.get(i).setText(value);
-		}
-
-		openLogFileCheckBox.setSelected(config.getBoolean("openLogFile",false))  ;
 
 	}
 
@@ -502,12 +522,18 @@ public class TableDataCopier extends JFrame {
 		String message = e.getMessage();
 
 		logger.error(message);
-		results.setText(results.getText() + "[ERROR] " + message);
-		// btnCopy.setEnabled(false);
+		logger.info("Please see log file or contact me(QQ.506817493).Thanks.");
+		if (StringUtils.isEmpty(results.getText())) {
+			results.setText("[ERROR] " + message);
+		} else {
+			results.setText(results.getText() + "\n[ERROR] " + message + " please see log file or contact me(QQ.506817493).Thanks. ");
+		}
+
 	}
 
-	private void showResults(String info){
+	private void showResults(String info) {
 		results.setText(results.getText() + info);
+		// logger.info(info);
 	}
 
 	// ///////////////////////////////////////////////////
@@ -537,7 +563,7 @@ public class TableDataCopier extends JFrame {
 		return true;
 	}
 
-	private  String buildInsertSql(Set<String> columnNames, String tableName) {
+	private String buildInsertSql(Set<String> columnNames, String tableName) {
 		StringBuffer insertSql = new StringBuffer("INSERT INTO " + tableName + "(");
 		insertSql.append(buildParams(columnNames, ""));
 		insertSql.append(") VALUES (");
@@ -546,7 +572,7 @@ public class TableDataCopier extends JFrame {
 		return insertSql.toString();
 	}
 
-	private  String buildParams(Set<String> columnNames, String prefix) {
+	private String buildParams(Set<String> columnNames, String prefix) {
 		StringBuffer params = new StringBuffer();
 
 		boolean isFirstColumn = true;
@@ -562,20 +588,20 @@ public class TableDataCopier extends JFrame {
 		return params.toString();
 	}
 
-	private  class PrintTimerTask extends java.util.TimerTask {
+	private class PrintTimerTask extends java.util.TimerTask {
 		@Override
 		public void run() {
 			showResults("· ");
 		}
 	}
 
-	private  class openLogTask extends java.util.TimerTask {
+	private class openLogTask extends java.util.TimerTask {
 		@Override
 		public void run() {
-			 try {
-			 Runtime.getRuntime().exec("notepad.exe " + System.getProperty("user.dir") + "\\log\\copier.log");
-			 } catch (IOException e) {
-			 }
+			try {
+				Runtime.getRuntime().exec("notepad.exe " + System.getProperty("user.dir") + "\\log\\copier.log");
+			} catch (IOException e) {
+			}
 		}
 	}
 
