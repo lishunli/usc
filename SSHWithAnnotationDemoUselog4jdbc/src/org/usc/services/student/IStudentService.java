@@ -25,4 +25,6 @@ public interface IStudentService extends IBaseDao<Student>
 	 * @return 该姓名的学生集
 	 */
 	public abstract List<Student> findByName(String value);
+	
+	void batch();
 }

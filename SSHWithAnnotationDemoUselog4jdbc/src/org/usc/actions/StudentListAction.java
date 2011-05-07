@@ -38,6 +38,11 @@ public class StudentListAction extends BaseActionSupport
 
 	public String execute() throws Exception
 	{
+		
+		// Test
+		studentService.batch();
+		
+		
 		/**
 		 * 下面3句固定
 		 */

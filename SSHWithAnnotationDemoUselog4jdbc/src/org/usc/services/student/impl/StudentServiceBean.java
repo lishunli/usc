@@ -1,8 +1,10 @@
 package org.usc.services.student.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.usc.beans.Student;
 import org.usc.daos.base.BaseDaoSupport;
 import org.usc.services.student.IStudentService;
@@ -19,15 +21,33 @@ import org.usc.services.student.IStudentService;
  */
 @Service
 // 声明此类为业务逻辑层的类
-public class StudentServiceBean extends BaseDaoSupport<Student> implements IStudentService
-{
+public class StudentServiceBean extends BaseDaoSupport<Student> implements IStudentService {
 
 	/*
 	 * @see org.usc.services.student.IStudentService#findByName(java.lang.String)
 	 */
-	public List<Student> findByName(String value)
-	{
+	public List<Student> findByName(String value) {
 		return super.findByProperty("name", value);
+	}
+
+	@Transactional
+	public void batch() {
+
+		// delete 
+		for (Student student : getScrollData().getResultList()) {
+			delete(student.getNo());
+		}
+		
+		for(int i = 0;i<100;i++){
+			Student student = new Student("lishunli_test_" + i, "M", i%24, 100d, new Date(System.currentTimeMillis()));
+			save(student );
+			if(i == 20){
+				throw new RuntimeException();
+			}
+		}
+		
+		
+
 	}
 
 }
