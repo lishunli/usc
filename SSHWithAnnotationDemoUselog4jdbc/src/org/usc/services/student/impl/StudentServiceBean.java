@@ -30,7 +30,8 @@ public class StudentServiceBean extends BaseDaoSupport<Student> implements IStud
 		return super.findByProperty("name", value);
 	}
 
-	@Transactional
+	@Transactional(noRollbackFor = RuntimeException.class )
+//	@Transactional
 	public void batch() {
 
 		// delete 
