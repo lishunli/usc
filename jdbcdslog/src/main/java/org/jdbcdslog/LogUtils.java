@@ -20,11 +20,11 @@ public class LogUtils {
         if (e instanceof InvocationTargetException) {
             Throwable t = ((InvocationTargetException) e).getTargetException();
             if (l.isErrorEnabled())
-                l.error(msg + " throws exception: " + t.getClass().getName() + ": " + t.getMessage(), t);
+                l.error(msg + "\nthrows exception: " + t.getClass().getName() + ": " + t.getMessage(), t);
             throw t;
         } else {
             if (l.isErrorEnabled())
-                l.error(msg + " throws exception: " + e.getClass().getName() + ": " + e.getMessage(), e);
+                l.error(msg + "\nthrows exception: " + e.getClass().getName() + ": " + e.getMessage(), e);
             throw e;
         }
     }
