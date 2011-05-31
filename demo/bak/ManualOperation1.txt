@@ -1,0 +1,96 @@
+package com.taifook.mtss.mss.integration.manualOperation;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+
+import com.taifook.mtss.mss.instrument.model.EgiOgInstrument;
+
+
+
+/**
+ *
+ * @author ShunLi
+ */
+public class ManualOperation {
+    private static int recordCount = 0;
+
+    private static final String EGIOG_DELETE_SQL = "Delete FROM MC_TMP_OG_INSTR ";
+
+    private static final String EGIOG_ALL_DATE_SQL = "SELECT * FROM MC_TMP_OG_INSTR ";
+
+    private static final String EGIOG_INSERT_SQL=
+        "Insert into MC_TMP_OG_INSTR "+
+            "(INSTR_CDE ,ISIN_CDE,LOT_SIZ,CCY_CDE,IS_SUSPD,IS_CCASS_SETL,HAS_STAMP,LST_DATE,DELIST_DATE,LST_STAT,PREV_CLOS_PRICE , "+
+            "ENGLISH_INSTR_NAM ,BIG5_CHI_INSTR_NAM,GB_CHI_INSTR_NAM ,CALL_PUT_STAT ,STRK_PRICE,IS_CBBC,IS_WARRANT,CALL_PRICE,EXPR_DATE,WARRANT_UPPER_LVL_INSTR_CDE)"+
+        " VALUES " +
+            "(:INSTR_CDE ,:ISIN_CDE,:LOT_SIZ,:CCY_CDE,:IS_SUSPD,:IS_CCASS_SETL ,:HAS_STAMP,:LST_DATE,:DELIST_DATE,:LST_STAT,:PREV_CLOS_PRICE , "+
+            ":ENGLISH_INSTR_NAM ,:BIG5_CHI_INSTR_NAM,:GB_CHI_INSTR_NAM  ,:CALL_PUT_STAT ,:STRK_PRICE,:IS_CBBC,:IS_WARRANT,:CALL_PRICE,:EXPR_DATE,:WARRANT_UPPER_LVL_INSTR_CDE)";
+
+
+    public static void main(String[] args) throws Exception {
+        // SIT
+        DriverManagerDataSource dataSourceFrom = new DriverManagerDataSource();
+        dataSourceFrom.setUrl("jdbc:oracle:thin:@172.30.201.15:1521:mseub");
+        dataSourceFrom.setDriverClassName("oracle.jdbc.driver.OracleDriver");
+        dataSourceFrom.setUsername("mssqry");
+        dataSourceFrom.setPassword("a0665");
+
+        // Local SZ
+        DriverManagerDataSource dataSourceTo = new DriverManagerDataSource();
+        dataSourceTo.setUrl("jdbc:oracle:thin:@10.100.53.85:1521:cmn");
+        dataSourceTo.setDriverClassName("oracle.jdbc.driver.OracleDriver");
+        dataSourceTo.setUsername("mssapp");
+        dataSourceTo.setPassword("commission");
+
+//        // Local HK
+//        DriverManagerDataSource dataSourceTo = new DriverManagerDataSource();
+//        dataSourceTo.setUrl("jdbc:oracle:thin:@10.100.210.40:1521:mseda");
+//        dataSourceTo.setDriverClassName("oracle.jdbc.driver.OracleDriver");
+//        dataSourceTo.setUsername("mdev11");
+//        dataSourceTo.setPassword("mdev11");
+
+        NamedParameterJdbcTemplate jdbcTemplateFrom = new NamedParameterJdbcTemplate(dataSourceFrom);
+        final NamedParameterJdbcTemplate jdbcTemplateTo = new NamedParameterJdbcTemplate(dataSourceTo);
+
+        HashMap<String, Object> paramMap = new HashMap<String, Object>();
+
+        jdbcTemplateTo.update(EGIOG_DELETE_SQL, paramMap);
+
+        jdbcTemplateFrom.query(EGIOG_ALL_DATE_SQL, paramMap, new RowCallbackHandler() {
+            public void processRow(ResultSet rs) throws SQLException {
+                HashMap<String, Object> paramMapTo = new HashMap<String, Object>();
+                paramMapTo.put("INSTR_CDE", rs.getString("INSTR_CDE"));
+                paramMapTo.put("ISIN_CDE", rs.getString("ISIN_CDE"));
+                paramMapTo.put("LOT_SIZ", rs.getString("LOT_SIZ"));
+                paramMapTo.put("CCY_CDE", rs.getString("CCY_CDE"));
+                paramMapTo.put("IS_SUSPD", rs.getString("IS_SUSPD"));
+                paramMapTo.put("IS_CCASS_SETL", rs.getString("IS_CCASS_SETL"));
+                paramMapTo.put("HAS_STAMP", rs.getString("HAS_STAMP"));
+                paramMapTo.put("LST_DATE", rs.getDate("LST_DATE"));
+                paramMapTo.put("DELIST_DATE", rs.getDate("DELIST_DATE"));
+                paramMapTo.put("LST_STAT", rs.getString("LST_STAT"));
+                paramMapTo.put("PREV_CLOS_PRICE", rs.getString("PREV_CLOS_PRICE"));
+                paramMapTo.put("ENGLISH_INSTR_NAM", rs.getString("ENGLISH_INSTR_NAM"));
+                paramMapTo.put("BIG5_CHI_INSTR_NAM", rs.getString("BIG5_CHI_INSTR_NAM"));
+                paramMapTo.put("GB_CHI_INSTR_NAM", rs.getString("GB_CHI_INSTR_NAM"));
+                paramMapTo.put("CALL_PUT_STAT", rs.getString("CALL_PUT_STAT"));
+                paramMapTo.put("STRK_PRICE", rs.getString("STRK_PRICE"));
+                paramMapTo.put("EXPR_DATE", rs.getDate("EXPR_DATE"));
+                paramMapTo.put("IS_CBBC", rs.getString("IS_CBBC"));
+                paramMapTo.put("IS_WARRANT", rs.getString("IS_WARRANT"));
+                paramMapTo.put("CALL_PRICE", rs.getString("CALL_PRICE"));
+                paramMapTo.put("WARRANT_UPPER_LVL_INSTR_CDE", rs.getString("WARRANT_UPPER_LVL_INSTR_CDE"));
+
+                jdbcTemplateTo.update(EGIOG_INSERT_SQL, paramMapTo);
+                System.out.println("insert " + (++recordCount) + " data");
+            }
+        });
+    }
+
+}
