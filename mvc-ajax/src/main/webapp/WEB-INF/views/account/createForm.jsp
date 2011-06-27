@@ -75,7 +75,7 @@
 						</p>
 					</fieldset>
 				</form>
-				<a href="#" onclick="closePopup();">Close</a>			
+				<a href="" onclick="closePopup();">Close</a>			
 			</div>			
 		</div>		
 	</body>

@@ -12,20 +12,24 @@ import org.springframework.core.convert.TypeDescriptor;
 final class ConvertingDeserializer extends JsonDeserializer<Object> {
 
 	private final ConversionService conversionService;
-	
+
 	private final TypeDescriptor targetType;
-	
+
 	public ConvertingDeserializer(ConversionService conversionService, TypeDescriptor targetType) {
 		this.conversionService = conversionService;
 		this.targetType = targetType;
 	}
-	
+
 	@Override
-	public Object deserialize(JsonParser jp, DeserializationContext ctxt)
-			throws IOException, JsonProcessingException {
+	public Object deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
 		Object value = jp.getText();
 		TypeDescriptor sourceType = TypeDescriptor.forObject(value);
-		return this.conversionService.convert(value, sourceType, targetType);
+		try {
+			return this.conversionService.convert(value, sourceType, targetType);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
-	
+
 }
