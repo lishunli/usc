@@ -48,6 +48,7 @@ public class AccountJsonBindingTests extends TestCase{
 		MockHttpInputMessage inputMessage = new MockHttpInputMessage(testPayload.getBytes("UTF-8"));
 		MediaType jsonType = new MediaType("application", "json");
 		inputMessage.getHeaders().setContentType(jsonType);
+		@SuppressWarnings("rawtypes")
 		Account account = (Account) converter.read((Class) Account.class, inputMessage);
 		Assert.notNull(account);
 		log.debug(account.toString());
