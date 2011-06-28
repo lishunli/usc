@@ -119,6 +119,21 @@
             <version>1.8.5</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.google.collections</groupId>
+            <artifactId>google-collections</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.taifook.mtss.mss.mss-core</groupId>
+            <artifactId>mss-core-main-api</artifactId>
+            <version>2.2-SNAPSHOT</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>
