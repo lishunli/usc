@@ -8,7 +8,6 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
 	<!-- Scans the classpath of this application for @Components to deploy as beans -->
-	<context:component-scan base-package="com.taifook.mtss.mss" />
 	<context:component-scan base-package="org.springframework.samples.mvc.basic" />
 
 	<!-- Configures the @Controller programming model -->
@@ -48,7 +47,7 @@
 
 
    <bean id="acl.config.aclExtConfig" class="org.apache.commons.configuration.XMLConfiguration">
-       <constructor-arg type="java.lang.String" value="C:/temp/acl-ext-config.xml"/>
+       <constructor-arg type="java.lang.String" value="acl-ext-config.xml"/>
        <property name="reloadingStrategy">
            <bean class="org.apache.commons.configuration.reloading.FileChangedReloadingStrategy"/>
        </property>

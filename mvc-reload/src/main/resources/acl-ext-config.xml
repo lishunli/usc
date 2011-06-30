@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+
+	<!-- un-remark following configs to restrict entries, base on permission
+		and/or function -->
+	<entryFilter>
+		<includedPermission>V</includedPermission>
+		<includedPermission>R</includedPermission>
+
+		<excludedFunction>FUNC1</excludedFunction>
+		<excludedFunction>FUNC2</excludedFunction>
+	</entryFilter>
+</config>
