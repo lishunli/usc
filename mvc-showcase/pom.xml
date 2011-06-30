@@ -12,7 +12,8 @@
 		<org.springframework-version>3.1.0.M2</org.springframework-version>
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.1</org.slf4j-version>
-		<tomcat-deploy-location>C:\Program Files\apache-tomcat-7.0.11\webapps</tomcat-deploy-location>
+		<tomcat.version>7.0.16</tomcat.version>
+		<tomcat.install.location>C:\Program Files</tomcat.install.location>
 	</properties>
 	<dependencies>
 		<!-- Spring -->
@@ -183,7 +184,7 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
 					<warName>mvc-showcase</warName>
-					<outputDirectory>${tomcat-deploy-location}</outputDirectory>
+					<outputDirectory>${tomcat.install.location}\apache-tomcat-${tomcat.version}\webapps</outputDirectory>
 				</configuration>
 			</plugin>
 			<plugin>
