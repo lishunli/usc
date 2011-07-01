@@ -1,4 +1,4 @@
-package org.springframework.samples.mvc.basic.account;
+package org.springframework.samples.mvc.basic.controller;
 
 import javax.annotation.Resource;
 
@@ -10,12 +10,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping(value = "/test")
-public class TestController {
+@RequestMapping(value = "/reload")
+public class ReloadController {
 	private Logger log = LoggerFactory.getLogger(getClass());
 
 	@Resource(name = "acl.service.accessControlService")
 	private AccessControlListService accessControlListService;
+
+	@RequestMapping(method = RequestMethod.GET)
+	public String getCreateForm() {
+		log.debug("Invoke getCreateForm()...");
+		return "createForm";
+	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String test() {
@@ -23,7 +29,8 @@ public class TestController {
 		log.debug("Invoke test()...");
 		log.debug("Call {} isAccessible...", accessControlListService);
 		accessControlListService.isAccessible();
-		// System.out.println("Result: " + accessControlListService.isAccessible());
+		// System.out.println("Result: " +
+		// accessControlListService.isAccessible());
 		// System.out.println("Result2: " + accessControlListService);
 		return "welcome";
 	}

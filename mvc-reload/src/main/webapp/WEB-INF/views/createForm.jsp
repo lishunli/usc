@@ -17,28 +17,15 @@
 </head>
 <body>
 <div class="container">
-	<h1>
-		Create Account
-	</h1>
 	<div class="span-12 last">
-		<form:form action="test" method="post">
+		<form:form action="reload" method="post">
 		  	<fieldset>
-				<legend>Account Fields</legend>
+				<legend>Configuration Auto Reload Example</legend>
 				<p>
 					<input type="submit" />
 				</p>
 			</fieldset>
 		</form:form>
-		
-<%--		<form:form  action="test2" method="post">--%>
-<%--		  	<fieldset>--%>
-<%--				<legend>Account2 Fields</legend>--%>
-<%--				<p>--%>
-<%--					<input type="submit" />--%>
-<%--				</p>--%>
-<%--			</fieldset>--%>
-<%--		</form:form>--%>
-	</div>
 	<hr>
 	<ul>
 		<li> <a href="?locale=en_us">us</a> |  <a href="?locale=en_gb">gb</a> | <a href="?locale=es_es">es</a> | <a href="?locale=de_de">de</a> </li>
