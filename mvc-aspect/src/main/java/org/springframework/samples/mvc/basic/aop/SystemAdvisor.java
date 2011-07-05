@@ -19,5 +19,6 @@ public class SystemAdvisor {
 	public void handleCallUserervice(JoinPoint jp, User user) throws Throwable {
 		Object[] params = { user.getUsername(), jp.getSignature().getName(), String.format("%1$tY-%1$tm-%1$td %1$tH:%1$tM:%1$tS", new Date()) };
 		log.info("User [{}] {} at {}.", params);
+		// TODO log into db. and ip? user spring security?
 	}
 }

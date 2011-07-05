@@ -7,11 +7,11 @@ import org.springframework.stereotype.Service;
 @Service("mvc.service.userService")
 public class UserServiceImpl implements Userervice {
 	public void login(User user) {
-		// TODO do more things.
+		// TODO do more things,e.g. check username and password, ACL and so on.
 	}
 
 	public void logout(User user) {
-		// TODO do more things.
+		// TODO do more things,e.g. context,session handle.
 	}
 
 }
