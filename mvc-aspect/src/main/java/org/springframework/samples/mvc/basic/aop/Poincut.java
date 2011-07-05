@@ -6,12 +6,8 @@ import org.springframework.samples.mvc.basic.model.User;
 
 @Aspect
 public class Poincut {
-	@Pointcut(value = "execution(* org.springframework.samples.mvc.basic.service.Userervice.login(user))", argNames = "user")
-	public void isLogin(User user) {
-	}
-
-	@Pointcut(value = "execution(* org.springframework.samples.mvc.basic.service.Userervice.logout(user))", argNames = "user")
-	public void isLogout(User user) {
+	@Pointcut(value = "execution(* org.springframework.samples.mvc.basic.service.Userervice.*(..)) && args(user)", argNames = "user")
+	public void isUserervice(User user) {
 	}
 
 }
