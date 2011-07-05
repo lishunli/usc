@@ -6,7 +6,7 @@ import org.springframework.samples.mvc.basic.model.User;
 
 @Aspect
 public class SystemPoincut {
-	@Pointcut(value = "execution(* org.springframework.samples.mvc.basic.service.Userervice.*(..)) && args(user)", argNames = "user")
+	@Pointcut(value = "execution(* org.springframework.samples.mvc.basic.service.Userervice.*(..)) && args(user,..)", argNames = "user")
 	public void isCallUserervice(User user) {
 	}
 
