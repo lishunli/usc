@@ -5,9 +5,9 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.samples.mvc.basic.model.User;
 
 @Aspect
-public class Poincut {
+public class SystemPoincut {
 	@Pointcut(value = "execution(* org.springframework.samples.mvc.basic.service.Userervice.*(..)) && args(user)", argNames = "user")
-	public void isUserervice(User user) {
+	public void isCallUserervice(User user) {
 	}
 
 }
