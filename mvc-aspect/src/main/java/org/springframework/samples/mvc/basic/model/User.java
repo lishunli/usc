@@ -1,27 +1,17 @@
 package org.springframework.samples.mvc.basic.model;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
-/**
- * User
- * 
- * @author <a href="http://www.blogjava.net/lishunli/" target="_blank">ShunLi</a>
- * @notes Created on 2011-7-4<br>
- *        Revision of last commit:$Revision$<br>
- *        Author of last commit:$Author$<br>
- *        Date of last commit:$Date$<br>
- *        <p>
- */
+import org.hibernate.validator.constraints.Length;
+
+
 public class User {
 	@NotNull
-//	@Length(min = 6, max = 20)
-	@Size(min = 1, max = 20)
+	@Length(min = 1, max = 30)
 	private String username;
-	
+
 	@NotNull
-	@Size(min = 1, max = 20)
-//	@Length(min = 6, max = 20)
+	@Length(min = 1, max = 30)
 	private String password;
 
 	public User() {

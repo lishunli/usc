@@ -14,28 +14,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
+@RequestMapping("/user")
 public class UserController {
 	private Logger log = LoggerFactory.getLogger(getClass());
 
 	@Resource(name = "mvc.service.userService")
 	private Userervice userervice;
 
-	@RequestMapping(value = "/user", method = RequestMethod.GET)
-	public String getCreateForm(Model model) {
+	@RequestMapping(value = "login", method = RequestMethod.GET)
+	public String initForm(Model model) {
 		log.debug("Invoke getCreateForm()...");
 		model.addAttribute(new User());
-		return "createForm";
+		return "login";
 	}
 
-	@RequestMapping(value = "/user/login", method = RequestMethod.POST)
-	public String login(@Valid User user, BindingResult result) {
+	@RequestMapping(value = "login", method = RequestMethod.POST)
+	public String login(@Valid User user, BindingResult result, Model model) {
 		log.debug("Invoke login()...");
 		if (result.hasErrors()) {
-			return "createForm";
+			return "login";
 		}
 		userervice.login(user);
-
-		return "welcome";
+		model.addAttribute(user);
+		return "logout";
 	}
 
 	@RequestMapping(value = "logout", method = RequestMethod.POST)
