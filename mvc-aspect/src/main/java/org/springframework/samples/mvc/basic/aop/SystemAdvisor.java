@@ -3,7 +3,9 @@ package org.springframework.samples.mvc.basic.aop;
 import java.util.Date;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,16 +31,27 @@ public class SystemAdvisor {
 		// TODO add args params into log.
 	}
 
-//	@Around("org.springframework.samples.mvc.basic.aop.SystemPoincut.isCallController()")
-//	@Order(11)
-//	public void executeControllerFlow(ProceedingJoinPoint jp) throws Throwable {
-//		long startTime = 0, endTime = 0;
-//		startTime = System.currentTimeMillis();
-//		jp.proceed(); // execute
-//		endTime = System.currentTimeMillis();
-//
-//		Object[] params = { jp.getSignature().getDeclaringTypeName(), jp.getSignature().getName(), endTime - startTime };
-//		log.info("{}; elapsed time for {}() = {}ms ", params);
-//	}
+	/**
+	 * Method three to calculate spent time in invoke controller method<br>
+	 * Advantages: very easy impl and understand(user aspectj,aop) <br>
+	 * Disadvantages: very diffcult to get handler's method name<br>
+	 * 
+	 * @param jp
+	 * @return
+	 * @throws Throwable
+	 */
+	// @Around("org.springframework.samples.mvc.basic.aop.SystemPoincut.isCallController()")
+	@Around("execution(* org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter.handle(..))")
+	@Order(11)
+	public Object executeControllerFlow(ProceedingJoinPoint jp) throws Throwable {
+		long startTime = 0;
+		startTime = System.currentTimeMillis();
+		Object proceed = jp.proceed(); // execute
+
+		log.info("elapsed time {} ms ", System.currentTimeMillis() - startTime);
+		// TODO to get handler's method name.
+
+		return proceed;
+	}
 
 }
