@@ -24,6 +24,7 @@
 		<!-- Changes the locale when a 'locale' request parameter is sent; e.g.
 			/?locale=de -->
 		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
+		<bean class="org.springframework.samples.mvc.basic.interceptor.PerformanceInterceptor" />
 	</mvc:interceptors>
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving
