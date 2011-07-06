@@ -16,7 +16,7 @@ import org.springframework.samples.mvc.basic.model.User;
 public class SystemAdvisor {
 	private Logger log = LoggerFactory.getLogger(getClass());
 
-	@After(value = "org.springframework.samples.mvc.basic.aop.SystemPoincut.isCallUserervice(user)", argNames = "user")
+	@After(value = "org.springframework.samples.mvc.basic.aop.SystemPointcut.isCallUserervice(user)", argNames = "user")
 	@Order(20)
 	public void executeUsererviceHandler(JoinPoint jp, User user) throws Throwable {
 		Object[] params = { user.getUsername(), jp.getSignature().getName(), String.format("%1$tY-%1$tm-%1$td %1$tH:%1$tM:%1$tS", new Date()) };
@@ -24,10 +24,24 @@ public class SystemAdvisor {
 		// TODO log into db. and ip? user spring security?
 	}
 
-	@After("org.springframework.samples.mvc.basic.aop.SystemPoincut.isCallController()")
-	@Order(10)
+	@After("org.springframework.samples.mvc.basic.aop.SystemPointcut.isCallController()")
+	@Order(11)
 	public void executeControllerHandler(JoinPoint jp) throws Throwable {
-		log.info("Invoke {}.{}()...", jp.getSignature().getDeclaringTypeName(), jp.getSignature().getName());
+		log.info("[FL] Invoke {}.{}()...", jp.getSignature().getDeclaringTypeName(), jp.getSignature().getName());
+		// TODO add args params into log.
+	}
+
+	@After("org.springframework.samples.mvc.basic.aop.SystemPointcut.isCallPLController()")
+	@Order(12)
+	public void executePLControllerHandler(JoinPoint jp) throws Throwable {
+		log.info("[PL] Invoke {}.{}()...", jp.getSignature().getDeclaringTypeName(), jp.getSignature().getName());
+		// TODO add args params into log.
+	}
+
+	@After("org.springframework.samples.mvc.basic.aop.SystemPointcut.isCallCLController()")
+	@Order(13)
+	public void executeCLControllerHandler(JoinPoint jp) throws Throwable {
+		log.info("[CL] Invoke {}.{}()...", jp.getSignature().getDeclaringTypeName(), jp.getSignature().getName());
 		// TODO add args params into log.
 	}
 
@@ -40,9 +54,9 @@ public class SystemAdvisor {
 	 * @return
 	 * @throws Throwable
 	 */
-	// @Around("org.springframework.samples.mvc.basic.aop.SystemPoincut.isCallController()")
+	// @Around("org.springframework.samples.mvc.basic.aop.SystemPointcut.isCallController()")
 	@Around("execution(* org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter.handle(..))")
-	@Order(11)
+	@Order(10)
 	public Object executeControllerFlow(ProceedingJoinPoint jp) throws Throwable {
 		long startTime = 0;
 		startTime = System.currentTimeMillis();

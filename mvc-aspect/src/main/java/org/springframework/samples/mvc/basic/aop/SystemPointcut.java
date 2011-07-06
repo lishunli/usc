@@ -5,7 +5,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.samples.mvc.basic.model.User;
 
 @Aspect
-public class SystemPoincut {
+public class SystemPointcut {
 	@Pointcut(value = "execution(* org.springframework.samples.mvc.basic.service.Userervice.*(..)) && args(user,..)", argNames = "user")
 	public void isCallUserervice(User user) {
 	}
@@ -24,6 +24,26 @@ public class SystemPoincut {
 
 	@Pointcut("publicOperation() && isControllerLayer() && isController()")
 	public void isCallController() {
+	}
+
+	// ///////////////////////////////////////////////
+
+	// package level,under org.springframework..controller..
+	@Pointcut("execution(* org.springframework..controller..*.*(..)) ")
+	public void isPLController() {
+	}
+
+	// class level, class name org.springframework..controller..*Controller..
+	@Pointcut("execution(* org.springframework..*Controller.*(..)) ")
+	public void isCLController() {
+	}
+
+	@Pointcut("publicOperation() && isPLController() && isController()")
+	public void isCallPLController() {
+	}
+
+	@Pointcut("publicOperation() && isCLController() && isController()")
+	public void isCallCLController() {
 	}
 
 }

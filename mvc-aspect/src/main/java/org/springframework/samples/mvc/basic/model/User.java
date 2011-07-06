@@ -4,7 +4,6 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
-
 public class User {
 	@NotNull
 	@Length(min = 1, max = 30)

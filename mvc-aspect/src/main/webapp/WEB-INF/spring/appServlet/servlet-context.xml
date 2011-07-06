@@ -8,7 +8,7 @@
 	<aop:aspectj-autoproxy />
 
 	<!-- Scans the classpath of this application for @Components to deploy as beans -->
-	<context:component-scan base-package="org.springframework.samples.mvc.basic" />
+	<context:component-scan base-package="org.springframework.samples.mvc" />
 
 	<!-- Configures the @Controller programming model -->
 	<mvc:annotation-driven />
@@ -50,7 +50,7 @@
 	<bean id="performanceInterceptor" class="org.springframework.samples.mvc.basic.interceptor.PerformanceMTInterceptor" />
 
 	<aop:config>
-		<aop:advisor advice-ref="performanceInterceptor" pointcut="execution(public * org.springframework.samples.mvc.basic.controller..*.*(..)) and @target(org.springframework.stereotype.Controller)" order="1" />
+		<aop:advisor advice-ref="performanceInterceptor" pointcut="execution(public * org.springframework..controller..*.*(..)) and @target(org.springframework.stereotype.Controller)" order="1" />
 	</aop:config>
 
 	<!-- Method three to calculation spent time in invoke controller method,please see org.springframework.samples.mvc.basic.aop.SystemAdvisor.executeControllerFlow() -->
