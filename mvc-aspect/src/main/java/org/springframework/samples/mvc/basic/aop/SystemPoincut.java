@@ -10,4 +10,20 @@ public class SystemPoincut {
 	public void isCallUserervice(User user) {
 	}
 
+	@Pointcut("execution(public * *(..))")
+	public void publicOperation() {
+	}
+
+	@Pointcut("execution(* org.springframework.samples.mvc.basic.controller..*.*(..)) ")
+	public void isControllerLayer() {
+	}
+
+	@Pointcut("@target(org.springframework.stereotype.Controller)")
+	public void isController() {
+	}
+
+	@Pointcut("publicOperation() && isControllerLayer() && isController()")
+	public void isCallController() {
+	}
+
 }

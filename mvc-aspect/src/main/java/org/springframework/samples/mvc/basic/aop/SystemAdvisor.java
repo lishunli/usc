@@ -21,4 +21,12 @@ public class SystemAdvisor {
 		log.info("User [{}] {} at {}.", params);
 		// TODO log into db. and ip? user spring security?
 	}
+
+	@After("org.springframework.samples.mvc.basic.aop.SystemPoincut.isCallController()")
+	@Order(2)
+	public void handleCallController(JoinPoint jp) throws Throwable {
+		log.info("Invoke {}.{}()...", jp.getSignature().getDeclaringTypeName(), jp.getSignature().getName());
+		// TODO add args params into log.
+	}
+
 }
