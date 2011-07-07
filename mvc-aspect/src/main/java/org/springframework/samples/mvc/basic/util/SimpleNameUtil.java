@@ -31,6 +31,9 @@ public class SimpleNameUtil {
 	 */
 	public static String chompClassName(String className) {
 		return chompClassName(className, DEFAULT_CHOMP_SIZE);
+
+		// if display full class name,please change use className.length()
+		// return chompClassName(className, className.length());
 	}
 
 	/**
@@ -40,6 +43,8 @@ public class SimpleNameUtil {
 	 */
 	public static String chompClassName(String className, String separatorChars) {
 		return chompClassName(className, separatorChars, DEFAULT_CHOMP_SIZE);
+		// if display full class name,please change use className.length()
+		// return chompClassName(className, separatorChars, className.length());
 	}
 
 	/**
