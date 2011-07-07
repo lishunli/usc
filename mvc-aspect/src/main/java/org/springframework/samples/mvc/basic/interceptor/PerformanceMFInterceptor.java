@@ -16,8 +16,6 @@ import org.springframework.core.annotation.Order;
  * @notes Created on 2011-7-7<br>
  *        Revision of last commit:$Revision$<br>
  *        Author of last commit:$Author$<br>
- *        Date of last commit:$Date: 2011-07-07 00:18:51 +0800 (星期四, 07 七月 2011)
- *        $<br>
  *        <p>
  */
 @Order(4)
