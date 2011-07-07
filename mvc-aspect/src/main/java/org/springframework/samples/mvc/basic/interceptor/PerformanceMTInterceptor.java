@@ -6,13 +6,14 @@ import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.annotation.Order;
 
 /**
  * Method Two Interceptor to calculate spent time in invoke controller method <br>
  * Use spring Normal Interceptor and configruation <br>
  * Advantages: very easy to get handler's params e.g. method name and class name <br>
  * Disadvantages: very diffcult to config <br>
- * 
+ *
  * @author <a href="http://www.blogjava.net/lishunli/" target="_blank">ShunLi</a>
  * @notes Created on 2011-7-7<br>
  *        Revision of last commit:$Revision$<br>
@@ -20,6 +21,7 @@ import org.slf4j.LoggerFactory;
  *        Date of last commit:$Date$<br>
  *        <p>
  */
+@Order(2)
 public class PerformanceMTInterceptor implements MethodInterceptor {// extends HandlerInterceptorAdapter {
 	private Logger log = LoggerFactory.getLogger(getClass());
 
@@ -31,7 +33,7 @@ public class PerformanceMTInterceptor implements MethodInterceptor {// extends H
 		Method method = methodInvocation.getMethod();
 		Object[] params = { method.getDeclaringClass().getName(), method.getName(), System.currentTimeMillis() - startTime };
 
-		log.info("{}.{}() elapsed time {} ms", params);
+		log.info("[3] {}.{}() elapsed time {} ms", params);
 		return result;
 	}
 

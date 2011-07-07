@@ -49,23 +49,37 @@ public class SystemAdvisor {
 	 * Method three to calculate spent time in invoke controller method<br>
 	 * Advantages: very easy impl and understand(user aspectj,aop) <br>
 	 * Disadvantages: very diffcult to get handler's method name<br>
-	 * 
+	 *
 	 * @param jp
 	 * @return
 	 * @throws Throwable
 	 */
 	// @Around("org.springframework.samples.mvc.basic.aop.SystemPointcut.isCallController()")
 	@Around("execution(* org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter.handle(..))")
-	@Order(10)
+	@Order(3)
 	public Object executeControllerFlow(ProceedingJoinPoint jp) throws Throwable {
 		long startTime = 0;
 		startTime = System.currentTimeMillis();
 		Object proceed = jp.proceed(); // execute
 
-		log.info("elapsed time {} ms ", System.currentTimeMillis() - startTime);
+		log.info("[4] elapsed time {} ms ", System.currentTimeMillis() - startTime);
 		// TODO to get handler's method name.
 
 		return proceed;
 	}
 
+//	 @Around("org.springframework.samples.mvc.basic.aop.SystemPointcut.isCallController()")
+	@Around("org.springframework.samples.mvc.basic.aop.SystemPointcut.isCallPLController()")
+	@Order(5)
+	public Object executeControllerNormalFlow(ProceedingJoinPoint jp) throws Throwable {
+		long startTime = 0;
+		startTime = System.currentTimeMillis();
+		Object proceed = jp.proceed(); // execute
+
+		Object[] params = { jp.getSignature().getDeclaringTypeName(), jp.getSignature().getName(), (System.currentTimeMillis() - startTime) };
+		log.info("[1] {} elapsed time for {}() = {} ms ", params);
+		// TODO to get handler's method name.
+
+		return proceed;
+	}
 }

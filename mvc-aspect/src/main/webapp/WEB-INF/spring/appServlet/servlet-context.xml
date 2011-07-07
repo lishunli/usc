@@ -48,9 +48,19 @@
 
 	<!-- Method Two Interceptor to calculation spent time in invoke controller method -->
 	<bean id="performanceInterceptor" class="org.springframework.samples.mvc.basic.interceptor.PerformanceMTInterceptor" />
-
 	<aop:config>
-		<aop:advisor advice-ref="performanceInterceptor" pointcut="execution(public * org.springframework..controller..*.*(..)) and @target(org.springframework.stereotype.Controller)" order="1" />
+		<aop:advisor advice-ref="performanceInterceptor"
+		pointcut="execution(public * org.springframework..controller..*.*(..)) and @target(org.springframework.stereotype.Controller)"  />
+	</aop:config>
+
+	<!-- Method Four Interceptor to calculation spent time in invoke controller method(use aspect config) -->
+	<bean id="performanceMFInterceptor" class="org.springframework.samples.mvc.basic.interceptor.PerformanceMFInterceptor"/>
+	<aop:config>
+        <aop:aspect ref="performanceMFInterceptor">
+            <aop:pointcut id="controller"
+                expression="execution(public * org.springframework..controller..*.*(..)) and @target(org.springframework.stereotype.Controller)" />
+            <aop:around pointcut-ref="controller" method="invoke" />
+        </aop:aspect>
 	</aop:config>
 
 	<!-- Method three to calculation spent time in invoke controller method,please see org.springframework.samples.mvc.basic.aop.SystemAdvisor.executeControllerFlow() -->
