@@ -4,6 +4,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
+import org.springframework.samples.mvc.basic.util.SimpleNameUtil;
 
 /**
  * Method Fourt Interceptor to calculate spent time in invoke controller method <br>
@@ -29,7 +30,7 @@ public class PerformanceMFInterceptor {
 		try {
 			proceed = jp.proceed(); // execute
 		} finally {
-			Object[] params = { jp.getSignature().getDeclaringTypeName(), jp.getSignature().getName(), (System.currentTimeMillis() - startTime) };
+			Object[] params = { SimpleNameUtil.chompClassName(jp.getSignature().getDeclaringTypeName()), jp.getSignature().getName(), (System.currentTimeMillis() - startTime) };
 			log.info("[2] {} elapsed time for {}() = {} ms ", params);
 		}
 

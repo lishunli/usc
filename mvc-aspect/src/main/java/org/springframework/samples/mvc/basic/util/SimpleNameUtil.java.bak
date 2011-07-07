@@ -1,0 +1,126 @@
+package org.springframework.samples.mvc.basic.Util;
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+
+/**
+ * Simple Name Util(Right intercept) <br>
+ * e.g.<br>
+ * <br>
+ * SimpleNameUtil.chompClassName("org.springframework.samples.mvc.basic.controller.UserController",".",2) = controller.UserController<br>
+ * 
+ * @author <a href="http://www.blogjava.net/lishunli/" target="_blank">ShunLi</a>
+ * @notes Created on 2011-7-7<br>
+ *        Revision of last commit:$Revision$<br>
+ *        Author of last commit:$Author$<br>
+ *        <p>
+ */
+public class SimpleNameUtil {
+	private static final String DEFAULT_SEPARATOR_CHARS = ".";
+	private static final int DEFAULT_CHOMP_SIZE = 2;
+	private static final String BLANK_STRING = "";
+
+	private String separatorChars = DEFAULT_SEPARATOR_CHARS;
+	private int chompSize = DEFAULT_CHOMP_SIZE;
+
+	public String getSeparatorChars() {
+		return separatorChars;
+	}
+
+	public void setSeparatorChars(String separatorChars) {
+		this.separatorChars = separatorChars;
+	}
+
+	public int getChompSize() {
+		return chompSize;
+	}
+
+	public void setChompSize(int chompSize) {
+		this.chompSize = chompSize;
+	}
+
+	public SimpleNameUtil() {
+		this(DEFAULT_SEPARATOR_CHARS, DEFAULT_CHOMP_SIZE);
+	}
+
+	/**
+	 * @param chompSize
+	 * @param separatorChars
+	 */
+	public SimpleNameUtil(String separatorChars) {
+		this(separatorChars, DEFAULT_CHOMP_SIZE);
+	}
+
+	/**
+	 * @param chompSize
+	 */
+	public SimpleNameUtil(int chompSize) {
+		this(DEFAULT_SEPARATOR_CHARS, chompSize);
+	}
+
+	/**
+	 * @param separatorChars
+	 * @param chompSize
+	 */
+	public SimpleNameUtil(String separatorChars, int chompSize) {
+		this.separatorChars = separatorChars;
+		this.chompSize = chompSize;
+	}
+
+	// ///////////////////////////////////////////////////////////////////////
+	// Functions
+	// ///////////////////////////////////////////////////////////////////////
+	/**
+	 * @param className
+	 * @return
+	 */
+	public String chompClassName(String className) {
+		return chompClassName(className, this.chompSize);
+	}
+
+	/**
+	 * @param className
+	 * @param separatorChars
+	 * @return
+	 */
+	public String chompClassName(String className, String separatorChars) {
+		return chompClassName(className, separatorChars, this.chompSize);
+	}
+
+	/**
+	 * @param className
+	 * @param chompSize
+	 * @return
+	 */
+	public String chompClassName(String className, int chompSize) {
+		return chompClassName(className, this.separatorChars, chompSize);
+	}
+
+	/**
+	 * @param className
+	 * @param separatorChars
+	 * @param chompSize
+	 * @return
+	 */
+	public static String chompClassName(String className, String separatorChars, int chompSize) {
+		if (!StringUtils.isBlank(className)) {
+			if (chompSize <= 0) {
+				chompSize = className.length();
+			}
+
+			List<String> handler = Arrays.asList(StringUtils.split(className, separatorChars));
+			int size = handler.size();
+
+			if (size > chompSize) {
+				return StringUtils.join(handler.subList(size - chompSize, size), separatorChars);
+			} else {
+				return className;
+			}
+		} else {
+			return BLANK_STRING;
+		}
+	}
+	
+}
