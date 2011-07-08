@@ -3,14 +3,14 @@ package org.springframework.samples.mvc.basic.util;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang.StringUtils;
 
 /**
  * Simple Name Util(Right intercept) <br>
  * e.g.<br>
  * <br>
  * SimpleNameUtil.chompClassName("org.springframework.samples.mvc.basic.controller.UserController",".",2) = controller.UserController<br>
- * 
+ *
  * @author <a href="http://www.blogjava.net/lishunli/" target="_blank">ShunLi</a>
  * @notes Created on 2011-7-7<br>
  *        Revision of last commit:$Revision$<br>
