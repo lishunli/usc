@@ -16,7 +16,7 @@ public class SystemAdvisor {
 	@After("org.springframework.samples.mvc.aop.SystemPointcut.isCallController()")
 	@Order(13)
 	public void executeControllerHandler(JoinPoint jp) throws Throwable {
-		log.info(StringUtils.center(" 我就是哥 ", 100, "-"));
+		log.info(StringUtils.center(" 我就是哥 ", 96, "-"));
 		log.info(StringUtils.repeat("-", 100));
 		log.info("Invoke {}.{}()...", SimpleNameUtil.chompClassName(jp.getSignature().getDeclaringTypeName(), 2), jp.getSignature().getName());
 	}
