@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.HashMultimap;
@@ -20,20 +22,29 @@ public class GoogleCollectionsDemo {
      */
     public void testImmutableList(){
         //1.JDK5.0 传统的方式
+        System.out.println(StringUtils.center(" 1.JDK5.0 传统的方式 ", 60, "-"));
         List<String> names = new ArrayList<String>();
         names.add("james");
         names.add("bryant");
         List<String> immutableNamesJdk = Collections.unmodifiableList(names);
         System.out.println("JDK1.5方式:"+immutableNamesJdk);
+        names.add("1");
+//        System.out.println("JDK1.5方式:"+immutableNamesJdk);
+
 
         //2.Google Collections 第一种方式获取
-        List<String> immutableNamesGoogle1 = ImmutableList.of("james", "bryant");
+        List<String> immutableNamesGoogle1 = ImmutableList.copyOf(names);//of("james", "bryant");
         System.out.println("Google Collections获取方式1:"+immutableNamesGoogle1);
 
         //2.Google Collections 第二种方式获取
         ImmutableList.Builder<String> builder= ImmutableList.builder();
-        builder.add("james","bryant");
+        builder.addAll(names);
+//        builder.add("james","bryant");
         ImmutableList<String> immutableNamesGoogle2 = builder.build();
+
+
+        System.out.println("Google Collections获取方式2:"+immutableNamesGoogle2);
+        names.add("1");
         System.out.println("Google Collections获取方式2:"+immutableNamesGoogle2);
     }
 
