@@ -12,26 +12,26 @@ import org.apache.commons.io.FileUtils;
 import org.scannotation.AnnotationDB;
 
 /**
- *
+ * 
  * @author ShunLi
  */
 public class ScanAnnotaionClass {
 
-    public static void main(String[] args) throws IOException {
-        List<String> projectClasspath = Arrays.asList("D:/MSSE/mss-app/mss-app-main/primary/target/classes", "C:/Documents and Settings/slli/.m2/repository/com/taifook/mtss/mss-e/mss-app/mss-app-main-base-api/1.1-SNAPSHOT/mss-app-main-base-api-1.1-SNAPSHOT.jar");
-        ArrayList<File> projectClasspathFiles = new ArrayList<File>(projectClasspath.size());
-        for (String path : projectClasspath) {
-            projectClasspathFiles.add(new File(path));
-        }
+	public static void main(String[] args) throws IOException {
+		List<String> projectClasspath = Arrays.asList("D:/MSSE/mss-app/mss-app-main/primary/target/classes", "C:/Documents and Settings/slli/.m2/repository/com/taifook/mtss/mss-e/mss-app/mss-app-main-base-api/1.1-SNAPSHOT/mss-app-main-base-api-1.1-SNAPSHOT.jar");
+		ArrayList<File> projectClasspathFiles = new ArrayList<File>(projectClasspath.size());
+		for (String path : projectClasspath) {
+			projectClasspathFiles.add(new File(path));
+		}
 
-        URL[] urls = FileUtils.toURLs(projectClasspathFiles.toArray(new File[0]));
+		URL[] urls = FileUtils.toURLs(projectClasspathFiles.toArray(new File[0]));
 
-        AnnotationDB db = new AnnotationDB();
-        db.scanArchives(urls);
+		AnnotationDB db = new AnnotationDB();
+		db.scanArchives(urls);
 
-        Set<String> className = db.getAnnotationIndex().get(javax.persistence.Entity.class.getName());
-        for (String name : className) {
-            System.out.println("<class>" + name + "</class>");
-        }
-    }
+		Set<String> className = db.getAnnotationIndex().get(javax.persistence.Entity.class.getName());
+		for (String name : className) {
+			System.out.println("<class>" + name + "</class>");
+		}
+	}
 }

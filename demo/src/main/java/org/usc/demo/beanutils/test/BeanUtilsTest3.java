@@ -9,17 +9,19 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.Map;
 
+import org.apache.commons.lang.time.DateUtils;
 import org.usc.demo.beanutils.model.User;
 import org.usc.demo.beanutils.utils.BeanUtils;
-import org.usc.demo.beanutils.utils.StringUtils;
 
 /**
  * @author ShunLi
- *
+ * 
  */
 public class BeanUtilsTest3 {
-	public static void main(String[] args) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException, IllegalArgumentException,
-			ParseException {
+	public static void main(String[] args) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException, IllegalArgumentException, ParseException {
+		String[] dateFormats = { "yyyy-MM-dd" };
+		String[] dateTimeFormats = { "yyyy-MM-dd HH:mm:ss" };
+
 		User user = new User("lishunli", "lishunli", 23, new Date());
 		user.setLogin(true);
 		// User user2 = new User();
@@ -27,8 +29,7 @@ public class BeanUtilsTest3 {
 		// BeanUtils.copyMapToBean(BeanUtils.convertBeanToMap(user), user2);
 		// System.out.println(user2);
 
-		@SuppressWarnings("rawtypes")
-		Map map = BeanUtils.convertBeanToMap(user);
+		@SuppressWarnings("rawtypes") Map map = BeanUtils.convertBeanToMap(user);
 		Field[] fs = user.getClass().getDeclaredFields();
 		for (Field f : fs) {
 			f.setAccessible(true);
@@ -44,9 +45,9 @@ public class BeanUtilsTest3 {
 						System.out.println(f.getType().isPrimitive());
 						f.set(user, Boolean.valueOf(((String) value).equalsIgnoreCase("Y")));
 					} else if (f.getType().equals(Date.class)) {
-						f.set(user, StringUtils.stringToDate((String) value));
+						f.set(user, DateUtils.parseDate((String) value, dateFormats));
 					} else if (f.getType().equals(Timestamp.class)) {
-						f.set(user, StringUtils.stringToTimestamp((String) value));
+						f.set(user, DateUtils.parseDate((String) value, dateTimeFormats));
 					} else if (f.getType().equals(Long.class)) {
 						f.set(user, Long.valueOf((String) value));
 					} else if (f.getType().equals(Integer.class)) {

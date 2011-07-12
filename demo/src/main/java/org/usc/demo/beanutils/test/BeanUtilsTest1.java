@@ -10,7 +10,7 @@ import org.usc.demo.beanutils.utils.BeanUtils;
 
 /**
  * @author ShunLi
- *
+ * 
  */
 public class BeanUtilsTest1 {
 	public static void main(String[] args) {
@@ -18,7 +18,7 @@ public class BeanUtilsTest1 {
 
 		try {
 			for (@SuppressWarnings("unused") PropertyDescriptor propertyDescriptor : PropertyUtils.getPropertyDescriptors(user)) {
-//				System.out.println(PropertyUtils.getProperty(user, propertyDescriptor.getName()));
+				// System.out.println(PropertyUtils.getProperty(user, propertyDescriptor.getName()));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -26,7 +26,7 @@ public class BeanUtilsTest1 {
 
 		Map<String, String> result = BeanUtils.convertBeanToMap(user);
 
-		for(Map.Entry<String, String> entry: result.entrySet()){
+		for (Map.Entry<String, String> entry : result.entrySet()) {
 			System.out.println(entry.getKey() + " : " + entry.getValue());
 		}
 

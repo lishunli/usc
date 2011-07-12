@@ -7,88 +7,89 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
 public class User {
-    private String username;
-    private String password;
-    private Integer age;
-    private Date birthDay;
-    private Boolean isActive = Boolean.TRUE;
-    private boolean isLogin = false;
-    private List<String> params;
-    public User() {
-    }
+	private String username;
+	private String password;
+	private Integer age;
+	private Date birthDay;
+	private Boolean isActive = Boolean.TRUE;
+	private boolean isLogin = false;
+	private List<String> params;
 
-    public User(String username, String password, Integer age, Date birthDay) {
-        this.username = username;
-        this.password = password;
-        this.age = age;
-        this.birthDay = birthDay;
-    }
+	public User() {
+	}
 
-    public User(String username, String password, Integer age, Date birthDay, Boolean isActive) {
-        this(username, password, age, birthDay);
-        this.isActive = isActive;
-    }
+	public User(String username, String password, Integer age, Date birthDay) {
+		this.username = username;
+		this.password = password;
+		this.age = age;
+		this.birthDay = birthDay;
+	}
 
-    public String getUsername() {
-        return username;
-    }
+	public User(String username, String password, Integer age, Date birthDay, Boolean isActive) {
+		this(username, password, age, birthDay);
+		this.isActive = isActive;
+	}
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+	public String getUsername() {
+		return username;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public Integer getAge() {
-        return age;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public void setAge(Integer age) {
-        this.age = age;
-    }
+	public Integer getAge() {
+		return age;
+	}
 
-    public Date getBirthDay() {
-        return birthDay;
-    }
+	public void setAge(Integer age) {
+		this.age = age;
+	}
 
-    public void setBirthDay(Date birthDay) {
-        this.birthDay = birthDay;
-    }
+	public Date getBirthDay() {
+		return birthDay;
+	}
 
-    public Boolean getIsActive() {
-        return isActive;
-    }
+	public void setBirthDay(Date birthDay) {
+		this.birthDay = birthDay;
+	}
 
-    public void setIsActive(Boolean isActive) {
-        this.isActive = isActive;
-    }
+	public Boolean getIsActive() {
+		return isActive;
+	}
 
-    public boolean isLogin() {
-        return isLogin;
-    }
+	public void setIsActive(Boolean isActive) {
+		this.isActive = isActive;
+	}
 
-    public void setLogin(boolean isLogin) {
-        this.isLogin = isLogin;
-    }
+	public boolean isLogin() {
+		return isLogin;
+	}
 
-    public List<String> getParams() {
-        return params;
-    }
+	public void setLogin(boolean isLogin) {
+		this.isLogin = isLogin;
+	}
 
-    public void setParams(List<String> params) {
-        this.params = params;
-    }
+	public List<String> getParams() {
+		return params;
+	}
 
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this,ToStringStyle.MULTI_LINE_STYLE);
+	public void setParams(List<String> params) {
+		this.params = params;
+	}
 
-    }
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+
+	}
 
 }

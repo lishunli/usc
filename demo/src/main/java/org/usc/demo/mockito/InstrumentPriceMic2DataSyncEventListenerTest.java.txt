@@ -1,0 +1,120 @@
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
+public class InstrumentPriceMic2DataSyncEventListenerTest {
+    @InjectMocks
+    private InstrumentDynamicDatumMic2DataSyncEventListener listener = new InstrumentDynamicDatumMic2DataSyncEventListener();
+
+    @Mock
+    private DataSyncService mockDataSyncService;
+
+    @Captor
+    private ArgumentCaptor<InstrumentPriceDataSyncMessage> enqParamCaptor;
+
+    @Before
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+    }
+
+    @Test
+    public void event2MessageConversionTest() throws Exception {
+        // init params
+        Calendar c = Calendar.getInstance();
+        c.clear();
+        c.set(2010, Calendar.JANUARY, 1);
+        Date businessDate = c.getTime();
+        BigDecimal closingPrice = new BigDecimal("0.1");
+        BigDecimal previousClosingPrice = new BigDecimal("0.2");
+        BigDecimal settlementPrice = new BigDecimal("0.3");
+        BigDecimal lastTradePrice = new BigDecimal("0.4");
+
+        InstrumentClass instrumentClass = new InstrumentClass();
+
+        String marketCode = "mrktCode";
+        Market market = new Market();
+        market.setCode(marketCode);
+
+        String instrumentTypeGroupCode = "instrTypGrpCode";
+        InstrumentTypeGroup instrumentTypeGroup = new InstrumentTypeGroup();
+        instrumentTypeGroup.setCode(instrumentTypeGroupCode);
+
+        InstrumentType instrumentType = new InstrumentType();
+        instrumentType.setGroup(instrumentTypeGroup);
+
+        InstrumentGroup instrumentGroup = new InstrumentGroup();
+        instrumentGroup.setInstrumentType(instrumentType);
+
+        instrumentClass.setMarket(market);
+        instrumentClass.setInstrumentGroup(instrumentGroup);
+
+        String instrumentCode = "0005";
+        Instrument instrument = new Instrument();
+        instrument.setCode(instrumentCode);
+        instrument.setInstrumentClass(instrumentClass);
+
+        List<InstrumentDynamicDatum> priceList = new ArrayList<InstrumentDynamicDatum>();
+
+        InstrumentDynamicDatum price = new InstrumentDynamicDatum();
+        price.setBusinessDate(businessDate);
+        price.setClosingPrice(closingPrice);
+        price.setInstrument(instrument);
+        price.setLastTradePrice(lastTradePrice);
+        price.setPreviousClosingPrice(previousClosingPrice);
+        price.setSettlementPrice(settlementPrice);
+
+        priceList.add(price);
+        priceList.add(new InstrumentDynamicDatum());
+
+        InstrumentDynamicDataEvent event = new InstrumentDynamicDataEvent(priceList, InstrumentDynamicDataEvent.EventAction.UPDATE);
+
+        listener.setDataSyncBatchSize(1);
+
+        // run test
+        listener.onInstrumentDynamicDataChanged(event);
+
+        // verify
+        verify(mockDataSyncService, times(2)).sendMessage(enqParamCaptor.capture());
+        List<InstrumentPriceDataSyncMessage> messages = enqParamCaptor.getAllValues();
+        assertNotNull(messages);
+        assertEquals(2, messages.size());
+
+        InstrumentPriceDataSyncMessage message1 = messages.get(0);
+        assertNotNull(message1);
+        assertNotNull(message1.getInstrumentPriceList());
+        assertTrue(message1.getInstrumentPriceList().size() > 0);
+        assertNotNull(message1.getInstrumentPriceList().get(0));
+        assertEquals("U", message1.getInstrumentPriceList().get(0).getActionType());
+        assertEquals(businessDate, message1.getInstrumentPriceList().get(0).getBusinessDate());
+        assertEquals(closingPrice, message1.getInstrumentPriceList().get(0).getClosingPrice());
+        assertEquals(instrumentCode, message1.getInstrumentPriceList().get(0).getInstrumentCode());
+        assertEquals(lastTradePrice, message1.getInstrumentPriceList().get(0).getLastTradePrice());
+        assertEquals(previousClosingPrice, message1.getInstrumentPriceList().get(0).getPreviousClosingPrice());
+        assertEquals(settlementPrice, message1.getInstrumentPriceList().get(0).getSettlementPrice());
+        assertEquals(marketCode, message1.getInstrumentPriceList().get(0).getMarketCode());
+        assertEquals(instrumentTypeGroupCode, message1.getInstrumentPriceList().get(0).getInstrumentTypeGroupCode());
+
+        InstrumentPriceDataSyncMessage message2 = messages.get(1);
+        assertNotNull(message2);
+        assertNotNull(message2.getInstrumentPriceList());
+        assertEquals(1, message2.getInstrumentPriceList().size());
+
+    }
+}

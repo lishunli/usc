@@ -4,7 +4,7 @@ import java.lang.reflect.Proxy;
 
 public class Main {
 	public static void main(String[] args) {
-		FooImpl1 foo1 = new FooImpl1();
+		Foo foo1 = new FooImpl1();
 
 		DynamicProxyHandler h = new DynamicProxyHandler(foo1);
 
