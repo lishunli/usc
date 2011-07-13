@@ -3,7 +3,7 @@ package org.usc.demo.reportUtils;
 import java.io.File;
 import java.io.FileOutputStream;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.io.FilenameUtils;
 
 /**

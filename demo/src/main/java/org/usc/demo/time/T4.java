@@ -4,69 +4,69 @@ import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 
-import org.apache.commons.lang.time.DateUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.joda.time.DateTime;
 import org.junit.Test;
 
 /**
- * 
+ *
  * @author ShunLi
  */
 public class T4 {
-	public static void main(String[] args) {
+    private static final String DATE_FORMAT = "yyyy-MM-dd";
 
-	}
+    public static void main(String[] args) {
 
-	@Test
-	public void test1() {
-		Calendar canlendar = Calendar.getInstance();
-		canlendar.setTime(new Date());
-		canlendar.add(Calendar.MONTH, -1);
+    }
 
-		canlendar.set(Calendar.DAY_OF_MONTH, canlendar.getMinimum(Calendar.DAY_OF_MONTH));
-		System.out.println(canlendar.getTime());
+    @Test
+    public void test1() {
+        Calendar canlendar = Calendar.getInstance();
+        canlendar.setTime(new Date());
+        canlendar.add(Calendar.MONTH, -1);
 
-		canlendar.set(Calendar.DAY_OF_MONTH, canlendar.getMaximum(Calendar.DAY_OF_MONTH));
-		System.out.println(canlendar.getTime());
-	}
+        canlendar.set(Calendar.DAY_OF_MONTH, canlendar.getMinimum(Calendar.DAY_OF_MONTH));
+        System.out.println(canlendar.getTime());
 
-	@Test
-	public void test2() {
-		Calendar canlendar = Calendar.getInstance();
+        canlendar.set(Calendar.DAY_OF_MONTH, canlendar.getMaximum(Calendar.DAY_OF_MONTH));
+        System.out.println(canlendar.getTime());
+    }
 
-		DateTime dt = new DateTime(2011, 3, 18, 12, 25, 52, 0);
-		canlendar.setTime(dt.toDate());
-		canlendar.add(Calendar.MONTH, -1);
+    @Test
+    public void test2() {
+        Calendar canlendar = Calendar.getInstance();
 
-		canlendar.set(Calendar.DAY_OF_MONTH, canlendar.getMinimum(Calendar.DAY_OF_MONTH));
-		Date lastMonthFirstDay = canlendar.getTime();
+        DateTime dt = new DateTime(2011, 3, 18, 12, 25, 52, 0);
+        canlendar.setTime(dt.toDate());
+        canlendar.add(Calendar.MONTH, -1);
 
-		canlendar.set(Calendar.DAY_OF_MONTH, canlendar.getMaximum(Calendar.DAY_OF_MONTH));
-		Date lastMonthLastDay = canlendar.getTime();
+        canlendar.set(Calendar.DAY_OF_MONTH, canlendar.getMinimum(Calendar.DAY_OF_MONTH));
+        Date lastMonthFirstDay = canlendar.getTime();
 
-		System.out.println(lastMonthFirstDay);
-		System.out.println(lastMonthLastDay);
-	}
+        canlendar.set(Calendar.DAY_OF_MONTH, canlendar.getMaximum(Calendar.DAY_OF_MONTH));
+        Date lastMonthLastDay = canlendar.getTime();
 
-	@Test
-	public void test3() throws ParseException {
-		Calendar canlendar = Calendar.getInstance();
+        System.out.println(lastMonthFirstDay);
+        System.out.println(lastMonthLastDay);
+    }
 
-		String[] parsePatterns = { "yyyy-MM-dd" };
+    @Test
+    public void test3() throws ParseException {
+        Calendar canlendar = Calendar.getInstance();
 
-		canlendar.setTime(DateUtils.truncate(DateUtils.parseDate("2011-03-12", parsePatterns), Calendar.MONTH));
-		canlendar.add(Calendar.DATE, -1);
+        canlendar.setTime(DateUtils.truncate(DateUtils.parseDate("2011-03-12", DATE_FORMAT), Calendar.MONTH));
+        canlendar.add(Calendar.DATE, -1);
 
-		Date lastMonthLastDay = canlendar.getTime();
-		Date lastMonthFirstDay = DateUtils.truncate(lastMonthLastDay, Calendar.MONTH);
+        Date lastMonthLastDay = canlendar.getTime();
+        Date lastMonthFirstDay = DateUtils.truncate(lastMonthLastDay, Calendar.MONTH);
 
-		System.out.println(lastMonthFirstDay);
-		System.out.println(lastMonthLastDay);
-	}
+        System.out.println(lastMonthFirstDay);
+        System.out.println(lastMonthLastDay);
+    }
 
-	@Test
-	public void test4() {
+    @Test
+    public void test4() {
 
-	}
+    }
 
 }
