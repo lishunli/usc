@@ -43,8 +43,8 @@
 	</bean>
 
 	<!-- Advisors (AspectJ style) -->
-	<bean id="systemAdvisor" class="org.springframework.samples.mvc.basic.aop.SystemAdvisor">
-	</bean>
+<!-- 	<bean id="systemAdvisor" class="org.springframework.samples.mvc.basic.aop.SystemAdvisor"> -->
+<!-- 	</bean> -->
 
 	<!-- Method Two Interceptor to calculation spent time in invoke controller method -->
 	<bean id="performanceInterceptor" class="org.springframework.samples.mvc.basic.interceptor.PerformanceMTInterceptor" />

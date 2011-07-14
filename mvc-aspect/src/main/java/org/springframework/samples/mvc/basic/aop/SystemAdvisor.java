@@ -12,8 +12,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
 import org.springframework.samples.mvc.basic.model.User;
 import org.springframework.samples.mvc.basic.util.SimpleNameUtil;
+import org.springframework.stereotype.Component;
 
 @Aspect
+@Component("systemAdvisor")
 public class SystemAdvisor {
 	private Logger log = LoggerFactory.getLogger(getClass());
 
