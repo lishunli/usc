@@ -16,7 +16,6 @@ import org.springframework.stereotype.Component;
 
 @Aspect
 @Component("systemAdvisor")
-
 public class SystemAdvisor {
 	private Logger log = LoggerFactory.getLogger(getClass());
 
