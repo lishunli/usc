@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:jee="http://www.springframework.org/schema/jee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+	 http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.0.xsd">
+
+	<!--Use ActiveMq JMS -->
+
+	<!-- JNDI -->
+	<bean id="jndiTemplate" class="org.springframework.jndi.JndiTemplate">
+		<property name="environment">
+			<props>
+				<prop key="java.naming.factory.initial">org.apache.activemq.jndi.ActiveMQInitialContextFactory</prop>
+				<prop key="java.naming.provider.url">tcp://localhost:61616</prop>
+				<prop key="connectionFactoryNames">ConnectionFactory,jms/Connection,queueConnectionFactory, topicConnectionFactry</prop>
+				<prop key="queue.requestQueue">requestQueue</prop>
+				<prop key="queue.responseQueue">responseQueue</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- ConnectionFactory -->
+	<bean id="jmsQueueConnectionFactory" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiTemplate">
+			<ref bean="jndiTemplate" />
+		</property>
+		<property name="jndiName">
+			<value>ConnectionFactory</value>
+		</property>
+	</bean>
+
+	<!-- request -->
+	<bean id="RequestQueueDestination" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiTemplate">
+			<ref bean="jndiTemplate" />
+		</property>
+		<property name="jndiName">
+			<value>requestQueue</value>
+		</property>
+	</bean>
+	<bean id="RequestQueueListener" class="com.bbxfnet.jms.RequestMessageListener">
+	</bean>
+
+
+	<!-- <bean id="RequestQueueListenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer"> -->
+	<!-- <property name="concurrentConsumers" value="1"/> -->
+	<!-- <property name="connectionFactory" ref="jmsQueueConnectionFactory"/> -->
+	<!-- <property name="destination" ref="RequestQueueDestination"/> -->
+	<!-- <property name="messageListener" ref="RequestQueueListener"/> -->
+	<!-- </bean> -->
+
+	<!-- JmsTemplate -->
+	<bean id="jmsQueueTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="pubSubDomain">
+			<value>false</value>
+		</property>
+		<property name="connectionFactory">
+			<ref bean="jmsQueueConnectionFactory" />
+		</property>
+		<property name="defaultDestination">
+			<ref bean="RequestQueueDestination" />
+		</property>
+	</bean>
+
+
+	<bean id="senderAndReceiver" class="com.bbxfnet.jms.SenderAndReceiver">
+		<property name="jmsTemplate" ref="jmsQueueTemplate"></property>
+	</bean>
+
+	<bean id="receiverQueueListenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="concurrentConsumers" value="1" />
+		<property name="connectionFactory" ref="jmsQueueConnectionFactory" />
+		<property name="destination" ref="RequestQueueDestination" />
+		<property name="messageListener" ref="senderAndReceiver" />
+	</bean>
+
+	<!-- Use Weblogic JMS -->
+	<jee:jndi-lookup id="batch.jmsFactory" jndi-name="jms/batch/connectionFactory">
+		<jee:environment>
+			java.naming.factory.initial=weblogic.jndi.WLInitialContextFactory
+			java.naming.provider.url=t3://127.0.0.1:7001
+		</jee:environment>
+	</jee:jndi-lookup>
+	<jee:jndi-lookup id="batch.reqQueue.destination" jndi-name="jms/batch/connectionFactory">
+		<jee:environment>
+			java.naming.factory.initial=weblogic.jndi.WLInitialContextFactory
+			java.naming.provider.url=t3://127.0.0.1:7001
+		</jee:environment>
+	</jee:jndi-lookup>
+
+	<!-- JmsTemplate -->
+	<bean id="jmsBatchQueueTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="pubSubDomain">
+			<value>false</value>
+		</property>
+		<property name="connectionFactory">
+			<ref bean="batch.jmsFactory" />
+		</property>
+		<property name="defaultDestination">
+			<ref bean="batch.reqQueue.destination" />
+		</property>
+	</bean>
+
+	<bean id="batchSenderAndReceiver" class="com.bbxfnet.jms.SenderAndReceiver">
+		<property name="jmsTemplate" ref="jmsBatchQueueTemplate"></property>
+	</bean>
+
+	<bean id="batchReceiverQueueListenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="concurrentConsumers" value="1" />
+		<property name="connectionFactory" ref="batch.jmsFactory" />
+		<property name="destination" ref="batch.reqQueue.destination" />
+		<property name="messageListener" ref="batchSenderAndReceiver" />
+	</bean>
+
+</beans>

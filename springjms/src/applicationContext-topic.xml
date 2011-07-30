@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:jee="http://www.springframework.org/schema/jee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+	 http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.0.xsd">
+
+	<!-- Use Weblogic JMS -->
+	<jee:jndi-lookup id="batch.jmsFactory" jndi-name="jms/batch/connectionFactory">
+		<jee:environment>
+			java.naming.factory.initial=weblogic.jndi.WLInitialContextFactory
+			java.naming.provider.url=t3://127.0.0.1:7001
+		</jee:environment>
+	</jee:jndi-lookup>
+	<jee:jndi-lookup id="batch.reqTopic.destination" jndi-name="jms/batch/reqTopic">
+		<jee:environment>
+			java.naming.factory.initial=weblogic.jndi.WLInitialContextFactory
+			java.naming.provider.url=t3://127.0.0.1:7001
+		</jee:environment>
+	</jee:jndi-lookup>
+
+	<!-- JmsTemplate -->
+	<bean id="jmsBatchTopicTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="pubSubDomain" value="false" />
+		<property name="connectionFactory" ref="batch.jmsFactory" />
+		<property name="defaultDestination" ref="batch.reqTopic.destination" />
+	</bean>
+
+	<bean id="batchPublisher" class="org.usc.jms.SenderOrPublisher">
+		<property name="jmsTemplate" ref="jmsBatchTopicTemplate" />
+	</bean>
+
+	<bean id="batchReceiverQueueListenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+<!--		<property name="concurrentConsumers" value="1" />-->
+		<property name="connectionFactory" ref="batch.jmsFactory" />
+		<property name="destination" ref="batch.reqTopic.destination" />
+		<property name="messageListener">
+			<bean class="org.usc.jms.ReceiverOrSubsciber1"></bean>
+		</property>
+	</bean>
+	<bean id="batchReceiverQueueListenerContainer2" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+<!--		<property name="concurrentConsumers" value="1" />-->
+		<property name="connectionFactory" ref="batch.jmsFactory" />
+		<property name="destination" ref="batch.reqTopic.destination" />
+		<property name="messageListener">
+			<bean class="org.usc.jms.ReceiverOrSubsciber2"></bean>
+		</property>
+	</bean>
+
+
+</beans>
