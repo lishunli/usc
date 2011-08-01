@@ -138,6 +138,35 @@
 		</repository>
 	</repositories>
 	<build>
+        <resources>
+            <!--
+                ####################################################
+                ## Main application resources
+                ####################################################
+             -->
+            <resource>
+                <directory>${basedir}/src/main/resources</directory>
+            </resource>
+            <!--
+                ####################################################
+                ## Main application external config
+                ####################################################
+             -->
+            <resource>
+                <directory>${basedir}/src/main/extconf</directory>
+                <targetPath>extconf</targetPath>
+            </resource>
+        </resources>
+
+        <testResources>
+            <testResource>
+                <directory>${basedir}/src/test/resources</directory>
+            </testResource>
+            <testResource>
+                <directory>${basedir}/src/main/extconf</directory>
+            </testResource>
+        </testResources>
+
 
 		<plugins>
 			<plugin>

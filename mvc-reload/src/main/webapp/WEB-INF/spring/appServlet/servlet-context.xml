@@ -45,9 +45,17 @@
 <!--         <constructor-arg type="java.lang.String" value="C:/temp/acl-ext-config.xml"/> -->
 <!--     </bean> -->
 
-
+	<!-- ext config -->
    <bean id="acl.config.aclExtConfig" class="org.apache.commons.configuration.XMLConfiguration">
        <constructor-arg type="java.lang.String" value="acl-ext-config.xml"/>
+       <property name="reloadingStrategy">
+           <bean class="org.apache.commons.configuration.reloading.FileChangedReloadingStrategy"/>
+       </property>
+   </bean>
+
+	<!-- inner config -->
+   <bean id="acl.config.aclConfig" class="org.apache.commons.configuration.XMLConfiguration">
+       <constructor-arg type="java.lang.String" value="acl-config.xml"/>
        <property name="reloadingStrategy">
            <bean class="org.apache.commons.configuration.reloading.FileChangedReloadingStrategy"/>
        </property>
