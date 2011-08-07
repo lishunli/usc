@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="ImageUseStruts2AndMysql"
+  id="myeclipse.1263731764396"
+  context-root="/ImageUseStruts2AndMysql"
+  j2ee-spec="5.0"
+  archive="ImageUseStruts2AndMysql.war">
+  <attributes>
+    <attribute name="webrootdir" value="/WebRoot" />
+  </attributes>
+</project-module>
+
