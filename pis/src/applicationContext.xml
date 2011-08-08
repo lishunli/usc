@@ -41,9 +41,9 @@
 		</property>
 
 		<!--主键Bean类		-->
-		<property name="annotatedClasses">
+		<property name="packagesToScan">
 			<list>
-				<value>org.usc.beans.User</value>
+				<value>org.usc.beans</value>
 			</list>
 		</property>
 	</bean>

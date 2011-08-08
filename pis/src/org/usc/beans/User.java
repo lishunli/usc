@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 /**
  * User Model,Please attention type of picture field
- * 
+ *
  * @author <a href="http://www.blogjava.net/lishunli/" target="_blank">ShunLi</a>
  * @notes Created on 2010-11-10<br>
  *        Revision of last commit:$Revision$<br>
@@ -19,9 +19,8 @@ import javax.persistence.Table;
  *        <p>
  */
 @Entity
-@Table(name = "user", catalog = "test")
-public class User implements java.io.Serializable {
-	private static final long serialVersionUID = 4230186551226007292L;
+@Table(name = "user")
+public class User {
 
 	private Integer id;
 	private String username;
@@ -81,12 +80,12 @@ public class User implements java.io.Serializable {
 		this.picture = picture;
 	}
 
-	/* 
+	/*
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", password=" + password + ", username=" + username + "]";
 	}
-	
+
 }
