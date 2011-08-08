@@ -1,11 +1,13 @@
 package org.usc.services;
 
+import java.io.File;
+
 import org.usc.beans.User;
 import org.usc.daos.base.IBaseDao;
 
 /**
  * User Service
- * 
+ *
  * @author <a href="http://www.blogjava.net/lishunli/" target="_blank">ShunLi</a>
  * @notes Created on 2010-11-10<br>
  *        Revision of last commit:$Revision$<br>
@@ -14,5 +16,6 @@ import org.usc.daos.base.IBaseDao;
  *        <p>
  */
 public interface IUserService extends IBaseDao<User> {
+	void saveUserWithImage(User user, File image) throws Exception ;
 
 }
