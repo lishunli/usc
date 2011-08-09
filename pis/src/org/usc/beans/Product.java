@@ -1,5 +1,7 @@
 package org.usc.beans;
 
+import java.math.BigDecimal;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,13 +37,13 @@ public class Product {
 	private String name;
 
 	@Column(name = "sampling_ratio")
-	private Double samplingRatio;
+	private BigDecimal samplingRatio;
 
 	@Column(name = "standard_length")
-	private Double standardLength;
+	private BigDecimal standardLength;
 
 	@Column(name = "error_range")
-	private Double errorRange;
+	private BigDecimal errorRange;
 
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "draw_id")
@@ -50,7 +52,7 @@ public class Product {
 	public Product() {
 	}
 
-	public Product(String model, String name, Double samplingRatio, Double standardLength, Double errorRange) {
+	public Product(String model, String name, BigDecimal samplingRatio, BigDecimal standardLength, BigDecimal errorRange) {
 		this.model = model;
 		this.name = name;
 		this.samplingRatio = samplingRatio;
@@ -82,27 +84,27 @@ public class Product {
 		this.name = name;
 	}
 
-	public Double getSamplingRatio() {
+	public BigDecimal getSamplingRatio() {
 		return samplingRatio;
 	}
 
-	public void setSamplingRatio(Double samplingRatio) {
+	public void setSamplingRatio(BigDecimal samplingRatio) {
 		this.samplingRatio = samplingRatio;
 	}
 
-	public Double getStandardLength() {
+	public BigDecimal getStandardLength() {
 		return standardLength;
 	}
 
-	public void setStandardLength(Double standardLength) {
+	public void setStandardLength(BigDecimal standardLength) {
 		this.standardLength = standardLength;
 	}
 
-	public Double getErrorRange() {
+	public BigDecimal getErrorRange() {
 		return errorRange;
 	}
 
-	public void setErrorRange(Double errorRange) {
+	public void setErrorRange(BigDecimal errorRange) {
 		this.errorRange = errorRange;
 	}
 

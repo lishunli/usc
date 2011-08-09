@@ -15,4 +15,6 @@ import org.usc.daos.base.IBaseDao;
  */
 public interface ProductService extends IBaseDao<Product> {
 
+	Product findByModel(String model);
+
 }

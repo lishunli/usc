@@ -73,11 +73,11 @@ public class AddUserAction extends ActionSupport {
 	public String execute() throws Exception {
 		userService.saveUserWithImage(user, image);
 
-		Product p = new Product("3", "ZZZ", 0.006, 6.5, 0.08);
-		Draw d = new Draw("3.png");
-		p.setDraw(d);
-
-		productService.save(p);
+//		Product p = new Product("3", "ZZZ", 0.006, 6.5, 0.08);
+//		Draw d = new Draw("3.png");
+//		p.setDraw(d);
+//
+//		productService.save(p);
 
 		return SUCCESS;
 	}
