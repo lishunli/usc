@@ -35,7 +35,7 @@ public class SimpleNameUtilTest {
 
 	@Test
 	public void testchompClassNameNormal() {
-		int chompSize = 4;
+		int chompSize = 3;
 		String separatorChars = ".";
 		assertEquals("mvc.basic.controller.UserController", SimpleNameUtil.chompClassName(className, separatorChars, chompSize));
 	}
