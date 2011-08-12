@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.usc.beans.Product;
-import org.usc.beans.ProductDto;
+import org.usc.dto.ProductDto;
 import org.usc.services.ProductService;
 
 import com.opensymphony.xwork2.ActionSupport;

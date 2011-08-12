@@ -1,4 +1,4 @@
-package org.usc.beans;
+package org.usc.dto;
 
 
 /**
