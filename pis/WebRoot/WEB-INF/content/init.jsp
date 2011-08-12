@@ -35,4 +35,7 @@
 			<s:reset value="Reset"></s:reset>
 		</s:form>
 	</body>
+
+
+	<a href="draws/%E5%9B%BE1.pdf" target="_blank" >图纸一</a>
 </html>
