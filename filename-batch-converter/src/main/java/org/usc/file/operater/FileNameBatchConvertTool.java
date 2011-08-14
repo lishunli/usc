@@ -118,7 +118,7 @@ public class FileNameBatchConvertTool extends JFrame {
         JLabel label = new JLabel("文件名批量转换");
         label.setFont(new Font("Microsoft YaHei", Font.PLAIN, 24));
 
-        JLabel lblv = new JLabel("顺利©V2.1");
+        JLabel lblv = new JLabel("顺利©V3.0");
         lblv.setEnabled(false);
         lblv.setFont(new Font("Microsoft YaHei", Font.PLAIN, 20));
         lblv.addMouseListener(new MouseAdapter() {
