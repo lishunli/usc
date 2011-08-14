@@ -1,5 +1,9 @@
 package org.usc.dto;
 
+import java.util.List;
+
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 /**
  * Product Dto
@@ -16,24 +20,21 @@ public class ProductDto {
 	private String model;
 	private String name;
 	private String samplingRatio;
-	private String standardLength;
-	private String errorRange;
 	private int injectionAmt;
-	private String draw;
+
+	private List<PartDto> parts;
 
 	public ProductDto() {
 	}
 
-	public ProductDto(Long productId, String model, String name, String samplingRatio, String standardLength, String errorRange,  int injectionAmt, String draw) {
+	public ProductDto(Long productId, String model, String name, String samplingRatio, int injectionAmt, List<PartDto> parts) {
 		super();
 		this.productId = productId;
 		this.model = model;
 		this.name = name;
 		this.samplingRatio = samplingRatio;
-		this.standardLength = standardLength;
-		this.errorRange = errorRange;
 		this.injectionAmt = injectionAmt;
-		this.draw = draw;
+		this.parts = parts;
 	}
 
 	public Long getProductId() {
@@ -68,22 +69,6 @@ public class ProductDto {
 		this.samplingRatio = samplingRatio;
 	}
 
-	public String getStandardLength() {
-		return standardLength;
-	}
-
-	public void setStandardLength(String standardLength) {
-		this.standardLength = standardLength;
-	}
-
-	public String getErrorRange() {
-		return errorRange;
-	}
-
-	public void setErrorRange(String errorRange) {
-		this.errorRange = errorRange;
-	}
-
 	public int getInjectionAmt() {
 		return injectionAmt;
 	}
@@ -92,12 +77,18 @@ public class ProductDto {
 		this.injectionAmt = injectionAmt;
 	}
 
-	public String getDraw() {
-		return draw;
+	public List<PartDto> getParts() {
+		return parts;
 	}
 
-	public void setDraw(String draw) {
-		this.draw = draw;
+	public void setParts(List<PartDto> parts) {
+		this.parts = parts;
 	}
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+	}
+
 
 }

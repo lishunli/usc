@@ -125,7 +125,7 @@
 			<td>产品型号</td>
 			<td width="100"><s:property value="dto.model" /></td>
 			<td>产品名称</td>
-			<td width="200"><s:property value="dto.name" /> (<a href='<s:property value="dto.draw" />' target="_blank" >图纸</a>)</td>
+			<td width="200"><s:property value="dto.name" /> </td>
 		</tr>
 		<tr>
 			<td>抽样比率</td>
@@ -133,16 +133,20 @@
 			<td>抽样数量 </td>
 			<td><s:property value="dto.injectionAmt" /></td>
 		</tr>
-		<tr>
-			<td>标准长度</td>
-			<td id="standardLength"><s:property value="dto.standardLength" /> </td>
-			<td>误差</td>
-			<td id="errorRange"><s:property value="dto.errorRange" /> </td>
-		</tr>
+<%--		<tr>--%>
+<%--			<td>标准长度</td>--%>
+<%--			<td id="standardLength"><s:property value="dto.standardLength" /> </td>--%>
+<%--			<td>误差</td>--%>
+<%--			<td id="errorRange"><s:property value="dto.errorRange" /> </td>--%>
+<%--		</tr>--%>
 	</tbody>
 </table>
 
 <h3>请输入检验的尺寸</h3>
+
+	<s:if test="dto.parts.size">
+		<s:iterator value="dto.parts" id="part">
+			<h4>零件 <s:property value="#part.name" />(<a href='<s:property value="#part.draw" />' target="_blank" >图纸</a>)</h4>
 
 <s:bean name="org.apache.struts2.util.Counter" id="counter">
    <s:param name="first" value="0" />
@@ -179,6 +183,16 @@
    </s:iterator>
 </s:bean>
 
+		</s:iterator>
+	</s:if>
+
+
+
+
+
 <a href="#" >导出检验结果</a>
+
+
+<s:debug></s:debug>
 	</body>
 </html>

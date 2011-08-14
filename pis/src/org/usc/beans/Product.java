@@ -1,21 +1,25 @@
 package org.usc.beans;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.AttributeOverride;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.usc.beans.base.Physical;
+
 /**
- * Product
+ *
  *
  * @author <a href="http://www.blogjava.net/lishunli/" target="_blank">ShunLi</a>
- * @notes Created on 2011-8-8<br>
+ * @notes Created on 2011-8-14<br>
  *        Revision of last commit:$Revision$<br>
  *        Author of last commit:$Author$<br>
  *        Date of last commit:$Date$<br>
@@ -23,66 +27,17 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "product")
-public class Product {
-
-	@Id
-	@GeneratedValue
-	@Column(name = "product_id", unique = true, nullable = false)
-	private Long productId;
-
+@AttributeOverride(name = "id", column = @Column(name = "product_id"))
+public class Product extends Physical {
 	@Column(name = "model")
 	private String model;
-
-	@Column(name = "name")
-	private String name;
 
 	@Column(name = "sampling_ratio")
 	private BigDecimal samplingRatio;
 
-	@Column(name = "standard_length")
-	private BigDecimal standardLength;
-
-	@Column(name = "error_range")
-	private BigDecimal errorRange;
-
-	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "draw_id")
-	private Draw draw;
-
-	public Product() {
-	}
-
-	public Product(String model, String name, BigDecimal samplingRatio, BigDecimal standardLength, BigDecimal errorRange) {
-		this.model = model;
-		this.name = name;
-		this.samplingRatio = samplingRatio;
-		this.standardLength = standardLength;
-		this.errorRange = errorRange;
-	}
-
-	public Long getProductId() {
-		return productId;
-	}
-
-	public void setProductId(Long productId) {
-		this.productId = productId;
-	}
-
-	public String getModel() {
-		return model;
-	}
-
-	public void setModel(String model) {
-		this.model = model;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "product_id")
+	private Set<Part> parts = new HashSet<Part>();
 
 	public BigDecimal getSamplingRatio() {
 		return samplingRatio;
@@ -92,28 +47,20 @@ public class Product {
 		this.samplingRatio = samplingRatio;
 	}
 
-	public BigDecimal getStandardLength() {
-		return standardLength;
+	public Set<Part> getParts() {
+		return parts;
 	}
 
-	public void setStandardLength(BigDecimal standardLength) {
-		this.standardLength = standardLength;
+	public void setParts(Set<Part> parts) {
+		this.parts = parts;
 	}
 
-	public BigDecimal getErrorRange() {
-		return errorRange;
+	public String getModel() {
+		return model;
 	}
 
-	public void setErrorRange(BigDecimal errorRange) {
-		this.errorRange = errorRange;
-	}
-
-	public Draw getDraw() {
-		return draw;
-	}
-
-	public void setDraw(Draw draw) {
-		this.draw = draw;
+	public void setModel(String model) {
+		this.model = model;
 	}
 
 }

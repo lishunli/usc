@@ -1,6 +1,8 @@
 package org.usc.actions;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -9,7 +11,11 @@ import org.apache.struts2.convention.annotation.Results;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.usc.beans.Injection;
+import org.usc.beans.Part;
 import org.usc.beans.Product;
+import org.usc.dto.InjectionDto;
+import org.usc.dto.PartDto;
 import org.usc.dto.ProductDto;
 import org.usc.services.ProductService;
 
@@ -92,14 +98,36 @@ public class InitAction extends ActionSupport {
 				return INPUT;
 			}
 
+			// System.out.println(product);
+
+			List<PartDto> parts = new ArrayList<PartDto>();
+
+			for (Part part : product.getParts()) {
+				List<InjectionDto> injectionDtos = new ArrayList<InjectionDto>();
+				parts.add(new PartDto(part.getName(), basePath + "/" + part.getDraw().getName(), injectionDtos));
+
+				for (Injection injection : part.getInjections()) {
+					injectionDtos.add(new InjectionDto(
+							injection.getName(),
+							injection.getStandardLength().stripTrailingZeros().toString(),
+							injection.getUpErrorRange().stripTrailingZeros().toString(),
+							injection.getDownErrorRange().stripTrailingZeros().toString()));
+				}
+
+			}
+
 			dto = new ProductDto(
-					product.getProductId(), product.getModel(),
+					product.getId(),
+					product.getModel(),
 					product.getName(),
 					product.getSamplingRatio().multiply(new BigDecimal("1000")).stripTrailingZeros() + "‰",
-					product.getStandardLength().stripTrailingZeros().toString(),
-					product.getErrorRange().stripTrailingZeros().toString(),
 					injectionAmt.intValue(),
-					basePath + "/" + product.getDraw().getName());
+					parts
+					);
+			System.out.println(dto);
+			// ,
+			// product.getErrorRange().stripTrailingZeros().toString(),
+			// product.getDraw().getName()
 		}
 
 		// TODO
