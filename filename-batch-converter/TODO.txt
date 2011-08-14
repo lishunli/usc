@@ -11,3 +11,9 @@ maven的使用
 1.maven release plugin 发布版本
 2.google code maven 仓库
 3.自动打包成可运行的Jar 和 Exe文件
+4.重构代码 common-io,fileNameUtils,fileUtils.
+
+0,3 完成
+迁移实际上很简单，就是简单的构建一些基本的Maven project，可以使用Eclipse的Maven 插件（m2eclipse），或者直接使用maven archive type 构件就可以了
+
+如果不了解Maven的可以先学习一下，毕竟Maven差不多已经形成构建的标准了。

@@ -84,7 +84,7 @@
                             <outfile>target/${finalName}.exe</outfile>
                             <jar>target/${finalName}.jar</jar>
                             <errTitle>please contact support(QQ:506817493)</errTitle>
-                            <icon>${basedir}/src/main/resources/batchConvert.ico</icon>
+                            <icon>${basedir}/src/main/installer/batchConvert.ico</icon>
 
                             <jre>
                                 <minVersion>1.6.0</minVersion>
@@ -104,7 +104,7 @@
                             </versionInfo>
 
                             <!-- <splash> -->
-                            <!-- <file>${basedir}/src/main/resources/batchConvert.bmp</file> -->
+                            <!-- <file>${basedir}/src/main/installer/batchConvert.bmp</file> -->
                             <!-- <waitForWindow>true</waitForWindow> -->
                             <!-- <timeout>60</timeout> -->
                             <!-- <timeoutErr>false</timeoutErr> -->
