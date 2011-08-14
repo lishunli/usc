@@ -7,5 +7,7 @@
 选了 文本框 或者 单选框 前面的 复选框(Rule)就选择了。
 
 maven的使用
+0.迁移到Maven project
 1.maven release plugin 发布版本
 2.google code maven 仓库
+3.自动打包成可运行的Jar 和 Exe文件

@@ -7,11 +7,13 @@
     <packaging>jar</packaging>
     <description>A tool to batch convert file or folder name</description>
 
-    <name>filename-batch-converter</name>
-    <url>http://maven.apache.org</url>
+    <name>文件名批量转换</name>
+    <url>http://blogjava.net/lishunli</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <finalName>${project.name}-${project.version}</finalName>
+        <!-- <finalName>${project.artifactId}-${project.version}</finalName> -->
     </properties>
 
     <dependencies>
@@ -29,6 +31,7 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
     <build>
 
         <plugins>
@@ -62,8 +65,56 @@
                     </execution>
                 </executions>
             </plugin>
-        </plugins>
 
+
+            <plugin>
+                <groupId>org.bluestemsoftware.open.maven.plugin</groupId>
+                <artifactId>launch4j-plugin</artifactId>
+                <version>1.5.0.0</version>
+                <executions>
+                    <execution>
+                        <id>launch4j</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>launch4j</goal>
+                        </goals>
+                        <configuration>
+                            <dontWrapJar>false</dontWrapJar>
+                            <headerType>gui</headerType>
+                            <outfile>target/${finalName}.exe</outfile>
+                            <jar>target/${finalName}.jar</jar>
+                            <errTitle>please contact support(QQ:506817493)</errTitle>
+                            <icon>${basedir}/src/main/resources/batchConvert.ico</icon>
+
+                            <jre>
+                                <minVersion>1.6.0</minVersion>
+                            </jre>
+
+                            <versionInfo>
+                                <fileVersion>2011.8.14.15</fileVersion>
+                                <txtFileVersion>${project.version}</txtFileVersion>
+                                <fileDescription>文件名批量转换</fileDescription>
+                                <copyright>李顺利</copyright>
+                                <productVersion>2011.8.14.15</productVersion>
+                                <txtProductVersion>${project.version}</txtProductVersion>
+                                <productName>文件名批量转换</productName>
+                                <companyName>USC</companyName>
+                                <internalName>${finalName}</internalName>
+                                <originalFilename>${finalName}.exe</originalFilename>
+                            </versionInfo>
+
+                            <splash>
+                                <file>${basedir}/src/main/resources/batchConvert.bmp</file>
+                                <waitForWindow>true</waitForWindow>
+                                <timeout>60</timeout>
+                                <timeoutErr>false</timeoutErr>
+                            </splash>
+
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
 
     </build>
 
