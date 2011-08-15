@@ -15,15 +15,13 @@ import org.apache.commons.lang.builder.ToStringStyle;
  */
 public class InjectionDto {
 	private String name;
-	private String standardLength;
-	private String upErrorRange;
-	private String downErrorRange;
+	private String upSize;
+	private String downSize;
 
-	public InjectionDto(String name, String standardLength, String upErrorRange, String downErrorRange) {
+	public InjectionDto(String name, String upSize, String downSize) {
 		this.name = name;
-		this.standardLength = standardLength;
-		this.upErrorRange = upErrorRange;
-		this.downErrorRange = downErrorRange;
+		this.upSize = upSize;
+		this.downSize = downSize;
 	}
 
 	public String getName() {
@@ -34,28 +32,20 @@ public class InjectionDto {
 		this.name = name;
 	}
 
-	public String getStandardLength() {
-		return standardLength;
+	public String getUpSize() {
+		return upSize;
 	}
 
-	public void setStandardLength(String standardLength) {
-		this.standardLength = standardLength;
+	public void setUpSize(String upSize) {
+		this.upSize = upSize;
 	}
 
-	public String getUpErrorRange() {
-		return upErrorRange;
+	public String getDownSize() {
+		return downSize;
 	}
 
-	public void setUpErrorRange(String upErrorRange) {
-		this.upErrorRange = upErrorRange;
-	}
-
-	public String getDownErrorRange() {
-		return downErrorRange;
-	}
-
-	public void setDownErrorRange(String downErrorRange) {
-		this.downErrorRange = downErrorRange;
+	public void setDownSize(String downSize) {
+		this.downSize = downSize;
 	}
 
 	@Override

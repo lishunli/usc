@@ -1,8 +1,8 @@
 package org.usc.beans;
 
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.CascadeType;
@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 import org.usc.beans.base.Physical;
@@ -37,7 +38,8 @@ public class Product extends Physical {
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "product_id")
-	private Set<Part> parts = new HashSet<Part>();
+	@OrderBy
+	private List<Part> parts = new ArrayList<Part>();
 
 	public BigDecimal getSamplingRatio() {
 		return samplingRatio;
@@ -47,11 +49,11 @@ public class Product extends Physical {
 		this.samplingRatio = samplingRatio;
 	}
 
-	public Set<Part> getParts() {
+	public List<Part> getParts() {
 		return parts;
 	}
 
-	public void setParts(Set<Part> parts) {
+	public void setParts(List<Part> parts) {
 		this.parts = parts;
 	}
 

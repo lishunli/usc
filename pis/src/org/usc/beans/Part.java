@@ -1,7 +1,7 @@
 package org.usc.beans;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.CascadeType;
@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 import org.usc.beans.base.Physical;
@@ -35,7 +36,8 @@ public class Part extends Physical {
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "part_id")
-	private Set<Injection> injections = new HashSet<Injection>();
+	@OrderBy
+	private List<Injection> injections = new ArrayList<Injection>();
 
 	public Part() {
 	}
@@ -48,11 +50,11 @@ public class Part extends Physical {
 		this.draw = draw;
 	}
 
-	public Set<Injection> getInjections() {
+	public List<Injection> getInjections() {
 		return injections;
 	}
 
-	public void setInjections(Set<Injection> injections) {
+	public void setInjections(List<Injection> injections) {
 		this.injections = injections;
 	}
 }

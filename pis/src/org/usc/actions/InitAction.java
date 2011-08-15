@@ -98,8 +98,6 @@ public class InitAction extends ActionSupport {
 				return INPUT;
 			}
 
-			// System.out.println(product);
-
 			List<PartDto> parts = new ArrayList<PartDto>();
 
 			for (Part part : product.getParts()) {
@@ -109,9 +107,8 @@ public class InitAction extends ActionSupport {
 				for (Injection injection : part.getInjections()) {
 					injectionDtos.add(new InjectionDto(
 							injection.getName(),
-							injection.getStandardLength().stripTrailingZeros().toString(),
-							injection.getUpErrorRange().stripTrailingZeros().toString(),
-							injection.getDownErrorRange().stripTrailingZeros().toString()));
+							injection.getStandardLength().add(injection.getUpErrorRange()).stripTrailingZeros().toPlainString(),
+							injection.getStandardLength().subtract(injection.getDownErrorRange()).stripTrailingZeros().toPlainString()));
 				}
 
 			}
@@ -124,16 +121,7 @@ public class InitAction extends ActionSupport {
 					injectionAmt.intValue(),
 					parts
 					);
-			System.out.println(dto);
-			// ,
-			// product.getErrorRange().stripTrailingZeros().toString(),
-			// product.getDraw().getName()
 		}
-
-		// TODO
-		/**
-		 * 1. 显示这个product 详细信息，比如型号，名称，抽样比例，图纸（重要）等等 2. 根据抽象比例 显示 table 3. js 直接判断数量的 table 中 size 是否满足，直接得到结论 4. 有时间，可以尝试直接导出 table 数据 到 excel 中
-		 */
 
 		return SUCCESS;
 	}

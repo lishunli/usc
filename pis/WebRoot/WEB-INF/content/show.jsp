@@ -35,13 +35,17 @@
 			{
 				if ($(this).val() != "")
 				{
-					if (check($(this).val()))
+<%--					alert($(this).val());--%>
+					if (check($(this)))
 					{
 						$(this).parent().next("td").html("合格");
 
-
 						if(lastCheck($(this))){
+
 							$(this).parent().parent().parent().parent().prev("span").html("<font color='green'>合格</font>");
+						}
+						else if(!checkHaveError($(this))){
+							$(this).parent().parent().parent().parent().prev("span").html("");
 						}
 
 					}
@@ -59,12 +63,13 @@
 
 			}
 
-			function check(size)
+			function check(obj)
 			{
-				var test = parseFloat(size);
-				var standardLength = parseFloat($("#standardLength").html());
-				var errorRange = parseFloat($("#errorRange").html());
-				if (test >= standardLength - errorRange && test <= standardLength + errorRange)
+				var size = parseFloat(obj.val());
+				var downSize = parseFloat(obj.prev("#downSize").val());
+				var upSize = parseFloat(obj.next("#upSize").val());
+<%--				alert($(obj.siblings("#downSize")[0]).val());--%>
+				if (size >= downSize && size <= upSize)
 				{
 					return true;
 				}
@@ -77,15 +82,17 @@
 			function lastCheck(obj)
 			{
 				var i =0;
-				obj.parent().parent().parent().parent().find("tr").each(function(){
-					var child = $(this).children("td").eq(2).children("input");
+				var checkCount = -1; // remove first td
 
+				obj.parent().parent().parent().parent().find("tr").each(function(){
+					var child = $(this).children("td").eq(2).children("input[type=text]");
+					checkCount ++;
 					if(child.val() != null && child.val() != "" && child.parent().next("td").html() == "合格"){
 						i++;
 					}
 				});
 
-				if(i == 3){
+				if(i == checkCount){
 					return true;
 				} else {
 					return false;
@@ -96,8 +103,7 @@
 			{
 				var i = 0;
 				obj.parent().parent().parent().parent().find("tr").each(function(){
-					var child = $(this).children("td").eq(2).children("input");
-
+					var child = $(this).children("td").eq(2).children("input[type=text]");
 					if(child.val() != null && child.val() != "" && child.parent().next("td").html() != "合格"){
 						i++;
 					}
@@ -133,12 +139,6 @@
 			<td>抽样数量 </td>
 			<td><s:property value="dto.injectionAmt" /></td>
 		</tr>
-<%--		<tr>--%>
-<%--			<td>标准长度</td>--%>
-<%--			<td id="standardLength"><s:property value="dto.standardLength" /> </td>--%>
-<%--			<td>误差</td>--%>
-<%--			<td id="errorRange"><s:property value="dto.errorRange" /> </td>--%>
-<%--		</tr>--%>
 	</tbody>
 </table>
 
@@ -160,24 +160,19 @@
 				<td>实际测量值</td>
 				<td>是否合格</td>
 			</tr>
-			<tr>
-				<td>长</td>
-				<td><s:property value="dto.standardLength" />±<s:property value="dto.errorRange" /> </td>
-				<td><s:textfield name="long" theme="simple"/> </td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>宽</td>
-				<td><s:property value="dto.standardLength" />±<s:property value="dto.errorRange" /> </td>
-				<td><s:textfield name="wide" theme="simple"/> </td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>高</td>
-				<td><s:property value="dto.standardLength" />±<s:property value="dto.errorRange" /> </td>
-				<td><s:textfield name="high" theme="simple"/> </td>
-				<td></td>
-			</tr>
+			<s:iterator value="#part.injections" id="injection">
+				<tr>
+					<td><s:property value="#injection.name" /></td>
+					<td><s:property value="#injection.downSize" /> - <s:property value="#injection.upSize" /> </td>
+					<td>
+					<input type="hidden" name="downSize" id="downSize" value="<s:property value='#injection.downSize' />"/>
+					<s:textfield theme="simple"/>
+					<input type="hidden" name="upSize" id="upSize" value="<s:property value='#injection.upSize' />"/>
+					</td>
+					<td></td>
+				</tr>
+			</s:iterator>
+
 		</table>
 		<br>
    </s:iterator>
@@ -187,12 +182,7 @@
 	</s:if>
 
 
-
-
-
 <a href="#" >导出检验结果</a>
 
-
-<s:debug></s:debug>
 	</body>
 </html>
