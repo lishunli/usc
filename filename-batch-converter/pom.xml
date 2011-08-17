@@ -6,13 +6,32 @@
     <version>3.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <description>A tool to batch convert file or folder name</description>
+    <name>filename-batch-converter</name>
+    <scm>
+        <developerConnection>scm:svn:http://code.google.com/p/usc/filename-batch-converter</developerConnection>
+        <url>http://code.google.com/p/usc/filename-batch-converter</url>
+    </scm>
 
-    <name>文件名批量转换</name>
-    <url>http://blogjava.net/lishunli</url>
+    <developers>
+        <developer>
+            <name>李顺利</name>
+            <id>ShunLi</id>
+            <url>http://blogjava.net/lishunli</url>
+            <email>lishunli.me@gmail.com</email>
+            <organization>USC</organization>
+            <organizationUrl>http://code.google.com/p/usc/</organizationUrl>
+            <timezone>+8</timezone>
+            <roles>
+                <role>Owner</role>
+            </roles>
+        </developer>
+    </developers>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <finalName>${project.name}-${project.version}</finalName>
+        <fileVersion>2011.8.17.23</fileVersion>
+        <productVersion>2011.8.17.23</productVersion>
+        <!-- <finalName>${project.name}-${project.version}</finalName> -->
         <!-- <finalName>${project.artifactId}-${project.version}</finalName> -->
     </properties>
 
@@ -43,6 +62,31 @@
                     <target>1.6</target>
                     <showWarnings>true</showWarnings>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>buildnumber-maven-plugin</artifactId>
+                <version>1.0</version>
+                <configuration>
+                    <format>{0,number}.{1,number}.{2,number}.{3,number}</format>
+                    <items>
+                        <item>buildNumber0</item>
+                        <item>buildNumber1</item>
+                        <item>buildNumber2</item>
+                        <item>buildNumber3</item>
+                    </items>
+<!--                    <revisionOnScmFailure>true</revisionOnScmFailure>-->
+                    <useLastCommittedRevision>true</useLastCommittedRevision>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>create</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
 
             <plugin>
@@ -81,8 +125,8 @@
                         <configuration>
                             <dontWrapJar>false</dontWrapJar>
                             <headerType>gui</headerType>
-                            <outfile>target/${finalName}.exe</outfile>
-                            <jar>target/${finalName}.jar</jar>
+                            <outfile>target/${project.build.finalName}.exe</outfile>
+                            <jar>target/${project.build.finalName}.jar</jar>
                             <errTitle>please contact support(QQ:506817493)</errTitle>
                             <icon>${basedir}/src/main/installer/batchConvert.ico</icon>
 
@@ -91,16 +135,16 @@
                             </jre>
 
                             <versionInfo>
-                                <fileVersion>2011.8.14.15</fileVersion>
+                                <fileVersion>${buildNumber}</fileVersion>
                                 <txtFileVersion>${project.version}</txtFileVersion>
-                                <fileDescription>文件名批量转换</fileDescription>
-                                <copyright>李顺利</copyright>
-                                <productVersion>2011.8.14.15</productVersion>
+                                <fileDescription>${project.description}</fileDescription>
+                                <copyright>${project.developers[0].name}</copyright>
+                                <productVersion>${fileVersion}</productVersion>
                                 <txtProductVersion>${project.version}</txtProductVersion>
-                                <productName>文件名批量转换</productName>
-                                <companyName>USC</companyName>
-                                <internalName>${finalName}</internalName>
-                                <originalFilename>${finalName}.exe</originalFilename>
+                                <productName>${project.name}</productName>
+                                <companyName>${project.developers[0].organization}</companyName>
+                                <internalName>${project.build.finalName}</internalName>
+                                <originalFilename>${project.build.finalName}.exe</originalFilename>
                             </versionInfo>
 
                             <!-- <splash> -->
