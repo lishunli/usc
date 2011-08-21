@@ -109,7 +109,7 @@
                     <configuration>
                         <tagBase>https://usc.googlecode.com/svn/tags/</tagBase>
                         <releaseProfiles>release</releaseProfiles>
-                        <goal>deploy</goal>
+                        <goals>deploy</goals>
                     </configuration>
                 </plugin>
             </plugins>
