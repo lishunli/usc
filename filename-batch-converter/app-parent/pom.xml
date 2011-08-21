@@ -8,9 +8,9 @@
     <packaging>pom</packaging>
     <description>Filename Batch Converter Application - Parent</description>
     <scm>
-        <connection>scm:svn:http://code.google.com/p/usc/filename-batch-converter</connection>
-        <developerConnection>scm:svn:https://code.google.com/p/usc/filename-batch-converter</developerConnection>
-        <url>http://code.google.com/p/usc/filename-batch-converter</url>
+        <connection>scm:svn:http://usc.googlecode.com/svn/filename-batch-converter/</connection>
+        <developerConnection>scm:svn:https://usc.googlecode.com/svn/filename-batch-converter/</developerConnection>
+        <url>http://usc.googlecode.com/svn/filename-batch-converter/</url>
     </scm>
     <developers>
         <developer>
@@ -108,7 +108,7 @@
                     <artifactId>maven-release-plugin</artifactId>
                     <version>2.0</version>
                     <configuration>
-                        <tagBase>https://code.google.com/p/usc/tags</tagBase>
+                        <tagBase>https://usc.googlecode.com/svn/tags/</tagBase>
                     </configuration>
                 </plugin>
             </plugins>
