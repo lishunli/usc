@@ -3,14 +3,14 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.usc.file.filename-batch-converter</groupId>
     <artifactId>app-parent</artifactId>
-    <version>3.0.0</version>
+    <version>3.0.0-SNAPSHOT</version>
     <name>Filename Batch Converter Application - Parent</name>
     <packaging>pom</packaging>
     <description>Filename Batch Converter Application - Parent</description>
     <scm>
-        <connection>scm:svn:http://code.google.com/p/usc/tags/filename-batch-converter-3.0.0/usc/filename-batch-converter</connection>
-        <developerConnection>scm:svn:https://code.google.com/p/usc/tags/filename-batch-converter-3.0.0/usc/filename-batch-converter</developerConnection>
-        <url>http://code.google.com/p/usc/tags/filename-batch-converter-3.0.0/usc/filename-batch-converter</url>
+        <connection>scm:svn:http://code.google.com/p/usc/filename-batch-converter</connection>
+        <developerConnection>scm:svn:https://code.google.com/p/usc/filename-batch-converter</developerConnection>
+        <url>http://code.google.com/p/usc/filename-batch-converter</url>
     </scm>
     <developers>
         <developer>
