@@ -8,9 +8,9 @@
     <packaging>pom</packaging>
     <description>Filename Batch Converter Application - Parent</description>
     <scm>
-        <connection>scm:svn:http://usc.googlecode.com/svn/filename-batch-converter/</connection>
-        <developerConnection>scm:svn:https://usc.googlecode.com/svn/filename-batch-converter/</developerConnection>
-        <url>http://usc.googlecode.com/svn/filename-batch-converter/</url>
+        <connection>scm:svn:https://usc.googlecode.com/svn/tags/filename-batch-converter=3.0.2.1</connection>
+        <developerConnection>scm:svn:https://usc.googlecode.com/svn/tags/filename-batch-converter=3.0.2.1</developerConnection>
+        <url>https://usc.googlecode.com/svn/tags/filename-batch-converter=3.0.2.1</url>
     </scm>
     <developers>
         <developer>
