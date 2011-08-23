@@ -29,3 +29,10 @@ main,install,parent ..
 发布和部署
 发布站点
 Release 到 Google Code远程仓库，而不是本地建的远程仓库
+
+
+buildnumber-maven-plugin 取得last sumbit svn reversion 生成版本号
+org.codehaus.gmaven 使用 Groovy语法 截取版本前五位，e.g. 3.0.0-SNAPSHOT 为3.0.0
+
+
+maven-jar-plugin 如果单个project是没有问题的，但是如果有多个有 aggregate(聚合) project的时候就有问题了。

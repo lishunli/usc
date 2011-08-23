@@ -25,21 +25,30 @@
     </dependencies>
 
     <build>
+        <!-- <finalName>文件名批量转换</finalName> -->
         <plugins>
+            <plugin>
+                <groupId>org.codehaus.gmaven</groupId>
+                <artifactId>gmaven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>generate-timestamps</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <source>
+                                project.properties['file.version'] = "${project.version}".substring(0, 5)
+                           </source>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>buildnumber-maven-plugin</artifactId>
-                <configuration>
-                    <format>{0,number,integer}.{1,number,integer}.{2,number,integer}.{3,number}</format>
-                    <items>
-                        <item implementation="java.lang.Integer">3</item>
-                        <item implementation="java.lang.Integer">0</item>
-                        <item implementation="java.lang.Integer">0</item>
-                        <item>buildNumber3</item>
-                    </items>
-                    <!-- <revisionOnScmFailure>true</revisionOnScmFailure> -->
-                    <useLastCommittedRevision>true</useLastCommittedRevision>
-                </configuration>
                 <executions>
                     <execution>
                         <phase>validate</phase>
@@ -48,8 +57,33 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <doCheck>false</doCheck>
+                    <doUpdate>true</doUpdate>
+					<useLastCommittedRevision>true</useLastCommittedRevision>
+                    <revisionOnScmFailure>true</revisionOnScmFailure>
+                </configuration>
             </plugin>
-
+            <!--
+                <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>buildnumber-maven-plugin</artifactId>
+                <configuration>
+                <format>${file.version}.{0,number}</format>
+                <items>
+                <item>buildNumber0</item>
+                </items>
+                </configuration>
+                <executions>
+                <execution>
+                <phase>validate</phase>
+                <goals>
+                <goal>create</goal>
+                </goals>
+                </execution>
+                </executions>
+                </plugin>
+            -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
@@ -70,22 +104,22 @@
                 </executions>
             </plugin>
 
-
-            <!-- <plugin> -->
-            <!-- <groupId>org.apache.maven.plugins</groupId> -->
-            <!-- <artifactId>maven-jar-plugin</artifactId> -->
-            <!-- <configuration> -->
-            <!-- <archive> -->
-            <!-- <manifest> -->
-            <!-- <addDefaultImplementationEntries>true</addDefaultImplementationEntries> -->
-            <!-- <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries> -->
-            <!-- <addClasspath>true</addClasspath> -->
-            <!-- <mainClass>org.usc.file.operater.FileNameBatchConvertTool</mainClass> -->
-            <!-- </manifest> -->
-            <!-- </archive> -->
-            <!-- </configuration> -->
-            <!-- </plugin> -->
-
+            <!--
+                <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                <archive>
+                <manifest>
+                <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                <addClasspath>true</addClasspath>
+                <mainClass>org.usc.file.operater.FileNameBatchConvertTool</mainClass>
+                </manifest>
+                </archive>
+                </configuration>
+                </plugin>
+            -->
             <plugin>
                 <groupId>org.bluestemsoftware.open.maven.plugin</groupId>
                 <artifactId>launch4j-plugin</artifactId>
@@ -109,11 +143,11 @@
                             </jre>
 
                             <versionInfo>
-                                <fileVersion>${buildNumber}</fileVersion>
+                                <fileVersion>${file.version}.${buildNumber}</fileVersion>
                                 <txtFileVersion>${project.version}</txtFileVersion>
                                 <fileDescription>${project.description}</fileDescription>
                                 <copyright>${project.developers[0].name}</copyright>
-                                <productVersion>${buildNumber}</productVersion>
+                                <productVersion>${file.version}.${buildNumber}</productVersion>
                                 <txtProductVersion>${project.version}</txtProductVersion>
                                 <productName>${project.name}</productName>
                                 <companyName>${project.developers[0].organization}</companyName>
