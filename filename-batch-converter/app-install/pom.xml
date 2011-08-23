@@ -60,7 +60,7 @@
                 <configuration>
                     <doCheck>false</doCheck>
                     <doUpdate>true</doUpdate>
-					<useLastCommittedRevision>true</useLastCommittedRevision>
+					<!--<useLastCommittedRevision>true</useLastCommittedRevision>-->
                     <revisionOnScmFailure>true</revisionOnScmFailure>
                 </configuration>
             </plugin>
