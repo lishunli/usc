@@ -12,10 +12,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
+import java.util.Properties;
 import java.util.prefs.Preferences;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -118,7 +120,18 @@ public class FileNameBatchConvertTool extends JFrame {
         JLabel label = new JLabel("文件名批量转换");
         label.setFont(new Font("Microsoft YaHei", Font.PLAIN, 24));
 
-        JLabel lblv = new JLabel("顺利©V3.0.0");
+        Properties prop = new Properties();
+        String version = "0.0.0";
+        InputStream versionResource = getClass().getClassLoader().getResourceAsStream("version.properties");
+        try {
+            if(versionResource != null){
+                prop.load(versionResource);
+                version = prop.getProperty("version", version);
+            }
+        } catch (IOException e2) {
+        }
+
+        JLabel lblv = new JLabel("顺利©V" + version.substring(0, 5));
         lblv.setEnabled(false);
         lblv.setFont(new Font("Microsoft YaHei", Font.PLAIN, 20));
         lblv.addMouseListener(new MouseAdapter() {
@@ -530,7 +543,7 @@ public class FileNameBatchConvertTool extends JFrame {
 
     /**
      * 浏览文件夹，打开文件夹
-     * 
+     *
      * @param evt
      */
     private void buttonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -565,7 +578,7 @@ public class FileNameBatchConvertTool extends JFrame {
 
     /**
      * 转换
-     * 
+     *
      * @param evt
      */
     private void button_1ActionPerformed(java.awt.event.ActionEvent evt) {
@@ -773,13 +786,13 @@ public class FileNameBatchConvertTool extends JFrame {
 
     /*
      * protected Boolean checkFileNameIsNotValid(String fileName) { String regEx = "[\\\\/:\\*\\?\\\"<>\\|]"; Pattern p = Pattern.compile(regEx);
-     * 
+     *
      * return p.matcher(fileName).find(); }
      */
 
     /**
      * 检查文件名是否满足windows文件的要求
-     * 
+     *
      * @param fileName
      * @param buffer
      * @return
