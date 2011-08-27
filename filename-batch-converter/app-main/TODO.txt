@@ -38,3 +38,6 @@ org.codehaus.gmaven 使用 Groovy语法 截取版本前五位，e.g. 3.0.0-SNAPS
 maven-jar-plugin 如果单个project是没有问题的，但是如果有多个有 aggregate(聚合) project的时候就有问题了。
 
 Java 中获取Maven的版本，显示
+
+测试覆盖率
+发布站点

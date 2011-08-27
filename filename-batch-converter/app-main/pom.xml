@@ -37,9 +37,9 @@
             <resource>
                 <directory>${basedir}/src/main/resources</directory>
                 <filtering>false</filtering>
-                <excludes>
-                    <exclude>version.properties</exclude>
-                </excludes>
+<!--                <excludes>-->
+<!--                    <exclude>version.properties</exclude>-->
+<!--                </excludes>-->
             </resource>
             <!-- 结合这两个resource，就可以拿到所有的resources文件，而且仅过滤version.properties文件，其它文件不过滤 -->
         </resources>
