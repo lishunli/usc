@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.usc.file.filename-batch-converter</groupId>
     <artifactId>app-parent</artifactId>
-    <version>3.0.4.1-SNAPSHOT</version>
+    <version>3.0.4.2</version>
     <name>Filename Batch Converter Application - Parent</name>
     <packaging>pom</packaging>
     <description>Filename Batch Converter Application - Parent</description>
