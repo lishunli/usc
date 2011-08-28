@@ -41,3 +41,6 @@ Java 中获取Maven的版本，显示
 
 测试覆盖率
 发布站点
+
+把站点的report放到profile里面，节省一些不必要的构建，如果需要，激活它就是了
+尝试使用 properties 和 version maven plugin
