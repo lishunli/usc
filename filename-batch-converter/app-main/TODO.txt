@@ -44,3 +44,10 @@ Java 中获取Maven的版本，显示
 
 把站点的report放到profile里面，节省一些不必要的构建，如果需要，激活它就是了
 尝试使用 properties 和 version maven plugin
+
+
+常用当不容易记得的命令
+mvn versions:set -DnewVersion=3.0.4-SNAPSHOT -f app-parent/pom.xml
+mvn release:perpare -DautoVersionSubmodules=true
+mvn release:rollback
+mvn release:perform
