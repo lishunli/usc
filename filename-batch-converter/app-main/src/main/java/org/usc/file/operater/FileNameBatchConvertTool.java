@@ -53,6 +53,7 @@ public class FileNameBatchConvertTool extends JFrame {
 
     private static final String FILE_IS_NOT_VALID = "文件名不能包含下列任何字符";
     private static final String SPECIFIC_CHAR = "\\/:*?\"<>|";
+    private static final String SNAPSHOT_FLAG = "-SNAPSHOT";
 
     private JPanel contentPane;
     private JTextField textField;
@@ -124,14 +125,21 @@ public class FileNameBatchConvertTool extends JFrame {
         String version = "0.0.0";
         InputStream versionResource = getClass().getClassLoader().getResourceAsStream("version.properties");
         try {
-            if(versionResource != null){
+            if (versionResource != null) {
                 prop.load(versionResource);
+
                 version = prop.getProperty("version", version);
+
+                int snapshotIndex = version.lastIndexOf(SNAPSHOT_FLAG);
+
+                if (snapshotIndex > 0) {
+                    version = version.substring(0, snapshotIndex);
+                }
             }
         } catch (IOException e2) {
         }
 
-        JLabel lblv = new JLabel("顺利©V" + version.substring(0, 5));
+        JLabel lblv = new JLabel("顺利©V" + version);
         lblv.setEnabled(false);
         lblv.setFont(new Font("Microsoft YaHei", Font.PLAIN, 20));
         lblv.addMouseListener(new MouseAdapter() {
