@@ -135,6 +135,7 @@
                 <configuration>
                     <tagBase>https://usc.googlecode.com/svn/tags/</tagBase>
                     <branchBase>https://usc.googlecode.com/svn/branches/</branchBase>
+                    <goal>install</goal>
                 </configuration>
             </plugin>
 
