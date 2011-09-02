@@ -51,9 +51,17 @@ public class BeanUtilsTest4 {
         System.out.println(user);
 
         System.out.println(StringUtils.center(" dest ", 40, "-"));
-        // modify dest will not change orig
+        // modify dest alao will change orig
         newUser.getParams().remove("1");
         System.out.println(newUser);
+
+        System.out.println(user);
+
+        newUser.setAge(24);
+        System.out.println(newUser);
+
+        System.out.println(user);
+
     }
 
     @Test
@@ -72,6 +80,7 @@ public class BeanUtilsTest4 {
         // modify dest will not change orig
         newUser.getParams().remove("1");
         System.out.println(newUser);
+        System.out.println(user);
     }
 
     @Test
@@ -90,6 +99,7 @@ public class BeanUtilsTest4 {
         // modify destwill not change orig
         newUser.getParams().remove("1");
         System.out.println(newUser);
+        System.out.println(user);
     }
 
     @Test
@@ -99,6 +109,7 @@ public class BeanUtilsTest4 {
         newUser = mapper.map(newUser, User.class);
 
         System.out.println(newUser);
+        System.out.println(user);
     }
 
     @Test
@@ -110,6 +121,47 @@ public class BeanUtilsTest4 {
         mapper.map(user, newUser);
 
         System.out.println(newUser);
+        System.out.println(user);
+    }
+
+    @Test
+    public void test6() throws IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchMethodException {
+        // Method 4 beanutils.BeanUtils.
+        newUser = (User) BeanUtils.cloneBean(user);
+
+        System.out.println(StringUtils.center(" orig ", 40, "-"));
+        // modify orig will change dest
+        params.add("3");
+        user.getParams().add("4");
+
+        System.out.println(user);
+
+        System.out.println(StringUtils.center(" dest ", 40, "-"));
+        // modify dest will not change orig
+        newUser.getParams().remove("1");
+        System.out.println(newUser);
+        System.out.println(user);
+    }
+
+    // use spring beanutil
+    @Test
+    public void test7(){
+        // Method 7 beanutils.BeanUtils.copyProperties
+        org.springframework.beans.BeanUtils.copyProperties(user, newUser);
+
+        System.out.println(StringUtils.center(" orig ", 40, "-"));
+        // modify orig will change dest
+        params.add("3");
+        user.getParams().add("4");
+
+        System.out.println(user);
+
+        System.out.println(StringUtils.center(" dest ", 40, "-"));
+        // modify dest also will change orig
+        newUser.getParams().remove("1");
+        System.out.println(newUser);
+
+        System.out.println(user);
     }
 
     public static void main(String[] args) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException, IllegalArgumentException, ParseException {
