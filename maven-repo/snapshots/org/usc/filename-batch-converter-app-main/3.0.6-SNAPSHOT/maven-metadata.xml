@@ -25,6 +25,11 @@
         <value>3.0.6-20110903.163003-3</value>
         <updated>20110903163003</updated>
       </snapshotVersion>
+      <snapshotVersion>
+        <extension>pom.asc</extension>
+        <value>3.0.6-20110903.163003-3</value>
+        <updated>20110903163003</updated>
+      </snapshotVersion>
     </snapshotVersions>
   </versioning>
 </metadata>
