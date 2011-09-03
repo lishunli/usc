@@ -27,12 +27,8 @@
             </roles>
         </developer>
     </developers>
-    <distributionManagement>
-        <site>
-            <id>website</id>
-            <url>file://D:/temp/site/</url>
-        </site>
 
+    <distributionManagement>
         <repository>
             <id>usc-google-code-repo</id>
             <name>Google Code Repo for USC (releases)</name>
@@ -45,21 +41,39 @@
             <url>dav:https://usc.googlecode.com/svn/maven-repo/snapshots</url>
             <uniqueVersion>false</uniqueVersion>
         </snapshotRepository>
-        <!--
-            use the following for release version.
-            <repository>
-            <id>proj-releases</id>
-            <name>Proj Release Repository</name>
-            <url>http://localhost:8080/nexus/content/repositories/releases/</url>
-            </repository>
-            use the following for snapshot version.
-            <snapshotRepository>
-            <id>proj-snapshots</id>
-            <name>Proj Snapshots Repository</name>
-            <url>http://localhost:8080/nexus/content/repositories/snapshots/</url>
-            </snapshotRepository> -->
-
     </distributionManagement>
+
+    <!-- <distributionManagement>
+        <repository>
+        <id>proj-releases</id>
+        <name>Proj Release Repository</name>
+        <url>http://localhost:8080/nexus/content/repositories/releases/</url>
+        </repository>
+        <snapshotRepository>
+        <id>proj-snapshots</id>
+        <name>Proj Snapshots Repository</name>
+        <url>http://localhost:8080/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+        </distributionManagement> -->
+
+
+    <!-- <site> -->
+    <!-- <id>website</id> -->
+    <!-- <url>file://D:/temp/site/</url> -->
+    <!-- </site> -->
+
+    <!-- <repository>
+        <id>usc-google-code-repo</id>
+        <name>Google Code Repo for USC (releases)</name>
+        <url>dav:https://usc.googlecode.com/svn/maven-repo/releases</url>
+        <uniqueVersion>false</uniqueVersion>
+        </repository>
+        <snapshotRepository>
+        <id>usc-google-code-snapshot</id>
+        <name>Google Code Repo USC (snapshots)</name>
+        <url>dav:https://usc.googlecode.com/svn/maven-repo/snapshots</url>
+        <uniqueVersion>false</uniqueVersion>
+        </snapshotRepository> -->
 
     <ciManagement>
         <system>Hudson</system>
