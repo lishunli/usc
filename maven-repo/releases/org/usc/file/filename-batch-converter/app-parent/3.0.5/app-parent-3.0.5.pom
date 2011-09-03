@@ -28,22 +28,39 @@
         </developer>
     </developers>
 
+
+    <!-- method 2 -->
     <distributionManagement>
         <repository>
             <id>usc-google-code-repo</id>
             <name>Google Code Repo for USC (releases)</name>
-            <url>dav:https://usc.googlecode.com/svn/maven-repo/releases</url>
+            <url>svn:https://usc.googlecode.com/svn/maven-repo/releases</url>
             <uniqueVersion>false</uniqueVersion>
         </repository>
         <snapshotRepository>
             <id>usc-google-code-snapshot</id>
             <name>Google Code Repo USC (snapshots)</name>
-            <url>dav:https://usc.googlecode.com/svn/maven-repo/snapshots</url>
+            <url>svn:https://usc.googlecode.com/svn/maven-repo/snapshots</url>
             <uniqueVersion>false</uniqueVersion>
         </snapshotRepository>
     </distributionManagement>
+    <!-- method 1
+        <distributionManagement>
+        <repository>
+        <id>usc-google-code-repo</id>
+        <name>Google Code Repo for USC (releases)</name>
+        <url>dav:https://usc.googlecode.com/svn/maven-repo/releases</url>
+        <uniqueVersion>false</uniqueVersion>
+        </repository>
+        <snapshotRepository>
+        <id>usc-google-code-snapshot</id>
+        <name>Google Code Repo USC (snapshots)</name>
+        <url>dav:https://usc.googlecode.com/svn/maven-repo/snapshots</url>
+        <uniqueVersion>false</uniqueVersion>
+        </snapshotRepository>
+        </distributionManagement> -->
 
-    <!-- <distributionManagement>
+    <!--method 0 <distributionManagement>
         <repository>
         <id>proj-releases</id>
         <name>Proj Release Repository</name>
@@ -196,6 +213,11 @@
                 <groupId>org.apache.maven.wagon</groupId>
                 <artifactId>wagon-webdav</artifactId>
                 <version>1.0-beta-2</version>
+            </extension>
+            <extension>
+                <groupId>org.jvnet.wagon-svn</groupId>
+                <artifactId>wagon-svn</artifactId>
+                <version>1.9</version>
             </extension>
         </extensions>
     </build>
