@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>org.usc.file.filename-batch-converter</groupId>
+  <artifactId>app-main</artifactId>
+  <versioning>
+    <versions>
+      <version>3.0.5-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20110903132051</lastUpdated>
+  </versioning>
+</metadata>
