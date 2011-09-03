@@ -2,12 +2,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.usc.file.filename-batch-converter</groupId>
-        <artifactId>app-parent</artifactId>
-        <version>3.0.5-SNAPSHOT</version>
+        <groupId>org.usc</groupId>
+        <artifactId>filename-batch-converter-app-parent</artifactId>
+        <version>3.0.6-SNAPSHOT</version>
         <relativePath>../app-parent</relativePath>
     </parent>
-    <artifactId>app-install</artifactId>
+    <artifactId>filename-batch-converter-app-install</artifactId>
     <name>Filename Batch Converter Application - install</name>
     <packaging>jar</packaging>
     <description>Filename Batch Converter Application - install</description>
@@ -19,13 +19,13 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>app-main</artifactId>
+            <artifactId>filename-batch-converter-app-main</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
 
     <build>
-        <!-- <finalName>文件名批量转换</finalName> -->
+        <finalName>filename-batch-converter</finalName>
         <plugins>
             <plugin>
                 <groupId>org.codehaus.gmaven</groupId>

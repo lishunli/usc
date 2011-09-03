@@ -42,6 +42,17 @@
             <username>admin</username>
             <password>admin123</password>
         </server>
+
+        <server>
+            <id>usc-google-code-repo</id>
+            <username>your google email</username>
+            <password>your google code project password</password>
+        </server>
+        <server>
+            <id>usc-google-code-snapshot</id>
+            <username>your google email</username>
+            <password>your google code project password</password>
+        </server>
     </servers>
 
     <activeProfiles>

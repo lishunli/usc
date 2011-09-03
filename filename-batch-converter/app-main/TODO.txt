@@ -51,3 +51,12 @@ mvn versions:set -DnewVersion=3.0.4-SNAPSHOT -f app-parent/pom.xml
 mvn release:prepare -DautoVersionSubmodules=true
 mvn release:rollback
 mvn release:perform
+
+
+maven3
+
+maven2 可能有些plugin运行没有效果，比如说 versions-plugin.
+
+部署到Google Code repo上面，进行远程共享访问 请见 maven in action笔记
+
+
