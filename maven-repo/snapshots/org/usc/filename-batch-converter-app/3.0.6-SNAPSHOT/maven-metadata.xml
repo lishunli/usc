@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata modelVersion="1.1.0">
+  <groupId>org.usc</groupId>
+  <artifactId>filename-batch-converter-app</artifactId>
+  <version>3.0.6-SNAPSHOT</version>
+  <versioning>
+    <snapshot>
+      <timestamp>20110903.155004</timestamp>
+      <buildNumber>1</buildNumber>
+    </snapshot>
+    <lastUpdated>20110903155004</lastUpdated>
+    <snapshotVersions>
+      <snapshotVersion>
+        <extension>pom</extension>
+        <value>3.0.6-20110903.155004-1</value>
+        <updated>20110903155004</updated>
+      </snapshotVersion>
+    </snapshotVersions>
+  </versioning>
+</metadata>
