@@ -7,7 +7,7 @@
         <version>3.0.6-SNAPSHOT</version>
         <relativePath>filename-batch-converter-app-parent</relativePath>
     </parent>
-    <artifactId>filename-batch-converter-app</artifactId>
+    <artifactId>filename-batch-converter</artifactId>
     <name>Filename Batch Converter Application</name>
     <packaging>pom</packaging>
     <description>Filename Batch Converter Application</description>
