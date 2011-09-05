@@ -53,6 +53,16 @@
             <username>your google email</username>
             <password>your google code project password</password>
         </server>
+        <server>
+            <id>sonatype-nexus-snapshots</id>
+            <username>your-jira-id</username>
+            <password>your-jira-pwd</password>
+        </server>
+        <server>
+            <id>sonatype-nexus-staging</id>
+            <username>your-jira-id</username>
+            <password>your-jira-pwd</password>
+        </server>
     </servers>
 
     <activeProfiles>
