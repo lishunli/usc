@@ -13,9 +13,9 @@
     <description>Filename Batch Converter Application</description>
 
     <modules>
-        <module>app-parent</module>
-        <module>app-main</module>
-        <module>app-install</module>
+        <module>filename-batch-converter-app-parent</module>
+        <module>filename-batch-converter-app-main</module>
+        <module>filename-batch-converter-app-install</module>
     </modules>
 
 </project>
