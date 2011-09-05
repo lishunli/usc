@@ -23,9 +23,9 @@
         </license>
     </licenses>
     <scm>
-        <connection>scm:svn:http://usc.googlecode.com/svn/tags/filename-batch-converter-app-3.0.6-SNAPSHOT/filename-batch-converter</connection>
-        <developerConnection>scm:svn:https://usc.googlecode.com/svn/tags/filename-batch-converter-app-3.0.6-SNAPSHOT/filename-batch-converter</developerConnection>
-        <url>http://usc.googlecode.com/svn/tags/filename-batch-converter-app-3.0.6-SNAPSHOT/filename-batch-converter</url>
+        <connection>scm:svn:http://usc.googlecode.com/svn/filename-batch-converter/</connection>
+        <developerConnection>scm:svn:https://usc.googlecode.com/svn/filename-batch-converter/</developerConnection>
+        <url>http://usc.googlecode.com/svn/filename-batch-converter/</url>
     </scm>
     <developers>
         <developer>
