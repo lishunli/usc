@@ -29,9 +29,9 @@ public class CalcAllowance {
         float allowance = 0f;
 
         for (; days > dayOfMonth; factor++, days -= dayOfMonth) {
-            allowance += dayOfMonth * (base + step * (factor - 1));
+            allowance += dayOfMonth * (base + step * (factor - 1)); //calc before level
         }
-        allowance += days * (base + step * (factor - 1));
+        allowance += days * (base + step * (factor - 1)); // calc current level
 
         return allowance;
     }
