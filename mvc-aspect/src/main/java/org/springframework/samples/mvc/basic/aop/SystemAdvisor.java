@@ -11,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
 import org.springframework.samples.mvc.basic.model.User;
-import org.springframework.samples.mvc.basic.util.SimpleNameUtil;
 import org.springframework.stereotype.Component;
 
 @Aspect
@@ -30,22 +29,20 @@ public class SystemAdvisor {
 	@After("org.springframework.samples.mvc.basic.aop.SystemPointcut.isCallController()")
 	@Order(11)
 	public void executeControllerHandler(JoinPoint jp) throws Throwable {
-		log.info("[FL] Invoke {}.{}()...", SimpleNameUtil.chompClassName(jp.getSignature().getDeclaringTypeName()), jp.getSignature().getName());
-		// TODO add args params into log.
+		log.info("[FL] Invoke {}.{}()...", jp.getTarget().getClass().getSimpleName(), jp.getSignature().getName());
+		// Arrays.asList(jp.getArgs());
 	}
 
 	@After("org.springframework.samples.mvc.basic.aop.SystemPointcut.isCallPLController()")
 	@Order(12)
 	public void executePLControllerHandler(JoinPoint jp) throws Throwable {
-		log.info("[PL] Invoke {}.{}()...", SimpleNameUtil.chompClassName(jp.getSignature().getDeclaringTypeName()), jp.getSignature().getName());
-		// TODO add args params into log.
+		log.info("[PL] Invoke {}.{}()...", jp.getTarget().getClass().getSimpleName(), jp.getSignature().getName());
 	}
 
 	@After("org.springframework.samples.mvc.basic.aop.SystemPointcut.isCallCLController()")
 	@Order(13)
 	public void executeCLControllerHandler(JoinPoint jp) throws Throwable {
-		log.info("[CL] Invoke {}.{}()...", SimpleNameUtil.chompClassName(jp.getSignature().getDeclaringTypeName()), jp.getSignature().getName());
-		// TODO add args params into log.
+		log.info("[CL] Invoke {}.{}()...", jp.getTarget().getClass().getSimpleName(), jp.getSignature().getName());
 	}
 
 	/**
@@ -65,13 +62,15 @@ public class SystemAdvisor {
 		startTime = System.currentTimeMillis();
 		Object proceed = jp.proceed(); // execute
 
+		// Object[] params = { jp.getTarget().getClass().getSimpleName(), jp.getSignature().getName(), (System.currentTimeMillis() - startTime) };
+
 		log.info("[4] elapsed time {} ms ", System.currentTimeMillis() - startTime);
-		// TODO to get handler's method name.
+		// TODO to get handler's real name and method name.
 
 		return proceed;
 	}
 
-//	 @Around("org.springframework.samples.mvc.basic.aop.SystemPointcut.isCallController()")
+	// @Around("org.springframework.samples.mvc.basic.aop.SystemPointcut.isCallController()")
 	@Around("org.springframework.samples.mvc.basic.aop.SystemPointcut.isCallPLController()")
 	@Order(5)
 	public Object executeControllerNormalFlow(ProceedingJoinPoint jp) throws Throwable {
@@ -79,9 +78,8 @@ public class SystemAdvisor {
 		startTime = System.currentTimeMillis();
 		Object proceed = jp.proceed(); // execute
 
-		Object[] params = { SimpleNameUtil.chompClassName(jp.getSignature().getDeclaringTypeName()), jp.getSignature().getName(), (System.currentTimeMillis() - startTime) };
+		Object[] params = { jp.getTarget().getClass().getSimpleName(), jp.getSignature().getName(), (System.currentTimeMillis() - startTime) };
 		log.info("[1] {} elapsed time for {}() = {} ms ", params);
-		// TODO to get handler's method name.
 
 		return proceed;
 	}
