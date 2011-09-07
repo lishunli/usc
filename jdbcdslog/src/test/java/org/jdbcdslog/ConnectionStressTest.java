@@ -3,21 +3,11 @@ package org.jdbcdslog;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
 import org.hsqldb.jdbc.jdbcDataSource;
+import org.junit.Test;
 
-public class ConnectionStressTest extends TestCase {
-    public ConnectionStressTest(String name) {
-        super(name);
-    }
-
-    public static Test suite() {
-        return new TestSuite(ConnectionStressTest.class);
-    }
-
+public class ConnectionStressTest  {
+    @Test
     public void test() throws Exception {
         jdbcDataSource ds = new jdbcDataSource();
         ds.setDatabase("jdbc:hsqldb:mem:mymemdb");

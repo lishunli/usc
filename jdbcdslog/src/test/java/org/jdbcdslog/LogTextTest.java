@@ -5,19 +5,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.Properties;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.junit.Test;
 
-public class LogTextTest extends TestCase {
-    public LogTextTest(String s) {
-        super(s);
-    }
-
-    public static Test suite() {
-        return new TestSuite(LogTextTest.class);
-    }
-
+public class LogTextTest {
+    @Test
     public void test() throws Exception {
         ConfigurationParameters.setLogText(true);
         DriverLoggingProxy proxy = new DriverLoggingProxy();

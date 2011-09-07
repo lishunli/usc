@@ -3,21 +3,11 @@ package org.jdbcdslog;
 import java.sql.Connection;
 import java.sql.ResultSet;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
 import org.hsqldb.jdbc.jdbcDataSource;
+import org.junit.Test;
 
-public class ConnectionPoolXADataSourceProxyTest extends TestCase {
-    public ConnectionPoolXADataSourceProxyTest(String testName) {
-        super(testName);
-    }
-
-    public static Test suite() {
-        return new TestSuite(ConnectionPoolXADataSourceProxyTest.class);
-    }
-
+public class ConnectionPoolXADataSourceProxyTest  {
+    @Test
     public void testConnectionPoolXADataSource() throws Exception {
         ConnectionPoolXADataSourceProxy ds = new ConnectionPoolXADataSourceProxy();
         ds.setDatabase("jdbc:hsqldb:mem:mymemdb;targetDS=org.hsqldb.jdbc.jdbcDataSource");
@@ -29,7 +19,7 @@ public class ConnectionPoolXADataSourceProxyTest extends TestCase {
         rs.close();
         con.close();
     }
-
+    @Test
     public void testSetTartetDS() throws Exception {
         ConnectionPoolXADataSourceProxy ds = new ConnectionPoolXADataSourceProxy();
         ds.setDatabase("jdbc:hsqldb:mem:mymemdb");
@@ -42,7 +32,7 @@ public class ConnectionPoolXADataSourceProxyTest extends TestCase {
         rs.close();
         con.close();
     }
-
+    @Test
     public void testSetTargetDSDirect() throws Exception {
         org.hsqldb.jdbc.jdbcDataSource ds = new jdbcDataSource();
         ds.setDatabase("jdbc:hsqldb:mem:mymemdb");

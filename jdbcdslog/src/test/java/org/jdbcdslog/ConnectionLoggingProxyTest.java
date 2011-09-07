@@ -3,22 +3,15 @@ package org.jdbcdslog;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
 import org.hsqldb.jdbc.jdbcDataSource;
+import org.junit.Test;
 
-public class ConnectionLoggingProxyTest extends TestCase {
-    public ConnectionLoggingProxyTest(String name) {
-        super(name);
-    }
 
-    public static Test suite() {
-        return new TestSuite(ConnectionLoggingProxyTest.class);
-    }
 
-    public void test() throws Exception {
+public class ConnectionLoggingProxyTest  {
+
+    @Test
+    public void testConn() throws Exception {
         jdbcDataSource ds = new jdbcDataSource();
         ds.setDatabase("jdbc:hsqldb:mem:mymemdb");
         ds.setUser("sa");

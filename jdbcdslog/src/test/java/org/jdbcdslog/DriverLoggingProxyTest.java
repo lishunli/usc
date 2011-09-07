@@ -4,19 +4,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.Properties;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.junit.Test;
 
-public class DriverLoggingProxyTest extends TestCase {
-    public DriverLoggingProxyTest(String name) {
-        super(name);
-    }
-
-    public static Test suite() {
-        return new TestSuite(DriverLoggingProxyTest.class);
-    }
-
+public class DriverLoggingProxyTest{
+    @Test
     public void test() throws Exception {
         DriverLoggingProxy proxy = new DriverLoggingProxy();
         Properties pr = new Properties();

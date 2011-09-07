@@ -3,19 +3,10 @@ package org.jdbcdslog;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.junit.Test;
 
-public class ConnectionPoolXADataSourceProxyStressTest extends TestCase {
-    public ConnectionPoolXADataSourceProxyStressTest(String name) {
-        super(name);
-    }
-
-    public static Test suite() {
-        return new TestSuite(ConnectionPoolXADataSourceProxyStressTest.class);
-    }
-
+public class ConnectionPoolXADataSourceProxyStressTest {
+    @Test
     public void test() throws Exception {
         ConnectionPoolXADataSourceProxy ds = new ConnectionPoolXADataSourceProxy();
         ds.setDatabase("jdbc:hsqldb:mem:mymemdb;targetDS=org.hsqldb.jdbc.jdbcDataSource");
