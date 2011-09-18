@@ -17,7 +17,7 @@ import com.opensymphony.xwork2.ActionContext;
 
 /**
  * 列出所有的学生action，访问时action名称为student-list.action
- * 
+ *
  * @author <a href="http://www.blogjava.net/lishunli/" target="_blank">ShunLi</a>
  * @notes Created on 2010-1-17<br>
  *        Revision of last commit:$Revision$<br>
@@ -32,17 +32,13 @@ import com.opensymphony.xwork2.ActionContext;
 public class StudentListAction extends BaseActionSupport
 {
 	 private Logger logger = LoggerFactory.getLogger(getClass());
-	
+
 	@Autowired
 	private IStudentService studentService;
 
 	public String execute() throws Exception
 	{
-		
-		// Test
-		studentService.batch();
-		
-		
+
 		/**
 		 * 下面3句固定
 		 */
@@ -54,12 +50,12 @@ public class StudentListAction extends BaseActionSupport
 		 */
 		PageView<Student> pageView = new PageView<Student>(maxResult, getPage());
 		pageView.setQueryResult(studentService.getScrollData(pageView.getFirstResult(), maxResult,"o.name = ?",new Object[]{"李顺利"}));
-		
+
 		/**
 		 * request.setAttribute("pageView", pageView)中key尽量为pageView，不然需要修改代码
 		 */
 		request.setAttribute("pageView", pageView);
-		
+
 		logger.info("Total Record " + pageView.getTotalRecord() );
 		return SUCCESS;
 	}
