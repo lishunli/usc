@@ -153,7 +153,7 @@ public class TableDataCopier extends JFrame {
         JLabel lblPassword = new JLabel("Password");
         lblPassword.setFont(new Font("Microsoft YaHei", Font.PLAIN, 18));
 
-        JLabel lblTable = new JLabel("Table");
+        JLabel lblTable = new JLabel("Criteria");
         lblTable.setHorizontalAlignment(SwingConstants.CENTER);
         lblTable.setFont(new Font("Microsoft YaHei", Font.PLAIN, 18));
 
@@ -369,9 +369,9 @@ public class TableDataCopier extends JFrame {
         // clear
         results.setText("");
 
-        String tableName = textField_4_0.getText();
-        String deleteSql = "Delete FROM " + tableName;
-        String selectSql = "SELECT * FROM " + tableName;
+        String criteria = textField_4_0.getText();
+        String deleteSql = "Delete FROM " + criteria;
+        String selectSql = "SELECT * FROM " + criteria;
 
         int updateNums = 0;
         Timer timer = new Timer();
@@ -426,7 +426,7 @@ public class TableDataCopier extends JFrame {
             stopWatch.start("batch insert");
             for (int i = 0; i * BATCH_SIZE < size; i++) {
                 if (i == 0) {
-                    egiOgInsertSql = buildInsertSql(selectList.get(0).keySet(), tableName);
+                    egiOgInsertSql = buildInsertSql(selectList.get(0).keySet(), criteria);
                     logger.info("Insert sql is {}", egiOgInsertSql);
                 }
 
@@ -480,8 +480,12 @@ public class TableDataCopier extends JFrame {
                 config = new PropertiesConfiguration(this.getClass().getClassLoader().getResource(CONF_FILE_NAME));
             }
 
-            List<String> props = Arrays.asList("fromDbDriver", "toDbDriver", "fromDbUrl", "toDbUrl", "fromDbUsername", "toDbUsername", "fromDbPassword",
-                    "toDbPassword", "tableName");
+            List<String> props = Arrays.asList(
+                    "fromDbDriver", "toDbDriver",
+                    "fromDbUrl", "toDbUrl",
+                    "fromDbUsername", "toDbUsername",
+                    "fromDbPassword", "toDbPassword",
+                    "criteria");
 
             logger.info("Init data from configruation");
             for (int i = 0; i < fields.size(); i++) {
@@ -563,8 +567,10 @@ public class TableDataCopier extends JFrame {
         return true;
     }
 
-    private String buildInsertSql(Set<String> columnNames, String tableName) {
-        StringBuffer insertSql = new StringBuffer("INSERT INTO " + tableName + "(");
+    private String buildInsertSql(Set<String> columnNames, String criteria) {
+        int indexOfWhere = criteria.toLowerCase().indexOf("where");
+
+        StringBuffer insertSql = new StringBuffer("INSERT INTO " + (indexOfWhere != -1 ? criteria.substring(0, indexOfWhere) : criteria) + "(");
         insertSql.append(buildParams(columnNames, ""));
         insertSql.append(") VALUES (");
         insertSql.append(buildParams(columnNames, ":"));
