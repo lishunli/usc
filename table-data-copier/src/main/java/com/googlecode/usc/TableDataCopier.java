@@ -1,4 +1,4 @@
-package com.googlecode.usc.table;
+package com.googlecode.usc;
 
 import java.awt.Desktop;
 import java.awt.EventQueue;
