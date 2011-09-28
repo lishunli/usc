@@ -183,6 +183,8 @@
         <profile>
             <id>launch4j</id>
             <build>
+                <finalName>TableDataCopier</finalName>
+
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
