@@ -9,7 +9,7 @@
 
     <groupId>com.googlecode.usc</groupId>
     <artifactId>table-data-copier</artifactId>
-    <version>0.5-SNAPSHOT</version>
+    <version>0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>table-data-copier</name>
     <description>copy table's data from one database to another database(same table schema)</description>
@@ -64,34 +64,6 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
             <version>3.0.6.RELEASE</version>
-        </dependency>
-
-        <dependency>
-            <groupId>commons-configuration</groupId>
-            <artifactId>commons-configuration</artifactId>
-            <version>1.4</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>commons-logging</groupId>
-                    <artifactId>commons-logging-api</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>commons-digester</groupId>
-                    <artifactId>commons-digester</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>commons-beanutils</groupId>
-                    <artifactId>commons-beanutils-core</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>commons-codec</groupId>
-                    <artifactId>commons-codec</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>commons-jxpath</groupId>
-                    <artifactId>commons-jxpath</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <dependency>

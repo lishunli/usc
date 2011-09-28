@@ -11,7 +11,6 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -19,7 +18,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
+import java.util.Properties;
 import java.util.Timer;
 
 import javax.swing.GroupLayout;
@@ -35,24 +34,23 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import org.apache.commons.configuration.PropertiesConfiguration;
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.util.StopWatch;
 
-public class TableDataCopier extends JFrame {
+class TableDataCopier extends JFrame {
     private static final long serialVersionUID = 5840057159492381296L;
 
     private Logger logger = LoggerFactory.getLogger(getClass());
     private final String CONF_FILE_NAME = "config.properties";
     private final long PER_SECOND = 1000;
     private int BATCH_SIZE = 100;
-    private boolean IS_OPEN_LOG_FILE = true;
+    private boolean IS_OPEN_LOG_FILE = false;
     private long DELAY_TIME = 1000;
     private boolean STOP = false;
+    private static final String SNAPSHOT_FLAG = "-SNAPSHOT";
 
     private JButton btnCopy;
     private JTextField textField_0_0;
@@ -102,7 +100,15 @@ public class TableDataCopier extends JFrame {
         JLabel label = new JLabel("TableDataCopier");
         label.setFont(new Font("Microsoft YaHei", Font.PLAIN, 24));
 
-        JLabel lblv = new JLabel("ShunLi©V0.5");
+        Properties prop = Utils.loadPropertiesFile(this.getClass().getClassLoader().getResourceAsStream("build-info.properties"));
+        String version = prop.getProperty("version", "1.0");
+
+        int snapshotIndex = version.lastIndexOf(SNAPSHOT_FLAG);
+        if (snapshotIndex > 0) {
+            version = version.substring(0, snapshotIndex);
+        }
+
+        JLabel lblv = new JLabel("ShunLi©V" + version);
         lblv.setEnabled(false);
         lblv.setFont(new Font("Microsoft YaHei", Font.PLAIN, 20));
         lblv.addMouseListener(new MouseAdapter() {
@@ -426,7 +432,7 @@ public class TableDataCopier extends JFrame {
             stopWatch.start("batch insert");
             for (int i = 0; i * BATCH_SIZE < size; i++) {
                 if (i == 0) {
-                    egiOgInsertSql = buildInsertSql(selectList.get(0).keySet(), criteria);
+                    egiOgInsertSql = Utils.buildInsertSql(selectList.get(0).keySet(), criteria);
                     logger.info("Insert sql is {}", egiOgInsertSql);
                 }
 
@@ -450,7 +456,7 @@ public class TableDataCopier extends JFrame {
 
             if (IS_OPEN_LOG_FILE) {
                 Timer timer2 = new Timer();
-                timer2.schedule(new openLogTask(), DELAY_TIME);
+                timer2.schedule(new OpenLogTask(), DELAY_TIME);
             }
 
         } catch (Exception e) {
@@ -468,40 +474,28 @@ public class TableDataCopier extends JFrame {
     }
 
     private void initData(List<JTextField> fields) {
-        try {
-            PropertiesConfiguration config = null;
+        // first get outside, second get inside
+        Properties config = Utils.loadPropertiesFile(
+                System.getProperty("user.dir") + "\\" + CONF_FILE_NAME,
+                this.getClass().getClassLoader().getResourceAsStream(CONF_FILE_NAME));
 
-            File file = new File(System.getProperty("user.dir") + "\\" + CONF_FILE_NAME);
-            if (file.exists()) {
-                // first get outside
-                config = new PropertiesConfiguration(file);
-            } else {
-                // second get inside
-                config = new PropertiesConfiguration(this.getClass().getClassLoader().getResource(CONF_FILE_NAME));
-            }
+        List<String> props = Arrays.asList(
+                "fromDbDriver", "toDbDriver",
+                "fromDbUrl", "toDbUrl",
+                "fromDbUsername", "toDbUsername",
+                "fromDbPassword", "toDbPassword",
+                "criteria");
 
-            List<String> props = Arrays.asList(
-                    "fromDbDriver", "toDbDriver",
-                    "fromDbUrl", "toDbUrl",
-                    "fromDbUsername", "toDbUsername",
-                    "fromDbPassword", "toDbPassword",
-                    "criteria");
-
-            logger.info("Init data from configruation");
-            for (int i = 0; i < fields.size(); i++) {
-                String key = props.get(i);
-                String value = config.getString(key);
-                logger.info("{} is {} ", StringUtils.capitalize(key), value);
-                fields.get(i).setText(value);
-            }
-
-            IS_OPEN_LOG_FILE = config.getBoolean("openLogFile", true);
-            DELAY_TIME = config.getLong("delayTime", PER_SECOND);
-
-        } catch (Exception e) {
-            exceptionHandler(e);
+        logger.info("Init data from configruation");
+        for (int i = 0; i < fields.size(); i++) {
+            String key = props.get(i);
+            String value = config.getProperty(key);
+            logger.info("{} is {} ", key, value);
+            fields.get(i).setText(value);
         }
 
+        IS_OPEN_LOG_FILE = Utils.parseString2Boolean(config.getProperty("openLogFile"), false);
+        DELAY_TIME = Utils.parseString2Long(config.getProperty("delayTime"), PER_SECOND);
     }
 
     private void addCanCopyDataListener(final List<JTextField> fields) {
@@ -522,17 +516,13 @@ public class TableDataCopier extends JFrame {
         btnCopy.setEnabled(validateAllFiledToBeFilled(fields));
     }
 
-    private void exceptionHandler(Exception e) {
-        String message = e.getMessage();
-
-        logger.error(message);
-        logger.info("Please see log file or contact me(QQ.506817493).Thanks.");
-        if (StringUtils.isEmpty(results.getText())) {
-            results.setText("[ERROR] " + message);
-        } else {
-            results.setText(results.getText() + "\n[ERROR] " + message + " please see log file or contact me(QQ.506817493).Thanks. ");
+    private boolean validateAllFiledToBeFilled(List<JTextField> fields) {
+        for (JTextField obj : fields) {
+            if (Utils.isBlank(obj.getText())) {
+                return false;
+            }
         }
-
+        return true;
     }
 
     private void showResults(String info) {
@@ -540,74 +530,22 @@ public class TableDataCopier extends JFrame {
         // logger.info(info);
     }
 
-    // ///////////////////////////////////////////////////
-    // **
-    // Function
-    // *
-    // ///////////////////////////////////////// /////////
-    private boolean validateAllFiledToBeFilled(List<JTextField> fields) {
-        for (JTextField obj : fields) {
-            if (isBlank(obj.getText())) {
-                return false;
-            }
+    private void exceptionHandler(Exception e) {
+        String message = e.getMessage();
+
+        logger.error(message);
+        logger.info("Please see log file or contact me(QQ.506817493).Thanks.");
+        if (Utils.isBlank(results.getText())) {
+            results.setText("[ERROR] " + message);
+        } else {
+            results.setText(results.getText() + "\n[ERROR] " + message + " please see log file or contact me(QQ.506817493).Thanks. ");
         }
-        return true;
-    }
-
-    private boolean isBlank(CharSequence cs) {
-        int strLen;
-        if (cs == null || (strLen = cs.length()) == 0) {
-            return true;
-        }
-        for (int i = 0; i < strLen; i++) {
-            if ((Character.isWhitespace(cs.charAt(i)) == false)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private String buildInsertSql(Set<String> columnNames, String criteria) {
-        int indexOfWhere = criteria.toLowerCase().indexOf("where");
-
-        StringBuffer insertSql = new StringBuffer("INSERT INTO " + (indexOfWhere != -1 ? criteria.substring(0, indexOfWhere) : criteria) + "(");
-        insertSql.append(buildParams(columnNames, ""));
-        insertSql.append(") VALUES (");
-        insertSql.append(buildParams(columnNames, ":"));
-        insertSql.append(") ");
-        return insertSql.toString();
-    }
-
-    private String buildParams(Set<String> columnNames, String prefix) {
-        StringBuffer params = new StringBuffer();
-
-        boolean isFirstColumn = true;
-        for (String columnName : columnNames) {
-            if (!isFirstColumn) {
-                params.append(", " + prefix + columnName);
-            } else {
-                params.append(prefix + columnName);
-                isFirstColumn = false;
-            }
-        }
-
-        return params.toString();
     }
 
     private class PrintTimerTask extends java.util.TimerTask {
         @Override
         public void run() {
             showResults("· ");
-        }
-    }
-
-    private class openLogTask extends java.util.TimerTask {
-        @Override
-        public void run() {
-            try {
-                Runtime.getRuntime().exec("notepad.exe " + System.getProperty("user.dir") + "\\log\\copier.log");
-            } catch (IOException e) {
-            }
         }
     }
 
