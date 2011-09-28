@@ -1,0 +1,44 @@
+TableDataCopier
+
++ What do?
+- copy table's data from one database to another database(same table schema)
+
++ Environment
+- JDK 1.6 or above
+- Only support oracle and mysql Driver DB.
+
++ Samples
+- Oracle
+### config.properties ###
+### you can put config.properties into folder which containing the exe or jar file, or manual input. ###
+fromDbDriver=oracle.jdbc.driver.OracleDriver
+fromDbUrl=jdbc:oracle:thin:@${ip}:${port}:${sid}
+fromDbUsername=username
+fromDbPassword=password
+toDbDriver=oracle.jdbc.driver.OracleDriver
+toDbUrl=jdbc:oracle:thin:@${ip}:${port}:${sid}
+toDbUsername=username
+toDbPassword=password
+criteria=table name or criteria
+openLogFile=false
+delayTime=5000
+
+Note: support connect by Oracle Service name. in this case, those URL will tuning as:
+jdbc:oracle:thin:@(DESCRIPTION=(FAILOVER=on)(LOAD_BALANCE=on)(ADDRESS=(PROTOCOL=TCP)(HOST=${ip})(PORT=${port}))(CONNECT_DATA=(SERVICE_NAME=${service_name})))
+and please according to your own environment to reconfigure @${ip},${port},${sid},${service_name} or others
+
+- Mysql
+### Ditto ###
+fromDbDriver=com.mysql.jdbc.Driver
+fromDbUrl=jdbc:mysql://localhost:3306/test
+fromDbUsername=root
+fromDbPassword=lishunli
+toDbDriver=com.mysql.jdbc.Driver
+toDbUrl=jdbc:mysql://localhost:3306/test1
+toDbUsername=root
+toDbPassword=lishunli
+criteria=student
+openLogFile=false
+delayTime=5000
+
+If you have any questions,please contact me(weibo: http://weibo.com/lishunli or qq: 506817493 or email: lishunli.me@gmail.com).
