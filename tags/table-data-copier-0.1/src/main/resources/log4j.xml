@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<!-- ===================================================================== -->
+<!--                                                                       -->
+<!--  Log4j Configuration                                                  -->
+<!--                                                                       -->
+<!-- ===================================================================== -->
+
+<!-- $Id$ -->
+
+<!--
+   | For more configuration infromation and examples see the Jakarta Log4j
+   | owebsite: http://jakarta.apache.org/log4j
+ -->
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="true">
+
+  <!--
+  ############################
+  # Appenders START          #
+  ############################
+  -->
+
+  <!-- This appender should not be used in production -->
+  <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+    <param name="Target" value="System.out"/>
+    <param name="Threshold" value="DEBUG"/>
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d [%p] %t [%c{2}] %m%n"/>
+    </layout>
+  </appender>
+
+  <appender name="USC_FILE" class="org.apache.log4j.RollingFileAppender">
+    <param name="File" value="log/copier.log"/>
+    <param name="Append" value="false"/>
+    <layout class="org.apache.log4j.PatternLayout">
+<!--      <param name="ConversionPattern" value="%d %m%n"/>-->
+      <param name="ConversionPattern" value="%d [%p] %m%n"/>
+    </layout>
+  </appender>
+
+  <!--
+  ############################
+  # Appenders END            #
+  ############################
+  -->
+
+
+  <!--
+  ############################
+  # Loggers START            #
+  ############################
+  -->
+  <!-- logger: Apache -->
+  <logger name="org.apache">
+    <level value="ERROR"/>
+  </logger>
+
+  <logger name="org.apache.cxf">
+    <level value="ERROR"/>
+  </logger>
+
+  <logger name="org.usc.table">
+    <level value="TRACE"/>
+  </logger>
+
+  <!-- logger: Spring JMS -->
+  <logger name="org.springframework.jdbc">
+    <level value="ERROR" />
+  </logger>
+
+  <!-- Root logger -->
+  <root>
+    <level value="TRACE" />
+    <appender-ref ref="USC_FILE"/>
+<!--    <appender-ref ref="CONSOLE"/>-->
+  </root>
+  <!--
+  ############################
+  # Loggers END              #
+  ############################
+  -->
+</log4j:configuration>
+
