@@ -421,7 +421,7 @@ class TableDataCopier extends JFrame {
             int size = selectList.size();
             logger.info("Successfully select {} records", size);
             for (int i = 0; i < size; i++) {
-                logger.info("{} : {}", String.format("%04d", i), selectList.get(i).toString());
+                logger.info("{} : {}", String.format("%04d", i + 1), selectList.get(i).toString());
             }
 
             stopWatch.stop();
