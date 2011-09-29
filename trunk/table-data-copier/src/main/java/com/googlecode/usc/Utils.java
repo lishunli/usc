@@ -74,7 +74,10 @@ public class Utils {
     public static Boolean parseString2Boolean(String value, Boolean defaultValue) {
         if ("true".equalsIgnoreCase(value)) {
             return Boolean.TRUE;
+        } else if ("false".equalsIgnoreCase(value)) {
+            return Boolean.FALSE;
         }
+
         return defaultValue;
     }
 
