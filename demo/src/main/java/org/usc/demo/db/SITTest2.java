@@ -90,19 +90,28 @@ public class SITTest2 {
                 " AND ac.BUSIN_ACTY_CDE                               = 'STOCK_OPTIONS' ";
 
         HashMap<String, Object> paramMap = new HashMap<String, Object>();
-        List<Map<String, Object>> userList = jdbcTemplate.queryForList(baseSql, paramMap);
 
-        List<String> query = jdbcTemplate.query(baseSql, new RowMapper<String>() {
+        List<String> userListForMethod1 = jdbcTemplate.query(baseSql, new RowMapper<String>() {
             public String mapRow(ResultSet rs, int rowNum) throws SQLException {
                 return rs.getString(1);
             }
         }, paramMap);
 
-        calcMethod(jdbcTemplate, searchSql, paramMap, query);
+        List<Map<String, Object>> userListForMethod2 = jdbcTemplate.queryForList(baseSql, paramMap);
 
-        for (int i = 0; i < userList.size(); i++) {
-            String userId = userList.get(i).get("user_id").toString();
+        calcMethod1(jdbcTemplate, searchSql, paramMap, userListForMethod1);
+        calcMethod2(jdbcTemplate, searchSql, paramMap, userListForMethod2);
+    }
 
+    /**
+     * @param jdbcTemplate
+     * @param searchSql
+     * @param paramMap
+     * @param query
+     */
+    private static void calcMethod1(SimpleJdbcTemplate jdbcTemplate, String searchSql, HashMap<String, Object> paramMap, List<String> query) {
+        for (String userId : query) {
+            System.out.println(userId);
             paramMap.put("userId", userId);
 
             long queryForLong = jdbcTemplate.queryForLong(searchSql, paramMap);
@@ -117,11 +126,12 @@ public class SITTest2 {
      * @param jdbcTemplate
      * @param searchSql
      * @param paramMap
-     * @param query
+     * @param userList
      */
-    private static void calcMethod(SimpleJdbcTemplate jdbcTemplate, String searchSql, HashMap<String, Object> paramMap, List<String> query) {
-        for (String userId : query) {
-            System.out.println(userId);
+    private static void calcMethod2(SimpleJdbcTemplate jdbcTemplate, String searchSql, HashMap<String, Object> paramMap, List<Map<String, Object>> userList) {
+        for (int i = 0; i < userList.size(); i++) {
+            String userId = userList.get(i).get("user_id").toString();
+
             paramMap.put("userId", userId);
 
             long queryForLong = jdbcTemplate.queryForLong(searchSql, paramMap);
