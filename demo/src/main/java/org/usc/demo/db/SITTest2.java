@@ -107,10 +107,10 @@ public class SITTest2 {
      * @param jdbcTemplate
      * @param searchSql
      * @param paramMap
-     * @param query
+     * @param userList
      */
-    private static void calcMethod1(SimpleJdbcTemplate jdbcTemplate, String searchSql, HashMap<String, Object> paramMap, List<String> query) {
-        for (String userId : query) {
+    private static void calcMethod1(SimpleJdbcTemplate jdbcTemplate, String searchSql, HashMap<String, Object> paramMap, List<String> userList) {
+        for (String userId : userList) {
             System.out.println(userId);
             paramMap.put("userId", userId);
 
