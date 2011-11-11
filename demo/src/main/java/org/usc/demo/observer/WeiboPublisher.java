@@ -1,9 +1,7 @@
 package org.usc.demo.observer;
 
-import java.util.Observable;
 
-public class WeiboPublisher extends Observable {
-
+public class WeiboPublisher extends AbstractPublisher {
     private String weiboName;
 
     public String getWeiboName() {
@@ -13,10 +11,4 @@ public class WeiboPublisher extends Observable {
     public WeiboPublisher(String weiboName) {
         this.weiboName = weiboName;
     }
-
-    public void publish() {
-        setChanged();
-        notifyObservers(this);
-    }
-
 }
