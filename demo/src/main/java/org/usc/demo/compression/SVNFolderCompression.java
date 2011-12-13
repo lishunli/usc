@@ -3,21 +3,18 @@ package org.usc.demo.compression;
 import java.io.File;
 import java.util.Timer;
 
-import org.apache.commons.io.FilenameUtils;
-
 /**
  *
  * @author ShunLi
  */
 public class SVNFolderCompression {
     public static void main(String[] args) {
-        // String svnFolder = "D:/Data/jdbcdslog-exp";
+        // String svnFolder = "D:/Data/jdbcdslog-exp/";
         String svnFolder = "D:/MSSE/";
 
-        String clearSVNFolder = FilenameUtils.getFullPathNoEndSeparator(svnFolder);
-
-        File[] files = new File(clearSVNFolder).listFiles();
-        File out = new File(clearSVNFolder + ".zip");
+        File svnFile = new File(svnFolder);
+        File[] files = svnFile.listFiles();
+        File out = new File(svnFile.getAbsolutePath() + ".zip");
 
         Timer timer = new Timer();
         timer.schedule(new PrintTimerTask(), 0, 1000);

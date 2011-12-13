@@ -20,15 +20,15 @@ import org.apache.commons.lang3.StringUtils;
  * @author lan
  */
 public final class ZipUtil {
-    private final static String EXCLUDED_WORD = ".svn | target | .classpath | .project | .settings";
+    private final static String EXCLUDED_WORD = ".svn | target | target-eclipse | .classpath | .project | .settings";
 
     /**
-     * 打包文件
+     * zip folder
      *
      * @param files
-     *            文件或文件夹的集合
+     *            file array
      * @param out
-     *            输出的zip文件
+     *            zip file
      */
     public static void zip(File[] files, File out) {
         Map<String, File> map = new HashMap<String, File>();
@@ -39,35 +39,43 @@ public final class ZipUtil {
         }
 
         if (!map.isEmpty()) {
+            ZipArchiveOutputStream zipOutput = null;
             try {
-                ZipArchiveOutputStream zaos = new ZipArchiveOutputStream(out);
+                zipOutput = new ZipArchiveOutputStream(out);
                 for (Map.Entry<String, File> entry : map.entrySet()) {
                     File file = entry.getValue();
-                    ZipArchiveEntry zae = new ZipArchiveEntry(file, entry.getKey());
-                    zaos.putArchiveEntry(zae);
+
+                    ZipArchiveEntry zipArchiveEntry = new ZipArchiveEntry(file, entry.getKey());
+                    zipOutput.putArchiveEntry(zipArchiveEntry);
+
                     InputStream is = new FileInputStream(file);
-                    byte[] b = new byte[1024 * 5];
+                    byte[] b = new byte[128];
                     int i = -1;
                     while ((i = is.read(b)) != -1) {
-                        zaos.write(b, 0, i);
+                        zipOutput.write(b, 0, i);
                     }
+
                     is.close();
-                    zaos.closeArchiveEntry();
+                    zipOutput.closeArchiveEntry();
                 }
-                zaos.finish();
-                zaos.close();
             } catch (IOException ex) {
                 ex.printStackTrace();
-            } finally{
-
+            } finally {
+                try {
+                    zipOutput.finish();
+                    zipOutput.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
 
     private static void list(File f, String parent, Map<String, File> map) {
         String name = f.getName();
+
         if (parent != null) {
-            name = parent + "/" + name;// 设置在zip包里的相对路径
+            name = parent + "/" + name;// set zip parent location.
         }
         // is exclude?
         if (!isExcluded(f)) {
