@@ -20,7 +20,9 @@ import org.apache.commons.lang3.StringUtils;
  * @author lan
  */
 public final class ZipUtil {
-    private final static String EXCLUDED_WORD = ".svn | target | target-eclipse | .classpath | .project | .settings";
+    private final static String EXCLUDED_WORD = ".svn | target | target-eclipse | .classpath | .project | .settings | build.bat";
+    private static boolean init = false;
+    private static List<String> excludedKeys = new ArrayList<String>();
 
     /**
      * zip folder
@@ -71,7 +73,7 @@ public final class ZipUtil {
         }
     }
 
-    private static void list(File f, String parent, Map<String, File> map) {
+    protected static void list(File f, String parent, Map<String, File> map) {
         String name = f.getName();
 
         if (parent != null) {
@@ -96,8 +98,10 @@ public final class ZipUtil {
      * @param f
      * @return
      */
-    private static boolean isExcluded(File f) {
-        for (String key : getExcludedKeys(EXCLUDED_WORD)) {
+    protected static boolean isExcluded(File f) {
+        initExcludedKeys(EXCLUDED_WORD);
+
+        for (String key : excludedKeys) {
             if (key.equalsIgnoreCase(f.getName())) {
                 return true;
             }
@@ -106,11 +110,12 @@ public final class ZipUtil {
         return false;
     }
 
-    protected static List<String> getExcludedKeys(String excludedWord) {
-        List<String> excludedKeys = new ArrayList<String>();
-        if (StringUtils.isNotBlank(excludedWord)) {
-            excludedKeys.addAll(Arrays.asList(excludedWord.split("\\s\\|\\s")));
+    protected static void initExcludedKeys(String excludedWord) {
+        if (!init) {
+            if (StringUtils.isNotBlank(excludedWord)) {
+                excludedKeys.addAll(Arrays.asList(excludedWord.split("\\s\\|\\s")));
+            }
+            init = true;
         }
-        return excludedKeys;
     }
 }
