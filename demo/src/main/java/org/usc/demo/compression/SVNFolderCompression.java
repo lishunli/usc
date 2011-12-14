@@ -9,8 +9,7 @@ import java.util.Timer;
  */
 public class SVNFolderCompression {
     public static void main(String[] args) {
-         String svnFolder = "D:/Data/jdbcdslog-exp/";
-//        String svnFolder = "D:/MSSE/";
+        String svnFolder = "D:/MSSE/mss-core";
 
         File svnFile = new File(svnFolder);
         File[] files = svnFile.listFiles();

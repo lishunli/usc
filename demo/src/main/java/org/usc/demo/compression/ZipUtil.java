@@ -21,6 +21,8 @@ import org.apache.commons.lang3.StringUtils;
  */
 public final class ZipUtil {
     private final static String EXCLUDED_WORD = ".svn | target | target-eclipse | .classpath | .project | .settings | build.bat";
+    private final static int BUFFER_SIZE = 128;
+
     private static boolean init = false;
     private static List<String> excludedKeys = new ArrayList<String>();
 
@@ -41,33 +43,38 @@ public final class ZipUtil {
         }
 
         if (!map.isEmpty()) {
-            ZipArchiveOutputStream zipOutput = null;
+            ZipArchiveOutputStream zos = null;
             try {
-                zipOutput = new ZipArchiveOutputStream(out);
+                zos = new ZipArchiveOutputStream(out);
+
                 for (Map.Entry<String, File> entry : map.entrySet()) {
                     File file = entry.getValue();
 
-                    ZipArchiveEntry zipArchiveEntry = new ZipArchiveEntry(file, entry.getKey());
-                    zipOutput.putArchiveEntry(zipArchiveEntry);
+                    ZipArchiveEntry ze = new ZipArchiveEntry(file, entry.getKey());
+                    zos.putArchiveEntry(ze);
 
-                    InputStream is = new FileInputStream(file);
-                    byte[] b = new byte[128];
-                    int i = -1;
-                    while ((i = is.read(b)) != -1) {
-                        zipOutput.write(b, 0, i);
+                    if (file.isFile()) {
+                        InputStream is = new FileInputStream(file);
+                        byte[] b = new byte[BUFFER_SIZE];
+                        int i = -1;
+                        while ((i = is.read(b)) != -1) {
+                            zos.write(b, 0, i);
+                        }
+                        is.close();
                     }
 
-                    is.close();
-                    zipOutput.closeArchiveEntry();
+                    zos.closeArchiveEntry();
                 }
+
+                zos.finish();
             } catch (IOException ex) {
                 ex.printStackTrace();
             } finally {
-                try {
-                    zipOutput.finish();
-                    zipOutput.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
+                if (zos != null) {
+                    try {
+                        zos.close();
+                    } catch (IOException e) { /* swallow */
+                    }
                 }
             }
         }
@@ -84,12 +91,17 @@ public final class ZipUtil {
             if (f.isFile()) {
                 map.put(name, f);
             } else if (f.isDirectory()) {
-                for (File file : f.listFiles()) {
-                    list(file, name, map);
+                File[] subFiles = f.listFiles();
+
+                if (subFiles.length > 0) {
+                    for (File file : subFiles) {
+                        list(file, name, map);
+                    }
+                } else { // empty directory
+                    map.put(name, f);
                 }
             }
         }
-
     }
 
     /**
