@@ -25,19 +25,19 @@ public class EgiogImporterM2 {
     public static void main(String[] args) throws Exception {
         // SIT
         DriverManagerDataSource dataSourceFrom = new DriverManagerDataSource();
-        dataSourceFrom.setUrl("jdbc:oracle:thin:@172.30.201.15:1521:mseub");
+        dataSourceFrom.setUrl("jdbc:oracle:thin:@IP:PORT:SID");
         dataSourceFrom.setDriverClassName("oracle.jdbc.driver.OracleDriver");
-        dataSourceFrom.setUsername("mssqry");
-        dataSourceFrom.setPassword("a0665");
+        dataSourceFrom.setUsername("username");
+        dataSourceFrom.setPassword("password");
 
-        // // Local SZ
-        // DriverManagerDataSource dataSourceTo = new DriverManagerDataSource();
-        // dataSourceTo.setUrl("jdbc:oracle:thin:@10.100.53.85:1521:cmn");
-        // dataSourceTo.setDriverClassName("oracle.jdbc.driver.OracleDriver");
-        // dataSourceTo.setUsername("mssapp");
-        // dataSourceTo.setPassword("commission");
+//         // Local SZ
+//         DriverManagerDataSource dataSourceTo = new DriverManagerDataSource();
+//         dataSourceTo.setUrl("jdbc:oracle:thin:@10.100.53.85:1521:cmn");
+//         dataSourceTo.setDriverClassName("oracle.jdbc.driver.OracleDriver");
+//         dataSourceTo.setUsername("mssapp");
+//         dataSourceTo.setPassword("commission");
 
-        // Local HK
+//         Local HK
         DriverManagerDataSource dataSourceTo = new DriverManagerDataSource();
         dataSourceTo.setUrl("jdbc:oracle:thin:@10.100.210.40:1521:mseda");
         dataSourceTo.setDriverClassName("oracle.jdbc.driver.OracleDriver");
