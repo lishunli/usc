@@ -233,7 +233,7 @@
                                     <icon>${basedir}/src/main/resources/dataCopier.ico</icon>
 
                                     <jre>
-                                        <minVersion>1.5.0</minVersion>
+                                        <minVersion>1.6.0</minVersion>
                                     </jre>
 
                                     <versionInfo>
