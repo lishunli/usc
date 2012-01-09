@@ -46,7 +46,7 @@ public class DBUtils {
     }
 
     public static void showTitle(String title) {
-        System.out.println(StringUtils.center(" " + title + " ", 80, "="));
+        System.out.println("\n" + StringUtils.center(" " + title + " ", 80, "="));
     }
 
 }
