@@ -15,8 +15,20 @@ import com.mongodb.MongoException;
  * @author ShunLi
  */
 public class DBUtils {
-    public static DBCollection getCollection(String collectionName) throws UnknownHostException, MongoException {
-        Mongo m = new Mongo("localhost", 27017);
+    public static Mongo getMongoInstance() {
+        Mongo m = null;
+        try {
+            m = new Mongo();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        } catch (MongoException e) {
+            e.printStackTrace();
+        }
+        return m;
+    }
+
+    public static DBCollection getCollection(String collectionName) {
+        Mongo m = getMongoInstance();
 
         DB db = m.getDB("mydb");
 
