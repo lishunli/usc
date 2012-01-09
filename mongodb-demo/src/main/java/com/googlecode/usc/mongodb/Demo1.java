@@ -1,6 +1,5 @@
 package com.googlecode.usc.mongodb;
 
-import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,14 +7,13 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
-import com.mongodb.MongoException;
 
 /**
  *
  * @author ShunLi
  */
 public class Demo1 {
-    public static void main(String[] args) throws UnknownHostException, MongoException {
+    public static void main(String[] args) {
         // Collection
         DBCollection coll = DBUtils.getCollection("testCollection");
 
