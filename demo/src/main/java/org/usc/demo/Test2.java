@@ -1,12 +1,26 @@
 package org.usc.demo;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  *
  * @author ShunLi
  */
 public class Test2 {
     public static void main(String[] args) {
-        System.out.println(getCodeFromMonthAndType("1","STKOPS_P"));;
+//        System.out.println(getCodeFromMonthAndType("1","STKOPS_P"));;
+
+        System.out.println(String.format("not foud %d market", 1L));
+
+        Map<String,String> test = new HashMap<String, String>(1);
+//        Map<String,String> value = new HashMap<String, String>();
+//        value.put("1", "1");
+//        test.putAll(value);
+        test.put("2", "2");
+        test.put("1", "1");
+        System.out.println(test);
+
     }
 
     public static String getCodeFromMonthAndType(String month,String instrumentTypeCode){
