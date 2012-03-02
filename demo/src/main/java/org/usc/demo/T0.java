@@ -43,9 +43,18 @@ public class T0 {
     }
 
     public static void main(String[] args) throws FileNotFoundException {
+        System.out.println(String.valueOf(false));
+        System.out.println(Arrays.toString("Connectionoracle.jdbc.driver.LogicalConnection".split("\\.")));
+
+        System.out.println("sqldb.jdbc.jdbcconnection".indexOf("hsqldb"));
+        System.out.println("sqldb.jdbc.jdbcconnection".matches("\\.*" + "hsqldb"));
+
+//        System.out.println("connectionoracle".m);
+
+
 
 //        sum();
-        System.out.println(Arrays.asList(null));;
+//        System.out.println(Arrays.asList(null));;
 
         // String regex = "^\\d{2}-\\d{6}[0-4]-\\d{2}$";
         // String testString = "02-0000000-22";
