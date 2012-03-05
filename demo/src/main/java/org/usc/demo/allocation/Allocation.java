@@ -34,7 +34,6 @@ public class Allocation {
                      new BigDecimal(str.substring(296, 306).trim())));
         }
 
-        // System.out.println(tradeInfos);
         // maybe grouping by sql. group by instrument, tradeType.
         List<SecPlusTradeTypePair> secPlusTradeTypePairs = new ArrayList<SecPlusTradeTypePair>();
 
@@ -44,8 +43,6 @@ public class Allocation {
                 secPlusTradeTypePairs.add(secPlusTradeTypePair);
             }
         }
-
-        // System.out.println(secPlusTradeTypePairs);
 
         List<TradeInfo> subTradeInfos = new ArrayList<TradeInfo>(); // handle per instrument + trade type.
         for (SecPlusTradeTypePair secPlusTradeTypePair : secPlusTradeTypePairs) {
@@ -60,7 +57,6 @@ public class Allocation {
                     subTradeInfos.add(trade);
                 }
             }
-            // System.out.println(subTradeInfos);
 
             Map<String, GroupAcInfo> acGrouping = new TreeMap<String, GroupAcInfo>();
 
@@ -75,16 +71,12 @@ public class Allocation {
                     acGrouping.put(accoutCode, new GroupAcInfo(accoutCode, subTrade.getAllocQty()));
                 }
             }
-            // System.out.println(subTradeInfos);
-            // System.out.println(acGrouping);
 
             // cal summary qty.
             BigDecimal summary = BigDecimal.ZERO;
             for (GroupAcInfo acInfo : acGrouping.values()) {
                 summary = summary.add(acInfo.getTotalQty());
             }
-
-            // System.out.println(summary);
 
             // grouping by trade ref no.
             Map<String, GroupTradeRefInfo> tradeRefGrouping = new TreeMap<String, GroupTradeRefInfo>();
@@ -100,8 +92,6 @@ public class Allocation {
                     tradeRefGrouping.put(exchgTradeRef, new GroupTradeRefInfo(subTrade.getAllocQty(), subTrade.getRealExec()));
                 }
             }
-
-            // System.out.println(detailGrouping);
 
             // all account set for this instrument + trade type.
             List<String> keys = new ArrayList<String>(acGrouping.keySet());
@@ -122,7 +112,6 @@ public class Allocation {
             }
 
             // 2nd allocation
-
             int index = 0;
 
             for (GroupTradeRefInfo detail : tradeRefGrouping.values()) {
