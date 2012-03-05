@@ -4,9 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -19,13 +19,13 @@ public class Allocation {
 
     public static void main(String[] args) throws IOException {
         @SuppressWarnings("unchecked")
-        List<String> contents = FileUtils.readLines(new File("D:/OMS1_20110826.txt"), "utf-8");
+        List<String> contents = FileUtils.readLines(new File("F:/OMS1_20110826.txt"), "utf-8");
 
         List<TradeInfo> tradeInfos = new ArrayList<TradeInfo>();
 
         for (String str : contents) {
             tradeInfos.add(new TradeInfo(
-                     str.substring(45, 46),
+                     str.substring(16, 46).trim(),
                      str.substring(47, 48),
                      str.substring(49, 69).trim(),
                      str.substring(70, 90).trim(),
@@ -45,9 +45,6 @@ public class Allocation {
             }
         }
 
-
-
-
         // System.out.println(perSecPerTradeTypeInfos);
 
         List<TradeInfo> subTradeInfos = new ArrayList<TradeInfo>();
@@ -63,8 +60,9 @@ public class Allocation {
                     subTradeInfos.add(trade);
                 }
             }
+            // System.out.println(subTradeInfos);
 
-            Map<String, AcInfo> acGrouping = new HashMap<String, AcInfo>();
+            Map<String, AcInfo> acGrouping = new TreeMap<String, AcInfo>();
 
             for (TradeInfo subTrade : subTradeInfos) {
                 String accoutCode = subTrade.getAllocAc();
@@ -75,10 +73,91 @@ public class Allocation {
                 } else {
                     acGrouping.put(accoutCode, new AcInfo(accoutCode, subTrade.getAllocQty()));
                 }
+            }
+            // System.out.println(subTradeInfos);
+            // System.out.println(acGrouping);
+            BigDecimal summary = BigDecimal.ZERO;
+            for (AcInfo acInfo : acGrouping.values()) {
+                summary = summary.add(acInfo.getTotalQty());
+            }
+
+            // System.out.println(summary);
+
+            Map<String, Detail> detailGrouping = new TreeMap<String, Detail>();
+
+            for (TradeInfo subTrade : subTradeInfos) {
+                String exchgTradeRef = subTrade.getExchgTradeRef();
+
+                if (detailGrouping.containsKey(exchgTradeRef)) {
+                    Detail detail = detailGrouping.get(exchgTradeRef);
+                    detail.setAllocQty(detail.getAllocQty().add(subTrade.getAllocQty()));
+                    detail.setRemainQty(detail.getAllocQty());
+                } else {
+                    detailGrouping.put(exchgTradeRef, new Detail(subTrade.getAllocQty(), subTrade.getRealExec()));
+                }
+            }
+
+            // System.out.println(detailGrouping);
+
+            List<String> keys = new ArrayList<String>(acGrouping.keySet());
+
+            // 1st allocation
+            for (Detail detail : detailGrouping.values()) {
+                Map<String, BigDecimal> allocation = detail.getAllocation();
+                for (String key : keys) {
+                    AcInfo acInfo = acGrouping.get(key);
+                    BigDecimal firstAllocation = acInfo.getTotalQty().multiply(detail.getAllocQty()).divide(summary, 0, BigDecimal.ROUND_DOWN);
+
+                    allocation.put(key, firstAllocation);
+
+                    detail.setRemainQty(detail.getRemainQty().subtract(firstAllocation));
+                    acInfo.setUnAllocQty(acInfo.getUnAllocQty().subtract(firstAllocation));
+
+                    // if(acInfo.getUnAllocQty().signum() == 0){
+                    // keys.remove(key);
+                    // }
+                }
 
             }
-//            System.out.println(subTradeInfos);
-//            System.out.println(acGrouping);
+
+            // 2nd allocation
+
+            int index = 0;
+
+            for (Detail detail : detailGrouping.values()) {
+                while (detail.getRemainQty().signum() > 0) {
+                    String key = keys.get(index);
+                    AcInfo acInfo = acGrouping.get(key);
+                    BigDecimal secondAllocation = BigDecimal.ONE;
+
+                    Map<String, BigDecimal> allocation = detail.getAllocation();
+                    allocation.put(key, allocation.get(key).add(secondAllocation));
+
+                    detail.setRemainQty(detail.getRemainQty().subtract(secondAllocation));
+                    acInfo.setUnAllocQty(acInfo.getUnAllocQty().subtract(secondAllocation));
+
+                    index++;
+
+                    if (acInfo.getUnAllocQty().signum() == 0) {
+                        keys.remove(key);
+                        index--;
+                        if (keys.isEmpty()) {
+                            break;
+                        }
+                    }
+
+                    index = index % keys.size();
+                }
+
+                // normal flow never invoke here.
+                if (keys.isEmpty()) {
+                    break;
+                }
+            }
+
+            System.out.println(detailGrouping);
+            System.out.println("=========================================");
+            System.out.println(acGrouping);
 
             break; // TODO
         }

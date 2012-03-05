@@ -1,9 +1,12 @@
 package org.usc.demo;
 
 import java.io.FileNotFoundException;
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  *
@@ -28,11 +31,9 @@ public class T0 {
     // }
 
     public static <T> List<T> gather(T... args) {
-        EnumSet set ;
+        EnumSet set;
         return Arrays.asList(args);
     }
-
-
 
     public static void sum(int... args) {
         int sum = 0;
@@ -43,18 +44,27 @@ public class T0 {
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        System.out.println(String.valueOf(false));
-        System.out.println(Arrays.toString("Connectionoracle.jdbc.driver.LogicalConnection".split("\\.")));
+        // System.out.println(String.valueOf(false));
+        // System.out.println(Arrays.toString("Connectionoracle.jdbc.driver.LogicalConnection".split("\\.")));
+        //
+        // System.out.println("sqldb.jdbc.jdbcconnection".indexOf("hsqldb"));
+        // System.out.println("sqldb.jdbc.jdbcconnection".matches("\\.*" + "hsqldb"));
+//        System.out.println(new BigDecimal("1").divide(new BigDecimal("3"), 0, BigDecimal.ROUND_DOWN));
 
-        System.out.println("sqldb.jdbc.jdbcconnection".indexOf("hsqldb"));
-        System.out.println("sqldb.jdbc.jdbcconnection".matches("\\.*" + "hsqldb"));
+        Map<String, BigDecimal> map =new  TreeMap<String, BigDecimal>();
+        map.put("1", BigDecimal.ONE);
+        map.put("2", BigDecimal.ONE);
 
-//        System.out.println("connectionoracle".m);
+        map.put("1", map.get("1").add(BigDecimal.TEN));
 
 
 
-//        sum();
-//        System.out.println(Arrays.asList(null));;
+        System.out.println(map);
+
+        // System.out.println("connectionoracle".m);
+
+        // sum();
+        // System.out.println(Arrays.asList(null));;
 
         // String regex = "^\\d{2}-\\d{6}[0-4]-\\d{2}$";
         // String testString = "02-0000000-22";
