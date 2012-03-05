@@ -7,15 +7,15 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  *
  * @author ShunLi
  */
-public class PerSecPerTradeTypeInfo {
+public class SecPlusTradeTypePair {
     String instrumentCode;
     String tradeType;
 
-    public PerSecPerTradeTypeInfo() {
+    public SecPlusTradeTypePair() {
         super();
     }
 
-    public PerSecPerTradeTypeInfo(String instrumentCode, String tradeType) {
+    public SecPlusTradeTypePair(String instrumentCode, String tradeType) {
         this.instrumentCode = instrumentCode;
         this.tradeType = tradeType;
     }
@@ -53,7 +53,7 @@ public class PerSecPerTradeTypeInfo {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        PerSecPerTradeTypeInfo other = (PerSecPerTradeTypeInfo) obj;
+        SecPlusTradeTypePair other = (SecPlusTradeTypePair) obj;
         if (instrumentCode == null) {
             if (other.instrumentCode != null)
                 return false;

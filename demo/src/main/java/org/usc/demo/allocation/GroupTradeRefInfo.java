@@ -11,18 +11,18 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  *
  * @author ShunLi
  */
-public class Detail {
+public class GroupTradeRefInfo {
     BigDecimal allocQty;
     BigDecimal realExec;
     BigDecimal remainQty;
 
     Map<String, BigDecimal> allocation = new TreeMap<String, BigDecimal>();
 
-    public Detail() {
+    public GroupTradeRefInfo() {
         super();
     }
 
-    public Detail(BigDecimal allocQty, BigDecimal realExec) {
+    public GroupTradeRefInfo(BigDecimal allocQty, BigDecimal realExec) {
         this.allocQty = allocQty;
         this.realExec = realExec;
         this.remainQty = allocQty;

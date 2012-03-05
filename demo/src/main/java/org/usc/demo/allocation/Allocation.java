@@ -35,23 +35,23 @@ public class Allocation {
         }
 
         // System.out.println(tradeInfos);
-
-        List<PerSecPerTradeTypeInfo> perSecPerTradeTypeInfos = new ArrayList<PerSecPerTradeTypeInfo>();
+        // maybe grouping by sql. group by instrument, tradeType.
+        List<SecPlusTradeTypePair> secPlusTradeTypePairs = new ArrayList<SecPlusTradeTypePair>();
 
         for (TradeInfo trade : tradeInfos) {
-            PerSecPerTradeTypeInfo perSecPerTradeTypeInfo = new PerSecPerTradeTypeInfo(trade.getInstrumentCode(), trade.getBuySell());
-            if (!perSecPerTradeTypeInfos.contains(perSecPerTradeTypeInfo)) {
-                perSecPerTradeTypeInfos.add(perSecPerTradeTypeInfo);
+            SecPlusTradeTypePair secPlusTradeTypePair = new SecPlusTradeTypePair(trade.getInstrumentCode(), trade.getBuySell());
+            if (!secPlusTradeTypePairs.contains(secPlusTradeTypePair)) {
+                secPlusTradeTypePairs.add(secPlusTradeTypePair);
             }
         }
 
-        // System.out.println(perSecPerTradeTypeInfos);
+        // System.out.println(secPlusTradeTypePairs);
 
-        List<TradeInfo> subTradeInfos = new ArrayList<TradeInfo>();
-        for (PerSecPerTradeTypeInfo perSecPerTradeTypeInfo : perSecPerTradeTypeInfos) {
+        List<TradeInfo> subTradeInfos = new ArrayList<TradeInfo>(); // handle per instrument + trade type.
+        for (SecPlusTradeTypePair secPlusTradeTypePair : secPlusTradeTypePairs) {
             subTradeInfos.clear();
-            String instrumentCode = perSecPerTradeTypeInfo.getInstrumentCode();
-            String tradeType = perSecPerTradeTypeInfo.getTradeType();
+            String instrumentCode = secPlusTradeTypePair.getInstrumentCode();
+            String tradeType = secPlusTradeTypePair.getTradeType();
             System.out.println(StringUtils.center(" Handle Instrument " + instrumentCode + ", and tradetype " + tradeType + " ", 60, "="));
 
             for (TradeInfo trade : tradeInfos) {
@@ -62,60 +62,61 @@ public class Allocation {
             }
             // System.out.println(subTradeInfos);
 
-            Map<String, AcInfo> acGrouping = new TreeMap<String, AcInfo>();
+            Map<String, GroupAcInfo> acGrouping = new TreeMap<String, GroupAcInfo>();
 
+            // grouping by ac code.
             for (TradeInfo subTrade : subTradeInfos) {
                 String accoutCode = subTrade.getAllocAc();
                 if (acGrouping.containsKey(accoutCode)) {
-                    AcInfo acInfo = acGrouping.get(accoutCode);
+                    GroupAcInfo acInfo = acGrouping.get(accoutCode);
                     acInfo.setTotalQty(acInfo.getTotalQty().add(subTrade.getAllocQty()));
                     acInfo.setUnAllocQty(acInfo.getTotalQty());
                 } else {
-                    acGrouping.put(accoutCode, new AcInfo(accoutCode, subTrade.getAllocQty()));
+                    acGrouping.put(accoutCode, new GroupAcInfo(accoutCode, subTrade.getAllocQty()));
                 }
             }
             // System.out.println(subTradeInfos);
             // System.out.println(acGrouping);
+
+            // cal summary qty.
             BigDecimal summary = BigDecimal.ZERO;
-            for (AcInfo acInfo : acGrouping.values()) {
+            for (GroupAcInfo acInfo : acGrouping.values()) {
                 summary = summary.add(acInfo.getTotalQty());
             }
 
             // System.out.println(summary);
 
-            Map<String, Detail> detailGrouping = new TreeMap<String, Detail>();
+            // grouping by trade ref no.
+            Map<String, GroupTradeRefInfo> tradeRefGrouping = new TreeMap<String, GroupTradeRefInfo>();
 
             for (TradeInfo subTrade : subTradeInfos) {
                 String exchgTradeRef = subTrade.getExchgTradeRef();
 
-                if (detailGrouping.containsKey(exchgTradeRef)) {
-                    Detail detail = detailGrouping.get(exchgTradeRef);
+                if (tradeRefGrouping.containsKey(exchgTradeRef)) {
+                    GroupTradeRefInfo detail = tradeRefGrouping.get(exchgTradeRef);
                     detail.setAllocQty(detail.getAllocQty().add(subTrade.getAllocQty()));
                     detail.setRemainQty(detail.getAllocQty());
                 } else {
-                    detailGrouping.put(exchgTradeRef, new Detail(subTrade.getAllocQty(), subTrade.getRealExec()));
+                    tradeRefGrouping.put(exchgTradeRef, new GroupTradeRefInfo(subTrade.getAllocQty(), subTrade.getRealExec()));
                 }
             }
 
             // System.out.println(detailGrouping);
 
+            // all account set for this instrument + trade type.
             List<String> keys = new ArrayList<String>(acGrouping.keySet());
 
             // 1st allocation
-            for (Detail detail : detailGrouping.values()) {
+            for (GroupTradeRefInfo detail : tradeRefGrouping.values()) {
                 Map<String, BigDecimal> allocation = detail.getAllocation();
                 for (String key : keys) {
-                    AcInfo acInfo = acGrouping.get(key);
+                    GroupAcInfo acInfo = acGrouping.get(key);
                     BigDecimal firstAllocation = acInfo.getTotalQty().multiply(detail.getAllocQty()).divide(summary, 0, BigDecimal.ROUND_DOWN);
 
                     allocation.put(key, firstAllocation);
 
                     detail.setRemainQty(detail.getRemainQty().subtract(firstAllocation));
                     acInfo.setUnAllocQty(acInfo.getUnAllocQty().subtract(firstAllocation));
-
-                    // if(acInfo.getUnAllocQty().signum() == 0){
-                    // keys.remove(key);
-                    // }
                 }
 
             }
@@ -124,10 +125,10 @@ public class Allocation {
 
             int index = 0;
 
-            for (Detail detail : detailGrouping.values()) {
+            for (GroupTradeRefInfo detail : tradeRefGrouping.values()) {
                 while (detail.getRemainQty().signum() > 0) {
                     String key = keys.get(index);
-                    AcInfo acInfo = acGrouping.get(key);
+                    GroupAcInfo acInfo = acGrouping.get(key);
                     BigDecimal secondAllocation = BigDecimal.ONE;
 
                     Map<String, BigDecimal> allocation = detail.getAllocation();
@@ -149,17 +150,19 @@ public class Allocation {
                     index = index % keys.size();
                 }
 
-                // normal flow never invoke here.
                 if (keys.isEmpty()) {
+                    // normal flow never invoke here.
                     break;
                 }
             }
 
-            System.out.println(detailGrouping);
+            System.out.println(tradeRefGrouping);
             System.out.println("=========================================");
             System.out.println(acGrouping);
 
-            break; // TODO
+            // TODO:Shunli - to calc avg price.
+
+            // break; // TODO
         }
 
     }

@@ -9,16 +9,16 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  *
  * @author ShunLi
  */
-public class AcInfo {
+public class GroupAcInfo {
     String accountCode;
     BigDecimal totalQty;
     BigDecimal unAllocQty;
 
-    public AcInfo() {
+    public GroupAcInfo() {
         super();
     }
 
-    public AcInfo(String accountCode, BigDecimal totalQty) {
+    public GroupAcInfo(String accountCode, BigDecimal totalQty) {
         this.accountCode = accountCode;
         this.totalQty = totalQty;
         this.unAllocQty = totalQty;
