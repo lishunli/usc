@@ -1,10 +1,12 @@
 package org.usc.file;
 
+import java.io.File;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 
 import org.apache.struts2.ServletActionContext;
-import org.usc.utils.UploadConfigurationRead;
+import org.usc.constant.Constants;
+import org.usc.utils.DynamicConfigurationUtil;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -32,8 +34,16 @@ public class DownloadAction extends ActionSupport {
         // System.out.println(fileRealName);
     }
 
-    /*
-     * @getFileName 此方法对应的是struts.xml文件中的： <param name="contentDisposition">attachment;filename="${fileName}"</param> 这个属性设置的是下载工具下载文件时显示的文件名， 要想正确的显示中文文件名，我们需要对fileName再次编码 否则中文名文件将出现乱码，或无法下载的情况
+    /**
+     * getFileName
+     *
+     * <pre>
+     * 此方法对应的是struts.xml文件中的： <param name="contentDisposition">attachment;filename="${fileName}"</param>
+     * 这个属性设置的是下载工具下载文件时显示的文件名， 要想正确的显示中文文件名，我们需要对fileName再次编码 否则中文名文件将出现乱码，或无法下载的情况
+     * </pre>
+     *
+     * @return
+     * @throws UnsupportedEncodingException
      */
     public String getFileName() throws UnsupportedEncodingException {
 
@@ -48,7 +58,7 @@ public class DownloadAction extends ActionSupport {
     public InputStream getDownloadFile() {
 
         this.setFileName();
-        return ServletActionContext.getServletContext().getResourceAsStream("/" + UploadConfigurationRead.getInstance().getConfigItem("uploadFilePath").trim() + "/" + fileName);
+        return ServletActionContext.getServletContext().getResourceAsStream(File.separator + DynamicConfigurationUtil.getProperty(Constants.UPLOAD_FILE_PATH) + File.separator + fileName);
     }
 
     @Override

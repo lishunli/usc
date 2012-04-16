@@ -4,9 +4,12 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
-import org.usc.utils.UploadConfigurationRead;
+import org.usc.constant.Constants;
+import org.usc.utils.DynamicConfigurationUtil;
+
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
@@ -29,8 +32,7 @@ public class UploadAction extends ActionSupport {
 
     public String execute() throws Exception {
         try {
-            String targetDirectory = ServletActionContext.getServletContext()
-                    .getRealPath("/" + UploadConfigurationRead.getInstance().getConfigItem("uploadFilePath").trim());// 获得路径
+            String targetDirectory = ServletActionContext.getServletContext().getRealPath(File.separator + DynamicConfigurationUtil.getProperty(Constants.UPLOAD_FILE_PATH));// 获得路径
             for (int i = 0; i < upload.length; i++) {
                 String fileName = uploadFileName[i];// 上传的文件名
                 String type = uploadContentType[i];// 文件类型
@@ -38,7 +40,7 @@ public class UploadAction extends ActionSupport {
 
                 File target = new File(targetDirectory, realName);
                 FileUtils.copyFile(upload[i], target);// 上传至服务器的目录，一般都这样操作，
-                                                      // 在把路径写入数据库即可
+                                                        // 在把路径写入数据库即可
 
                 UploadFiles uf = new UploadFiles();// 创建文件
                 uf.setUploadContentType(type);
