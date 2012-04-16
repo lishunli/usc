@@ -27,7 +27,7 @@ public class ExportXLS {
         CreationHelper helper = wb.getCreationHelper();
         // 创建Sheet并给名字(表示Excel的一个Sheet)
         Sheet sheet1 = wb.createSheet("HSSF_Sheet_1");
-        Sheet sheet2 = wb.createSheet("HSSF_Sheet_2");
+//        Sheet sheet2 = wb.createSheet("HSSF_Sheet_2");
         // Row表示一行Cell表示一列
         Row row = null;
         Cell cell = null;

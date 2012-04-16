@@ -1,6 +1,5 @@
 package org.usc.demo.time;
 
-import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;

@@ -3,7 +3,6 @@ package org.usc.demo;
 import java.io.FileNotFoundException;
 import java.math.BigDecimal;
 import java.util.Arrays;
-import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -16,7 +15,8 @@ public class T0 {
 
     // private static final String SYSTEM_SEPARATOR = "/";
     //
-    // private static String buildExcludeBrokerIds(String excludeBrokerIds, String excludeSpecificallyBrokerId) {
+    // private static String buildExcludeBrokerIds(String excludeBrokerIds,
+    // String excludeSpecificallyBrokerId) {
     // if (StringUtils.isBlank(excludeBrokerIds)) {
     // return excludeSpecificallyBrokerId;
     // } else if (StringUtils.isBlank(excludeSpecificallyBrokerId)) {
@@ -26,12 +26,13 @@ public class T0 {
     // return excludeBrokerIds + "," + excludeSpecificallyBrokerId;
     // }
     //
-    // private static String buildExcludeBrokerIds2(String... excludeBrokerIds) {
+    // private static String buildExcludeBrokerIds2(String... excludeBrokerIds)
+    // {
     // return StringUtils. join (excludeBrokerIds, ",");
     // }
 
     public static <T> List<T> gather(T... args) {
-        EnumSet set;
+        // EnumSet set;
         return Arrays.asList(args);
     }
 
@@ -48,16 +49,16 @@ public class T0 {
         // System.out.println(Arrays.toString("Connectionoracle.jdbc.driver.LogicalConnection".split("\\.")));
         //
         // System.out.println("sqldb.jdbc.jdbcconnection".indexOf("hsqldb"));
-        // System.out.println("sqldb.jdbc.jdbcconnection".matches("\\.*" + "hsqldb"));
-//        System.out.println(new BigDecimal("1").divide(new BigDecimal("3"), 0, BigDecimal.ROUND_DOWN));
+        // System.out.println("sqldb.jdbc.jdbcconnection".matches("\\.*" +
+        // "hsqldb"));
+        // System.out.println(new BigDecimal("1").divide(new BigDecimal("3"), 0,
+        // BigDecimal.ROUND_DOWN));
 
-        Map<String, BigDecimal> map =new  TreeMap<String, BigDecimal>();
+        Map<String, BigDecimal> map = new TreeMap<String, BigDecimal>();
         map.put("1", BigDecimal.ONE);
         map.put("2", BigDecimal.ONE);
 
         map.put("1", map.get("1").add(BigDecimal.TEN));
-
-
 
         System.out.println(map);
 
@@ -81,7 +82,8 @@ public class T0 {
         // testString.matches(regex);
         // }
         //
-        // System.out.println("Methos 1 cost " + (System.nanoTime() - startTime));
+        // System.out.println("Methos 1 cost " + (System.nanoTime() -
+        // startTime));
         //
         // i = 0;
         // startTime = System.nanoTime();
@@ -90,7 +92,8 @@ public class T0 {
         // p.matcher(testString).find();
         // }
         //
-        // System.out.println("Methos 2 cost " + (System.nanoTime() - startTime));
+        // System.out.println("Methos 2 cost " + (System.nanoTime() -
+        // startTime));
         // }
 
         // System.out.println(System.nanoTime() - startTime);
@@ -106,12 +109,14 @@ public class T0 {
         // System.out.println(buildExcludeBrokerIds2(null, "3,4"));
         // System.out.println(buildExcludeBrokerIds2("1,2", null));
         // System.out.println(buildExcludeBrokerIds2("1,2", "3,4"));
-        // System.out.println(buildExcludeBrokerIds2(buildExcludeBrokerIds(null, "3,4"), "3,4"));
+        // System.out.println(buildExcludeBrokerIds2(buildExcludeBrokerIds(null,
+        // "3,4"), "3,4"));
 
         // String line =
         // "Index |SLE|     Return_Type|Trading_Code   |UTI_Number        |Stock_Code          |ISIN_Code           |           Side|       Quantity|               Unit_Price|         Customer_Account|dd_Lot_Broker_Number|       Internal_Reference|          Exchange_Number|      Confirmation_Flag|ade_Class_Origin|arket_Code|      Trade_Class_Short_Sell|           Trade_Class_Hedge|ddlot_Boardlot_Order|outing_Ref|r_Status|     Order_Time|      Remain_Qty|Number_Of_Trade|                Avg_Price| Order_Status|_Order_User_Ref|Cumulative_Qte|rade_Phase|                Exe_Price|        Exe_Qty|                Trade_Num|                 Exe_Time|revious_Exch_No|                 Ack_Type|          Time_Trade_Book|Type_Ack|        Old_Qty|                Old_Price|               Rejet_Code|               Rejet_Time|            Rejet_Command|    Broker_Comment|                  Free_Txt_Order|            Trade_Num_Ref|      Broker_ID|      Server_ID|   Counter_Part|  Sub_Status|    POrdID|dType|    ETFQty|     HOUSE_AC_ID|";
         // String glFileHeaderEnd = "SUB_STATUS|";
-        // if (!line.toUpperCase().startsWith("INDEX") || !line.toUpperCase().endsWith(glFileHeaderEnd)){
+        // if (!line.toUpperCase().startsWith("INDEX") ||
+        // !line.toUpperCase().endsWith(glFileHeaderEnd)){
         //
         // System.out.println("error");
         // }

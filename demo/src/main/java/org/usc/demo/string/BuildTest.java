@@ -1,7 +1,6 @@
 package org.usc.demo.string;
 
 import java.io.IOException;
-import java.util.Random;
 
 /**
  *
