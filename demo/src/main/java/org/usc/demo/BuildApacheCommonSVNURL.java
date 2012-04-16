@@ -19,9 +19,18 @@ public class BuildApacheCommonSVNURL {
                 "math", "modeler", "net", "ognl", "pool", "primitives", "proxy", "sanselan",
                 "scxml", "validator", "vfs");
 
-        String templte = "svn checkout http://svn.apache.org/repos/asf/commons/proper/%1$s/trunk %1$s";
+        System.out.println("#----------------------Checkout------------------------#");
+        String checkoutTpt = "svn checkout http://svn.apache.org/repos/asf/commons/proper/%1$s/trunk %1$s";
         for (String common : commons) {
-            System.out.println(String.format(templte, common));
+            System.out.println(String.format(checkoutTpt, common));
         }
+
+        System.out.println("#----------------------Update------------------------#");
+        String updateTpt = "cd ../%s";
+        for (String common : commons) {
+            System.out.println(String.format(updateTpt, common));
+            System.out.println("svn update");
+        }
+
     }
 }
