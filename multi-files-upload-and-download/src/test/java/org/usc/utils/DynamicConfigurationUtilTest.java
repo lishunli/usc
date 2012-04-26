@@ -10,8 +10,8 @@ import org.usc.constant.Constants;
  * @author Shunli
  */
 public class DynamicConfigurationUtilTest {
-    @Test
-    public void testGetProperty() {
-        assertEquals("upload/file", DynamicConfigurationUtil.getProperty(Constants.UPLOAD_FILE_PATH));
-    }
+	@Test
+	public void testGetProperty() {
+		assertEquals("upload/file", UploadConfigurationUtil.getConfig().getProperty(Constants.UPLOAD_FILE_PATH));
+	}
 }
