@@ -15,7 +15,7 @@ class ClassAsFactory<T> {
 	}
 }
 
-class Employee {
+class Employee1 {
 }
 
 public class InstantiateGenericType {
