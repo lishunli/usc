@@ -3,11 +3,8 @@ package com.tencent.weibo.example;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
-
-import weibo4j.Status;
 
 import com.tencent.weibo.api.Statuses_API;
 import com.tencent.weibo.beans.OAuth;
@@ -23,10 +20,10 @@ public class Test_API {
 	public static void main(String[] args) {
 		try {
 			test_list_t();
-//			for(int i = 0;i< 10; i++){
-//			Thread.sleep(1000);
-//			test_list_t2();
-//			}
+			// for(int i = 0;i< 10; i++){
+			// Thread.sleep(1000);
+			// test_list_t2();
+			// }
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -75,7 +72,7 @@ public class Test_API {
 
 			System.out.println("Input your verification code：");
 			Scanner in = new Scanner(System.in);
-			verify = in.nextLine();
+			verify = in.nextLine().trim();
 
 			// 获取access token
 			System.out.println("GetAccessToken......");
@@ -87,9 +84,9 @@ public class Test_API {
 				System.out.println("Get Access Token failed!");
 				return;
 			} else {
-//				User_API uAPi = new User_API();
+				// User_API uAPi = new User_API();
 
-//				System.out.println(uAPi.info(oauth,WeiBoConst.ResultType.ResultType_Json));
+				// System.out.println(uAPi.info(oauth,WeiBoConst.ResultType.ResultType_Json));
 				// Fav_API tAPI = new Fav_API();
 				// // String response=tAPI.list_t(oauth, WeiBoConst.ResultType.ResultType_Json, "20", "0", "0");
 				// // String response=tAPI.delt(oauth, WeiBoConst.ResultType.ResultType_Json, "104502055372919");
@@ -99,14 +96,18 @@ public class Test_API {
 				// String response = private_API.add(oauth, WeiBoConst.ResultType.ResultType_Json, "hello", "127.0.0.1", "", "", "BlueX_Chan");
 				// System.out.println("response:" + response);
 
-//				T_API sendApi = new T_API();
-//				String response = sendApi.add(oauth, WeiBoConst.ResultType.ResultType_Json, "hello world" + count, "127.0.0.1");
-//				System.out.println("response:" + response);
-				Statuses_API sApi = new Statuses_API();
-//				String response = sApi.home_timeline(oauth, WeiBoConst.ResultType.ResultType_Json, "0", "0", "70");
-//				List<Status>  status = sApi.broadcast_timeline(oauth,  "0");
+				// T_API sendApi = new T_API();
+				// String response = sendApi.add(oauth, WeiBoConst.ResultType.ResultType_Json, "hello world" + count, "127.0.0.1");
+				// System.out.println("response:" + response);
 
-//				System.out.println(response);
+				Statuses_API sApi = new Statuses_API();
+				String response = sApi.broadcast_timeline(oauth, WeiBoConst.ResultType.ResultType_Json, "0", "1337048706", "100", "1879098635110", "0", "0", "1");
+				System.out.println(response);
+
+				// String response = sApi.home_timeline(oauth, WeiBoConst.ResultType.ResultType_Json, "0", "0", "70");
+				// List<Status> status = sApi.broadcast_timeline(oauth, "0");
+
+				// System.out.println(response);
 			}
 			in.close();
 		}
@@ -128,10 +129,10 @@ public class Test_API {
 			System.out.println("Get Access Token failed!");
 			return;
 		} else {
-//			T_API tApi = new T_API();
-//			String response = tApi.add(oauth, WeiBoConst.ResultType.ResultType_Json, "hello world " + count, "127.0.0.1");
-//			// String response = tApi.show(oauth, WeiBoConst.ResultType.ResultType_Json, "103735038173797");
-//			System.out.println("response:" + response);
+			// T_API tApi = new T_API();
+			// String response = tApi.add(oauth, WeiBoConst.ResultType.ResultType_Json, "hello world " + count, "127.0.0.1");
+			// // String response = tApi.show(oauth, WeiBoConst.ResultType.ResultType_Json, "103735038173797");
+			// System.out.println("response:" + response);
 
 			Statuses_API sApi = new Statuses_API();
 			String response = sApi.home_timeline(oauth, WeiBoConst.ResultType.ResultType_Json, "0", "0", "70");
