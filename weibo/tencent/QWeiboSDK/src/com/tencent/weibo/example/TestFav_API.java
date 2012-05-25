@@ -9,7 +9,6 @@ import com.tencent.weibo.api.Statuses_API;
 import com.tencent.weibo.api.T_API;
 import com.tencent.weibo.api.User_API;
 import com.tencent.weibo.utils.OAuthClient;
-import com.tencent.weibo.utils.WeiBoConst;
 
 public class TestFav_API {
 
@@ -19,11 +18,11 @@ public class TestFav_API {
 		try {
 			test_list_t();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private static void test_list_t() throws Exception {
 		com.tencent.weibo.beans.OAuth oauth = new com.tencent.weibo.beans.OAuth();
 		OAuthClient auth = new OAuthClient();
@@ -102,6 +101,7 @@ public class TestFav_API {
 				 * Tag_API tag=new Tag_API(); String response=tag.add(oauth, WeiBoConst.ResultType.ResultType_Json, "测试");
 				 */
 				// Search_API search=new Search_API();
+
 				User_API tUserAPI = new User_API();
 				String feildid = "24037";
 				String yearUser = "1985";

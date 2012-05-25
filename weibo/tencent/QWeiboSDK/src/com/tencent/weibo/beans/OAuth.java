@@ -2,7 +2,6 @@ package com.tencent.weibo.beans;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.UUID;
 
 /**
@@ -13,21 +12,24 @@ import java.util.UUID;
  * @Version 1.0.0
  */
 
-public class OAuth {
-	private String oauth_consumer_key = "671dc036a4924fa39027abe4b7a7091a";// AppKey(client credentials)
-	private String oauth_consumer_secret = "22b430ced88be161924acdfe40dbb68c";// 签名密钥1
-	private String oauth_signature_method = "HMAC-SHA1";// 签名方法，暂只支持HMAC-SHA1
-	private String oauth_timestamp = "";// 时间戳
-	private String oauth_nonce = "";// 单次值，随机字符串，防止重放攻击
-	private String oauth_callback = "null";// 认证成功后浏览器会被重定向到这个url中
-	private String oauth_version = "1.0";// (可选)
-	private String oauth_token = ""; // 授权码
-	private String oauth_token_secret = ""; // 签名密钥2
-	private String oauth_verifier = ""; // 验证码
-	private int status = 0;// 认证状态,0:成功,1:Request失败,2:Access失败
-	private Account account = new Account(); // 个人账户信息
-	private String msg = "";
-//	private Random random = new Random();
+public class OAuth implements java.io.Serializable {
+	private static final long serialVersionUID = -7301624444658690458L;
+
+	public String oauth_consumer_key = "671dc036a4924fa39027abe4b7a7091a";// AppKey(client credentials)
+	public String oauth_consumer_secret = "22b430ced88be161924acdfe40dbb68c";// 签名密钥1
+	public String oauth_signature_method = "HMAC-SHA1";// 签名方法，暂只支持HMAC-SHA1
+	public String oauth_timestamp = "";// 时间戳
+	public String oauth_nonce = "";// 单次值，随机字符串，防止重放攻击
+	public String oauth_callback = "null";// 认证成功后浏览器会被重定向到这个url中
+	public String oauth_version = "1.0";// (可选)
+	public String oauth_token = ""; // 授权码
+	public String oauth_token_secret = ""; // 签名密钥2
+	public String oauth_verifier = ""; // 验证码
+	public int status = 0;// 认证状态,0:成功,1:Request失败,2:Access失败
+	public Account account = new Account(); // 个人账户信息
+	public String msg = "";
+
+	// private Random random = new Random();
 
 	public OAuth() {
 		super();
@@ -204,14 +206,14 @@ public class OAuth {
 	 * @return
 	 */
 	private String generateNonce() {
-//		return String.valueOf(random.nextInt(9876599) + 123400);
+		// return String.valueOf(random.nextInt(9876599) + 123400);
 		return UUID.randomUUID().toString().replaceAll("-", "");
 	}
 
 	@Override
 	public String toString() {
 		return "OAuth [oauth_consumer_key=" + oauth_consumer_key + ", oauth_consumer_secret=" + oauth_consumer_secret + ", oauth_signature_method=" + oauth_signature_method + ", oauth_timestamp=" + oauth_timestamp + ", oauth_nonce=" + oauth_nonce + ", oauth_callback=" + oauth_callback + ", oauth_version="
-				+ oauth_version + ", oauth_token=" + oauth_token + ", oauth_token_secret=" + oauth_token_secret + ", oauth_verifier=" + oauth_verifier + ", status=" + status + ", account=" + account + ", msg=" + msg ;
+				+ oauth_version + ", oauth_token=" + oauth_token + ", oauth_token_secret=" + oauth_token_secret + ", oauth_verifier=" + oauth_verifier + ", status=" + status + ", account=" + account + ", msg=" + msg;
 	}
 
 }
