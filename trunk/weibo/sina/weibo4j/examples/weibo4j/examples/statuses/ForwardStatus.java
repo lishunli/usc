@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package weibo4j.examples.statuses;
 
@@ -9,13 +9,13 @@ import weibo4j.Weibo;
 
 /**
  * @author sina
- * 
+ *
  */
 public class ForwardStatus {
 
 	/**
 	 * 根据微博ID和用户ID跳转到单条微博页面
-	 * 
+	 *
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -32,7 +32,6 @@ public class ForwardStatus {
 				Runtime.getRuntime().exec("cmd /c start " + url);
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

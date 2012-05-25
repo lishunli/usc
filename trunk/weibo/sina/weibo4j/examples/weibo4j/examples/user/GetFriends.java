@@ -7,14 +7,14 @@ import weibo4j.User;
 
 /**
  * @author sina
- * 
+ *
  */
 public class GetFriends {
 
 	/**
 	 * Usage: java -DWeibo4j.oauth.consumerKey=[consumer key] -DWeibo4j.oauth.consumerSecret=[consumer secret] Weibo4j.examples.GetFriends [accessToken]
 	 * [accessSecret]
-	 * 
+	 *
 	 * @param args
 	 *            message
 	 */
@@ -28,7 +28,6 @@ public class GetFriends {
 				List<User> list = weibo.getFriendsStatuses();
 				System.out.println("Successfully get Friends to [" + list + "].");
 			} catch (Exception e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			System.exit(0);
