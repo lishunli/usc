@@ -5,13 +5,13 @@ All rights reserved.
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
  * Redistributions of source code must retain the above copyright
-      notice, this list of conditions and the following disclaimer.
+	notice, this list of conditions and the following disclaimer.
  * Redistributions in binary form must reproduce the above copyright
-      notice, this list of conditions and the following disclaimer in the
-      documentation and/or other materials provided with the distribution.
+	notice, this list of conditions and the following disclaimer in the
+	documentation and/or other materials provided with the distribution.
  * Neither the name of the Yusuke Yamamoto nor the
-      names of its contributors may be used to endorse or promote products
-      derived from this software without specific prior written permission.
+	names of its contributors may be used to endorse or promote products
+	derived from this software without specific prior written permission.
 
 THIS SOFTWARE IS PROVIDED BY Yusuke Yamamoto ``AS IS'' AND ANY
 EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
@@ -31,7 +31,9 @@ import weibo4j.http.HttpClient;
 /**
  * @author Yusuke Yamamoto - yusuke at mac.com
  */
-/* protected */class WeiboSupport {
+/* protected */class WeiboSupport implements java.io.Serializable{
+	private static final long serialVersionUID = 1849506327131346304L;
+
 	protected HttpClient http = new HttpClient();
 	protected String source = Configuration.getSource();
 	protected final boolean USE_SSL;
@@ -50,7 +52,7 @@ import weibo4j.http.HttpClient;
 
 	/**
 	 * Sets the User-Agent header. System property -Dsinat4j.http.userAgent overrides this attribute.
-	 * 
+	 *
 	 * @param userAgent
 	 *            UserAgent
 	 * @since Weibo4J 1.2.1
@@ -60,7 +62,7 @@ import weibo4j.http.HttpClient;
 	}
 
 	/**
-	 * 
+	 *
 	 * @return UserAgent
 	 * @since Weibo4J 1.2.1
 	 */
@@ -70,7 +72,7 @@ import weibo4j.http.HttpClient;
 
 	/**
 	 * Sets the X-Weibo-Client-Version header. System property -Dsinat4j.clientVersion overrides this attribute.
-	 * 
+	 *
 	 * @param version
 	 *            client version
 	 * @since Weibo4J 1.2.1
@@ -80,7 +82,7 @@ import weibo4j.http.HttpClient;
 	}
 
 	/**
-	 * 
+	 *
 	 * @return client version
 	 * @since Weibo4J 1.2.1
 	 */
@@ -90,7 +92,7 @@ import weibo4j.http.HttpClient;
 
 	/**
 	 * Sets the X-Weibo-Client-URL header. System property -Dsinat4j.clientURL overrides this attribute.
-	 * 
+	 *
 	 * @param clientURL
 	 *            client URL
 	 * @since Weibo4J 1.2.1
@@ -100,7 +102,7 @@ import weibo4j.http.HttpClient;
 	}
 
 	/**
-	 * 
+	 *
 	 * @return client URL
 	 * @since Weibo4J 1.2.1
 	 */
@@ -119,7 +121,7 @@ import weibo4j.http.HttpClient;
 
 	/**
 	 * Returns authenticating userid
-	 * 
+	 *
 	 * @return userid
 	 */
 	public String getUserId() {
@@ -137,7 +139,7 @@ import weibo4j.http.HttpClient;
 
 	/**
 	 * Returns authenticating password
-	 * 
+	 *
 	 * @return password
 	 */
 	public String getPassword() {
@@ -146,7 +148,7 @@ import weibo4j.http.HttpClient;
 
 	/**
 	 * Enables use of HTTP proxy
-	 * 
+	 *
 	 * @param proxyHost
 	 *            proxy host, can be overridden system property -Dsinat4j.http.proxyHost , -Dhttp.proxyHost
 	 * @param proxyPort
@@ -160,7 +162,7 @@ import weibo4j.http.HttpClient;
 
 	/**
 	 * Adds authentication on HTTP proxy
-	 * 
+	 *
 	 * @param proxyUser
 	 *            proxy user, can be overridden system property -Dsinat4j.http.proxyUser
 	 * @param proxyPass
@@ -175,7 +177,7 @@ import weibo4j.http.HttpClient;
 	/**
 	 * Sets a specified timeout value, in milliseconds, to be used when opening a communications link to the Weibo API. System property
 	 * -Dsinat4j.http.connectionTimeout overrides this attribute.
-	 * 
+	 *
 	 * @param connectionTimeout
 	 *            an int that specifies the connect timeout value in milliseconds
 	 * @since Weibo4J 1.2.1
@@ -186,7 +188,7 @@ import weibo4j.http.HttpClient;
 
 	/**
 	 * Sets the read timeout to a specified timeout, in milliseconds.
-	 * 
+	 *
 	 * @param readTimeoutMilliSecs
 	 *            an int that specifies the timeout value to be used in milliseconds
 	 * @since Weibo4J 1.2.1
@@ -198,7 +200,7 @@ import weibo4j.http.HttpClient;
 	/**
 	 * Sets X-Weibo-Client http header and the source parameter that will be passed by updating methods. System property -Dsinat4j.source overrides this
 	 * attribute. System property -Dsinat4j.source overrides this attribute.
-	 * 
+	 *
 	 * @param source
 	 *            the new source
 	 */
@@ -209,7 +211,7 @@ import weibo4j.http.HttpClient;
 
 	/**
 	 * Returns the source
-	 * 
+	 *
 	 * @return source
 	 */
 	public String getSource() {
@@ -218,7 +220,7 @@ import weibo4j.http.HttpClient;
 
 	/**
 	 * Sets the request header name/value combination see Weibo Fan Wiki for detail.
-	 * 
+	 *
 	 * @param name
 	 *            the name of the request header
 	 * @param value
@@ -231,7 +233,7 @@ import weibo4j.http.HttpClient;
 	/**
 	 * Set true to force using POST method communicating to the server.<br>
 	 * This method doesn't take effect anymore
-	 * 
+	 *
 	 * @param forceUsePost
 	 *            if true POST method will be used forcibly
 	 * @deprecated some methods don't accept POST method anymore

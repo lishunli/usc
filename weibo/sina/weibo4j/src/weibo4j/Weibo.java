@@ -56,9 +56,9 @@ import weibo4j.util.URLEncodeUtils;
  *
  */
 
-public class Weibo extends WeiboSupport implements java.io.Serializable {
-	public static String CONSUMER_KEY = "1033549550";
-	public static String CONSUMER_SECRET = "464364f385111bf6d99e83e1d79ce8e3";
+public class Weibo extends WeiboSupport {
+	public static String CONSUMER_KEY = "";
+	public static String CONSUMER_SECRET = "";
 	private String baseURL = Configuration.getScheme() + "api.t.sina.com.cn/";
 	private String searchBaseURL = Configuration.getScheme() + "api.t.sina.com.cn/";
 	private static final long serialVersionUID = -1486360080128882436L;

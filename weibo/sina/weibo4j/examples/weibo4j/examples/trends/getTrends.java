@@ -13,7 +13,6 @@ public class getTrends {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		System.setProperty("weibo4j.oauth.consumerKey", Weibo.CONSUMER_KEY);
 		System.setProperty("weibo4j.oauth.consumerSecret", Weibo.CONSUMER_SECRET);
 		Paging paging = new Paging();
@@ -27,7 +26,6 @@ public class getTrends {
 			System.out.println("=======userTrends=======");
 			System.out.println(userTrends);
 		} catch (WeiboException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
