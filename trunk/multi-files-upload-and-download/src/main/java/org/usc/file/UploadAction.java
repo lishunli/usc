@@ -32,7 +32,7 @@ public class UploadAction extends ActionSupport {
 
 	public String execute() throws Exception {
 		try {
-			String targetDirectory = ServletActionContext.getServletContext().getRealPath(File.separator + UploadConfigurationUtil.getConfig().getProperty(Constants.UPLOAD_FILE_PATH));// 获得路径
+			String targetDirectory = ServletActionContext.getServletContext().getRealPath(File.separator + UploadConfigurationUtil.getProperty(Constants.UPLOAD_FILE_PATH));// 获得路径
 			for (int i = 0; i < upload.length; i++) {
 				String fileName = uploadFileName[i];// 上传的文件名
 				String type = uploadContentType[i];// 文件类型

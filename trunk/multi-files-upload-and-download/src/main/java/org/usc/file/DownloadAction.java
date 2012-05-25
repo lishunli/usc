@@ -58,7 +58,7 @@ public class DownloadAction extends ActionSupport {
 	public InputStream getDownloadFile() {
 
 		this.setFileName();
-		return ServletActionContext.getServletContext().getResourceAsStream(File.separator + UploadConfigurationUtil.getConfig().getProperty(Constants.UPLOAD_FILE_PATH) + File.separator + fileName);
+		return ServletActionContext.getServletContext().getResourceAsStream(File.separator + UploadConfigurationUtil.getProperty(Constants.UPLOAD_FILE_PATH) + File.separator + fileName);
 	}
 
 	@Override
