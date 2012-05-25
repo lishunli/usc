@@ -2,13 +2,15 @@ package com.tencent.weibo.beans;
 
 /**
  * 个人账户实体类
- * 
+ *
  * @author <a href="http://blog.javawind.net">Xuefang Xu</a>
  * @Data 2010-01-21
  * @Version 1.0.0
  */
 
-public class Account {
+public class Account implements java.io.Serializable {
+	private static final long serialVersionUID = -3692928791944210165L;
+
 	private String name = ""; // 帐号
 	private String nick = ""; // 昵称
 	private String head = ""; // 头像
