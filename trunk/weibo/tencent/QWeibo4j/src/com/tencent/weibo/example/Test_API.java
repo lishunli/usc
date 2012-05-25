@@ -7,6 +7,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 import com.tencent.weibo.api.Statuses_API;
+import com.tencent.weibo.api.T_API;
 import com.tencent.weibo.beans.OAuth;
 import com.tencent.weibo.utils.OAuthClient;
 import com.tencent.weibo.utils.WeiBoConst;
@@ -25,7 +26,6 @@ public class Test_API {
 			// test_list_t2();
 			// }
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -77,6 +77,7 @@ public class Test_API {
 			// 获取access token
 			System.out.println("GetAccessToken......");
 			oauth.setOauth_verifier(verify);
+			System.out.println(oauth);
 			oauth = auth.accessToken(oauth);
 			System.out.println("Response from server：");
 
@@ -100,8 +101,11 @@ public class Test_API {
 				// String response = sendApi.add(oauth, WeiBoConst.ResultType.ResultType_Json, "hello world" + count, "127.0.0.1");
 				// System.out.println("response:" + response);
 
+				System.out.println(oauth);
 				Statuses_API sApi = new Statuses_API();
-				String response = sApi.broadcast_timeline(oauth, WeiBoConst.ResultType.ResultType_Json, "0", "1337048706", "100", "1879098635110", "0", "0", "1");
+				// String response = sApi.broadcast_timeline(oauth, WeiBoConst.ResultType.ResultType_Json, "2", "1337837587", "100", "74246130382428", "0", "0",
+				// "1");
+				String response =  new T_API().comment(oauth, WeiBoConst.ResultType.ResultType_Json, "Good", "127.0.0.1", "65297129576904");
 				System.out.println(response);
 
 				// String response = sApi.home_timeline(oauth, WeiBoConst.ResultType.ResultType_Json, "0", "0", "70");
@@ -115,15 +119,23 @@ public class Test_API {
 
 	private static void test_list_t2() throws Exception {
 		OAuth oauth = new OAuth("801063781", "64f5dfe15a3fa65ffe153cff7609922b", "null");
-		oauth.setOauth_token("36c1ad6002214bdd88a24168b0d51a35");
-		oauth.setOauth_verifier("314208");
+		oauth.setOauth_token("bdde0644f4c54d578cc446571490185b");
+		oauth.setOauth_token_secret("bdce26ab881e41c1e50c83c66a33ffac");
+		// oauth.setOauth_verifier("984267");
+		// oauth.setOauth_token("b321274ec2cc4033ab1c1748517ae113");
+		// oauth.setOauth_token_secret("4ec1c75edf09828c4326a6f79f2e45f9");
+		// oauth.setOauth_verifier("963401");
 
+		// oauth_token=&oauth_verifier=
 		OAuthClient auth = new OAuthClient();
+		oauth = auth.requestToken(oauth);
 
 		// 获取access token
 		System.out.println("GetAccessToken......");
-		oauth = auth.accessToken(oauth);
+		// oauth = auth.accessToken(oauth);
 		System.out.println("Response from server：");
+
+		System.out.println(oauth);
 
 		if (oauth.getStatus() == 2) {
 			System.out.println("Get Access Token failed!");
