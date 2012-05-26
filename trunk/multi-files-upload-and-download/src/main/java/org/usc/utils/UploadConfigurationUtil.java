@@ -38,11 +38,11 @@ public class UploadConfigurationUtil implements ConfigurationListener {
 		config.getProperties("dummy");
 
 		if (cache.containsKey(key)) {
-			System.out.println("hide in cache");
+			// System.out.println("hide in cache");
 			return cache.get(key).toString();
 		}
 
-		System.out.println("get Property");
+		// System.out.println("get Property");
 		String value = config.getString(key);
 		cache.put(key, value);
 		return value;
@@ -50,7 +50,7 @@ public class UploadConfigurationUtil implements ConfigurationListener {
 
 	@Override
 	public void configurationChanged(ConfigurationEvent configurationevent) {
-		System.out.println("clear cache...");
+		// System.out.println("clear cache...");
 		cache.clear();
 	}
 
