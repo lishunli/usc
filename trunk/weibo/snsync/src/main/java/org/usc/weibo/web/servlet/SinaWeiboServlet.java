@@ -136,9 +136,7 @@ public class SinaWeiboServlet extends BaseServlet {
 
 			log.info("callBack successly " + appId + " access token, followerId=" + model.getSeqId());
 
-			Follower leftFollower = followerService.findByUserIdAndAppId(userId, appId);
-
-			Cookie cookie = new Cookie("leftFollowerId", URLEncoder.encode(leftFollower.getSeqId().toString(), "UTF-8"));
+			Cookie cookie = new Cookie("leftFollowerId", URLEncoder.encode(model.getSeqId().toString(), "UTF-8"));
 			cookie.setDomain("127.0.0.1");
 			cookie.setMaxAge(-1);
 			cookie.setPath("/");
