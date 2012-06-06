@@ -1,6 +1,9 @@
 package org.usc.weibo.web.servlet;
 
+import java.net.URLEncoder;
+
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -37,8 +40,6 @@ public class TencentWeiboServlet extends BaseServlet {
 	protected static Logger log = LogFactory.getLogger(Constants.LOG_DIR, Constants.ACT_DIR, "txweibo");
 	protected static FollowerService followerService = ServiceFactory.getService(FollowerService.class);
 	protected static ApplicationService appService = ServiceFactory.getService(ApplicationService.class);
-
-	// private final String CALL_BACK_URL = Constants.CALL_BACK_URL;
 
 	private OAuth oauth;
 
@@ -119,6 +120,7 @@ public class TencentWeiboServlet extends BaseServlet {
 				Follower model = followerService.findByUserIdAndProvider(userId, AppUtil.getProvider(appId));
 
 				if (model != null) {
+					model.setAppId(appId);
 					model.setToken(follower.getToken());
 					model.setVerifier(follower.getVerifier());
 					followerService.updateFollower(model);
@@ -131,10 +133,15 @@ public class TencentWeiboServlet extends BaseServlet {
 
 				log.info("callBack successly " + appId + " access token, followerId=" + model.getSeqId());
 
-				// if (!StringUtils.isBlank(CALL_BACK_URL)) {
-				// response.sendRedirect(CALL_BACK_URL);
-				// }
-				String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/";
+				Follower rightFollower = followerService.findByUserIdAndAppId(userId, appId);
+				Cookie cookie = new Cookie("rightFollowerId", URLEncoder.encode(rightFollower.getSeqId().toString(), "UTF-8"));
+				cookie.setDomain("127.0.0.1");
+				cookie.setMaxAge(-1);
+				cookie.setPath("/");
+				response.addCookie(cookie);
+
+				String path = request.getContextPath();
+				String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 				response.sendRedirect(basePath);
 			}
 

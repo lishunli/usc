@@ -1,6 +1,9 @@
 package org.usc.weibo.web.servlet;
 
+import java.net.URLEncoder;
+
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -38,8 +41,6 @@ public class SinaWeiboServlet extends BaseServlet {
 	protected static Logger log = LogFactory.getLogger(Constants.LOG_DIR, Constants.ACT_DIR, "sinaweibo");
 	protected static FollowerService followerService = ServiceFactory.getService(FollowerService.class);
 	protected static ApplicationService appService = ServiceFactory.getService(ApplicationService.class);
-
-	// private final String CALL_BACK_URL = Constants.CALL_BACK_URL;
 
 	private String appId;
 	private Weibo weibo;
@@ -122,6 +123,7 @@ public class SinaWeiboServlet extends BaseServlet {
 
 			Follower model = followerService.findByUserIdAndProvider(userId, AppUtil.getProvider(appId));
 			if (model != null) {
+				model.setAppId(appId);
 				model.setToken(follower.getToken());
 				model.setTokenSecret(follower.getTokenSecret());
 				followerService.updateFollower(model);
@@ -134,13 +136,16 @@ public class SinaWeiboServlet extends BaseServlet {
 
 			log.info("callBack successly " + appId + " access token, followerId=" + model.getSeqId());
 
-			// if (!StringUtils.isBlank(CALL_BACK_URL)) {
-			// // request.setAttribute("", "")
-			// // request.getRequestDispatcher(CALL_BACK_URL).forward(request, response);
-			//
-			// response.sendRedirect(CALL_BACK_URL);
-			// }
-			String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/";
+			Follower leftFollower = followerService.findByUserIdAndAppId(userId, appId);
+
+			Cookie cookie = new Cookie("leftFollowerId", URLEncoder.encode(leftFollower.getSeqId().toString(), "UTF-8"));
+			cookie.setDomain("127.0.0.1");
+			cookie.setMaxAge(-1);
+			cookie.setPath("/");
+			response.addCookie(cookie);
+
+			String path = request.getContextPath();
+			String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 			response.sendRedirect(basePath);
 
 		} catch (Exception e) {
