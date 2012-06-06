@@ -1,11 +1,11 @@
 package org.usc.weibo.dao;
 
-import java.util.List;
+import org.usc.weibo.util.Constants;
+import org.usc.weibo.vo.Follower;
+import org.usc.weibo.vo.Provider;
 
 import com.xunlei.game.activity.annotation.DataSourceType;
 import com.xunlei.game.activity.dao.BaseDao;
-import org.usc.weibo.util.Constants;
-import org.usc.weibo.vo.Follower;
 
 @DataSourceType(Constants.JDBC_JNDI_YOUXI_WEIBO)
 public class FollowerDaoImpl extends BaseDao implements FollowerDao {
@@ -26,13 +26,12 @@ public class FollowerDaoImpl extends BaseDao implements FollowerDao {
 
 	@Override
 	public Follower findByUserIdAndAppId(String userId, String appId) {
-		List<Follower> followers = super.queryListSQL(Follower.class, "select * from follower where userid = ? and appid = ?", new Object[] { userId, appId });
+		return super.querySinglObj(Follower.class, "select * from follower where userid = ? and appid = ?", new Object[] { userId, appId });
+	}
 
-		if (followers != null) {
-			return followers.get(0);
-		}
-
-		return null;
+	@Override
+	public Follower findByUserIdAndProvider(String userId, Provider provider) {
+		return super.querySinglObj(Follower.class, "select f.* from follower f inner join application a on a.appid = f.appid and a.provider = ? where userid = ?", new Object[] { provider.name(), userId });
 	}
 
 }

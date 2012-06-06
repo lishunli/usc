@@ -7,6 +7,7 @@ import com.xunlei.game.activity.dao.DaoFactory;
 import org.usc.weibo.cache.CacheEntry;
 import org.usc.weibo.dao.FollowerDao;
 import org.usc.weibo.vo.Follower;
+import org.usc.weibo.vo.Provider;
 
 public class FollowerServiceImpl implements FollowerService {
 	private static FollowerDao dao = DaoFactory.getDao(FollowerDao.class);
@@ -40,5 +41,10 @@ public class FollowerServiceImpl implements FollowerService {
 	@Override
 	public Follower findByUserIdAndAppId(String userId, String appId) {
 		return dao.findByUserIdAndAppId(userId, appId);
+	}
+
+	@Override
+	public Follower findByUserIdAndProvider(String userId, Provider provider) {
+		return dao.findByUserIdAndProvider(userId, provider);
 	}
 }
