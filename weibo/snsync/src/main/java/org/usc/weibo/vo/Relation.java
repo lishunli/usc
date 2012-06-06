@@ -14,5 +14,15 @@ public class Relation implements java.io.Serializable {
 	private Long seqId;
 	private Long leftFollowerId;
 	private Long rightFollowerId;
-	private Integer isTwoWay = 0;
+	private Integer isTwoWay = 1;
+
+	public Relation(Long leftFollowerId, Long rightFollowerId) {
+		this.leftFollowerId = leftFollowerId;
+		this.rightFollowerId = rightFollowerId;
+	}
+	public Relation(Long leftFollowerId, Long rightFollowerId, Integer isTwoWay) {
+		this(leftFollowerId, rightFollowerId);
+		this.isTwoWay = isTwoWay;
+	}
+
 }

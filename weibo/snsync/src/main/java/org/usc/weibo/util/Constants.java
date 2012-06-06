@@ -1,7 +1,6 @@
 package org.usc.weibo.util;
 
-import com.xunlei.game.activity.config.Config;
-import com.xunlei.game.activity.utils.RegUtil;
+import org.usc.weibo.config.Config;
 
 public class Constants {
 	public static final String JDBC_JNDI_YOUXI_WEIBO = "jdbc/xlgame_youxi_weibo";
@@ -10,8 +9,9 @@ public class Constants {
 	public static final String ACT_DIR = "youxiweibo";
 	public static final String SYNC_DATE_FORMATE = "yyyyMMdd";
 
-	public static final String WEIBO_URL_PREFIX = Config.getProperty("weibo_url_prefix");
-	public static final Long CACHE_PERIOD = RegUtil.getLong(Config.getProperty("cache_period")) * 60 * 60 * 1000L; // h
+//	public static final String WEIBO_URL_PREFIX = Config.getProperty("weibo_url_prefix");
+	public static final String CALL_BACK_URL = Config.getProperty("call_back_url");
+	public static final Long CACHE_PERIOD = /* RegUtil.getLong(Config.getProperty("cache_period")) */2 * 60 * 60 * 1000L; // h
 	public static final Integer WEIBO_CONTENT_MAX_LENGTH = 140;
 
 	public static final String SERVERLIST = Config.getProperty("serverlist");

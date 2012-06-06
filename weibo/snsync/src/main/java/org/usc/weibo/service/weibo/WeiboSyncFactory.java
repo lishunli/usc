@@ -22,7 +22,7 @@ public class WeiboSyncFactory {
 
 	protected static ApplicationService appService = ServiceFactory.getService(ApplicationService.class);
 
-	public static void weiboSync(Follower leftFollower, Follower rightFollower, Integer isTwoWay) throws Exception {
+	public static void weiboSync(Follower leftFollower, Follower rightFollower, int isTwoWay) throws Exception {
 		WeiboService leftWeiboService = buildWeiboService(leftFollower);
 		WeiboService rightWeiboService = buildWeiboService(rightFollower);
 
