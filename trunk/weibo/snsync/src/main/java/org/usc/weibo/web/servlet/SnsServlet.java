@@ -30,9 +30,18 @@ public class SnsServlet extends BaseServlet {
 		try {
 			Long leftFollowerId = RegUtil.getLong(request.getParameter("leftFollowerId"));
 			Long rightFollowerId = RegUtil.getLong(request.getParameter("rightFollowerId"));
-			Relation relation = new Relation(leftFollowerId, rightFollowerId); // default is two-way
 
-			relationService.addRelation(relation);
+			Relation originRelation = relationService.findByTwoWayFollowers(leftFollowerId, rightFollowerId);
+
+			if (originRelation == null) {
+				Relation relation = new Relation(leftFollowerId, rightFollowerId); // default is two-way
+				relationService.addRelation(relation);
+			} else {
+				// update , now is no-op, maybe will change th two way property.
+				// originRelation.setIsTwoWay(0);
+				// relationService.updateRelation(originRelation);
+			}
+
 		} catch (Exception e) {
 			log.error("doAction-error: ", e);
 			super.outputRtn(request, response, new JsonRtn<Object>(-1, "网络超时，请稍后重试！").toJsonString());

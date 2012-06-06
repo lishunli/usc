@@ -29,4 +29,9 @@ public class RelationDaoImpl extends BaseDao implements RelationDao {
 		return queryListSQL;
 	}
 
+	@Override
+	public Relation findByTwoWayFollowers(Long leftFollowerId, Long rightFollowerId) {
+		return super.querySinglObj(Relation.class, "select * from relation where leftfollowerid = ? and rightfollowerid = ?", new Object[] { leftFollowerId, rightFollowerId });
+	}
+
 }
