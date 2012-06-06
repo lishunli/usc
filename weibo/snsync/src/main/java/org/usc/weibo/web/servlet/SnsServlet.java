@@ -16,7 +16,7 @@ import com.xunlei.game.activity.vo.JsonRtn;
 import com.xunlei.game.activity.web.servlet.BaseServlet;
 
 /**
- * 提供统一的接口
+ * sync
  *
  * @author Shunli
  */
@@ -28,8 +28,14 @@ public class SnsServlet extends BaseServlet {
 
 	public void doAction(HttpServletRequest request, HttpServletResponse response) {
 		try {
-			Long leftFollowerId = RegUtil.getLong(request.getParameter("leftFollowerId"));
-			Long rightFollowerId = RegUtil.getLong(request.getParameter("rightFollowerId"));
+
+			Long leftFollowerId = RegUtil.getLong(super.getCookie(request, response, "leftFollowerId"));
+			Long rightFollowerId = RegUtil.getLong(super.getCookie(request, response, "rightFollowerId"));
+
+			if (leftFollowerId == null || rightFollowerId == null) {
+				log.info("doAction-no-cookie,please auth both left and right!" + leftFollowerId + rightFollowerId);
+				return;
+			}
 
 			Relation originRelation = relationService.findByTwoWayFollowers(leftFollowerId, rightFollowerId);
 
@@ -42,6 +48,9 @@ public class SnsServlet extends BaseServlet {
 				// relationService.updateRelation(originRelation);
 			}
 
+			String path = request.getContextPath();
+			String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+			response.sendRedirect(basePath);
 		} catch (Exception e) {
 			log.error("doAction-error: ", e);
 			super.outputRtn(request, response, new JsonRtn<Object>(-1, "网络超时，请稍后重试！").toJsonString());
