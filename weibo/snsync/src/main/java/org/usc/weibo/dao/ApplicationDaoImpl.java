@@ -1,5 +1,8 @@
 package org.usc.weibo.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.usc.weibo.util.AppUtil;
 import org.usc.weibo.util.Constants;
 import org.usc.weibo.vo.Application;
@@ -18,12 +21,12 @@ public class ApplicationDaoImpl extends BaseDao implements ApplicationDao {
 	}
 
 	@Override
-	public Application findAppByProvider(Provider provider) {
-		return super.querySinglObj(Application.class, "select * from application where provider = ? order by appid", new Object[] { provider.name() });
-	}
-	@Override
-	public Application randGetOneApp(Provider provider) {
-		return super.querySinglObj(Application.class, "select * from application where provider = ? order by rand() limit 1", new Object[] { provider.name() });
+	public List<Application> findAppsByProvider(Provider provider) {
+		List<Application> results = super.queryListSQL(Application.class, "select * from application where provider = ? order by appid", new Object[] { provider.name() });
+		if (results == null) {
+			results = new ArrayList<Application>();
+		}
+		return results;
 	}
 
 }

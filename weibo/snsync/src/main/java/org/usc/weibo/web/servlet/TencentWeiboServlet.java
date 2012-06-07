@@ -123,6 +123,8 @@ public class TencentWeiboServlet extends BaseServlet {
 					model.setAppId(appId);
 					model.setToken(follower.getToken());
 					model.setVerifier(follower.getVerifier());
+					model.setLastId(follower.getLastId());
+					model.setLastTimeStamp(follower.getLastTimeStamp());
 					followerService.updateFollower(model);
 				} else {
 					followerService.addFollower(follower);
@@ -132,7 +134,7 @@ public class TencentWeiboServlet extends BaseServlet {
 				TencentOAuthCache.putOAuth(model.getSeqId(), oauth);
 
 				Cookie cookie = new Cookie("rightFollowerId", URLEncoder.encode(model.getSeqId().toString(), "UTF-8"));
-				cookie.setDomain("127.0.0.1");
+				cookie.setDomain(Constants.DOMAIN);
 				cookie.setMaxAge(-1);
 				cookie.setPath("/");
 				response.addCookie(cookie);
