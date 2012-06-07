@@ -14,4 +14,7 @@ public class Constants {
 
 	public static final String SERVERLIST = Config.getProperty("serverlist");
 	public static final String WEIBO_CACHE_PREFIX = "WEIBO_";
+
+	public static final String DOMAIN = Config.getProperty("domain");
+
 }
