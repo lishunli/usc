@@ -14,6 +14,6 @@ public class ConfigTest {
 	@Test
 	public void testGetProperty() {
 		assertEquals("10.11.9.32:11211", Config.getProperty("serverlist"));
-		assertEquals("/usr/local/gameact/xlgame_youxi/logs/", Constants.LOG_DIR);
+		assertEquals("/usr/local/lishunli/logs/", Constants.LOG_DIR);
 	}
 }

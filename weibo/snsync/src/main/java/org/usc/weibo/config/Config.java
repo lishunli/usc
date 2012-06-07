@@ -8,7 +8,7 @@ public class Config {
 
 	static {
 		try {
-			InputStream in = Config.class.getResourceAsStream("/youxiweibo-config.properties");
+			InputStream in = Config.class.getResourceAsStream("/snsync-config.properties");
 			if (in != null) {
 				prop.load(in);
 				in.close();
