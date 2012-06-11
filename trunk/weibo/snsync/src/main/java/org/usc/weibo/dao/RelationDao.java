@@ -9,4 +9,5 @@ public interface RelationDao {
 	void updateRelation(Relation relation);
 	List<Relation> findAll();
 	Relation findByTwoWayFollowers(Long leftFollowerId, Long rightFollowerId);
+	void cancelRelation(Long leftFollowerId, Long rightFollowerId);
 }
