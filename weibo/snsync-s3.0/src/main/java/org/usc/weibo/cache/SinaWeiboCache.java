@@ -26,7 +26,7 @@ public class SinaWeiboCache {
 	public static Weibo getWeibo(Long followerId, Boolean createIfNotExist) {
 		String key = Constants.WEIBO_CACHE_PREFIX + followerId;
 
-		Weibo weibo = null;// instance.getObj(key, Weibo.class);
+		Weibo weibo = instance.getObj(key, Weibo.class);
 
 		if (weibo == null && createIfNotExist) {
 			Follower follower = followerService.findById(followerId);
