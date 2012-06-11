@@ -1,9 +1,6 @@
 package org.usc.weibo.web.servlet;
 
-import java.net.URLEncoder;
-
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,8 +8,6 @@ import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.usc.weibo.cache.TencentOAuthCache;
-import org.usc.weibo.service.ApplicationService;
-import org.usc.weibo.service.FollowerService;
 import org.usc.weibo.util.AppUtil;
 import org.usc.weibo.util.Constants;
 import org.usc.weibo.vo.Application;
@@ -24,22 +19,18 @@ import com.tencent.weibo.beans.OAuth;
 import com.tencent.weibo.utils.OAuthClient;
 import com.tencent.weibo.utils.WeiBoConst.ResultType;
 import com.xunlei.game.activity.log.LogFactory;
-import com.xunlei.game.activity.service.ServiceFactory;
 import com.xunlei.game.activity.vo.JsonRtn;
-import com.xunlei.game.activity.web.servlet.BaseServlet;
 
 /**
  * 提供统一的接口
  *
  * @author Shunli
  */
-@SuppressWarnings({ "rawtypes", "serial" })
 @WebServlet(urlPatterns = "/txweibo")
-public class TencentWeiboServlet extends BaseServlet {
+public class TencentWeiboServlet extends SnsBaseServlet {
+	private static final long serialVersionUID = 3469012171633045534L;
 
 	protected static Logger log = LogFactory.getLogger(Constants.LOG_DIR, Constants.ACT_DIR, "txweibo");
-	protected static FollowerService followerService = ServiceFactory.getService(FollowerService.class);
-	protected static ApplicationService appService = ServiceFactory.getService(ApplicationService.class);
 
 	private OAuth oauth;
 
@@ -76,7 +67,7 @@ public class TencentWeiboServlet extends BaseServlet {
 
 		} catch (Exception e) {
 			log.error("auth-error: ", e);
-			super.outputRtn(request, response, new JsonRtn(-1, "网络超时，请稍后重试！").toJsonString());
+			super.outputRtn(request, response, new JsonRtn<Object>(-1, "网络超时，请稍后重试！").toJsonString());
 		}
 	}
 
@@ -132,21 +123,17 @@ public class TencentWeiboServlet extends BaseServlet {
 				}
 
 				TencentOAuthCache.putOAuth(model.getSeqId(), oauth);
-
-				Cookie cookie = new Cookie("rightFollowerId", URLEncoder.encode(model.getSeqId().toString(), "UTF-8"));
-				cookie.setDomain(Constants.DOMAIN);
-				cookie.setMaxAge(-1);
-				cookie.setPath("/");
-				response.addCookie(cookie);
+				super.setCookie(request, response, RIGHT_FOLLOWER_COOKIE_NAME, model.getSeqId().toString(), -1);
+				log.info("callBack successly " + appId + " access token, followerId=" + model.getSeqId());
 
 				String path = request.getContextPath();
 				String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
-				response.sendRedirect(basePath);
+				response.sendRedirect(basePath + "sns?action=sync");
 			}
 
 		} catch (Exception e) {
 			log.error("callBack-error: ", e);
-			super.outputRtn(request, response, new JsonRtn(-1, "网络超时，请稍后重试！").toJsonString());
+			super.outputRtn(request, response, new JsonRtn<Object>(-1, "网络超时，请稍后重试！").toJsonString());
 		}
 	}
 }

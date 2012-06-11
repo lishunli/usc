@@ -28,4 +28,9 @@ public class RelationServiceImpl implements RelationService {
 	public Relation findByTwoWayFollowers(Long leftFollowerId, Long rightFollowerId) {
 		return dao.findByTwoWayFollowers(leftFollowerId, rightFollowerId);
 	}
+
+	@Override
+	public void cancelRelation(Long leftFollowerId, Long rightFollowerId) {
+		dao.cancelRelation(leftFollowerId, rightFollowerId);
+	}
 }
