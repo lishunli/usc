@@ -1,6 +1,5 @@
 package org.usc.weibo.web.servlet;
 
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,11 +22,10 @@ import com.xunlei.game.activity.log.LogFactory;
 import com.xunlei.game.activity.vo.JsonRtn;
 
 /**
- * 提供统一的接口
+ * SinaWeiboServlet
  *
  * @author Shunli
  */
-@WebServlet(urlPatterns = "/sinaweibo")
 public class SinaWeiboServlet extends SnsBaseServlet {
 	private static final long serialVersionUID = -2910525161848529312L;
 

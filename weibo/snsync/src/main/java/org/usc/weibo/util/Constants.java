@@ -17,4 +17,6 @@ public class Constants {
 
 	public static final String DOMAIN = Config.getProperty("domain");
 
+	public static final String SNS_SYNC_JOB_CRON = Config.getProperty("sns_sync_job_cron");
+
 }

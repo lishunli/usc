@@ -1,6 +1,5 @@
 package org.usc.weibo.web.servlet;
 
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,11 +13,10 @@ import com.xunlei.game.activity.utils.ServerUtil;
 import com.xunlei.game.activity.vo.JsonRtn;
 
 /**
- * sync
+ * SnsServlet
  *
  * @author Shunli
  */
-@WebServlet(urlPatterns = "/sns")
 public class SnsServlet extends SnsBaseServlet {
 	private static final long serialVersionUID = -1477065409747225124L;
 	protected static Logger log = LogFactory.getLogger(Constants.LOG_DIR, Constants.ACT_DIR, "sns");
