@@ -38,18 +38,18 @@
 			<scope>test</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>3.0.1</version>
-			<!-- <scope>provided</scope> -->
-		</dependency>
 		<!-- <dependency> -->
 		<!-- <groupId>javax.servlet</groupId> -->
-		<!-- <artifactId>servlet-api</artifactId> -->
-		<!-- <version>2.5</version> -->
+		<!-- <artifactId>javax.servlet-api</artifactId> -->
+		<!-- <version>3.0.1</version> -->
 		<!-- <scope>provided</scope> -->
 		<!-- </dependency> -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
 
 		<dependency>
 			<groupId>commons-codec</groupId>
@@ -107,11 +107,24 @@
 			<version>1.6.1</version>
 		</dependency>
 
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.20</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>c3p0</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.1.2</version>
+			<scope>runtime</scope>
+		</dependency>
+
 		<!-- please see readme - build local jar into m2 repo -->
 		<dependency>
 			<groupId>org.usc.weibo</groupId>
 			<artifactId>activity</artifactId>
-			<version>1.0</version>
+			<version>0.9</version>
 		</dependency>
 		<dependency>
 			<groupId>org.usc.weibo</groupId>

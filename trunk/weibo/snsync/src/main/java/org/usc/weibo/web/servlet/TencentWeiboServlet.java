@@ -1,6 +1,5 @@
 package org.usc.weibo.web.servlet;
 
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -22,11 +21,10 @@ import com.xunlei.game.activity.log.LogFactory;
 import com.xunlei.game.activity.vo.JsonRtn;
 
 /**
- * 提供统一的接口
+ * TencentWeiboServlet
  *
  * @author Shunli
  */
-@WebServlet(urlPatterns = "/txweibo")
 public class TencentWeiboServlet extends SnsBaseServlet {
 	private static final long serialVersionUID = 3469012171633045534L;
 
