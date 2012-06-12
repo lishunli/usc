@@ -11,6 +11,6 @@
 	factory="org.apache.naming.factory.BeanFactory"
 	type="com.mchange.v2.c3p0.ComboPooledDataSource"
 	name="jdbc/xlgame_youxi_weibo"
-	user="root" password="lishunli"
-	jdbcUrl="jdbc:mysql://127.0.0.1:3306/snsync?characterEncoding=utf8&amp;autoReconnect=true" />
+	user="5xlxj1nnx1" password="wxy0y4i3hxzli5150402h1lw4jkh3hzwmh5xi0z2"
+	jdbcUrl="jdbc:mysql://w.rdc.sae.sina.com.cn:3307/app_snsync?characterEncoding=utf8&amp;autoReconnect=true" />
 </Context>

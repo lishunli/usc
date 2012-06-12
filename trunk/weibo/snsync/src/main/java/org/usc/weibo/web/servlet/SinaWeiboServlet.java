@@ -3,10 +3,8 @@ package org.usc.weibo.web.servlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
 import org.usc.weibo.cache.SinaWeiboCache;
 import org.usc.weibo.util.AppUtil;
-import org.usc.weibo.util.Constants;
 import org.usc.weibo.vo.Application;
 import org.usc.weibo.vo.Follower;
 import org.usc.weibo.vo.Provider;
@@ -18,7 +16,6 @@ import weibo4j.WeiboException;
 import weibo4j.http.AccessToken;
 import weibo4j.http.RequestToken;
 
-import com.xunlei.game.activity.log.LogFactory;
 import com.xunlei.game.activity.vo.JsonRtn;
 
 /**
@@ -29,7 +26,7 @@ import com.xunlei.game.activity.vo.JsonRtn;
 public class SinaWeiboServlet extends SnsBaseServlet {
 	private static final long serialVersionUID = -2910525161848529312L;
 
-	protected static Logger log = LogFactory.getLogger(Constants.LOG_DIR, Constants.ACT_DIR, "sinaweibo");
+	// protected static Logger log = LogFactory.getLogger(Constants.LOG_DIR, Constants.ACT_DIR, "sinaweibo");
 
 	private String appId;
 	private Weibo weibo;
@@ -40,7 +37,7 @@ public class SinaWeiboServlet extends SnsBaseServlet {
 			Application app = appService.randGetOneApp(Provider.SINA);
 
 			if (app == null) {
-				log.info("no SINA weibo application, please check");
+				// log.info("no SINA weibo application, please check");
 				return;
 			}
 
@@ -65,7 +62,7 @@ public class SinaWeiboServlet extends SnsBaseServlet {
 			response.sendRedirect(requestToken.getAuthorizationURL(request.getRequestURL() + "?action=callBack"));
 
 		} catch (Exception e) {
-			log.error("auth-error: ", e);
+			// log.error("auth-error: ", e);
 			super.outputRtn(request, response, new JsonRtn<Object>(-1, "网络超时，请稍后重试！").toJsonString());
 		}
 	}
@@ -125,14 +122,14 @@ public class SinaWeiboServlet extends SnsBaseServlet {
 
 			SinaWeiboCache.putWeibo(model.getSeqId(), weibo);
 			super.setCookie(request, response, LEFT_FOLLOWER_COOKIE_NAME, model.getSeqId().toString(), -1);
-			log.info("callBack successly " + appId + " access token, followerId=" + model.getSeqId());
+			// log.info("callBack successly " + appId + " access token, followerId=" + model.getSeqId());
 
 			String path = request.getContextPath();
 			String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 			response.sendRedirect(basePath + "sns?action=sync");
 
 		} catch (Exception e) {
-			log.error("callBack-error: ", e);
+			// log.error("callBack-error: ", e);
 			super.outputRtn(request, response, new JsonRtn<Object>(-1, "网络超时，请稍后重试！").toJsonString());
 		}
 	}

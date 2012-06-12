@@ -40,7 +40,7 @@ public class TencentWeiboServiceImpl extends AbstractWeiboService implements Wei
 		OAuth oauth = TencentOAuthCache.getOAuth(txFollowerId, true);
 
 		if (oauth == null) {
-			log.info("no tx oauth,please check it " + txFollowerId);
+			// log.info("no tx oauth,please check it " + txFollowerId);
 			throw new Exception("no tencent cache");
 		}
 
@@ -53,7 +53,7 @@ public class TencentWeiboServiceImpl extends AbstractWeiboService implements Wei
 				"100", lastId != null ? lastId.toString() : "0",
 				"0", "0", "1");
 
-		log.info("TencentWeiboServiceImpl.read() " + response);
+		// log.info("TencentWeiboServiceImpl.read() " + response);
 
 		Object jsonObject = new JSONObject(response).getString("data");
 
@@ -82,7 +82,7 @@ public class TencentWeiboServiceImpl extends AbstractWeiboService implements Wei
 					if (!syncRecordService.isSynchronized(txFollowerId, weiboId)) {
 						weiboContents.add(new WeiboContent(weiboId, json.getString("origtext"), image, json.getLong("timestamp")));
 					} else {
-						log.info("skip weibo " + json);
+						// log.info("skip weibo " + json);
 					}
 				}
 
@@ -98,7 +98,7 @@ public class TencentWeiboServiceImpl extends AbstractWeiboService implements Wei
 				}
 			}
 
-			log.info("TencentWeiboServiceImpl.read()" + weiboContents);
+			// log.info("TencentWeiboServiceImpl.read()" + weiboContents);
 		}
 
 		return new Pair<Pair<Long, Long>, List<WeiboContent>>(new Pair<Long, Long>(lastId, lastTimeStamp), weiboContents);
@@ -110,7 +110,7 @@ public class TencentWeiboServiceImpl extends AbstractWeiboService implements Wei
 		OAuth oauth = TencentOAuthCache.getOAuth(txFollowerId, true);
 
 		if (oauth == null) {
-			log.info("no tx oauth,please check it " + txFollowerId);
+			// log.info("no tx oauth,please check it " + txFollowerId);
 			throw new Exception("no tencent cache");
 		}
 
@@ -148,7 +148,7 @@ public class TencentWeiboServiceImpl extends AbstractWeiboService implements Wei
 			result = sendApi.add_pic(oauth, WeiBoConst.ResultType.ResultType_Json, text, defaultIp, weiboContent.getOriginalPic());
 		}
 
-		log.info("TencentWeiboServiceImpl.addWeibo()" + weiboContent + "-" + result);
+		// log.info("TencentWeiboServiceImpl.addWeibo()" + weiboContent + "-" + result);
 
 		int errorCode = analyzeErrorCode(result);
 		if (errorCode == 2) {
@@ -159,7 +159,7 @@ public class TencentWeiboServiceImpl extends AbstractWeiboService implements Wei
 				weiboContent.setText(text.replaceFirst("。", "."));
 			} else {
 				String errorMsg = "send tx weibo failed since error content len error, please check the text!" + weiboContent + "-" + result;
-				log.info(errorMsg);
+				// log.info(errorMsg);
 				throw new Exception(errorMsg);
 			}
 

@@ -5,12 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-
-import weibo4j.Paging;
-import weibo4j.Status;
-import weibo4j.Weibo;
-
-import com.xunlei.game.activity.utils.DateUtil;
 import org.usc.weibo.cache.SinaWeiboCache;
 import org.usc.weibo.util.Constants;
 import org.usc.weibo.util.WeiboUtil;
@@ -18,6 +12,12 @@ import org.usc.weibo.vo.Follower;
 import org.usc.weibo.vo.Pair;
 import org.usc.weibo.vo.SyncRecord;
 import org.usc.weibo.vo.WeiboContent;
+
+import weibo4j.Paging;
+import weibo4j.Status;
+import weibo4j.Weibo;
+
+import com.xunlei.game.activity.utils.DateUtil;
 
 /**
  *
@@ -37,7 +37,7 @@ public class SinaWeiboServiceImpl extends AbstractWeiboService implements WeiboS
 		Weibo weibo = SinaWeiboCache.getWeibo(sinaFollowerId, true);
 
 		if (weibo == null) {
-			log.info("no sina weibo,please check it " + sinaFollowerId);
+			// log.info("no sina weibo,please check it " + sinaFollowerId);
 			throw new Exception("no sina cache");
 		}
 
@@ -74,7 +74,7 @@ public class SinaWeiboServiceImpl extends AbstractWeiboService implements WeiboS
 						weiboContents.add(new WeiboContent(status.getId(), text, "", status.getCreatedAt().getTime(), retweetedContent));
 					}
 				} else {
-					log.info("skip weibo " + status);
+					// log.info("skip weibo " + status);
 				}
 			}
 
@@ -89,7 +89,7 @@ public class SinaWeiboServiceImpl extends AbstractWeiboService implements WeiboS
 			}
 		}
 
-		log.info("SinaWeiboServiceImpl.read()" + weiboContents);
+		// log.info("SinaWeiboServiceImpl.read()" + weiboContents);
 
 		return new Pair<Pair<Long, Long>, List<WeiboContent>>(new Pair<Long, Long>(lastId, lastTimeStamp), weiboContents);
 	}
@@ -103,7 +103,7 @@ public class SinaWeiboServiceImpl extends AbstractWeiboService implements WeiboS
 		Weibo weibo = SinaWeiboCache.getWeibo(sinaFollowerId, true);
 
 		if (weibo == null) {
-			log.info("no sina weibo,please check it " + sinaFollowerId);
+			// log.info("no sina weibo,please check it " + sinaFollowerId);
 			throw new Exception("no sina cache");
 		}
 
@@ -123,7 +123,7 @@ public class SinaWeiboServiceImpl extends AbstractWeiboService implements WeiboS
 					Thread.sleep(5000);
 				}
 
-				log.info("SinaWeiboServiceImpl.write()" + weiboContent + "-" + (result != null ? result.getId() : ""));
+				// log.info("SinaWeiboServiceImpl.write()" + weiboContent + "-" + (result != null ? result.getId() : ""));
 			}
 		}
 
