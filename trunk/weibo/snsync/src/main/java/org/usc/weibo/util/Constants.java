@@ -3,10 +3,10 @@ package org.usc.weibo.util;
 import org.usc.weibo.config.Config;
 
 public class Constants {
-    public static final String JDBC_JNDI_SNSYNC = "jdbc/snsync";
+    // public static final String JDBC_JNDI_SNSYNC = "jdbc/snsync";
 
-    public static final String LOG_DIR = Config.getProperty("log_dir");
-    public static final String ACT_DIR = "snsync";
+    // public static final String LOG_DIR = Config.getProperty("log_dir");
+    // public static final String ACT_DIR = "snsync";
     public static final String SYNC_DATE_FORMATE = "yyyyMMdd";
 
     public static final Long CACHE_PERIOD = 2 * 60 * 60 * 1000L; // h
