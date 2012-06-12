@@ -27,7 +27,8 @@ public class BaseDao {
     static {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://w.rdc.sae.sina.com.cn:3307/app_snsync?characterEncoding=utf8&amp;autoReconnect=true");
+        // dataSource.setUrl("jdbc:mysql://w.rdc.sae.sina.com.cn:3307/app_snsync?characterEncoding=utf8&amp;autoReconnect=true");
+        dataSource.setUrl("jdbc:mysql://r.rdc.sae.sina.com.cn:3307/app_snsync?characterEncoding=utf8&amp;autoReconnect=true");
         dataSource.setUsername(SaeUserInfo.getAccessKey());
         dataSource.setPassword(SaeUserInfo.getSecretKey());
         // dataSource.setUsername("5xlxj1nnx1");
