@@ -3,12 +3,10 @@ package org.usc.weibo.web.servlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.usc.weibo.cache.TencentOAuthCache;
 import org.usc.weibo.util.AppUtil;
-import org.usc.weibo.util.Constants;
 import org.usc.weibo.vo.Application;
 import org.usc.weibo.vo.Follower;
 import org.usc.weibo.vo.Provider;
@@ -17,7 +15,6 @@ import com.tencent.weibo.api.User_API;
 import com.tencent.weibo.beans.OAuth;
 import com.tencent.weibo.utils.OAuthClient;
 import com.tencent.weibo.utils.WeiBoConst.ResultType;
-import com.xunlei.game.activity.log.LogFactory;
 import com.xunlei.game.activity.vo.JsonRtn;
 
 /**
@@ -28,7 +25,7 @@ import com.xunlei.game.activity.vo.JsonRtn;
 public class TencentWeiboServlet extends SnsBaseServlet {
 	private static final long serialVersionUID = 3469012171633045534L;
 
-	protected static Logger log = LogFactory.getLogger(Constants.LOG_DIR, Constants.ACT_DIR, "txweibo");
+//	protected static Logger log = LogFactory.getLogger(Constants.LOG_DIR, Constants.ACT_DIR, "txweibo");
 
 	private OAuth oauth;
 
@@ -37,7 +34,7 @@ public class TencentWeiboServlet extends SnsBaseServlet {
 			Application app = appService.randGetOneApp(Provider.TENCENT);
 
 			if (app == null) {
-				log.info("no SINA weibo application, please check");
+				// log.info("no SINA weibo application, please check");
 				return;
 			}
 
@@ -53,18 +50,18 @@ public class TencentWeiboServlet extends SnsBaseServlet {
 			oauth = auth.requestToken(oauth);
 
 			if (oauth.getStatus() == 1) {
-				log.info("Get Request Token failed!");
+				// log.info("Get Request Token failed!");
 				return;
 			} else {
 				String oauth_token = oauth.getOauth_token();
 				String url = "http://open.t.qq.com/cgi-bin/authorize?oauth_token=" + oauth_token;
 
-				log.info("auth success and oauth_token=" + oauth_token);
+				// log.info("auth success and oauth_token=" + oauth_token);
 				response.sendRedirect(url);
 			}
 
 		} catch (Exception e) {
-			log.error("auth-error: ", e);
+			// log.error("auth-error: ", e);
 			super.outputRtn(request, response, new JsonRtn<Object>(-1, "网络超时，请稍后重试！").toJsonString());
 		}
 	}
@@ -83,7 +80,7 @@ public class TencentWeiboServlet extends SnsBaseServlet {
 			oauth = auth.accessToken(oauth);
 
 			if (oauth.getStatus() == 2) {
-				log.info("Get Access Token failed!");
+				// log.info("Get Access Token failed!");
 				return;
 			} else {
 				User_API uApi = new User_API();
@@ -122,7 +119,7 @@ public class TencentWeiboServlet extends SnsBaseServlet {
 
 				TencentOAuthCache.putOAuth(model.getSeqId(), oauth);
 				super.setCookie(request, response, RIGHT_FOLLOWER_COOKIE_NAME, model.getSeqId().toString(), -1);
-				log.info("callBack successly " + appId + " access token, followerId=" + model.getSeqId());
+				// log.info("callBack successly " + appId + " access token, followerId=" + model.getSeqId());
 
 				String path = request.getContextPath();
 				String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -130,7 +127,7 @@ public class TencentWeiboServlet extends SnsBaseServlet {
 			}
 
 		} catch (Exception e) {
-			log.error("callBack-error: ", e);
+			// log.error("callBack-error: ", e);
 			super.outputRtn(request, response, new JsonRtn<Object>(-1, "网络超时，请稍后重试！").toJsonString());
 		}
 	}

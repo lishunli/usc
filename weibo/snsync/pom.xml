@@ -110,7 +110,7 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.20</version>
+			<version>5.0.8</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
@@ -136,10 +136,17 @@
 			<artifactId>weibo4j</artifactId>
 			<version>1.0</version>
 		</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>com.danga</groupId> -->
+		<!-- <artifactId>java-memcached-release</artifactId> -->
+		<!-- <version>2.5.1</version> -->
+		<!-- </dependency> -->
+
+		<!-- Sina App Engine -->
 		<dependency>
-			<groupId>com.danga</groupId>
-			<artifactId>java-memcached-release</artifactId>
-			<version>2.5.1</version>
+			<groupId>com.sina</groupId>
+			<artifactId>sae-local</artifactId>
+			<version>1.0</version>
 		</dependency>
 
 	</dependencies>

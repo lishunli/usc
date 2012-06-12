@@ -2,23 +2,20 @@ package org.usc.weibo.service.weibo;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
-import com.xunlei.game.activity.log.LogFactory;
-import com.xunlei.game.activity.service.ServiceFactory;
 import org.usc.weibo.service.ApplicationService;
-import org.usc.weibo.util.Constants;
 import org.usc.weibo.vo.Follower;
 import org.usc.weibo.vo.Pair;
 import org.usc.weibo.vo.Provider;
 import org.usc.weibo.vo.WeiboContent;
+
+import com.xunlei.game.activity.service.ServiceFactory;
 
 /**
  *
  * @author Shunli
  */
 public class WeiboSyncFactory {
-	private static Logger log = LogFactory.getLogger(Constants.LOG_DIR, Constants.ACT_DIR, "sendWeiboJob");
+	// private static Logger log = LogFactory.getLogger(Constants.LOG_DIR, Constants.ACT_DIR, "sendWeiboJob");
 
 	protected static ApplicationService appService = ServiceFactory.getService(ApplicationService.class);
 
@@ -27,7 +24,7 @@ public class WeiboSyncFactory {
 		WeiboService rightWeiboService = buildWeiboService(rightFollower);
 
 		if (leftWeiboService == null || rightWeiboService == null) {
-			log.info("no weibo service, please check again.");
+			// log.info("no weibo service, please check again.");
 			return;
 		}
 
@@ -37,7 +34,7 @@ public class WeiboSyncFactory {
 		} else if (isTwoWay == 0) {
 			oneWaySync(leftWeiboService, rightWeiboService);
 		} else {
-			log.info("please check the relation's two way param.");
+			// log.info("please check the relation's two way param.");
 		}
 
 	}
@@ -52,7 +49,7 @@ public class WeiboSyncFactory {
 		Pair<Pair<Long, Long>, List<WeiboContent>> leftReader = leftWeiboService.read();
 
 		if (leftReader == null) {
-			log.info("something error, please check." + leftReader);
+			// log.info("something error, please check." + leftReader);
 			return;
 		}
 

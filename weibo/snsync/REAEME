@@ -4,3 +4,5 @@ mvn install:install-file -Dfile=lib/activity-v2.jar -DgroupId=org.usc.weibo -Dar
 mvn install:install-file -Dfile=lib/weibo4j.jar -DgroupId=org.usc.weibo -DartifactId=weibo4j -Dversion=1.0 -Dpackaging=jar
 mvn install:install-file -Dfile=lib/qweibosdk.jar -DgroupId=org.usc.weibo -DartifactId=qweibosdk -Dversion=1.0 -Dpackaging=jar
 mvn install:install-file -Dfile=lib/java_memcached-release_2.5.1.jar -DgroupId=com.danga -DartifactId=java-memcached-release -Dversion=2.5.1 -Dpackaging=jar
+
+mvn install:install-file -Dfile=sae-lib/sae-local-1.0.jar -DgroupId=com.sina -DartifactId=sae-local -Dversion=1.0 -Dpackaging=jar

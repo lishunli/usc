@@ -7,13 +7,11 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
 import org.usc.weibo.service.ApplicationService;
 import org.usc.weibo.service.FollowerService;
 import org.usc.weibo.service.RelationService;
 import org.usc.weibo.util.Constants;
 
-import com.xunlei.game.activity.log.LogFactory;
 import com.xunlei.game.activity.service.ServiceFactory;
 import com.xunlei.game.activity.web.servlet.BaseServlet;
 
@@ -24,7 +22,7 @@ import com.xunlei.game.activity.web.servlet.BaseServlet;
  */
 public class SnsBaseServlet extends BaseServlet {
 	private static final long serialVersionUID = -4919948752973997373L;
-	protected static Logger log = LogFactory.getLogger(Constants.LOG_DIR, Constants.ACT_DIR, "snsbase");
+	// protected static Logger log = LogFactory.getLogger(Constants.LOG_DIR, Constants.ACT_DIR, "snsbase");
 	protected static final String LEFT_FOLLOWER_COOKIE_NAME = "leftFollowerId";
 	protected static final String RIGHT_FOLLOWER_COOKIE_NAME = "rightFollowerId";
 	protected static FollowerService followerService = ServiceFactory.getService(FollowerService.class);
@@ -41,7 +39,7 @@ public class SnsBaseServlet extends BaseServlet {
 			cookie.setPath("/");
 			response.addCookie(cookie);
 		} catch (UnsupportedEncodingException e) {
-			log.error("setCookie-error: ", e);
+			// log.error("setCookie-error: ", e);
 		}
 	}
 
