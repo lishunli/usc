@@ -9,7 +9,7 @@ import org.usc.weibo.vo.SyncRecord;
  *
  * @author ShunLi
  */
-@DataSourceType(Constants.JDBC_JNDI_YOUXI_WEIBO)
+@DataSourceType(Constants.JDBC_JNDI_SNSYNC)
 public class SyncRecordDaoImpl extends BaseDao implements SyncRecordDao {
 
 	// @Override

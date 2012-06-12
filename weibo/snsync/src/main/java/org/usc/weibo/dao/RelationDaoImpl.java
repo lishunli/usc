@@ -9,7 +9,7 @@ import org.usc.weibo.vo.Relation;
 import com.xunlei.game.activity.annotation.DataSourceType;
 import com.xunlei.game.activity.dao.BaseDao;
 
-@DataSourceType(Constants.JDBC_JNDI_YOUXI_WEIBO)
+@DataSourceType(Constants.JDBC_JNDI_SNSYNC)
 public class RelationDaoImpl extends BaseDao implements RelationDao {
 	@Override
 	public void addRelation(Relation relation) {
