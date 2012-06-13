@@ -25,7 +25,7 @@ import com.xunlei.game.activity.vo.JsonRtn;
 public class TencentWeiboServlet extends SnsBaseServlet {
 	private static final long serialVersionUID = 3469012171633045534L;
 
-//	protected static Logger log = LogFactory.getLogger(Constants.LOG_DIR, Constants.ACT_DIR, "txweibo");
+	// protected static Logger log = LogFactory.getLogger(Constants.LOG_DIR, Constants.ACT_DIR, "txweibo");
 
 	private OAuth oauth;
 
@@ -62,7 +62,8 @@ public class TencentWeiboServlet extends SnsBaseServlet {
 
 		} catch (Exception e) {
 			// log.error("auth-error: ", e);
-			super.outputRtn(request, response, new JsonRtn<Object>(-1, "网络超时，请稍后重试！").toJsonString());
+			// super.outputRtn(request, response, new JsonRtn<Object>(-1, "网络超时，请稍后重试！").toJsonString());
+			super.outputRtn(request, response, new JsonRtn<Object>(-1, e.toString()).toJsonString());
 		}
 	}
 
@@ -128,7 +129,8 @@ public class TencentWeiboServlet extends SnsBaseServlet {
 
 		} catch (Exception e) {
 			// log.error("callBack-error: ", e);
-			super.outputRtn(request, response, new JsonRtn<Object>(-1, "网络超时，请稍后重试！").toJsonString());
+			// super.outputRtn(request, response, new JsonRtn<Object>(-1, "网络超时，请稍后重试！").toJsonString());
+			super.outputRtn(request, response, new JsonRtn<Object>(-1, e.toString()).toJsonString());
 		}
 	}
 }

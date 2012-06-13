@@ -44,7 +44,8 @@ public class SnsServlet extends SnsBaseServlet {
 			response.sendRedirect(basePath);
 		} catch (Exception e) {
 			// log.error("sync-error: ", e);
-			super.outputRtn(request, response, new JsonRtn<Object>(-1, "网络超时，请稍后重试！").toJsonString());
+			// super.outputRtn(request, response, new JsonRtn<Object>(-1, "网络超时，请稍后重试！").toJsonString());
+			super.outputRtn(request, response, new JsonRtn<Object>(-1, e.toString()).toJsonString());
 		}
 	}
 	public void cansync(HttpServletRequest request, HttpServletResponse response) {
@@ -66,7 +67,8 @@ public class SnsServlet extends SnsBaseServlet {
 			response.sendRedirect(basePath);
 		} catch (Exception e) {
 			// log.error("cansync-error: ", e);
-			super.outputRtn(request, response, new JsonRtn<Object>(-1, "网络超时，请稍后重试！").toJsonString());
+			// super.outputRtn(request, response, new JsonRtn<Object>(-1, "网络超时，请稍后重试！").toJsonString());
+			super.outputRtn(request, response, new JsonRtn<Object>(-1, e.toString()).toJsonString());
 		}
 	}
 }

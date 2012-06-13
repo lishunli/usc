@@ -63,7 +63,8 @@ public class SinaWeiboServlet extends SnsBaseServlet {
 
 		} catch (Exception e) {
 			// log.error("auth-error: ", e);
-			super.outputRtn(request, response, new JsonRtn<Object>(-1, "网络超时，请稍后重试！").toJsonString());
+			super.outputRtn(request, response, new JsonRtn<Object>(-1, e.toString()).toJsonString());
+			// super.outputRtn(request, response, new JsonRtn<Object>(-1, "网络超时，请稍后重试！").toJsonString());
 		}
 	}
 
@@ -130,7 +131,8 @@ public class SinaWeiboServlet extends SnsBaseServlet {
 
 		} catch (Exception e) {
 			// log.error("callBack-error: ", e);
-			super.outputRtn(request, response, new JsonRtn<Object>(-1, "网络超时，请稍后重试！").toJsonString());
+			// super.outputRtn(request, response, new JsonRtn<Object>(-1, "网络超时，请稍后重试！").toJsonString());
+			super.outputRtn(request, response, new JsonRtn<Object>(-1, e.toString()).toJsonString());
 		}
 	}
 }
