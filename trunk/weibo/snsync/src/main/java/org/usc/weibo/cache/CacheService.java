@@ -1,15 +1,26 @@
 package org.usc.weibo.cache;
 
+import org.apache.commons.lang.StringUtils;
+import org.usc.weibo.config.Config;
+
 import com.sina.sae.memcached.SaeMemcache;
 
 public class CacheService {
 	private static CacheService instance = new CacheService();
-	private static SaeMemcache mc = new SaeMemcache();;
+	private static SaeMemcache mc;
 
 	public static CacheService instance() {
 		return instance;
 	}
 	private CacheService() {
+		String ip = Config.getProperty("serverlist");
+
+		if (StringUtils.isNotBlank(ip)) {
+			mc = new SaeMemcache(new String[] { ip });
+		} else {
+			mc = new SaeMemcache();
+		}
+
 		mc.init();
 	}
 
