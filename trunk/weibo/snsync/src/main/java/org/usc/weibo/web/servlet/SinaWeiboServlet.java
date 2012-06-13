@@ -1,5 +1,9 @@
 package org.usc.weibo.web.servlet;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -44,12 +48,13 @@ public class SinaWeiboServlet extends SnsBaseServlet {
 			synchronized (this) {
 				appId = app.getAppId();
 			}
-
-			System.setProperty("weibo4j.oauth.consumerKey", app.getOauthConsumerKey());
-			System.setProperty("weibo4j.oauth.consumerSecret", app.getOauthConsumerSecret());
+			//
+			// System.setProperty("weibo4j.oauth.consumerKey", app.getOauthConsumerKey());
+			// System.setProperty("weibo4j.oauth.consumerSecret", app.getOauthConsumerSecret());
 
 			synchronized (this) {
 				weibo = new Weibo();
+				weibo.setOAuthConsumer(app.getOauthConsumerKey(), app.getOauthConsumerSecret());
 				requestToken = weibo.getOAuthRequestToken();
 			}
 
@@ -62,12 +67,21 @@ public class SinaWeiboServlet extends SnsBaseServlet {
 			response.sendRedirect(requestToken.getAuthorizationURL(request.getRequestURL() + "?action=callBack"));
 
 		} catch (Exception e) {
+			ByteArrayOutputStream os = new ByteArrayOutputStream();
+			PrintStream ps = new PrintStream(os);
+			e.printStackTrace(ps);
+			String errorMsg = "";
+			try {
+				errorMsg = os.toString("UTF8");
+			} catch (UnsupportedEncodingException e1) {
+				e1.printStackTrace();
+			}
+
 			// log.error("auth-error: ", e);
-			super.outputRtn(request, response, new JsonRtn<Object>(-1, e.toString()).toJsonString());
+			super.outputRtn(request, response, new JsonRtn<Object>(-1, errorMsg).toJsonString());
 			// super.outputRtn(request, response, new JsonRtn<Object>(-1, "网络超时，请稍后重试！").toJsonString());
 		}
 	}
-
 	public void callBack(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			String verify = request.getParameter("oauth_verifier");
@@ -132,7 +146,21 @@ public class SinaWeiboServlet extends SnsBaseServlet {
 		} catch (Exception e) {
 			// log.error("callBack-error: ", e);
 			// super.outputRtn(request, response, new JsonRtn<Object>(-1, "网络超时，请稍后重试！").toJsonString());
-			super.outputRtn(request, response, new JsonRtn<Object>(-1, e.toString()).toJsonString());
+
+			ByteArrayOutputStream os = new ByteArrayOutputStream();
+			PrintStream ps = new PrintStream(os);
+			e.printStackTrace(ps);
+			String errorMsg = "";
+			try {
+				errorMsg = os.toString("UTF8");
+			} catch (UnsupportedEncodingException e1) {
+				e1.printStackTrace();
+			}
+
+			// log.error("auth-error: ", e);
+			super.outputRtn(request, response, new JsonRtn<Object>(-1, errorMsg).toJsonString());
+			// super.outputRtn(request, response, new JsonRtn<Object>(-1, "网络超时，请稍后重试！").toJsonString());
+
 		}
 	}
 }
