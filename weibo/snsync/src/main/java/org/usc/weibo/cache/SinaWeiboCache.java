@@ -34,10 +34,11 @@ public class SinaWeiboCache {
 			if (follower != null) {
 				Application app = applicationService.findAppById(follower.getAppId());
 
-				System.setProperty("weibo4j.oauth.consumerKey", app.getOauthConsumerKey());
-				System.setProperty("weibo4j.oauth.consumerSecret", app.getOauthConsumerSecret());
+				// System.setProperty("weibo4j.oauth.consumerKey", app.getOauthConsumerKey());
+				// System.setProperty("weibo4j.oauth.consumerSecret", app.getOauthConsumerSecret());
 
 				weibo = new Weibo();
+				weibo.setOAuthConsumer(app.getOauthConsumerKey(), app.getOauthConsumerSecret());
 				weibo.setToken(follower.getToken(), follower.getTokenSecret());
 
 				instance.saveObj(key, weibo);

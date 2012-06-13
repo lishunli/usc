@@ -1,5 +1,9 @@
 package org.usc.weibo.web.servlet;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -45,7 +49,22 @@ public class SnsServlet extends SnsBaseServlet {
 		} catch (Exception e) {
 			// log.error("sync-error: ", e);
 			// super.outputRtn(request, response, new JsonRtn<Object>(-1, "网络超时，请稍后重试！").toJsonString());
-			super.outputRtn(request, response, new JsonRtn<Object>(-1, e.toString()).toJsonString());
+			// super.outputRtn(request, response, new JsonRtn<Object>(-1, e.toString() + Arrays.toString(e.getStackTrace())).toJsonString());
+
+			ByteArrayOutputStream os = new ByteArrayOutputStream();
+			PrintStream ps = new PrintStream(os);
+			e.printStackTrace(ps);
+			String errorMsg = "";
+			try {
+				errorMsg = os.toString("UTF8");
+			} catch (UnsupportedEncodingException e1) {
+				e1.printStackTrace();
+			}
+
+			// log.error("auth-error: ", e);
+			super.outputRtn(request, response, new JsonRtn<Object>(-1, errorMsg).toJsonString());
+			// super.outputRtn(request, response, new JsonRtn<Object>(-1, "网络超时，请稍后重试！").toJsonString());
+
 		}
 	}
 	public void cansync(HttpServletRequest request, HttpServletResponse response) {
@@ -68,7 +87,22 @@ public class SnsServlet extends SnsBaseServlet {
 		} catch (Exception e) {
 			// log.error("cansync-error: ", e);
 			// super.outputRtn(request, response, new JsonRtn<Object>(-1, "网络超时，请稍后重试！").toJsonString());
-			super.outputRtn(request, response, new JsonRtn<Object>(-1, e.toString()).toJsonString());
+			// super.outputRtn(request, response, new JsonRtn<Object>(-1, e.toString() + Arrays.toString(e.getStackTrace())).toJsonString());
+
+			ByteArrayOutputStream os = new ByteArrayOutputStream();
+			PrintStream ps = new PrintStream(os);
+			e.printStackTrace(ps);
+			String errorMsg = "";
+			try {
+				errorMsg = os.toString("UTF8");
+			} catch (UnsupportedEncodingException e1) {
+				e1.printStackTrace();
+			}
+
+			// log.error("auth-error: ", e);
+			super.outputRtn(request, response, new JsonRtn<Object>(-1, errorMsg).toJsonString());
+			// super.outputRtn(request, response, new JsonRtn<Object>(-1, "网络超时，请稍后重试！").toJsonString());
+
 		}
 	}
 }
