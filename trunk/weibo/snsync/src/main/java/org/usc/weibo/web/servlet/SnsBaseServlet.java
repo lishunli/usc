@@ -7,6 +7,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.usc.weibo.cache.CacheService;
 import org.usc.weibo.service.ApplicationService;
 import org.usc.weibo.service.FollowerService;
 import org.usc.weibo.service.RelationService;
@@ -23,11 +24,12 @@ import com.xunlei.game.activity.web.servlet.BaseServlet;
 public class SnsBaseServlet extends BaseServlet {
 	private static final long serialVersionUID = -4919948752973997373L;
 	// protected static Logger log = LogFactory.getLogger(Constants.LOG_DIR, Constants.ACT_DIR, "snsbase");
-	protected static final String LEFT_FOLLOWER_COOKIE_NAME = "leftFollowerId";
-	protected static final String RIGHT_FOLLOWER_COOKIE_NAME = "rightFollowerId";
-	protected static FollowerService followerService = ServiceFactory.getService(FollowerService.class);
-	protected static ApplicationService appService = ServiceFactory.getService(ApplicationService.class);
-	protected static RelationService relationService = ServiceFactory.getService(RelationService.class);
+	protected static final String LEFT_FOLLOWER_COOKIE_NAME = "_leftFollowerId";
+	protected static final String RIGHT_FOLLOWER_COOKIE_NAME = "_rightFollowerId";
+	protected static final FollowerService followerService = ServiceFactory.getService(FollowerService.class);
+	protected static final ApplicationService appService = ServiceFactory.getService(ApplicationService.class);
+	protected static final RelationService relationService = ServiceFactory.getService(RelationService.class);
+	protected static final CacheService instance = CacheService.instance();
 
 	@Override
 	protected void setCookie(HttpServletRequest request, HttpServletResponse response, String cookiename, String cookievalue, int expiry) {
@@ -36,7 +38,7 @@ public class SnsBaseServlet extends BaseServlet {
 			cookie = new Cookie(cookiename, URLEncoder.encode(cookievalue, "UTF-8"));
 			cookie.setDomain(Constants.DOMAIN);
 			cookie.setMaxAge(-1);
-			cookie.setPath("/");
+			cookie.setPath("/snsync");
 			response.addCookie(cookie);
 		} catch (UnsupportedEncodingException e) {
 			// log.error("setCookie-error: ", e);
@@ -47,7 +49,7 @@ public class SnsBaseServlet extends BaseServlet {
 	protected void delCookie(HttpServletResponse response, String cookieName) {
 		Cookie cookie = new Cookie(cookieName, null);
 		cookie.setDomain(Constants.DOMAIN);
-		cookie.setPath("/");
+		cookie.setPath("/snsync");
 		cookie.setMaxAge(0);
 		response.addCookie(cookie);
 	}
