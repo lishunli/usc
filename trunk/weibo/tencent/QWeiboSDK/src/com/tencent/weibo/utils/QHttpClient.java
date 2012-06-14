@@ -1,12 +1,12 @@
 package com.tencent.weibo.utils;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpStatus;
-import org.apache.commons.httpclient.methods.ByteArrayRequestEntity;
-import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.multipart.FilePart;
 import org.apache.commons.httpclient.methods.multipart.MultipartRequestEntity;
@@ -15,6 +15,7 @@ import org.apache.commons.httpclient.methods.multipart.StringPart;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.sina.sae.fetchurl.SaeFetchurl;
 import com.tencent.weibo.beans.QParameter;
 
 public class QHttpClient {
@@ -28,7 +29,7 @@ public class QHttpClient {
 
 	/**
 	 * Using GET method.
-	 * 
+	 *
 	 * @param url
 	 *            The remote URL.
 	 * @param queryString
@@ -37,41 +38,21 @@ public class QHttpClient {
 	 * @throws Exception
 	 */
 	public String httpGet(String url, String queryString) throws Exception {
-		String responseData = null;
-
 		if (queryString != null && !queryString.equals("")) {
 			url += "?" + queryString;
 		}
 
 		log.info("httpGet [1]. url = " + url);
 
-		HttpClient httpClient = new HttpClient();
-		GetMethod httpGet = new GetMethod(url);
-		httpGet.getParams().setParameter("http.socket.timeout", new Integer(CONNECTION_TIMEOUT));
-
-		try {
-			int statusCode = httpClient.executeMethod(httpGet);
-			if (statusCode != HttpStatus.SC_OK) {
-				log.info("HttpGet [2] Method failed: " + httpGet.getStatusLine());
-			}
-			// Read the response body.
-			responseData = httpGet.getResponseBodyAsString();
-
-			log.info(" httpGet [3] getResponseBodyAsString() = " + httpGet.getResponseBodyAsString());
-
-		} catch (Exception e) {
-			throw new Exception(e);
-		} finally {
-			httpGet.releaseConnection();
-			httpClient = null;
-		}
+		SaeFetchurl fetchUrl = new SaeFetchurl();
+		String responseData = fetchUrl.fetch(url);
 
 		return responseData;
 	}
 
 	/**
 	 * Using POST method.
-	 * 
+	 *
 	 * @param url
 	 *            The remote URL.
 	 * @param queryString
@@ -80,38 +61,26 @@ public class QHttpClient {
 	 * @throws Exception
 	 */
 	public String httpPost(String url, String queryString) throws Exception {
-		String responseData = null;
-		HttpClient httpClient = new HttpClient();
-
-		log.info("QHttpClient httpPost [1] url = " + url);
-		PostMethod httpPost = new PostMethod(url);
-		httpPost.addParameter("Content-Type", "application/x-www-form-urlencoded");
-		httpPost.getParams().setParameter("http.socket.timeout", new Integer(CONNECTION_TIMEOUT));
-		if (queryString != null && !queryString.equals("")) {
-			httpPost.setRequestEntity(new ByteArrayRequestEntity(queryString.getBytes()));
+		queryString = queryString.substring(queryString.lastIndexOf("?") + 1);
+		String[] firstSplit = queryString.split("&");
+		Map<String, String> maps = new HashMap<String, String>();
+		for (String param : firstSplit) {
+			String[] secondeSplit = param.split("=");
+			maps.put(secondeSplit[0], secondeSplit[1]);
 		}
 
-		try {
-			int statusCode = httpClient.executeMethod(httpPost);
-			if (statusCode != HttpStatus.SC_OK) {
-				System.err.println("HttpPost Method failed: " + httpPost.getStatusLine());
-			}
-			responseData = httpPost.getResponseBodyAsString();
+		SaeFetchurl fetchUrl = new SaeFetchurl();
+		fetchUrl.setMethod("post");
+		fetchUrl.setPostData(maps);
 
-			log.info("QHttpClient httpPost [2] responseData = " + responseData);
-		} catch (Exception e) {
-			throw new Exception(e);
-		} finally {
-			httpPost.releaseConnection();
-			httpClient = null;
-		}
+		String responseData = fetchUrl.fetch(url);
 
 		return responseData;
 	}
 
 	/**
 	 * Using POST method with multiParts.
-	 * 
+	 *
 	 * @param url
 	 *            The remote URL.
 	 * @param queryString
