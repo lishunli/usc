@@ -26,7 +26,7 @@ public class SnsSyncListener implements ServletContextListener {
 
 			// log.info("snssync.job.init.success!");
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e);
 		}
 
 	}

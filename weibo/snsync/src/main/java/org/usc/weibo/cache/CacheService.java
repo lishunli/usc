@@ -1,5 +1,7 @@
 package org.usc.weibo.cache;
 
+import java.util.Date;
+
 import org.apache.commons.lang.StringUtils;
 import org.usc.weibo.config.Config;
 
@@ -32,11 +34,19 @@ public class CacheService {
 		this.getClient().set(key, obj);
 	}
 
+	public <T> void saveObj(String key, T obj, Long expiry) {
+		this.getClient().set(key, obj, new Date().getTime() + expiry);
+	}
+
 	@SuppressWarnings("unchecked")
 	public <T> T getObj(String key, Class<T> clazz) {
 		Object o = this.getClient().get(key);
 		if (o == null)
 			return null;
 		return (T) o;
+	}
+
+	public boolean deleteObj(String key) {
+		return this.getClient().delete(key);
 	}
 }

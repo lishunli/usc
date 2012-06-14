@@ -1,9 +1,5 @@
 package org.usc.weibo.web.servlet;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-import java.io.UnsupportedEncodingException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,8 +16,6 @@ import weibo4j.WeiboException;
 import weibo4j.http.AccessToken;
 import weibo4j.http.RequestToken;
 
-import com.xunlei.game.activity.vo.JsonRtn;
-
 /**
  * SinaWeiboServlet
  *
@@ -36,131 +30,95 @@ public class SinaWeiboServlet extends SnsBaseServlet {
 	private Weibo weibo;
 	private RequestToken requestToken;
 
-	public void auth(HttpServletRequest request, HttpServletResponse response) {
-		try {
-			Application app = appService.randGetOneApp(Provider.SINA);
+	public void auth(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Application app = appService.randGetOneApp(Provider.SINA);
 
-			if (app == null) {
-				// log.info("no SINA weibo application, please check");
-				return;
-			}
-
-			synchronized (this) {
-				appId = app.getAppId();
-			}
-			//
-			// System.setProperty("weibo4j.oauth.consumerKey", app.getOauthConsumerKey());
-			// System.setProperty("weibo4j.oauth.consumerSecret", app.getOauthConsumerSecret());
-
-			synchronized (this) {
-				weibo = new Weibo();
-				weibo.setOAuthConsumer(app.getOauthConsumerKey(), app.getOauthConsumerSecret());
-				requestToken = weibo.getOAuthRequestToken();
-			}
-
-			System.out.println("Got request token.");
-
-			System.out.println("Request token: " + requestToken.getToken());
-			System.out.println("Request token secret: " + requestToken.getTokenSecret());
-			System.out.println("Open the following URL and grant access to your account:");
-
-			response.sendRedirect(requestToken.getAuthorizationURL(request.getRequestURL() + "?action=callBack"));
-
-		} catch (Exception e) {
-			ByteArrayOutputStream os = new ByteArrayOutputStream();
-			PrintStream ps = new PrintStream(os);
-			e.printStackTrace(ps);
-			String errorMsg = "";
-			try {
-				errorMsg = os.toString("UTF8");
-			} catch (UnsupportedEncodingException e1) {
-				e1.printStackTrace();
-			}
-
-			// log.error("auth-error: ", e);
-			super.outputRtn(request, response, new JsonRtn<Object>(-1, errorMsg).toJsonString());
-			// super.outputRtn(request, response, new JsonRtn<Object>(-1, "网络超时，请稍后重试！").toJsonString());
+		if (app == null) {
+			System.out.println("no SINA weibo application, please check");
+			return;
 		}
+
+		synchronized (this) {
+			appId = app.getAppId();
+		}
+		//
+		// System.setProperty("weibo4j.oauth.consumerKey", app.getOauthConsumerKey());
+		// System.setProperty("weibo4j.oauth.consumerSecret", app.getOauthConsumerSecret());
+
+		synchronized (this) {
+			weibo = new Weibo();
+			weibo.setOAuthConsumer(app.getOauthConsumerKey(), app.getOauthConsumerSecret());
+			requestToken = weibo.getOAuthRequestToken();
+		}
+
+		System.out.println("Got request token.");
+
+		System.out.println("Request token: " + requestToken.getToken());
+		System.out.println("Request token secret: " + requestToken.getTokenSecret());
+		System.out.println("Open the following URL and grant access to your account:");
+
+		response.sendRedirect(requestToken.getAuthorizationURL(request.getRequestURL() + "?action=callBack"));
 	}
-	public void callBack(HttpServletRequest request, HttpServletResponse response) {
+	public void callBack(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String verify = request.getParameter("oauth_verifier");
+		AccessToken accessToken = null;
+
 		try {
-			String verify = request.getParameter("oauth_verifier");
-			AccessToken accessToken = null;
-
-			try {
-				accessToken = requestToken.getAccessToken(verify);
-			} catch (WeiboException te) {
-				if (401 == te.getStatusCode()) {
-					System.out.println("Unable to get the access token.");
-				} else {
-					te.printStackTrace();
-				}
-			}
-
-			System.out.println("Got access token.");
-			System.out.println(accessToken);
-
-			String token = accessToken.getToken();
-			String tokenSecret = accessToken.getTokenSecret();
-			String userId = String.valueOf(accessToken.getUserId());
-			System.out.println("Access token: " + token);
-			System.out.println("Access token secret: " + tokenSecret);
-
-			weibo.setToken(token, tokenSecret);
-			User user = weibo.showUser(userId);
-
-			Follower follower = new Follower();
-			follower.setAppId(appId);
-			follower.setUserId(userId);
-			follower.setUserName(user.getName());
-			follower.setToken(token);
-			follower.setTokenSecret(tokenSecret);
-
-			Status lastWeiboContent = user.getStatus();
-			if (lastWeiboContent != null) {
-				follower.setLastId(lastWeiboContent.getId());
-				follower.setLastTimeStamp(lastWeiboContent.getCreatedAt().getTime());
-			}
-
-			Follower model = followerService.findByUserIdAndProvider(userId, AppUtil.getProvider(appId));
-			if (model != null) {
-				model.setAppId(appId);
-				model.setToken(follower.getToken());
-				model.setTokenSecret(follower.getTokenSecret());
-				model.setLastId(follower.getLastId());
-				model.setLastTimeStamp(follower.getLastTimeStamp());
-				followerService.updateFollower(model);
+			accessToken = requestToken.getAccessToken(verify);
+		} catch (WeiboException te) {
+			if (401 == te.getStatusCode()) {
+				System.out.println("Unable to get the access token.");
 			} else {
-				followerService.addFollower(follower);
-				model = followerService.findByUserIdAndAppId(userId, appId);
+				te.printStackTrace();
 			}
-
-			SinaWeiboCache.putWeibo(model.getSeqId(), weibo);
-			super.setCookie(request, response, LEFT_FOLLOWER_COOKIE_NAME, model.getSeqId().toString(), -1);
-			// log.info("callBack successly " + appId + " access token, followerId=" + model.getSeqId());
-
-			String path = request.getContextPath();
-			String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
-			response.sendRedirect(basePath + "sns?action=sync");
-
-		} catch (Exception e) {
-			// log.error("callBack-error: ", e);
-			// super.outputRtn(request, response, new JsonRtn<Object>(-1, "网络超时，请稍后重试！").toJsonString());
-
-			ByteArrayOutputStream os = new ByteArrayOutputStream();
-			PrintStream ps = new PrintStream(os);
-			e.printStackTrace(ps);
-			String errorMsg = "";
-			try {
-				errorMsg = os.toString("UTF8");
-			} catch (UnsupportedEncodingException e1) {
-				e1.printStackTrace();
-			}
-
-			// log.error("auth-error: ", e);
-			super.outputRtn(request, response, new JsonRtn<Object>(-1, errorMsg).toJsonString());
-			// super.outputRtn(request, response, new JsonRtn<Object>(-1, "网络超时，请稍后重试！").toJsonString());
-
 		}
+
+		System.out.println("Got access token.");
+		System.out.println(accessToken);
+
+		String token = accessToken.getToken();
+		String tokenSecret = accessToken.getTokenSecret();
+		String userId = String.valueOf(accessToken.getUserId());
+		System.out.println("Access token: " + token);
+		System.out.println("Access token secret: " + tokenSecret);
+
+		weibo.setToken(token, tokenSecret);
+		User user = weibo.showUser(userId);
+
+		Follower follower = new Follower();
+		follower.setAppId(appId);
+		follower.setUserId(userId);
+		follower.setUserName(user.getName());
+		follower.setToken(token);
+		follower.setTokenSecret(tokenSecret);
+
+		Status lastWeiboContent = user.getStatus();
+		if (lastWeiboContent != null) {
+			follower.setLastId(lastWeiboContent.getId());
+			follower.setLastTimeStamp(lastWeiboContent.getCreatedAt().getTime());
+		}
+
+		Follower model = followerService.findByUserIdAndProvider(userId, AppUtil.getProvider(appId));
+		if (model != null) {
+			model.setAppId(appId);
+			model.setToken(follower.getToken());
+			model.setTokenSecret(follower.getTokenSecret());
+			model.setLastId(follower.getLastId());
+			model.setLastTimeStamp(follower.getLastTimeStamp());
+			followerService.updateFollower(model);
+		} else {
+			followerService.addFollower(follower);
+			model = followerService.findByUserIdAndAppId(userId, appId);
+		}
+
+		SinaWeiboCache.putWeibo(model.getSeqId(), weibo);
+
+		String key = super.getCookie(request, response, "saeut");
+		System.out.println("cookie key = " + key);
+		instance.saveObj(key + LEFT_FOLLOWER_COOKIE_NAME, model.getSeqId(), 5 * 60 * 1000L);// 5min
+
+		System.out.println("callBack successly " + appId + " access token, followerId=" + model.getSeqId());
+
+		response.sendRedirect("http://snsync.sinaapp.com/sns?action=sync");
 	}
 }
