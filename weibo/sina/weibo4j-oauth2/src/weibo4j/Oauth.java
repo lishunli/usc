@@ -72,24 +72,21 @@ public class Oauth {
 
 	/*----------------------------Oauth接口--------------------------------------*/
 
-	public AccessToken getAccessTokenByCode(String code) throws WeiboException {
+	public AccessToken getAccessTokenByCode(String code, String client_id, String client_secret, String redirect_uri) throws WeiboException {
 		return new AccessToken(Weibo.client.post(
 				WeiboConfig.getValue("accessTokenURL"),
 				new PostParameter[] {
-						new PostParameter("client_id", WeiboConfig
-								.getValue("client_ID")),
-						new PostParameter("client_secret", WeiboConfig
-								.getValue("client_SERCRET")),
+						new PostParameter("client_id", client_id),
+						new PostParameter("client_secret", client_secret),
 						new PostParameter("grant_type", "authorization_code"),
 						new PostParameter("code", code),
-						new PostParameter("redirect_uri", WeiboConfig
-								.getValue("redirect_URI")) }, false));
+						new PostParameter("redirect_uri", redirect_uri) }, false));
 	}
 
-	public String authorize(String response_type) throws WeiboException {
-		return WeiboConfig.getValue("authorizeURL").trim() + "?client_id="
-				+ WeiboConfig.getValue("client_ID").trim() + "&redirect_uri="
-				+ WeiboConfig.getValue("redirect_URI").trim()
+	public String authorize(String response_type, String client_id, String redirect_uri) throws WeiboException {
+		return WeiboConfig.getValue("authorizeURL").trim() +
+				"?client_id=" + client_id +
+				"&redirect_uri=" + redirect_uri
 				+ "&response_type=" + response_type;
 	}
 }
