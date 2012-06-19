@@ -10,7 +10,7 @@ public class GetUid {
 
 	public static void main(String[] args) {
 		Weibo weibo = new Weibo();
-		String access_token = args[0];
+		String access_token = "2.00WP3ohBC9fwHB2c6a76b989CDt99E";// args[0];
 		weibo.setToken(access_token);
 		Account am = new Account();
 		try {
