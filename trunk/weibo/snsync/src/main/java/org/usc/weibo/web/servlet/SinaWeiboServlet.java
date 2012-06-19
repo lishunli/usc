@@ -5,16 +5,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.usc.weibo.cache.SinaWeiboCache;
 import org.usc.weibo.util.AppUtil;
+import org.usc.weibo.util.Constants;
 import org.usc.weibo.vo.Application;
 import org.usc.weibo.vo.Follower;
 import org.usc.weibo.vo.Provider;
 
-import weibo4j.Status;
-import weibo4j.User;
+import weibo4j.Oauth;
+import weibo4j.Users;
 import weibo4j.Weibo;
-import weibo4j.WeiboException;
 import weibo4j.http.AccessToken;
-import weibo4j.http.RequestToken;
+import weibo4j.model.Status;
+import weibo4j.model.User;
 
 /**
  * SinaWeiboServlet
@@ -22,103 +23,79 @@ import weibo4j.http.RequestToken;
  * @author Shunli
  */
 public class SinaWeiboServlet extends SnsBaseServlet {
-	private static final long serialVersionUID = -2910525161848529312L;
+    private static final long serialVersionUID = -2910525161848529312L;
 
-	// protected static Logger log = LogFactory.getLogger(Constants.LOG_DIR, Constants.ACT_DIR, "sinaweibo");
+    // protected static Logger log = LogFactory.getLogger(Constants.LOG_DIR, Constants.ACT_DIR, "sinaweibo");
 
-	private String appId;
-	private Weibo weibo;
-	private RequestToken requestToken;
+    private Application app;
+    private Oauth oauth;
 
-	public void auth(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		Application app = appService.randGetOneApp(Provider.SINA);
+    public void auth(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        synchronized (this) {
+            app = appService.randGetOneApp(Provider.SINA);
 
-		if (app == null) {
-			System.out.println("no SINA weibo application, please check");
-			return;
-		}
+            if (app == null) {
+                System.out.println("no SINA weibo application, please check");
+                return;
+            }
 
-		synchronized (this) {
-			appId = app.getAppId();
-		}
-		//
-		// System.setProperty("weibo4j.oauth.consumerKey", app.getOauthConsumerKey());
-		// System.setProperty("weibo4j.oauth.consumerSecret", app.getOauthConsumerSecret());
+            oauth = new Oauth();
+            System.out.println("SinaWeiboServlet app=" + app);
+            System.out.println("SinaWeiboServlet oauth=" + oauth);
+            String url = oauth.authorize("code", app.getOauthConsumerKey(), Constants.SINA_WEIBO_CALLBACK_URL);
 
-		synchronized (this) {
-			weibo = new Weibo();
-			weibo.setOAuthConsumer(app.getOauthConsumerKey(), app.getOauthConsumerSecret());
-			requestToken = weibo.getOAuthRequestToken();
-		}
+            response.sendRedirect(url);
+        }
+    }
 
-		System.out.println("Got request token.");
+    public void callBack(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        System.out.println("SinaWeiboServlet app=" + app);
+        String verify = request.getParameter("code");
+        String appId = app.getAppId();
 
-		System.out.println("Request token: " + requestToken.getToken());
-		System.out.println("Request token secret: " + requestToken.getTokenSecret());
-		System.out.println("Open the following URL and grant access to your account:");
+        AccessToken accessToken = oauth.getAccessTokenByCode(verify, app.getOauthConsumerKey(), app.getOauthConsumerSecret(), Constants.SINA_WEIBO_CALLBACK_URL);
+        String access_token = accessToken.getAccessToken();
+        String userId = accessToken.getUid();
 
-		response.sendRedirect(requestToken.getAuthorizationURL(request.getRequestURL() + "?action=callBack"));
-	}
-	public void callBack(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String verify = request.getParameter("oauth_verifier");
-		AccessToken accessToken = null;
+        Weibo weibo = new Weibo();
+        weibo.setToken(access_token);
 
-		try {
-			accessToken = requestToken.getAccessToken(verify);
-		} catch (WeiboException te) {
-			if (401 == te.getStatusCode()) {
-				System.out.println("Unable to get the access token.");
-			} else {
-				te.printStackTrace();
-			}
-		}
+        Users userApi = new Users();
+        User user = userApi.showUserById(userId);
 
-		System.out.println("Got access token.");
-		System.out.println(accessToken);
+        Follower follower = new Follower();
+        follower.setAppId(appId);
+        follower.setUserId(userId);
+        follower.setUserName(user.getName());
+        follower.setToken(access_token);
 
-		String token = accessToken.getToken();
-		String tokenSecret = accessToken.getTokenSecret();
-		String userId = String.valueOf(accessToken.getUserId());
-		System.out.println("Access token: " + token);
-		System.out.println("Access token secret: " + tokenSecret);
+        Status lastWeiboContent = user.getStatus();
+        if (lastWeiboContent != null) {
+            follower.setLastId(Long.valueOf(lastWeiboContent.getId()));
+            follower.setLastTimeStamp(lastWeiboContent.getCreatedAt().getTime());
+        }
 
-		weibo.setToken(token, tokenSecret);
-		User user = weibo.showUser(userId);
+        Follower model = followerService.findByUserIdAndProvider(userId, AppUtil.getProvider(appId));
+        if (model != null) {
+            model.setAppId(appId);
+            model.setToken(follower.getToken());
+            model.setTokenSecret(follower.getTokenSecret());
+            model.setLastId(follower.getLastId());
+            model.setLastTimeStamp(follower.getLastTimeStamp());
+            followerService.updateFollower(model);
+        } else {
+            followerService.addFollower(follower);
+            model = followerService.findByUserIdAndAppId(userId, appId);
+        }
 
-		Follower follower = new Follower();
-		follower.setAppId(appId);
-		follower.setUserId(userId);
-		follower.setUserName(user.getName());
-		follower.setToken(token);
-		follower.setTokenSecret(tokenSecret);
+        SinaWeiboCache.putWeibo(model.getSeqId(), weibo);
 
-		Status lastWeiboContent = user.getStatus();
-		if (lastWeiboContent != null) {
-			follower.setLastId(lastWeiboContent.getId());
-			follower.setLastTimeStamp(lastWeiboContent.getCreatedAt().getTime());
-		}
+        String key = super.getCookie(request, response, "saeut");
+        System.out.println("cookie key = " + key);
+        instance.saveObj(key + LEFT_FOLLOWER_COOKIE_NAME, model.getSeqId(), 5 * 60 * 1000L);// 5min
 
-		Follower model = followerService.findByUserIdAndProvider(userId, AppUtil.getProvider(appId));
-		if (model != null) {
-			model.setAppId(appId);
-			model.setToken(follower.getToken());
-			model.setTokenSecret(follower.getTokenSecret());
-			model.setLastId(follower.getLastId());
-			model.setLastTimeStamp(follower.getLastTimeStamp());
-			followerService.updateFollower(model);
-		} else {
-			followerService.addFollower(follower);
-			model = followerService.findByUserIdAndAppId(userId, appId);
-		}
+        System.out.println("callBack successly " + appId + " access token, followerId=" + model.getSeqId());
 
-		SinaWeiboCache.putWeibo(model.getSeqId(), weibo);
-
-		String key = super.getCookie(request, response, "saeut");
-		System.out.println("cookie key = " + key);
-		instance.saveObj(key + LEFT_FOLLOWER_COOKIE_NAME, model.getSeqId(), 5 * 60 * 1000L);// 5min
-
-		System.out.println("callBack successly " + appId + " access token, followerId=" + model.getSeqId());
-
-		response.sendRedirect("http://snsync.sinaapp.com/sns?action=sync");
-	}
+        response.sendRedirect("http://snsync.sinaapp.com/sns?action=sync");
+    }
 }

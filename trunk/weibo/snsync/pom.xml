@@ -1,211 +1,211 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.usc.weibo</groupId>
-	<artifactId>snsync</artifactId>
-	<packaging>war</packaging>
-	<version>1.0-SNAPSHOT</version>
-	<name>weibo sync</name>
-	<url>http://maven.apache.org</url>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.usc.weibo</groupId>
+    <artifactId>snsync</artifactId>
+    <packaging>war</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <name>weibo sync</name>
+    <url>http://maven.apache.org</url>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<dependency.slf4j.version>1.6.4</dependency.slf4j.version>
-	</properties>
-
-
-	<dependencies>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>${dependency.slf4j.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>${dependency.slf4j.version}</version>
-		</dependency>
-
-		<!-- <dependency> -->
-		<!-- <groupId>javax.servlet</groupId> -->
-		<!-- <artifactId>jstl</artifactId> -->
-		<!-- <version>1.2</version> -->
-		<!-- </dependency> -->
-
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.9</version>
-			<scope>test</scope>
-		</dependency>
-
-		<!-- <dependency> -->
-		<!-- <groupId>javax.servlet</groupId> -->
-		<!-- <artifactId>javax.servlet-api</artifactId> -->
-		<!-- <version>3.0.1</version> -->
-		<!-- <scope>provided</scope> -->
-		<!-- </dependency> -->
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>2.5</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>commons-codec</groupId>
-			<artifactId>commons-codec</artifactId>
-			<version>1.6</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-httpclient</groupId>
-			<artifactId>commons-httpclient</artifactId>
-			<version>3.1</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-configuration</groupId>
-			<artifactId>commons-configuration</artifactId>
-			<version>1.4</version>
-			<exclusions>
-				<exclusion>
-					<groupId>commons-jxpath</groupId>
-					<artifactId>commons-jxpath</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<version>0.11.0</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.quartz-scheduler</groupId>
-			<artifactId>quartz</artifactId>
-			<version>1.8.4</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.json</groupId>
-			<artifactId>json</artifactId>
-			<version>20090211</version>
-		</dependency>
-		<dependency>
-			<groupId>trove</groupId>
-			<artifactId>trove</artifactId>
-			<version>1.0.2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-jdbc</artifactId>
-			<version>2.5.5</version>
-		</dependency>
-		<dependency>
-			<groupId>dom4j</groupId>
-			<artifactId>dom4j</artifactId>
-			<version>1.6.1</version>
-		</dependency>
-
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.0.8</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>c3p0</groupId>
-			<artifactId>c3p0</artifactId>
-			<version>0.9.1.2</version>
-			<scope>runtime</scope>
-		</dependency>
-
-		<!-- please see readme - build local jar into m2 repo -->
-		<dependency>
-			<groupId>org.usc.weibo</groupId>
-			<artifactId>activity</artifactId>
-			<version>0.9</version>
-		</dependency>
-		<dependency>
-			<groupId>org.usc.weibo</groupId>
-			<artifactId>qweibosdk</artifactId>
-			<version>1.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.usc.weibo</groupId>
-			<artifactId>weibo4j</artifactId>
-			<version>1.0</version>
-		</dependency>
-		<!-- <dependency> -->
-		<!-- <groupId>com.danga</groupId> -->
-		<!-- <artifactId>java-memcached-release</artifactId> -->
-		<!-- <version>2.5.1</version> -->
-		<!-- </dependency> -->
-
-		<!-- Sina App Engine -->
-		<dependency>
-			<groupId>com.sina</groupId>
-			<artifactId>sae-local</artifactId>
-			<version>1.0</version>
-		</dependency>
-
-	</dependencies>
-
-	<build>
-		<finalName>snsync</finalName>
-
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-					<encoding>${project.build.sourceEncoding}</encoding>
-					<compilerVersion>1.6</compilerVersion>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <dependency.slf4j.version>1.6.4</dependency.slf4j.version>
+    </properties>
 
 
-	<profiles>
-		<profile>
-			<id>tomcat1</id>
-			<activation>
-				<property>
-					<name>tomcat.version</name>
-				</property>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-war-plugin</artifactId>
-						<configuration>
-							<webappDirectory>C:\Program Files\apache-tomcat-${tomcat.version}\webapps\${project.build.finalName}</webappDirectory>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
-			<id>tomcat2</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>tomcat-maven-plugin</artifactId>
-						<configuration>
-							<url>http://localhost:8080/manager/html</url>
-							<server>tomcat</server>
-							<path>/${project.build.finalName}</path>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
+    <dependencies>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${dependency.slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${dependency.slf4j.version}</version>
+        </dependency>
+
+        <!-- <dependency> -->
+        <!-- <groupId>javax.servlet</groupId> -->
+        <!-- <artifactId>jstl</artifactId> -->
+        <!-- <version>1.2</version> -->
+        <!-- </dependency> -->
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.9</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- <dependency> -->
+        <!-- <groupId>javax.servlet</groupId> -->
+        <!-- <artifactId>javax.servlet-api</artifactId> -->
+        <!-- <version>3.0.1</version> -->
+        <!-- <scope>provided</scope> -->
+        <!-- </dependency> -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.6</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
+            <version>3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-configuration</groupId>
+            <artifactId>commons-configuration</artifactId>
+            <version>1.4</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-jxpath</groupId>
+                    <artifactId>commons-jxpath</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>0.11.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>1.8.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20090211</version>
+        </dependency>
+        <dependency>
+            <groupId>trove</groupId>
+            <artifactId>trove</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>2.5.5</version>
+        </dependency>
+        <dependency>
+            <groupId>dom4j</groupId>
+            <artifactId>dom4j</artifactId>
+            <version>1.6.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.0.8</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>c3p0</groupId>
+            <artifactId>c3p0</artifactId>
+            <version>0.9.1.2</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- please see readme - build local jar into m2 repo -->
+        <dependency>
+            <groupId>org.usc.weibo</groupId>
+            <artifactId>activity</artifactId>
+            <version>0.9</version>
+        </dependency>
+        <dependency>
+            <groupId>org.usc.weibo</groupId>
+            <artifactId>qweibosdk</artifactId>
+            <version>1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.usc.weibo</groupId>
+            <artifactId>weibo4j-oauth2</artifactId>
+            <version>1.1</version>
+        </dependency>
+        <!-- <dependency> -->
+        <!-- <groupId>com.danga</groupId> -->
+        <!-- <artifactId>java-memcached-release</artifactId> -->
+        <!-- <version>2.5.1</version> -->
+        <!-- </dependency> -->
+
+        <!-- Sina App Engine -->
+        <dependency>
+            <groupId>com.sina</groupId>
+            <artifactId>sae-local</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <finalName>snsync</finalName>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <compilerVersion>1.6</compilerVersion>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+    <profiles>
+        <profile>
+            <id>tomcat1</id>
+            <activation>
+                <property>
+                    <name>tomcat.version</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-war-plugin</artifactId>
+                        <configuration>
+                            <webappDirectory>C:\Program Files\apache-tomcat-${tomcat.version}\webapps\${project.build.finalName}</webappDirectory>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>tomcat2</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>tomcat-maven-plugin</artifactId>
+                        <configuration>
+                            <url>http://localhost:8080/manager/html</url>
+                            <server>tomcat</server>
+                            <path>/${project.build.finalName}</path>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 
 </project>
