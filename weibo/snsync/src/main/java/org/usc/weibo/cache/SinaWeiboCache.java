@@ -6,6 +6,7 @@ import org.usc.weibo.vo.Follower;
 
 import weibo4j.Weibo;
 
+import com.sina.sae.memcached.SaeMemcache;
 import com.xunlei.game.activity.service.ServiceFactory;
 
 /**
@@ -13,7 +14,6 @@ import com.xunlei.game.activity.service.ServiceFactory;
  * @author Shunli
  */
 public class SinaWeiboCache {
-    private final static CacheService instance = CacheService.instance();
     private static FollowerService followerService = ServiceFactory.getService(FollowerService.class);
 
     // private static ApplicationService applicationService = ServiceFactory.getService(ApplicationService.class);
@@ -25,7 +25,10 @@ public class SinaWeiboCache {
     public static Weibo getWeibo(Long followerId, Boolean createIfNotExist) {
         String key = Constants.WEIBO_CACHE_PREFIX + followerId;
 
-        Weibo weibo = instance.getObj(key, Weibo.class);
+        SaeMemcache mc = new SaeMemcache();
+        mc.init();
+
+        Weibo weibo = mc.get(key);
 
         if (weibo == null && createIfNotExist) {
             Follower follower = followerService.findById(followerId);
@@ -39,7 +42,7 @@ public class SinaWeiboCache {
                 weibo = new Weibo();
                 weibo.setToken(follower.getToken());
 
-                instance.saveObj(key, weibo);
+                mc.set(key, weibo);
             }
         }
 
@@ -47,7 +50,9 @@ public class SinaWeiboCache {
     }
 
     public static void putWeibo(Long followerId, Weibo weibo) {
-        instance.saveObj(Constants.WEIBO_CACHE_PREFIX + followerId, weibo);
+        SaeMemcache mc = new SaeMemcache();
+        mc.init();
+        mc.set(Constants.WEIBO_CACHE_PREFIX + followerId, weibo);
     }
 
 }

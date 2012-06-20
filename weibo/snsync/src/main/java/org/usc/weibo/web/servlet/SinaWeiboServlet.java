@@ -17,6 +17,9 @@ import weibo4j.http.AccessToken;
 import weibo4j.model.Status;
 import weibo4j.model.User;
 
+import com.sina.sae.memcached.SaeMemcache;
+import com.xunlei.game.activity.utils.ServerUtil;
+
 /**
  * SinaWeiboServlet
  *
@@ -90,9 +93,12 @@ public class SinaWeiboServlet extends SnsBaseServlet {
 
         SinaWeiboCache.putWeibo(model.getSeqId(), weibo);
 
-        String key = super.getCookie(request, response, "saeut");
+        String key = ServerUtil.getRealIp(request);// super.getCookie(request, response, Constants.SINA_APP_COOKIE_KEY);
         System.out.println("cookie key = " + key);
-        instance.saveObj(key + LEFT_FOLLOWER_COOKIE_NAME, model.getSeqId(), 5 * 60 * 1000L);// 5min
+
+        SaeMemcache mc = new SaeMemcache();
+        mc.init();
+        mc.set(key + LEFT_FOLLOWER_COOKIE_NAME, model.getSeqId(), 5 * 60 * 1000L);
 
         System.out.println("callBack successly " + appId + " access token, followerId=" + model.getSeqId());
 
