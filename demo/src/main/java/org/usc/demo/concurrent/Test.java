@@ -27,9 +27,9 @@ public class Test {
 				public void run() {
 					while (true) {
 						try {
-							String key = random.nextInt(100) + "";
-							String value = Thread.currentThread().getName() + "-" + key + ":" + Cache.getValue(key);
-//							System.out.println(value);
+							String key = random.nextInt(10) + "";
+							key = Thread.currentThread().getName() + "-" + key + ":" + Cache.getValue(key);
+							System.out.println(key);
 //							Thread.sleep(1000);
 						} catch (InterruptedException e) {
 							e.printStackTrace();

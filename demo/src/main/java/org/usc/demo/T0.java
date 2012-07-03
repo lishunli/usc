@@ -1,5 +1,6 @@
 package org.usc.demo;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -94,21 +95,53 @@ public class T0 {
 	}
 
 	public static void main(String[] args) throws Exception {
-		String key = UUID.randomUUID().toString().replaceAll("-", "").toString();
-		String code = null;
-		System.out.println(key.equals(code));
-//		String url = "http://127.0.0.1:8080/snsync/sinaweibo";
-//		String servletUrl = "/sinaweibo";
-//		System.out.println(url.substring(0, url.length() - servletUrl.length()) );
+		// Pattern p = Pattern.compile("\\d{4}", 2);
+		// Matcher m = p.matcher("");
+		// System.out.println(m.matches());
 
-//		String data = null;
-//		System.out.println(data.split("\\|"));
+		// Long a = 1236L;
+		// Long b = 60 * 1000L;
+		// System.out.println(a < b);
+
+		// System.out.println(System.getenv());
+		// String name = System.getProperty("user.name");
+		// System.out.println(name);
+
+		// Map<String ,String > map = new HashMap<String, String>();
+		// String url = "http://act.game.xunlei.com:85/xlgame_dcf/dcfrecall?action=getRecallCount&test=test";
+		//
+		// System.out.println(url.lastIndexOf("?"));
+		// url = url.substring(url.lastIndexOf("?") + 1);
+		// System.out.println(url);
+		//
+		// String[] firstSplit = url.split("&");
+		//
+		// Map<String, String> maps = new HashMap<String, String>();
+		// for (String param : firstSplit) {
+		// System.out.println(param);
+		// String[] secondeSplit = param.split("=");
+		// maps.put(secondeSplit[0], secondeSplit[1]);
+		// }
+		//
+		// System.out.println(maps);
+
+		// String key = UUID.randomUUID().toString().replaceAll("-", "").toString();
+		System.out.println(UUID.randomUUID().toString().replaceAll("-", ""));
+		// String code = null;
+		// System.out.println(key.equals(code));
+		// String url = "http://127.0.0.1:8080/snsync/sinaweibo";
+		// String servletUrl = "/sinaweibo";
+		// System.out.println(url.substring(0, url.length() - servletUrl.length()) );
+
+		// String data = null;
+		// System.out.println(data.split("\\|"));
 
 		// String url = "http://t2.qpic.cn/mblogpic/89e43514893fe5b7359e/2000";
 		// File file = new File(url);
 		// System.out.println(file);
 
-//		String context = "【中,.，。：”“:\"\"南财大毕业x生抢帽子 4年狂骗7000万】过事先建仓、黑嘴荐股、拉抬股价后抢先卖出，通过这一\"抢帽子\"手法，年仅30岁出头的中南财大一名毕业生，在短短4年时间里，将拼凑来的30万元，炒到7000多万元。5月17日，天门法院一审判决：被告人余凯犯操纵证券市场罪，判处有期徒刑三年。";
+		// String context =
+		// "【中,.，。：”“:\"\"南财大毕业x生抢帽子 4年狂骗7000万】过事先建仓、黑嘴荐股、拉抬股价后抢先卖出，通过这一\"抢帽子\"手法，年仅30岁出头的中南财大一名毕业生，在短短4年时间里，将拼凑来的30万元，炒到7000多万元。5月17日，天门法院一审判决：被告人余凯犯操纵证券市场罪，判处有期徒刑三年。";
 		// System.out.println(context);
 		//
 		// String pattern = "\\[\\u4e00-\\u9fa5\\]";
@@ -135,16 +168,16 @@ public class T0 {
 		//
 		// System.out.println(questionMarkCount);
 
-//		String text = context;
-//		int limit = 140 - 10 - " //来自微博@李顺利 ".length();// shorturl lenght = 20 /2 = 10
-//
-//		if (checkIsOverLengthLimit(text, limit)) {
-//			text = StringUtils.abbreviate(text, limit); // substring
-//		}
-//
-//		text = text + " //来自微博@李顺利 " + "http://url.cn/1OFbY4";
-//
-//		System.out.println(text);
+		// String text = context;
+		// int limit = 140 - 10 - " //来自微博@李顺利 ".length();// shorturl lenght = 20 /2 = 10
+		//
+		// if (checkIsOverLengthLimit(text, limit)) {
+		// text = StringUtils.abbreviate(text, limit); // substring
+		// }
+		//
+		// text = text + " //来自微博@李顺利 " + "http://url.cn/1OFbY4";
+		//
+		// System.out.println(text);
 
 		// for (char c : context.toCharArray()) {
 		// // System.out.println(c + ":" + String.valueOf(c).matches("[\\u4e00-\\u9fa5]"));
