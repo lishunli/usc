@@ -18,7 +18,7 @@ import org.usc.weibo.vo.WeiboContent;
  * @author Shunli
  */
 public class WeiboSyncFactory {
-	private static Logger log = LogFactory.getLogger(Constants.LOG_DIR, Constants.ACT_DIR, "sendWeiboJob");
+	private static Logger log = LogFactory.getLoggerDaily(Constants.LOG_DIR, Constants.ACT_DIR, "sendWeiboJob");
 
 	protected static ApplicationService appService = ServiceFactory.getService(ApplicationService.class);
 
