@@ -15,7 +15,7 @@ import com.xunlei.game.activity.log.LogFactory;
 import com.xunlei.game.activity.service.ServiceFactory;
 
 public class SendWeiboJob extends AbstractJob {
-	private static Logger log = LogFactory.getLogger(Constants.LOG_DIR, Constants.ACT_DIR, "sendWeiboJob");
+	private static Logger log = LogFactory.getLoggerDaily(Constants.LOG_DIR, Constants.ACT_DIR, "sendWeiboJob");
 	private static FollowerService followerService = ServiceFactory.getService(FollowerService.class);
 	private static RelationService relationService = ServiceFactory.getService(RelationService.class);
 
