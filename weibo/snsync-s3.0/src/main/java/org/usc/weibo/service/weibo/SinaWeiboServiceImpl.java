@@ -64,13 +64,19 @@ public class SinaWeiboServiceImpl extends AbstractWeiboService implements WeiboS
 						weiboContents.add(new WeiboContent(status.getId(), text, pic, status.getCreatedAt().getTime()));
 					} else {
 						long retweetedId = retweetedStatus.getId();
-						WeiboContent retweetedContent = new WeiboContent(retweetedId, retweetedStatus.getText(), retweetedStatus.getOriginal_pic(), retweetedStatus.getCreatedAt().getTime());
-
 						String from = " //来自微博@" + retweetedStatus.getUser().getName() + " ";
+						String linkUrl = String.format(SINA_FROM_ID_TO_URL, retweetedStatus.getUser().getId(), retweetedId);
 						int maxWidth = Constants.WEIBO_CONTENT_MAX_LENGTH - WeiboUtil.length(from) - SHORT_URL_MAX_LENGTH;
 
-						text = WeiboUtil.abbreviate(text, maxWidth) + from + String.format(SINA_FROM_ID_TO_URL, retweetedStatus.getUser().getId(), retweetedId);
+						// keep the more real original weibo text.
+						String retweetedText = retweetedStatus.getText();
+						if (WeiboUtil.length(retweetedText) <= maxWidth) {
+							retweetedText = retweetedText + from + linkUrl;
+						} else {
+							text = WeiboUtil.abbreviate(text, maxWidth) + from + linkUrl;
+						}
 
+						WeiboContent retweetedContent = new WeiboContent(retweetedId, retweetedText, retweetedStatus.getOriginal_pic(), retweetedStatus.getCreatedAt().getTime());
 						weiboContents.add(new WeiboContent(status.getId(), text, "", status.getCreatedAt().getTime(), retweetedContent));
 					}
 				} else {
