@@ -1,5 +1,11 @@
 package org.usc.demo;
 
+import java.util.Date;
+
+import org.apache.commons.lang3.time.DateUtils;
+
+import com.xunlei.game.activity.utils.DateUtil;
+
 /**
  *
  * @author Shunli
@@ -22,22 +28,26 @@ public class BuildSqlStatement {
 		// System.out.println();
 		// }
 
-		String pic1 = "INSERT INTO `bellepics` VALUES ('%s', '%s', '1151286372573796214.JPG', '1151286372573796149.JPG', '', '', '2012-04-13 18:32:02', 'jasonzhang');";
-		String pic2 = "INSERT INTO `bellepics` VALUES ('%s', '%s', '1151286372571714932.JPG', '1151286372571714803.JPG', '', '', '2012-04-13 18:31:34', 'jasonzhang');";
-		String pic3 = "INSERT INTO `bellepics` VALUES ('%s', '%s', '1151286372571714162.JPG', '1151286372571714097.JPG', '', '', '2012-04-13 18:31:34', 'jasonzhang');";
-		String pic4 = "INSERT INTO `bellepics` VALUES ('%s', '%s', '1151286372570216496.JPG', '1151286372570216431.JPG', '', '', '2012-04-13 18:31:11', 'jasonzhang');";
-		String pic5 = "INSERT INTO `bellepics` VALUES ('%s', '%s', '1151286372570215918.JPG', '1151286372570215853.JPG', '', '', '2012-04-13 18:31:11', 'jasonzhang');";
-		String pic6 = "INSERT INTO `bellepics` VALUES ('%s', '%s', '1151286372573798456.jpg', '1151286372573797879.jpg', '', '', '2012-04-13 18:32:02', 'jasonzhang');";
+		String pic1 = "INSERT INTO `signin_1`(userid,oldaccount,signindate) VALUES ('46670035874667', 'youxiceshi', '%s');";
+		// String pic2 =
+		// "INSERT INTO `bellepics` VALUES ('%s', '%s', '1151286372571714932.JPG', '1151286372571714803.JPG', '', '', '2012-04-13 18:31:34', 'jasonzhang');";
+		// String pic3 =
+		// "INSERT INTO `bellepics` VALUES ('%s', '%s', '1151286372571714162.JPG', '1151286372571714097.JPG', '', '', '2012-04-13 18:31:34', 'jasonzhang');";
+		// String pic4 =
+		// "INSERT INTO `bellepics` VALUES ('%s', '%s', '1151286372570216496.JPG', '1151286372570216431.JPG', '', '', '2012-04-13 18:31:11', 'jasonzhang');";
+		// String pic5 =
+		// "INSERT INTO `bellepics` VALUES ('%s', '%s', '1151286372570215918.JPG', '1151286372570215853.JPG', '', '', '2012-04-13 18:31:11', 'jasonzhang');";
+		// String pic6 =
+		// "INSERT INTO `bellepics` VALUES ('%s', '%s', '1151286372573798456.jpg', '1151286372573797879.jpg', '', '', '2012-04-13 18:32:02', 'jasonzhang');";
 
-//        INSERT INTO `loginnotice` VALUES ('5', 'test', 'test', 'test', '20120507', '16:04:13');
+		// INSERT INTO `loginnotice` VALUES ('5', 'test', 'test', 'test', '20120507', '16:04:13');
+		Date date = new Date();
+
 		int seq = 1;
-		for (int i = 1; i <= 40; i++) {
-			System.out.println(String.format(pic1, seq++, i));
-			System.out.println(String.format(pic2, seq++, i));
-			System.out.println(String.format(pic3, seq++, i));
-			System.out.println(String.format(pic4, seq++, i));
-			System.out.println(String.format(pic5, seq++, i));
-			System.out.println(String.format(pic6, seq++, i));
+		for (int i = 1; i <= 42; i++) {
+			date = DateUtils.addDays(date, 1);
+			String dateStr = DateUtil.formatDate(date, DateUtil.PATTEM_DATE);
+			System.out.println(String.format(pic1, dateStr));
 		}
 
 	}

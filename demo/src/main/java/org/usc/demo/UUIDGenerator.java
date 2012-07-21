@@ -9,7 +9,9 @@ import java.util.UUID;
 public class UUIDGenerator {
 
 	public static void main(String[] args) {
-		System.out.println(UUID.randomUUID().toString().replaceAll("-", ""));
+		for (int i = 0; i < 100; i++) {
+			System.out.println(UUID.randomUUID().toString().replaceAll("-", "") + " lishunli" + (i + 1));
+		}
 	}
 
 }

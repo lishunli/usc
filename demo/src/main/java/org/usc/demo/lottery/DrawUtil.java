@@ -1,4 +1,4 @@
-package org.usc.demo;
+package org.usc.demo.lottery;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -1,10 +1,9 @@
 package org.usc.demo;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -95,6 +94,17 @@ public class T0 {
 	}
 
 	public static void main(String[] args) throws Exception {
+		String s1 = "1";
+		String s2 = null;
+		System.out.println(s1 + s2);
+
+//		List<String> list = new ArrayList<String>(10);
+//		System.out.println(list.size());
+//		list.add("1");
+//		list.add("1");
+//		list.add("1");
+////		System.out.println(list.size());
+//		System.out.println(list);
 		// Pattern p = Pattern.compile("\\d{4}", 2);
 		// Matcher m = p.matcher("");
 		// System.out.println(m.matches());
@@ -125,8 +135,14 @@ public class T0 {
 		//
 		// System.out.println(maps);
 
+
+//		String source ="http://google.com";
+//		String img = "123.png";
+//		System.out.println(FilenameUtils.concat(source, img));
+
+
 		// String key = UUID.randomUUID().toString().replaceAll("-", "").toString();
-		System.out.println(UUID.randomUUID().toString().replaceAll("-", ""));
+//		System.out.println(UUID.randomUUID().toString().replaceAll("-", ""));
 		// String code = null;
 		// System.out.println(key.equals(code));
 		// String url = "http://127.0.0.1:8080/snsync/sinaweibo";
