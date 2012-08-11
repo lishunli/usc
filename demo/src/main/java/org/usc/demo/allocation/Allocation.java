@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -23,6 +24,21 @@ public class Allocation {
 
 		List<TradeInfo> tradeInfos = new ArrayList<TradeInfo>();
 
+<<<<<<< .mine
+        Map<String, String> map = new HashMap<String, String>();
+
+
+        for (String str : contents) {
+            tradeInfos.add(new TradeInfo(
+                     str.substring(16, 46).trim(),
+                     str.substring(47, 48),
+                     str.substring(49, 69).trim(),
+                     str.substring(70, 90).trim(),
+                     str.substring(91, 111).trim(),
+                     new BigDecimal(str.substring(112, 122).trim()),
+                     new BigDecimal(str.substring(296, 306).trim())));
+        }
+=======
 		for (String str : contents) {
 			tradeInfos.add(new TradeInfo(
 					 str.substring(16, 46).trim(),
@@ -33,6 +49,7 @@ public class Allocation {
 					 new BigDecimal(str.substring(112, 122).trim()),
 					 new BigDecimal(str.substring(296, 306).trim())));
 		}
+>>>>>>> .r1526
 
 		// maybe grouping by sql. group by instrument, tradeType.
 		List<SecPlusTradeTypePair> secPlusTradeTypePairs = new ArrayList<SecPlusTradeTypePair>();
