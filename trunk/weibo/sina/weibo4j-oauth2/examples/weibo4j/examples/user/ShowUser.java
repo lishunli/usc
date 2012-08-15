@@ -8,18 +8,18 @@ import weibo4j.model.WeiboException;
 
 public class ShowUser {
 
-	public static void main(String[] args) {
-		String access_token = "2.00WP3ohBC9fwHBbead892d05kL4p2C";//args[0];
-		Weibo weibo = new Weibo();
-		weibo.setToken(access_token);
-		String uid = "1563517210"; //args[1];
-		Users um = new Users();
-		try {
-			User user = um.showUserById(uid);
-			Log.logInfo(user.toString());
-		} catch (WeiboException e) {
-			e.printStackTrace();
-		}
-	}
+    public static void main(String[] args) {
+        String access_token = "2.00WP3ohBC9fwHBb5d741095dikjFYB";//args[0];
+        Weibo weibo = new Weibo();
+        weibo.setToken(access_token);
+        String uid = "1563517210"; //args[1];
+        Users um = new Users();
+        try {
+            User user = um.showUserById(uid);
+            Log.logInfo(user.toString());
+        } catch (WeiboException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
