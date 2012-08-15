@@ -17,7 +17,7 @@ public class SyncRecordServiceImpl implements SyncRecordService {
     }
 
     @Override
-    public boolean isSynchronized(Long followerId, Long weiboId) {
+    public boolean isSynchronized(Long followerId, String weiboId) {
         return dao.isSynchronized(followerId, weiboId);
     }
 

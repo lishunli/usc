@@ -8,5 +8,5 @@ import org.usc.weibo.vo.SyncRecord;
  */
 public interface SyncRecordService {
     void addSyncRecord(SyncRecord relation);
-    boolean isSynchronized(Long followerId, Long weiboId);
+    boolean isSynchronized(Long followerId, String weiboId);
 }

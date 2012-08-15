@@ -14,11 +14,11 @@ import org.usc.weibo.vo.WeiboContent;
  * @author Shunli
  */
 public interface WeiboService {
-	Logger log = LogFactory.getLoggerDaily(Constants.LOG_DIR, Constants.ACT_DIR, "sendWeiboJob");
+    Logger log = LogFactory.getLoggerDaily(Constants.LOG_DIR, Constants.ACT_DIR, "sendWeiboJob");
 
-	Pair<Pair<Long,Long>, List<WeiboContent>> read() throws Exception;
+    Pair<Pair<String,Long>, List<WeiboContent>> read() throws Exception;
 
-	void write(List<WeiboContent> weiboContents) throws Exception;
+    void write(List<WeiboContent> weiboContents) throws Exception;
 
-	void updateLastInfo(Long lastId, Long lastTimeStamp);
+    void updateLastInfo(String lastId, Long lastTimeStamp);
 }
