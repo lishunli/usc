@@ -46,7 +46,7 @@ public class SinaWeiboServiceImpl extends AbstractWeiboService implements WeiboS
 
         Paging pag = new Paging();
         pag.setSinceId(StringUtils.isNotEmpty(follower.getLastId()) ? RegUtil.getLong(follower.getLastId()) : 1L);
-        pag.setCount(1000);
+        pag.setCount(100);
 
         Timeline tm = new Timeline();
         StatusWapper statusWapper = tm.getUserTimelineByUid(follower.getUserId(), pag, 0, 0);
