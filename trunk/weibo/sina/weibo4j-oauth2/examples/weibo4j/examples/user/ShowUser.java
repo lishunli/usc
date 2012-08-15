@@ -9,10 +9,10 @@ import weibo4j.model.WeiboException;
 public class ShowUser {
 
 	public static void main(String[] args) {
-		String access_token = args[0];
+		String access_token = "2.00WP3ohBC9fwHBbead892d05kL4p2C";//args[0];
 		Weibo weibo = new Weibo();
 		weibo.setToken(access_token);
-		String uid =  args[1];
+		String uid = "1563517210"; //args[1];
 		Users um = new Users();
 		try {
 			User user = um.showUserById(uid);
