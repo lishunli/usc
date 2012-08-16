@@ -9,7 +9,6 @@ import org.usc.weibo.util.Constants;
 import org.usc.weibo.vo.Relation;
 
 import com.xunlei.game.activity.log.LogFactory;
-import com.xunlei.game.activity.utils.RegUtil;
 import com.xunlei.game.activity.utils.ServerUtil;
 import com.xunlei.game.activity.vo.JsonRtn;
 
@@ -25,11 +24,12 @@ public class SnsServlet extends SnsBaseServlet {
 
 	public void sync(HttpServletRequest request, HttpServletResponse response) {
 		try {
-			Long leftFollowerId = RegUtil.getLong(super.getCookie(request, response, LEFT_FOLLOWER_COOKIE_NAME));
-			Long rightFollowerId = RegUtil.getLong(super.getCookie(request, response, RIGHT_FOLLOWER_COOKIE_NAME));
+			String realIp = ServerUtil.getRealIp(request);
+			Long leftFollowerId = instance.getObj(realIp + LEFT_FOLLOWER_NAME, Long.class);
+			Long rightFollowerId = instance.getObj(realIp + RIGHT_FOLLOWER_NAME, Long.class);
 
 			if (leftFollowerId == null || rightFollowerId == null) {
-				log.info("sync-no-cookie,please auth both left and right!" + leftFollowerId + "," + rightFollowerId);
+				log.info("sync-no-mc-object,please auth both left and right!" + leftFollowerId + "," + rightFollowerId);
 			} else {
 				Relation originRelation = relationService.findByTwoWayFollowers(leftFollowerId, rightFollowerId);
 
@@ -54,15 +54,16 @@ public class SnsServlet extends SnsBaseServlet {
 	}
 	public void cansync(HttpServletRequest request, HttpServletResponse response) {
 		try {
-			Long leftFollowerId = RegUtil.getLong(super.getCookie(request, response, LEFT_FOLLOWER_COOKIE_NAME));
-			Long rightFollowerId = RegUtil.getLong(super.getCookie(request, response, RIGHT_FOLLOWER_COOKIE_NAME));
+			String realIp = ServerUtil.getRealIp(request);
+			Long leftFollowerId = instance.getObj(realIp + LEFT_FOLLOWER_NAME, Long.class);
+			Long rightFollowerId = instance.getObj(realIp + RIGHT_FOLLOWER_NAME, Long.class);
 
 			if (leftFollowerId == null && rightFollowerId == null) {
-				log.info("cansync-no-cookie,please auth both left and right!" + leftFollowerId + rightFollowerId);
+				log.info("cansync-no-mc-object,please auth both left and right!" + leftFollowerId + rightFollowerId);
 			} else {
 				relationService.cancelRelation(leftFollowerId, rightFollowerId);
-				super.delCookie(response, LEFT_FOLLOWER_COOKIE_NAME);
-				super.delCookie(response, RIGHT_FOLLOWER_COOKIE_NAME);
+				instance.delete(realIp + LEFT_FOLLOWER_NAME);
+				instance.delete(realIp + RIGHT_FOLLOWER_NAME);
 				log.info("cansync success:" + leftFollowerId + "," + rightFollowerId + "," + ServerUtil.getRealIp(request));
 			}
 

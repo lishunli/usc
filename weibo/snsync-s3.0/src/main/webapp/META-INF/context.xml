@@ -12,5 +12,5 @@
 	type="com.mchange.v2.c3p0.ComboPooledDataSource"
 	name="jdbc/xlgame_youxi_weibo"
 	user="root" password="lishunli"
-	jdbcUrl="jdbc:mysql://127.0.0.1:3306/snsync?characterEncoding=utf8&amp;autoReconnect=true" />
+	jdbcUrl="jdbc:mysql://127.0.0.1:3306/lishunli?characterEncoding=utf8&amp;autoReconnect=true" />
 </Context>
