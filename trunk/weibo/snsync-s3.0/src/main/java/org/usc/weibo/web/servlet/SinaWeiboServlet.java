@@ -20,7 +20,6 @@ import weibo4j.model.Status;
 import weibo4j.model.User;
 
 import com.xunlei.game.activity.log.LogFactory;
-import com.xunlei.game.activity.utils.ServerUtil;
 import com.xunlei.game.activity.vo.JsonRtn;
 
 /**
@@ -109,7 +108,7 @@ public class SinaWeiboServlet extends SnsBaseServlet {
 
 			SinaWeiboCache.putWeibo(model.getSeqId(), weibo);
 
-			instance.saveObj(ServerUtil.getRealIp(request) + LEFT_FOLLOWER_NAME, model.getSeqId());
+			super.setCookie(request, response, LEFT_FOLLOWER_COOKIE_NAME, model.getSeqId().toString(), -1);
 			log.info("callBack successly " + appId + " access token, followerId=" + model.getSeqId());
 
 			String path = request.getContextPath();
