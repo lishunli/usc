@@ -40,7 +40,7 @@ import weibo4j.org.json.JSONException;
 
 /**
  * @author sinaWeibo
- * 
+ *
  */
 public class HttpClient implements java.io.Serializable {
 
@@ -69,7 +69,7 @@ public class HttpClient implements java.io.Serializable {
 	/**
 	 * Sets proxy host. System property -Dsinat4j.http.proxyHost or
 	 * http.proxyHost overrides this attribute.
-	 * 
+	 *
 	 * @param proxyHost
 	 */
 	public void setProxyHost(String proxyHost) {
@@ -83,7 +83,7 @@ public class HttpClient implements java.io.Serializable {
 	/**
 	 * Sets proxy port. System property -Dsinat4j.http.proxyPort or
 	 * -Dhttp.proxyPort overrides this attribute.
-	 * 
+	 *
 	 * @param proxyPort
 	 */
 	public void setProxyPort(int proxyPort) {
@@ -97,7 +97,7 @@ public class HttpClient implements java.io.Serializable {
 	/**
 	 * Sets proxy authentication user. System property -Dsinat4j.http.proxyUser
 	 * overrides this attribute.
-	 * 
+	 *
 	 * @param proxyAuthUser
 	 */
 	public void setProxyAuthUser(String proxyAuthUser) {
@@ -111,7 +111,7 @@ public class HttpClient implements java.io.Serializable {
 	/**
 	 * Sets proxy authentication password. System property
 	 * -Dsinat4j.http.proxyPassword overrides this attribute.
-	 * 
+	 *
 	 * @param proxyAuthPassword
 	 */
 	public void setProxyAuthPassword(String proxyAuthPassword) {
@@ -169,7 +169,7 @@ public class HttpClient implements java.io.Serializable {
 
 	/**
 	 * log调试
-	 * 
+	 *
 	 */
 	private static void log(String message) {
 		if (DEBUG) {
@@ -179,7 +179,7 @@ public class HttpClient implements java.io.Serializable {
 
 	/**
 	 * 处理http getmethod 请求
-	 * 
+	 *
 	 */
 
 	public Response get(String url) throws WeiboException {
@@ -278,7 +278,7 @@ public class HttpClient implements java.io.Serializable {
 
 	/**
 	 * 处理http post请求
-	 * 
+	 *
 	 */
 
 	public Response post(String url, PostParameter[] params)
@@ -306,7 +306,7 @@ public class HttpClient implements java.io.Serializable {
 
 	/**
 	 * 支持multipart方式上传图片
-	 * 
+	 *
 	 */
 	public Response multPartURL(String url, PostParameter[] params,
 			ImageItem item) throws WeiboException {
@@ -509,4 +509,10 @@ public class HttpClient implements java.io.Serializable {
 		}
 		return statusCode + ":" + cause;
 	}
+
+	@Override
+	public String toString() {
+		return "HttpClient [proxyHost=" + proxyHost + ", proxyPort=" + proxyPort + ", proxyAuthUser=" + proxyAuthUser + ", proxyAuthPassword=" + proxyAuthPassword + ", token=" + token + ", client=" + client + ", connectionManager=" + connectionManager + ", maxSize=" + maxSize + "]";
+	}
+
 }

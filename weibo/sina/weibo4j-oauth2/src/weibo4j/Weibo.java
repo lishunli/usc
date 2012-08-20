@@ -4,7 +4,7 @@ import weibo4j.http.HttpClient;
 
 /**
  * @author sinaWeibo
- * 
+ *
  */
 
 public class Weibo implements java.io.Serializable {
@@ -15,11 +15,15 @@ public class Weibo implements java.io.Serializable {
 
 	/**
 	 * Sets token information
-	 * 
+	 *
 	 * @param token
 	 */
 	public synchronized void setToken(String token) {
 		client.setToken(token);
 	}
 
+	@Override
+	public String toString() {
+		return "Weibo [" + client + "]";
+	}
 }
