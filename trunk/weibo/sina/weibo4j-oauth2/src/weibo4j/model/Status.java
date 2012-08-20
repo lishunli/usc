@@ -13,37 +13,38 @@ public class Status extends WeiboResponse implements java.io.Serializable {
 
 	private static final long serialVersionUID = -8795691786466526420L;
 
-	private User user = null;                            //作者信息
-	private Date createdAt;                              //status创建时间
-	private String id;                                   //status id
-	private String mid;                                  //微博MID
-	private long idstr;                                  //保留字段，请勿使用                     
-	private String text;                                 //微博内容
-	private Source source;                               //微博来源
-	private boolean favorited;                           //是否已收藏
+	private User user = null; // 作者信息
+	private Date createdAt; // status创建时间
+	private String id; // status id
+	private String mid; // 微博MID
+	private long idstr; // 保留字段，请勿使用
+	private String text; // 微博内容
+	private Source source; // 微博来源
+	private boolean favorited; // 是否已收藏
 	private boolean truncated;
-	private long inReplyToStatusId;                      //回复ID
-	private long inReplyToUserId;                        //回复人ID
-	private String inReplyToScreenName;                  //回复人昵称
-	private String thumbnailPic;                         //微博内容中的图片的缩略地址
-	private String bmiddlePic;                           //中型图片
-	private String originalPic;                          //原始图片
-	private Status retweetedStatus = null;               //转发的博文，内容为status，如果不是转发，则没有此字段
-	private String geo;                                  //地理信息，保存经纬度，没有时不返回此字段
-	private double latitude = -1;                        //纬度
-	private double longitude = -1;                       //经度
-	private int repostsCount;                            //转发数
-	private int commentsCount;                           //评论数
-	private String annotations;                          //元数据，没有时不返回此字段
+	private long inReplyToStatusId; // 回复ID
+	private long inReplyToUserId; // 回复人ID
+	private String inReplyToScreenName; // 回复人昵称
+	private String thumbnailPic; // 微博内容中的图片的缩略地址
+	private String bmiddlePic; // 中型图片
+	private String originalPic; // 原始图片
+	private Status retweetedStatus = null; // 转发的博文，内容为status，如果不是转发，则没有此字段
+	private String geo; // 地理信息，保存经纬度，没有时不返回此字段
+	private double latitude = -1; // 纬度
+	private double longitude = -1; // 经度
+	private int repostsCount; // 转发数
+	private int commentsCount; // 评论数
+	private String annotations; // 元数据，没有时不返回此字段
 	private int mlevel;
 	private Visible visible;
+
 	public Status()
 	{
 
 	}
-	public Status(Response res)throws WeiboException{
+	public Status(Response res) throws WeiboException {
 		super(res);
-		JSONObject json=res.asJSONObject();
+		JSONObject json = res.asJSONObject();
 		constructJson(json);
 	}
 
@@ -51,15 +52,15 @@ public class Status extends WeiboResponse implements java.io.Serializable {
 		try {
 			createdAt = parseDate(json.getString("created_at"), "EEE MMM dd HH:mm:ss z yyyy");
 			id = json.getString("id");
-			mid=json.getString("mid");
+			mid = json.getString("mid");
 			idstr = json.getLong("idstr");
 			text = json.getString("text");
-			if(!json.getString("source").isEmpty()){
+			if (!json.getString("source").isEmpty()) {
 				source = new Source(json.getString("source"));
 			}
 			inReplyToStatusId = getLong("in_reply_to_status_id", json);
 			inReplyToUserId = getLong("in_reply_to_user_id", json);
-			inReplyToScreenName=json.getString("in_reply_toS_screenName");
+			inReplyToScreenName = json.getString("in_reply_toS_screenName");
 			favorited = getBoolean("favorited", json);
 			truncated = getBoolean("truncated", json);
 			thumbnailPic = json.getString("thumbnail_pic");
@@ -68,18 +69,18 @@ public class Status extends WeiboResponse implements java.io.Serializable {
 			repostsCount = json.getInt("reposts_count");
 			commentsCount = json.getInt("comments_count");
 			annotations = json.getString("annotations");
-			if(!json.isNull("user"))
+			if (!json.isNull("user"))
 				user = new User(json.getJSONObject("user"));
-			if(!json.isNull("retweeted_status")){
-				retweetedStatus= new Status(json.getJSONObject("retweeted_status"));
+			if (!json.isNull("retweeted_status")) {
+				retweetedStatus = new Status(json.getJSONObject("retweeted_status"));
 			}
 			mlevel = json.getInt("mlevel");
-			geo= json.getString("geo");
-			if(geo!=null &&!"".equals(geo) &&!"null".equals(geo)){
+			geo = json.getString("geo");
+			if (geo != null && !"".equals(geo) && !"null".equals(geo)) {
 				getGeoInfo(geo);
 			}
-			if(!json.isNull("visible")){
-				visible= new Visible(json.getJSONObject("visible"));
+			if (!json.isNull("visible")) {
+				visible = new Visible(json.getJSONObject("visible"));
 			}
 		} catch (JSONException je) {
 			throw new WeiboException(je.getMessage() + ":" + json.toString(), je);
@@ -87,23 +88,22 @@ public class Status extends WeiboResponse implements java.io.Serializable {
 	}
 
 	private void getGeoInfo(String geo) {
-		StringBuffer value= new StringBuffer();
-		for(char c:geo.toCharArray()){
-			if(c>45&&c<58){
+		StringBuffer value = new StringBuffer();
+		for (char c : geo.toCharArray()) {
+			if (c > 45 && c < 58) {
 				value.append(c);
 			}
-			if(c==44){
-				if(value.length()>0){
-					latitude=Double.parseDouble(value.toString());
+			if (c == 44) {
+				if (value.length() > 0) {
+					latitude = Double.parseDouble(value.toString());
 					value.delete(0, value.length());
 				}
 			}
 		}
-		longitude=Double.parseDouble(value.toString());
+		longitude = Double.parseDouble(value.toString());
 	}
 
-
-	public Status(JSONObject json)throws WeiboException, JSONException{
+	public Status(JSONObject json) throws WeiboException, JSONException {
 		constructJson(json);
 	}
 	public Status(String str) throws WeiboException, JSONException {
@@ -113,7 +113,6 @@ public class Status extends WeiboResponse implements java.io.Serializable {
 		constructJson(json);
 	}
 
-	
 	public User getUser() {
 		return user;
 	}
@@ -252,7 +251,7 @@ public class Status extends WeiboResponse implements java.io.Serializable {
 	public void setVisible(Visible visible) {
 		this.visible = visible;
 	}
-	
+
 	public boolean isTruncated() {
 		return truncated;
 	}
@@ -260,16 +259,16 @@ public class Status extends WeiboResponse implements java.io.Serializable {
 		this.truncated = truncated;
 	}
 	public static StatusWapper constructWapperStatus(Response res) throws WeiboException {
-		JSONObject jsonStatus = res.asJSONObject(); //asJSONArray();
+		JSONObject jsonStatus = res.asJSONObject(); // asJSONArray();
 		JSONArray statuses = null;
 		try {
-			if(!jsonStatus.isNull("statuses")){				
+			if (!jsonStatus.isNull("statuses")) {
 				statuses = jsonStatus.getJSONArray("statuses");
 			}
-			if(!jsonStatus.isNull("reposts")){
+			if (!jsonStatus.isNull("reposts")) {
 				statuses = jsonStatus.getJSONArray("reposts");
 			}
-			int size = statuses.length();
+			int size = statuses != null ? statuses.length() : 0;
 			List<Status> status = new ArrayList<Status>(size);
 			for (int i = 0; i < size; i++) {
 				status.add(new Status(statuses.getJSONObject(i)));
@@ -278,7 +277,7 @@ public class Status extends WeiboResponse implements java.io.Serializable {
 			long nextCursor = jsonStatus.getLong("next_cursor");
 			long totalNumber = jsonStatus.getLong("total_number");
 			String hasvisible = jsonStatus.getString("hasvisible");
-			return new StatusWapper(status, previousCursor, nextCursor,totalNumber,hasvisible);
+			return new StatusWapper(status, previousCursor, nextCursor, totalNumber, hasvisible);
 		} catch (JSONException jsone) {
 			throw new WeiboException(jsone);
 		}
