@@ -18,5 +18,6 @@ public class Constants {
 	public static final String WEIBO_CACHE_PREFIX = "WEIBO_";
 
 	public static final String SINA_WEIBO_CALL_BACK_REDIRECT_URI_PROP = "sina_weibo_call_back_redirect_uri";
+	public static final String DOMAIN = CONF.getValue("domain");
 
 }

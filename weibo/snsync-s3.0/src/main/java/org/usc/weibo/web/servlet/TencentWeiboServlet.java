@@ -19,7 +19,6 @@ import com.tencent.weibo.beans.OAuth;
 import com.tencent.weibo.utils.OAuthClient;
 import com.tencent.weibo.utils.WeiBoConst.ResultType;
 import com.xunlei.game.activity.log.LogFactory;
-import com.xunlei.game.activity.utils.ServerUtil;
 import com.xunlei.game.activity.vo.JsonRtn;
 
 /**
@@ -124,7 +123,8 @@ public class TencentWeiboServlet extends SnsBaseServlet {
 				}
 
 				TencentOAuthCache.putOAuth(model.getSeqId(), oauth);
-				instance.saveObj(ServerUtil.getRealIp(request) + RIGHT_FOLLOWER_NAME, model.getSeqId());
+				super.setCookie(request, response, RIGHT_FOLLOWER_COOKIE_NAME, model.getSeqId().toString(), -1);
+
 				log.info("callBack successly " + appId + " access token, followerId=" + model.getSeqId());
 
 				String path = request.getContextPath();
