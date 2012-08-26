@@ -225,6 +225,12 @@
 			<version>0.11.0</version>
 			<scope>provided</scope>
 		</dependency>
+		
+        <dependency>
+            <groupId>org.usc.weibo</groupId>
+            <artifactId>activity</artifactId>
+            <version>1.0</version>
+        </dependency>		
 	</dependencies>
 
 	<build>
@@ -265,6 +271,7 @@
 				<configuration>
 					<source>1.5</source>
 					<target>1.5</target>
+					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
 			<plugin>
