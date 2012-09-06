@@ -99,13 +99,14 @@ public class SinaWeiboServiceImpl extends AbstractWeiboService implements WeiboS
                 WeiboContent lastWeiboContent = weiboContents.get(0);
                 lastId = lastWeiboContent.getId();
                 lastTimeStamp = lastWeiboContent.getTimeStamp();
+
+                // reverse weibo bcz now order by send time desc(first record is last weibo).
+                Collections.reverse(weiboContents);
             }
         }
 
         log.info("SinaWeiboServiceImpl.read()" + weiboContents);
 
-        // reverse weibo bcz now order by send time desc(first record is last weibo).
-        Collections.reverse(weiboContents);
         return new Pair<Pair<String, Long>, List<WeiboContent>>(new Pair<String, Long>(lastId, lastTimeStamp), weiboContents);
     }
 
