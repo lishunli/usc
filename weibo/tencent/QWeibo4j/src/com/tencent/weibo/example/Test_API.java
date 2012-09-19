@@ -6,11 +6,15 @@ import java.net.URISyntaxException;
 import java.util.Random;
 import java.util.Scanner;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import com.tencent.weibo.api.Statuses_API;
-import com.tencent.weibo.api.T_API;
+import com.tencent.weibo.api.User_API;
 import com.tencent.weibo.beans.OAuth;
 import com.tencent.weibo.utils.OAuthClient;
 import com.tencent.weibo.utils.WeiBoConst;
+import com.tencent.weibo.utils.WeiBoConst.ResultType;
 
 public class Test_API {
 
@@ -85,6 +89,20 @@ public class Test_API {
 				System.out.println("Get Access Token failed!");
 				return;
 			} else {
+
+				User_API uApi = new User_API();
+				String userInfo = uApi.info(oauth, ResultType.ResultType_Json);
+
+				JSONObject user = (JSONObject) new JSONObject(userInfo).get("data");
+				JSONArray lastWeiboContents = user.getJSONArray("tweetinfo");
+
+				if(lastWeiboContents.length() > 0){
+					JSONObject lastWeiboContent = (JSONObject)lastWeiboContents.get(0);
+					System.out.println(Long.valueOf(lastWeiboContent.getString("id")));
+					System.out.println(lastWeiboContent.getLong("timestamp"));
+				}
+
+
 				// User_API uAPi = new User_API();
 
 				// System.out.println(uAPi.info(oauth,WeiBoConst.ResultType.ResultType_Json));
@@ -101,12 +119,12 @@ public class Test_API {
 				// String response = sendApi.add(oauth, WeiBoConst.ResultType.ResultType_Json, "hello world" + count, "127.0.0.1");
 				// System.out.println("response:" + response);
 
-				System.out.println(oauth);
-				Statuses_API sApi = new Statuses_API();
-				// String response = sApi.broadcast_timeline(oauth, WeiBoConst.ResultType.ResultType_Json, "2", "1337837587", "100", "74246130382428", "0", "0",
-				// "1");
-				String response =  new T_API().comment(oauth, WeiBoConst.ResultType.ResultType_Json, "Good", "127.0.0.1", "65297129576904");
-				System.out.println(response);
+//				System.out.println(oauth);
+//				Statuses_API sApi = new Statuses_API();
+//				// String response = sApi.broadcast_timeline(oauth, WeiBoConst.ResultType.ResultType_Json, "2", "1337837587", "100", "74246130382428", "0", "0",
+//				// "1");
+//				String response =  new T_API().comment(oauth, WeiBoConst.ResultType.ResultType_Json, "Good", "127.0.0.1", "65297129576904");
+//				System.out.println(response);
 
 				// String response = sApi.home_timeline(oauth, WeiBoConst.ResultType.ResultType_Json, "0", "0", "70");
 				// List<Status> status = sApi.broadcast_timeline(oauth, "0");
