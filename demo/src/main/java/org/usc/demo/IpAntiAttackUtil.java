@@ -13,16 +13,17 @@ public class IpAntiAttackUtil {
 	public static boolean isValidIp(String ip) {
 		CacheEntry entry = ipCache.get(ip);
 		long currentTimeMillis = System.currentTimeMillis();
+		int threshold = 100;
 		if (entry != null && currentTimeMillis <= entry.getExpiredTime()) {
 			int times = entry.getTimes() + 1;
 
-			if (times > 100) {
+			if (times > threshold) {
 				return false;
 			}
 
 			entry.setTimes(times);
 
-			if (entry.getTimes() >= 100) {
+			if (entry.getTimes() >= threshold) {
 				entry.setExpiredTime(currentTimeMillis + 8 * 60 * 60 * 1000L);// 8h
 				// log
 			}
