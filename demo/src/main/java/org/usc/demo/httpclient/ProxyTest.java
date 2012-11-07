@@ -54,7 +54,6 @@ public class ProxyTest {
             } finally {
                 httpget.releaseConnection();
             }
-
         }
 
     }
