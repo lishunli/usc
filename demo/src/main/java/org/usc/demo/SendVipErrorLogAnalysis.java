@@ -14,7 +14,6 @@ import org.apache.commons.io.FileUtils;
  */
 public class SendVipErrorLogAnalysis {
 
-    @SuppressWarnings("unchecked")
     public static void main(String[] args) throws IOException {
         File file = new File("C:\\Users\\Shunli\\Downloads\\xmlevelingsendvip_Error.log");
         List<String> lines = FileUtils.readLines(file);
@@ -35,7 +34,7 @@ public class SendVipErrorLogAnalysis {
 
         System.out.println("--------------------");
 
-        String fileNames = "xmlevelingsendvip.log xmlevelingsendvip.log2012-08-27  xmlevelingsendvip.log2012-08-28 ";
+        String fileNames = " xmlevelingsendvip.log2012-10-02 xmlevelingsendvip.log2012-10-03 xmlevelingsendvip.log2012-10-04 ";
         boolean isFrist = true;
         StringBuffer sb = new StringBuffer("egrep -E '(");
         for (String userId : userIdList) {
@@ -51,7 +50,7 @@ public class SendVipErrorLogAnalysis {
         System.out.println(sb);
         System.out.println("--------------------");
 
-        file = new File("C:\\Users\\Shunli\\Downloads\\log_result.txt");
+        file = new File("D:\\log_result.txt");
         lines = FileUtils.readLines(file);
 
         List<String> successUserIdList = new ArrayList<String>();
