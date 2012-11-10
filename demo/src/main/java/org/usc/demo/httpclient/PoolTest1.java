@@ -49,7 +49,7 @@ public class PoolTest1 {
             List<String> proxyUrls = readLines.subList(fromIndex, toIndex);
 
             // create a thread for each URI
-            HttpGet httpget = new HttpGet("http://www.baidu.com/");
+            HttpGet httpget = new HttpGet("http://act.game.xunlei.com:85/xlgame_xiumo/");
             httpget.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 2000);
             exec.execute(new GetThread(httpClient, httpget, proxyUrls));
         }

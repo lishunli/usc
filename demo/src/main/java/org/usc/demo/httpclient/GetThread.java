@@ -25,6 +25,7 @@ public class GetThread extends Thread {
 
     @Override
     public void run() {
+        // System.out.println(Thread.currentThread().getName() + " working");
         for (String line : proxyUrls) {
             String[] split = line.split(":");
             String hostname = split[0];
@@ -35,7 +36,8 @@ public class GetThread extends Thread {
 
             try {
                 this.httpClient.execute(this.httpget, this.context);
-                System.out.println(hostname + ":" + port + " test ok.");
+                // System.out.println("\"" + hostname + "\" ," + port /* + " test ok." */);
+                System.out.println("httpParams.setParameter(ConnRoutePNames.DEFAULT_PROXY, new HttpHost(\"" + hostname + "\" ," + port + "));"/* + " test ok." */);
 
             } catch (Exception e) {
                 // e.printStackTrace();
