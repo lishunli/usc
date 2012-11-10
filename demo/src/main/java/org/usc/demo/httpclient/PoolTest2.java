@@ -35,7 +35,7 @@ public class PoolTest2 {
         List<List<String>> doSubList = ListUtil.doSubList(readLines, THREAD_SIZE);
         for (List<String> proxyUrls : doSubList) {
             // create a thread for each URI
-            HttpGet httpget = new HttpGet("http://act.game.xunlei.com:85/xlgame_xiumo/xmcooperation");
+            HttpGet httpget = new HttpGet("http://localhost/");
             httpget.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 2000);
             exec.execute(new GetThread(httpClient, httpget, proxyUrls));
         }
