@@ -71,6 +71,20 @@ public class WeiboSyncFactory {
         }
     }
 
+    public static void sync(Long leftFollowerId, Long rightFollowerId) throws Exception {
+        log.info("hanlde " + leftFollowerId + "," + rightFollowerId);
+
+        Follower leftFollower = followerService.findById(leftFollowerId);
+        Follower rightFollower = followerService.findById(rightFollowerId);
+
+        if (leftFollower == null || rightFollower == null) {
+            log.info("no follower" + leftFollower + rightFollower);
+            return;
+        }
+
+        weiboSync(leftFollower, rightFollower, 1);
+    }
+
     /**
      * @param leftWeiboService
      * @param rightWeiboService
