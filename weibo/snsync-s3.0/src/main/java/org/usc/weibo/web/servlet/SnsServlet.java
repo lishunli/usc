@@ -80,7 +80,17 @@ public class SnsServlet extends SnsBaseServlet {
 
     public void doAction(HttpServletRequest request, HttpServletResponse response) {
         try {
-            WeiboSyncFactory.sync();
+            // WeiboSyncFactory.sync();
+            Long leftFollowerId = RegUtil.getLong(super.getCookie(request, response, LEFT_FOLLOWER_COOKIE_NAME));
+            Long rightFollowerId = RegUtil.getLong(super.getCookie(request, response, RIGHT_FOLLOWER_COOKIE_NAME));
+
+            if (leftFollowerId == null || rightFollowerId == null) {
+                log.info("sync-no-cookie,please auth both left and right!" + leftFollowerId + "," + rightFollowerId);
+                super.outputRtn(request, response, "请同时用新浪和腾讯账号登录");
+                return;
+            }
+
+            WeiboSyncFactory.sync(leftFollowerId, rightFollowerId);
             log.info("doAction-success");
             super.outputRtn(request, response, new JsonRtn<Object>(0, "成功").toJsonString());
         } catch (Exception e) {
