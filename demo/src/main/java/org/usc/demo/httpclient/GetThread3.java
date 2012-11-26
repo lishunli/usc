@@ -20,8 +20,7 @@ public class GetThread3 extends Thread {
             String hostname = split[0];
             int port = Integer.parseInt(split[1]);
 
-            String timeStamp = System.currentTimeMillis() + "";
-            HttpGet httpget = new HttpGet("http://hits.17173.com/mood/moodOpa.php?channel=10009&web_id=3109360&kind=1&action=1&mood=3&r=" + timeStamp + "&ajajId=ajaj1");
+            HttpGet httpget = new HttpGet("http://www.baidu.com");
             HttpUtil.httpGet(httpget, new HttpHost(hostname, port));
         }
     }

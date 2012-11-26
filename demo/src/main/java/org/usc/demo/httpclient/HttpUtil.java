@@ -51,8 +51,17 @@ public class HttpUtil {
 
     }
 
+    public static void httpGet(String url) throws IOException {
+        HttpGet httpget = new HttpGet(url);
+        httpGet(httpget);
+    }
+
     public static void httpGet(URI uri) throws IOException {
         HttpGet httpget = new HttpGet(uri);
+        httpGet(httpget);
+    }
+
+    public static void httpGet(HttpGet httpget) throws IOException {
         httpget.getParams().removeParameter(ConnRoutePNames.DEFAULT_PROXY);
 
         HttpResponse response = null;
@@ -69,23 +78,14 @@ public class HttpUtil {
             httpget.releaseConnection();
         }
     }
+    public static void httpGet(String url, HttpHost proxyHost) {
+        HttpGet httpget = new HttpGet(url);
+        httpGet(httpget, proxyHost);
+    }
 
     public static void httpGet(URI uri, HttpHost proxyHost) {
         HttpGet httpget = new HttpGet(uri);
-        httpget.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxyHost);
-        HttpResponse response = null;
-        try {
-            response = httpclient.execute(httpget);
-
-            if (response != null) {
-                System.out.println(response.getStatusLine().getStatusCode());
-                System.out.println(EntityUtils.toString(response.getEntity()));
-            }
-        } catch (Exception e) {
-            httpget.abort();
-        } finally {
-            httpget.releaseConnection();
-        }
+        httpGet(httpget, proxyHost);
     }
 
     public static void httpGet(HttpGet httpget, HttpHost proxyHost) {
