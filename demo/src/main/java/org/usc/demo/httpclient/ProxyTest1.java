@@ -7,16 +7,18 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.http.HttpHost;
+import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.conn.params.ConnRoutePNames;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreConnectionPNames;
+import org.apache.http.util.EntityUtils;
 
 /**
  *
  * @author Shunli
  */
-public class ProxyTest {
+public class ProxyTest1 {
 
     public static void main(String[] args) {
         testProxy();
@@ -33,7 +35,7 @@ public class ProxyTest {
             e1.printStackTrace();
         }
 
-        HttpGet httpget = new HttpGet("http://localhost/");
+        HttpGet httpget = new HttpGet("http://www.baidu.com");
         httpget.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 2000);
 
         for (String line : readLines) {
@@ -46,7 +48,8 @@ public class ProxyTest {
             httpclient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
 
             try {
-                httpclient.execute(httpget);
+                HttpResponse execute = httpclient.execute(httpget);
+                System.out.println(EntityUtils.toString(execute.getEntity()));
                 System.out.println(hostname + ":" + port + " test ok.");
             } catch (Exception e) {
                 // e.printStackTrace();

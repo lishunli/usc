@@ -37,7 +37,7 @@ public class PoolTest2 {
             // create a thread for each URI
             HttpGet httpget = new HttpGet("http://localhost/");
             httpget.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 2000);
-            exec.execute(new GetThread(httpClient, httpget, proxyUrls));
+            exec.execute(new GetThread1(httpClient, httpget, proxyUrls));
         }
 
         exec.shutdown();

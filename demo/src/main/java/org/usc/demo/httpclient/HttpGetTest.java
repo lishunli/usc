@@ -23,9 +23,9 @@ public class HttpGetTest {
         HttpClient httpclient = new DefaultHttpClient();
         httpclient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 2000);
 
-        URIBuilder uriBuilder = new URIBuilder("http://act.game.xunlei.com:85/xlgame_dcf/dcfplayerregression2");
-        uriBuilder.addParameter("regionid", "303001");
+        URIBuilder uriBuilder = new URIBuilder("http://www.baidu.com");
         uriBuilder.addParameter("username", "中文");
+        uriBuilder.addParameter("paaword", "303001");
         URI uri = uriBuilder.build();
         System.out.println(uri);
 

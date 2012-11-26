@@ -17,6 +17,7 @@ import org.apache.http.conn.scheme.SchemeRegistry;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.PoolingClientConnectionManager;
 import org.apache.http.params.CoreConnectionPNames;
+import org.usc.demo.util.ListUtil;
 
 /**
  *
@@ -40,18 +41,14 @@ public class PoolTest1 {
             e1.printStackTrace();
         }
 
-        int size = readLines.size();
-        ExecutorService exec = Executors.newFixedThreadPool(size / BATCH_SIZE + 1);
-        for (int i = 0; i * BATCH_SIZE < size; i++) {
-            int fromIndex = i * BATCH_SIZE;
-            int toIndex = size - fromIndex > BATCH_SIZE ? fromIndex + BATCH_SIZE : size;
+        List<List<String>> doSubList = ListUtil.doSubList(readLines, BATCH_SIZE);
+        ExecutorService exec = Executors.newFixedThreadPool(BATCH_SIZE);
 
-            List<String> proxyUrls = readLines.subList(fromIndex, toIndex);
-
+        for (List<String> proxyUrls : doSubList) {
             // create a thread for each URI
-            HttpGet httpget = new HttpGet("http://localhost/");
-            httpget.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 2000);
-            exec.execute(new GetThread(httpClient, httpget, proxyUrls));
+            HttpGet httpget = new HttpGet("http://www.baidu.com");
+            // httpget.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 20000);
+            exec.execute(new GetThread1(httpClient, httpget, proxyUrls));
         }
 
         exec.shutdown();

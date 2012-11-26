@@ -5,6 +5,7 @@ import java.net.URI;
 
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.conn.params.ConnRoutePNames;
 import org.apache.http.conn.scheme.PlainSocketFactory;
@@ -36,12 +37,6 @@ public class HttpUtil {
         httpParams.setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, CONNECT_TIMEOUT);
         httpParams.setParameter(CoreConnectionPNames.SO_TIMEOUT, READ_TIMEOUT);
         httpParams.setParameter(CoreProtocolPNames.HTTP_CONTENT_CHARSET, "UTF-8");
-//        httpParams.setParameter(ConnRoutePNames.DEFAULT_PROXY, new HttpHost("altair.netk5.com", 80));
-//         httpParams.setParameter(ConnRoutePNames.DEFAULT_PROXY, new HttpHost("122.193.22.72" ,8080));
-        // httpParams.setParameter(ConnRoutePNames.DEFAULT_PROXY, new HttpHost("222.187.222.118" ,8080));
-         httpParams.setParameter(ConnRoutePNames.DEFAULT_PROXY, new HttpHost("120.85.132.234" ,80));
-        // httpParams.setParameter(ConnRoutePNames.DEFAULT_PROXY, new HttpHost("222.92.117.217" ,8080));
-        // httpParams.setParameter(ConnRoutePNames.DEFAULT_PROXY, new HttpHost("223.202.8.69" ,3128));
 
         SchemeRegistry schemeRegistry = new SchemeRegistry();
         schemeRegistry.register(new Scheme("http", 80, PlainSocketFactory.getSocketFactory()));
@@ -58,18 +53,58 @@ public class HttpUtil {
 
     public static void httpGet(URI uri) throws IOException {
         HttpGet httpget = new HttpGet(uri);
-        // httpget.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 2000);
+        httpget.getParams().removeParameter(ConnRoutePNames.DEFAULT_PROXY);
 
         HttpResponse response = null;
         try {
             response = httpclient.execute(httpget);
 
             if (response != null) {
-                // System.out.println(response);
-                // System.out.println(response.getStatusLine().getStatusCode());
+                System.out.println(response.getStatusLine().getStatusCode());
                 System.out.println(EntityUtils.toString(response.getEntity()));
-                // System.out.println(response.getEntity().getContent());
             }
+        } catch (Exception e) {
+            httpget.abort();
+        } finally {
+            httpget.releaseConnection();
+        }
+    }
+
+    public static void httpGet(URI uri, HttpHost proxyHost) {
+        HttpGet httpget = new HttpGet(uri);
+        httpget.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxyHost);
+        HttpResponse response = null;
+        try {
+            response = httpclient.execute(httpget);
+
+            if (response != null) {
+                System.out.println(response.getStatusLine().getStatusCode());
+                System.out.println(EntityUtils.toString(response.getEntity()));
+            }
+        } catch (Exception e) {
+            httpget.abort();
+        } finally {
+            httpget.releaseConnection();
+        }
+    }
+
+    public static void httpGet(HttpGet httpget, HttpHost proxyHost) {
+        httpget.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxyHost);
+        HttpResponse response = null;
+        try {
+            response = httpclient.execute(httpget);
+
+            if (response != null) {
+                int statusCode = response.getStatusLine().getStatusCode();
+
+                if (statusCode == HttpStatus.SC_OK) {
+                    System.out.println(httpget.getParams().getParameter(ConnRoutePNames.DEFAULT_PROXY));
+                    System.out.println(EntityUtils.toString(response.getEntity()));
+                }
+
+            }
+        } catch (Exception e) {
+            httpget.abort();
         } finally {
             httpget.releaseConnection();
         }
