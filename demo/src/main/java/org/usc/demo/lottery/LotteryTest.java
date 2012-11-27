@@ -29,14 +29,10 @@ public class LotteryTest {
 		// List<Double> orignalRates = Arrays.asList(0.4d, 0.1d, 0.3d, 0.2d, 0.123d);
 		List<Double> orignalRates = Arrays.asList(0.2d, 0.4d, 0.4d);
 
-		// for (int i = 0; i < 10000; i++) {
-		// try {
-		// ThreeTuple<String, String, String> tuple = gifts.get(LotteryUtil.lottery(orignalRates));
-		// System.out.println(tuple);
-		// } catch (Exception e) {
-		// System.out.println("config is error,please check it!");
-		// }
-		// }
+		for (int i = 0; i < 10; i++) {
+			ThreeTuple<String, String, String> tuple = gifts.get(LotteryUtil.lottery(orignalRates));
+			System.out.println(tuple);
+		}
 
 		// calc
 		Map<ThreeTuple<String, String, String>, Integer> count = new HashMap<ThreeTuple<String, String, String>, Integer>();
