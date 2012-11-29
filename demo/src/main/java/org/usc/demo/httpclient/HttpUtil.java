@@ -1,6 +1,5 @@
 package org.usc.demo.httpclient;
 
-import java.io.IOException;
 import java.net.URI;
 
 import org.apache.http.HttpHost;
@@ -51,17 +50,17 @@ public class HttpUtil {
 
     }
 
-    public static void httpGet(String url) throws IOException {
+    public static void httpGet(String url) {
         HttpGet httpget = new HttpGet(url);
         httpGet(httpget);
     }
 
-    public static void httpGet(URI uri) throws IOException {
+    public static void httpGet(URI uri) {
         HttpGet httpget = new HttpGet(uri);
         httpGet(httpget);
     }
 
-    public static void httpGet(HttpGet httpget) throws IOException {
+    public static void httpGet(HttpGet httpget) {
         httpget.getParams().removeParameter(ConnRoutePNames.DEFAULT_PROXY);
 
         HttpResponse response = null;
