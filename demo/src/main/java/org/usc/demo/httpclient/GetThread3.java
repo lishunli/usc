@@ -21,7 +21,7 @@ public class GetThread3 extends Thread {
             int port = Integer.parseInt(split[1]);
 
             HttpGet httpget = new HttpGet("http://www.baidu.com");
-            HttpUtil.httpGet(httpget, new HttpHost(hostname, port));
+            HttpUtil.http(httpget, new HttpHost(hostname, port));
         }
     }
 }

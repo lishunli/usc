@@ -6,6 +6,8 @@ import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.conn.params.ConnRoutePNames;
 import org.apache.http.conn.scheme.PlainSocketFactory;
 import org.apache.http.conn.scheme.Scheme;
@@ -50,62 +52,87 @@ public class HttpUtil {
 
     }
 
+    public static DefaultHttpClient getHttpclient() {
+        return httpclient;
+    }
+
     public static void httpGet(String url) {
         HttpGet httpget = new HttpGet(url);
-        httpGet(httpget);
+        http(httpget);
     }
 
     public static void httpGet(URI uri) {
         HttpGet httpget = new HttpGet(uri);
-        httpGet(httpget);
+        http(httpget);
     }
 
-    public static void httpGet(HttpGet httpget) {
-        httpget.getParams().removeParameter(ConnRoutePNames.DEFAULT_PROXY);
+    public static void httpGet(String url, HttpHost proxyHost) {
+        HttpGet httpget = new HttpGet(url);
+        http(httpget, proxyHost);
+    }
+
+    public static void httpGet(URI uri, HttpHost proxyHost) {
+        HttpGet httpget = new HttpGet(uri);
+        http(httpget, proxyHost);
+    }
+
+    // public static void httpPost(String url) {
+    // HttpPost httppost = new HttpPost(url);
+    // http(httppost);
+    // }
+    //
+    // public static void httpPost(URI uri) {
+    // HttpPost httppost = new HttpPost(uri);
+    // http(httppost);
+    // }
+    //
+    // public static void httpPost(String url, HttpHost proxyHost) {
+    // HttpPost httppost = new HttpPost(url);
+    // http(httppost, proxyHost);
+    // }
+    //
+    // public static void httpPost(URI uri, HttpHost proxyHost) {
+    // HttpPost httppost = new HttpPost(uri);
+    // http(httppost, proxyHost);
+    // }
+
+    public static void http(HttpRequestBase httpRequest) {
+        httpRequest.getParams().removeParameter(ConnRoutePNames.DEFAULT_PROXY);
 
         HttpResponse response = null;
         try {
-            response = httpclient.execute(httpget);
+            response = httpclient.execute(httpRequest);
 
             if (response != null) {
                 System.out.println(response.getStatusLine().getStatusCode());
                 System.out.println(EntityUtils.toString(response.getEntity()));
             }
         } catch (Exception e) {
-            httpget.abort();
+            httpRequest.abort();
         } finally {
-            httpget.releaseConnection();
+            httpRequest.releaseConnection();
         }
     }
-    public static void httpGet(String url, HttpHost proxyHost) {
-        HttpGet httpget = new HttpGet(url);
-        httpGet(httpget, proxyHost);
-    }
 
-    public static void httpGet(URI uri, HttpHost proxyHost) {
-        HttpGet httpget = new HttpGet(uri);
-        httpGet(httpget, proxyHost);
-    }
-
-    public static void httpGet(HttpGet httpget, HttpHost proxyHost) {
-        httpget.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxyHost);
+    public static void http(HttpRequestBase httpRequest, HttpHost proxyHost) {
+        httpRequest.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxyHost);
         HttpResponse response = null;
         try {
-            response = httpclient.execute(httpget);
+            response = httpclient.execute(httpRequest);
 
             if (response != null) {
                 int statusCode = response.getStatusLine().getStatusCode();
 
                 if (statusCode == HttpStatus.SC_OK) {
-                    System.out.println(httpget.getParams().getParameter(ConnRoutePNames.DEFAULT_PROXY));
+                    System.out.println(httpRequest.getParams().getParameter(ConnRoutePNames.DEFAULT_PROXY));
                     System.out.println(EntityUtils.toString(response.getEntity()));
                 }
 
             }
         } catch (Exception e) {
-            httpget.abort();
+            httpRequest.abort();
         } finally {
-            httpget.releaseConnection();
+            httpRequest.releaseConnection();
         }
     }
 }

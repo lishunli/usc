@@ -29,7 +29,7 @@ public class GetThread2 extends Thread {
             int port = Integer.parseInt(split[1]);
 
             HttpGet httpget = new HttpGet(String.format(urlFormat, System.currentTimeMillis()));
-            HttpUtil.httpGet(httpget, new HttpHost(hostname, port));
+            HttpUtil.http(httpget, new HttpHost(hostname, port));
         }
     }
 }

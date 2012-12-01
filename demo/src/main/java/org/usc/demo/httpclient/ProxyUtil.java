@@ -12,14 +12,14 @@ import org.apache.commons.io.FileUtils;
  * @author Shunli
  */
 public class ProxyUtil {
-    public static List<String> getProxyUrls() {
-        List<String> readLines = new ArrayList<String>();
-        try {
-            readLines = FileUtils.readLines(new File("D:\\小米\\小米网盘\\proxylist.txt"), "UTF-8");
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
+	public static List<String> getProxyUrls() {
+		List<String> readLines = new ArrayList<String>();
+		try {
+			readLines = FileUtils.readLines(new File("D:\\网盘\\小米网盘\\proxy.txt"), "UTF-8");
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 
-        return readLines;
-    }
+		return readLines;
+	}
 }

@@ -22,7 +22,7 @@ public class GetThread2 extends Thread {
             String hostname = split[0];
             int port = Integer.parseInt(split[1]);
 
-            HttpUtil.httpGet(httpget, new HttpHost(hostname, port));
+            HttpUtil.http(httpget, new HttpHost(hostname, port));
         }
     }
 }
