@@ -1,9 +1,7 @@
 package org.usc.demo.beanutils.test;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.dozer.DozerBeanMapper;
@@ -17,7 +15,6 @@ import org.usc.demo.beanutils.model.User;
  */
 public class BeanUtilsTest5 {
     private static User user, newUser;
-    private static List<String> params;
     private static int count = 1000000;
 
     public static void main(String[] args) throws Exception {

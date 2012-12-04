@@ -7,10 +7,8 @@ import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.cookie.Cookie;
-import org.apache.http.impl.client.AbstractHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreConnectionPNames;
 
@@ -23,6 +21,7 @@ public class OCRTest {
     public static void main(String[] args) throws Exception {
         // String url = "http://dynamic.12306.cn/otsweb/passCodeAction.do?rand=sjrand";
         String url = "http://newgame.17173.com/hao/validateCode.php";
+        // String url = "https://omeo.alipay.com/service/checkcode?sessionID=b0d2492bbb0831697bbaf52731798cd8&r=0.9015433858148754";
         // String url = "http://verify2.xunlei.com/image?t=MEA";
         byte[] image = getVerifyCodeImage(url);
         String verifyCode = OCR.read(image);

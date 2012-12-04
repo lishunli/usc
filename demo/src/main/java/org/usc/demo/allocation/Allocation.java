@@ -18,20 +18,19 @@ import org.apache.commons.lang3.StringUtils;
 public class Allocation {
 
     public static void main(String[] args) throws IOException {
-        @SuppressWarnings("unchecked")
         List<String> contents = FileUtils.readLines(new File("F:/OMS1_20110826.txt"), "utf-8");
 
         List<TradeInfo> tradeInfos = new ArrayList<TradeInfo>();
 
         for (String str : contents) {
             tradeInfos.add(new TradeInfo(
-                     str.substring(16, 46).trim(),
-                     str.substring(47, 48),
-                     str.substring(49, 69).trim(),
-                     str.substring(70, 90).trim(),
-                     str.substring(91, 111).trim(),
-                     new BigDecimal(str.substring(112, 122).trim()),
-                     new BigDecimal(str.substring(296, 306).trim())));
+                    str.substring(16, 46).trim(),
+                    str.substring(47, 48),
+                    str.substring(49, 69).trim(),
+                    str.substring(70, 90).trim(),
+                    str.substring(91, 111).trim(),
+                    new BigDecimal(str.substring(112, 122).trim()),
+                    new BigDecimal(str.substring(296, 306).trim())));
         }
 
         // maybe grouping by sql. group by instrument, tradeType.
@@ -53,7 +52,7 @@ public class Allocation {
 
             for (TradeInfo trade : tradeInfos) {
                 if (trade.getInstrumentCode().equals(instrumentCode)
-                         && trade.getBuySell().equals(tradeType)) {
+                        && trade.getBuySell().equals(tradeType)) {
                     subTradeInfos.add(trade);
                 }
             }

@@ -16,21 +16,23 @@ public class OCR {
     protected transient final static Logger logger = LoggerFactory.getLogger("OCR");
     // private final static String LANG_OPTION = "-l";
     private final static String EOL = System.getProperty("line.separator");
-    private static String TESSERACT_PTAH = new File("D:\\Tesseract-OCR").getAbsolutePath();
+    private static String TESSERACT_PTAH = new File("D:\\tesseract").getAbsolutePath();
 
     public static String read(byte[] image) throws Exception {
         File file = new File(TESSERACT_PTAH + "/img", System.currentTimeMillis() + ".jpg");
-        System.out.println(file);
+        // System.out.println(file);
         IOUtils.write(image, new FileOutputStream(file));
 
         String randCode = read(file);
         randCode = randCode.replaceAll("\\s", "");
+
+        // file.delete();
         return randCode;
     }
 
     public static String read(File imageFile) throws Exception {
         String result = "";
-        File outputFile = new File(imageFile.getParentFile(), "output");
+        File outputFile = new File(imageFile.getParent(), imageFile.getName());
         StringBuffer strB = new StringBuffer();
 
         List<String> cmd = new ArrayList<String>();
@@ -55,9 +57,7 @@ public class OCR {
         logger.debug("Exit value = {}", w);
 
         if (w == 0) {
-            BufferedReader in = new BufferedReader(new InputStreamReader(
-                    new FileInputStream(outputFile.getAbsolutePath() + ".txt"),
-                    "UTF-8"));
+            BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(outputFile.getAbsolutePath() + ".txt"), "UTF-8"));
 
             String str;
 
@@ -84,7 +84,7 @@ public class OCR {
             // throw new RuntimeException(msg);
         }
 
-        new File(outputFile.getAbsolutePath() + ".txt").delete();
+        // new File(outputFile.getAbsolutePath() + ".txt").delete();
         result = strB.toString().trim();
         return result;
     }

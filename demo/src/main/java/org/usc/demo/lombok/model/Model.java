@@ -17,8 +17,9 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 //@Data
+@SuppressWarnings("unused")
 public class Model {
-	private int age;
-	private String name;
-	private long money;
+    private int age;
+    private String name;
+    private long money;
 }

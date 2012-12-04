@@ -1,7 +1,5 @@
 package org.usc.demo.allocation;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
