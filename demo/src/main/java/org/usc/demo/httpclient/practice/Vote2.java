@@ -118,7 +118,7 @@ public class Vote2 {
                     }
 
                 } catch (Exception e) {
-                    // e.printStackTrace();
+                     e.printStackTrace();
                 }
             }
         }
