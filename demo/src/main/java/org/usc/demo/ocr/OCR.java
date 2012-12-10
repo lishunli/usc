@@ -16,7 +16,7 @@ public class OCR {
     protected transient final static Logger logger = LoggerFactory.getLogger("OCR");
     // private final static String LANG_OPTION = "-l";
     private final static String EOL = System.getProperty("line.separator");
-    private static String TESSERACT_PTAH = new File("E:\\Tool\\Tesseract-OCR").getAbsolutePath();
+    private static String TESSERACT_PTAH = new File("D:\\Tool\\Tesseract-OCR").getAbsolutePath();
 
     public static String read(byte[] image) throws Exception {
         File file = new File(TESSERACT_PTAH + "/img", System.currentTimeMillis() + ".jpg");

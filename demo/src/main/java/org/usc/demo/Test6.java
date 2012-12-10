@@ -1,11 +1,9 @@
 package org.usc.demo;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.commons.lang3.time.DateUtils;
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -13,7 +11,17 @@ import org.apache.commons.lang3.time.DateUtils;
  */
 public class Test6 {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, SecurityException, NoSuchMethodException {
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("1", "11");
+        System.out.println(map);
+
+        Child child = new Child();
+        child.doAction1();
+        Method method1 = Child.class.getMethod("doAction3");
+        System.out.println(method1);
+        // Method method2 = Child.class.getDeclaredMethod("doAction2");
+        // System.out.println(method2);
         // File file = new File("E:\\Source\\XLAct\\V2\\xlgame_dachongfeng\\dcfpaygift\\etc\\doc\\paydrawgift.txt");
         // List<String> lines = FileUtils.readLines(file);
         // int i = 461;
@@ -35,10 +43,10 @@ public class Test6 {
         // Date date = new Date(1345020143000L);
         // System.out.println(date);
 
-//        for (int i = 0; i < 200; i++) {
-//            String randomNumeric = RandomStringUtils.randomAlphanumeric(13);
-//            System.out.println(("XIUMO61" + randomNumeric).toUpperCase());
-//        }
+        // for (int i = 0; i < 200; i++) {
+        // String randomNumeric = RandomStringUtils.randomAlphanumeric(13);
+        // System.out.println(("XIUMO61" + randomNumeric).toUpperCase());
+        // }
         //
         // List<String> usres = new ArrayList<String>();// Arrays.asList("1","2","3","4","5");
         // Random random = new Random();
@@ -68,11 +76,11 @@ public class Test6 {
         //
         // System.out.println(format.format(date));
 
-        System.out.println(System.currentTimeMillis());
-        System.out.println(new Date(1348744412000L));
+        // System.out.println(System.currentTimeMillis());
+        // System.out.println(new Date(1348744412000L));
     }
 
-    private static void test() {
-        throw new IllegalArgumentException("test");
-    }
+    // private static void test() {
+    // throw new IllegalArgumentException("test");
+    // }
 }

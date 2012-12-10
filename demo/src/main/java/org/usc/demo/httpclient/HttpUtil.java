@@ -107,6 +107,7 @@ public class HttpUtil {
                 System.out.println(EntityUtils.toString(response.getEntity()));
             }
         } catch (Exception e) {
+            e.printStackTrace();
             httpRequest.abort();
         } finally {
             httpRequest.releaseConnection();
