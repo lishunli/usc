@@ -1,7 +1,6 @@
 package org.usc.demo.guava;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -24,8 +23,7 @@ public class Test2 {
             doSum(previousList, sumMap);
             doSum(todayList, sumMap);
 
-            Collection<Currency> values = sumMap.values();
-            ArrayList<Currency> list = new ArrayList<Currency>(values);
+            ArrayList<Currency> list = new ArrayList<Currency>(sumMap.values());
             Collections.sort(list);
             System.out.println(list);
         }
