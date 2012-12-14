@@ -1,12 +1,15 @@
 package org.usc.demo.httpclient.practice;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
@@ -38,14 +41,22 @@ public class Vote2 {
 
         AtomicInteger handleCount = new AtomicInteger();
         AtomicInteger successCount = new AtomicInteger();
+        List<String> successProxys = new CopyOnWriteArrayList<String>();
         for (List<String> proxyUrls : doSubList) {
-            exec.submit(new GetThread(proxyUrls, handleCount, successCount)) /* execute(new GetThread(proxyUrls, handleCount, successCount)) */;
+            exec.submit(new GetThread(proxyUrls, handleCount, successCount, successProxys)) /* execute(new GetThread(proxyUrls, handleCount, successCount)) */;
         }
         exec.shutdown();
 
         // better use CountDownLatch
         if (exec.awaitTermination(1, TimeUnit.HOURS)) {
             System.out.println("【结果】handle " + handleCount.get() + ", success handle " + successCount.get());
+
+            File file = new File("D:\\网盘\\小米网盘\\success_proxy.txt");
+            List<String> alreadySuccessList = FileUtils.readLines(file);
+            successProxys.addAll(alreadySuccessList);
+            FileUtils.writeLines(file, successProxys);
+
+            System.out.println(successProxys);
         }
 
     }
@@ -54,25 +65,27 @@ public class Vote2 {
         private List<String> proxyUrls;
         private AtomicInteger handleCount;
         private AtomicInteger successCount;
+        private List<String> successProxys;
 
-        public GetThread(List<String> proxyUrls, AtomicInteger handleCount, AtomicInteger successCount) {
+        public GetThread(List<String> proxyUrls, AtomicInteger handleCount, AtomicInteger successCount, List<String> successProxys) {
             this.proxyUrls = proxyUrls;
             this.handleCount = handleCount;
             this.successCount = successCount;
+            this.successProxys = successProxys;
         }
 
         @Override
         public void run() {
             System.out.println(Thread.currentThread().getName() + " working");
             for (String line : proxyUrls) {
-                System.out.println("now handle " + handleCount.incrementAndGet() + "," + successCount);
-                String[] split = line.split("\t")[0].split(":");
+                System.out.println("now handle " + handleCount.incrementAndGet() + "," + successCount + "," + successProxys.size());
+                String[] split = line.split("\t")/*[0].split(":")*/;
                 String hostname = split[0];
                 int port = Integer.parseInt(split[1]);
 
                 // System.out.println(hostname + ":" + port + ".");
 
-                vote(hostname, port, successCount);
+                vote(hostname, port);
             }
         }
 
@@ -80,7 +93,7 @@ public class Vote2 {
          * @param hostname
          * @param port
          */
-        private void vote(String hostname, int port, AtomicInteger successCount) {
+        private void vote(String hostname, int port) {
             try {
                 DefaultHttpClient httpclient = new DefaultHttpClient();
                 httpclient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 30000);
@@ -118,6 +131,7 @@ public class Vote2 {
 
                     if (statusCode == HttpStatus.SC_OK) {
                         System.out.println(httppost.getParams().getParameter(ConnRoutePNames.DEFAULT_PROXY));
+                        successProxys.add(hostname + ":" + port);
                         String result = EntityUtils.toString(response.getEntity(), "gbk");
 
                         System.out.println(result);
@@ -125,7 +139,7 @@ public class Vote2 {
                             successCount.incrementAndGet();
                         } else if ("验证码错误!".equals(result)) {
                             System.out.println("continue at " + hostname + ":" + port);
-                            vote(hostname, port, successCount);
+                            vote(hostname, port);
                         }
                     }
 
