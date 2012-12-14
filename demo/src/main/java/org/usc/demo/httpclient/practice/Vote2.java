@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.commons.io.IOUtils;
@@ -31,35 +32,21 @@ import org.usc.demo.util.ListUtil;
 public class Vote2 {
 
     public static void main(String[] args) throws Exception {
-        int threadSize = 20;
+        int threadSize = 50;
         List<List<String>> doSubList = ListUtil.doSubList(ProxyUtil.getProxyUrls(), threadSize);
         ExecutorService exec = Executors.newFixedThreadPool(threadSize);
 
         AtomicInteger handleCount = new AtomicInteger();
         AtomicInteger successCount = new AtomicInteger();
         for (List<String> proxyUrls : doSubList) {
-            exec.execute(new GetThread(proxyUrls, handleCount, successCount));
+            exec.submit(new GetThread(proxyUrls, handleCount, successCount)) /* execute(new GetThread(proxyUrls, handleCount, successCount)) */;
         }
         exec.shutdown();
 
-        System.out.println("handle " + handleCount.get() + ", success handle " + successCount.get());
-        // HttpUtil.http(httppost);
-
-        // HttpResponse response = null;
-        // try {
-        // response = httpclient.execute(httppost);
-        //
-        // if (response != null) {
-        // System.out.println(response.getStatusLine());
-        // System.out.println(EntityUtils.toString(response.getEntity()));
-        // }
-        // } catch (ClientProtocolException e) {
-        // e.printStackTrace();
-        // } catch (IOException e) {
-        // e.printStackTrace();
-        // } finally {
-        // httppost.releaseConnection();
-        // }
+        // better use CountDownLatch
+        if (exec.awaitTermination(1, TimeUnit.HOURS)) {
+            System.out.println("【结果】handle " + handleCount.get() + ", success handle " + successCount.get());
+        }
 
     }
 
@@ -78,7 +65,7 @@ public class Vote2 {
         public void run() {
             System.out.println(Thread.currentThread().getName() + " working");
             for (String line : proxyUrls) {
-                System.out.println("now handle " + handleCount.incrementAndGet());
+                System.out.println("now handle " + handleCount.incrementAndGet() + "," + successCount);
                 String[] split = line.split("\t")[0].split(":");
                 String hostname = split[0];
                 int port = Integer.parseInt(split[1]);
@@ -96,7 +83,8 @@ public class Vote2 {
         private void vote(String hostname, int port, AtomicInteger successCount) {
             try {
                 DefaultHttpClient httpclient = new DefaultHttpClient();
-                httpclient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 10000);
+                httpclient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 30000);
+                httpclient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 60000);
 
                 HttpGet httpget = new HttpGet("http://newgame.17173.com/hao/validateCode.php");
                 byte[] image = null;
