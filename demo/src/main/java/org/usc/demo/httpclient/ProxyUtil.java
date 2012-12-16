@@ -17,11 +17,11 @@ public class ProxyUtil {
         try {
             String filePathPrefix = "D:\\网盘\\小米网盘\\代理IP\\";
             // String filePathPrefix = "D:\\小米网盘\\小米网盘\\";
-            readLines = FileUtils.readLines(new File(filePathPrefix + "success_proxy.txt"), "UTF-8");
+//            readLines = FileUtils.readLines(new File(filePathPrefix + "success_proxy.txt"), "UTF-8");
             // readLines = FileUtils.readLines(new File(filePathPrefix + "iplist.txt"), "UTF-8");
             // readLines = FileUtils.readLines(new File(filePathPrefix + "ip2.txt"), "UTF-8");
             // readLines = FileUtils.readLines(new File(filePathPrefix + "proxy3.txt"), "UTF-8");
-            // readLines = FileUtils.readLines(new File(filePathPrefix + "proxylist-base4-1.txt"), "UTF-8");
+             readLines = FileUtils.readLines(new File(filePathPrefix + "proxylist-base4-1.txt"), "UTF-8");
         } catch (IOException e1) {
             e1.printStackTrace();
         }

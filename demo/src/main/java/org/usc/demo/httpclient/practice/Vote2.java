@@ -86,8 +86,8 @@ public class Vote2 {
                 System.out.println("now handle " + handleCount.incrementAndGet() + "," + successCount + "," + successProxys.size());
                 // String[] split = line.split(":");
                 // String[] split = line.split(" ");
-                // String[] split = line.split("\t");
-                String[] split = line.split("\t")[0].split(":");
+                String[] split = line.split("\t");
+                // String[] split = line.split("\t")[0].split(":");
                 String hostname = split[0];
                 int port = Integer.parseInt(split[1]);
 
@@ -138,15 +138,15 @@ public class Vote2 {
                     int statusCode = response.getStatusLine().getStatusCode();
 
                     if (statusCode == HttpStatus.SC_OK) {
-                        System.out.println(httppost.getParams().getParameter(ConnRoutePNames.DEFAULT_PROXY));
+                        // System.out.println(httppost.getParams().getParameter(ConnRoutePNames.DEFAULT_PROXY));
                         successProxys.add(hostname + ":" + port);
                         String result = EntityUtils.toString(response.getEntity(), "gbk");
 
-                        System.out.println(result);
+                        // System.out.println(result);
                         if ("投票成功！感谢您宝贵的一票。投票成功！感谢您宝贵的一票。".equals(result)) {
                             successCount.incrementAndGet();
                         } else if ("验证码错误!".equals(result)) {
-                            System.out.println("continue at " + hostname + ":" + port);
+                            // System.out.println("continue at " + hostname + ":" + port);
                             vote(hostname, port);
                         }
                     }
