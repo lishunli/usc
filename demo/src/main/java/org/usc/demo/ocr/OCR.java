@@ -15,7 +15,7 @@ public class OCR {
     private static String TESSERACT_PTAH = new File("E:\\Tool\\Tesseract-OCR").getAbsolutePath();
 
     public static String read(byte[] image) throws Exception {
-        File file = new File(TESSERACT_PTAH + "/img", System.currentTimeMillis() + ".jpg");
+        File file = new File(TESSERACT_PTAH + "/img", System.nanoTime() + ".jpg");
         // System.out.println(file);
         FileOutputStream output = new FileOutputStream(file);
         IOUtils.write(image, output);

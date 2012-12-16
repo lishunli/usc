@@ -38,7 +38,13 @@ public class Vote2 {
 
     public static void main(String[] args) throws Exception {
         int threadSize = 400;
-        List<List<String>> doSubList = ListUtil.doSubList(ProxyUtil.getProxyUrls(), threadSize);
+        int times = 5;
+        List<String> proxyList = new ArrayList<String>();
+        for (int i = 0; i < times; i++) {
+            proxyList.addAll(ProxyUtil.getProxyUrls());
+        }
+
+        List<List<String>> doSubList = ListUtil.doSubList(proxyList, threadSize);
         ExecutorService exec = Executors.newFixedThreadPool(threadSize);
 
         AtomicInteger handleCount = new AtomicInteger();
@@ -86,8 +92,8 @@ public class Vote2 {
                 System.out.println("now handle " + handleCount.incrementAndGet() + "," + successCount + "," + successProxys.size());
                 // String[] split = line.split(":");
                 // String[] split = line.split(" ");
-                String[] split = line.split("\t");
-                // String[] split = line.split("\t")[0].split(":");
+                // String[] split = line.split("\t");
+                String[] split = line.split("\t")[0].split(":");
                 String hostname = split[0];
                 int port = Integer.parseInt(split[1]);
 
