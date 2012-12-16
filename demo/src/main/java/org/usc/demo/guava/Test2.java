@@ -18,7 +18,7 @@ public class Test2 {
         todayList.add(new Currency("U2", 10));
         todayList.add(new Currency("U3", 35));
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 1000000; i++) {
             Map<String, Currency> sumMap = new HashMap<String, Currency>();
             doSum(previousList, sumMap);
             doSum(todayList, sumMap);

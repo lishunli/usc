@@ -2,9 +2,9 @@ package org.usc.demo.httpclient.practice;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -37,7 +37,7 @@ import org.usc.demo.util.ListUtil;
 public class Vote2 {
 
     public static void main(String[] args) throws Exception {
-        int threadSize = 50;
+        int threadSize = 400;
         List<List<String>> doSubList = ListUtil.doSubList(ProxyUtil.getProxyUrls(), threadSize);
         ExecutorService exec = Executors.newFixedThreadPool(threadSize);
 
@@ -45,23 +45,23 @@ public class Vote2 {
         AtomicInteger successCount = new AtomicInteger();
         List<String> successProxys = new CopyOnWriteArrayList<String>();
         for (List<String> proxyUrls : doSubList) {
-            exec.submit(new GetThread(proxyUrls, handleCount, successCount, successProxys)) /* execute(new GetThread(proxyUrls, handleCount, successCount)) */;
+            exec.execute(new GetThread(proxyUrls, handleCount, successCount, successProxys));
         }
         exec.shutdown();
 
         // better use CountDownLatch
         if (exec.awaitTermination(1, TimeUnit.HOURS)) {
-            System.out.println("【结果】handle " + handleCount.get() + ", success handle " + successCount.get());
+            System.out.println("【结果】handle " + handleCount.get() + ", success handle " + successCount.get() + ", success proxy " + successProxys.size());
 
-            File file = new File("D:\\网盘\\小米网盘\\success_proxy.txt");
+            File file = new File("D:\\网盘\\小米网盘\\代理IP\\success_proxy.txt");
 
             List<String> alreadySuccessList = FileUtils.readLines(file);
             successProxys.addAll(alreadySuccessList); // combine
 
-            Set<String> removeDuplicated = new HashSet<String>(successProxys);// remove duplicated elements
+            Set<String> removeDuplicated = new TreeSet<String>(successProxys);// remove duplicated elements
             FileUtils.writeLines(file, removeDuplicated);
 
-            System.out.println(successProxys);
+            // System.out.println(successProxys);
         }
 
     }
@@ -84,9 +84,10 @@ public class Vote2 {
             System.out.println(Thread.currentThread().getName() + " working");
             for (String line : proxyUrls) {
                 System.out.println("now handle " + handleCount.incrementAndGet() + "," + successCount + "," + successProxys.size());
-                String[] split = line.split(":");
+                // String[] split = line.split(":");
+                // String[] split = line.split(" ");
                 // String[] split = line.split("\t");
-                // String[] split = line.split("\t")[0].split(":");
+                String[] split = line.split("\t")[0].split(":");
                 String hostname = split[0];
                 int port = Integer.parseInt(split[1]);
 
@@ -103,8 +104,8 @@ public class Vote2 {
         private void vote(String hostname, int port) {
             try {
                 DefaultHttpClient httpclient = new DefaultHttpClient();
-                httpclient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 30000);
-                httpclient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 60000);
+                httpclient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 60000);
+                httpclient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 120000);
 
                 HttpGet httpget = new HttpGet("http://newgame.17173.com/hao/validateCode.php");
                 byte[] image = null;
