@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class ListUtil {
     public static <T> List<List<T>> doSubList(List<T> list, int blockSize) {
-        List<List<T>> lists = new ArrayList<List<T>>();
+        List<List<T>> lists = new ArrayList<List<T>>(blockSize);
 
         if (list != null && blockSize > 0) {
             int listSize = list.size();

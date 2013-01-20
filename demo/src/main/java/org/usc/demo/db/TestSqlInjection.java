@@ -23,8 +23,8 @@ public class TestSqlInjection {
         // SimpleJdbcTemplate jdbcTemplateFrom = new SimpleJdbcTemplate(local);
 
         Map<String, Object> paramMap = new HashMap<String, Object>();
-        paramMap.put("name", "lishunli");
-        // paramMap.put("name", "lishunli' or '1 = 1");
+        // paramMap.put("name", "lishunli");
+        paramMap.put("name", "lishunli' or '1 = 1");
 
         String sql = "select * from order_t where name = :name";
         List<Map<String, Object>> result = jdbcTemplateFrom.queryForList(sql, paramMap);
