@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 
 public class OCR {
     protected transient final static Logger logger = LoggerFactory.getLogger("OCR");
-    private static String TESSERACT_PTAH = new File("E:\\Tool\\Tesseract-OCR").getAbsolutePath();
+    private static String TESSERACT_PTAH = new File("D:\\Tool\\Tesseract-OCR").getAbsolutePath();
 
     public static String read(byte[] image) throws Exception {
         File file = new File(TESSERACT_PTAH + "/img", System.nanoTime() + ".jpg");
@@ -24,7 +24,7 @@ public class OCR {
         randCode = randCode.replaceAll("\\s", "");
 
         IOUtils.closeQuietly(output);
-        FileUtils.deleteQuietly(file);
+        // FileUtils.deleteQuietly(file);
         return randCode;
     }
 
@@ -75,7 +75,7 @@ public class OCR {
             // throw new RuntimeException(msg);
         }
 
-        FileUtils.deleteQuietly(file);
+        // FileUtils.deleteQuietly(file);
 
         return result.trim();
     }

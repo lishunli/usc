@@ -1,66 +1,96 @@
 package org.usc.demo.fastjson;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 public class Entity {
-	private String id;
-	private int age;
-	private Long score;
-	private List<String> names;
-	private Map<String, String> cahce;
+    private String id;
+    private int age;
+    private Long score;
+    private Date birthDay;
+    private List<String> names;
+    private Map<String, String> cahce;
 
-	public Entity() {
-		super();
-	}
+    private SubEntity subEntity;
 
-	public Entity(String id, int age, Long score, List<String> names, Map<String, String> cahce) {
-		super();
-		this.id = id;
-		this.age = age;
-		this.score = score;
-		this.names = names;
-		this.cahce = cahce;
-	}
+    public Entity() {
+    }
 
-	public String getId() {
-		return id;
-	}
+    public Entity(String id, int age, Long score, Date birthDay, List<String> names, Map<String, String> cahce) {
+        super();
+        this.id = id;
+        this.age = age;
+        this.birthDay = birthDay;
+        this.score = score;
+        this.names = names;
+        this.cahce = cahce;
+    }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    public Entity(String id, int age, Long score, Date birthDay, List<String> names, Map<String, String> cahce, SubEntity subEntity) {
+        this.id = id;
+        this.age = age;
+        this.score = score;
+        this.birthDay = birthDay;
+        this.names = names;
+        this.cahce = cahce;
+        this.subEntity = subEntity;
+    }
 
-	public int getAge() {
-		return age;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public void setAge(int age) {
-		this.age = age;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	public Long getScore() {
-		return score;
-	}
+    public int getAge() {
+        return age;
+    }
 
-	public void setScore(Long score) {
-		this.score = score;
-	}
+    public void setAge(int age) {
+        this.age = age;
+    }
 
-	public List<String> getNames() {
-		return names;
-	}
+    public Long getScore() {
+        return score;
+    }
 
-	public void setNames(List<String> names) {
-		this.names = names;
-	}
+    public void setScore(Long score) {
+        this.score = score;
+    }
 
-	public Map<String, String> getCahce() {
-		return cahce;
-	}
+    public List<String> getNames() {
+        return names;
+    }
 
-	public void setCahce(Map<String, String> cahce) {
-		this.cahce = cahce;
-	}
+    public void setNames(List<String> names) {
+        this.names = names;
+    }
+
+    public Map<String, String> getCahce() {
+        return cahce;
+    }
+
+    public void setCahce(Map<String, String> cahce) {
+        this.cahce = cahce;
+    }
+
+    public Date getBirthDay() {
+        return birthDay;
+    }
+
+    public void setBirthDay(Date birthDay) {
+        this.birthDay = birthDay;
+    }
+
+    public SubEntity getSubEntity() {
+        return subEntity;
+    }
+
+    public void setSubEntity(SubEntity subEntity) {
+        this.subEntity = subEntity;
+    }
 
 }

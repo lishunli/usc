@@ -10,18 +10,26 @@ public class DecodeTest {
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {
-        String source = "中文测试，hello+world i'm lishunli%中文";
-        String encode = URLEncoder.encode(source, "utf8");
-        System.out.println(encode);
+        // String source = "中文测试，hello+world i'm lishunli%中文";
+        // String encode = URLEncoder.encode(source, "utf8");
+        // System.out.println(encode);
 
-        String encodeStr = "%E4%B8%AD%E6%96%87%E6%B5%8B%E8%AF%95%EF%BC%8C%E8%BF%98%E6%9C%89%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6%25%E6%B5%8B%E8%AF%95";
-        System.out.println(URLDecoder.decode(encodeStr, "utf8"));
+        // String encodeStr = "测试%test";
+        String encoding = "UTF-8";
+//        String encodeStr = "%E6%B5%8B%E8%AF%95%25test";
+        String encodeStr = "中文test";
+        encodeStr = URLDecoder.decode(encodeStr, encoding);
+        System.out.println(encodeStr);
+        // System.out.println(URLDecoder.decode(encodeStr, "utf8"));
 
-        String encoding = "utf8";
-
-        System.out.println(new String(encodeStr.getBytes("ISO-8859-1")));
-        System.out.println(URLDecoder.decode(new String(encodeStr.getBytes("ISO-8859-1")), encoding));
-        System.out.println(URLDecoder.decode(encodeStr, encoding));
+        // System.out.println(new String(encodeStr.getBytes("ISO-8859-1")));
+        String x = new String(encodeStr.getBytes("UTF-8"), "ISO-8859-1");
+        System.out.println(x);
+        // System.out.println(new String(x.getBytes("ISO-8859-1"), "UTF-8"));
+        // System.out.println(URLDecoder.decode(new String(x.getBytes("ISO-8859-1"), "UTF-8"), encoding));
+        System.out.println(new String(x.getBytes("ISO-8859-1"), "UTF-8"));
+        // System.out.println(URLDecoder.decode(new String(encodeStr.getBytes("ISO-8859-1")), encoding));
+        // System.out.println(URLDecoder.decode(encodeStr, encoding));
 
     }
 }

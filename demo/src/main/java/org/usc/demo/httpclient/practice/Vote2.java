@@ -37,8 +37,8 @@ import org.usc.demo.util.ListUtil;
 public class Vote2 {
 
     public static void main(String[] args) throws Exception {
-        int threadSize = 400;
-        int times = 5;
+        int threadSize = 200;
+        int times = 1;
         List<String> proxyList = new ArrayList<String>();
         for (int i = 0; i < times; i++) {
             proxyList.addAll(ProxyUtil.getProxyUrls());
@@ -59,7 +59,7 @@ public class Vote2 {
         if (exec.awaitTermination(1, TimeUnit.HOURS)) {
             System.out.println("【结果】handle " + handleCount.get() + ", success handle " + successCount.get() + ", success proxy " + successProxys.size());
 
-            File file = new File("D:\\网盘\\小米网盘\\代理IP\\success_proxy.txt");
+            File file = new File(ProxyUtil.SHARE_PATH_PREFIX + "success_proxy.txt");
 
             List<String> alreadySuccessList = FileUtils.readLines(file);
             successProxys.addAll(alreadySuccessList); // combine
@@ -91,9 +91,9 @@ public class Vote2 {
             for (String line : proxyUrls) {
                 System.out.println("now handle " + handleCount.incrementAndGet() + "," + successCount + "," + successProxys.size());
                 // String[] split = line.split(":");
-                // String[] split = line.split(" ");
+                String[] split = line.split(" ");
                 // String[] split = line.split("\t");
-                String[] split = line.split("\t")[0].split(":");
+                // String[] split = line.split("\t")[0].split(":");
                 String hostname = split[0];
                 int port = Integer.parseInt(split[1]);
 

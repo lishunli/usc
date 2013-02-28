@@ -2,6 +2,8 @@ package org.usc.demo;
 
 import java.util.UUID;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  *
  * @author Shunli

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.usc</groupId>
     <artifactId>demo</artifactId>
@@ -228,8 +229,9 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.1.24</version>
+            <version>1.1.27</version>
         </dependency>
+
 
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -285,6 +287,13 @@
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.xunlei.youxi</groupId>
+            <artifactId>youxi-core</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -333,7 +342,8 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.4.2</version>
                 <configuration>
-                    <argLine>-Xms512m -Xmx1024m -Xss256k -XX:MaxPermSize=256m -XX:+CMSClassUnloadingEnabled -XX:+CMSPermGenSweepingEnabled</argLine>
+                    <argLine>-Xms512m -Xmx1024m -Xss256k -XX:MaxPermSize=256m -XX:+CMSClassUnloadingEnabled
+                        -XX:+CMSPermGenSweepingEnabled</argLine>
                     <excludes>
                         <exclude>${mss.oracleTestExclusion}</exclude>
                     </excludes>

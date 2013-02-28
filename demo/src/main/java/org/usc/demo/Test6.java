@@ -1,9 +1,10 @@
 package org.usc.demo;
 
+import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
+
+import org.apache.commons.io.FileUtils;
 
 /**
  *
@@ -12,24 +13,23 @@ import java.util.Map;
 public class Test6 {
 
     public static void main(String[] args) throws IOException, SecurityException, NoSuchMethodException {
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("1", "11");
-        System.out.println(map);
-
-        Child child = new Child();
-        child.doAction1();
-        Method method1 = Child.class.getMethod("doAction3");
-        System.out.println(method1);
+        // Map<String, String> map = new HashMap<String, String>();
+        // map.put("1", "11");
+        // System.out.println(map);
+        //
+        // Child child = new Child();
+        // child.doAction1();
+        // Method method1 = Child.class.getMethod("doAction3");
+        // System.out.println(method1);
         // Method method2 = Child.class.getDeclaredMethod("doAction2");
         // System.out.println(method2);
-        // File file = new File("E:\\Source\\XLAct\\V2\\xlgame_dachongfeng\\dcfpaygift\\etc\\doc\\paydrawgift.txt");
-        // List<String> lines = FileUtils.readLines(file);
+        List<String> lines = FileUtils.readLines(new File("D:\\gifts.txt"));
         // int i = 461;
-        // for (String line : lines) {
-        // String[] split = line.split("==");
-        // // System.out.println(split[0] + "==" + split[1] + "==" + split[2] + "==" + (i--));
-        // System.out.println(split[1] + "==" + split[3]);
-        // }
+        for (String line : lines) {
+            String[] split = line.split("\t");
+            // System.out.println(split[0] + "==" + split[1] + "==" + split[2] + "==" + (i--));
+            System.out.println(split[0] + "==" + split[1] + "==" + split[2] + "==" + split[3]);
+        }
 
         // String fileName1 = "/usr/local/gameact/xlgame_dachongfeng/logs/xxx.log";
         // String fileName2 = "/usr/local2/gameact/xlgame_dachongfeng/logs/xxx.log";
@@ -79,7 +79,6 @@ public class Test6 {
         // System.out.println(System.currentTimeMillis());
         // System.out.println(new Date(1348744412000L));
     }
-
     // private static void test() {
     // throw new IllegalArgumentException("test");
     // }
