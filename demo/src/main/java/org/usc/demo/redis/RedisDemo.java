@@ -18,7 +18,7 @@ import com.alibaba.fastjson.JSON;
 import com.xunlei.youxi.core.kit.config.ReloadingPropConfig;
 
 public class RedisDemo {
-    private static final PropertiesConfiguration config = ReloadingPropConfig.getConfig("config.properties");
+    private static final PropertiesConfiguration config = ReloadingPropConfig.getConfig("redis.properties");
 
     // private static JedisPool jedisPool = null;
 
@@ -30,7 +30,7 @@ public class RedisDemo {
 
         Jedis jedis = pool.getResource();
         try {
-            // jedis.set("foo", "bar");
+            jedis.set("foo", "");
             // String value = jedis.get("foo");
 
             // jedis.expire("foo", 10);
@@ -39,10 +39,18 @@ public class RedisDemo {
 
             // jedis.setex("foo", 10, "bar");
 
+            // jedis.setex(key, seconds, value)
+            HashMap<String, String> hash = new HashMap<String, String>();
+            hash.put("username", "lishunli");
+            hash.put("age", "18");
+            jedis.hmset("test:hash", hash);
+
+            System.out.println(jedis.hgetAll("test:hash"));
+
             String value = jedis.get("foo");
             System.out.println(value);
 
-            Map<String, String> cahce = new HashMap<String, String>();
+            Map<String, String> cahce = hash;
             cahce.put("2", "2a");
             Entity entry = new Entity("1", 20, 100L, new Date(), Arrays.asList("lis", "sl", "李"), cahce, new SubEntity("test sub entity"));
 
