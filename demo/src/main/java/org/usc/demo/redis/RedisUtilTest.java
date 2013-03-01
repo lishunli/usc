@@ -19,7 +19,7 @@ public class RedisUtilTest {
     private final static String KEY_PREFIX = "jedis:lishunli:test:";
 
     public static void main(String[] args) {
-        // setGet();
+         setGet();
         // setnx();
         // setexTtl();
         // existsDel();

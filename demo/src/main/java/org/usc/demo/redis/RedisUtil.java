@@ -12,6 +12,11 @@ import com.alibaba.fastjson.JSON;
 import com.xunlei.youxi.core.kit.config.ReloadingPropConfig;
 import com.xunlei.youxi.core.log.LoggerFactory;
 
+/**
+ * Redis-Jedis Client工具类
+ *
+ * @author Shunli
+ */
 public class RedisUtil {
     private static Logger log = LoggerFactory.getLogger(RedisUtil.class);
 
@@ -163,7 +168,7 @@ public class RedisUtil {
     public static long setnxex(String key, String value, int seconds) {
         Jedis jedis = getJedisClient();
         try {
-
+            // TODO-Shunli: TBW
             return 0;
         } catch (Exception e) {
             log.error("setnxex-string-failed:" + key + "," + value, e);

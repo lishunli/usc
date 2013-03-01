@@ -30,7 +30,7 @@ public class RedisDemo {
 
         Jedis jedis = pool.getResource();
         try {
-            jedis.set("foo", "");
+//            jedis.set("foo", "");
             // String value = jedis.get("foo");
 
             // jedis.expire("foo", 10);
