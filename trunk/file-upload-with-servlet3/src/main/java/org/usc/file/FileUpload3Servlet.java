@@ -2,6 +2,7 @@ package org.usc.file;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -25,6 +26,7 @@ public class FileUpload3Servlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
+            List<String> allowFileTypes = Arrays.asList("png", "jpg", "gif", "jpeg");
             File picParentDir = new File("D:\\1");
             FileUtils.forceMkdir(picParentDir);
 
@@ -40,7 +42,13 @@ public class FileUpload3Servlet extends HttpServlet {
                     continue;
                 }
 
-                String fileName = UUID.randomUUID().toString() + "." + FilenameUtils.getExtension(item.getName());
+                String fileExt = FilenameUtils.getExtension(item.getName());
+                if (!allowFileTypes.contains(fileExt)) {
+                    System.out.println("not allow upload this type file");
+                    break;
+                }
+
+                String fileName = UUID.randomUUID().toString() + "." + fileExt;
                 item.write(new File(picParentDir, fileName));
 
                 System.out.println(item.getName() + " write to " + fileName);
