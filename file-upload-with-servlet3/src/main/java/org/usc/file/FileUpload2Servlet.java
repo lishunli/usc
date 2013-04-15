@@ -17,7 +17,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 
 @WebServlet(urlPatterns = { "/upload2" })
-@MultipartConfig(location = "D:\\", fileSizeThreshold = 1 * 1024 * 1024)
+@MultipartConfig(location = "D:\\1", fileSizeThreshold = 1 * 1024 * 1024)
 public class FileUpload2Servlet extends HttpServlet {
     private static final long serialVersionUID = 7916150070189856104L;
 
