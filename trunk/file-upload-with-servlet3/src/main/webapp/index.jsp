@@ -6,7 +6,7 @@
 <title>File Upload</title>
 </head>
 <body>
-    <form method="post" enctype="multipart/form-data" action="upload2">
+    <form method="post" enctype="multipart/form-data" action="upload3">
         <input type="file" id="file" name="file" />
         <input type="text" id="name" name="name" />
         <input type="submit" value="提交" />
