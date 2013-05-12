@@ -64,7 +64,7 @@ public class BeanUtilsTest5 {
         long begin = System.currentTimeMillis();
 
         for (int i = 0; i < count; i++) {
-            newUser = mapper.map(newUser, User.class);
+            newUser = mapper.map(user, User.class);
         }
 
         System.out.println("DozerBeanMapperSingletonWrapper.map:" + (System.currentTimeMillis() - begin));
