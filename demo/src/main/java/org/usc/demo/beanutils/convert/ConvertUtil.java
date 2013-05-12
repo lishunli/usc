@@ -11,7 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public class ConvertUtil {
     private final static char defaultDelimiter = ',';
-    private final static char[] defaultAllowedChars = new char[] { '.', '-', '=' };
+    private final static char[] defaultAllowedChars = new char[] { '.', '-', '=', '|' };
 
     public static List<String> convertToStringList(String value) {
         return parseElements(value, defaultDelimiter, defaultAllowedChars);

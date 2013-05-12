@@ -13,7 +13,7 @@ import org.apache.commons.beanutils.Converter;
  */
 public class SimpleMapConverter implements Converter {
     private final static char delimiter = '=';
-    private final static char[] allowedChars = new char[] { '.', '-' };
+    private final static char[] allowedChars = new char[] { '.', '-', '|' };
 
     private Object defaultValue = null;
 

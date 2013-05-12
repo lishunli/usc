@@ -24,7 +24,6 @@ public class UserForTypeTest {
     }
 
     public static void main(String[] args) throws Exception {
-
         UserForType ut = new UserForType();
 
         BeanUtils.setProperty(ut, "s", "s");
@@ -35,8 +34,8 @@ public class UserForTypeTest {
         BeanUtils.setProperty(ut, "f", "100.0");
         BeanUtils.setProperty(ut, "de", "2013-05-12");
         BeanUtils.setProperty(ut, "sa", "1.0,2-3,3");
-        BeanUtils.setProperty(ut, "sl", "1.0,2-3,3=4,5 6*7");
-        BeanUtils.setProperty(ut, "m", "1.0=2-0,2-3=4,3");
+        BeanUtils.setProperty(ut, "sl", "1.0,2-3,3=4,5 6*7,2|3");
+        BeanUtils.setProperty(ut, "m", "1.0=2-0,2-3=4,3,1=2|3|4");
         // BeanUtils.setProperty(ut, "sl", null);
         // BeanUtils.setProperty(ut, "m", null);
         // BeanUtils.setProperty(ut, "sl", Arrays.asList("1", "2"));
