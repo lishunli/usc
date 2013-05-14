@@ -1,16 +1,18 @@
 package org.usc.demo.wechat.msg;
 
+import org.usc.demo.wechat.util.XmlUtil;
+
 public enum WxMsgParser {
     TEXT {
         @Override
         public WxMsg parseMsg(String message) {
-            return new TextWxMsg();
+            return XmlUtil.unmarshal(message);
         }
     },
     EVENT {
         @Override
         public WxMsg parseMsg(String message) {
-            return new EventWxMsg();
+            return XmlUtil.unmarshal(message);
         }
     },
     IMAGE {

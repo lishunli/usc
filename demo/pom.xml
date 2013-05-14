@@ -56,16 +56,16 @@
             <groupId>commons-configuration</groupId>
             <artifactId>commons-configuration</artifactId>
             <version>1.8</version>
-<!--             <exclusions> -->
-<!--                 <exclusion> -->
-<!--                     <groupId>commons-beanutils</groupId> -->
-<!--                     <artifactId>commons-beanutils</artifactId> -->
-<!--                 </exclusion> -->
-<!--                 <exclusion> -->
-<!--                     <groupId>commons-lang</groupId> -->
-<!--                     <artifactId>commons-lang</artifactId> -->
-<!--                 </exclusion> -->
-<!--             </exclusions> -->
+            <!-- <exclusions> -->
+            <!-- <exclusion> -->
+            <!-- <groupId>commons-beanutils</groupId> -->
+            <!-- <artifactId>commons-beanutils</artifactId> -->
+            <!-- </exclusion> -->
+            <!-- <exclusion> -->
+            <!-- <groupId>commons-lang</groupId> -->
+            <!-- <artifactId>commons-lang</artifactId> -->
+            <!-- </exclusion> -->
+            <!-- </exclusions> -->
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -288,13 +288,25 @@
         <dependency>
             <groupId>com.xunlei.youxi</groupId>
             <artifactId>youxi-core</artifactId>
-            <version>1.0.3</version>
+            <version>1.0.4</version>
         </dependency>
 
         <dependency>
             <groupId>com.xunlei.youxi</groupId>
             <artifactId>youxi-act-frm</artifactId>
-            <version>3.0.4</version>
+            <version>3.0.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.xml</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.xml</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>2.1</version>
         </dependency>
     </dependencies>
 
@@ -344,7 +356,8 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.4.2</version>
                 <configuration>
-                    <argLine>-Xms512m -Xmx1024m -Xss256k -XX:MaxPermSize=256m -XX:+CMSClassUnloadingEnabled
+                    <argLine>-Xms512m -Xmx1024m -Xss256k -XX:MaxPermSize=256m
+                        -XX:+CMSClassUnloadingEnabled
                         -XX:+CMSPermGenSweepingEnabled</argLine>
                     <excludes>
                         <exclude>${mss.oracleTestExclusion}</exclude>

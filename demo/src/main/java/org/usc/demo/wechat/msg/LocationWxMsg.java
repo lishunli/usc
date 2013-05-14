@@ -1,9 +1,23 @@
 package org.usc.demo.wechat.msg;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "xml")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class LocationWxMsg extends WxMsg {
+    @XmlElement(name = "Location_X")
     private String location_X;
+
+    @XmlElement(name = "Location_Y")
     private String location_Y;
+
+    @XmlElement(name = "Scale")
     private String scale;
+
+    @XmlElement(name = "Label")
     private String label;
 
     public String getLocation_X() {
