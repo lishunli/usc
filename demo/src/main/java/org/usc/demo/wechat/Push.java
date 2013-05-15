@@ -9,7 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.usc.demo.wechat.msg.AbstractMsg;
-import org.usc.demo.wechat.msg.MsgParser;
+import org.usc.demo.wechat.msg.MsgType;
 import org.usc.demo.wechat.util.EnumUtil;
 
 /**
@@ -30,7 +30,7 @@ public class Push {
         Validate.notEmpty(message);
 
         String msgType = getMsgType(message);
-        MsgParser wxMsgType = EnumUtil.getEnumFromString(MsgParser.class, msgType);
+        MsgType wxMsgType = EnumUtil.getEnumFromString(MsgType.class, msgType);
         Validate.notNull(wxMsgType, "don't support '%s' type message.", msgType);
 
         AbstractMsg wxMsg = wxMsgType.parseMsg(message);

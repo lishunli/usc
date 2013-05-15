@@ -6,37 +6,47 @@ import org.usc.demo.wechat.util.XmlUtil;
  *
  * @author Shunli
  */
-public enum MsgParser {
-    TEXT {
+public enum MsgType {
+    TEXT("text") {
         @Override
         public Class<? extends AbstractMsg> getMsgClass() {
             return TextMsg.class;
         }
     },
-    EVENT {
+    EVENT("event") {
         @Override
         public Class<? extends AbstractMsg> getMsgClass() {
             return EventMsg.class;
         }
     },
-    IMAGE {
+    IMAGE("image") {
         @Override
         public Class<? extends AbstractMsg> getMsgClass() {
             return ImageMsg.class;
         }
     },
-    LINK {
+    LINK("link") {
         @Override
         public Class<? extends AbstractMsg> getMsgClass() {
             return LinkMsg.class;
         }
     },
-    LOCATION {
+    LOCATION("location") {
         @Override
         public Class<? extends AbstractMsg> getMsgClass() {
             return LocationMsg.class;
         }
     };
+
+    private String type;
+
+    private MsgType(String type) {
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
+    }
 
     public abstract Class<? extends AbstractMsg> getMsgClass();
 
