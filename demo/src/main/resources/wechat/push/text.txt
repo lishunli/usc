@@ -1,8 +1,1 @@
- <xml>
- <ToUserName><![CDATA[toUser]]></ToUserName>
- <FromUserName><![CDATA[fromUser]]></FromUserName>
- <CreateTime>1348831860</CreateTime>
- <MsgType><![CDATA[text]]></MsgType>
- <Content><![CDATA[this is a test]]></Content>
- <MsgId>1234567890123456</MsgId>
- </xml>
+<xml><ToUserName><![CDATA[gh_5b2229334c42]]></ToUserName><FromUserName><![CDATA[ol_e_joFnsa1UMeRtSJIA4BjQFWU]]></FromUserName><CreateTime>1368590592</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[]]></Content><MsgId>5878051834253279602</MsgId></xml>

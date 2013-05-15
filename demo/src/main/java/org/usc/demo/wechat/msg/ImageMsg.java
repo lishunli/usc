@@ -5,18 +5,22 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ *
+ * @author Shunli
+ */
 @XmlRootElement(name = "xml")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class TextWxMsg extends WxMsg {
-    @XmlElement(name = "Content")
-    private String content;
+public class ImageMsg extends AbstractMsg {
+    @XmlElement(name = "PicUrl")
+    private String picUrl;
 
-    public String getContent() {
-        return content;
+    public String getPicUrl() {
+        return picUrl;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setPicUrl(String picUrl) {
+        this.picUrl = picUrl;
     }
 
 }

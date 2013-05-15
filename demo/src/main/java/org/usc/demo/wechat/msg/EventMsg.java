@@ -4,12 +4,14 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSeeAlso;
 
+/**
+ *
+ * @author Shunli
+ */
 @XmlRootElement(name = "xml")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlSeeAlso({ WxMsg.class })
-public class EventWxMsg extends WxMsg {
+public class EventMsg extends AbstractMsg {
     @XmlElement(name = "Event")
     private String event;
 

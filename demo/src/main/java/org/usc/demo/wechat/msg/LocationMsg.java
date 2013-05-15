@@ -5,9 +5,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ *
+ * @author Shunli
+ */
 @XmlRootElement(name = "xml")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class LocationWxMsg extends WxMsg {
+public class LocationMsg extends AbstractMsg {
     @XmlElement(name = "Location_X")
     private String location_X;
 

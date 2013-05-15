@@ -1,21 +1,26 @@
-package org.usc.demo.wechat.msg;
+package org.usc.demo.wechat.reply;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name = "xml")
+/**
+ *
+ * @author Shunli
+ */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class LinkWxMsg extends WxMsg {
+public class MusicDetail {
     @XmlElement(name = "Title")
     private String title;
 
-    @XmlElement(name = "description")
+    @XmlElement(name = "Description")
     private String description;
 
-    @XmlElement(name = "Url")
-    private String url;
+    @XmlElement(name = "MusicUrl")
+    private String musicUrl;
+
+    @XmlElement(name = "HQMusicUrl")
+    private String hQMusicUrl;
 
     public String getTitle() {
         return title;
@@ -33,12 +38,20 @@ public class LinkWxMsg extends WxMsg {
         this.description = description;
     }
 
-    public String getUrl() {
-        return url;
+    public String getMusicUrl() {
+        return musicUrl;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setMusicUrl(String musicUrl) {
+        this.musicUrl = musicUrl;
+    }
+
+    public String gethQMusicUrl() {
+        return hQMusicUrl;
+    }
+
+    public void sethQMusicUrl(String hQMusicUrl) {
+        this.hQMusicUrl = hQMusicUrl;
     }
 
 }

@@ -25,8 +25,8 @@ import org.apache.http.util.EntityUtils;
  * @author Shunli
  */
 public class HttpUtil {
-    private final static int MAX_TOTAL_CONNECTIONS = 200; // 最大连接数
-    private final static int MAX_ROUTE_CONNECTIONS = 20; // 每个路由最大连接数
+    private final static int MAX_TOTAL_CONNECTIONS = 200 * 1000; // 最大连接数
+    private final static int MAX_ROUTE_CONNECTIONS = 20 * 10000; // 每个路由最大连接数
     private final static int CONNECT_TIMEOUT = 10000; // 连接超时时间
     private final static int READ_TIMEOUT = 30000; // 读取超时时间
 
@@ -110,6 +110,7 @@ public class HttpUtil {
             e.printStackTrace();
             httpRequest.abort();
         } finally {
+            // System.out.println("release");
             httpRequest.releaseConnection();
         }
     }

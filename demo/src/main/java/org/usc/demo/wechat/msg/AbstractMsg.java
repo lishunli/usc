@@ -5,10 +5,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ *
+ * @author Shunli
+ */
 @XmlRootElement(name = "xml")
 @XmlAccessorType(XmlAccessType.FIELD)
-// @XmlSeeAlso({ EventWxMsg.class, ImageWxMsg.class, LinkWxMsg.class, LocationWxMsg.class, TextWxMsg.class })
-public class WxMsg {
+public abstract class AbstractMsg {
     @XmlElement(name = "ToUserName")
     private String toUserName;
 

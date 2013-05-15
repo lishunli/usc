@@ -1,55 +1,40 @@
 package org.usc.demo.wechat.util;
 
-import java.io.File;
 import java.io.StringReader;
-import java.net.URL;
 
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.usc.demo.wechat.Push;
-import org.usc.demo.wechat.msg.EventWxMsg;
-import org.usc.demo.wechat.msg.WxMsg;
+import org.usc.demo.wechat.msg.AbstractMsg;
+import org.usc.demo.wechat.reply.AbstractReply;
 
+/**
+ *
+ * @author Shunli
+ */
 public class XmlUtil {
-    public static void main(String[] args) throws Exception {
-
-        // JAXBContext jaxbCtx = JAXBContext.newInstance(WxMsg.class);
-        //
-        // TextWxMsg msg = new TextWxMsg();
-        // msg.setFromUserName("lishunli");
-        // msg.setContent("test");
-        //
-        // Marshaller marshaller = jaxbCtx.createMarshaller();
-        // marshaller.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
-        //
-        // marshaller.marshal(msg, System.out);
-        //
-        // URL resource = new Push().getClass().getClassLoader().getResource("wechat/push");
-        // File f = new File(resource.getFile(), "text.txt");
-        //
-        // Unmarshaller unmarshaller = jaxbCtx.createUnmarshaller();
-        // TextWxMsg dest = (TextWxMsg) unmarshaller.unmarshal(f);
-        // System.out.println(ToStringBuilder.reflectionToString(dest));
-        URL resource = new Push().getClass().getClassLoader().getResource("wechat/push");
-        File f = new File(resource.getFile(), "event.txt");
-
-        JAXBContext jaxbCtx = JAXBContext.newInstance(EventWxMsg.class);
-        Unmarshaller unmarshaller = jaxbCtx.createUnmarshaller();
-        WxMsg dest = (WxMsg) unmarshaller.unmarshal(f);
-        System.out.println(ToStringBuilder.reflectionToString(dest));
-    }
-
-    public static WxMsg unmarshal(String message) {
+    public static AbstractMsg unmarshal(String message, Class<? extends AbstractMsg> childClass) {
         try {
-            JAXBContext jaxbCtx = JAXBContext.newInstance(WxMsg.class);
+            JAXBContext jaxbCtx = JAXBContext.newInstance(AbstractMsg.class, childClass);
             Unmarshaller unmarshaller = jaxbCtx.createUnmarshaller();
 
-            return (WxMsg) unmarshaller.unmarshal(new StringReader(message));
+            return (AbstractMsg) unmarshaller.unmarshal(new StringReader(message));
         } catch (Exception e) {
         }
 
         return null;
+    }
+
+    public static void marshal(AbstractReply reply, Class<? extends AbstractReply> childClass) {
+        try {
+            JAXBContext jaxbCtx = JAXBContext.newInstance(childClass);
+            Marshaller marshaller = jaxbCtx.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
+            // TODO-Shunli: don't need in production
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            marshaller.marshal(reply, System.out);
+        } catch (Exception e) {
+        }
     }
 }
