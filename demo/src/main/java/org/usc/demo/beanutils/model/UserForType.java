@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public class UserForType {
-    private String s;
+    private String ssS;
     private Boolean b;
     private Integer i;
     private Long l;
@@ -16,16 +16,18 @@ public class UserForType {
     private String[] sa;
     private List<String> sl;
     private Map<String, String> m;
+    private String ttTT;
+    private String[] xxXOo;
 
     public UserForType() {
     }
 
-    public String getS() {
-        return s;
+    public String getSsS() {
+        return ssS;
     }
 
-    public void setS(String s) {
-        this.s = s;
+    public void setSsS(String ssS) {
+        this.ssS = ssS;
     }
 
     public Boolean getB() {
@@ -100,9 +102,20 @@ public class UserForType {
         this.m = m;
     }
 
-    @Override
-    public String toString() {
-        return "UserForType [s=" + s + ", b=" + b + ", i=" + i + ", l=" + l + ", d=" + d + ", f=" + f + ", de=" + de + ", sa=" + Arrays.toString(sa) + ", sl=" + sl + ", m=" + m + "]";
+    public String getTtTT() {
+        return ttTT;
+    }
+
+    public void setTtTT(String ttTT) {
+        this.ttTT = ttTT;
+    }
+
+    public String[] getXxXOo() {
+        return xxXOo;
+    }
+
+    public void setXxXOo(String[] xxXOo) {
+        this.xxXOo = xxXOo;
     }
 
 }

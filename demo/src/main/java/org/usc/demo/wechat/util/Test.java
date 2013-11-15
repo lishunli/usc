@@ -24,10 +24,10 @@ import org.usc.demo.wechat.reply.TextReply;
  */
 public class Test {
     public static void main(String[] args) throws Exception {
-        unmarshalTextMsg();
-        marshalTextReply();
+//        unmarshalTextMsg();
+//        marshalTextReply();
         marshalMusicReply();
-        marshalNewsReply();
+//        marshalNewsReply();
     }
 
     private static void marshalTextReply() throws Exception {
@@ -51,7 +51,7 @@ public class Test {
         musicDetail.setDescription("i love it");
         musicDetail.sethQMusicUrl("http://zhangmenshiting.baidu.com/data2/music/8382776/1010926165600320.mp3?xcode=285d2800236ed221da42e1f1a4fa697b");
         musicDetail.setMusicUrl("http://zhangmenshiting.baidu.com/data2/music/7306953/1010926165600128.mp3?xcode=285d2800236ed221ac5cb01b8744315c");
-        musicDetail.setTitle("想把我唱给你听 - 老狼,小柯,曹芳,王筝.mp3");
+        musicDetail.setTitle("想\r把\r\n我\n唱\t给&#xD;你 听 - 老狼,小柯,曹芳,王筝.mp3");
 
         MusicReply wxPeply = new MusicReply();
         wxPeply.setMusicDetail(musicDetail);

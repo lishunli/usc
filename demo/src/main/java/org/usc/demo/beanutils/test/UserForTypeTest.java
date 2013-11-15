@@ -27,7 +27,7 @@ public class UserForTypeTest {
     public static void main(String[] args) throws Exception {
         UserForType ut = new UserForType();
 
-        BeanUtils.setProperty(ut, "s", "s");
+        BeanUtils.setProperty(ut, "sS", "s");
         BeanUtils.setProperty(ut, "i", "1");
         BeanUtils.setProperty(ut, "b", "1");
         BeanUtils.setProperty(ut, "l", "10000000");
@@ -46,25 +46,25 @@ public class UserForTypeTest {
         BeanUtils.setProperty(ut, "xxoo", "nofiled");
 
         System.out.println(ut);
-        System.out.println(ut.getSa().length);
-        // System.out.println(ut.getSl().size());
-        System.out.println(ut.getM().size());
-
-        Map<String, String> properties = new HashMap<String, String>();
-        properties.put("s", "s");
-        properties.put("i", "1");
-        properties.put("b", "1");
-        properties.put("l", "10000000");
-        properties.put("d", "100.0");
-        properties.put("f", "100.0");
-        properties.put("de", "2013-05-12 12:00:00");
-        properties.put("sa", "1.0,2-3,3");
-        properties.put("sl", null);
-        properties.put("m", "1.0=2-0,2-3=4,3,1=2|3|4");
-
-        UserForType newUT = new UserForType();
-        BeanUtils.populate(newUT, properties);
-
-        System.out.println(newUT);
+//        System.out.println(ut.getSa().length);
+//        // System.out.println(ut.getSl().size());
+//        System.out.println(ut.getM().size());
+//
+//        Map<String, String> properties = new HashMap<String, String>();
+//        properties.put("s", "s");
+//        properties.put("i", "1");
+//        properties.put("b", "1");
+//        properties.put("l", "10000000");
+//        properties.put("d", "100.0");
+//        properties.put("f", "100.0");
+//        properties.put("de", "2013-05-12 12:00:00");
+//        properties.put("sa", "1.0,2-3,3");
+//        properties.put("sl", null);
+//        properties.put("m", "1.0=2-0,2-3=4,3,1=2|3|4");
+//
+//        UserForType newUT = new UserForType();
+//        BeanUtils.populate(newUT, properties);
+//
+//        System.out.println(newUT);
     }
 }

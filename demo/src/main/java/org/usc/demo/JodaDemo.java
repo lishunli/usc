@@ -3,6 +3,7 @@ package org.usc.demo;
 import java.util.Locale;
 
 import org.joda.time.DateTime;
+import org.joda.time.Interval;
 
 /**
  *
@@ -42,6 +43,10 @@ public class JodaDemo {
         System.out.println(isLeapYear);
         System.out.println(rounded);
 
+        DateTime start = new DateTime(2011, 12, 2, 15, 33);// 开始时间
+        DateTime end = new DateTime(2013, 8, 1, 12, 34);// 结束时间
+        Interval inteval = new Interval(start, end);
+        System.out.println(inteval.containsNow());
     }
 
 }

@@ -240,6 +240,11 @@
             <artifactId>fastjson</artifactId>
             <version>1.1.28</version>
         </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>0.2.25</version>
+        </dependency>
 
         <dependency>
             <groupId>org.projectlombok</groupId>
