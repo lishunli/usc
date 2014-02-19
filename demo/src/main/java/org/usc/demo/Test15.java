@@ -1,17 +1,13 @@
 package org.usc.demo;
 
-import java.util.UUID;
-
-import org.apache.commons.lang.math.RandomUtils;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.commons.lang3.StringUtils;
 
 /**
  *
  * @author Shunli
  */
 public class Test15 {
-    private static final String ORDER_ID_PREFIX = "54";
+    // private static final String ORDER_ID_PREFIX = "54";
 
     public static void main(String[] args) {
         for (int i = 0; i < 10000000; i++) {

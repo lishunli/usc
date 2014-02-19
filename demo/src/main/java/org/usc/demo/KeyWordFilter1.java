@@ -6,8 +6,8 @@ import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.Properties;
-import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class KeyWordFilter1
 {
@@ -23,6 +23,7 @@ public class KeyWordFilter1
             Properties pro = new Properties();
             pro.load(in);
             in.close();
+            @SuppressWarnings("unchecked")
             Enumeration<String> enu = (Enumeration<String>) pro.propertyNames();
             patternBuf.append("(");
             while (enu.hasMoreElements())

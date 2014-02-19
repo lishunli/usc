@@ -1,6 +1,5 @@
 package org.usc.demo;
 
-import java.util.Arrays;
 import java.util.List;
 
 import com.xunlei.game.activity.utils.FileUtils;

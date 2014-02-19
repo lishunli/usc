@@ -26,9 +26,8 @@ public class TestSqlInjection {
         // paramMap.put("name", "lishunli");
         paramMap.put("name", "lishunli' or '1 = 1");
 
-
         String sql = "select * from order_t where name = :name";
-        List<String> queryForList = jdbcTemplateFrom.queryForList(sql, paramMap, String.class);
+        // List<String> queryForList = jdbcTemplateFrom.queryForList(sql, paramMap, String.class);
         List<Map<String, Object>> result = jdbcTemplateFrom.queryForList(sql, paramMap);
         System.out.println(result);
     }

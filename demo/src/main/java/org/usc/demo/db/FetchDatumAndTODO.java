@@ -13,6 +13,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
  *
  * @author ShunLi
  */
+@SuppressWarnings("deprecation")
 public class FetchDatumAndTODO {
     private static final String SQL = "select exit_descr from JB_JOB_RUN where job_run_id = 1013007";
 
@@ -24,7 +25,7 @@ public class FetchDatumAndTODO {
          local.setUsername("mssapp");
          local.setPassword("commission");
 
-         SimpleJdbcTemplate jdbcTemplateFrom = new SimpleJdbcTemplate(local);
+        SimpleJdbcTemplate jdbcTemplateFrom = new SimpleJdbcTemplate(local);
 
         HashMap<String, Object> paramMap = new HashMap<String, Object>();
 

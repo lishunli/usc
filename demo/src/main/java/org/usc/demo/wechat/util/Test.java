@@ -22,6 +22,7 @@ import org.usc.demo.wechat.reply.TextReply;
  *
  * @author Shunli
  */
+@SuppressWarnings("unused")
 public class Test {
     public static void main(String[] args) throws Exception {
 //        unmarshalTextMsg();

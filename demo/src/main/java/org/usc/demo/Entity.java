@@ -8,6 +8,7 @@ public class Entity {
     protected void doAction1() {
 
     }
+    @SuppressWarnings("unused")
     private void doAction2() {
 
     }

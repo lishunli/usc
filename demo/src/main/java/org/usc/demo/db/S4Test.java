@@ -8,9 +8,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 /**
@@ -24,8 +22,6 @@ public class S4Test {
         local.setDriverClassName("com.mysql.jdbc.Driver");
         local.setUsername("root");
         local.setPassword("sd-9898w");
-
-        JdbcTemplate jdbcTemplate = new JdbcTemplate(local);
 
         final List<Vote> votes = new ArrayList<Vote>();
         votes.add(new Vote("b1", 1));
@@ -56,10 +52,6 @@ public class S4Test {
     public static <T> int[] batchUpdate(DataSource dataSource, String sql, List<T> objs, final BatchPreparedStatementSetter pss) throws Exception {
         Connection connection = dataSource.getConnection();
         PreparedStatement ps = connection.prepareStatement(sql);
-
-        for (T obj : objs) {
-
-        }
 
         for (int i = 0; i < objs.size(); i++) {
             pss.setValues(ps, i);

@@ -8,8 +8,6 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
-import org.apache.commons.codec.binary.Hex;
-
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 
 /**
@@ -21,6 +19,7 @@ import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
  * @author Aub
  *
  */
+@SuppressWarnings("restriction")
 public class AESCoder {
 
     /**
@@ -199,6 +198,7 @@ public class AESCoder {
         return cipher.doFinal(data);
     }
 
+    @SuppressWarnings("unused")
     private static String showByteArray(byte[] data) {
         if (null == data) {
             return null;

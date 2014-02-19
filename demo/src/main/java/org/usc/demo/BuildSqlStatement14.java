@@ -3,11 +3,7 @@ package org.usc.demo;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
-import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.commons.lang3.StringUtils;
 
 import com.xunlei.youxi.core.util.FileUtils;
 

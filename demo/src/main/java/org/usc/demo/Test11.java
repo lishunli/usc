@@ -1,12 +1,12 @@
 package org.usc.demo;
 
-import java.util.regex.Pattern;
 
 /**
  *
  * @author Shunli
  */
 public class Test11 {
+    @SuppressWarnings("static-access")
     public static void main(String[] args) {
         B b1 = new B();
         b1.addCache("test1", "test1");

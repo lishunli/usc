@@ -11,6 +11,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
  *
  * @author ShunLi
  */
+@SuppressWarnings("deprecation")
 public class SITTest {
     public static void main(String[] args) throws Exception {
         // Local SZ

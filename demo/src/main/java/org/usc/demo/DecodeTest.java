@@ -1,7 +1,6 @@
 package org.usc.demo;
 
 import java.net.URLDecoder;
-import java.net.URLEncoder;
 
 public class DecodeTest {
 

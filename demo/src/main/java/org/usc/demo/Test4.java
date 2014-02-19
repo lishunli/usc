@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.text.WordUtils;
 
 /**
  *
@@ -34,6 +33,7 @@ public class Test4 {
         System.out.println(StringUtils.uncapitalize("PgroupId"));
     }
 
+    @SuppressWarnings("unused")
     private static List<String> getDate() {
         return Arrays.asList("1", "1", "1", "1", "1", "1", "1", "1", "1", "1");
     }
