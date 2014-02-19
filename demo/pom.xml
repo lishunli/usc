@@ -308,7 +308,13 @@
         <dependency>
             <groupId>com.xunlei.youxi</groupId>
             <artifactId>youxi-act-frm</artifactId>
-            <version>3.0.5</version>
+            <version>3.0.8-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>5.0.0.Alpha1</version>
         </dependency>
 
         <!-- <dependency> -->

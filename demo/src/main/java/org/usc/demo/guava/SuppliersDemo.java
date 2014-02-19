@@ -21,16 +21,16 @@ public class SuppliersDemo {
         System.out.println(cache.get());
         System.out.println("end");
 
-        // int i = 0;
-        // while (true) {
-        // System.out.println(cache.get());
-        //
-        // if ((++i) % 10000 == 0) {
-        // System.out.println("re-load");
-        // cache = Suppliers.memoize(load());
-        // }
-        //
-        // }
+         int i = 0;
+         while (true) {
+         System.out.println(cache.get());
+
+         if ((++i) % 10000 == 0) {
+         System.out.println("re-load");
+         cache = Suppliers.memoize(load());
+         }
+
+         }
     }
     private static Supplier<String> load() {
         System.out.println("xx");

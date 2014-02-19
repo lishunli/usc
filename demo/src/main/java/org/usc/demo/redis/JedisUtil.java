@@ -4,14 +4,15 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
 public final class JedisUtil {
-    private static final Logger LOGGER = Logger.getLogger(JedisUtil.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(JedisUtil.class);
     private static final String FILE_NAME = "redis.properties";
     private static int DEFAULT_DB_INDEX = 0;
 

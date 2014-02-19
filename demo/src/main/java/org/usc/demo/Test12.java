@@ -1,23 +1,23 @@
 package org.usc.demo;
 
+import org.apache.commons.lang3.math.NumberUtils;
+
+import com.xunlei.youxi.core.util.RegexUtils;
+
 /**
  *
  * @author Shunli
  */
 public class Test12 {
-    public static void main(String[] args) {
-        long now = System.currentTimeMillis();
-        System.out.println(now - 5 * 60 * 1000);
-        System.out.println(now);
+    public static void main(String[] args) throws Exception {
+        // String content = FileUtils.readFileToString(new File("D:\\test.txt"));
+        //
+        // System.out.println(content.matches("[.\\s\\S]*test[.\\s\\S]*"));
 
-        long stamp = 1372384286L;
+        System.out.println(RegexUtils.getLong(""));
 
-        System.out.println(Math.abs(now - stamp) > 5 * 60 * 1000);
-        System.out.println(Math.abs(now - stamp * 1000) > 5 * 60 * 1000);
-
-        if (Math.abs(now - stamp) > 5 * 60 * 1000 && Math.abs(now - stamp * 1000) > 5 * 60 * 1000) {
-            System.out.println("expired");
-        }
+        System.out.println(NumberUtils.createLong("12"));
+        System.out.println(NumberUtils.toLong("12.2"));
 
     }
 }

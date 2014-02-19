@@ -1,29 +1,34 @@
 package org.usc.demo.guava;
 
-import java.util.List;
+import java.util.concurrent.TimeUnit;
 
-import com.google.common.collect.ImmutableList;
+import org.apache.commons.lang3.RandomStringUtils;
+
+import com.google.common.base.Supplier;
+import com.google.common.base.Suppliers;
 
 /**
  *
  * @author Shunli
  */
 public class Test6 {
+    private static Supplier<String> cache = Suppliers.memoizeWithExpiration(load(), 1, TimeUnit.MINUTES);
 
-    /**
-     * @param args
-     */
     public static void main(String[] args) {
-        List<String> list = ImmutableList.of("1", "2", "3", "4", "5", "6", "7");
-        List<List<String>> partition = new Partition<String>(list, 3);
-        System.out.println(partition);
-
-        List<List<String>> distribution = new Distribution<String>(list, 3);
-        System.out.println(distribution);
-        // for (List<String> list2 : distribution) {
-        // System.out.println(list2);
-        // }
-        // System.out.println("end");
+        while (true) {
+            cache.get();
+            // System.out.println(cache.get());
+        }
     }
 
+    private static Supplier<String> load() {
+        return new Supplier<String>() {
+            @Override
+            public String get() {
+                String randomAlphabetic = RandomStringUtils.randomAlphabetic(6);
+                System.out.println("load-" + randomAlphabetic);
+                return randomAlphabetic;
+            }
+        };
+    }
 }

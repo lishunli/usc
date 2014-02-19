@@ -1,6 +1,6 @@
 package org.usc.demo;
 
-import org.apache.commons.lang3.StringUtils;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -8,11 +8,14 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class Test11 {
     public static void main(String[] args) {
-        String template = "你好 %s";
-        System.out.println(String.format(template, "lishunli", "19:00:00"));
+        B b1 = new B();
+        b1.addCache("test1", "test1");
 
-        String time = "2013-06-22 10:15:58";
-        System.out.println(StringUtils.substring(time, 11));
+        B b2 = new B();
+        b2.addCache("test2", "test2");
+
+        B b3 = new B();
+        System.out.println(b3.getCache());
 
     }
 }
