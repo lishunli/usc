@@ -16,6 +16,7 @@ public class SupplierTest {
         Supplier2 instance2 = SupplierFactory.getInstance(Supplier2.class);
         System.out.println(instance2.get());
         System.out.println(instance2.get());
+        instance2.refresh();
 
         while (true) {
             System.out.println(instance2.get());
