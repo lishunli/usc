@@ -1,4 +1,4 @@
-package org.usc.demo.guava;
+package org.usc.demo.guava.cache;
 
 /**
  *

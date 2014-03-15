@@ -6,8 +6,8 @@ import org.reflections.Reflections;
 import org.reflections.scanners.SubTypesScanner;
 import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
-import org.usc.demo.guava.AbstractCache1;
-import org.usc.demo.guava.CacheFactory3;
+import org.usc.demo.guava.cache.AbstractCache1;
+import org.usc.demo.guava.cache.CacheFactory3;
 
 /**
  *

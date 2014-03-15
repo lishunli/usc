@@ -1,4 +1,4 @@
-package org.usc.demo.guava;
+package org.usc.demo.guava.cache;
 
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
@@ -10,17 +10,17 @@ import com.google.common.cache.LoadingCache;
  * @author Shunli
  */
 @SuppressWarnings("rawtypes")
-public class CacheFactory3 {
-    private static final LoadingCache<Class<? extends AbstractCache1>, AbstractCache1> cache =
-            CacheBuilder.newBuilder().build(new CacheLoader<Class<? extends AbstractCache1>, AbstractCache1>() {
+public class SupplierFactory {
+    private static final LoadingCache<Class<? extends AbstractSupplier>, AbstractSupplier> cache =
+            CacheBuilder.newBuilder().build(new CacheLoader<Class<? extends AbstractSupplier>, AbstractSupplier>() {
                 @Override
-                public AbstractCache1 load(Class<? extends AbstractCache1> key) throws Exception {
+                public AbstractSupplier load(Class<? extends AbstractSupplier> key) throws Exception {
                     return key.newInstance();
                 }
             });
 
     @SuppressWarnings("unchecked")
-    public static <T extends AbstractCache1> T getInstance(Class<T> clazz) {
+    public static <T extends AbstractSupplier> T getInstance(Class<T> clazz) {
         try {
             return (T) cache.get(clazz);
         } catch (Exception e) {
