@@ -1,0 +1,18 @@
+package org.usc.demo.quartz;
+
+import org.quartz.Job;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
+
+/**
+ *
+ * @author Shunli
+ */
+public class HelloJob implements Job{
+
+    @Override
+    public void execute(JobExecutionContext context) throws JobExecutionException {
+        System.out.println("hello");
+    }
+
+}

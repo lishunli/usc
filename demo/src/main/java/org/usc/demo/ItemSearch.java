@@ -26,7 +26,7 @@ public class ItemSearch {
             // System.out.println("AddItem(" + giftId + ")" + "\t" + Arrays.toString(content));
             // }
 
-            Pattern pattern = Pattern.compile(".*怨念.*");
+            Pattern pattern = Pattern.compile(".*角色.*");
             if (pattern.matcher(giftName).matches()) {
                 System.out.println("AddItem(" + giftId + ")" + "\t" + Arrays.toString(content));
             }
