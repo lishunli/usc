@@ -30,14 +30,16 @@ public class GuavaTest4 {
         System.out.println(Hashing.md5().hashString("lishunli", Charset.forName("UTF-8")));
         System.out.println(Hashing.md5().hashString("lishunli", Charset.forName("GBK")));
         System.out.println(Hashing.md5().hashString("lishunli", Charset.forName("ISO-8859-1")));
-        System.out.println(Hashing.md5().hashString("lishunli"));
+        System.out.println(Hashing.md5().hashUnencodedChars("lishunli"));
+
+        System.out.println("==========");
 
         System.out.println(DigestUtils.md5Hex("中文"));
         System.out.println(Hashing.md5().hashBytes("中文".getBytes()));
         System.out.println(Hashing.md5().hashString("中文", Charset.forName("UTF-8")));
         System.out.println(Hashing.md5().hashString("中文", Charset.forName("GBK")));
         System.out.println(Hashing.md5().hashString("中文", Charset.forName("ISO-8859-1")));
-        System.out.println(Hashing.md5().hashString("中文"));
+        System.out.println(Hashing.md5().hashUnencodedChars("中文"));
 
     }
 }
