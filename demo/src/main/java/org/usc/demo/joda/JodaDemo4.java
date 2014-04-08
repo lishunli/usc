@@ -1,5 +1,6 @@
 package org.usc.demo.joda;
 
+import java.sql.Date;
 import java.text.ParseException;
 
 import org.joda.time.DateTime;
@@ -22,18 +23,20 @@ import org.joda.time.format.DateTimeFormatter;
 public class JodaDemo4 {
 
     public static void main(String[] args) throws ParseException {
-        DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MM-dd");
-        LocalDate localDate = dtf.parseLocalDate("2014-03-01");
-        int days = Days.daysBetween(LocalDate.now(), localDate).getDays();
-        System.out.println(days);
+        // DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MM-dd");
+        // LocalDate localDate = dtf.parseLocalDate("2014-03-01");
+        // int days = Days.daysBetween(LocalDate.now(), localDate).getDays();
+        // System.out.println(days);
+        //
+        // DateTime now = DateTime.now();
+        // // begin of a day
+        // System.out.println(now.withTimeAtStartOfDay());
+        //
+        // DateTime start = new DateTime(2014, 3, 18, 12, 25, 52, 0);
+        // System.out.println(Hours.hoursBetween(start, now).getHours());
 
-        DateTime now = DateTime.now();
-        // begin of a day
-        System.out.println(now.withTimeAtStartOfDay());
-
-        DateTime start = new DateTime(2014, 3, 18, 12, 25, 52, 0);
-        System.out.println(Hours.hoursBetween(start, now).getHours());
+        DateTime actStartTime = DateTime.parse("2014-03-28 00:00:00", DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss"));
+        System.out.println(Days.daysBetween(actStartTime.toLocalDate(), LocalDate.now()).getDays());
 
     }
-
 }

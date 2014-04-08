@@ -6,18 +6,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-
 /**
  *
  * @author Shunli
  */
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Setter
+@Getter
 @ToString
-//@Data
-@SuppressWarnings("unused")
+// @Data
 public class Model {
     private int age;
     private String name;
