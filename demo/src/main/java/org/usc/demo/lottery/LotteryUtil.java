@@ -1,7 +1,5 @@
 package org.usc.demo.lottery;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -15,7 +13,6 @@ public class LotteryUtil {
         }
 
         int size = orignalRates.size();
-        List<Double> sortOrignalRates = new ArrayList<Double>(size);
 
         Double sumRate = 0d;
         for (Double rate : orignalRates) {
@@ -23,15 +20,14 @@ public class LotteryUtil {
         }
 
         Double tempSumRate = 0d;
-        for (Double rate : orignalRates) {
-            tempSumRate += rate;
-            sortOrignalRates.add(tempSumRate / sumRate);
+        double luckyNum = Math.random() * sumRate;
+        for (int i = 0; i < size; i++) {
+            tempSumRate += orignalRates.get(i);
+            if (luckyNum < tempSumRate) {
+                return i;
+            }
         }
 
-        double nextDouble = Math.random();
-        sortOrignalRates.add(nextDouble);
-        Collections.sort(sortOrignalRates);
-
-        return sortOrignalRates.indexOf(nextDouble);
+        return size - 1;
     }
 }
