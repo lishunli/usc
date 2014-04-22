@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.xunlei.youxi.core.util.FileUtils;
+import com.xunlei.youxi.core.util.FileUtil;
 
 /**
  *
@@ -15,13 +15,13 @@ public class BuildSqlStatement13 {
     private static String cdkey_tpl = "update mediapagecdkey set status = %d where cdkey = '%s';";
 
     public static void main(String[] args) throws IOException {
-        List<String> lines = FileUtils.readLines("D://key-had-actived.txt");
+        List<String> lines = FileUtil.readLines("D://key-had-actived.txt");
         List<String> results = new ArrayList<String>();
         for (String cdkey : lines) {
             results.add(String.format(cdkey_tpl, -1, cdkey));
         }
 
-        lines = FileUtils.readLines("D://duplicat-send.txt");
+        lines = FileUtil.readLines("D://duplicat-send.txt");
         for (String cdkey : lines) {
             results.add(String.format(cdkey_tpl, -2, cdkey));
         }

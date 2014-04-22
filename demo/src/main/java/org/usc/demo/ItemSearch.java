@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
-import com.xunlei.youxi.core.util.FileUtils;
+import com.xunlei.youxi.core.util.FileUtil;
 
 /**
  *
@@ -15,7 +15,7 @@ public class ItemSearch {
     // private static String plates = "胸铠|战盔|长裤|战靴|扣带|手筒";
 
     public static void main(String[] args) throws IOException {
-        for (String line : FileUtils.readLines("D://items.txt")) {
+        for (String line : FileUtil.readLines("D://items.txt")) {
             String[] content = line.split("\t");
 
             String giftId = content[0];

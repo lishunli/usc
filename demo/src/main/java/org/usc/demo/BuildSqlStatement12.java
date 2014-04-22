@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.xunlei.youxi.core.util.FileUtils;
+import com.xunlei.youxi.core.util.FileUtil;
 
 /**
  *
@@ -20,7 +20,7 @@ public class BuildSqlStatement12 {
     public static void main(String[] args) throws IOException {
         // System.out.println(CdkeyGenerator.genCdkey(20, "", "2n"));
 
-        List<String> lines = FileUtils.readLines("D://fab//cdkeys.txt");
+        List<String> lines = FileUtil.readLines("D://fab//cdkeys.txt");
         List<String> results = new ArrayList<String>();
         for (String line : lines) {
             String[] content = line.split("\\t");

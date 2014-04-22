@@ -18,11 +18,11 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc14</artifactId>
-            <version>10.2.0.5.0</version>
-        </dependency>
+        <!-- <dependency> -->
+        <!-- <groupId>com.oracle</groupId> -->
+        <!-- <artifactId>ojdbc14</artifactId> -->
+        <!-- <version>10.2.0.3.0</version> -->
+        <!-- </dependency> -->
 
         <dependency>
             <groupId>mysql</groupId>
@@ -245,11 +245,11 @@
             <artifactId>fastjson</artifactId>
             <version>1.1.28</version>
         </dependency>
-<!--         <dependency> -->
-<!--             <groupId>com.alibaba</groupId> -->
-<!--             <artifactId>simple-el</artifactId> -->
-<!--             <version>0.1.6</version> -->
-<!--         </dependency> -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>simple-el</artifactId>
+            <version>0.1.6</version>
+        </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
@@ -270,11 +270,11 @@
             <scope>provided</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.usc.weibo</groupId>
-            <artifactId>activity</artifactId>
-            <version>1.0</version>
-        </dependency>
+        <!-- <dependency> -->
+        <!-- <groupId>org.usc.weibo</groupId> -->
+        <!-- <artifactId>activity</artifactId> -->
+        <!-- <version>1.0</version> -->
+        <!-- </dependency> -->
 
         <dependency>
             <groupId>org.mortbay.jetty</groupId>
@@ -319,13 +319,13 @@
         <dependency>
             <groupId>com.xunlei.youxi</groupId>
             <artifactId>youxi-core</artifactId>
-            <version>1.0.4</version>
+            <version>1.0.13-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>com.xunlei.youxi</groupId>
             <artifactId>youxi-act-frm</artifactId>
-            <version>3.0.8-SNAPSHOT</version>
+            <version>3.0.16-SNAPSHOT</version>
         </dependency>
 
         <dependency>

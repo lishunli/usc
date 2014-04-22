@@ -7,18 +7,18 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.xunlei.youxi.core.util.FileUtils;
+import com.xunlei.youxi.core.util.FileUtil;
 
 /**
- *
+ * 
  * @author Shunli
  */
 public class Test14 {
     public static void main(String[] args) throws IOException {
-        List<String> keys = FileUtils.readLines("D://fab//keyinfo.txt");
+        List<String> keys = FileUtil.readLines("D://fab//keyinfo.txt");
 
         List<String> notIncludes = new ArrayList<String>();
-        for (String reservation : FileUtils.readLines("D://fab//rh_12.txt")) {
+        for (String reservation : FileUtil.readLines("D://fab//rh_12.txt")) {
             String[] content = reservation.split("\t");
             String userId = content[1];
             // System.out.println(userId);
@@ -29,7 +29,7 @@ public class Test14 {
             notIncludes.add(userId + "\t" + oldName);
         }
 
-        for (String reservation : FileUtils.readLines("D://fab//youxireservation.txt")) {
+        for (String reservation : FileUtil.readLines("D://fab//youxireservation.txt")) {
             String[] content = reservation.split(" ");
             String userId = content[0];
             // System.out.println(userId);

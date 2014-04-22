@@ -2,8 +2,6 @@ package org.usc.demo;
 
 import org.apache.commons.lang3.math.NumberUtils;
 
-import com.xunlei.youxi.core.util.RegexUtils;
-
 /**
  *
  * @author Shunli
@@ -14,7 +12,6 @@ public class Test12 {
         //
         // System.out.println(content.matches("[.\\s\\S]*test[.\\s\\S]*"));
 
-        System.out.println(RegexUtils.getLong(""));
 
         System.out.println(NumberUtils.createLong("12"));
         System.out.println(NumberUtils.toLong("12.2"));

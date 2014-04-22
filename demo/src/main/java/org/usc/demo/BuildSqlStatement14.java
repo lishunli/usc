@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.xunlei.youxi.core.util.FileUtils;
+import com.xunlei.youxi.core.util.FileUtil;
 
 /**
  *
@@ -15,7 +15,7 @@ public class BuildSqlStatement14 {
     private static String tpl = "update configitem set itemvalue = '%s' where itemkey = '%s' and itemvalue = '%s' and groupid = '1';";
 
     public static void main(String[] args) throws IOException {
-        List<String> lines = FileUtils.readLines("D://new  7.txt");
+        List<String> lines = FileUtil.readLines("D://new  7.txt");
         List<String> results = new ArrayList<String>();
         for (String cdkey : lines) {
             // System.out.println(lines);
