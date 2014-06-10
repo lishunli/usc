@@ -13,7 +13,7 @@ public class CacheTest {
         System.out.println(cache11.getUnchecked("1"));
         System.out.println(cache11.getUnchecked("1"));
 
-        // Cache21 cache21 = new Cache21();
+        Cache12 cache21 = new Cache12();
 
         System.out.println(CacheFactory1.getInstance(Cache11.class).getUnchecked("1"));
         System.out.println(CacheFactory1.getInstance(Cache11.class).getUnchecked("1"));
@@ -24,8 +24,12 @@ public class CacheTest {
         System.out.println(CacheFactory3.getInstance(Cache12.class).getUnchecked("1"));
         System.out.println(CacheFactory3.getInstance(Cache12.class).getUnchecked("1"));
 
-        while (true) {
-            System.out.println(CacheFactory3.getInstance(Cache12.class).getUnchecked("1"));
-        }
+        System.out.println(SingletonFactory.getInstance(Cache12.class).getUnchecked("1"));
+        System.out.println(SingletonFactory.getInstance(Cache12.class).getUnchecked("1"));
+        System.out.println(SingletonFactory.getInstance(Cache12.class).getUnchecked("1"));
+
+        // while (true) {
+        // System.out.println(CacheFactory3.getInstance(Cache12.class).getUnchecked("1"));
+        // }
     }
 }

@@ -11,6 +11,10 @@ import com.google.common.cache.CacheBuilder;
  * @author Shunli
  */
 public class Cache12 extends AbstractCache1<String, String> {
+    protected Cache12() {
+
+    }
+
     // with expiry
     @Override
     protected CacheBuilder<Object, Object> newBuilder() {

@@ -1,6 +1,5 @@
 package org.usc.demo.joda;
 
-import java.sql.Date;
 import java.text.ParseException;
 
 import org.joda.time.DateTime;
@@ -8,7 +7,8 @@ import org.joda.time.Days;
 import org.joda.time.Hours;
 import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
+
+import com.google.common.primitives.Ints;
 
 /**
  *
@@ -35,8 +35,16 @@ public class JodaDemo4 {
         // DateTime start = new DateTime(2014, 3, 18, 12, 25, 52, 0);
         // System.out.println(Hours.hoursBetween(start, now).getHours());
 
-        DateTime actStartTime = DateTime.parse("2014-03-28 00:00:00", DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss"));
-        System.out.println(Days.daysBetween(actStartTime.toLocalDate(), LocalDate.now()).getDays());
+        // 初始值：13624
+        // 每小时增加数量：453
+
+        DateTime actStartTime = DateTime.parse("2014-06-09 15:00:00", DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss"));
+
+        int hours = Hours.hoursBetween(actStartTime, DateTime.now()).getHours();
+        System.out.println(hours);
+        System.out.println(13624 + (Ints.max(hours, 0)) * 453);
+
+        // System.out.println(Days.daysBetween(actStartTime.toLocalDate(), LocalDate.now()).getDays());
 
     }
 }

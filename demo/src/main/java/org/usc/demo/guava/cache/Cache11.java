@@ -18,6 +18,9 @@ public class Cache11 extends AbstractCache1<String, String> {
     // return Holder.INSTANCE;
     // }
 
+    // private Cache11() {
+    // }
+
     @Override
     protected String loadCache(String key) throws Exception {
         return "C11-" + RandomStringUtils.randomAlphanumeric(6);
