@@ -14,6 +14,8 @@ public class Test9 {
     public static void main(String[] args) {
         System.out.println(COMMA_SPLITTER.withKeyValueSeparator(EQUAL_MARK_SPLITTER).split("key1=value1,key2=value2,key3=value3"));
         System.out.println(COMMA_SPLITTER.withKeyValueSeparator(UPRIGHT_SLASH_SPLITTER).split("key1|value1,key2|value2,key3|value3"));
+
+        System.out.println(Splitter.on(",").withKeyValueSeparator("=").split("key1=value1,key2=value2,key3=value3"));
     }
 
 }
