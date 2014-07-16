@@ -1,6 +1,5 @@
 package org.usc.demo.guava;
 
-import com.google.common.base.Stopwatch;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
@@ -11,7 +10,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by Shunli on 2014/7/13.
+ * @author Shunli
  */
 public class RateLimiterTest3 {
 

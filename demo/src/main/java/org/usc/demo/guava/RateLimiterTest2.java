@@ -1,7 +1,6 @@
 package org.usc.demo.guava;
 
 import com.google.common.base.Stopwatch;
-import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
@@ -12,8 +11,8 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by Shunli on 2014/7/13.
- */
+* Created by Shunli on 2014/7/13.
+*/
 public class RateLimiterTest2 {
 
     private static final LoadingCache<String, RateLimiter> cache = CacheBuilder.newBuilder()/*.softValues()*/.build(
@@ -28,7 +27,7 @@ public class RateLimiterTest2 {
     public static boolean isLimited(String ip) {
         try {
             RateLimiter rateLimiter = cache.get(ip);
-           return !(rateLimiter.tryAcquire());
+            return !(rateLimiter.tryAcquire());
         } catch (Exception e) {
             return false;
         }
@@ -38,10 +37,10 @@ public class RateLimiterTest2 {
 
         Stopwatch sw = Stopwatch.createStarted();
         for (int i = 0; i < 10000000; i++) {
-            String ip =  RandomStringUtils.randomNumeric(1);
+            String ip = RandomStringUtils.randomNumeric(1);
 
             if (!isLimited(ip)) {
-                //System.out.println(ip +","+ sw.elapsed(TimeUnit.MILLISECONDS));
+                System.out.println(ip + "," + sw.elapsed(TimeUnit.MILLISECONDS));
             } else {
                 System.out.println(ip);
             }
