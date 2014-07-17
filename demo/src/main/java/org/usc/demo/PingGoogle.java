@@ -3,18 +3,15 @@ package org.usc.demo;
 import java.io.File;
 import java.net.InetAddress;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import org.apache.commons.io.FileUtils;
 
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import com.google.common.net.InetAddresses;
-import com.xunlei.youxi.core.util.ListUtil;
 
 /**
- * 
+ *
  * @author Shunli
  */
 public class PingGoogle {

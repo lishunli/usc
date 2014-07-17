@@ -3,9 +3,7 @@ package org.usc.demo.joda;
 import java.text.ParseException;
 
 import org.joda.time.DateTime;
-import org.joda.time.Days;
 import org.joda.time.Hours;
-import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 
 import com.google.common.primitives.Ints;

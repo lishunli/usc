@@ -6,8 +6,6 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
-import com.google.common.collect.Lists;
-
 /**
  *
  * @author Shunli

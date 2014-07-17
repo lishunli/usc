@@ -150,6 +150,7 @@ public class IPLookupManager
             return 0;
     }
 
+    @SuppressWarnings("resource")
     public static HashSet<String> getIpList(String fileName)
     {
         File readFile = new File(fileName);

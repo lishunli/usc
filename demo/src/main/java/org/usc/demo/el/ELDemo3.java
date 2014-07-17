@@ -31,8 +31,7 @@ public class ELDemo3 {
         System.out.println(service.eval(ctx, "return 1 > 2 ? 3 : (4 > 3 ? 5 :6) ;"));
         System.out.println(service.eval(ctx, "return \"1\".equals(task.getRemark()) ? \"10\" : (\"2\".equals(task.getRemark()) ? \"20\" : \"30\");"));
 
-        Stopwatch watch = new Stopwatch();
-        watch.start();
+        Stopwatch watch = Stopwatch.createStarted();
         for (int i = 0; i < 10000000; i++) {
             ELDemoObj task2 = new ELDemoObj("1", RandomStringUtils.randomNumeric(1));
             ctx.put("task", task2);

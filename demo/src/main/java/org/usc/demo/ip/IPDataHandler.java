@@ -87,6 +87,7 @@ public class IPDataHandler {
         return reslut;
     }
 
+    @SuppressWarnings("unused")
     private static int getIntByBytes(byte[] b, int offSet)
     {
         if (b == null || (b.length < (offSet + 3))) {
@@ -103,6 +104,7 @@ public class IPDataHandler {
         return (int) getbytesTolong(bs, 0, 4, ByteOrder.LITTLE_ENDIAN);
     }
 
+    @SuppressWarnings("unused")
     public static String findGeography(String address) {
         if (StringUtils.isBlank(address)) {
             return "illegal address";

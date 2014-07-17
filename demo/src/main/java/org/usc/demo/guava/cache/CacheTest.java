@@ -13,7 +13,7 @@ public class CacheTest {
         System.out.println(cache11.getUnchecked("1"));
         System.out.println(cache11.getUnchecked("1"));
 
-        Cache12 cache21 = new Cache12();
+        // Cache12 cache21 = new Cache12();
 
         System.out.println(CacheFactory1.getInstance(Cache11.class).getUnchecked("1"));
         System.out.println(CacheFactory1.getInstance(Cache11.class).getUnchecked("1"));
