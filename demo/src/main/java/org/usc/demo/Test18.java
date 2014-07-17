@@ -1,5 +1,7 @@
 package org.usc.demo;
 
+import java.net.URLEncoder;
+
 /**
  *
  * @author Shunli
@@ -20,8 +22,8 @@ public class Test18 {
         // System.out.println(URLDecoder.decode(new String(encodeStr.getBytes("ISO-8859-1"), "UTF-8"), "UTF-8"));
 
         // // String source = "中文测试，hello+world i'm lishunli%中文";
-        // // String encode = URLEncoder.encode(source, "utf8");
-        // // System.out.println(encode);
+          String encode = URLEncoder.encode("http://10.11.200.33:76/youxi-emqy/druid/weburi-detail.html?uri=/youxi-emqy/qianghao?action=getUserInfoForWeb", "utf8");
+          System.out.println(encode);
         //
         // // String encodeStr = "测试%test";
         // // String encoding = "UTF-8";

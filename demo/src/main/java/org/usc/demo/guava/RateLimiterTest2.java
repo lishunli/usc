@@ -1,28 +1,28 @@
 package org.usc.demo.guava;
 
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+
+import org.apache.commons.lang3.RandomStringUtils;
+
 import com.google.common.base.Stopwatch;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.google.common.util.concurrent.RateLimiter;
-import org.apache.commons.lang3.RandomStringUtils;
-
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
 
 /**
 * Created by Shunli on 2014/7/13.
 */
 public class RateLimiterTest2 {
 
-    private static final LoadingCache<String, RateLimiter> cache = CacheBuilder.newBuilder()/*.softValues()*/.build(
+    private static final LoadingCache<String, RateLimiter> cache = CacheBuilder.newBuilder()/* .softValues() */.build(
             new CacheLoader<String, RateLimiter>() {
                 @Override
                 public RateLimiter load(String ip) throws Exception {
                     return RateLimiter.create(50 / 60.0);
                 }
             });
-
 
     public static boolean isLimited(String ip) {
         try {
@@ -45,15 +45,13 @@ public class RateLimiterTest2 {
                 System.out.println(ip);
             }
 
-
-            //try {
-            //    TimeUnit.MILLISECONDS.sleep(200);
-            //} catch (InterruptedException e) {
-            //    e.printStackTrace();
-            //}
+            // try {
+            // TimeUnit.MILLISECONDS.sleep(200);
+            // } catch (InterruptedException e) {
+            // e.printStackTrace();
+            // }
         }
 
     }
-
 
 }
