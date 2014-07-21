@@ -26,7 +26,7 @@ public class SyncLockWithGuavaCache {
         return false;
     }
 
-    public synchronized static void unlock(String key, Object field) {
+    public static void unlock(String key, Object field) {
         lockCache.invalidate(SyncLockUtil.buildKeyWord(key, field));
     }
 

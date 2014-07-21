@@ -27,7 +27,7 @@ public class SyncLock {
         lockMap.remove(SyncLockUtil.buildKeyWord(key, field));
     }
 
-    public static void unlockAll() {
+    public synchronized static void unlockAll() {
         lockMap.clear();
     }
 
