@@ -8,6 +8,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
+ * 检查对于对一个key进行加锁（解锁后加锁），同时只会有一个成功
  *
  * @author Shunli
  */
