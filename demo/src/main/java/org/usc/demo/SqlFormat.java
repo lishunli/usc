@@ -13,6 +13,7 @@ public class SqlFormat {
     public static void main(String[] args) {
         System.out.println("please input sql:");
 
+        @SuppressWarnings("resource")
         Scanner in = new Scanner(System.in);
         String sql = in.nextLine();
 

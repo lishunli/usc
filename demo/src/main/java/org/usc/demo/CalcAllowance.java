@@ -12,6 +12,7 @@ public class CalcAllowance {
         while (i++ < 10) {
             System.out.print("please input dates: ");
 
+            @SuppressWarnings("resource")
             Scanner input = new Scanner(System.in);
             int days = input.nextInt(); // read from file,and -, + 1
             float base = 50f;// read from file

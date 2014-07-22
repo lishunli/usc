@@ -19,7 +19,7 @@ import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
  * @author Aub
  *
  */
-@SuppressWarnings("restriction")
+//@SuppressWarnings("restriction")
 public class AESCoder {
 
     /**
