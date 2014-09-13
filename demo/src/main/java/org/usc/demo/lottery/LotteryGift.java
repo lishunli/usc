@@ -1,5 +1,8 @@
 package org.usc.demo.lottery;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 public class LotteryGift {
     private int index;
     private String giftId;
@@ -47,6 +50,6 @@ public class LotteryGift {
 
     @Override
     public String toString() {
-        return "LotteryGift [index=" + index + ", gitfId=" + giftId + ", giftName=" + giftName + ", probability=" + probability + "]";
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 }

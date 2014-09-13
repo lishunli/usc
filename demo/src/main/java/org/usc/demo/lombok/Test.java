@@ -1,6 +1,5 @@
 package org.usc.demo.lombok;
 
-
 /**
  *
  * @author Shunli
