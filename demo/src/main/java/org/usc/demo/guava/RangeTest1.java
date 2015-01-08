@@ -43,22 +43,19 @@ public class RangeTest1 {
         return Suppliers.memoize(new Supplier<Map<String, Config>>() {
             @Override
             public Map<String, Config> get() {
-                // List<String> configInfos = ImmutableList.of("1|2014-10-01|2014-10-08|1000", "2|2014-10-10|2014-10-18|1000", "3|2014-11-24|2014-12-05|3000");
-                // Map<String, Config> configMap = Maps.toMap(configInfos, new Function<String, Config>() {
-                String[] configArray = new String[] { "1|2014-10-01|2014-10-08|1000", "2|2014-10-10|2014-10-18|1000", "3|2014-11-24|2014-12-05|3000" };
-                Map<String, Config> configMap = Maps.toMap(ImmutableList.copyOf(configArray), new Function<String, Config>() {
-                    @Override
-                    public Config apply(String info) {
-                        List<String> splitToList = splitter.splitToList(info);
+                List<String> configInfos = ImmutableList.of("1|2014-10-01|2014-10-08|1000", "2|2014-10-10|2014-10-18|1000", "3|2014-11-24|2014-12-05|3000");
 
-                        String id = splitToList.get(0);
-                        String startTime = splitToList.get(1);
-                        String endTime = splitToList.get(2);
-                        String giftId = splitToList.get(3);
+                Map<String, Config> configMap = Maps.newHashMap();
+                for (String info : configInfos) {
+                    List<String> splitToList = splitter.splitToList(info);
 
-                        return new Config(id, startTime, endTime, giftId);
-                    }
-                });
+                    String id = splitToList.get(0);
+                    String startTime = splitToList.get(1);
+                    String endTime = splitToList.get(2);
+                    String giftId = splitToList.get(3);
+
+                    configMap.put(id, new Config(id, startTime, endTime, giftId));
+                }
 
                 System.out.println("load-Map");
                 return configMap;
